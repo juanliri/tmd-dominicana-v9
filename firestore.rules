@@ -1,0 +1,190 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'mrjliriano@gmail.com' ||
+        request.auth.token.email == 'jliriano154@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isStaff() {
+      return isSignedIn() && (
+        isAdmin() ||
+        exists(/databases/$(database)/documents/staff/$(request.auth.uid))
+      );
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Health check connectivity doc
+    match /test/{docId} {
+      allow read: if true;
+    }
+
+    // Quotes and CRM RFQ conversion subcollection
+    match /quotes/{quoteId} {
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn();
+      allow delete: if isAdmin() || isStaff();
+
+      match /crm_inquiries/{inquiryId} {
+        allow read, write: if isSignedIn();
+      }
+
+      match /{subcollection=**} {
+        allow read, write: if isSignedIn();
+      }
+    }
+
+    // Work orders (Service & Field)
+    match /work_orders/{orderId} {
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn();
+      allow delete: if isAdmin() || isStaff();
+
+      match /{subcollection=**} {
+        allow read, write: if isSignedIn();
+      }
+    }
+
+    // Fullbay Heavy-Duty Shop Manager work orders
+    match /fullbay_work_orders/{orderId} {
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn();
+      allow delete: if isAdmin() || isStaff();
+
+      match /{subcollection=**} {
+        allow read, write: if isSignedIn();
+      }
+    }
+
+    // Customer Purchase Orders
+    match /orders/{orderId} {
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn();
+      allow delete: if isAdmin() || isStaff();
+
+      match /{subcollection=**} {
+        allow read, write: if isSignedIn();
+      }
+    }
+
+    // Users and Profiles
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(userId) || isAdmin() || isStaff();
+
+      match /{subcollection=**} {
+        allow read: if isSignedIn();
+        allow write: if isOwner(userId) || isAdmin() || isStaff();
+      }
+    }
+
+    // Admins and Staff Whitelists
+    match /admins/{adminId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    match /staff/{staffId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // Catalogs: Maquinaria & Repuestos (Public Read for Storefront / Showroom)
+    match /maquinaria/{machineId} {
+      allow read: if true;
+      allow write: if isAdmin() || isStaff();
+    }
+
+    match /repuestos/{partId} {
+      allow read: if true;
+      allow write: if isAdmin() || isStaff();
+    }
+
+    // Tractor Sales Catalog & Specifications (Showroom public read, staff write)
+    match /machinery_listings/{listingId} {
+      allow read: if true;
+      allow write: if isAdmin() || isStaff();
+    }
+
+    match /specifications/{specId} {
+      allow read: if true;
+      allow write: if isAdmin() || isStaff();
+    }
+
+    // Machinery Sales Leads & CRM Inquiries (Public lead creation, staff/admin manage)
+    match /sales_leads/{leadId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin() || isStaff();
+    }
+
+    // Presupuestos (Formal Quotes & Fiscal Proformas)
+    match /presupuestos/{quoteId} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Inventory Units (Heavy Machinery & Spare Parts Stock Management)
+    match /inventory_machines/{machineId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin() || isStaff();
+    }
+
+    match /inventory_parts/{partId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin() || isStaff();
+    }
+
+    // Notifications & FCM Push Tokens
+    match /notifications/{notificationId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+
+    match /fcm_tokens/{tokenId} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Patio Km 22: Field Test Drives & Demos
+    match /patio_test_drives/{bookingId} {
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn();
+      allow delete: if isAdmin() || isStaff();
+    }
+
+    // Patio Km 22: Track and Machine Availability (Public Read)
+    match /patio_availability/{machineId} {
+      allow read: if true;
+      allow write: if isAdmin() || isStaff();
+    }
+
+    // Immutable Security & Administrative Audit Logs
+    match /audit_logs/{logId} {
+      allow read: if isAdmin() || isStaff();
+      allow create: if isSignedIn();
+      allow update, delete: if false; // Invariant: Audit logs are strictly immutable
+    }
+
+    // Inventory Logs (QR Scan Logs by Staff & Admin in Yard / Warehouse)
+    match /inventory_logs/{logId} {
+      allow read: if true;
+      allow create: if isSignedIn() || isAdmin() || isStaff();
+      allow update, delete: if isAdmin();
+    }
+
+    // Default Deny Catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

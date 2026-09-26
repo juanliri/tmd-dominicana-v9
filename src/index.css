@@ -1,0 +1,687 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-display: 'Oswald', 'Barlow Condensed', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   GLOBAL INDUSTRIAL TYPOGRAPHIC HIERARCHY & CONTRAST SYSTEM
+   (Grounded in Industrial Luxury & Dark Mode Typography Principles):
+   1. Never pure #FFFFFF on pure black (prevents halation/retinal glare).
+   2. Optical font weight: Softer bolding (700/600) prevents light bleed (irradiation).
+   3. Expanded letter-spacing for small tags/caps (+0.015em to +0.025em).
+   4. Generous line-height (1.6 - 1.65) so dark letters breathe.
+   5. Layered dark elevations (canvas #09090b -> cards #121316 -> elevated #1a1b22).
+   ========================================================================== */
+
+/* Typography Font Families & Defaults */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  font-feature-settings: 'tnum' 1, 'zero' 1;
+}
+
+/* Standard Industrial Typography Scale & Line-Heights */
+.type-hero-title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+}
+
+.type-section-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.018em;
+  line-height: 1.15;
+}
+
+.type-card-title, h3.card-title, h4.card-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.012em;
+  line-height: 1.22;
+}
+
+.type-kicker {
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1;
+}
+
+.type-badge {
+  font-family: var(--font-mono);
+  font-size: 0.625rem; /* 10px */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+.type-metric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.type-body-lead {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+}
+
+.type-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Global paragraph typography standardization */
+p {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+/* Card headings global standardization */
+h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.012em;
+  line-height: 1.22;
+}
+
+/* Dark mode clear typographic hierarchy */
+.dark body {
+  color: #d4d4d8; /* Softer, fatigue-free body text */
+  background-color: #09090b;
+}
+
+/* Titles: Luminous Off-White & Balanced Optical Weight (prevents halation glow) */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: #f4f4f6;
+  font-weight: 800;
+  letter-spacing: -0.012em;
+  line-height: 1.22;
+}
+
+/* Body paragraphs: Comfortable reading contrast with optical breathing room */
+.dark p {
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-family: var(--font-sans);
+}
+
+/* Secondary & description text */
+.dark .text-secondary,
+.dark .text-muted {
+  color: #a1a1aa;
+}
+
+/* Light mode clear typographic hierarchy */
+html:not(.dark) body {
+  color: #27272a;
+}
+
+html:not(.dark) h1, html:not(.dark) h2, html:not(.dark) h3, html:not(.dark) h4, html:not(.dark) h5, html:not(.dark) h6 {
+  color: #09090b;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+html:not(.dark) p {
+  color: #3f3f46;
+  line-height: 1.6;
+}
+
+/* Dark mode glassmorphic navigation and card tokens */
+.glass-nav-dark {
+  background: rgba(12, 13, 16, 0.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-nav-light {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.glass-card-dark {
+  background: rgba(18, 19, 23, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Status pills & tags tracking balance for dark mode */
+.dark .badge-pill {
+  letter-spacing: 0.02em;
+}
+
+/* Custom scrollbars for clean mobile & desktop feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 150, 150, 0.5);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-paused {
+  animation-play-state: paused !important;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-shimmer::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.15) 30%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.15) 70%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: skeleton-shimmer 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  content: '';
+}
+
+.dark .skeleton-shimmer::after {
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.03) 30%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.03) 70%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+/* Custom TMD Leaflet Map Popup Styling */
+.tmd-leaflet-popup .leaflet-popup-content-wrapper {
+  background: #ffffff;
+  color: #18181b;
+  border-radius: 1rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(228, 228, 231, 0.8);
+  padding: 0;
+  overflow: hidden;
+}
+
+.dark .tmd-leaflet-popup .leaflet-popup-content-wrapper {
+  background: #18181b;
+  color: #f4f4f5;
+  border: 1px solid rgba(63, 63, 70, 0.6);
+}
+
+.tmd-leaflet-popup .leaflet-popup-content {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.tmd-leaflet-popup .leaflet-popup-tip {
+  background: #ffffff;
+}
+
+.dark .tmd-leaflet-popup .leaflet-popup-tip {
+  background: #18181b;
+}
+
+/* ==========================================================================
+   INDUSTRIAL LUXURY MICRO-INTERACTIONS ("Dress to Impress")
+   ========================================================================== */
+
+/* Metallic Light Sweep Shimmer Effect (every 6 seconds) */
+@keyframes metallic-sweep {
+  0%, 75% {
+    transform: translateX(-160%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(260%) skewX(-20deg);
+  }
+}
+
+.tmd-shimmer-btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.tmd-shimmer-btn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 70%,
+    transparent 100%
+  );
+  animation: metallic-sweep 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+.tmd-shimmer-btn:active {
+  transform: scale(0.98);
+}
+
+/* Luxury Industrial Card Glowing Hover */
+.tmd-luxury-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .tmd-luxury-card:hover {
+  border-color: rgba(245, 158, 11, 0.4) !important;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 
+              0 0 20px -5px rgba(245, 158, 11, 0.18) !important;
+  transform: translateY(-2px);
+}
+
+.tmd-luxury-card:hover {
+  border-color: rgba(245, 158, 11, 0.5) !important;
+  box-shadow: 0 12px 25px -8px rgba(245, 158, 11, 0.15),
+              0 4px 10px -2px rgba(0, 0, 0, 0.05) !important;
+  transform: translateY(-2px);
+}
+
+/* High Precision Typography */
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ==========================================================================
+   TMD INDUSTRIAL CARD FLICKER & AMBER HUD GLOW
+   ========================================================================== */
+@keyframes tmd-industrial-flicker {
+  0% {
+    filter: brightness(1);
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+  18% {
+    filter: brightness(1.06);
+    box-shadow: 0 0 16px 2px rgba(245, 158, 11, 0.35);
+  }
+  32% {
+    filter: brightness(0.97);
+    box-shadow: 0 0 6px 1px rgba(245, 158, 11, 0.15);
+  }
+  50% {
+    filter: brightness(1.09);
+    box-shadow: 0 0 22px 4px rgba(245, 158, 11, 0.45);
+  }
+  100% {
+    filter: brightness(1.02);
+    box-shadow: 0 12px 28px -6px rgba(245, 158, 11, 0.25), 0 0 14px 2px rgba(245, 158, 11, 0.2);
+  }
+}
+
+.tmd-industrial-card {
+  position: relative;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.25s ease;
+}
+
+.tmd-industrial-card:hover {
+  transform: translateY(-2px);
+  animation: tmd-industrial-flicker 0.45s ease-out forwards;
+}
+
+.tmd-industrial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(245, 158, 11, 0.9) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.tmd-industrial-card:hover::before {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   TMD Industrial Gradient Separator / Divider
+   ========================================================================== */
+.tmd-industrial-divider {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(245, 158, 11, 0.05) 12%,
+    rgba(245, 158, 11, 0.45) 45%,
+    rgba(217, 119, 6, 0.8) 50%,
+    rgba(245, 158, 11, 0.45) 55%,
+    rgba(245, 158, 11, 0.05) 88%,
+    transparent 100%
+  );
+}
+
+.dark .tmd-industrial-divider {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(245, 158, 11, 0.08) 12%,
+    rgba(245, 158, 11, 0.55) 45%,
+    rgba(251, 191, 36, 0.95) 50%,
+    rgba(245, 158, 11, 0.55) 55%,
+    rgba(245, 158, 11, 0.08) 88%,
+    transparent 100%
+  );
+}
+
+/* ==========================================================================
+   MEGA MENU PREMIUM TRANSITIONS & ANTI-OVERLAP RULES
+   ========================================================================== */
+.mega-subcat-container {
+  contain: layout style;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.mega-interactive-card {
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.mega-interactive-card:hover {
+  transform: translateY(-1.5px);
+}
+
+/* ==========================================================================
+   3D FLIP CARD & INDUSTRIAL 3D TILT EFFECTS
+   ========================================================================== */
+.perspective-1000 {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+.perspective-1200 {
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.card-flip-container {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+.card-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.card-flip-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-flip-front,
+.card-flip-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-flip-back {
+  transform: rotateY(180deg);
+}
+
+/* 3D Machinery Tilt Card with Dynamic Perspective & Specular Sheen */
+.machinery-3d-tilt {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease-out;
+  will-change: transform;
+}
+
+.machinery-3d-tilt:hover {
+  box-shadow: 0 24px 38px -12px rgba(0, 0, 0, 0.8), 0 0 25px rgba(245, 158, 11, 0.2);
+}
+
+.machinery-3d-tilt-inner {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* ==========================================================================
+   HIGH-FIDELITY GLASSMORPHISM & TILT UTILITIES
+   ========================================================================== */
+.glass-card-dark {
+  background: rgba(13, 15, 22, 0.82);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.12),
+    0 16px 36px -10px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.28s ease;
+}
+
+.glass-card-dark:hover {
+  border-color: rgba(245, 158, 11, 0.38);
+  box-shadow: 
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.18),
+    0 24px 44px -12px rgba(0, 0, 0, 0.88),
+    0 0 24px -4px rgba(245, 158, 11, 0.22);
+}
+
+.hover-tilt-card {
+  perspective: 800px;
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease;
+  will-change: transform;
+}
+
+.hover-tilt-card:hover {
+  transform: translateY(-3px) scale(1.025);
+  box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+.hover-tilt-card:active {
+  transform: scale(0.975);
+}
+
+/* Global Anti-Overflow & Mobile Breakpoint Hardening (320px - 1024px) */
+html, body, #root {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.safe-container {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+/* ==========================================================================
+   MOBILE & TABLET INDUSTRIAL SCROLL ANIMATIONS & REVEAL (CONTENT COME UP)
+   ========================================================================== */
+@keyframes contentComeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-content-come-up {
+  animation: contentComeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+  will-change: transform, opacity;
+}
+
+.reveal-init {
+  opacity: 0;
+  transform: translateY(22px) scale(0.985);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-init.animate-content-come-up {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Touch-optimized horizontal slider containers with crisp snapping */
+.touch-slider-snap {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+}
+
+.touch-slider-snap > * {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  flex-shrink: 0;
+}
+
+/* Hide scrollbar cleanly while preserving smooth touch panning */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Clean mobile active tap feedback */
+@media (hover: none) and (pointer: coarse) {
+  button:active, a:active {
+    transform: scale(0.975);
+    transition: transform 0.08s ease-out;
+  }
+}

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tmd-dominicana-2026-todobuild-apps.vercel.app/sitemap.xml

@@ -1,0 +1,49 @@
+{
+  "name": "Tecnomaquinarias Diesel S.R.L. (TMD Dominicana)",
+  "short_name": "TMD Dominicana",
+  "description": "Plataforma de Maquinaria Pesada, Repuestos OEM y Taller Km 22 en República Dominicana",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#090c10",
+  "theme_color": "#ffb800",
+  "lang": "es-DO",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "https://lh3.googleusercontent.com/aida/AEtjO1VA9lXrksvsphvsVJV2p9VPantEDAE0QXYc7JhlNdji1GF8PZHnaq7lcbvfGtuGv4MjiXJppk1ZrsZTKymyOQ37JSp5MeGesQRdRL7qcLLlsPb6-AcREt2N_jQj4INyoJ9tOcUEeliLzLngn8Q7cA35BHRv-1Avy-ETnUYbYuZ2ZQgTiFd4jBJYfqGt2Zv1NAnjZqkRAvNvDiBEUKt50dsHQoNQiJXGzag3HRXcrZ_T8PLKK-NxQb-7ov_a",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/aida/AEtjO1VA9lXrksvsphvsVJV2p9VPantEDAE0QXYc7JhlNdji1GF8PZHnaq7lcbvfGtuGv4MjiXJppk1ZrsZTKymyOQ37JSp5MeGesQRdRL7qcLLlsPb6-AcREt2N_jQj4INyoJ9tOcUEeliLzLngn8Q7cA35BHRv-1Avy-ETnUYbYuZ2ZQgTiFd4jBJYfqGt2Zv1NAnjZqkRAvNvDiBEUKt50dsHQoNQiJXGzag3HRXcrZ_T8PLKK-NxQb-7ov_a",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Auxilio Mecánico 24/7",
+      "short_name": "Auxilio",
+      "description": "Despacho de taller móvil a obra",
+      "url": "https://wa.me/18098262222?text=Emergencia%20Mecanica%20Faena",
+      "icons": [{ "src": "https://lh3.googleusercontent.com/aida/AEtjO1VA9lXrksvsphvsVJV2p9VPantEDAE0QXYc7JhlNdji1GF8PZHnaq7lcbvfGtuGv4MjiXJppk1ZrsZTKymyOQ37JSp5MeGesQRdRL7qcLLlsPb6-AcREt2N_jQj4INyoJ9tOcUEeliLzLngn8Q7cA35BHRv-1Avy-ETnUYbYuZ2ZQgTiFd4jBJYfqGt2Zv1NAnjZqkRAvNvDiBEUKt50dsHQoNQiJXGzag3HRXcrZ_T8PLKK-NxQb-7ov_a", "sizes": "96x96" }]
+    },
+    {
+      "name": "Catálogo Maquinaria",
+      "short_name": "Catálogo",
+      "description": "Ver inventario 0 Km en Km 22",
+      "url": "/#/vehicles",
+      "icons": [{ "src": "https://lh3.googleusercontent.com/aida/AEtjO1VA9lXrksvsphvsVJV2p9VPantEDAE0QXYc7JhlNdji1GF8PZHnaq7lcbvfGtuGv4MjiXJppk1ZrsZTKymyOQ37JSp5MeGesQRdRL7qcLLlsPb6-AcREt2N_jQj4INyoJ9tOcUEeliLzLngn8Q7cA35BHRv-1Avy-ETnUYbYuZ2ZQgTiFd4jBJYfqGt2Zv1NAnjZqkRAvNvDiBEUKt50dsHQoNQiJXGzag3HRXcrZ_T8PLKK-NxQb-7ov_a", "sizes": "96x96" }]
+    },
+    {
+      "name": "Bio-Link Oficial",
+      "short_name": "Bio-Link",
+      "description": "Centro de enlaces rápidos",
+      "url": "/bio",
+      "icons": [{ "src": "https://lh3.googleusercontent.com/aida/AEtjO1VA9lXrksvsphvsVJV2p9VPantEDAE0QXYc7JhlNdji1GF8PZHnaq7lcbvfGtuGv4MjiXJppk1ZrsZTKymyOQ37JSp5MeGesQRdRL7qcLLlsPb6-AcREt2N_jQj4INyoJ9tOcUEeliLzLngn8Q7cA35BHRv-1Avy-ETnUYbYuZ2ZQgTiFd4jBJYfqGt2Zv1NAnjZqkRAvNvDiBEUKt50dsHQoNQiJXGzag3HRXcrZ_T8PLKK-NxQb-7ov_a", "sizes": "96x96" }]
+    }
+  ]
+}

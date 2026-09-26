@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <!-- Accent Gradient -->
+    <linearGradient id="accentGrad_advisory_white" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="60%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    
+    <!-- Metal Titanium Gradient -->
+    <linearGradient id="metalGrad_white" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F1F5F9" />
+    </linearGradient>
+
+    <!-- Subtle Drop Shadow -->
+    <filter id="subtleShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- ICON MONOGRAM: Interlocking Architectural TB -->
+  <g transform="translate(180, 80) scale(1.1)" filter="url(#subtleShadow)">
+    <!-- THE T COMPONENT (Architectural Foundation & Crossbar) -->
+    <!-- T Vertical Pillar -->
+    <path d="M 80 40 L 140 40 L 140 340 L 80 340 Z" fill="url(#metalGrad_white)" />
+    <!-- T Bevel Facet -->
+    <path d="M 140 40 L 175 60 L 175 340 L 140 340 Z" fill="#F1F5F9" opacity="0.85" />
+    
+    <!-- T Horizontal Architectural Cantilever (Top Bar with 45-deg Chamfers) -->
+    <path d="M 10 40 L 40 10 L 260 10 L 290 40 L 250 80 L 50 80 Z" fill="url(#metalGrad_white)" />
+    <path d="M 50 80 L 80 40 L 250 40 L 220 80 Z" fill="#FFFFFF" opacity="0.4" />
+
+    <!-- THE B COMPONENT (Interlocking Accent Crystal Facets) -->
+    <!-- Upper Loop -->
+    <path d="M 175 80 L 240 80 C 285 80 315 105 315 145 C 315 185 285 205 240 205 L 175 205 Z" fill="url(#accentGrad_advisory_white)" />
+    <path d="M 175 110 L 230 110 C 255 110 270 120 270 145 C 270 170 255 178 230 178 L 175 178 Z" fill="#FFFFFF" opacity="0.08" />
+
+    <!-- Lower Loop (Solid Architectural Stance) -->
+    <path d="M 175 195 L 250 195 C 300 195 335 225 335 270 C 335 315 295 340 240 340 L 175 340 Z" fill="url(#accentGrad_advisory_white)" />
+    <path d="M 175 225 L 240 225 C 268 225 288 238 288 270 C 288 300 268 312 240 312 L 175 312 Z" fill="#FFFFFF" opacity="0.08" />
+
+    <!-- Precision Chamfered Glass Highlight -->
+    <path d="M 40 10 L 260 10 L 240 25 L 60 25 Z" fill="#FFFFFF" opacity="0.35" />
+    <path d="M 260 10 L 290 40 L 275 45 L 240 25 Z" fill="#FFFFFF" opacity="0.2" />
+  </g>
+
+  <!-- TYPOGRAPHY: Bespoke Modernist Geometry -->
+  <g transform="translate(400, 560)" text-anchor="middle">
+    <!-- Main Wordmark -->
+    <text y="0" font-family="-apple-system, BlinkMacSystemFont, 'Montserrat', 'Inter', 'Segoe UI', sans-serif" font-size="74" font-weight="900" letter-spacing="4" fill="#FFFFFF">
+      TODO<tspan fill="#059669">BUILD</tspan>
+    </text>
+    
+    <!-- Architectural Separator Line -->
+    <line x1="-180" y1="32" x2="180" y2="32" stroke="#34D399" stroke-width="3" stroke-linecap="round" opacity="0.85" />
+    
+    <!-- Division Subtitle -->
+    <text y="72" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="28" font-weight="700" letter-spacing="14" fill="#34D399">
+      ADVISORY
+    </text>
+  </g>
+</svg>

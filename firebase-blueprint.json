@@ -1,0 +1,644 @@
+{
+  "entities": {
+    "MachineryListing": {
+      "title": "MachineryListing",
+      "description": "Public catalog equipment listing for heavy machinery & tractors (LiuGong, JCB, LS Tractor, Kubota)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "listingCode": { "type": "string" },
+        "brand": { "type": "string" },
+        "model": { "type": "string" },
+        "year": { "type": "number" },
+        "category": { "type": "string" },
+        "commercialTitle": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["available", "reserved", "sold", "in_transit", "patio_demo"] },
+        "condition": { "type": "string" },
+        "basePriceUsd": { "type": "number" },
+        "stockLocation": { "type": "string" },
+        "specId": { "type": "string" },
+        "heroImage": { "type": "string" },
+        "telematicsReady": { "type": "boolean" },
+        "inquiriesCount": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "listingCode", "brand", "model", "basePriceUsd", "status"]
+    },
+    "MachinerySpecification": {
+      "title": "MachinerySpecification",
+      "description": "Technical specification parameters for tractor and equipment models (engine, hydraulic pump, transmission)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "listingId": { "type": "string" },
+        "engine": { "type": "object" },
+        "hydraulics": { "type": "object" },
+        "transmission": { "type": "object" },
+        "dimensionsAndWeight": { "type": "object" },
+        "capacitiesLiters": { "type": "object" },
+        "standardEquipment": { "type": "array" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "listingId", "engine", "hydraulics"]
+    },
+    "MachinerySalesLead": {
+      "title": "MachinerySalesLead",
+      "description": "Customer purchase inquiry for tractors with financing preference, trade-in, and CRM lead stage",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "listingId": { "type": "string" },
+        "machineTitle": { "type": "string" },
+        "machineBrand": { "type": "string" },
+        "estimatedPriceUsd": { "type": "number" },
+        "customerName": { "type": "string" },
+        "companyName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "acquisitionType": { "type": "string" },
+        "preferredBank": { "type": "string" },
+        "hasTradeIn": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["new", "contacted", "quote_sent", "demo_scheduled", "negotiating", "won", "lost"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "listingId", "customerName", "phone", "status"]
+    },
+    "Maquinaria": {
+      "title": "Maquinaria",
+      "description": "Unidades de maquinaria pesada, especificaciones técnicas de motor, potencia HP, peso operativo, balde y precios oficiales",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 150 },
+        "brand": { "type": "string", "maxLength": 80 },
+        "category": { "type": "string", "maxLength": 80 },
+        "modelCode": { "type": "string", "maxLength": 80 },
+        "year": { "type": "number" },
+        "powerHp": { "type": "number" },
+        "operatingWeightKg": { "type": "number" },
+        "bucketCapacityM3": { "type": "number" },
+        "engine": { "type": "string", "maxLength": 150 },
+        "description": { "type": "string", "maxLength": 1500 },
+        "inStock": { "type": "boolean" },
+        "featured": { "type": "boolean" },
+        "basePriceUsd": { "type": "number" },
+        "specs": { "type": "array" },
+        "applications": { "type": "array" },
+        "image": { "type": "string", "maxLength": 500 },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "brand", "category", "basePriceUsd", "inStock"]
+    },
+    "Repuesto": {
+      "title": "Repuesto",
+      "description": "Repuestos y consumibles originales OEM certificados con números de parte, modelos compatibles y stock en almacén Km 22",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "partNumber": { "type": "string", "maxLength": 80 },
+        "name": { "type": "string", "maxLength": 150 },
+        "brand": { "type": "string", "maxLength": 80 },
+        "category": { "type": "string", "maxLength": 80 },
+        "assemblyId": { "type": "string", "maxLength": 60 },
+        "compatibleModels": { "type": "array" },
+        "priceUsd": { "type": "number" },
+        "stockQty": { "type": "number" },
+        "image": { "type": "string", "maxLength": 500 },
+        "description": { "type": "string", "maxLength": 1500 },
+        "isOem": { "type": "boolean" },
+        "deliveryTimeHours": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "partNumber", "name", "priceUsd", "stockQty"]
+    },
+    "Presupuesto": {
+      "title": "Presupuesto",
+      "description": "Cotizaciones formales y proformas emitidas con RNC, NCF B01/B02, desglose ITBIS 18% y soporte multimoneda USD/DOP",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "quoteNumber": { "type": "string", "maxLength": 64 },
+        "clientId": { "type": "string", "maxLength": 128 },
+        "clientEmail": { "type": "string", "maxLength": 120 },
+        "clientName": { "type": "string", "maxLength": 120 },
+        "companyName": { "type": "string", "maxLength": 120 },
+        "rncOrCedula": { "type": "string", "maxLength": 30 },
+        "ncfType": { "type": "string", "maxLength": 50 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "status": { "type": "string", "enum": ["draft", "submitted", "approved", "rejected", "in_review"] },
+        "currency": { "type": "string", "enum": ["USD", "DOP"] },
+        "subtotal": { "type": "number" },
+        "itbis": { "type": "number" },
+        "total": { "type": "number" },
+        "items": { "type": "array" },
+        "itemsCount": { "type": "number" },
+        "itemsSummary": { "type": "string", "maxLength": 500 },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "validUntil": { "type": "string", "maxLength": 60 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "quoteNumber", "clientId", "clientEmail", "status", "total"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with role-based access for clients, staff, and admins",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 120 },
+        "displayName": { "type": "string", "maxLength": 120 },
+        "companyName": { "type": "string", "maxLength": 120 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "role": { "type": "string", "enum": ["client", "staff", "admin"] },
+        "rnc": { "type": "string", "maxLength": 20 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "email", "role", "displayName"]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Trusted admin whitelist document",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 120 },
+        "role": { "type": "string", "enum": ["admin"] }
+      },
+      "required": ["email", "role"]
+    },
+    "StaffRecord": {
+      "title": "StaffRecord",
+      "description": "Trusted staff whitelist document",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "maxLength": 120 },
+        "department": { "type": "string", "maxLength": 60 },
+        "role": { "type": "string", "enum": ["staff"] }
+      },
+      "required": ["email", "role"]
+    },
+    "PortalQuote": {
+      "title": "PortalQuote",
+      "description": "Proforma quotes created by clients or managed by staff/admin",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "quoteNumber": { "type": "string", "maxLength": 64 },
+        "clientId": { "type": "string", "maxLength": 128 },
+        "clientEmail": { "type": "string", "maxLength": 120 },
+        "clientName": { "type": "string", "maxLength": 120 },
+        "companyName": { "type": "string", "maxLength": 120 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "status": { "type": "string", "enum": ["draft", "submitted", "approved", "rejected", "in_review"] },
+        "currency": { "type": "string", "enum": ["USD", "DOP"] },
+        "subtotal": { "type": "number" },
+        "itbis": { "type": "number" },
+        "total": { "type": "number" },
+        "itemsCount": { "type": "number" },
+        "itemsSummary": { "type": "string", "maxLength": 500 },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "assignedStaffId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "quoteNumber", "clientId", "clientEmail", "status", "total"]
+    },
+    "ServiceWorkOrder": {
+      "title": "ServiceWorkOrder",
+      "description": "Maintenance, field repairs, inspections and installed parts service history for heavy machinery",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "orderNumber": { "type": "string", "maxLength": 64 },
+        "clientId": { "type": "string", "maxLength": 128 },
+        "clientName": { "type": "string", "maxLength": 120 },
+        "companyName": { "type": "string", "maxLength": 120 },
+        "equipmentUnitId": { "type": "string", "maxLength": 50 },
+        "equipmentBrand": { "type": "string", "maxLength": 80 },
+        "machineModel": { "type": "string", "maxLength": 100 },
+        "machineSerial": { "type": "string", "maxLength": 100 },
+        "equipmentYear": { "type": "number" },
+        "horometerHours": { "type": "number" },
+        "serviceType": { "type": "string", "enum": ["preventive_250h", "preventive_500h", "preventive_1000h", "hydraulic_repair", "engine_overhaul", "undercarriage", "electrical_diagnostic", "bucket_wear_repair", "certified_safety_inspection"] },
+        "serviceCategory": { "type": "string", "maxLength": 80 },
+        "location": { "type": "string", "maxLength": 200 },
+        "workshopName": { "type": "string", "maxLength": 150 },
+        "priority": { "type": "string", "enum": ["routine", "urgent", "emergency"] },
+        "status": { "type": "string", "enum": ["requested", "scheduled", "in_progress", "completed", "cancelled"] },
+        "assignedTechnician": { "type": "string", "maxLength": 120 },
+        "technicianTitle": { "type": "string", "maxLength": 120 },
+        "scheduledDate": { "type": "string", "maxLength": 60 },
+        "completedDate": { "type": "string", "maxLength": 60 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "workPerformed": { "type": "string", "maxLength": 1500 },
+        "technicianNotes": { "type": "string", "maxLength": 1000 },
+        "diagnosticReport": { "type": "string", "maxLength": 1500 },
+        "installedParts": { "type": "array" },
+        "installedPartsCount": { "type": "number" },
+        "nextServiceDueHours": { "type": "number" },
+        "nextServiceDueDate": { "type": "string", "maxLength": 60 },
+        "totalLaborCostUsd": { "type": "number" },
+        "totalPartsCostUsd": { "type": "number" },
+        "totalCostUsd": { "type": "number" },
+        "totalCostDop": { "type": "number" },
+        "warrantyMonths": { "type": "number" },
+        "warrantyHours": { "type": "number" },
+        "estimatedHours": { "type": "number" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "orderNumber", "clientId", "machineModel", "serviceType", "priority", "status"]
+    },
+    "InventoryMachine": {
+      "title": "InventoryMachine",
+      "description": "Heavy machinery fleet units and stock tracking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 150 },
+        "brand": { "type": "string", "maxLength": 80 },
+        "category": { "type": "string", "maxLength": 80 },
+        "modelCode": { "type": "string", "maxLength": 80 },
+        "year": { "type": "number" },
+        "powerHp": { "type": "number" },
+        "operatingWeightKg": { "type": "number" },
+        "basePriceUsd": { "type": "number" },
+        "inStock": { "type": "boolean" },
+        "stockQty": { "type": "number" },
+        "minStockAlert": { "type": "number" },
+        "serialNumber": { "type": "string", "maxLength": 100 },
+        "location": { "type": "string", "maxLength": 150 },
+        "status": { "type": "string", "enum": ["available", "reserved", "sold", "maintenance"] },
+        "image": { "type": "string", "maxLength": 500 },
+        "description": { "type": "string", "maxLength": 1500 },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "brand", "category", "basePriceUsd", "inStock"]
+    },
+    "InventoryPart": {
+      "title": "InventoryPart",
+      "description": "OEM replacement parts inventory and stock level management",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "partNumber": { "type": "string", "maxLength": 80 },
+        "name": { "type": "string", "maxLength": 150 },
+        "brand": { "type": "string", "maxLength": 80 },
+        "category": { "type": "string", "maxLength": 80 },
+        "priceUsd": { "type": "number" },
+        "stockQty": { "type": "number" },
+        "minStockAlert": { "type": "number" },
+        "locationBin": { "type": "string", "maxLength": 60 },
+        "isOem": { "type": "boolean" },
+        "compatibleModels": { "type": "array", "items": { "type": "string" } },
+        "image": { "type": "string", "maxLength": 500 },
+        "description": { "type": "string", "maxLength": 1000 },
+        "deliveryTimeHours": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "partNumber", "name", "priceUsd", "stockQty"]
+    },
+    "AppNotification": {
+      "title": "AppNotification",
+      "description": "Push and in-app alerts for quote status updates and special offers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 150 },
+        "body": { "type": "string", "maxLength": 500 },
+        "type": { "type": "string", "enum": ["quote_status", "special_offer", "service_update", "system"] },
+        "quoteId": { "type": "string", "maxLength": 128 },
+        "quoteNumber": { "type": "string", "maxLength": 64 },
+        "offerCode": { "type": "string", "maxLength": 64 },
+        "discountPercent": { "type": "number" },
+        "validUntil": { "type": "string", "maxLength": 60 },
+        "targetCategory": { "type": "string", "maxLength": 80 },
+        "actionUrl": { "type": "string", "maxLength": 200 },
+        "isRead": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "body", "type", "createdAt"]
+    },
+    "FCMTokenRecord": {
+      "title": "FCMTokenRecord",
+      "description": "User device registration token for Firebase Cloud Messaging",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "token": { "type": "string", "maxLength": 300 },
+        "platform": { "type": "string", "maxLength": 50 },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "token", "updatedAt"]
+    },
+    "CustomerPurchaseOrder": {
+      "title": "CustomerPurchaseOrder",
+      "description": "Customer purchase orders for parts, accessories, and confirmed machine units",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "orderNumber": { "type": "string", "maxLength": 64 },
+        "clientId": { "type": "string", "maxLength": 128 },
+        "clientEmail": { "type": "string", "maxLength": 120 },
+        "clientName": { "type": "string", "maxLength": 120 },
+        "companyName": { "type": "string", "maxLength": 120 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "items": { "type": "array" },
+        "itemsCount": { "type": "number" },
+        "subtotalUsd": { "type": "number" },
+        "itbisUsd": { "type": "number" },
+        "shippingUsd": { "type": "number" },
+        "totalUsd": { "type": "number" },
+        "totalDop": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string", "enum": ["paid", "pending_verification", "credit_approved", "on_delivery"] },
+        "deliveryMethod": { "type": "string" },
+        "deliveryAddress": { "type": "string", "maxLength": 300 },
+        "city": { "type": "string", "maxLength": 100 },
+        "ncfType": { "type": "string", "maxLength": 50 },
+        "ncfNumber": { "type": "string", "maxLength": 50 },
+        "rncOrCedula": { "type": "string", "maxLength": 30 },
+        "status": { "type": "string", "enum": ["pending", "processing", "ready_for_pickup", "in_transit", "delivered", "cancelled"] },
+        "trackingNumber": { "type": "string", "maxLength": 100 },
+        "carrier": { "type": "string", "maxLength": 100 },
+        "estimatedDeliveryDate": { "type": "string", "maxLength": 50 },
+        "timeline": { "type": "array" },
+        "notes": { "type": "string", "maxLength": 1000 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "orderNumber", "clientId", "clientEmail", "status", "totalUsd", "itemsCount"]
+    },
+    "AdminAuditLog": {
+      "title": "AdminAuditLog",
+      "description": "Immutable security and administrative audit log for inventory changes, pricing overrides, bulk uploads, and user permission updates",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "timestamp": { "type": "string" },
+        "actorUid": { "type": "string", "maxLength": 128 },
+        "actorEmail": { "type": "string", "maxLength": 120 },
+        "actorName": { "type": "string", "maxLength": 120 },
+        "actorRole": { "type": "string", "enum": ["admin", "staff", "system"] },
+        "actionType": { "type": "string", "enum": ["INVENTORY_STOCK_UPDATE", "PRICE_UPDATE", "BULK_IMPORT", "MACHINE_CREATED", "MACHINE_DELETED", "PART_CREATED", "PART_DELETED", "USER_ROLE_PROMOTION", "QUOTE_STATUS_OVERRIDE", "SECURITY_ALERT"] },
+        "targetEntity": { "type": "string", "enum": ["inventory_machines", "inventory_parts", "maquinaria", "repuestos", "users", "quotes", "orders", "bulk_batch"] },
+        "targetId": { "type": "string", "maxLength": 128 },
+        "targetName": { "type": "string", "maxLength": 150 },
+        "previousValue": { "type": "string" },
+        "newValue": { "type": "string" },
+        "diffSummary": { "type": "string", "maxLength": 500 },
+        "details": { "type": "string", "maxLength": 1500 },
+        "ipAddress": { "type": "string", "maxLength": 80 },
+        "location": { "type": "string", "maxLength": 120 },
+        "status": { "type": "string", "enum": ["SUCCESS", "FLAGGED", "WARNING"] },
+        "immutable": { "type": "boolean" },
+        "checksum": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["id", "timestamp", "actorEmail", "actionType", "targetEntity", "targetId", "details", "immutable"]
+    },
+    "CrmInquiry": {
+      "title": "CrmInquiry",
+      "description": "Registro de solicitud comercial RFQ y seguimiento del embudo de conversión en el CRM de ventas de TMD Dominicana",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "quoteId": { "type": "string", "maxLength": 128 },
+        "quoteNumber": { "type": "string", "maxLength": 64 },
+        "clientId": { "type": "string", "maxLength": 128 },
+        "clientEmail": { "type": "string", "maxLength": 120 },
+        "clientName": { "type": "string", "maxLength": 120 },
+        "companyName": { "type": "string", "maxLength": 120 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "rncOrCedula": { "type": "string", "maxLength": 30 },
+        "source": { "type": "string", "enum": ["portal_rfq", "checkout_cart", "quick_calculator", "machine_customizer", "direct_inquiry", "catalog_lead"] },
+        "funnelStage": { "type": "string", "enum": ["new_inquiry", "contacted", "technical_evaluation", "commercial_proposal", "negotiation", "won", "lost"] },
+        "dealValueUsd": { "type": "number" },
+        "dealValueDop": { "type": "number" },
+        "currency": { "type": "string", "enum": ["USD", "DOP"] },
+        "equipmentCategory": { "type": "string", "maxLength": 80 },
+        "equipmentInterested": { "type": "string", "maxLength": 200 },
+        "buyerIntent": { "type": "string", "enum": ["high", "medium", "exploratory"] },
+        "leadScore": { "type": "number" },
+        "assignedSalesRep": { "type": "string", "maxLength": 120 },
+        "assignedSalesEmail": { "type": "string", "maxLength": 120 },
+        "assignedSalesPhone": { "type": "string", "maxLength": 30 },
+        "followUpDueDate": { "type": "string", "maxLength": 60 },
+        "priority": { "type": "string", "enum": ["urgent", "high", "medium", "standard"] },
+        "lossReason": { "type": "string", "maxLength": 100 },
+        "lossNotes": { "type": "string", "maxLength": 500 },
+        "wonDate": { "type": "string", "maxLength": 60 },
+        "itemsCount": { "type": "number" },
+        "itemsSummary": { "type": "string", "maxLength": 500 },
+        "customerNotes": { "type": "string", "maxLength": 1000 },
+        "activityLog": { "type": "array" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "quoteId", "quoteNumber", "clientEmail", "funnelStage", "dealValueUsd", "source", "createdAt"]
+    },
+    "PatioTestDriveBooking": {
+      "title": "PatioTestDriveBooking",
+      "description": "Agendamiento de pruebas de campo y demostraciones técnicas en pista de Patio Km 22",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "machineId": { "type": "string", "maxLength": 128 },
+        "machineName": { "type": "string", "maxLength": 150 },
+        "machineBrand": { "type": "string", "maxLength": 60 },
+        "machineCategory": { "type": "string", "maxLength": 80 },
+        "machineModel": { "type": "string", "maxLength": 80 },
+        "machineImage": { "type": "string", "maxLength": 500 },
+        "date": { "type": "string", "maxLength": 30 },
+        "timeSlot": { "type": "string", "maxLength": 60 },
+        "timeSlotId": { "type": "string", "maxLength": 40 },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "in_progress", "completed", "cancelled", "rescheduled"] },
+        "operatorName": { "type": "string", "maxLength": 120 },
+        "companyName": { "type": "string", "maxLength": 120 },
+        "clientEmail": { "type": "string", "maxLength": 120 },
+        "phone": { "type": "string", "maxLength": 40 },
+        "licenseCategory": { "type": "string", "maxLength": 100 },
+        "testFocus": { "type": "string", "maxLength": 200 },
+        "trackZone": { "type": "string", "enum": ["pista_1_excavacion", "pista_2_rampa", "pista_3_confinado", "pista_4_velocidad", "pista_5_agricola"] },
+        "trackZoneName": { "type": "string", "maxLength": 100 },
+        "instructorRequested": { "type": "boolean" },
+        "assignedInstructor": { "type": "string", "maxLength": 120 },
+        "assignedInstructorPhone": { "type": "string", "maxLength": 40 },
+        "telemetryRequired": { "type": "boolean" },
+        "safetyEquipmentConfirmed": { "type": "boolean" },
+        "qrAccessPass": { "type": "string", "maxLength": 100 },
+        "clientNotes": { "type": "string", "maxLength": 1000 },
+        "staffNotes": { "type": "string", "maxLength": 1000 },
+        "machineOperatingHours": { "type": "number" },
+        "fuelLevelPercent": { "type": "number" },
+        "clientId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "machineId", "machineName", "date", "timeSlot", "status", "operatorName", "phone", "createdAt"]
+    },
+    "PatioMachineAvailability": {
+      "title": "PatioMachineAvailability",
+      "description": "Estado de disponibilidad, pista asignada y bloqueos de calendario para equipos en Patio Km 22",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "machineId": { "type": "string", "maxLength": 128 },
+        "machineName": { "type": "string", "maxLength": 150 },
+        "machineBrand": { "type": "string", "maxLength": 60 },
+        "machineCategory": { "type": "string", "maxLength": 80 },
+        "isAvailable": { "type": "boolean" },
+        "currentStatus": { "type": "string", "enum": ["disponible", "en_pista", "mantenimiento", "reservado_vip"] },
+        "currentTrackZone": { "type": "string", "maxLength": 100 },
+        "nextAvailableSlot": { "type": "string", "maxLength": 100 },
+        "blockedDates": { "type": "array" },
+        "blockedSlots": { "type": "array" },
+        "totalCompletedDemos": { "type": "number" },
+        "instructorLead": { "type": "string", "maxLength": 120 },
+        "fuelLevel": { "type": "number" },
+        "operatingHours": { "type": "number" },
+        "lastInspectionDate": { "type": "string", "maxLength": 50 },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "machineId", "machineName", "isAvailable", "currentStatus", "updatedAt"]
+    },
+    "InventoryLog": {
+      "title": "InventoryLog",
+      "description": "Registro de escaneos QR realizados por personal de patio y almacén con coordenadas de geolocalización, metadatos y timestamp scanned-at",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "scannedAt": { "type": "string" },
+        "timestamp": { "type": "number" },
+        "staffUid": { "type": "string", "maxLength": 128 },
+        "staffEmail": { "type": "string", "maxLength": 120 },
+        "staffName": { "type": "string", "maxLength": 120 },
+        "staffRole": { "type": "string", "enum": ["staff", "admin"] },
+        "itemType": { "type": "string", "enum": ["machinery", "part"] },
+        "itemId": { "type": "string", "maxLength": 128 },
+        "itemName": { "type": "string", "maxLength": 200 },
+        "itemBrand": { "type": "string", "maxLength": 100 },
+        "itemCode": { "type": "string", "maxLength": 100 },
+        "rawCode": { "type": "string", "maxLength": 500 },
+        "scanMethod": { "type": "string", "enum": ["camera", "upload", "manual"] },
+        "location": {
+          "type": "object",
+          "properties": {
+            "latitude": { "type": "number" },
+            "longitude": { "type": "number" },
+            "accuracy": { "type": "number" },
+            "altitude": { "type": "number" },
+            "zoneName": { "type": "string", "maxLength": 120 },
+            "facility": { "type": "string", "maxLength": 120 },
+            "address": { "type": "string", "maxLength": 250 },
+            "source": { "type": "string", "enum": ["gps", "manual_zone", "facility_default"] }
+          }
+        },
+        "deviceInfo": {
+          "type": "object",
+          "properties": {
+            "userAgent": { "type": "string", "maxLength": 250 },
+            "platform": { "type": "string", "maxLength": 80 }
+          }
+        },
+        "synced": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "scannedAt", "staffUid", "staffEmail", "staffRole", "itemType", "itemId", "itemName", "rawCode", "scanMethod"]
+    }
+  },
+  "firestore": {
+    "/machinery_listings/{id}": {
+      "schema": { "$ref": "MachineryListing" },
+      "description": "Tractor and heavy machinery listings for sales catalog with pricing, warranty, and stock location"
+    },
+    "/specifications/{id}": {
+      "schema": { "$ref": "MachinerySpecification" },
+      "description": "Technical specifications for tractor models (engine, hydraulic pump, transmission, dimensions)"
+    },
+    "/sales_leads/{id}": {
+      "schema": { "$ref": "MachinerySalesLead" },
+      "description": "Machinery sales leads and acquisition requests with bank financing preference and trade-in data"
+    },
+    "/maquinaria/{id}": {
+      "schema": { "$ref": "Maquinaria" },
+      "description": "Catálogo maestro y flota técnica de maquinaria pesada"
+    },
+    "/repuestos/{id}": {
+      "schema": { "$ref": "Repuesto" },
+      "description": "Catálogo e inventario de repuestos y consumibles originales OEM"
+    },
+    "/presupuestos/{id}": {
+      "schema": { "$ref": "Presupuesto" },
+      "description": "Presupuestos, cotizaciones formales y proformas fiscales de clientes"
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "UserProfile" },
+      "description": "User profile with role definition (client, staff, admin)"
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "AdminRecord" },
+      "description": "Designated administrators whitelist"
+    },
+    "/staff/{staffId}": {
+      "schema": { "$ref": "StaffRecord" },
+      "description": "Designated staff and technician members whitelist"
+    },
+    "/quotes/{quoteId}": {
+      "schema": { "$ref": "PortalQuote" },
+      "description": "Proforma quotes for machines and parts"
+    },
+    "/quotes/{quoteId}/crm_inquiries/{inquiryId}": {
+      "schema": { "$ref": "CrmInquiry" },
+      "description": "Subcolección de seguimiento CRM y embudo de conversión para solicitudes de cotización (RFQ)"
+    },
+    "/patio_test_drives/{bookingId}": {
+      "schema": { "$ref": "PatioTestDriveBooking" },
+      "description": "Reservas de pruebas de campo y demostraciones en terreno de Patio Km 22"
+    },
+    "/patio_availability/{machineId}": {
+      "schema": { "$ref": "PatioMachineAvailability" },
+      "description": "Disponibilidad en tiempo real de maquinaria en pista Patio Km 22"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "CustomerPurchaseOrder" },
+      "description": "Customer purchase orders with status tracking, items, delivery, and payment records"
+    },
+    "/work_orders/{orderId}": {
+      "schema": { "$ref": "ServiceWorkOrder" },
+      "description": "Workshop and mobile service work orders"
+    },
+    "/fullbay_work_orders/{orderId}": {
+      "schema": { "$ref": "ServiceWorkOrder" },
+      "description": "Fullbay heavy-duty shop manager work orders synchronized from workshop floor"
+    },
+    "/inventory_machines/{machineId}": {
+      "schema": { "$ref": "InventoryMachine" },
+      "description": "Heavy machinery fleet stock management"
+    },
+    "/inventory_parts/{partId}": {
+      "schema": { "$ref": "InventoryPart" },
+      "description": "OEM parts warehouse stock management"
+    },
+    "/notifications/{notificationId}": {
+      "schema": { "$ref": "AppNotification" },
+      "description": "Real-time user alerts and broadcast special offers"
+    },
+    "/fcm_tokens/{tokenId}": {
+      "schema": { "$ref": "FCMTokenRecord" },
+      "description": "FCM push notification registration tokens"
+    },
+    "/audit_logs/{logId}": {
+      "schema": { "$ref": "AdminAuditLog" },
+      "description": "Logs inmutables de auditoría exclusiva para administradores"
+    },
+    "/inventory_logs/{logId}": {
+      "schema": { "$ref": "InventoryLog" },
+      "description": "Bitácora operativa de lecturas y escaneos QR en patio y almacén por personal de TMD con timestamp y geolocalización"
+    }
+  }
+}
