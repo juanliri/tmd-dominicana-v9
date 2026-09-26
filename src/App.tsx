@@ -53,7 +53,6 @@ import { GuidedWalkthroughTour } from './components/tour/GuidedWalkthroughTour';
 import { ProductQrScannerModal } from './components/ProductQrScannerModal';
 import { FloatingActionOrchestrator } from './components/common/actions/FloatingActionOrchestrator';
 import { IndustrialScrollProgressBar } from './components/effects/IndustrialScrollProgressBar';
-import { useScrollDirection } from './hooks/useScrollDirection';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle, X, Sparkles } from 'lucide-react';
@@ -85,7 +84,6 @@ function AppContent() {
     };
   };
 
-  const { isScrollingDown } = useScrollDirection();
   const initialUrlState = parseUrlState();
   const [currentRoute, setCurrentRoute] = useState<string>(initialUrlState.route);
   

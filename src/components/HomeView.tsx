@@ -124,10 +124,10 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
   const [isHeroAutoPlaying, setIsHeroAutoPlaying] = useState<boolean>(true);
   const heroMachines = useMemo(() => {
     return [
-      MACHINES_DATA.find(m => m.id === 'm1') || MACHINES_DATA[0], // JCB 3CX
-      MACHINES_DATA.find(m => m.id === 'm2') || MACHINES_DATA[1], // LiuGong 922E
-      MACHINES_DATA.find(m => m.id === 'm4') || MACHINES_DATA[3], // JCB 540-170
-      MACHINES_DATA.find(m => m.id === 'm6') || MACHINES_DATA[5], // Ammann ASC 110
+      MACHINES_DATA.find(m => m.id === 'jcb-3cx-eco') || MACHINES_DATA[0], // JCB 3CX
+      MACHINES_DATA.find(m => m.id === 'jcb-3cx-compact') || MACHINES_DATA[1], // JCB 3CX Compact
+      MACHINES_DATA.find(m => m.id === 'jcb-1cxt') || MACHINES_DATA[3], // JCB 1CXT
+      MACHINES_DATA.find(m => m.id === 'jcb-250t') || MACHINES_DATA[5], // JCB 250T
     ].filter(Boolean);
   }, []);
   const activeHeroMachine = heroMachines[heroMachineIndex] || heroMachines[0];
