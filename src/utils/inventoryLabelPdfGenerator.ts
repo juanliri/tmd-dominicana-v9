@@ -2,6 +2,7 @@ import { jsPDF } from 'jspdf';
 import QRCode from 'qrcode';
 import { Machine, Part } from '../types';
 import { getProductMobileUrl } from './qrExporter';
+import { drawTmdOfficialLogoPdf } from './pdfGenerator';
 
 export type LabelSheetFormat = 'single_placard' | 'grid_6' | 'grid_8' | 'grid_12';
 
@@ -120,15 +121,18 @@ export async function generateInventoryLabelPdf(
       doc.setFillColor(24, 24, 27);
       doc.rect(10, 18, pageWidth - 20, 24, 'F');
 
+      // Official TMD Logo matching homepage
+      drawTmdOfficialLogoPdf(doc, 15, 21, 46, 17);
+
       doc.setTextColor(245, 158, 11);
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(22);
-      doc.text('TMD DOMINICANA', pageWidth / 2, 29, { align: 'center' });
+      doc.setFontSize(16);
+      doc.text('TECNOMAQUINARIAS DIESEL S.R.L.', 66, 29);
 
       doc.setTextColor(255, 255, 255);
-      doc.setFontSize(9);
+      doc.setFontSize(8.5);
       doc.setFont('courier', 'bold');
-      doc.text('RÓTULO OFICIAL DE ALMACÉN & TRAZABILIDAD INDUSTRIAL • PATIO KM 22', pageWidth / 2, 36, { align: 'center' });
+      doc.text('RÓTULO OFICIAL DE ALMACÉN & TRAZABILIDAD INDUSTRIAL • PATIO KM 22', 66, 36);
 
       // Code Identification Header Box
       doc.setFillColor(244, 244, 245);

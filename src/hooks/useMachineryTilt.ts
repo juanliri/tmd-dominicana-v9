@@ -47,42 +47,57 @@ export function useMachineryTilt<T extends HTMLElement = HTMLDivElement>(
     }
   });
 
+  const rafIdRef = useRef<number | null>(null);
+
   const handleMouseMove = useCallback(
     (e: MouseEvent<T>) => {
       const el = elementRef.current;
       if (!el) return;
 
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
 
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+      const clientX = e.clientX;
+      const clientY = e.clientY;
 
-      // Calculate normalized tilt (-maxTilt to +maxTilt)
-      const rotationX = ((y - centerY) / centerY) * -maxTilt;
-      const rotationY = ((x - centerX) / centerX) * maxTilt;
+      rafIdRef.current = requestAnimationFrame(() => {
+        if (!elementRef.current) return;
+        const rect = elementRef.current.getBoundingClientRect();
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
 
-      // Specular sheen coordinates (0% to 100%)
-      const glareX = Math.round((x / rect.width) * 100);
-      const glareY = Math.round((y / rect.height) * 100);
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-      setTiltState({
-        rotationX,
-        rotationY,
-        glareX,
-        glareY,
-        opacity: 0.18,
-        transformStyle: {
-          transform: `perspective(${perspective}px) rotateX(${rotationX.toFixed(2)}deg) rotateY(${rotationY.toFixed(2)}deg)`,
-          transition: 'transform 0.08s ease-out'
-        }
+        // Calculate normalized tilt (-maxTilt to +maxTilt)
+        const rotationX = ((y - centerY) / centerY) * -maxTilt;
+        const rotationY = ((x - centerX) / centerX) * maxTilt;
+
+        // Specular sheen coordinates (0% to 100%)
+        const glareX = Math.round((x / rect.width) * 100);
+        const glareY = Math.round((y / rect.height) * 100);
+
+        setTiltState({
+          rotationX,
+          rotationY,
+          glareX,
+          glareY,
+          opacity: 0.18,
+          transformStyle: {
+            transform: `perspective(${perspective}px) rotateX(${rotationX.toFixed(2)}deg) rotateY(${rotationY.toFixed(2)}deg)`,
+            transition: 'transform 0.08s ease-out'
+          }
+        });
       });
     },
     [maxTilt, perspective]
   );
 
   const handleMouseLeave = useCallback(() => {
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
+    }
     setTiltState({
       rotationX: 0,
       rotationY: 0,

@@ -201,47 +201,105 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
   // Quick Spec Modal Accordion State
   const [previewAccordionSection, setPreviewAccordionSection] = useState<'specs' | 'engine' | 'hydraulic' | 'dimensions' | 'warranty'>('specs');
 
-  // Mobile Quick Anchor Jump & Scroll-To-Top state
+  // Hero Section Dynamic Typewriter Text for Specializations
+  const HERO_ROTATING_PHRASES = useMemo(() => [
+    'DISTRIBUIDOR AUTORIZADO JCB & LIUGONG EN RD',
+    'EXCAVADORAS & PALAS DE ALTO TONELAJE',
+    'REPUESTOS ORIGINALES OEM & TALLER MÓVIL 24/7',
+    'FINANCIAMIENTO & LEASING COMERCIAL EN RD',
+    'TELEMETRÍA SATELITAL & HORÓMETROS LIVELINK™'
+  ], []);
+
+  const [typewriterIndex, setTypewriterIndex] = useState(0);
+  const [typewriterText, setTypewriterText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentPhrase = HERO_ROTATING_PHRASES[typewriterIndex];
+    let timeout: NodeJS.Timeout;
+
+    if (!isDeleting && typewriterText === currentPhrase) {
+      timeout = setTimeout(() => setIsDeleting(true), 2200);
+    } else if (isDeleting && typewriterText === '') {
+      setIsDeleting(false);
+      setTypewriterIndex((prev) => (prev + 1) % HERO_ROTATING_PHRASES.length);
+    } else {
+      const nextCharLength = isDeleting ? typewriterText.length - 1 : typewriterText.length + 1;
+      const speed = isDeleting ? 25 : 50;
+      timeout = setTimeout(() => {
+        setTypewriterText(currentPhrase.substring(0, nextCharLength));
+      }, speed);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [typewriterText, isDeleting, typewriterIndex, HERO_ROTATING_PHRASES]);
+
+  // Mobile Quick Anchor Jump & Scroll-To-Top state (Optimized with rAF & zero layout thrashing)
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeSectionId, setActiveSectionId] = useState<string>('top-hero-section');
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
+  const showScrollTopRef = useRef(false);
+  const activeSectionIdRef = useRef('top-hero-section');
+  const scrollRafId = useRef<number | null>(null);
+  const progressBarRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 450);
+      if (scrollRafId.current !== null) return;
 
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        setScrollProgress(Math.min(100, Math.max(0, (window.scrollY / totalScroll) * 100)));
-      }
+      scrollRafId.current = requestAnimationFrame(() => {
+        scrollRafId.current = null;
+        const currentY = window.scrollY;
 
-      const sectionIds = [
-        'top-hero-section',
-        'fleet-catalog-section',
-        'executive-commercial-profiles',
-        'tradein-valuation-module',
-        'official-company-video',
-        'strategic-services-section',
-        'industrial-ecosystem-grid',
-      ];
+        // 1. Show scroll-to-top button threshold (only updates state on change)
+        const shouldShow = currentY > 450;
+        if (shouldShow !== showScrollTopRef.current) {
+          showScrollTopRef.current = shouldShow;
+          setShowScrollTop(shouldShow);
+        }
 
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 120) {
-            setActiveSectionId(id);
-            break;
+        // 2. Direct DOM update for scroll progress bar (prevents full-tree re-renders!)
+        const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+        if (totalScroll > 0 && progressBarRef.current) {
+          const pct = Math.min(100, Math.max(0, (currentY / totalScroll) * 100));
+          progressBarRef.current.style.width = `${pct}%`;
+        }
+
+        // 3. Active Section anchor spy (only updates state when active section changes)
+        const sectionIds = [
+          'top-hero-section',
+          'fleet-catalog-section',
+          'executive-commercial-profiles',
+          'tradein-valuation-module',
+          'official-company-video',
+          'strategic-services-section',
+          'industrial-ecosystem-grid',
+        ];
+
+        for (const id of sectionIds) {
+          const el = document.getElementById(id);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= 200 && rect.bottom >= 120) {
+              if (id !== activeSectionIdRef.current) {
+                activeSectionIdRef.current = id;
+                setActiveSectionId(id);
+              }
+              break;
+            }
           }
         }
-      }
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollRafId.current !== null) cancelAnimationFrame(scrollRafId.current);
+    };
   }, []);
 
   const scrollToAnchor = (sectionId: string) => {
+    activeSectionIdRef.current = sectionId;
     setActiveSectionId(sectionId);
     if (sectionId === 'top-hero-section') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -257,19 +315,19 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 18 }}
+      initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-      className="space-y-8 sm:space-y-12 pb-16 animate-in fade-in-50 slide-in-from-bottom-4 duration-500 ease-out fill-mode-both"
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      className="space-y-8 sm:space-y-12 pb-16 animate-in fade-in-50 duration-400 ease-out fill-mode-both"
     >
       {/* 1. HERO SECTION: Clean, High-Contrast Industrial Aesthetic & Flagship Showcase */}
       <div className="w-full px-3 sm:px-6 lg:px-8 xl:px-12 max-w-[1780px] mx-auto pt-5 sm:pt-7 lg:pt-8 relative">
         {/* Soft atmospheric ambient aura bridging header and hero */}
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-4/5 h-28 bg-amber-500/10 dark:bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-4/5 h-28 bg-amber-500/15 dark:bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
 
         <section id="top-hero-section" className="relative overflow-hidden rounded-[6px] bg-zinc-950 text-white border border-zinc-800/80 dark:border-white/[0.08] shadow-2xl">
-        {/* Background Image with optimized loading & gradient */}
-        <div className="absolute inset-0 z-0">
+        {/* Background Image with optimized loading & balanced cinematic illumination (Clear & Vivid) */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <img
             src={activeHeroMachine.image || "/images/tmd_portal_hero.jpg"}
             alt="Maquinaria Pesada en República Dominicana"
@@ -281,11 +339,12 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 target.src = '/images/tmd_coming_soon.jpg';
               }
             }}
-            className="w-full h-full object-cover object-center opacity-20 scale-105 filter contrast-125 transition-all duration-700"
+            className="w-full h-full object-cover object-center opacity-65 sm:opacity-75 scale-102 filter brightness-105 contrast-110 transition-all duration-700 ease-out"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/90 to-zinc-950/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(245,158,11,0.14),rgba(0,0,0,0))] pointer-events-none" />
+          {/* Subtle luminous industrial vignette - machinery is bright, clear & visible */}
+          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/92 via-zinc-950/55 to-zinc-950/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(245,158,11,0.22),rgba(0,0,0,0))] pointer-events-none" />
         </div>
 
         <motion.div
@@ -296,14 +355,17 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
         >
           {/* Left Column: Headline, Live Status & Search */}
           <div className="lg:col-span-7 space-y-4 sm:space-y-5">
-            {/* Live Operational Status Badges (3-Color Deep Industrial Palette) */}
+            {/* Live Operational Status Badges with Dynamic Typing Showcase */}
             <motion.div variants={heroFadeInUpItem} className="flex flex-wrap items-center gap-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[5px] bg-zinc-900/95 border border-zinc-700/80 text-zinc-100 text-[11px] sm:text-xs font-black tracking-wider uppercase font-mono shadow-md">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-[5px] bg-zinc-900/95 border border-amber-500/40 text-zinc-100 text-[11px] sm:text-xs font-black tracking-wider uppercase font-mono shadow-md backdrop-blur-md">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400" />
                 </span>
-                <span>PATIO KM 22 ABIERTO • DESPACHO INMEDIATO RD</span>
+                <span className="bg-gradient-to-r from-amber-400 via-amber-200 to-amber-400 bg-clip-text text-transparent font-bold">
+                  {typewriterText}
+                </span>
+                <span className="inline-block w-1.5 h-3.5 bg-amber-400 animate-pulse ml-0.5 rounded-[1px]" />
               </div>
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[5px] bg-zinc-900/95 border border-zinc-700/80 text-zinc-200 text-[11px] sm:text-xs font-bold tracking-wider uppercase font-mono shadow-md">
                 <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
@@ -311,13 +373,13 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
               </div>
             </motion.div>
 
-            {/* Monumental Heavy Industrial Typography: Oswald Display with Ultra Bold Authority */}
+            {/* Monumental Heavy Industrial Typography: Luxury Gold Gradient Title with High-Contrast Presence */}
             <motion.h1 
               variants={heroFadeInUpItem} 
-              className="text-3xl sm:text-5xl md:text-6xl lg:text-[3.85rem] font-black font-display tracking-tight text-white uppercase leading-[0.98] drop-shadow-md"
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-[3.95rem] font-black font-display tracking-tight text-white uppercase leading-[0.96] drop-shadow-xl"
             >
-              TECNOMAQUINARIAS DIESEL{' '}
-              <span className="bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 bg-clip-text text-transparent font-black">
+              <span className="block text-white">TECNOMAQUINARIAS DIESEL</span>{' '}
+              <span className="inline-block bg-gradient-to-r from-amber-400 via-yellow-200 via-amber-300 to-amber-500 bg-clip-text text-transparent font-black drop-shadow-[0_4px_16px_rgba(245,158,11,0.4)]">
                 DOMINICANA
               </span>
             </motion.h1>
@@ -325,9 +387,9 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
             {/* Body Typography: High-Contrast Technical Overview */}
             <motion.p 
               variants={heroFadeInUpItem} 
-              className="text-xs sm:text-sm md:text-base text-zinc-300 max-w-2xl font-normal leading-relaxed tracking-[0.01em]"
+              className="text-xs sm:text-sm md:text-base text-zinc-200 max-w-2xl font-normal leading-relaxed tracking-[0.01em] drop-shadow-sm"
             >
-              Distribuidor oficial autorizado de <strong className="text-amber-300 font-bold uppercase">JCB, LiuGong, LS Tractor y Ammann</strong> en República Dominicana. Maquinaria pesada certificada, servicio de taller móvil en obra 24/7 y almacén central de repuestos genuinos en el Km 22, Autopista Duarte.
+              Distribuidor oficial autorizado de <strong className="text-amber-400 font-bold uppercase">JCB, LiuGong, LS Tractor y Ammann</strong> en República Dominicana. Maquinaria pesada certificada, servicio de taller móvil en obra 24/7 y almacén central de repuestos genuinos en el Km 22, Autopista Duarte.
             </motion.p>
 
             {/* Quick Live Filter Search Input with 5px Precision Corners */}
@@ -485,7 +547,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                   <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-[#d99b26]/70 pointer-events-none z-20 transition-all group-hover/photo:border-[#e0a22a] group-hover/photo:w-4 group-hover/photo:h-4" />
                   <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-[#d99b26]/70 pointer-events-none z-20 transition-all group-hover/photo:border-[#e0a22a] group-hover/photo:w-4 group-hover/photo:h-4" />
 
-                  {/* High-Resolution Machinery Image */}
+                  {/* High-Resolution Machinery Image - Bright, Vibrant, High Definition */}
                   <img
                     src={activeHeroMachine.image}
                     alt={activeHeroMachine.name}
@@ -495,12 +557,12 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                         target.src = '/images/tmd_coming_soon.jpg';
                       }
                     }}
-                    className="w-full h-full object-cover group-hover/photo:scale-106 filter contrast-110 group-hover/photo:contrast-125 transition-all duration-700 ease-out"
+                    className="w-full h-full object-cover group-hover/photo:scale-106 filter brightness-105 contrast-110 group-hover/photo:contrast-120 transition-all duration-700 ease-out"
                   />
 
-                  {/* Dynamic Dark Vignette Gradients for Legibility */}
-                  <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/85 via-black/30 to-transparent pointer-events-none z-10" />
-                  <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/95 via-black/50 to-transparent pointer-events-none z-10" />
+                  {/* Balanced Vignette Gradients for Text Legibility without dimming the machine */}
+                  <div className="absolute inset-x-0 top-0 h-14 bg-gradient-to-b from-black/60 via-transparent to-transparent pointer-events-none z-10" />
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/75 via-black/25 to-transparent pointer-events-none z-10" />
 
                   {/* Specular Light Reflection Sweep on Hover */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/photo:translate-x-full transition-transform duration-1000 ease-out pointer-events-none z-15" />
@@ -657,8 +719,9 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
           {/* Animated Dynamic Scroll Progress Indicator along the base */}
           <div className="absolute bottom-0 inset-x-0 h-[2px] bg-white/[0.05] pointer-events-none">
             <div 
-              className="h-full bg-gradient-to-r from-[#d99b26] to-[#f0b54d] transition-all duration-150 ease-out" 
-              style={{ width: `${scrollProgress}%` }}
+              ref={progressBarRef}
+              className="h-full bg-gradient-to-r from-[#d99b26] to-[#f0b54d] transition-all duration-75 ease-out" 
+              style={{ width: '0%' }}
             />
           </div>
 

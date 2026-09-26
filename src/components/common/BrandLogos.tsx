@@ -1,70 +1,32 @@
 import React from 'react';
 
-interface LogoProps {
+export const TMD_OFFICIAL_LOGO_SRC = '/assets/logos/tmd_logo_official.png';
+export const TMD_GOLD_LOGO_SRC = '/assets/logos/tmd_logo_gold.png';
+
+export interface TMDLogoProps {
   className?: string;
-  variant?: 'official' | 'gold' | 'compact' | 'monochrome';
+  variant?: 'official' | 'gold' | 'compact' | 'minimal' | 'white-text' | 'monochrome';
+  hideSubtext?: boolean;
 }
 
 /**
- * TMD Official Company Logo Component (Matches tmd_logo_official.png & tmd_logo_gold.png)
+ * TMD Official Company Logo Component
+ * Uses the exact original logo asset in the authentic setup and format without modifying the design.
  */
-export const TMDLogo: React.FC<LogoProps> = ({ className = 'h-10', variant = 'official' }) => {
+export const TMDLogo: React.FC<TMDLogoProps> = ({ 
+  className = 'h-10', 
+  variant = 'official'
+}) => {
+  const src = variant === 'gold' ? TMD_GOLD_LOGO_SRC : TMD_OFFICIAL_LOGO_SRC;
+
   return (
     <div className={`inline-flex items-center select-none ${className}`}>
-      <svg
-        viewBox="0 0 230 84"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-full w-auto drop-shadow-sm"
-      >
-        {/* Outer Chevron Frame (Gold Border) */}
-        <polygon
-          points="6,6 206,6 224,42 206,78 6,78"
-          fill="#0c0d10"
-          stroke="#F59E0B"
-          strokeWidth="5"
-          strokeLinejoin="round"
-        />
-        {/* Inner Chevron Accent Line */}
-        <polyline
-          points="209,16 220,42 209,68"
-          stroke="#F59E0B"
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-
-        {/* TMD Bold Wordmark */}
-        <text
-          x="106"
-          y="51"
-          textAnchor="middle"
-          fill="#FFFFFF"
-          fontFamily="'Chakra Petch', system-ui, -apple-system, sans-serif"
-          fontWeight="800"
-          fontSize="44"
-          letterSpacing="2.5"
-          fontStyle="italic"
-        >
-          TMD
-        </text>
-
-        {/* Bottom Sub-label: TECNOMAQUINARIAS DIESEL */}
-        <text
-          x="106"
-          y="69"
-          textAnchor="middle"
-          fill="#F59E0B"
-          fontFamily="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif"
-          fontWeight="800"
-          fontSize="9.5"
-          letterSpacing="1.8"
-          textLength="168"
-          lengthAdjust="spacing"
-        >
-          TECNOMAQUINARIAS DIESEL
-        </text>
-      </svg>
+      <img
+        src={src}
+        alt="TMD - Tecnomaquinarias Diesel"
+        className="h-full w-auto object-contain select-none pointer-events-none drop-shadow-sm"
+        draggable={false}
+      />
     </div>
   );
 };

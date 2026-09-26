@@ -259,13 +259,12 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
       
       {/* Cinematic Heavy Machinery Background Image (No text, pure industrial power) */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none z-0 transition-transform duration-700"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none z-0 brightness-110 contrast-105"
         style={{ backgroundImage: `url(${portalBgMachinery})` }}
       >
-        {/* Deep cinematic gradients: dark vignette & atmospheric contrast */}
-        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/95 via-zinc-950/80 to-zinc-950/92" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-zinc-950/50 to-black/70" />
-        <div className="absolute inset-0 bg-black/30 backdrop-blur-[0.5px]" />
+        {/* Balanced cinematic atmospheric gradient - machinery is vivid & clearly visible */}
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/80 via-zinc-950/40 to-zinc-950/75" />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-transparent to-zinc-950/35" />
       </div>
 
       {/* Hardware-Accelerated Ambient Ember Particle Canvas */}

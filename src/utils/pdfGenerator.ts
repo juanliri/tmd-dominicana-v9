@@ -12,6 +12,25 @@ export interface ExportQuotePdfOptions {
   includeSpecs?: boolean;
 }
 
+export const TMD_LOGO_PNG_BASE64 = 'data:image/png;base64,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';
+
+/**
+ * Embeds the exact official TMD Logo image asset into the PDF document without modifying the design.
+ */
+export function drawTmdOfficialLogoPdf(
+  doc: jsPDF, 
+  x: number, 
+  y: number, 
+  width: number = 42, 
+  height: number = 17
+): void {
+  try {
+    doc.addImage(TMD_LOGO_PNG_BASE64, 'PNG', x, y, width, height);
+  } catch (err) {
+    console.error('Error drawing TMD logo to PDF:', err);
+  }
+}
+
 export const generateQuotePDF = (options: ExportQuotePdfOptions): jsPDF => {
   const { 
     quote, 
@@ -42,16 +61,8 @@ export const generateQuotePDF = (options: ExportQuotePdfOptions): jsPDF => {
   doc.setFillColor(...brandAmber);
   doc.rect(0, 0, pageWidth, 5, 'F');
 
-  // Header Title & Logo Box
-  doc.setFillColor(...brandDark);
-  doc.roundedRect(margin, 10, 36, 16, 2, 2, 'F');
-  doc.setTextColor(255, 255, 255);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
-  doc.text('TMD', margin + 6, 20);
-  doc.setTextColor(...brandAmber);
-  doc.setFontSize(7.5);
-  doc.text('DOMINICANA', margin + 6, 24);
+  // Official TMD Chevron Logo matching homepage
+  drawTmdOfficialLogoPdf(doc, margin, 10, 44, 16);
 
   // Company Contact Details (Right side of header)
   doc.setTextColor(...brandDark);
@@ -425,16 +436,8 @@ export const downloadOrderInvoicePDF = (order: CustomerPurchaseOrder, filename?:
   doc.setFillColor(...brandAmber);
   doc.rect(0, 0, pageWidth, 5, 'F');
 
-  // Logo Box
-  doc.setFillColor(...brandDark);
-  doc.roundedRect(margin, 10, 36, 16, 2, 2, 'F');
-  doc.setTextColor(255, 255, 255);
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
-  doc.text('TMD', margin + 6, 20);
-  doc.setTextColor(...brandAmber);
-  doc.setFontSize(7.5);
-  doc.text('DOMINICANA', margin + 6, 24);
+  // Official TMD Chevron Logo matching homepage
+  drawTmdOfficialLogoPdf(doc, margin, 10, 44, 16);
 
   // Company info
   doc.setTextColor(...brandDark);

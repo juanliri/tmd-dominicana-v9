@@ -27,7 +27,7 @@ Write-Host "✓ Found new snapshot: $($candidate.Name) (Created: $($candidate.La
 
 # 1. Sync files to workspace
 Write-Host "📦 Syncing files into $wsPath..." -ForegroundColor Cyan
-robocopy $srcPath $wsPath /E /NFL /NDL /NP /R:1 /W:1 /XD node_modules .git dist | Out-Null
+robocopy $srcPath $wsPath /E /NFL /NDL /NP /R:1 /W:1 /XD node_modules .git dist .antigravity | Out-Null
 
 # 2. Check firestore.rules for new collections
 Write-Host "🛡️ Checking Firestore rules for schema updates..." -ForegroundColor Cyan

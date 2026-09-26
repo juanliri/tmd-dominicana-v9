@@ -2,6 +2,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { Machine, Part } from '../types';
 import { USD_TO_DOP_RATE } from '../data/catalog';
+import { drawTmdOfficialLogoPdf } from '../utils/pdfGenerator';
 
 export interface ExportMachineryPdfOptions {
   machines: Machine[];
@@ -55,20 +56,23 @@ export const generateMachineryCatalogPdf = (options: ExportMachineryPdfOptions):
   doc.setFillColor(15, 23, 42);
   doc.rect(0, 5, pageWidth, 28, 'F');
 
-  // Title & Brand
+  // Official TMD Chevron Logo matching homepage
+  drawTmdOfficialLogoPdf(doc, 14, 9, 42, 15);
+
+  // Title & Brand info alongside logo
   doc.setTextColor(255, 255, 255);
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(16);
-  doc.text('REMIX TMD DOMINICANA', 14, 16);
+  doc.setFontSize(14);
+  doc.text('TECNOMAQUINARIAS DIESEL DOMINICANA', 60, 16);
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
   doc.setTextColor(245, 158, 11);
-  doc.text('DISTRIBUIDOR AUTORIZADO DE MAQUINARIA PESADA Y AGROINDUSTRIAL', 14, 22);
+  doc.text('DISTRIBUIDOR AUTORIZADO DE MAQUINARIA PESADA Y AGROINDUSTRIAL', 60, 21.5);
 
   doc.setFontSize(7.5);
   doc.setTextColor(203, 213, 225);
-  doc.text('Km 22 Autopista Duarte, Pedro Brand, Sto. Dgo. | Tel: (809) 560-8484 | info@tmd.do', 14, 28);
+  doc.text('Km 22 Autopista Duarte, Santo Domingo Oeste | Tel: +1 (809) 560-1234 | info@tmd.com.do', 60, 27);
 
   // Document metadata on right side of header
   doc.setFont('helvetica', 'bold');
@@ -243,20 +247,23 @@ export const generatePartsCatalogPdf = (options: ExportPartsPdfOptions): jsPDF =
   doc.setFillColor(15, 23, 42);
   doc.rect(0, 5, pageWidth, 28, 'F');
 
-  // Title & Brand
+  // Official TMD Chevron Logo matching homepage
+  drawTmdOfficialLogoPdf(doc, 14, 9, 42, 15);
+
+  // Title & Brand info alongside logo
   doc.setTextColor(255, 255, 255);
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(15);
-  doc.text('REMIX TMD DOMINICANA', 14, 16);
+  doc.setFontSize(14);
+  doc.text('TECNOMAQUINARIAS DIESEL DOMINICANA', 60, 16);
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
   doc.setTextColor(245, 158, 11);
-  doc.text('DIVISIÓN DE REPUESTOS Y COMPONENTES OEM GENUINOS', 14, 22);
+  doc.text('DIVISIÓN DE REPUESTOS Y COMPONENTES OEM GENUINOS', 60, 21.5);
 
   doc.setFontSize(7.5);
   doc.setTextColor(203, 213, 225);
-  doc.text('Almacén Central Autopista Duarte Km 22 | Despacho a todo el país en 24h', 14, 28);
+  doc.text('Almacén Central Autopista Duarte Km 22 | Despacho a todo el país en 24h', 60, 27);
 
   // Document metadata
   doc.setFont('helvetica', 'bold');
@@ -441,20 +448,23 @@ export const generateSingleMachineSpecPdf = (options: ExportSingleMachineProform
   doc.setFillColor(15, 23, 42);
   doc.rect(0, 5, pageWidth, 30, 'F');
 
-  // TMD Logo Text
+  // Official TMD Chevron Logo matching homepage
+  drawTmdOfficialLogoPdf(doc, 14, 10, 44, 16);
+
+  // Title alongside logo
   doc.setTextColor(255, 255, 255);
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(16);
-  doc.text('TMD DOMINICANA', 14, 16);
+  doc.setFontSize(13);
+  doc.text('TECNOMAQUINARIAS DIESEL DOMINICANA', 62, 17);
 
   doc.setFontSize(8);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(245, 158, 11);
-  doc.text('MAQUINARIA PESADA, TRACTORES & RESPALDO TÉCNICO OFICIAL', 14, 22);
+  doc.text('MAQUINARIA PESADA, TRACTORES & RESPALDO TÉCNICO OFICIAL', 62, 22);
 
   doc.setTextColor(203, 213, 225);
   doc.setFontSize(7.5);
-  doc.text('Autopista Duarte Km 22, Santo Domingo Oeste • RNC: 1-31-88492-1 • Tel: (809) 560-4000', 14, 28);
+  doc.text('Autopista Duarte Km 22, Santo Domingo Oeste • RNC: 1-31-88492-1 • Tel: +1 (809) 560-1234', 62, 27);
 
   // Proforma Badge on Top Right
   doc.setFillColor(245, 158, 11);
