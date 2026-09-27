@@ -31,7 +31,8 @@ import {
   Zap,
   HardHat,
   MessageSquare,
-  X
+  X,
+  BookOpen
 } from 'lucide-react';
 import { PortalQuote, ServiceWorkOrder, UserProfile, UserRole, Currency } from '../../types';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
@@ -48,6 +49,7 @@ import { CustomerOrdersTab } from './CustomerOrdersTab';
 import { ServiceHistoryTab } from './ServiceHistoryTab';
 import { ProMemberDashboard } from './ProMemberDashboard';
 import { LiveLinkCustomerTelematicsTab } from './LiveLinkCustomerTelematicsTab';
+import { TechnicalDocumentationVaultTab } from './TechnicalDocumentationVaultTab';
 import { getQuoteWhatsAppUrl } from '../../utils/whatsappMessaging';
 import { downloadQuotePDF } from '../../utils/pdfGenerator';
 import { getLocalFleet } from '../../services/serviceHistoryService';
@@ -60,6 +62,7 @@ export type ClientPortalTab =
   | 'livelink_telematics' 
   | 'service_history' 
   | 'pro_member' 
+  | 'tech_docs'
   | 'profile';
 
 interface ClientDashboardProps {
@@ -141,6 +144,8 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
         setActiveTab('pro_member');
       } else if (hash.includes('tab=service_history')) {
         setActiveTab('service_history');
+      } else if (hash.includes('tech_docs') || hash.includes('fichas') || hash.includes('catalogos')) {
+        setActiveTab('tech_docs');
       }
     };
     handleHash();
@@ -463,6 +468,19 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
         >
           <Crown className="w-3.5 h-3.5" />
           <span>CLUB PRO</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => handleTabSelect('tech_docs')}
+          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
+            activeTab === 'tech_docs'
+              ? 'bg-amber-400 text-black shadow-xs font-black'
+              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+          }`}
+        >
+          <BookOpen className="w-3.5 h-3.5" />
+          <span>FICHAS & CATÁLOGOS PDF</span>
         </button>
 
         <button
@@ -881,6 +899,11 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
               </form>
             </div>
           </div>
+        )}
+
+        {/* TAB 7: TECH DOCS & CATALOGS VAULT */}
+        {activeTab === 'tech_docs' && (
+          <TechnicalDocumentationVaultTab />
         )}
       </div>
     </div>

@@ -26,7 +26,8 @@ import {
   CheckCircle2,
   AlertCircle,
   Download,
-  Printer
+  Printer,
+  BookOpen
 } from 'lucide-react';
 import { Machine, MachineCustomizationOption } from '../../types';
 import { useCart } from '../../context/CartContext';
@@ -39,6 +40,7 @@ import { downloadProductQrCode } from '../../utils/qrExporter';
 import { TractorSalesInquiryModal } from './TractorSalesInquiryModal';
 import { generateSingleMachineSpecPdf } from '../../services/catalogPdfExport';
 import { InteractiveMachineryFinancing } from '../common/InteractiveMachineryFinancing';
+import { getMachinePdfUrls } from '../../data/machinePdfsData';
 
 interface MachineDetailStudioModalProps {
   machine: Machine | null;
@@ -174,6 +176,7 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   }, 0);
 
   const totalInvestmentUsd = (machine?.basePriceUsd || 0) + attachmentsCostUsd;
+  const machinePdfInfo = machine ? getMachinePdfUrls(machine.id) : null;
 
   const whatsappQuoteUrl = useMemo(() => {
     if (!machine) return '';
@@ -312,6 +315,21 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
               <Printer className="w-3.5 h-3.5" />
               <span>Rótulos</span>
             </button>
+
+            {/* Direct Official Factory Brochure PDF Download */}
+            {machinePdfInfo?.brochurePdfUrl && (
+              <a
+                href={machinePdfInfo.brochurePdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                download={machinePdfInfo.brochureFileName}
+                className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/50 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
+                title="Descargar Catálogo Oficial del Fabricante en PDF de alta resolución"
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Catálogo Fábrica</span>
+              </a>
+            )}
 
             {/* Direct Official Bank Spec Sheet / Proforma PDF Download */}
             <button
@@ -543,6 +561,60 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                   {machine.description}
                 </p>
               </div>
+
+              {/* Official Technical Documentation Card (Real Local Verified PDFs) */}
+              {machinePdfInfo && (
+                <div className="p-3 bg-zinc-950 rounded-[2px] border border-amber-500/30 bg-gradient-to-r from-amber-500/5 to-transparent">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="text-xs font-black uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                      <FileText className="w-3.5 h-3.5" />
+                      <span>Documentación Técnica Oficial (PDF Verificado)</span>
+                    </h4>
+                    <span className="text-[10px] text-zinc-500 font-mono">TMD KM 22 • ARCHIVO TÉCNICO</span>
+                  </div>
+                  <p className="text-[11px] text-zinc-400 mb-3">
+                    Fichas técnicas de taller homologadas con tolerancias mecánicas y folletos oficiales del fabricante listos para descargar o imprimir.
+                  </p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {machinePdfInfo.fichaPdfUrl && (
+                      <a
+                        href={machinePdfInfo.fichaPdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download={machinePdfInfo.fichaFileName}
+                        className="px-3 py-1.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black font-black text-xs uppercase flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                        title="Descargar Ficha Técnica de Taller en PDF"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        <span>Ficha Técnica Oficial (.PDF)</span>
+                      </a>
+                    )}
+                    {machinePdfInfo.brochurePdfUrl && (
+                      <a
+                        href={machinePdfInfo.brochurePdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download={machinePdfInfo.brochureFileName}
+                        className="px-3 py-1.5 rounded-[2px] bg-zinc-900 hover:bg-zinc-800 text-white border border-zinc-700 font-bold text-xs uppercase flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                        title="Descargar Folleto Completo del Fabricante"
+                      >
+                        <BookOpen className="w-3.5 h-3.5 text-amber-400" />
+                        <span>Catálogo de Fábrica (.PDF)</span>
+                      </a>
+                    )}
+                    <button
+                      type="button"
+                      onClick={handleDownloadBankProformaPdf}
+                      disabled={isExportingBankPdf}
+                      className="px-3 py-1.5 rounded-[2px] bg-zinc-900 hover:bg-zinc-800 text-amber-400 border border-amber-400/30 font-bold text-xs uppercase flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                      title="Generar Ficha Homologada para Banco (Bagrícola, Popular, BHD)"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                      <span>Ficha Bancaria Homologada</span>
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* 2x4 Key Specs Matrix */}
               <div>
