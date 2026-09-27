@@ -31,28 +31,28 @@ export const SALES_REPRESENTATIVES = [
   {
     name: 'Ing. Carlos Mendoza',
     role: 'Asesor Comercial Senior (Viales & JCB)',
-    email: 'cmendoza@tmd.com.do',
+    email: 'cmendoza@tmd.rd',
     phone: '+1 (809) 560-4001',
     categorySpecialty: ['Retroexcavadoras', 'Rodillos', 'Vial', 'JCB']
   },
   {
     name: 'Ing. Rafael Castillo',
     role: 'Especialista Flotas Minería & LiuGong',
-    email: 'rcastillo@tmd.com.do',
+    email: 'rcastillo@tmd.rd',
     phone: '+1 (809) 560-4002',
     categorySpecialty: ['Excavadoras', 'Cargadores', 'Minería', 'LiuGong']
   },
   {
     name: 'Lic. Marcos Almonte',
     role: 'Consultor Agroindustrial & Kubota/LS',
-    email: 'malmonte@tmd.com.do',
+    email: 'malmonte@tmd.rd',
     phone: '+1 (809) 560-4003',
     categorySpecialty: ['Tractores', 'Miniexcavadoras', 'Agrícola', 'Kubota', 'LS Tractor']
   },
   {
     name: 'Ing. Sarah De León',
     role: 'Gerente Post-Venta & Repuestos OEM',
-    email: 'sdeleon@tmd.com.do',
+    email: 'sdeleon@tmd.rd',
     phone: '+1 (809) 560-4004',
     categorySpecialty: ['Repuestos', 'Filtros', 'Tren de Rodaje', 'AFEX', 'Ammann']
   }

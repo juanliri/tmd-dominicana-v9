@@ -541,7 +541,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                       id: completedOrder.orderId,
                       orderNumber: completedOrder.orderId,
                       clientId: currentUser?.uid || 'guest',
-                      clientEmail: completedOrder.customer.email || 'cliente@tmd.com.do',
+                      clientEmail: completedOrder.customer.email || 'cliente@tmd.rd',
                       clientName: completedOrder.customer.fullName || 'Cliente TMD',
                       companyName: completedOrder.customer.companyName || '',
                       phone: completedOrder.customer.phone || '',

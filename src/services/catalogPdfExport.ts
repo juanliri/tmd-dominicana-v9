@@ -72,7 +72,7 @@ export const generateMachineryCatalogPdf = (options: ExportMachineryPdfOptions):
 
   doc.setFontSize(7.5);
   doc.setTextColor(203, 213, 225);
-  doc.text('Km 22 Autopista Duarte, Santo Domingo Oeste | Tel: +1 (809) 560-1234 | info@tmd.com.do', 60, 27);
+  doc.text('Km 22 Autopista Duarte, Santo Domingo Oeste | Tel: +1 (809) 560-1234 | info@tmd.rd', 60, 27);
 
   // Document metadata on right side of header
   doc.setFont('helvetica', 'bold');
@@ -422,7 +422,7 @@ export const generateSingleMachineSpecPdf = (options: ExportSingleMachineProform
     loanTermMonths = 48,
     annualInterestRate = 12.5,
     salespersonName = 'Ing. Carlos Mendoza - Asesor Técnico Comercial',
-    salespersonContact = 'cmendoza@tmd.com.do | +1 (809) 560-4001'
+    salespersonContact = 'cmendoza@tmd.rd | +1 (809) 560-4001'
   } = options;
 
   const doc = new jsPDF({

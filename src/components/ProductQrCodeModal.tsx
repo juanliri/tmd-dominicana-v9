@@ -209,7 +209,7 @@ export const ProductQrCodeModal: React.FC<ProductQrCodeModalProps> = ({
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(7.5);
       doc.setTextColor(203, 213, 225);
-      doc.text('Km 22 Autopista Duarte, Pedro Brand, Sto. Dgo. | Tel: +1 (809) 560-8484 | info@tmd.do', margin, 27);
+      doc.text('Km 22 Autopista Duarte, Pedro Brand, Sto. Dgo. | Tel: +1 (809) 560-8484 | info@tmd.rd', margin, 27);
 
       // Placard Title on right
       doc.setFont('helvetica', 'bold');

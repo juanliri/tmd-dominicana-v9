@@ -269,7 +269,7 @@ export const AdminAnalyticsCharts: React.FC<AdminAnalyticsChartsProps> = ({
         quoteNumber: q.quoteNumber || `TMD-${q.id.slice(0, 7).toUpperCase()}`,
         clientName: q.clientName || 'Cliente Proforma',
         companyName: q.companyName || 'Constructora Registrada',
-        clientEmail: q.clientEmail || 'contacto@cliente.com.do',
+        clientEmail: q.clientEmail || 'contacto@cliente.rd',
         phone: q.phone || '+1 (809) 555-0100',
         status: q.status,
         currency: q.currency || 'USD',
@@ -290,18 +290,18 @@ export const AdminAnalyticsCharts: React.FC<AdminAnalyticsChartsProps> = ({
 
     // Baseline Dominican contractor profiles and representative quotes for historical data points
     const dominicanCompanies = [
-      { comp: 'Constructora Rizek & Asoc.', client: 'Ing. Carlos Rizek', loc: 'Santo Domingo / Aut. Duarte Km 14', phone: '+1 (809) 567-3344', email: 'proyectos@rizek.com.do' },
-      { comp: 'Ingeniería Estrella S.A.', client: 'Arq. Manuel Estrella', loc: 'Santiago / Autopista Joaquín Balaguer', phone: '+1 (809) 582-1200', email: 'compras@grupoestrella.com.do' },
-      { comp: 'Consorcio Remix Dominicana', client: 'Ing. Rafael Valdez', loc: 'Bávaro - Punta Cana / Boulevard Turístico', phone: '+1 (809) 552-8890', email: 'vial@remix.com.do' },
-      { comp: 'Agregados y Canteras del Cibao', client: 'Lic. Fernando Peralta', loc: 'La Vega / Carretera Duarte Vieja', phone: '+1 (809) 573-4560', email: 'cantera@agregadoscibao.do' },
-      { comp: 'Consorcio Minero Dominicano', client: 'Ing. Roberto Sánchez', loc: 'Bonao / Falcondo', phone: '+1 (809) 525-6677', email: 'operaciones@minerodominicano.com' },
-      { comp: 'Constructora Mar S.R.L.', client: 'Ing. David Polanco', loc: 'San Cristóbal / Parque Industrial', phone: '+1 (809) 528-9012', email: 'maquinaria@constructoramar.com' },
-      { comp: 'Desarrollo Turístico Macao', client: 'Lic. Alejandro Guzmán', loc: 'Higüey / La Altagracia', phone: '+1 (809) 554-3210', email: 'infraestructura@macaoresort.do' },
-      { comp: 'Pavimentos & Obras Viales del Sur', client: 'Ing. Héctor Medina', loc: 'Baní / Carretera Sánchez', phone: '+1 (809) 522-7788', email: 'equipos@pavimentosdelsur.do' },
-      { comp: 'Agroindustrial La Vega Real', client: 'Lic. Ramón Cáceres', loc: 'Moca / Espaillat', phone: '+1 (809) 578-2233', email: 'flota@lavegareal.com.do' },
-      { comp: 'Movimiento de Tierra Samaná', client: 'Ing. José Almonte', loc: 'Las Terrenas / Samaná', phone: '+1 (809) 240-5544', email: 'contacto@movimientotierrasamana.do' },
-      { comp: 'Constructora Pedernales Sostenible', client: 'Arq. Patricia Vargas', loc: 'Cabo Rojo / Pedernales', phone: '+1 (809) 524-1122', email: 'obras@pedernalessur.com.do' },
-      { comp: 'Asfaltos & Obras Quisqueya', client: 'Ing. Luis Emilio Peña', loc: 'Santo Domingo Este / Carretera Mella', phone: '+1 (809) 788-9900', email: 'cotizaciones@quisqueyaobras.do' }
+      { comp: 'Constructora Rizek & Asoc.', client: 'Ing. Carlos Rizek', loc: 'Santo Domingo / Aut. Duarte Km 14', phone: '+1 (809) 567-3344', email: 'proyectos@rizek.rd' },
+      { comp: 'Ingeniería Estrella S.A.', client: 'Arq. Manuel Estrella', loc: 'Santiago / Autopista Joaquín Balaguer', phone: '+1 (809) 582-1200', email: 'compras@grupoestrella.rd' },
+      { comp: 'Consorcio Remix Dominicana', client: 'Ing. Rafael Valdez', loc: 'Bávaro - Punta Cana / Boulevard Turístico', phone: '+1 (809) 552-8890', email: 'vial@remix.rd' },
+      { comp: 'Agregados y Canteras del Cibao', client: 'Lic. Fernando Peralta', loc: 'La Vega / Carretera Duarte Vieja', phone: '+1 (809) 573-4560', email: 'cantera@agregadoscibao.rd' },
+      { comp: 'Consorcio Minero Dominicano', client: 'Ing. Roberto Sánchez', loc: 'Bonao / Falcondo', phone: '+1 (809) 525-6677', email: 'operaciones@minerodominicano.rd' },
+      { comp: 'Constructora Mar S.R.L.', client: 'Ing. David Polanco', loc: 'San Cristóbal / Parque Industrial', phone: '+1 (809) 528-9012', email: 'maquinaria@constructoramar.rd' },
+      { comp: 'Desarrollo Turístico Macao', client: 'Lic. Alejandro Guzmán', loc: 'Higüey / La Altagracia', phone: '+1 (809) 554-3210', email: 'infraestructura@macaoresort.rd' },
+      { comp: 'Pavimentos & Obras Viales del Sur', client: 'Ing. Héctor Medina', loc: 'Baní / Carretera Sánchez', phone: '+1 (809) 522-7788', email: 'equipos@pavimentosdelsur.rd' },
+      { comp: 'Agroindustrial La Vega Real', client: 'Lic. Ramón Cáceres', loc: 'Moca / Espaillat', phone: '+1 (809) 578-2233', email: 'flota@lavegareal.rd' },
+      { comp: 'Movimiento de Tierra Samaná', client: 'Ing. José Almonte', loc: 'Las Terrenas / Samaná', phone: '+1 (809) 240-5544', email: 'contacto@movimientotierrasamana.rd' },
+      { comp: 'Constructora Pedernales Sostenible', client: 'Arq. Patricia Vargas', loc: 'Cabo Rojo / Pedernales', phone: '+1 (809) 524-1122', email: 'obras@pedernalessur.rd' },
+      { comp: 'Asfaltos & Obras Quisqueya', client: 'Ing. Luis Emilio Peña', loc: 'Santo Domingo Este / Carretera Mella', phone: '+1 (809) 788-9900', email: 'cotizaciones@quisqueyaobras.rd' }
     ];
 
     const equipmentTemplates = [

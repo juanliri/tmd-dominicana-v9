@@ -871,7 +871,7 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="usuario@constructora.com.do"
+                      placeholder="usuario@constructora.rd"
                       className="w-full px-2.5 py-1.5 min-h-[32px] sm:min-h-[36px] rounded-[4px] bg-black/70 backdrop-blur-xl border border-white/15 text-white placeholder-zinc-500 text-xs font-mono focus:border-amber-400 focus:bg-black/90 focus:ring-1 focus:ring-amber-400/50 outline-none transition-all"
                     />
                   </div>

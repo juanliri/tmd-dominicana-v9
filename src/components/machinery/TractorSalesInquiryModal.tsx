@@ -75,7 +75,7 @@ export const TractorSalesInquiryModal: React.FC<TractorSalesInquiryModalProps> =
         estimatedPriceUsd: machine.priceUsd,
         customerName,
         companyName: companyName || undefined,
-        email: email || 'cliente@tmd.com.do',
+        email: email || 'cliente@tmd.rd',
         phone,
         province,
         preferredContactMethod,
@@ -216,7 +216,7 @@ export const TractorSalesInquiryModal: React.FC<TractorSalesInquiryModalProps> =
                     <label className="text-[10px] text-zinc-400 uppercase block mb-1">Correo Electrónico</label>
                     <input
                       type="email"
-                      placeholder="contacto@empresa.com.do"
+                      placeholder="contacto@empresa.rd"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="w-full px-3 py-2 text-xs rounded-[2px] bg-zinc-900 border border-zinc-800 text-white focus:border-amber-400 focus:outline-hidden"

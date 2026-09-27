@@ -349,7 +349,7 @@ export const ProductQrScannerModal: React.FC<ProductQrScannerModalProps> = ({
               scannedAt: new Date().toISOString(),
               timestamp: Date.now(),
               staffUid: currentUser.uid,
-              staffEmail: currentUser.email || 'staff@tmd.com.do',
+              staffEmail: currentUser.email || 'staff@tmd.rd',
               staffName: userProfile?.displayName || currentUser.displayName || 'Técnico TMD Km 22',
               staffRole: isAdmin ? 'admin' : 'staff',
               itemType: matched.type,

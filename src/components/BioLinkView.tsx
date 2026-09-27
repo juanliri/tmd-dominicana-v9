@@ -263,7 +263,7 @@ ORG:Tecnomaquinarias Diesel S.R.L. (TMD)
 TITLE:Director de Operaciones
 TEL;TYPE=WORK,VOICE:+18095601234
 TEL;TYPE=CELL,VOICE,WHATSAPP:+18095601234
-EMAIL;TYPE=WORK:ventas@tmd.com.do
+EMAIL;TYPE=WORK:ventas@tmd.rd
 URL:https://ais-dev-3s3ie2nc7ohx53sxh65rsd-869667323763.us-east1.run.app/#/bio
 ADR;TYPE=WORK:;;Km 22, Autopista Duarte;Santo Domingo Oeste;;;República Dominicana
 NOTE:Distribuidor Oficial Maquinaria Pesada LiuGong, JCB, LS Tractor, Kubota & Donaldson. Sede Km 22 Duarte.
@@ -290,7 +290,7 @@ END:VCARD`;
           id: `bio-lead-${Date.now()}`,
           quoteNumber: `RFQ-BIO-${Math.floor(1000 + Math.random() * 9000)}`,
           clientId: 'social-guest',
-          clientEmail: 'lead.social@tmd.com.do',
+          clientEmail: 'lead.social@tmd.rd',
           clientName: leadName,
           companyName: 'Lead Bio Link',
           phone: leadPhone,

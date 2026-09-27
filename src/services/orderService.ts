@@ -78,7 +78,7 @@ export const createPurchaseOrder = async (params: {
     id: orderId,
     orderNumber: params.orderNumber,
     clientId: params.clientId || 'guest',
-    clientEmail: params.clientEmail || params.customer.email || 'cliente@tmd.com.do',
+    clientEmail: params.clientEmail || params.customer.email || 'cliente@tmd.rd',
     clientName: params.clientName || params.customer.fullName || 'Cliente TMD',
     companyName: params.companyName || params.customer.companyName || '',
     phone: params.phone || params.customer.phone || '',

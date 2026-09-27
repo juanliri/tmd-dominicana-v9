@@ -113,7 +113,7 @@ export const PATIO_INSTRUCTORS = [
     role: 'Instructor Máster de Maquinaria Pesada & Hidráulica',
     specialty: ['JCB', 'Excavadoras', 'Retroexcavadoras'],
     phone: '+1 (809) 555-2201',
-    email: 'mcabrera@tmd.com.do'
+    email: 'mcabrera@tmd.rd'
   },
   {
     id: 'inst_dario',
@@ -121,7 +121,7 @@ export const PATIO_INSTRUCTORS = [
     role: 'Especialista en Ciclos de Carga & LiuGong',
     specialty: ['LiuGong', 'Cargadores', 'Minicargadores'],
     phone: '+1 (809) 555-2202',
-    email: 'dencarnacion@tmd.com.do'
+    email: 'dencarnacion@tmd.rd'
   },
   {
     id: 'inst_valentin',
@@ -129,7 +129,7 @@ export const PATIO_INSTRUCTORS = [
     role: 'Especialista en Equipos Agrícolas Kubota / LS Tractor',
     specialty: ['Kubota', 'LS Tractor', 'Implementos Agrícolas', 'Yomel'],
     phone: '+1 (809) 555-2203',
-    email: 'vsolano@tmd.com.do'
+    email: 'vsolano@tmd.rd'
   },
   {
     id: 'inst_yovanny',
@@ -137,7 +137,7 @@ export const PATIO_INSTRUCTORS = [
     role: 'Especialista en Compactación Ammann & Concreto IMER',
     specialty: ['Ammann', 'IMER', 'Compactación', 'Plantas de Concreto'],
     phone: '+1 (809) 555-2204',
-    email: 'ybatista@tmd.com.do'
+    email: 'ybatista@tmd.rd'
   }
 ];
 
@@ -157,7 +157,7 @@ export const INITIAL_PATIO_BOOKINGS: PatioTestDriveBooking[] = [
     status: 'confirmed',
     operatorName: 'Ing. Rafael Castillo',
     companyName: 'Constructora Malespín S.R.L.',
-    clientEmail: 'rcastillo@malespin.com.do',
+    clientEmail: 'rcastillo@malespin.rd',
     phone: '809-567-8900',
     licenseCategory: 'Categoría 3 (Equipos Pesados)',
     testFocus: 'Ciclo hidráulico y fuerza de desprendimiento en banco de tierra',
@@ -190,7 +190,7 @@ export const INITIAL_PATIO_BOOKINGS: PatioTestDriveBooking[] = [
     status: 'confirmed',
     operatorName: 'Sr. Manuel Tejada',
     companyName: 'Constructora Rizek & Asoc.',
-    clientEmail: 'mtejada@rizek.com.do',
+    clientEmail: 'mtejada@rizek.rd',
     phone: '809-541-2000',
     licenseCategory: 'Categoría 4 (Especial Maquinaria)',
     testFocus: 'Consumo de combustible por ciclo de carga y ralentí',
@@ -223,7 +223,7 @@ export const INITIAL_PATIO_BOOKINGS: PatioTestDriveBooking[] = [
     status: 'pending',
     operatorName: 'Agrónomo José Abreu',
     companyName: 'Consorcio Azucarero Central',
-    clientEmail: 'jabreu@consorcio.com.do',
+    clientEmail: 'jabreu@consorcio.rd',
     phone: '809-524-3311',
     licenseCategory: 'Categoría 3 (Equipos Pesados)',
     testFocus: 'Tracción y estabilidad en pendientes pronunciadas',
@@ -256,7 +256,7 @@ export const INITIAL_PATIO_BOOKINGS: PatioTestDriveBooking[] = [
     status: 'confirmed',
     operatorName: 'Ing. Félix Peña',
     companyName: 'Constructora Estrella',
-    clientEmail: 'fpena@estrella.com.do',
+    clientEmail: 'fpena@estrella.rd',
     phone: '809-582-7000',
     licenseCategory: 'Categoría 3 (Equipos Pesados)',
     testFocus: 'Ergonomía de cabina, visibilidad y mandos joystick',
@@ -562,7 +562,7 @@ export const createPatioBooking = async (
 
   // 3. Record Audit Log
   recordAdminAuditLog({
-    actorEmail: bookingInput.clientEmail || 'contratista@tmd.com.do',
+    actorEmail: bookingInput.clientEmail || 'contratista@tmd.rd',
     actorName: bookingInput.operatorName,
     actorRole: 'staff',
     actionType: 'QUOTE_STATUS_OVERRIDE',
@@ -625,7 +625,7 @@ export const updatePatioBookingStatus = async (
 
   // Audit
   recordAdminAuditLog({
-    actorEmail: 'staff@tmd.com.do',
+    actorEmail: 'staff@tmd.rd',
     actorName: 'Coordinador Patio Km 22',
     actorRole: 'staff',
     actionType: 'QUOTE_STATUS_OVERRIDE',
@@ -722,7 +722,7 @@ export const updateMachinePatioAvailability = async (
   }
 
   recordAdminAuditLog({
-    actorEmail: 'staff@tmd.com.do',
+    actorEmail: 'staff@tmd.rd',
     actorName: 'Jefe de Patio Km 22',
     actorRole: 'staff',
     actionType: 'INVENTORY_STOCK_UPDATE',

@@ -496,7 +496,7 @@ export const PriceEstimateModal: React.FC<PriceEstimateModalProps> = ({
                   </label>
                   <input
                     type="email"
-                    placeholder="compras@empresa.com.do"
+                    placeholder="compras@empresa.rd"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="w-full p-2 rounded-[2px] bg-zinc-950 border border-zinc-800 text-white placeholder:text-zinc-600 focus:border-amber-400 focus:outline-none text-xs"

@@ -49,7 +49,7 @@ const INITIAL_ENTERPRISES: EnterpriseInsight[] = [
     fleetSize: 18,
     totalSpentUsd: 485000,
     activeQuotes: 3,
-    contactEmail: 'operaciones@cibaoconstructora.do',
+    contactEmail: 'operaciones@cibaoconstructora.rd',
     phone: '809-582-4411'
   },
   {
@@ -61,7 +61,7 @@ const INITIAL_ENTERPRISES: EnterpriseInsight[] = [
     fleetSize: 24,
     totalSpentUsd: 720000,
     activeQuotes: 2,
-    contactEmail: 'flota@consorciovialeste.com',
+    contactEmail: 'flota@consorciovialeste.rd',
     phone: '809-552-8900'
   },
   {
@@ -73,7 +73,7 @@ const INITIAL_ENTERPRISES: EnterpriseInsight[] = [
     fleetSize: 12,
     totalSpentUsd: 310000,
     activeQuotes: 1,
-    contactEmail: 'mantenimiento@canterasdelsur.do',
+    contactEmail: 'mantenimiento@canterasdelsur.rd',
     phone: '809-524-3012'
   },
   {
@@ -85,7 +85,7 @@ const INITIAL_ENTERPRISES: EnterpriseInsight[] = [
     fleetSize: 7,
     totalSpentUsd: 145000,
     activeQuotes: 1,
-    contactEmail: 'equipos@agropalmareal.do',
+    contactEmail: 'equipos@agropalmareal.rd',
     phone: '809-588-2940'
   }
 ];
@@ -137,7 +137,7 @@ export const AdminUserInsightsModule: React.FC<AdminUserInsightsModuleProps> = (
         },
         {
           id: 'user-02',
-          email: 'carlos.ingenieria@cibaoconstructora.do',
+          email: 'carlos.ingenieria@cibaoconstructora.rd',
           displayName: 'Ing. Carlos Valdez',
           role: 'client',
           companyName: 'Constructora del Cibao S.R.L.',

@@ -249,7 +249,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, currentRoute = '' })
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="correo@empresa.com.do"
+                  placeholder="correo@empresa.rd"
                   required
                   className="w-full sm:w-64 px-3 py-2 rounded-lg bg-[#07070b] border border-white/[0.08] text-white placeholder-zinc-500 text-xs font-mono focus:outline-none focus:border-[#d99b26] transition-colors"
                 />

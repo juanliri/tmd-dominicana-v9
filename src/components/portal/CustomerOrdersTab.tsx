@@ -56,7 +56,7 @@ export const CustomerOrdersTab: React.FC<CustomerOrdersTabProps> = ({
   const [orders, setOrders] = useState<CustomerPurchaseOrder[]>(() => {
     const existing = getLocalOrders();
     if (existing.length > 0) return existing;
-    const initialDemo = generateDemoOrders('client-demo-km22', 'cliente@tmd.com.do', 'Ing. Manuel Tavares (Constructora Tavares S.R.L.)');
+    const initialDemo = generateDemoOrders('client-demo-km22', 'cliente@tmd.rd', 'Ing. Manuel Tavares (Constructora Tavares S.R.L.)');
     initialDemo.forEach(o => saveOrderToLocalStorage(o));
     return initialDemo;
   });
@@ -121,7 +121,7 @@ export const CustomerOrdersTab: React.FC<CustomerOrdersTabProps> = ({
   // Seed sample orders if user has no past purchases yet
   const handleSeedDemoOrders = () => {
     const uid = currentUser?.uid || 'client-demo-km22';
-    const email = currentUser?.email || 'cliente@tmd.com.do';
+    const email = currentUser?.email || 'cliente@tmd.rd';
     const name = userProfile?.displayName || currentUser?.displayName || 'Ing. Manuel Tavares (Constructora Tavares S.R.L.)';
     const demo = generateDemoOrders(uid, email, name);
     demo.forEach((o) => saveOrderToLocalStorage(o));
