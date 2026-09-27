@@ -30,6 +30,7 @@ import portalBgMachinery from '../../assets/images/portal_bg_machinery_179044110
 import tmdDealershipBg from '../../assets/images/tmd_dealership_bg_1790439101712.jpg';
 import tmdPatioBg from '../../assets/images/tmd_sede_central_patio_km22.jpg';
 import { PIN_ACCOUNTS, PIN_ALIASES, PinAccount } from '../../data/pinAuthAccounts';
+import { PinPadInput } from './auth/PinPadInput';
 
 interface EnterprisePortalLoginProps {
   onSignInWithGoogle: () => Promise<void>;
@@ -494,9 +495,9 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
           {/* Middle Section: 4-Pillar Enterprise Services */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 my-auto max-w-2xl">
             {/* Feature 1: LiveLink Telemetry */}
-            <div className="p-2.5 sm:p-3 rounded-lg bg-zinc-950/70 backdrop-blur-xl border border-white/10 hover:border-amber-400/30 transition-all space-y-1">
+            <div className="p-2.5 sm:p-3 rounded-[3px] bg-zinc-950/70 backdrop-blur-xl border border-white/10 hover:border-amber-400/30 transition-all space-y-1">
               <div className="flex items-center gap-1.5 text-amber-400 font-bold text-[11px] sm:text-xs uppercase tracking-wide">
-                <div className="p-1 rounded bg-amber-400/10 border border-amber-400/20 text-amber-400">
+                <div className="p-1 rounded-[2px] bg-amber-400/10 border border-amber-400/20 text-amber-400">
                   <Radio className="w-3.5 h-3.5" />
                 </div>
                 <span>Telemetría LiveLink™</span>
@@ -507,9 +508,9 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
             </div>
 
             {/* Feature 2: Fiscal Invoicing B01 */}
-            <div className="p-2.5 sm:p-3 rounded-lg bg-zinc-950/70 backdrop-blur-xl border border-white/10 hover:border-amber-400/30 transition-all space-y-1">
+            <div className="p-2.5 sm:p-3 rounded-[3px] bg-zinc-950/70 backdrop-blur-xl border border-white/10 hover:border-amber-400/30 transition-all space-y-1">
               <div className="flex items-center gap-1.5 text-amber-400 font-bold text-[11px] sm:text-xs uppercase tracking-wide">
-                <div className="p-1 rounded bg-amber-400/10 border border-amber-400/20 text-amber-400">
+                <div className="p-1 rounded-[2px] bg-amber-400/10 border border-amber-400/20 text-amber-400">
                   <FileText className="w-3.5 h-3.5" />
                 </div>
                 <span>Facturación Fiscal B01</span>
@@ -520,9 +521,9 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
             </div>
 
             {/* Feature 3: Central Workshop Km 22 */}
-            <div className="p-2.5 sm:p-3 rounded-lg bg-zinc-950/70 backdrop-blur-xl border border-white/10 hover:border-amber-400/30 transition-all space-y-1">
+            <div className="p-2.5 sm:p-3 rounded-[3px] bg-zinc-950/70 backdrop-blur-xl border border-white/10 hover:border-amber-400/30 transition-all space-y-1">
               <div className="flex items-center gap-1.5 text-amber-400 font-bold text-[11px] sm:text-xs uppercase tracking-wide">
-                <div className="p-1 rounded bg-amber-400/10 border border-amber-400/20 text-amber-400">
+                <div className="p-1 rounded-[2px] bg-amber-400/10 border border-amber-400/20 text-amber-400">
                   <Wrench className="w-3.5 h-3.5" />
                 </div>
                 <span>Taller Km 22 & Campo</span>
@@ -533,9 +534,9 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
             </div>
 
             {/* Feature 4: S.O.S. Lab & OEM Parts */}
-            <div className="p-2.5 sm:p-3 rounded-lg bg-zinc-950/70 backdrop-blur-xl border border-white/10 hover:border-amber-400/30 transition-all space-y-1">
+            <div className="p-2.5 sm:p-3 rounded-[3px] bg-zinc-950/70 backdrop-blur-xl border border-white/10 hover:border-amber-400/30 transition-all space-y-1">
               <div className="flex items-center gap-1.5 text-amber-400 font-bold text-[11px] sm:text-xs uppercase tracking-wide">
-                <div className="p-1 rounded bg-amber-400/10 border border-amber-400/20 text-amber-400">
+                <div className="p-1 rounded-[2px] bg-amber-400/10 border border-amber-400/20 text-amber-400">
                   <Activity className="w-3.5 h-3.5" />
                 </div>
                 <span>Laboratorio S.O.S. & OEM</span>
@@ -569,7 +570,7 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
-            className={`w-full max-w-[420px] sm:max-w-[450px] md:max-w-[460px] lg:max-w-[430px] xl:max-w-[460px] rounded-[8px] p-3 sm:p-4 md:p-5 lg:p-4 xl:p-5 space-y-2 sm:space-y-2.5 md:space-y-3 relative overflow-hidden transition-all my-auto ${
+            className={`w-full max-w-[420px] sm:max-w-[450px] md:max-w-[460px] lg:max-w-[430px] xl:max-w-[460px] rounded-[5px] p-3 sm:p-4 md:p-5 lg:p-4 xl:p-5 space-y-2 sm:space-y-2.5 md:space-y-3 relative overflow-hidden transition-all my-auto ${
               particlesAndGlass
                 ? 'bg-zinc-950/85 backdrop-blur-2xl border border-white/20 ring-1 ring-amber-400/25 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.22),0_25px_80px_rgba(0,0,0,0.95)]'
                 : 'bg-zinc-900 border border-zinc-800 shadow-2xl'
@@ -630,174 +631,30 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
                 MODE 1: INSTANT PIN ACCESS (100% RELIABLE FOR 3 ACCOUNTS)
                 ============================================================= */}
             {loginMethod === 'pin' ? (
-              <div className="space-y-2 sm:space-y-2.5">
-                {/* Feedback Alerts */}
-                {pinError && (
-                  <div className="p-2 rounded-[4px] bg-rose-500/15 border border-rose-500/40 text-rose-300 text-[10px] sm:text-xs flex items-start gap-1.5 font-sans backdrop-blur-md">
-                    <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5 text-rose-400" />
-                    <span>{pinError}</span>
-                  </div>
-                )}
-                {pinSuccess && (
-                  <div className="p-2 rounded-[4px] bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-[10px] sm:text-xs flex items-center gap-1.5 font-sans backdrop-blur-md">
-                    <CheckCircle2 className="w-3.5 h-3.5 shrink-0 text-emerald-400" />
-                    <span>{pinSuccess}</span>
-                  </div>
-                )}
-
-                {/* 3 Account Cards with 1-Click Instant Login */}
-                <div className="space-y-1.5">
-                  <div className="flex items-center justify-between text-[9px] font-bold text-zinc-400 uppercase tracking-wider">
-                    <span>SELECCIONE CUENTA O DIGITE PIN:</span>
-                    <span className="text-amber-400 font-mono">1111 / 2222 / 3333</span>
-                  </div>
-
-                  {/* Account 1: Cliente VIP */}
-                  <div className="p-2 rounded-[5px] bg-black/60 border border-amber-400/30 hover:border-amber-400/80 transition-all flex items-center justify-between gap-2 group">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <div className="w-7 h-7 rounded-[3px] bg-amber-400/15 text-amber-400 border border-amber-400/30 flex items-center justify-center font-black shrink-0">
-                        <Crown className="w-3.5 h-3.5" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="text-[10px] sm:text-[11px] font-black text-white uppercase truncate">
-                            Ing. Manuel Tavares
-                          </span>
-                          <span className="px-1 py-0.2 rounded-[2px] bg-amber-400 text-black text-[8px] font-black uppercase">
-                            CLIENTE VIP
-                          </span>
-                        </div>
-                        <p className="text-[9px] text-zinc-400 truncate">Constructora Tavares S.R.L.</p>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      disabled={isVerifyingPin}
-                      onClick={() => handleQuickRoleLogin('client')}
-                      className="px-2.5 py-1.5 rounded-[3px] bg-amber-400 hover:bg-amber-300 text-black font-black text-[10px] uppercase shrink-0 transition-all cursor-pointer shadow-xs active:scale-95 disabled:opacity-50"
-                    >
-                      {isVerifyingPin ? 'ENTRANDO...' : 'ENTRAR • 1111'}
-                    </button>
-                  </div>
-
-                  {/* Account 2: Staff Técnico */}
-                  <div className="p-2 rounded-[5px] bg-black/60 border border-sky-400/30 hover:border-sky-400/80 transition-all flex items-center justify-between gap-2 group">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <div className="w-7 h-7 rounded-[3px] bg-sky-400/15 text-sky-400 border border-sky-400/30 flex items-center justify-center font-black shrink-0">
-                        <HardHat className="w-3.5 h-3.5" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="text-[10px] sm:text-[11px] font-black text-white uppercase truncate">
-                            Carlos Mendoza
-                          </span>
-                          <span className="px-1 py-0.2 rounded-[2px] bg-sky-400 text-black text-[8px] font-black uppercase">
-                            STAFF TÉCNICO
-                          </span>
-                        </div>
-                        <p className="text-[9px] text-zinc-400 truncate">Jefe de Taller & Patio Km 22</p>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      disabled={isVerifyingPin}
-                      onClick={() => handleQuickRoleLogin('staff')}
-                      className="px-2.5 py-1.5 rounded-[3px] bg-sky-400 hover:bg-sky-300 text-black font-black text-[10px] uppercase shrink-0 transition-all cursor-pointer shadow-xs active:scale-95 disabled:opacity-50"
-                    >
-                      {isVerifyingPin ? 'ENTRANDO...' : 'ENTRAR • 2222'}
-                    </button>
-                  </div>
-
-                  {/* Account 3: Admin General */}
-                  <div className="p-2 rounded-[5px] bg-black/60 border border-purple-400/30 hover:border-purple-400/80 transition-all flex items-center justify-between gap-2 group">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <div className="w-7 h-7 rounded-[3px] bg-purple-400/15 text-purple-400 border border-purple-400/30 flex items-center justify-center font-black shrink-0">
-                        <Shield className="w-3.5 h-3.5" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="text-[10px] sm:text-[11px] font-black text-white uppercase truncate">
-                            Juan Liriano
-                          </span>
-                          <span className="px-1 py-0.2 rounded-[2px] bg-purple-500 text-white text-[8px] font-black uppercase">
-                            ADMIN TOTAL
-                          </span>
-                        </div>
-                        <p className="text-[9px] text-zinc-400 truncate">Director General TMD</p>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      disabled={isVerifyingPin}
-                      onClick={() => handleQuickRoleLogin('admin')}
-                      className="px-2.5 py-1.5 rounded-[3px] bg-purple-500 hover:bg-purple-400 text-white font-black text-[10px] uppercase shrink-0 transition-all cursor-pointer shadow-xs active:scale-95 disabled:opacity-50"
-                    >
-                      {isVerifyingPin ? 'ENTRANDO...' : 'ENTRAR • 3333'}
-                    </button>
-                  </div>
-                </div>
-
-                {/* 4-Digit Indicator Display */}
-                <div className="pt-1.5 border-t border-white/10 space-y-1.5">
-                  <div className="flex items-center justify-center gap-2.5 py-1">
-                    {[0, 1, 2, 3].map((index) => {
-                      const isFilled = pinDigits.length > index;
-                      const isCurrent = pinDigits.length === index;
-                      return (
-                        <div
-                          key={index}
-                          className={`w-9 h-10 sm:w-10 sm:h-11 rounded-[4px] flex items-center justify-center text-base sm:text-lg font-black font-mono transition-all ${
-                            isFilled
-                              ? 'bg-amber-400 text-black shadow-[0_0_15px_rgba(251,191,36,0.4)]'
-                              : isCurrent
-                                ? 'bg-zinc-900 border-2 border-amber-400 text-amber-400 animate-pulse'
-                                : 'bg-zinc-900/80 border border-white/15 text-zinc-600'
-                          }`}
-                        >
-                          {isFilled ? '●' : '-'}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Compact Numeric Keypad Grid */}
-                  <div className="grid grid-cols-3 gap-1 max-w-[240px] mx-auto">
-                    {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((digit) => (
-                      <button
-                        key={digit}
-                        type="button"
-                        onClick={() => handleDigitPress(digit)}
-                        className="h-8 sm:h-9 rounded-[4px] bg-zinc-900 hover:bg-zinc-800 active:bg-amber-400 active:text-black border border-white/10 text-white font-mono font-bold text-xs sm:text-sm transition-all cursor-pointer touch-manipulation shadow-xs"
-                      >
-                        {digit}
-                      </button>
-                    ))}
-                    <button
-                      type="button"
-                      onClick={handleClearPin}
-                      className="h-8 sm:h-9 rounded-[4px] bg-zinc-950 hover:bg-zinc-800 active:scale-95 border border-zinc-800 text-zinc-400 hover:text-white font-mono text-[9px] font-bold uppercase transition-all cursor-pointer touch-manipulation"
-                      title="Borrar todo"
-                    >
-                      C
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleDigitPress('0')}
-                      className="h-8 sm:h-9 rounded-[4px] bg-zinc-900 hover:bg-zinc-800 active:bg-amber-400 active:text-black border border-white/10 text-white font-mono font-bold text-xs sm:text-sm transition-all cursor-pointer touch-manipulation shadow-xs"
-                    >
-                      0
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleDeleteDigit}
-                      className="h-8 sm:h-9 rounded-[4px] bg-zinc-950 hover:bg-zinc-800 active:scale-95 border border-zinc-800 text-amber-400 font-mono flex items-center justify-center transition-all cursor-pointer touch-manipulation"
-                      title="Borrar dígito"
-                    >
-                      <Delete className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <PinPadInput
+                onVerifyPin={async (pin) => {
+                  if (onSignInWithPin) {
+                    return await onSignInWithPin(pin);
+                  }
+                  if (onSignInAsRole) {
+                    const resolved = PIN_ALIASES[pin] || pin;
+                    if (resolved === '1111') { await onSignInAsRole('client'); return { success: true, role: 'client' }; }
+                    if (resolved === '2222') { await onSignInAsRole('staff'); return { success: true, role: 'staff' }; }
+                    if (resolved === '3333') { await onSignInAsRole('admin'); return { success: true, role: 'admin' }; }
+                    return { success: false, error: 'PIN incorrecto. Ingrese 1111, 2222 o 3333.' };
+                  }
+                  return { success: false, error: 'Método de autenticación no disponible.' };
+                }}
+                onQuickAccess={async (role) => {
+                  if (onSignInAsRole) await onSignInAsRole(role);
+                  else if (onQuickAccess) onQuickAccess(role);
+                  else if (onSignInWithPin) {
+                    const pinMap = { client: '1111', staff: '2222', admin: '3333' };
+                    await onSignInWithPin(pinMap[role]);
+                  }
+                }}
+                loading={loading}
+              />
             ) : (
               /* =============================================================
                  MODE 2: CREDENTIALS, GOOGLE SSO & BIOMETRIC AUTH

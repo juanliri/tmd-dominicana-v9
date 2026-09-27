@@ -27,7 +27,8 @@ import {
   Layers,
   Database,
   Sliders,
-  DollarSign
+  DollarSign,
+  FileSpreadsheet
 } from 'lucide-react';
 import { PortalQuote, ServiceWorkOrder, UserProfile, Currency } from '../../types';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
@@ -211,7 +212,7 @@ export const StaffCommandCenterPanel: React.FC<StaffCommandCenterPanelProps> = (
           <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">TMD-OPS-2026</span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
           {/* Action 1 */}
           <button
             type="button"
@@ -225,21 +226,61 @@ export const StaffCommandCenterPanel: React.FC<StaffCommandCenterPanelProps> = (
               <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-amber-400 transition-colors" />
             </div>
             <h4 className="text-xs font-bold text-white group-hover:text-amber-400 transition-colors uppercase">
-              1. GESTOR COTIZACIONES & NCF
+              1. PROFORMAS & COTIZACIONES
             </h4>
             <p className="text-[11px] text-zinc-400 mt-1 line-clamp-2">
-              Emisión de proformas oficiales, cálculo de márgenes, comprobantes DGII y exportación PDF.
+              Emisión de proformas oficiales, cálculo de márgenes y exportación PDF para clientes.
             </p>
           </button>
 
           {/* Action 2 */}
           <button
             type="button"
-            onClick={() => onSelectWorkflowSection('preventive_maintenance')}
+            onClick={() => onSelectWorkflowSection('invoices_dgii')}
             className="p-3.5 rounded-[3px] bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 hover:border-emerald-500/40 transition-all text-left group cursor-pointer"
           >
             <div className="flex items-center justify-between mb-1.5">
               <div className="w-7 h-7 rounded-[2px] bg-emerald-500 text-black flex items-center justify-center font-black">
+                <DollarSign className="w-3.5 h-3.5" />
+              </div>
+              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-emerald-400 transition-colors" />
+            </div>
+            <h4 className="text-xs font-bold text-white group-hover:text-emerald-400 transition-colors uppercase">
+              2. FACTURACIÓN NCF (B01/B02)
+            </h4>
+            <p className="text-[11px] text-zinc-400 mt-1 line-clamp-2">
+              Emisión de comprobantes fiscales DGII, desglose ITBIS 18% y retenciones de ley.
+            </p>
+          </button>
+
+          {/* Action 3 */}
+          <button
+            type="button"
+            onClick={() => onSelectWorkflowSection('dgii_reports')}
+            className="p-3.5 rounded-[3px] bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 hover:border-amber-400/40 transition-all text-left group cursor-pointer"
+          >
+            <div className="flex items-center justify-between mb-1.5">
+              <div className="w-7 h-7 rounded-[2px] bg-amber-400/20 text-amber-400 border border-amber-400/30 flex items-center justify-center font-black">
+                <FileSpreadsheet className="w-3.5 h-3.5" />
+              </div>
+              <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-amber-400 transition-colors" />
+            </div>
+            <h4 className="text-xs font-bold text-white group-hover:text-amber-400 transition-colors uppercase">
+              3. REPORTES DGII 606/607
+            </h4>
+            <p className="text-[11px] text-zinc-400 mt-1 line-clamp-2">
+              Formatos mensuales Norma 07-2018, exportación CSV oficial y conciliación fiscal IT-1.
+            </p>
+          </button>
+
+          {/* Action 4 */}
+          <button
+            type="button"
+            onClick={() => onSelectWorkflowSection('preventive_maintenance')}
+            className="p-3.5 rounded-[3px] bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 hover:border-emerald-500/40 transition-all text-left group cursor-pointer"
+          >
+            <div className="flex items-center justify-between mb-1.5">
+              <div className="w-7 h-7 rounded-[2px] bg-emerald-600 text-white flex items-center justify-center font-black">
                 <HardHat className="w-3.5 h-3.5" />
               </div>
               <span className="px-1.5 py-0.5 rounded-[2px] bg-emerald-500/20 text-emerald-400 text-[9px] font-bold font-mono uppercase">
@@ -247,14 +288,14 @@ export const StaffCommandCenterPanel: React.FC<StaffCommandCenterPanelProps> = (
               </span>
             </div>
             <h4 className="text-xs font-bold text-white group-hover:text-emerald-400 transition-colors uppercase">
-              2. RADAR PREVENTIVO & HORÓMETROS
+              4. RADAR PREVENTIVO
             </h4>
             <p className="text-[11px] text-zinc-400 mt-1 line-clamp-2">
               Monitoreo de intervalos 250h/500h/1000h, kits de filtros OEM y alertas WhatsApp a clientes.
             </p>
           </button>
 
-          {/* Action 3 */}
+          {/* Action 5 */}
           <button
             type="button"
             onClick={() => onSelectWorkflowSection('advances_ledger')}
@@ -267,14 +308,14 @@ export const StaffCommandCenterPanel: React.FC<StaffCommandCenterPanelProps> = (
               <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-sky-400 transition-colors" />
             </div>
             <h4 className="text-xs font-bold text-white group-hover:text-sky-400 transition-colors uppercase">
-              3. LIBRO DE ANTICIPOS & BANCOS
+              5. ANTICIPOS & BANCOS
             </h4>
             <p className="text-[11px] text-zinc-400 mt-1 line-clamp-2">
               Transferencias y depósitos Banco Popular, BHD y Banreservas vinculados a proformas.
             </p>
           </button>
 
-          {/* Action 4 */}
+          {/* Action 6 */}
           <button
             type="button"
             onClick={() => onSelectWorkflowSection('patio_dispatch')}
@@ -287,14 +328,14 @@ export const StaffCommandCenterPanel: React.FC<StaffCommandCenterPanelProps> = (
               <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-amber-400 transition-colors" />
             </div>
             <h4 className="text-xs font-bold text-white group-hover:text-amber-400 transition-colors uppercase">
-              4. PASES DE SALIDA PATIO KM 22
+              6. PATIO KM 22 & GATE PASS
             </h4>
             <p className="text-[11px] text-zinc-400 mt-1 line-clamp-2">
               Gate Pass con QR para garita, autorización de transporte en cama baja (Lowboy) y remisión.
             </p>
           </button>
 
-          {/* Action 5 */}
+          {/* Action 7 */}
           <button
             type="button"
             onClick={() => onSelectWorkflowSection('service_dispatch')}
@@ -307,14 +348,14 @@ export const StaffCommandCenterPanel: React.FC<StaffCommandCenterPanelProps> = (
               <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-emerald-400 transition-colors" />
             </div>
             <h4 className="text-xs font-bold text-white group-hover:text-emerald-400 transition-colors uppercase">
-              5. DESPACHO WHATSAPP AL TÉCNICO
+              7. DESPACHO WHATSAPP
             </h4>
             <p className="text-[11px] text-zinc-400 mt-1 line-clamp-2">
               Ficha técnica, coordenadas GPS de la obra y repuestos requeridos a mecánicos en ruta.
             </p>
           </button>
 
-          {/* Action 6 */}
+          {/* Action 8 */}
           <button
             type="button"
             onClick={() => onSelectWorkflowSection('client_accounts')}
@@ -327,7 +368,7 @@ export const StaffCommandCenterPanel: React.FC<StaffCommandCenterPanelProps> = (
               <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-purple-400 transition-colors" />
             </div>
             <h4 className="text-xs font-bold text-white group-hover:text-purple-400 transition-colors uppercase">
-              6. DIRECTORIO CONTRATISTAS & RNC
+              8. DIRECTORIO & RNC
             </h4>
             <p className="text-[11px] text-zinc-400 mt-1 line-clamp-2">
               Clientes registrados, historial de compras, RNC fiscal y membresías TMD Pro-Member.

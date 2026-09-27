@@ -37,10 +37,12 @@ import { PortalQuote, ServiceWorkOrder, UserProfile, UserRole } from '../types';
 import { saveServiceOrderToLocalStorage } from '../services/serviceHistoryService';
 import { QuotePdfExportModal } from './portal/QuotePdfExportModal';
 import { CreateMachineQuoteModal } from './portal/CreateMachineQuoteModal';
-import { ClientDashboard } from './portal/ClientDashboard';
-import { StaffCommandCenter } from './portal/StaffCommandCenter';
+import { ClientDashboard, ClientPortalTab } from './portal/ClientDashboard';
+import { StaffCommandCenter, StaffPortalTab } from './portal/StaffCommandCenter';
 import { StaffBiometricAuthModal } from './auth/StaffBiometricAuthModal';
 import { EnterprisePortalLogin } from './portal/EnterprisePortalLogin';
+import { PortalShell } from './portal/layout/PortalShell';
+import { AdminDashboardView } from './AdminDashboardView';
 import { 
   INITIAL_PORTAL_QUOTES, 
   INITIAL_PORTAL_WORK_ORDERS, 
@@ -77,6 +79,37 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
   
   const { currency, addToCart } = useCart();
 
+  // Sub-route state from window.location.hash
+  const getSubrouteFromHash = (): string => {
+    if (typeof window === 'undefined') return '';
+    const hash = window.location.hash || '';
+    if (hash.startsWith('#/portal/')) {
+      return hash.replace('#/portal/', '').split('?')[0].toLowerCase();
+    }
+    return '';
+  };
+
+  const [subRoute, setSubRoute] = useState<string>(getSubrouteFromHash());
+  const [activePortalTab, setActivePortalTab] = useState<string>(() => {
+    const sub = getSubrouteFromHash();
+    if (sub === 'admin') return 'metrics';
+    if (sub === 'ops') return 'command';
+    if (sub === 'dealer' || sub === 'client') return 'quotes';
+    return 'overview';
+  });
+
+  useEffect(() => {
+    const handleHashSync = () => {
+      const sub = getSubrouteFromHash();
+      setSubRoute(sub);
+      if (sub === 'admin') setActivePortalTab('metrics');
+      else if (sub === 'ops') setActivePortalTab('command');
+      else if (sub === 'dealer' || sub === 'client') setActivePortalTab('quotes');
+    };
+    window.addEventListener('hashchange', handleHashSync);
+    return () => window.removeEventListener('hashchange', handleHashSync);
+  }, []);
+
   const [quotes, setQuotes] = useState<PortalQuote[]>(INITIAL_PORTAL_QUOTES);
   const [workOrders, setWorkOrders] = useState<ServiceWorkOrder[]>(INITIAL_PORTAL_WORK_ORDERS);
   const [allUsers, setAllUsers] = useState<UserProfile[]>(INITIAL_PORTAL_USERS);
@@ -87,6 +120,50 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
   const [showCreateQuoteModal, setShowCreateQuoteModal] = useState<boolean>(false);
   const [showBiometricModal, setShowBiometricModal] = useState<boolean>(false);
   const [biometricModalMode, setBiometricModalMode] = useState<'login' | 'manage'>('login');
+
+  // Mappers between PortalShell tabs and submodule tabs
+  const mapShellTabToClientTab = (tab: string): ClientPortalTab => {
+    switch (tab) {
+      case 'overview':
+      case 'quotes': return 'quotes';
+      case 'orders': return 'purchases';
+      case 'purchases': return 'purchases';
+      case 'livelink': return 'livelink_telematics';
+      case 'service': return 'service_history';
+      case 'pro': return 'pro_member';
+      case 'docs': return 'tech_docs';
+      case 'profile': return 'profile';
+      default: return 'quotes';
+    }
+  };
+
+  const mapShellTabToStaffTab = (tab: string): StaffPortalTab => {
+    switch (tab) {
+      case 'overview':
+      case 'command': return 'command_center';
+      case 'workflow':
+      case 'office': return 'office_workflow';
+      case 'quotes': return 'quotes';
+      case 'orders': return 'orders';
+      case 'purchases': return 'purchases';
+      case 'livelink': return 'livelink_telematics';
+      case 'service': return 'service_history';
+      case 'inventory': return 'inventory_logs';
+      case 'docs': return 'tech_docs';
+      case 'users': return 'users';
+      case 'profile': return 'profile';
+      default: return 'command_center';
+    }
+  };
+
+  const handleSelectPortalTab = (tabId: string) => {
+    setActivePortalTab(tabId);
+    if (['patio', 'metrics', 'audit', 'users'].includes(tabId) && isAdmin) {
+      if (window.location.hash !== '#/portal/admin') {
+        window.location.hash = '#/portal/admin';
+      }
+    }
+  };
 
   // New Work Order Form State
   const [orderForm, setOrderForm] = useState({
@@ -279,8 +356,25 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
   // layout or the 'StaffCommandCenter' component set to optimize UI density.
   // =========================================================================
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 font-mono">
-      {(isStaff || isAdmin) ? (
+    <PortalShell
+      activeTab={activePortalTab}
+      onSelectTab={handleSelectPortalTab}
+      userProfile={userProfile}
+      role={role}
+      simulatedRole={simulatedRole}
+      onSetSimulatedRole={setSimulatedRole}
+      onNavigate={onNavigate}
+      onOpenCreateQuote={() => setShowCreateQuoteModal(true)}
+      onOpenNewOrderModal={() => setShowNewOrderModal(true)}
+      onOpenQrScanner={onOpenQrScanner}
+      onSignOut={signOut}
+      quotesCount={quotes.length}
+      ordersCount={workOrders.length}
+    >
+      {/* Dynamic Sub-route & Workspace Router */}
+      {isAdmin && (subRoute === 'admin' || ['patio', 'metrics', 'audit'].includes(activePortalTab)) ? (
+        <AdminDashboardView onNavigate={onNavigate} />
+      ) : (isStaff || isAdmin) ? (
         <StaffCommandCenter
           currentUser={currentUser}
           userProfile={userProfile}
@@ -304,6 +398,10 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
           onSignOut={signOut}
           addToCart={addToCart}
           onOpenQrScanner={onOpenQrScanner}
+          activeTab={mapShellTabToStaffTab(activePortalTab)}
+          onTabChange={(tab) => {
+            // Internal tab sync
+          }}
         />
       ) : (
         <ClientDashboard
@@ -323,6 +421,10 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
           onUpdateProfileDetails={updateProfileDetails}
           onSignOut={signOut}
           onOpenQrScanner={onOpenQrScanner}
+          activeTab={mapShellTabToClientTab(activePortalTab)}
+          onTabChange={(tab) => {
+            // Internal tab sync
+          }}
         />
       )}
 
@@ -489,6 +591,6 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
         onClose={() => setShowBiometricModal(false)}
         mode={biometricModalMode}
       />
-    </div>
+    </PortalShell>
   );
 };

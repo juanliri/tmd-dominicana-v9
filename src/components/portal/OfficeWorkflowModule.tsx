@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   FileText, 
   Search, 
@@ -69,12 +69,27 @@ import {
   completeEquipmentServiceCycle
 } from '../../services/serviceHistoryService';
 import { OFFICIAL_SERVICE_KITS, getBestServiceKitForMachine } from '../../data/serviceKitsData';
+import { InvoiceManager } from './staff/InvoiceManager';
+import { NcfGenerator } from './staff/NcfGenerator';
+import { DispatchQueue } from './staff/DispatchQueue';
+import { DgiiReportPanel } from './staff/DgiiReportPanel';
+
+export type OfficeWorkflowSection = 
+  | 'sales_quotes' 
+  | 'invoices_dgii' 
+  | 'dgii_reports' 
+  | 'preventive_maintenance' 
+  | 'advances_ledger' 
+  | 'patio_dispatch' 
+  | 'service_dispatch' 
+  | 'client_accounts';
 
 interface OfficeWorkflowModuleProps {
   quotes: PortalQuote[];
   workOrders: ServiceWorkOrder[];
   allUsers: UserProfile[];
   currency: Currency;
+  initialSection?: OfficeWorkflowSection;
   onOpenCreateQuote: () => void;
   onUpdateQuoteStatus: (quoteId: string, newStatus: PortalQuote['status']) => void;
   onUpdateWorkOrderStatus: (orderId: string, newStatus: ServiceWorkOrder['status']) => void;
@@ -88,6 +103,7 @@ export const OfficeWorkflowModule: React.FC<OfficeWorkflowModuleProps> = ({
   workOrders,
   allUsers,
   currency,
+  initialSection,
   onOpenCreateQuote,
   onUpdateQuoteStatus,
   onUpdateWorkOrderStatus,
@@ -96,13 +112,18 @@ export const OfficeWorkflowModule: React.FC<OfficeWorkflowModuleProps> = ({
   onAddToCart
 }) => {
   const { showToast } = useCart();
-  const [activeSection, setActiveSection] = useState<
-    'sales_quotes' | 'preventive_maintenance' | 'advances_ledger' | 'patio_dispatch' | 'service_dispatch' | 'client_accounts'
-  >('sales_quotes');
+  const [activeSection, setActiveSection] = useState<OfficeWorkflowSection>(initialSection || 'sales_quotes');
+
+  useEffect(() => {
+    if (initialSection) {
+      setActiveSection(initialSection);
+    }
+  }, [initialSection]);
   
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'submitted' | 'in_review' | 'approved' | 'rejected'>('all');
   const [selectedQuoteDetail, setSelectedQuoteDetail] = useState<PortalQuote | null>(null);
+  const [selectedNcfQuote, setSelectedNcfQuote] = useState<PortalQuote | null>(null);
   
   // Fleet and Preventive State
   const [fleetList, setFleetList] = useState<RegisteredEquipment[]>(() => getLocalFleet());
@@ -379,6 +400,32 @@ export const OfficeWorkflowModule: React.FC<OfficeWorkflowModuleProps> = ({
 
         <button
           type="button"
+          onClick={() => setActiveSection('invoices_dgii')}
+          className={`px-3 py-1.5 rounded-[2px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
+            activeSection === 'invoices_dgii'
+              ? 'bg-amber-400 text-black shadow-xs font-black'
+              : 'bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800'
+          }`}
+        >
+          <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
+          <span>FACTURACIÓN NCF (B01/B02)</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveSection('dgii_reports')}
+          className={`px-3 py-1.5 rounded-[2px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
+            activeSection === 'dgii_reports'
+              ? 'bg-amber-400 text-black shadow-xs font-black'
+              : 'bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800'
+          }`}
+        >
+          <FileSpreadsheet className="w-3.5 h-3.5 text-amber-400" />
+          <span>REPORTES DGII 606/607</span>
+        </button>
+
+        <button
+          type="button"
           onClick={() => setActiveSection('preventive_maintenance')}
           className={`px-3 py-1.5 rounded-[2px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
             activeSection === 'preventive_maintenance'
@@ -442,6 +489,23 @@ export const OfficeWorkflowModule: React.FC<OfficeWorkflowModuleProps> = ({
           <span>CUENTAS & RNC</span>
         </button>
       </div>
+
+      {/* SECTION: DGII FISCAL INVOICING (B01/B02) */}
+      {activeSection === 'invoices_dgii' && (
+        <InvoiceManager
+          quotes={quotes}
+          currency={currency}
+          onOpenCreateQuote={onOpenCreateQuote}
+          onOpenNcfModal={(quote) => setSelectedNcfQuote(quote)}
+          onExportPdf={onExportQuotePdf}
+          onUpdateQuoteStatus={onUpdateQuoteStatus}
+        />
+      )}
+
+      {/* SECTION: DGII 606 & 607 REPORTING */}
+      {activeSection === 'dgii_reports' && (
+        <DgiiReportPanel quotes={quotes} />
+      )}
 
       {/* SECTION 1: SALES & QUOTES PIPELINE WITH DIRECT WHATSAPP INTEGRATION */}
       {activeSection === 'sales_quotes' && (
@@ -626,6 +690,23 @@ export const OfficeWorkflowModule: React.FC<OfficeWorkflowModuleProps> = ({
             </div>
           )}
         </div>
+      )}
+
+      {/* SECTION: DGII FISCAL INVOICE MANAGER */}
+      {activeSection === 'invoices_dgii' && (
+        <InvoiceManager
+          quotes={quotes}
+          currency={currency}
+          onOpenCreateQuote={onOpenCreateQuote}
+          onOpenNcfModal={(quote) => setSelectedNcfQuote(quote)}
+          onExportPdf={(quote) => onExportQuotePdf(quote)}
+          onUpdateQuoteStatus={onUpdateQuoteStatus}
+        />
+      )}
+
+      {/* SECTION: DGII MONTHLY FORMATOS 606 & 607 REPORTING */}
+      {activeSection === 'dgii_reports' && (
+        <DgiiReportPanel quotes={quotes} />
       )}
 
       {/* SECTION 2: PREVENTIVE MAINTENANCE & HOROMETER RADAR */}
@@ -897,113 +978,10 @@ export const OfficeWorkflowModule: React.FC<OfficeWorkflowModuleProps> = ({
 
       {/* SECTION 4: PATIO KM 22 DISPATCH & GATE PASS LOGISTICS */}
       {activeSection === 'patio_dispatch' && (
-        <div className="space-y-3">
-          <div className="p-3.5 rounded-[5px] bg-zinc-900 text-white border border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <h4 className="text-xs font-black text-white flex items-center gap-1.5 uppercase font-display">
-                <Truck className="w-4 h-4 text-amber-400" />
-                <span>PATIO CENTRAL KM 22 • PDI & PASES DE SALIDA (GATE PASS)</span>
-              </h4>
-              <p className="text-[11px] text-zinc-400">
-                Supervisión física de maquinaria, inspección PDI de 60 puntos, verificación de saldo y despacho en Lowboys.
-              </p>
-            </div>
-            <span className="px-2 py-0.5 rounded-[2px] text-[10px] font-bold bg-amber-400/20 text-amber-400 border border-amber-400/30 self-start sm:self-auto uppercase">
-              5 BAHÍAS ACTIVAS
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {yardBays.map(bay => {
-              const waGatePassUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
-                `🎟️ *TMD DOMINICANA | PASE DE SALIDA AUTORIZADO*\n` +
-                `📍 *PATIO CENTRAL KM 22 - AUTOPISTA DUARTE*\n` +
-                `━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                `✅ *CÓDIGO:* \`${bay.gatePassCode}\`\n` +
-                `🚜 *Equipo:* ${bay.machineModel} (${bay.serial})\n` +
-                `🏢 *Bahía:* ${bay.bayName}\n` +
-                `🚚 *Chofer Lowboy:* ${bay.carrierDriver}\n` +
-                `📍 *Destino:* ${bay.destination}\n` +
-                `🔒 Autorizado por Gerencia de Patio Km 22.`
-              )}`;
-
-              return (
-                <div
-                  key={bay.id}
-                  className="p-4 rounded-[3px] bg-zinc-900 border border-zinc-800 shadow-xs space-y-3 flex flex-col justify-between"
-                >
-                  <div className="space-y-2">
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <span className="px-1.5 py-0.5 rounded-[2px] text-[9px] font-bold uppercase tracking-wider bg-zinc-950 text-zinc-300 border border-zinc-800 inline-block mb-1">
-                          {bay.bayName}
-                        </span>
-                        <h5 className="font-bold text-xs text-white uppercase">
-                          {bay.machineModel}
-                        </h5>
-                        <p className="text-[10px] text-zinc-500 font-mono">CHASIS: {bay.serial}</p>
-                      </div>
-
-                      <span className={`px-1.5 py-0.5 rounded-[2px] text-[8px] font-black uppercase tracking-wider ${
-                        bay.gatePassAuthorized
-                          ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                          : 'bg-amber-400/20 text-amber-400 border border-amber-400/30'
-                      }`}>
-                        {bay.statusLabel}
-                      </span>
-                    </div>
-
-                    <div className="p-2.5 rounded-[2px] bg-zinc-950 border border-zinc-800 text-[11px] space-y-1">
-                      <div className="flex items-center gap-1 text-zinc-300">
-                        <MapPin className="w-3 h-3 text-amber-400 shrink-0" />
-                        <span className="truncate"><strong>DESTINO:</strong> {bay.destination}</span>
-                      </div>
-                      <div className="flex items-center gap-1 text-zinc-400">
-                        <ShieldCheck className="w-3 h-3 text-emerald-400 shrink-0" />
-                        <span><strong>PDI:</strong> {bay.pdiStatus}</span>
-                      </div>
-                      <div className="flex items-center gap-1 text-zinc-400">
-                        <Truck className="w-3 h-3 text-sky-400 shrink-0" />
-                        <span className="truncate"><strong>TRANSPORTE:</strong> {bay.carrierDriver}</span>
-                      </div>
-                      <div className="flex items-center justify-between pt-1 border-t border-zinc-800 text-[10px]">
-                        <span className="text-zinc-500 uppercase">Pase Salida:</span>
-                        <strong className="font-mono text-amber-400">{bay.gatePassCode}</strong>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-2 border-t border-zinc-800 space-y-1.5">
-                    <div className="grid grid-cols-2 gap-1.5">
-                      <button
-                        type="button"
-                        onClick={() => handleToggleGatePass(bay.id)}
-                        className={`py-1.5 px-2 rounded-[2px] text-[11px] font-bold transition-colors flex items-center justify-center gap-1 cursor-pointer uppercase ${
-                          bay.gatePassAuthorized
-                            ? 'bg-zinc-800 text-zinc-300'
-                            : 'bg-emerald-600 hover:bg-emerald-500 text-white'
-                        }`}
-                      >
-                        <QrCode className="w-3 h-3" />
-                        <span>{bay.gatePassAuthorized ? 'REVOCAR' : 'EMITIR'}</span>
-                      </button>
-
-                      <a
-                        href={waGatePassUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="py-1.5 px-2 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-white text-[11px] font-bold flex items-center justify-center gap-1 transition-colors cursor-pointer uppercase"
-                      >
-                        <MessageSquare className="w-3 h-3 text-amber-400" />
-                        <span>WHATSAPP</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <DispatchQueue
+          initialBays={yardBays as any}
+          onToggleGatePass={handleToggleGatePass}
+        />
       )}
 
       {/* SECTION 5: WORKSHOP & SERVICE DISPATCH VIA WHATSAPP */}
@@ -1163,6 +1141,22 @@ export const OfficeWorkflowModule: React.FC<OfficeWorkflowModuleProps> = ({
           </div>
         </div>
       )}
+
+      {/* DGII NCF FISCAL SEQUENCE GENERATOR MODAL */}
+      <NcfGenerator
+        isOpen={Boolean(selectedNcfQuote)}
+        onClose={() => setSelectedNcfQuote(null)}
+        quote={selectedNcfQuote}
+        onAssignNcf={async (quoteId, ncfNumber, ncfType, rnc) => {
+          const targetQuote = quotes.find(q => q.id === quoteId);
+          if (targetQuote) {
+            targetQuote.ncfNumber = ncfNumber;
+            targetQuote.ncfType = ncfType;
+            targetQuote.rnc = rnc;
+          }
+          showToast(`¡Comprobante Fiscal ${ncfNumber} emitido exitosamente!`);
+        }}
+      />
     </div>
   );
 };

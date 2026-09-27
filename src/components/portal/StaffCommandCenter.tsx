@@ -90,6 +90,8 @@ interface StaffCommandCenterProps {
   onSignOut: () => Promise<void>;
   addToCart?: (item: any) => void;
   onOpenQrScanner?: () => void;
+  activeTab?: StaffPortalTab;
+  onTabChange?: (tab: StaffPortalTab) => void;
 }
 
 export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
@@ -114,9 +116,23 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
   onUpdateProfileDetails,
   onSignOut,
   addToCart,
-  onOpenQrScanner
+  onOpenQrScanner,
+  activeTab: activeTabProp,
+  onTabChange
 }) => {
-  const [activeTab, setActiveTab] = useState<StaffPortalTab>('command_center');
+  const [internalActiveTab, setInternalActiveTab] = useState<StaffPortalTab>(activeTabProp || 'command_center');
+
+  useEffect(() => {
+    if (activeTabProp !== undefined) {
+      setInternalActiveTab(activeTabProp);
+    }
+  }, [activeTabProp]);
+
+  const activeTab = activeTabProp !== undefined ? activeTabProp : internalActiveTab;
+  const setActiveTab = (tab: StaffPortalTab) => {
+    setInternalActiveTab(tab);
+    if (onTabChange) onTabChange(tab);
+  };
   const [activeWorkflowSection, setActiveWorkflowSection] = useState<string>('ncf_invoicing');
   
   // High-density filter states
@@ -516,6 +532,7 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
               workOrders={workOrders}
               allUsers={allUsers}
               currency={currency}
+              initialSection={activeWorkflowSection as any}
               onOpenCreateQuote={onOpenCreateQuote}
               onUpdateQuoteStatus={onUpdateQuoteStatus}
               onUpdateWorkOrderStatus={onUpdateOrderStatus}

@@ -228,18 +228,18 @@ export const StaffQuickActionSidebar: React.FC<StaffQuickActionSidebarProps> = (
               )}
             </button>
 
-            {/* Action 6: NCF DGII Validator */}
+            {/* Action 6: NCF DGII Validator & Invoicing */}
             <button
               type="button"
-              onClick={() => setQuickNcfModal(true)}
+              onClick={() => onSelectWorkflowTab ? onSelectWorkflowTab('invoices_dgii') : setQuickNcfModal(true)}
               className={`w-full p-2 rounded-[3px] bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-200 text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer uppercase ${
                 isCollapsed ? 'justify-center' : 'justify-between'
               }`}
-              title="Generador / Validador NCF DGII"
+              title="Facturación NCF Fiscal DGII"
             >
               <div className="flex items-center gap-2">
                 <FileCheck className="w-3.5 h-3.5 text-purple-400 shrink-0" />
-                {!isCollapsed && <span className="truncate">NCF FISCAL DGII</span>}
+                {!isCollapsed && <span className="truncate">FACTURAS NCF DGII</span>}
               </div>
               {!isCollapsed && (
                 <span className="text-[9px] text-purple-400 font-mono font-bold">B01/B02</span>

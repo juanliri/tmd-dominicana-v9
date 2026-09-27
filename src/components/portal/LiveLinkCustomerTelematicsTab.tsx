@@ -202,21 +202,21 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
       {/* LiveLink Header Banner */}
-      <div className="rounded-3xl bg-gradient-to-br from-zinc-900 via-neutral-900 to-amber-950 p-6 sm:p-8 text-white border border-amber-500/30 shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="rounded-[5px] bg-zinc-900 p-6 sm:p-8 text-white border border-zinc-800 shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-400/5 rounded-full blur-3xl pointer-events-none" />
         
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs font-black tracking-wide uppercase">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[2px] bg-amber-400/10 border border-amber-400/30 text-amber-400 text-xs font-mono font-bold tracking-wide uppercase">
               <Radio className="w-3.5 h-3.5 animate-pulse text-amber-400" />
-              <span>Fase 16 &bull; LiveLink™ Telematics Gateway 24/7 (CAN Bus J1939)</span>
+              <span>LiveLink™ Telematics Gateway 24/7 (CAN Bus J1939)</span>
             </div>
             
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight font-display uppercase">
               Telemetría en Vivo de Flota Activa
             </h1>
             
-            <p className="text-sm text-zinc-300 leading-relaxed">
+            <p className="text-sm text-zinc-300 leading-relaxed font-sans">
               Monitoreo satelital continuo de <strong className="text-amber-400">temperatura de motor</strong>, <strong className="text-amber-400">horas de operación efectivas</strong>, y <strong className="text-amber-400">geocercas de seguridad</strong> en canteras, minas y obras en República Dominicana.
             </p>
           </div>
@@ -226,7 +226,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
               type="button"
               onClick={handleRefresh}
               disabled={refreshing}
-              className="px-4 py-2.5 rounded-xl bg-zinc-800/90 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 font-bold text-xs flex items-center gap-2 transition-all shadow-sm active:scale-95 disabled:opacity-50 cursor-pointer"
+              className="px-4 py-2.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 font-display uppercase tracking-wider font-bold text-xs flex items-center gap-2 transition-all shadow-sm active:scale-95 disabled:opacity-50 cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 text-amber-400 ${refreshing ? 'animate-spin' : ''}`} />
               <span>{refreshing ? 'Sincronizando CAN Bus...' : 'Actualizar Señal'}</span>
@@ -235,7 +235,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
             <button
               type="button"
               onClick={() => onNavigate('#/emergency-dispatch')}
-              className="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-black text-xs flex items-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
+              className="px-4 py-2.5 rounded-[2px] bg-rose-600 hover:bg-rose-500 text-white font-display uppercase tracking-wider font-bold text-xs flex items-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
             >
               <AlertTriangle className="w-3.5 h-3.5" />
               <span>S.O.S Auxilio Vial</span>
@@ -245,39 +245,39 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
 
         {/* Global Fleet Quick Telemetry Metrics */}
         {summary && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-6 pt-6 border-t border-zinc-800/80">
-            <div className="p-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
-              <span className="text-[11px] font-bold text-zinc-400 block uppercase tracking-wider">Flota Total</span>
-              <div className="text-xl font-black text-white mt-1">{summary.totalUnits} <span className="text-xs font-normal text-zinc-400">equipos</span></div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-6 pt-6 border-t border-zinc-800">
+            <div className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
+              <span className="text-[11px] font-bold text-zinc-400 block font-display uppercase tracking-wider">Flota Total</span>
+              <div className="text-xl font-black text-white mt-1 font-mono">{summary.totalUnits} <span className="text-xs font-normal text-zinc-500 font-sans">equipos</span></div>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
-              <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1.5 uppercase tracking-wider">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" /> En Operación
+            <div className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
+              <span className="text-[11px] font-bold text-emerald-400 flex items-center gap-1.5 font-display uppercase tracking-wider">
+                <span className="w-2 h-2 rounded-[1px] bg-emerald-500 animate-ping" /> En Operación
               </span>
-              <div className="text-xl font-black text-emerald-400 mt-1">{summary.runningUnits} <span className="text-xs font-normal text-zinc-400">trabajando</span></div>
+              <div className="text-xl font-black text-emerald-400 mt-1 font-mono">{summary.runningUnits} <span className="text-xs font-normal text-zinc-500 font-sans">trabajando</span></div>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
-              <span className="text-[11px] font-bold text-amber-400 block uppercase tracking-wider">En Ralentí</span>
-              <div className="text-xl font-black text-amber-400 mt-1">{summary.idleUnits} <span className="text-xs font-normal text-zinc-400">en espera</span></div>
+            <div className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
+              <span className="text-[11px] font-bold text-amber-400 block font-display uppercase tracking-wider">En Ralentí</span>
+              <div className="text-xl font-black text-amber-400 mt-1 font-mono">{summary.idleUnits} <span className="text-xs font-normal text-zinc-500 font-sans">en espera</span></div>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
-              <span className="text-[11px] font-bold text-zinc-400 block uppercase tracking-wider">Apagados / Taller</span>
-              <div className="text-xl font-black text-zinc-300 mt-1">{summary.stoppedUnits} <span className="text-xs font-normal text-zinc-400">unidades</span></div>
+            <div className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
+              <span className="text-[11px] font-bold text-zinc-400 block font-display uppercase tracking-wider">Apagados / Taller</span>
+              <div className="text-xl font-black text-zinc-300 mt-1 font-mono">{summary.stoppedUnits} <span className="text-xs font-normal text-zinc-500 font-sans">unidades</span></div>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
-              <span className="text-[11px] font-bold text-rose-400 flex items-center gap-1 uppercase tracking-wider">
+            <div className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
+              <span className="text-[11px] font-bold text-rose-400 flex items-center gap-1 font-display uppercase tracking-wider">
                 <AlertTriangle className="w-3 h-3 text-rose-400" /> Alertas DTC
               </span>
-              <div className="text-xl font-black text-rose-400 mt-1">{summary.criticalAlertsCount} <span className="text-xs font-normal text-zinc-400">críticas</span></div>
+              <div className="text-xl font-black text-rose-400 mt-1 font-mono">{summary.criticalAlertsCount} <span className="text-xs font-normal text-zinc-500 font-sans">críticas</span></div>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-800">
-              <span className="text-[11px] font-bold text-cyan-400 block uppercase tracking-wider">Salud CAN Bus</span>
-              <div className="text-xl font-black text-cyan-400 mt-1">{summary.fleetHealthScore}% <span className="text-xs font-normal text-zinc-400">óptima</span></div>
+            <div className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
+              <span className="text-[11px] font-bold text-cyan-400 block font-display uppercase tracking-wider">Salud CAN Bus</span>
+              <div className="text-xl font-black text-cyan-400 mt-1 font-mono">{summary.fleetHealthScore}% <span className="text-xs font-normal text-zinc-500 font-sans">óptima</span></div>
             </div>
           </div>
         )}
@@ -285,7 +285,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
 
       {/* Toast Feedback Alert */}
       {feedbackMessage && (
-        <div className={`p-4 rounded-2xl flex items-center gap-3 text-xs sm:text-sm font-bold transition-all animate-in slide-in-from-top-2 ${
+        <div className={`p-4 rounded-[3px] flex items-center gap-3 text-xs sm:text-sm font-bold transition-all animate-in slide-in-from-top-2 font-mono ${
           feedbackMessage.type === 'success' 
             ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30' 
             : 'bg-rose-500/10 text-rose-400 border border-rose-500/30'
@@ -304,28 +304,28 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
         
         {/* Left Column: Units List & Multi-Filters */}
         <aside className="lg:col-span-4 sticky top-24 self-start space-y-4 max-h-[calc(100vh-7.5rem)] overflow-y-auto scrollbar-thin pr-1">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-5 shadow-sm space-y-4">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-[5px] p-5 shadow-sm space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Activity className="w-4 h-4 text-amber-500" />
-                <h3 className="text-sm font-black text-zinc-900 dark:text-white uppercase tracking-wider">
+                <Activity className="w-4 h-4 text-amber-400" />
+                <h3 className="text-sm font-black text-white font-display uppercase tracking-wider">
                   Equipos Conectados ({filteredFleet.length})
                 </h3>
               </div>
-              <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+              <span className="flex items-center gap-1 text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-[2px] border border-emerald-500/20">
                 <Wifi className="w-3 h-3" /> 4G LTE
               </span>
             </div>
 
             {/* Search Input */}
             <div className="relative">
-              <Search className="w-3.5 h-3.5 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-3.5 h-3.5 text-zinc-500 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
                 placeholder="Buscar por ficha, modelo, VIN o provincia..."
-                className="w-full pl-9 pr-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700 text-xs font-semibold text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full pl-9 pr-3 py-2 rounded-[2px] bg-zinc-950 border border-zinc-800 text-xs font-sans text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400"
               />
             </div>
 
@@ -334,7 +334,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
               <select
                 value={filterBrand}
                 onChange={e => setFilterBrand(e.target.value)}
-                className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-2.5 py-1.5 text-zinc-800 dark:text-zinc-200 text-xs font-bold"
+                className="bg-zinc-950 border border-zinc-800 rounded-[2px] px-2.5 py-1.5 text-zinc-300 text-xs font-mono font-bold"
               >
                 <option value="all">Todas las Marcas</option>
                 <option value="JCB">JCB</option>
@@ -346,7 +346,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
               <select
                 value={filterStatus}
                 onChange={e => setFilterStatus(e.target.value)}
-                className="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-2.5 py-1.5 text-zinc-800 dark:text-zinc-200 text-xs font-bold"
+                className="bg-zinc-950 border border-zinc-800 rounded-[2px] px-2.5 py-1.5 text-zinc-300 text-xs font-mono font-bold"
               >
                 <option value="all">Todos Estados</option>
                 <option value="running">En Marcha</option>
@@ -358,8 +358,8 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
             {/* Fleet Unit Cards List */}
             <div className="space-y-2.5 max-h-[560px] overflow-y-auto pr-1">
               {filteredFleet.length === 0 ? (
-                <div className="p-8 text-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl">
-                  <p className="text-xs text-zinc-400 font-medium">No se encontraron unidades con estos filtros.</p>
+                <div className="p-8 text-center border border-dashed border-zinc-800 rounded-[3px]">
+                  <p className="text-xs text-zinc-400 font-medium font-sans">No se encontraron unidades con estos filtros.</p>
                 </div>
               ) : (
                 filteredFleet.map(unit => {
@@ -371,39 +371,39 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                     <div
                       key={unit.id}
                       onClick={() => setSelectedUnit(unit)}
-                      className={`p-3.5 rounded-2xl border transition-all cursor-pointer text-left relative ${
+                      className={`p-3.5 rounded-[3px] border transition-all cursor-pointer text-left relative ${
                         isSelected 
-                          ? 'bg-amber-500/10 border-amber-500 dark:bg-amber-500/15 shadow-sm' 
-                          : 'bg-zinc-50 dark:bg-zinc-800/40 border-zinc-200 dark:border-zinc-700/80 hover:border-amber-400'
+                          ? 'bg-amber-400/10 border-amber-400/50 shadow-sm' 
+                          : 'bg-zinc-950 border-zinc-800 hover:border-zinc-700'
                       }`}
                     >
                       <div className="flex items-start justify-between gap-2">
                         <div className="space-y-0.5">
                           <div className="flex items-center gap-2">
-                            <span className={`w-2.5 h-2.5 rounded-full shrink-0 ${
+                            <span className={`w-2 h-2 rounded-[1px] shrink-0 ${
                               unit.status === 'running' 
                                 ? 'bg-emerald-500 animate-pulse' 
                                 : unit.status === 'idle' 
-                                  ? 'bg-amber-500' 
-                                  : 'bg-zinc-500'
+                                  ? 'bg-amber-400' 
+                                  : 'bg-zinc-600'
                             }`} />
-                            <h4 className="text-xs font-black text-zinc-900 dark:text-white truncate">
+                            <h4 className="text-xs font-bold text-white truncate">
                               {unit.name}
                             </h4>
                           </div>
                           
-                          <p className="text-[11px] text-zinc-500 dark:text-zinc-400 truncate flex items-center gap-1">
-                            <MapPin className="w-3 h-3 text-amber-500 shrink-0" />
+                          <p className="text-[11px] text-zinc-400 truncate flex items-center gap-1 font-sans">
+                            <MapPin className="w-3 h-3 text-amber-400 shrink-0" />
                             {unit.location.province} &bull; {unit.geofenceName}
                           </p>
                         </div>
 
                         <div className="text-right shrink-0">
-                          <span className="text-xs font-mono font-black text-amber-600 dark:text-amber-400">
+                          <span className="text-xs font-mono font-bold text-amber-400">
                             {unit.horometerHours} h
                           </span>
                           {hasDtc && (
-                            <span className="block mt-1 text-[9px] font-black text-rose-500 bg-rose-500/10 px-1.5 py-0.5 rounded-md border border-rose-500/20">
+                            <span className="block mt-1 text-[9px] font-mono font-bold text-rose-400 bg-rose-500/10 px-1.5 py-0.5 rounded-[2px] border border-rose-500/20">
                               {unit.faultCodes.length} DTC
                             </span>
                           )}
@@ -411,23 +411,23 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                       </div>
 
                       {/* Quick Badges Row */}
-                      <div className="mt-2.5 pt-2 border-t border-zinc-200 dark:border-zinc-700/60 flex items-center justify-between text-[11px]">
+                      <div className="mt-2.5 pt-2 border-t border-zinc-800 flex items-center justify-between text-[11px] font-mono">
                         <span className={`flex items-center gap-1 font-bold ${
-                          isOverheating ? 'text-rose-500' : 'text-zinc-600 dark:text-zinc-300'
+                          isOverheating ? 'text-rose-400' : 'text-zinc-300'
                         }`}>
                           <Thermometer className="w-3 h-3" />
                           {unit.engineCoolantTempC}°C
                         </span>
 
-                        <span className="flex items-center gap-1 text-zinc-600 dark:text-zinc-300 font-semibold">
-                          <Fuel className="w-3 h-3 text-amber-500" />
+                        <span className="flex items-center gap-1 text-zinc-300 font-semibold">
+                          <Fuel className="w-3 h-3 text-amber-400" />
                           {unit.fuelLevelPercent}%
                         </span>
 
                         <span className={`flex items-center gap-1 font-bold text-[10px] ${
                           unit.geofenceStatus === 'inside' 
-                            ? 'text-emerald-500' 
-                            : 'text-rose-500 font-black'
+                            ? 'text-emerald-400' 
+                            : 'text-rose-400 font-black'
                         }`}>
                           <ShieldCheck className="w-3 h-3" />
                           {unit.geofenceStatus === 'inside' ? 'En Geocerca' : 'ALERTA PERÍMETRO'}
@@ -444,66 +444,66 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
         {/* Right Column: Deep Telemetry Console for Selected Machine */}
         <main className="lg:col-span-8 space-y-6">
           {selectedUnit ? (
-            <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 sm:p-7 shadow-sm space-y-6">
+            <div className="bg-zinc-900 border border-zinc-800 rounded-[5px] p-6 sm:p-7 shadow-sm space-y-6">
               
               {/* Top Header of Selected Unit */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-zinc-200 dark:border-zinc-800">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-zinc-800">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span className="px-2.5 py-0.5 rounded-lg text-xs font-black bg-amber-500 text-black">
+                    <span className="px-2.5 py-0.5 rounded-[2px] text-xs font-display uppercase tracking-wider font-bold bg-amber-400 text-black">
                       {selectedUnit.brand}
                     </span>
-                    <span className="text-xs font-mono font-bold text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-lg border border-zinc-200 dark:border-zinc-700">
+                    <span className="text-xs font-mono font-bold text-zinc-300 bg-zinc-950 px-2 py-0.5 rounded-[2px] border border-zinc-800">
                       VIN: {selectedUnit.vin}
                     </span>
-                    <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
+                    <span className="text-xs font-mono text-zinc-400">
                       S/N: {selectedUnit.serialNumber}
                     </span>
                   </div>
 
-                  <h2 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-white tracking-tight">
+                  <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight font-display uppercase">
                     {selectedUnit.name}
                   </h2>
 
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-1.5 pt-0.5">
-                    <MapPin className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                    <span>{selectedUnit.location.address}, <strong>{selectedUnit.location.province}, RD</strong></span>
+                  <p className="text-xs text-zinc-400 flex items-center gap-1.5 pt-0.5 font-sans">
+                    <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                    <span>{selectedUnit.location.address}, <strong className="text-zinc-300">{selectedUnit.location.province}, RD</strong></span>
                   </p>
                 </div>
 
                 {/* Status Badges & Quick Action */}
                 <div className="flex flex-wrap items-center gap-2">
-                  <div className={`px-3 py-1.5 rounded-xl border text-xs font-black flex items-center gap-2 ${
+                  <div className={`px-3 py-1.5 rounded-[2px] border text-xs font-mono font-bold flex items-center gap-2 ${
                     selectedUnit.status === 'running'
                       ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
                       : selectedUnit.status === 'idle'
-                        ? 'bg-amber-500/10 text-amber-400 border-amber-500/30'
-                        : 'bg-zinc-500/10 text-zinc-400 border-zinc-500/30'
+                        ? 'bg-amber-400/10 text-amber-400 border-amber-400/30'
+                        : 'bg-zinc-800 text-zinc-400 border-zinc-700'
                   }`}>
-                    <span className="w-2 h-2 rounded-full bg-current animate-pulse" />
+                    <span className="w-2 h-2 rounded-[1px] bg-current animate-pulse" />
                     {selectedUnit.status === 'running' ? 'MOTOR EN MARCHA' : selectedUnit.status === 'idle' ? 'EN ESPERA (RALENTÍ)' : 'MOTOR APAGADO'}
                   </div>
 
                   <button
                     type="button"
                     onClick={handleExportTelematicsReport}
-                    className="p-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 transition-colors cursor-pointer"
+                    className="p-2 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 transition-colors cursor-pointer"
                     title="Exportar Registro CSV"
                   >
-                    <Download className="w-4 h-4" />
+                    <Download className="w-4 h-4 text-amber-400" />
                   </button>
                 </div>
               </div>
 
               {/* Sub-Tabs Navigation for Telematics Inspector */}
-              <div className="flex items-center gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-2 overflow-x-auto">
+              <div className="flex items-center gap-2 border-b border-zinc-800 pb-2 overflow-x-auto">
                 <button
                   type="button"
                   onClick={() => setActiveDetailTab('realtime')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
+                  className={`px-3.5 py-1.5 rounded-[2px] text-xs font-display uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
                     activeDetailTab === 'realtime'
-                      ? 'bg-amber-500 text-black font-black'
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                      ? 'bg-amber-400 text-black font-black'
+                      : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
                   }`}
                 >
                   <Gauge className="w-3.5 h-3.5" />
@@ -513,10 +513,10 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                 <button
                   type="button"
                   onClick={() => setActiveDetailTab('temperature')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
+                  className={`px-3.5 py-1.5 rounded-[2px] text-xs font-display uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
                     activeDetailTab === 'temperature'
-                      ? 'bg-amber-500 text-black font-black'
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                      ? 'bg-amber-400 text-black font-black'
+                      : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
                   }`}
                 >
                   <Thermometer className="w-3.5 h-3.5" />
@@ -526,10 +526,10 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                 <button
                   type="button"
                   onClick={() => setActiveDetailTab('hours')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
+                  className={`px-3.5 py-1.5 rounded-[2px] text-xs font-display uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
                     activeDetailTab === 'hours'
-                      ? 'bg-amber-500 text-black font-black'
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                      ? 'bg-amber-400 text-black font-black'
+                      : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
                   }`}
                 >
                   <Clock className="w-3.5 h-3.5" />
@@ -539,10 +539,10 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                 <button
                   type="button"
                   onClick={() => setActiveDetailTab('geofence')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
+                  className={`px-3.5 py-1.5 rounded-[2px] text-xs font-display uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
                     activeDetailTab === 'geofence'
-                      ? 'bg-amber-500 text-black font-black'
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                      ? 'bg-amber-400 text-black font-black'
+                      : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
                   }`}
                 >
                   <ShieldCheck className="w-3.5 h-3.5" />
@@ -552,10 +552,10 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                 <button
                   type="button"
                   onClick={() => setActiveDetailTab('diagnostics')}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
+                  className={`px-3.5 py-1.5 rounded-[2px] text-xs font-display uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
                     activeDetailTab === 'diagnostics'
-                      ? 'bg-amber-500 text-black font-black'
-                      : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                      ? 'bg-amber-400 text-black font-black'
+                      : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
                   }`}
                 >
                   <AlertTriangle className="w-3.5 h-3.5" />
@@ -569,62 +569,62 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                   {/* Primary 4 Metric Cards */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     {/* Horometer */}
-                    <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80">
-                      <span className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 block uppercase">Horómetro Acumulado</span>
-                      <div className="text-2xl font-black text-zinc-900 dark:text-white mt-1 font-mono">
-                        {selectedUnit.horometerHours} <span className="text-xs font-semibold text-zinc-400">h</span>
+                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800">
+                      <span className="text-[11px] font-bold text-zinc-400 block font-display uppercase tracking-wider">Horómetro Acumulado</span>
+                      <div className="text-2xl font-black text-white mt-1 font-mono">
+                        {selectedUnit.horometerHours} <span className="text-xs font-normal text-zinc-500 font-sans">h</span>
                       </div>
-                      <div className="mt-2 text-[11px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1">
+                      <div className="mt-2 text-[11px] text-emerald-400 font-bold flex items-center gap-1 font-mono">
                         <CheckCircle2 className="w-3 h-3" /> Próx. Service: {selectedUnit.serviceCountdownHours}h
                       </div>
                     </div>
 
                     {/* Fuel Level */}
-                    <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80">
-                      <span className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 block uppercase">Combustible Diésel</span>
-                      <div className="text-2xl font-black text-amber-500 mt-1 font-mono">
+                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800">
+                      <span className="text-[11px] font-bold text-zinc-400 block font-display uppercase tracking-wider">Combustible Diésel</span>
+                      <div className="text-2xl font-black text-amber-400 mt-1 font-mono">
                         {selectedUnit.fuelLevelPercent}%
                       </div>
-                      <div className="mt-2 text-[11px] text-zinc-600 dark:text-zinc-400 font-semibold">
-                        Consumo: {selectedUnit.fuelConsumptionLph} L/hora
+                      <div className="mt-2 text-[11px] text-zinc-400 font-mono">
+                        Consumo: {selectedUnit.fuelConsumptionLph} L/h
                       </div>
                     </div>
 
                     {/* Engine Temperature */}
-                    <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80">
-                      <span className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 block uppercase">Temp. Refrigerante</span>
+                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800">
+                      <span className="text-[11px] font-bold text-zinc-400 block font-display uppercase tracking-wider">Temp. Refrigerante</span>
                       <div className={`text-2xl font-black mt-1 font-mono ${
-                        selectedUnit.engineCoolantTempC > 95 ? 'text-rose-500' : 'text-zinc-900 dark:text-white'
+                        selectedUnit.engineCoolantTempC > 95 ? 'text-rose-400' : 'text-white'
                       }`}>
                         {selectedUnit.engineCoolantTempC}°C
                       </div>
-                      <div className="mt-2 text-[11px] text-zinc-600 dark:text-zinc-400 font-semibold">
+                      <div className="mt-2 text-[11px] text-zinc-400 font-mono">
                         Hidráulico: {selectedUnit.hydraulicOilTempC}°C
                       </div>
                     </div>
 
                     {/* Battery Voltage */}
-                    <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80">
-                      <span className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 block uppercase">Batería Alternador</span>
-                      <div className="text-2xl font-black text-cyan-500 mt-1 font-mono">
+                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800">
+                      <span className="text-[11px] font-bold text-zinc-400 block font-display uppercase tracking-wider">Batería Alternador</span>
+                      <div className="text-2xl font-black text-cyan-400 mt-1 font-mono">
                         {selectedUnit.batteryVoltage} V
                       </div>
-                      <div className="mt-2 text-[11px] text-emerald-500 font-bold">
+                      <div className="mt-2 text-[11px] text-emerald-400 font-mono">
                         DEF / Urea: {selectedUnit.defLevelPercent}%
                       </div>
                     </div>
                   </div>
 
                   {/* Geofence & Location Quick Summary */}
-                  <div className="p-5 rounded-2xl bg-gradient-to-r from-zinc-50 to-amber-500/5 dark:from-zinc-800/50 dark:to-amber-500/10 border border-zinc-200 dark:border-zinc-700/80 space-y-3">
+                  <div className="p-5 rounded-[3px] bg-zinc-950 border border-zinc-800 space-y-3">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div className="flex items-center gap-2">
-                        <ShieldCheck className="w-5 h-5 text-emerald-500" />
+                        <ShieldCheck className="w-5 h-5 text-emerald-400" />
                         <div>
-                          <h4 className="text-xs font-black text-zinc-900 dark:text-white uppercase tracking-wider">
+                          <h4 className="text-xs font-black text-white font-display uppercase tracking-wider">
                             Geocerca Activa: {selectedUnit.geofenceName}
                           </h4>
-                          <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
+                          <p className="text-[11px] text-zinc-400 font-mono">
                             Coordenadas GPS: Lat {selectedUnit.location.lat.toFixed(4)}, Lng {selectedUnit.location.lng.toFixed(4)}
                           </p>
                         </div>
@@ -637,7 +637,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                             setGeofenceName(selectedUnit.geofenceName);
                             setShowGeofenceModal(true);
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-800 dark:text-zinc-200 text-xs font-bold transition-all cursor-pointer"
+                          className="px-3 py-1.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-display uppercase tracking-wider font-bold transition-all cursor-pointer border border-zinc-700"
                         >
                           Configurar Geocerca
                         </button>
@@ -646,7 +646,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                           type="button"
                           onClick={() => handlePingUnit(selectedUnit)}
                           disabled={commandLoading}
-                          className="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-black transition-all cursor-pointer disabled:opacity-50"
+                          className="px-3 py-1.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black text-xs font-display uppercase tracking-wider font-bold transition-all cursor-pointer disabled:opacity-50"
                         >
                           Pitar / Luces
                         </button>
@@ -655,15 +655,15 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                   </div>
 
                   {/* Remote Engine Lock / Immobilizer */}
-                  <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="p-5 rounded-[3px] bg-zinc-950 border border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <Lock className="w-4 h-4 text-amber-500" />
-                        <h4 className="text-xs font-black text-zinc-900 dark:text-white uppercase tracking-wider">
+                        <Lock className="w-4 h-4 text-amber-400" />
+                        <h4 className="text-xs font-black text-white font-display uppercase tracking-wider">
                           Inmovilizador Antirrobo Satelital
                         </h4>
                       </div>
-                      <p className="text-xs text-zinc-500 dark:text-zinc-400 max-w-md">
+                      <p className="text-xs text-zinc-400 max-w-md font-sans">
                         Corta la inyección de combustible mediante el relé telemático CAN Bus. Bloquea el arranque no autorizado en horarios nocturnos.
                       </p>
                     </div>
@@ -672,10 +672,10 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                       type="button"
                       onClick={() => handleToggleImmobilizer(selectedUnit)}
                       disabled={commandLoading}
-                      className={`px-4 py-2.5 rounded-xl text-xs font-black flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50 ${
+                      className={`px-4 py-2.5 rounded-[2px] text-xs font-display uppercase tracking-wider font-bold flex items-center gap-2 transition-all cursor-pointer disabled:opacity-50 ${
                         selectedUnit.immobilizerActive 
                           ? 'bg-rose-600 hover:bg-rose-500 text-white shadow-md' 
-                          : 'bg-zinc-900 dark:bg-zinc-700 hover:bg-zinc-800 text-white'
+                          : 'bg-zinc-800 hover:bg-zinc-700 text-white border border-zinc-700'
                       }`}
                     >
                       {selectedUnit.immobilizerActive ? (
@@ -697,8 +697,8 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
               {/* TAB 2: DETAILED TEMPERATURE MONITORING */}
               {activeDetailTab === 'temperature' && (
                 <div className="space-y-6 animate-in fade-in duration-200">
-                  <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-700 dark:text-amber-300 flex items-start gap-3">
-                    <Info className="w-4 h-4 shrink-0 mt-0.5" />
+                  <div className="p-4 rounded-[3px] bg-amber-400/10 border border-amber-400/20 text-xs text-amber-300 flex items-start gap-3 font-sans">
+                    <Info className="w-4 h-4 shrink-0 mt-0.5 text-amber-400" />
                     <span>
                       Los sensores CAN Bus calibrados para el clima tropical de República Dominicana emiten advertencias tempranas si el refrigerante supera <strong>95°C</strong> o el aceite hidráulico supera <strong>85°C</strong> en condiciones de carga pesada en cantera.
                     </span>
@@ -706,79 +706,79 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Coolant Gauge Card */}
-                    <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80 space-y-4">
+                    <div className="p-5 rounded-[3px] bg-zinc-950 border border-zinc-800 space-y-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-black text-zinc-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                          <Thermometer className="w-4 h-4 text-rose-500" /> Refrigerante de Motor
+                        <span className="text-xs font-black text-white font-display uppercase tracking-wider flex items-center gap-2">
+                          <Thermometer className="w-4 h-4 text-rose-400" /> Refrigerante de Motor
                         </span>
-                        <span className={`px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase ${
-                          selectedUnit.engineCoolantTempC > 95 ? 'bg-rose-500 text-white' : 'bg-emerald-500/10 text-emerald-500'
+                        <span className={`px-2.5 py-0.5 rounded-[2px] text-[10px] font-mono font-bold uppercase ${
+                          selectedUnit.engineCoolantTempC > 95 ? 'bg-rose-500 text-white' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
                         }`}>
                           {selectedUnit.engineCoolantTempC > 95 ? 'ALTA TEMPERATURA' : 'NORMAL'}
                         </span>
                       </div>
 
-                      <div className="text-3xl font-black text-zinc-900 dark:text-white font-mono">
+                      <div className="text-3xl font-black text-white font-mono">
                         {selectedUnit.engineCoolantTempC}°C
                       </div>
 
                       {/* Progress Bar Visualizer */}
                       <div className="space-y-1">
-                        <div className="w-full bg-zinc-200 dark:bg-zinc-700 h-3 rounded-full overflow-hidden flex">
+                        <div className="w-full bg-zinc-800 h-2.5 rounded-[1px] overflow-hidden flex">
                           <div 
                             className={`h-full transition-all duration-500 ${
-                              selectedUnit.engineCoolantTempC > 95 ? 'bg-rose-500' : selectedUnit.engineCoolantTempC > 88 ? 'bg-amber-500' : 'bg-emerald-500'
+                              selectedUnit.engineCoolantTempC > 95 ? 'bg-rose-500' : selectedUnit.engineCoolantTempC > 88 ? 'bg-amber-400' : 'bg-emerald-400'
                             }`}
                             style={{ width: `${Math.min(100, (selectedUnit.engineCoolantTempC / 120) * 100)}%` }}
                           />
                         </div>
-                        <div className="flex justify-between text-[10px] text-zinc-400 font-mono">
+                        <div className="flex justify-between text-[10px] text-zinc-500 font-mono">
                           <span>0°C (Frío)</span>
                           <span>85°C (Óptimo)</span>
                           <span>110°C (Crítico)</span>
                         </div>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 text-xs text-zinc-600 dark:text-zinc-400 space-y-1">
-                        <p className="font-bold text-zinc-900 dark:text-white">Diagnóstico Térmico:</p>
+                      <div className="p-3 rounded-[2px] bg-zinc-900 border border-zinc-800/80 text-xs text-zinc-400 space-y-1 font-sans">
+                        <p className="font-bold text-white font-display uppercase tracking-wider text-[11px]">Diagnóstico Térmico:</p>
                         <p>{selectedUnit.engineCoolantTempC > 95 ? 'Se recomienda limpiar panal de radiador de polvo de cantera e inspeccionar nivel de anticongelante OAT 50/50.' : 'Bomba de agua y termostato operando dentro de tolerancias de fábrica.'}</p>
                       </div>
                     </div>
 
                     {/* Hydraulic Oil Gauge Card */}
-                    <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80 space-y-4">
+                    <div className="p-5 rounded-[3px] bg-zinc-950 border border-zinc-800 space-y-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-black text-zinc-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                          <Activity className="w-4 h-4 text-cyan-500" /> Aceite Hidráulico Principal
+                        <span className="text-xs font-black text-white font-display uppercase tracking-wider flex items-center gap-2">
+                          <Activity className="w-4 h-4 text-cyan-400" /> Aceite Hidráulico Principal
                         </span>
-                        <span className="px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase bg-emerald-500/10 text-emerald-500">
+                        <span className="px-2.5 py-0.5 rounded-[2px] text-[10px] font-mono font-bold uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                           {selectedUnit.hydraulicOilTempC > 85 ? 'PRECAUCIÓN' : 'NORMAL'}
                         </span>
                       </div>
 
-                      <div className="text-3xl font-black text-zinc-900 dark:text-white font-mono">
+                      <div className="text-3xl font-black text-white font-mono">
                         {selectedUnit.hydraulicOilTempC}°C
                       </div>
 
                       {/* Progress Bar Visualizer */}
                       <div className="space-y-1">
-                        <div className="w-full bg-zinc-200 dark:bg-zinc-700 h-3 rounded-full overflow-hidden flex">
+                        <div className="w-full bg-zinc-800 h-2.5 rounded-[1px] overflow-hidden flex">
                           <div 
                             className={`h-full transition-all duration-500 ${
-                              selectedUnit.hydraulicOilTempC > 85 ? 'bg-amber-500' : 'bg-cyan-500'
+                              selectedUnit.hydraulicOilTempC > 85 ? 'bg-amber-400' : 'bg-cyan-400'
                             }`}
                             style={{ width: `${Math.min(100, (selectedUnit.hydraulicOilTempC / 100) * 100)}%` }}
                           />
                         </div>
-                        <div className="flex justify-between text-[10px] text-zinc-400 font-mono">
+                        <div className="flex justify-between text-[10px] text-zinc-500 font-mono">
                           <span>20°C</span>
                           <span>65°C (Óptimo)</span>
                           <span>90°C (Límite)</span>
                         </div>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 text-xs text-zinc-600 dark:text-zinc-400 space-y-1">
-                        <p className="font-bold text-zinc-900 dark:text-white">Salud del Circuito Hidráulico:</p>
+                      <div className="p-3 rounded-[2px] bg-zinc-900 border border-zinc-800/80 text-xs text-zinc-400 space-y-1 font-sans">
+                        <p className="font-bold text-white font-display uppercase tracking-wider text-[11px]">Salud del Circuito Hidráulico:</p>
                         <p>Viscosidad ISO VG 46/68 estable. Válvulas proporcionales y enfriador de aceite funcionando al 100%.</p>
                       </div>
                     </div>
@@ -790,61 +790,61 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
               {activeDetailTab === 'hours' && (
                 <div className="space-y-6 animate-in fade-in duration-200">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80 text-center">
-                      <span className="text-xs text-zinc-500 dark:text-zinc-400 font-bold uppercase">Total Horómetro</span>
-                      <div className="text-3xl font-black text-zinc-900 dark:text-white font-mono mt-1">
+                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800 text-center">
+                      <span className="text-xs text-zinc-400 font-display uppercase tracking-wider block">Total Horómetro</span>
+                      <div className="text-3xl font-black text-white font-mono mt-1">
                         {selectedUnit.horometerHours} h
                       </div>
-                      <p className="text-[11px] text-zinc-400 mt-1">Desde puesta en marcha</p>
+                      <p className="text-[11px] text-zinc-500 mt-1 font-sans">Desde puesta en marcha</p>
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80 text-center">
-                      <span className="text-xs text-emerald-500 font-bold uppercase">Horas Efectivas de Trabajo</span>
-                      <div className="text-3xl font-black text-emerald-500 font-mono mt-1">
+                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800 text-center">
+                      <span className="text-xs text-emerald-400 font-display uppercase tracking-wider block">Horas Efectivas</span>
+                      <div className="text-3xl font-black text-emerald-400 font-mono mt-1">
                         {(selectedUnit.horometerHours * 0.78).toFixed(1)} h
                       </div>
-                      <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold mt-1">78% de Productividad</p>
+                      <p className="text-[11px] text-emerald-400 font-mono font-bold mt-1">78% de Productividad</p>
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80 text-center">
-                      <span className="text-xs text-amber-500 font-bold uppercase">Horas en Ralentí (Idle)</span>
-                      <div className="text-3xl font-black text-amber-500 font-mono mt-1">
+                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800 text-center">
+                      <span className="text-xs text-amber-400 font-display uppercase tracking-wider block">Horas en Ralentí</span>
+                      <div className="text-3xl font-black text-amber-400 font-mono mt-1">
                         {(selectedUnit.horometerHours * 0.22).toFixed(1)} h
                       </div>
-                      <p className="text-[11px] text-amber-600 dark:text-amber-400 font-bold mt-1">22% en Espera de Camión</p>
+                      <p className="text-[11px] text-amber-400 font-mono font-bold mt-1">22% en Espera</p>
                     </div>
                   </div>
 
                   {/* Scheduled Service Countdown Bar */}
-                  <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80 space-y-3">
+                  <div className="p-5 rounded-[3px] bg-zinc-950 border border-zinc-800 space-y-3">
                     <div className="flex items-center justify-between">
                       <div>
-                        <h4 className="text-xs font-black text-zinc-900 dark:text-white uppercase tracking-wider">
+                        <h4 className="text-xs font-black text-white font-display uppercase tracking-wider">
                           Próximo Mantenimiento Preventivo (PM-500h / PM-1000h)
                         </h4>
-                        <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                          Horas restantes para cambio de aceite motor 15W40 y kit de 5 filtros OEM:
+                        <p className="text-xs text-zinc-400 font-sans">
+                          Horas restantes para cambio de aceite motor 15W40 y kit de filtros OEM:
                         </p>
                       </div>
-                      <span className="text-lg font-black text-amber-500 font-mono">
+                      <span className="text-lg font-black text-amber-400 font-mono">
                         {selectedUnit.serviceCountdownHours} horas
                       </span>
                     </div>
 
-                    <div className="w-full bg-zinc-200 dark:bg-zinc-700 h-3 rounded-full overflow-hidden">
+                    <div className="w-full bg-zinc-800 h-2.5 rounded-[1px] overflow-hidden">
                       <div 
-                        className="bg-amber-500 h-full rounded-full"
+                        className="bg-amber-400 h-full rounded-[1px]"
                         style={{ width: `${Math.max(10, 100 - (selectedUnit.serviceCountdownHours / 500) * 100)}%` }}
                       />
                     </div>
 
-                    <div className="flex items-center justify-between pt-1">
+                    <div className="flex items-center justify-between pt-1 font-mono text-xs">
                       <span className="text-[11px] text-zinc-500">Último servicio: {(selectedUnit.horometerHours - (500 - selectedUnit.serviceCountdownHours)).toFixed(0)}h</span>
                       {onOpenServiceTab && (
                         <button
                           type="button"
                           onClick={onOpenServiceTab}
-                          className="text-xs font-black text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1 cursor-pointer"
+                          className="text-xs font-bold text-amber-400 hover:underline flex items-center gap-1 cursor-pointer font-display uppercase tracking-wider"
                         >
                           <span>Ver Historial de Mantenimiento</span>
                           <ChevronRight className="w-3.5 h-3.5" />
@@ -858,21 +858,21 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
               {/* TAB 4: GEOFENCES (DOMINICAN GEOFENCING) */}
               {activeDetailTab === 'geofence' && (
                 <div className="space-y-6 animate-in fade-in duration-200">
-                  <div className="p-5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/80 space-y-4">
+                  <div className="p-5 rounded-[3px] bg-zinc-950 border border-zinc-800 space-y-4">
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div>
                         <div className="flex items-center gap-2">
-                          <ShieldCheck className="w-5 h-5 text-emerald-500" />
-                          <h3 className="text-sm font-black text-zinc-900 dark:text-white uppercase tracking-wider">
+                          <ShieldCheck className="w-5 h-5 text-emerald-400" />
+                          <h3 className="text-sm font-black text-white font-display uppercase tracking-wider">
                             {selectedUnit.geofenceName}
                           </h3>
                         </div>
-                        <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                        <p className="text-xs text-zinc-400 mt-1 font-sans">
                           Zona de operación registrada en <strong>{selectedUnit.location.province}, República Dominicana</strong>.
                         </p>
                       </div>
 
-                      <span className={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider border ${
+                      <span className={`px-3 py-1 rounded-[2px] text-xs font-mono font-bold uppercase tracking-wider border ${
                         selectedUnit.geofenceStatus === 'inside'
                           ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
                           : 'bg-rose-500/10 text-rose-400 border-rose-500/30'
@@ -882,7 +882,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                     </div>
 
                     {/* Geofence Map Graphic Preview */}
-                    <div className="w-full h-48 rounded-2xl bg-zinc-950 border border-zinc-800 relative overflow-hidden flex items-center justify-center p-4">
+                    <div className="w-full h-48 rounded-[3px] bg-zinc-950 border border-zinc-800 relative overflow-hidden flex items-center justify-center p-4">
                       {/* Grid Lines simulation */}
                       <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]" />
                       
@@ -891,38 +891,38 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                         <span className="text-[10px] font-mono text-emerald-400 absolute top-2 font-bold">Radio 500m</span>
                         
                         {/* Machine Pin */}
-                        <div className="w-8 h-8 rounded-full bg-amber-500 text-black flex items-center justify-center shadow-lg font-black text-xs z-10">
+                        <div className="w-8 h-8 rounded-[2px] bg-amber-400 text-black flex items-center justify-center shadow-lg font-black text-xs z-10">
                           <Navigation className="w-4 h-4 fill-current" />
                         </div>
                       </div>
 
                       {/* Map Badges */}
-                      <div className="absolute bottom-3 left-3 bg-zinc-900/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-zinc-700 text-[10px] text-zinc-300 font-mono">
+                      <div className="absolute bottom-3 left-3 bg-zinc-900/90 backdrop-blur-md px-2.5 py-1 rounded-[2px] border border-zinc-700 text-[10px] text-zinc-300 font-mono">
                         GPS: {selectedUnit.location.lat.toFixed(4)}, {selectedUnit.location.lng.toFixed(4)}
                       </div>
 
-                      <div className="absolute top-3 right-3 bg-zinc-900/90 backdrop-blur-md px-2.5 py-1 rounded-lg border border-zinc-700 text-[10px] text-zinc-300 font-bold">
+                      <div className="absolute top-3 right-3 bg-zinc-900/90 backdrop-blur-md px-2.5 py-1 rounded-[2px] border border-zinc-700 text-[10px] text-zinc-300 font-mono font-bold">
                         Límite Obra: 25 km/h
                       </div>
                     </div>
 
                     {/* Geofence Parameters */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                      <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-                        <span className="text-[10px] text-zinc-400 font-bold block">Radio Permitido</span>
-                        <span className="text-sm font-black text-zinc-900 dark:text-white mt-0.5">500 metros</span>
+                      <div className="p-3 rounded-[3px] bg-zinc-900 border border-zinc-800">
+                        <span className="text-[10px] text-zinc-400 font-display uppercase tracking-wider block">Radio Permitido</span>
+                        <span className="text-sm font-bold text-white mt-0.5 font-mono">500 metros</span>
                       </div>
-                      <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-                        <span className="text-[10px] text-zinc-400 font-bold block">Horario de Operación</span>
-                        <span className="text-sm font-black text-zinc-900 dark:text-white mt-0.5">06:00 - 19:00</span>
+                      <div className="p-3 rounded-[3px] bg-zinc-900 border border-zinc-800">
+                        <span className="text-[10px] text-zinc-400 font-display uppercase tracking-wider block">Horario de Operación</span>
+                        <span className="text-sm font-bold text-white mt-0.5 font-mono">06:00 - 19:00</span>
                       </div>
-                      <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-                        <span className="text-[10px] text-zinc-400 font-bold block">Alerta por WhatsApp</span>
-                        <span className="text-sm font-black text-emerald-500 mt-0.5">Activada</span>
+                      <div className="p-3 rounded-[3px] bg-zinc-900 border border-zinc-800">
+                        <span className="text-[10px] text-zinc-400 font-display uppercase tracking-wider block">Alerta por WhatsApp</span>
+                        <span className="text-sm font-bold text-emerald-400 mt-0.5 font-mono">Activada</span>
                       </div>
-                      <div className="p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800">
-                        <span className="text-[10px] text-zinc-400 font-bold block">Último Reporte Satelital</span>
-                        <span className="text-sm font-black text-zinc-900 dark:text-white mt-0.5">Hace 2 min</span>
+                      <div className="p-3 rounded-[3px] bg-zinc-900 border border-zinc-800">
+                        <span className="text-[10px] text-zinc-400 font-display uppercase tracking-wider block">Último Reporte</span>
+                        <span className="text-sm font-bold text-white mt-0.5 font-mono">Hace 2 min</span>
                       </div>
                     </div>
 
@@ -932,7 +932,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                         setGeofenceName(selectedUnit.geofenceName);
                         setShowGeofenceModal(true);
                       }}
-                      className="w-full py-2.5 rounded-xl bg-zinc-900 dark:bg-zinc-800 hover:bg-zinc-800 dark:hover:bg-zinc-700 text-white font-bold text-xs transition-colors cursor-pointer"
+                      className="w-full py-2.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-white font-display uppercase tracking-wider font-bold text-xs transition-colors cursor-pointer border border-zinc-700"
                     >
                       Editar Parámetros de Geocerca o Crear Nuevo Polígono
                     </button>
@@ -944,12 +944,12 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
               {activeDetailTab === 'diagnostics' && (
                 <div className="space-y-4 animate-in fade-in duration-200">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-black text-zinc-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-                      <AlertTriangle className="w-4 h-4 text-amber-500" />
+                    <h3 className="text-sm font-black text-white font-display uppercase tracking-wider flex items-center gap-2">
+                      <AlertTriangle className="w-4 h-4 text-amber-400" />
                       Códigos de Falla Telemática (J1939 CAN Bus)
                     </h3>
-                    <span className="text-xs font-bold text-zinc-500">
-                      Protocolo: SAE J1939 / ISO 15765
+                    <span className="text-xs font-mono text-zinc-400">
+                      SAE J1939 / ISO 15765
                     </span>
                   </div>
 
@@ -958,21 +958,21 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                       {selectedUnit.faultCodes.map((fc, idx) => (
                         <div 
                           key={idx}
-                          className="p-5 rounded-2xl border border-rose-500/40 bg-rose-500/5 dark:bg-rose-950/20 flex flex-col md:flex-row md:items-center justify-between gap-4"
+                          className="p-5 rounded-[3px] border border-rose-500/40 bg-rose-950/20 flex flex-col md:flex-row md:items-center justify-between gap-4"
                         >
                           <div className="space-y-1.5">
                             <div className="flex items-center gap-2">
-                              <span className="px-2.5 py-0.5 rounded-md font-mono text-xs font-black bg-rose-500 text-white">
+                              <span className="px-2.5 py-0.5 rounded-[2px] font-mono text-xs font-black bg-rose-500 text-white">
                                 {fc.code}
                               </span>
-                              <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400">
+                              <span className="text-xs font-mono font-bold text-zinc-400">
                                 Sistema: {fc.system}
                               </span>
                             </div>
-                            <p className="text-xs font-semibold text-rose-700 dark:text-rose-300">
+                            <p className="text-xs font-sans text-rose-300">
                               {fc.description}
                             </p>
-                            <p className="text-[11px] text-zinc-400">
+                            <p className="text-[11px] text-zinc-500 font-mono">
                               Detectado: {new Date(fc.timestamp).toLocaleString('es-DO')}
                             </p>
                           </div>
@@ -982,7 +982,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                               type="button"
                               onClick={() => handleDispatchFullbay(selectedUnit, fc.code, fc.description)}
                               disabled={commandLoading}
-                              className="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black text-xs transition-all shadow-md active:scale-95 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
+                              className="px-4 py-2.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black font-display uppercase tracking-wider font-bold text-xs transition-all shadow-md active:scale-95 disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
                             >
                               <Truck className="w-3.5 h-3.5" />
                               <span>Despachar Taller Fullbay</span>
@@ -992,7 +992,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                               href={`https://wa.me/18095601234?text=${encodeURIComponent(`Hola TMD Dominicana, mi equipo ${selectedUnit.name} (VIN: ${selectedUnit.vin}) presenta la falla telemática ${fc.code}: ${fc.description}. Solicito asistencia técnica.`)}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="p-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition-colors"
+                              className="p-2.5 rounded-[2px] bg-emerald-600 hover:bg-emerald-500 text-white transition-colors"
                               title="Consultar por WhatsApp"
                             >
                               <PhoneCall className="w-4 h-4" />
@@ -1002,8 +1002,8 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                       ))}
                     </div>
                   ) : (
-                    <div className="p-6 rounded-2xl border border-emerald-500/30 bg-emerald-500/5 text-emerald-500 text-xs font-semibold flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                    <div className="p-6 rounded-[3px] border border-emerald-500/30 bg-emerald-950/20 text-emerald-400 text-xs font-semibold flex items-center gap-3 font-sans">
+                      <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
                       <span>
                         Sin códigos DTC activos en la ECU. La transmisión CAN Bus opera dentro de todas las tolerancias de fábrica OEM.
                       </span>
@@ -1014,10 +1014,10 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
 
             </div>
           ) : (
-            <div className="h-96 flex flex-col items-center justify-center border border-dashed border-zinc-300 dark:border-zinc-700 rounded-3xl text-zinc-400 p-8 text-center">
-              <Activity className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mb-3" />
-              <p className="text-sm font-bold text-zinc-600 dark:text-zinc-300">Selecciona un equipo de la lista izquierda</p>
-              <p className="text-xs text-zinc-400 mt-1">Podrás inspeccionar temperaturas en tiempo real, horómetro y geocercas activas.</p>
+            <div className="h-96 flex flex-col items-center justify-center border border-dashed border-zinc-800 rounded-[5px] text-zinc-400 p-8 text-center bg-zinc-900">
+              <Activity className="w-12 h-12 text-zinc-600 mb-3" />
+              <p className="text-sm font-bold text-zinc-300 font-display uppercase tracking-wider">Selecciona un equipo de la lista izquierda</p>
+              <p className="text-xs text-zinc-500 mt-1 font-sans">Podrás inspeccionar temperaturas en tiempo real, horómetro y geocercas activas.</p>
             </div>
           )}
         </main>
@@ -1026,19 +1026,19 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
 
       {/* Geofence Configuration Modal */}
       {showGeofenceModal && selectedUnit && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl max-w-lg w-full p-6 space-y-5 shadow-2xl animate-in zoom-in-95 duration-150">
-            <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800">
+        <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-zinc-900 border border-zinc-800 rounded-[5px] max-w-lg w-full p-6 space-y-5 shadow-2xl animate-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-amber-500" />
-                <h3 className="text-base font-black text-zinc-900 dark:text-white">
+                <ShieldCheck className="w-5 h-5 text-amber-400" />
+                <h3 className="text-base font-black text-white font-display uppercase tracking-tight">
                   Configurar Geocerca Satelital
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setShowGeofenceModal(false)}
-                className="p-1 rounded-lg text-zinc-400 hover:text-white cursor-pointer"
+                className="p-1 rounded-[2px] text-zinc-400 hover:text-white cursor-pointer"
               >
                 ✕
               </button>
@@ -1046,7 +1046,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
 
             <div className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1">
+                <label className="block text-xs font-bold text-zinc-300 mb-1 font-display uppercase tracking-wider">
                   Nombre del Proyecto / Obra / Cantera
                 </label>
                 <input
@@ -1054,13 +1054,13 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                   value={geofenceName}
                   onChange={e => setGeofenceName(e.target.value)}
                   placeholder="Ej. Cantera Baní - Tramo Sur"
-                  className="w-full px-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-xs font-semibold text-zinc-900 dark:text-white"
+                  className="w-full px-3 py-2 rounded-[2px] bg-zinc-950 border border-zinc-800 text-xs font-sans text-white focus:outline-none focus:border-amber-400"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1">
-                  Radio del Perímetro de Seguridad ({geofenceRadius} metros)
+                <label className="block text-xs font-bold text-zinc-300 mb-1 font-display uppercase tracking-wider">
+                  Radio del Perímetro ({geofenceRadius} metros)
                 </label>
                 <input
                   type="range"
@@ -1069,18 +1069,18 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                   step="100"
                   value={geofenceRadius}
                   onChange={e => setGeofenceRadius(Number(e.target.value))}
-                  className="w-full accent-amber-500 cursor-pointer"
+                  className="w-full accent-amber-400 cursor-pointer"
                 />
-                <div className="flex justify-between text-[11px] text-zinc-400">
-                  <span>200m (Obra puntual)</span>
-                  <span>1,500m (Cantera mediana)</span>
-                  <span>5,000m (Tramo vial)</span>
+                <div className="flex justify-between text-[11px] text-zinc-500 font-mono">
+                  <span>200m (Puntual)</span>
+                  <span>1,500m (Cantera)</span>
+                  <span>5,000m (Vial)</span>
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1">
-                  Alerta por Exceso de Velocidad en Obra ({geofenceAlertSpeed} km/h)
+                <label className="block text-xs font-bold text-zinc-300 mb-1 font-display uppercase tracking-wider">
+                  Alerta por Exceso de Velocidad ({geofenceAlertSpeed} km/h)
                 </label>
                 <input
                   type="range"
@@ -1089,20 +1089,20 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                   step="5"
                   value={geofenceAlertSpeed}
                   onChange={e => setGeofenceAlertSpeed(Number(e.target.value))}
-                  className="w-full accent-amber-500 cursor-pointer"
+                  className="w-full accent-amber-400 cursor-pointer"
                 />
               </div>
 
-              <div className="p-3 rounded-xl bg-amber-500/10 text-[11px] text-amber-700 dark:text-amber-300">
+              <div className="p-3 rounded-[3px] bg-amber-400/10 border border-amber-400/20 text-[11px] text-amber-300 font-sans">
                 Al salir del polígono, LiveLink™ enviará automáticamente una notificación SMS/WhatsApp al maestro de obra y al supervisor de patio.
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-3 pt-3 border-t border-zinc-200 dark:border-zinc-800">
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-zinc-800">
               <button
                 type="button"
                 onClick={() => setShowGeofenceModal(false)}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer"
+                className="px-4 py-2 rounded-[2px] text-xs font-display uppercase tracking-wider font-bold text-zinc-400 hover:bg-zinc-800 hover:text-white border border-zinc-800 cursor-pointer"
               >
                 Cancelar
               </button>
@@ -1110,7 +1110,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                 type="button"
                 onClick={handleSaveGeofence}
                 disabled={geofenceSaveSuccess}
-                className="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black font-black text-xs transition-all shadow cursor-pointer"
+                className="px-5 py-2 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black font-display uppercase tracking-wider font-bold text-xs transition-all shadow cursor-pointer"
               >
                 {geofenceSaveSuccess ? 'Guardando...' : 'Guardar Geocerca'}
               </button>

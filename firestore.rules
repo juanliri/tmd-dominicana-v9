@@ -137,9 +137,22 @@ service cloud.firestore {
       allow read, update, delete: if isAdmin() || isStaff();
     }
 
-    // Presupuestos (Formal Quotes & Fiscal Proformas)
+    // Presupuestos (Formal Quotes & Fiscal Proformas - Scoped to client owner or staff/admin)
     match /presupuestos/{quoteId} {
-      allow read, write: if isSignedIn();
+      allow read: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
+      allow create: if isSignedIn() && (request.resource.data.clientId == request.auth.uid || isAdmin() || isStaff());
+      allow update: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
+      allow delete: if isAdmin() || isStaff();
+    }
+
+    // DGII Fiscal Invoices & NCF Sequences (Staff & Admin Managed)
+    match /invoices/{invoiceId} {
+      allow read: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
+      allow write: if isAdmin() || isStaff();
+    }
+
+    match /ncf_sequences/{seqId} {
+      allow read, write: if isAdmin() || isStaff();
     }
 
     // Inventory Units (Heavy Machinery & Spare Parts Stock Management)
@@ -153,20 +166,25 @@ service cloud.firestore {
       allow write: if isAdmin() || isStaff();
     }
 
-    // Notifications & FCM Push Tokens
+    // Notifications & FCM Push Tokens (Scoped to recipient)
     match /notifications/{notificationId} {
-      allow read: if isSignedIn();
-      allow write: if isSignedIn();
+      allow read: if isAdmin() || isStaff() || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow create: if isAdmin() || isStaff() || isSignedIn();
+      allow update: if isAdmin() || isStaff() || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow delete: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
     }
 
     match /fcm_tokens/{tokenId} {
-      allow read, write: if isSignedIn();
+      allow read: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow create, update: if isSignedIn() && (request.resource.data.userId == request.auth.uid || isOwner(tokenId));
+      allow delete: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
     }
 
     // Patio Km 22: Field Test Drives & Demos
     match /patio_test_drives/{bookingId} {
-      allow read: if isSignedIn();
-      allow create, update: if isSignedIn();
+      allow read: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
+      allow create: if isSignedIn();
+      allow update: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
       allow delete: if isAdmin() || isStaff();
     }
 
@@ -185,8 +203,8 @@ service cloud.firestore {
 
     // Inventory Logs (QR Scan Logs by Staff & Admin in Yard / Warehouse)
     match /inventory_logs/{logId} {
-      allow read: if true;
-      allow create: if isSignedIn() || isAdmin() || isStaff();
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
       allow update, delete: if isAdmin();
     }
 

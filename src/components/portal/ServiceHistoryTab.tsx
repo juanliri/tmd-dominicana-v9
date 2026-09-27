@@ -52,6 +52,7 @@ import { approveFullbayEstimate } from '../../services/fullbayService';
 import { WorkshopLiveTimeline } from './WorkshopLiveTimeline';
 import { fetchFullbayActiveRepairOrders } from '../../services/fullbayConnectMockService';
 import { FullbayActiveRepairOrder } from '../../types';
+import { ServiceDetailModal } from './service/ServiceDetailModal';
 
 interface ServiceHistoryTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -378,19 +379,19 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-mono">
       {/* Top Banner & Fleet Overview */}
-      <div className="bg-zinc-50 dark:bg-zinc-800/40 p-5 sm:p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-zinc-900 p-5 sm:p-6 rounded-[5px] border border-zinc-800 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-sm">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="p-2 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
+            <span className="p-2 rounded-[2px] bg-amber-500/10 text-amber-400 border border-amber-400/20">
               <Wrench className="w-5 h-5" />
             </span>
-            <h3 className="text-lg font-black text-zinc-900 dark:text-white">
+            <h3 className="text-lg font-black font-display uppercase tracking-tight text-white">
               Historial de Mantenimiento & Repuestos Instalados
             </h3>
           </div>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 max-w-2xl">
+          <p className="text-xs text-zinc-400 max-w-2xl font-sans">
             Consulte la bitácora técnica certificada, horas de horómetro, diagnósticos de fábrica y piezas OEM instaladas en sus equipos registrados.
           </p>
         </div>
@@ -399,7 +400,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           {serviceRecords.length === 0 && (
             <button
               onClick={handleSeedDemoRecords}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl text-xs transition-all shadow-sm cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider rounded-[2px] text-xs transition-all shadow-sm cursor-pointer"
             >
               <Sparkles className="w-4 h-4" />
               <span>Cargar Historial de Ejemplo</span>
@@ -408,17 +409,17 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
 
           <button
             onClick={() => setShowAddMachineModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 font-bold rounded-xl text-xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
           >
-            <Plus className="w-4 h-4 text-amber-500" />
+            <Plus className="w-4 h-4 text-amber-400" />
             <span>Registrar Equipo</span>
           </button>
 
           <button
             onClick={() => onNavigate('#/service')}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-700 text-white font-bold rounded-xl text-xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer shadow-md"
           >
-            <Calendar className="w-4 h-4 text-amber-400" />
+            <Calendar className="w-4 h-4 text-black" />
             <span>Solicitar Servicio Técnico</span>
           </button>
         </div>
@@ -426,57 +427,57 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
 
       {/* KPI Cards Strip */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm flex items-center gap-3.5">
-          <div className="p-3 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
+        <div className="p-4 rounded-[3px] bg-zinc-900 border border-zinc-800 shadow-sm flex items-center gap-3.5">
+          <div className="p-3 rounded-[2px] bg-amber-500/10 text-amber-400 border border-amber-400/20">
             <Layers className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-[10px] uppercase font-bold text-zinc-400 block">
+            <span className="text-[10px] uppercase font-bold text-zinc-400 block font-display tracking-wider">
               Equipos en Flota
             </span>
-            <span className="text-xl font-black text-zinc-900 dark:text-white">
+            <span className="text-xl font-black text-white font-mono">
               {activeMachinesCount} {activeMachinesCount === 1 ? 'Unidad' : 'Unidades'}
             </span>
           </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm flex items-center gap-3.5">
-          <div className="p-3 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
+        <div className="p-4 rounded-[3px] bg-zinc-900 border border-zinc-800 shadow-sm flex items-center gap-3.5">
+          <div className="p-3 rounded-[2px] bg-blue-500/10 text-sky-400 border border-sky-400/20">
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-[10px] uppercase font-bold text-zinc-400 block">
+            <span className="text-[10px] uppercase font-bold text-zinc-400 block font-display tracking-wider">
               Servicios Ejecutados
             </span>
-            <span className="text-xl font-black text-zinc-900 dark:text-white">
+            <span className="text-xl font-black text-white font-mono">
               {totalServices} Certificados
             </span>
           </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm flex items-center gap-3.5">
-          <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+        <div className="p-4 rounded-[3px] bg-zinc-900 border border-zinc-800 shadow-sm flex items-center gap-3.5">
+          <div className="p-3 rounded-[2px] bg-emerald-500/10 text-emerald-400 border border-emerald-400/20">
             <Settings className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-[10px] uppercase font-bold text-zinc-400 block">
+            <span className="text-[10px] uppercase font-bold text-zinc-400 block font-display tracking-wider">
               Repuestos OEM Instalados
             </span>
-            <span className="text-xl font-black text-zinc-900 dark:text-white">
+            <span className="text-xl font-black text-white font-mono">
               {totalInstalledPartsCount} Piezas
             </span>
           </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm flex items-center gap-3.5">
-          <div className="p-3 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400">
+        <div className="p-4 rounded-[3px] bg-zinc-900 border border-zinc-800 shadow-sm flex items-center gap-3.5">
+          <div className="p-3 rounded-[2px] bg-purple-500/10 text-purple-400 border border-purple-400/20">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
-            <span className="text-[10px] uppercase font-bold text-zinc-400 block">
+            <span className="text-[10px] uppercase font-bold text-zinc-400 block font-display tracking-wider">
               Garantía de Taller
             </span>
-            <span className="text-xl font-black text-zinc-900 dark:text-white">
+            <span className="text-xl font-black text-white font-mono">
               100% Cobertura TMD
             </span>
           </div>
@@ -489,7 +490,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
-              <h3 className="text-sm font-black text-zinc-900 dark:text-white uppercase font-display tracking-wider">
+              <h3 className="text-sm font-black text-white uppercase font-display tracking-wider">
                 Seguimiento de Taller en Vivo (Fullbay Shop Km 22)
               </h3>
             </div>
@@ -533,21 +534,21 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
         <div className="space-y-3">
           {/* Active Maintenance Alert Banner (< 100 Hours) */}
           {machinesDueForService.length > 0 && (
-            <div className="p-4 sm:p-5 rounded-2xl bg-red-500/10 dark:bg-red-500/15 border-2 border-red-500/40 text-zinc-900 dark:text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-4 animate-in fade-in">
+            <div className="p-4 sm:p-5 rounded-[3px] bg-red-500/10 border-2 border-red-500/40 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-4 animate-in fade-in">
               <div className="flex items-start gap-3">
-                <div className="p-2.5 rounded-xl bg-red-500 text-white shadow-sm mt-0.5 shrink-0 animate-pulse">
+                <div className="p-2.5 rounded-[2px] bg-red-500 text-white shadow-sm mt-0.5 shrink-0 animate-pulse">
                   <AlertTriangle className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h4 className="text-sm font-black text-red-600 dark:text-red-400 uppercase tracking-wide">
+                    <h4 className="text-sm font-black font-display uppercase tracking-wide text-red-400">
                       ¡Alerta de Mantenimiento Preventivo Inminente! (&lt; 100 Horas)
                     </h4>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-red-500 text-white">
+                    <span className="px-2 py-0.5 rounded-[2px] text-[10px] font-black bg-red-500 text-white font-mono">
                       {machinesDueForService.length} {machinesDueForService.length === 1 ? 'Máquina' : 'Máquinas'}
                     </span>
                   </div>
-                  <p className="text-xs text-zinc-600 dark:text-zinc-300 mt-1 max-w-2xl">
+                  <p className="text-xs text-zinc-300 mt-1 max-w-2xl font-sans">
                     {machinesDueForService.map(m => `${m.unitId} (${m.model}) - Faltan ${(m.nextServiceHours || 0) - m.currentHorometer} hrs`).join(' • ')}
                   </p>
                 </div>
@@ -557,7 +558,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                 <button
                   type="button"
                   onClick={handleOrderAllDueFilterKits}
-                  className="px-3.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-black transition-all shadow-sm cursor-pointer flex items-center gap-1.5"
+                  className="px-3.5 py-1.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black text-xs font-black font-display uppercase tracking-wider transition-all shadow-sm cursor-pointer flex items-center gap-1.5"
                 >
                   <ShoppingBag className="w-3.5 h-3.5 fill-black" />
                   <span>Pedir Kits de Filtros (1-Clic)</span>
@@ -565,14 +566,14 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                 <button
                   type="button"
                   onClick={handleManualCheckReminders}
-                  className="px-3 py-1.5 rounded-xl bg-white dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 text-xs font-bold transition-all cursor-pointer"
+                  className="px-3 py-1.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 text-xs font-bold font-display uppercase tracking-wider transition-all cursor-pointer"
                 >
                   Verificar Alertas
                 </button>
                 <button
                   type="button"
                   onClick={() => onNavigate('#/service')}
-                  className="px-3.5 py-1.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-black transition-all shadow-sm cursor-pointer flex items-center gap-1.5"
+                  className="px-3.5 py-1.5 rounded-[2px] bg-red-600 hover:bg-red-500 text-white text-xs font-black font-display uppercase tracking-wider transition-all shadow-sm cursor-pointer flex items-center gap-1.5"
                 >
                   <Calendar className="w-3.5 h-3.5" />
                   <span>Coordinar Taller Móvil Km 22</span>
@@ -582,7 +583,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           )}
 
           {horometerFeedback && (
-            <div className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold flex items-center justify-between animate-in fade-in">
+            <div className="p-3 rounded-[3px] bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-bold flex items-center justify-between animate-in fade-in">
               <span className="flex items-center gap-2">
                 <Check className="w-4 h-4" />
                 {horometerFeedback}
@@ -590,7 +591,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
               <button
                 type="button"
                 onClick={() => setHorometerFeedback(null)}
-                className="text-emerald-700 dark:text-emerald-300 hover:opacity-75 cursor-pointer text-xs"
+                className="text-emerald-300 hover:opacity-75 cursor-pointer text-xs"
               >
                 ✕
               </button>
@@ -598,7 +599,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           )}
 
           <div className="flex items-center justify-between">
-            <span className="text-xs font-black uppercase text-zinc-400 tracking-wider flex items-center gap-1.5">
+            <span className="text-xs font-black uppercase text-zinc-400 tracking-wider flex items-center gap-1.5 font-display">
               <Truck className="w-3.5 h-3.5" />
               <span>Mis Equipos & Horómetros Registrados ({fleet.length})</span>
             </span>
@@ -606,7 +607,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
               <button
                 type="button"
                 onClick={handleManualCheckReminders}
-                className="text-xs font-bold text-zinc-500 hover:text-amber-500 transition-colors cursor-pointer flex items-center gap-1"
+                className="text-xs font-bold text-zinc-400 hover:text-amber-400 transition-colors cursor-pointer flex items-center gap-1 font-display uppercase tracking-wider"
                 title="Comprobar alertas preventivas de horómetro"
               >
                 <RotateCcw className="w-3 h-3" />
@@ -615,8 +616,8 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
               <button
                 type="button"
                 onClick={() => setSelectedMachineFilter('all')}
-                className={`text-xs font-bold transition-colors cursor-pointer ${
-                  selectedMachineFilter === 'all' ? 'text-amber-500 underline' : 'text-zinc-400 hover:text-zinc-600'
+                className={`text-xs font-bold transition-colors cursor-pointer font-display uppercase tracking-wider ${
+                  selectedMachineFilter === 'all' ? 'text-amber-400 underline' : 'text-zinc-500 hover:text-zinc-300'
                 }`}
               >
                 Ver Todas las Máquinas
@@ -635,12 +636,12 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
               return (
                 <div
                   key={machine.id}
-                  className={`p-4 sm:p-5 rounded-2xl border transition-all relative overflow-hidden flex flex-col justify-between h-full gap-3 ${
+                  className={`p-4 sm:p-5 rounded-[3px] border transition-all relative overflow-hidden flex flex-col justify-between h-full gap-3 ${
                     isDueSoon
-                      ? 'bg-amber-500/5 dark:bg-amber-500/10 border-red-500/60 shadow-sm'
+                      ? 'bg-amber-500/10 border-red-500/60 shadow-sm'
                       : isSelected
-                        ? 'bg-amber-500/10 border-amber-500 dark:border-amber-400 shadow-sm'
-                        : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700'
+                        ? 'bg-amber-500/10 border-amber-400 shadow-sm'
+                        : 'bg-zinc-900 border-zinc-800 hover:border-zinc-700'
                   }`}
                 >
                   <div className="space-y-2">
@@ -649,17 +650,17 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                         <div className="flex items-center gap-1.5">
                           <span 
                             onClick={() => setSelectedMachineFilter(isSelected ? 'all' : machine.unitId)}
-                            className="px-2 py-0.5 rounded-md bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-mono text-[10px] font-black cursor-pointer hover:opacity-80"
+                            className="px-2 py-0.5 rounded-[2px] bg-zinc-800 text-amber-400 border border-zinc-700 font-mono text-[10px] font-black cursor-pointer hover:opacity-80"
                           >
                             {machine.unitId}
                           </span>
-                          <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400">
+                          <span className="text-[10px] font-bold text-amber-400 font-display uppercase">
                             {machine.brand}
                           </span>
                         </div>
                         <h4 
                           onClick={() => setSelectedMachineFilter(isSelected ? 'all' : machine.unitId)}
-                          className="font-extrabold text-xs text-zinc-900 dark:text-white line-clamp-1 cursor-pointer"
+                          className="font-extrabold text-xs text-white line-clamp-1 cursor-pointer font-display uppercase tracking-tight"
                         >
                           {machine.model}
                         </h4>
@@ -669,38 +670,38 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                       </div>
 
                       {isDueSoon ? (
-                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-black uppercase border animate-pulse ${
+                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-[2px] text-[9px] font-black uppercase border animate-pulse font-mono ${
                           isOverdue 
                             ? 'bg-red-500 text-white border-red-600' 
-                            : 'bg-red-500/15 text-red-600 dark:text-red-400 border-red-500/30'
+                            : 'bg-red-500/15 text-red-400 border-red-500/30'
                         }`}>
                           <AlertTriangle className="w-2.5 h-2.5" />
                           {isOverdue ? 'Vencido' : `< ${threshold}h`}
                         </span>
                       ) : (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-[2px] text-[9px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">
                           Óptima
                         </span>
                       )}
                     </div>
 
                     {/* Maintenance countdown progress / pill */}
-                    <div className={`p-2.5 rounded-xl border text-[10px] space-y-1 ${
+                    <div className={`p-2.5 rounded-[3px] border text-[10px] space-y-1 ${
                       isDueSoon
-                        ? 'bg-red-500/10 dark:bg-red-500/15 border-red-500/30 text-red-700 dark:text-red-300 font-bold'
-                        : 'bg-zinc-50 dark:bg-zinc-800/60 border-zinc-100 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400'
+                        ? 'bg-red-500/15 border-red-500/30 text-red-300 font-bold'
+                        : 'bg-zinc-950/70 border-zinc-800 text-zinc-400'
                     }`}>
                       <div className="flex items-center justify-between">
-                        <span>Próximo Servicio: <strong>{nextService.toLocaleString()} hrs</strong></span>
-                        <span className={isDueSoon ? 'text-red-600 dark:text-red-400 font-black' : 'text-zinc-500'}>
+                        <span>Próximo Servicio: <strong className="text-white font-mono">{nextService.toLocaleString()} hrs</strong></span>
+                        <span className={isDueSoon ? 'text-red-400 font-black font-mono' : 'text-zinc-500 font-mono'}>
                           {isOverdue 
                             ? `Excedido por ${Math.abs(remainingHours)} hrs` 
                             : `Faltan ${remainingHours} hrs`}
                         </span>
                       </div>
-                      <div className="w-full bg-zinc-200 dark:bg-zinc-700 h-1.5 rounded-full overflow-hidden">
+                      <div className="w-full bg-zinc-800 h-1.5 rounded-[1px] overflow-hidden">
                         <div 
-                          className={`h-full rounded-full ${isDueSoon ? 'bg-red-500' : 'bg-amber-500'}`}
+                          className={`h-full rounded-[1px] ${isDueSoon ? 'bg-red-500' : 'bg-amber-400'}`}
                           style={{ width: `${Math.min(100, Math.max(0, (machine.currentHorometer / nextService) * 100))}%` }}
                         />
                       </div>
@@ -708,10 +709,10 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                   </div>
 
                   {/* Horometer controls & Quick increment */}
-                  <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 space-y-2">
+                  <div className="pt-2 border-t border-zinc-800 space-y-2">
                     <div className="flex items-center justify-between text-[11px]">
-                      <span className="text-zinc-500 flex items-center gap-1 font-medium">
-                        <Clock className="w-3.5 h-3.5 text-amber-500" />
+                      <span className="text-zinc-400 flex items-center gap-1 font-medium font-sans">
+                        <Clock className="w-3.5 h-3.5 text-amber-400" />
                         Horómetro Actual:
                       </span>
                       {editingHorometerId === machine.id ? (
@@ -720,12 +721,12 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                             type="number"
                             value={tempHorometerVal}
                             onChange={(e) => setTempHorometerVal(Number(e.target.value))}
-                            className="w-16 px-1.5 py-0.5 text-[10px] rounded bg-white dark:bg-zinc-800 border border-amber-500 text-zinc-900 dark:text-white"
+                            className="w-16 px-1.5 py-0.5 text-[10px] rounded-[2px] bg-zinc-800 border border-amber-400 text-white font-mono"
                           />
                           <button
                             type="button"
                             onClick={() => handleUpdateHorometer(machine.id, tempHorometerVal)}
-                            className="px-1.5 py-0.5 rounded bg-amber-500 text-black font-black text-[9px]"
+                            className="px-1.5 py-0.5 rounded-[2px] bg-amber-400 text-black font-black text-[9px]"
                           >
                             OK
                           </button>
@@ -736,7 +737,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                             setEditingHorometerId(machine.id);
                             setTempHorometerVal(machine.currentHorometer);
                           }}
-                          className="font-black text-zinc-900 dark:text-white cursor-pointer hover:text-amber-500 underline decoration-dotted"
+                          className="font-black text-white font-mono cursor-pointer hover:text-amber-400 underline decoration-dotted"
                           title="Click para editar horómetro directamente"
                         >
                           {machine.currentHorometer.toLocaleString()} hrs
@@ -746,11 +747,11 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
 
                     {/* Quick Horometer Add & Service Actions */}
                     <div className="flex items-center gap-1">
-                      <span className="text-[9px] text-zinc-400 font-bold uppercase mr-1">Simular:</span>
+                      <span className="text-[9px] text-zinc-500 font-bold uppercase mr-1 font-display">Simular:</span>
                       <button
                         type="button"
                         onClick={() => handleQuickIncrementHorometer(machine.id, 10)}
-                        className="px-2 py-0.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-mono text-[9px] font-bold cursor-pointer transition-colors"
+                        className="px-2 py-0.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-[9px] font-bold cursor-pointer transition-colors border border-zinc-750"
                         title="Sumar 10 horas de operación"
                       >
                         +10h
@@ -758,7 +759,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                       <button
                         type="button"
                         onClick={() => handleQuickIncrementHorometer(machine.id, 50)}
-                        className="px-2 py-0.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 font-mono text-[9px] font-bold cursor-pointer transition-colors"
+                        className="px-2 py-0.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-mono text-[9px] font-bold cursor-pointer transition-colors border border-zinc-750"
                         title="Sumar 50 horas de operación"
                       >
                         +50h
@@ -768,7 +769,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                         <button
                           type="button"
                           onClick={() => handleResetServiceCycle(machine.id, 500)}
-                          className="ml-auto px-2 py-0.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-[9px] cursor-pointer transition-colors shadow-xs"
+                          className="ml-auto px-2 py-0.5 rounded-[2px] bg-emerald-500 hover:bg-emerald-400 text-black font-black text-[9px] cursor-pointer transition-colors shadow-xs font-display uppercase"
                           title="Registrar servicio efectuado y programar siguiente ciclo de 500h"
                         >
                           ✓ Servicio Realizado (+500h)
@@ -777,7 +778,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                         <button
                           type="button"
                           onClick={() => setSelectedMachineFilter(isSelected ? 'all' : machine.unitId)}
-                          className="ml-auto px-2 py-0.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 text-[9px] font-bold cursor-pointer"
+                          className="ml-auto px-2 py-0.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[9px] font-bold cursor-pointer border border-zinc-700 font-display uppercase"
                         >
                           {isSelected ? 'Ver Todos' : 'Ver Bitácora'}
                         </button>
@@ -785,11 +786,11 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                     </div>
 
                     {/* 1-Click Maintenance Filter Kit Order & Technical Sheet */}
-                    <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 grid grid-cols-2 gap-1.5">
+                    <div className="pt-2 border-t border-zinc-800 grid grid-cols-2 gap-1.5">
                       <button
                         type="button"
                         onClick={() => handleOrderFilterKitForMachine(machine)}
-                        className="px-2 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-[10px] font-black flex items-center justify-center gap-1 cursor-pointer transition-colors shadow-xs"
+                        className="px-2 py-1.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black text-[10px] font-black flex items-center justify-center gap-1 cursor-pointer transition-colors shadow-xs font-display uppercase tracking-wider"
                         title="Agregar kit de filtros genuinos 500h al carrito con tarifa Pro"
                       >
                         <ShoppingBag className="w-3 h-3 fill-black" />
@@ -799,13 +800,13 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                       <button
                         type="button"
                         onClick={() => setSelectedMachineFilter(isSelected ? 'all' : machine.unitId)}
-                        className={`px-2 py-1.5 rounded-xl text-[10px] font-bold flex items-center justify-center gap-1 cursor-pointer transition-colors ${
+                        className={`px-2 py-1.5 rounded-[2px] text-[10px] font-bold flex items-center justify-center gap-1 cursor-pointer transition-colors font-display uppercase tracking-wider ${
                           isSelected
-                            ? 'bg-amber-500/20 text-amber-500 border border-amber-500/30'
-                            : 'bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200'
+                            ? 'bg-amber-500/20 text-amber-400 border border-amber-400/30'
+                            : 'bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700'
                         }`}
                       >
-                        <FileText className="w-3 h-3 text-amber-500" />
+                        <FileText className="w-3 h-3 text-amber-400" />
                         <span>{isSelected ? 'Ver Todas' : 'Bitácora VIN'}</span>
                       </button>
                     </div>
@@ -818,16 +819,16 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
       )}
 
       {/* Filter and Search Bar */}
-      <div className="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+      <div className="bg-zinc-900 p-4 rounded-[5px] border border-zinc-800 shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
         {/* Search */}
         <div className="relative flex-1">
-          <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-zinc-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Buscar por N° de orden, pieza instalada, código OEM, técnico o síntoma..."
-            className="w-full pl-10 pr-4 py-2 text-xs rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-amber-500"
+            className="w-full pl-10 pr-4 py-2 text-xs rounded-[2px] bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 font-mono"
           />
         </div>
 
@@ -843,10 +844,10 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
             <button
               key={tab.id}
               onClick={() => setServiceTypeFilter(tab.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-[2px] text-xs font-bold font-display uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
                 serviceTypeFilter === tab.id
-                  ? 'bg-amber-500 text-black shadow-sm font-black'
-                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                  ? 'bg-amber-400 text-black shadow-sm font-black'
+                  : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-white'
               }`}
             >
               {tab.label}
@@ -858,19 +859,19 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
       {/* Service History List */}
       {loading ? (
         <div className="p-12 text-center text-zinc-400 space-y-3">
-          <div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p className="text-xs font-semibold">Cargando bitácora de servicio técnico...</p>
+          <div className="w-8 h-8 border-4 border-amber-400 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="text-xs font-semibold font-display uppercase tracking-wider">Cargando bitácora de servicio técnico...</p>
         </div>
       ) : filteredRecords.length === 0 ? (
-        <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-10 text-center space-y-4 shadow-sm">
-          <div className="w-14 h-14 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center mx-auto">
+        <div className="bg-zinc-900 rounded-[5px] border border-zinc-800 p-10 text-center space-y-4 shadow-sm">
+          <div className="w-14 h-14 rounded-[3px] bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto border border-amber-400/20">
             <Wrench className="w-7 h-7" />
           </div>
           <div className="max-w-md mx-auto space-y-1">
-            <h4 className="font-extrabold text-base text-zinc-900 dark:text-white">
+            <h4 className="font-extrabold text-base text-white font-display uppercase tracking-tight">
               No hay registros de servicio encontrados
             </h4>
-            <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+            <p className="text-xs text-zinc-400 leading-relaxed font-sans">
               No se encontraron mantenimientos para la máquina o filtro seleccionado. Puede solicitar una nueva orden de servicio o cargar datos de muestra.
             </p>
           </div>
@@ -878,14 +879,14 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <button
               onClick={handleSeedDemoRecords}
-              className="px-4 py-2.5 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl text-xs shadow-sm transition-all cursor-pointer flex items-center gap-1.5"
+              className="px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider rounded-[2px] text-xs shadow-sm transition-all cursor-pointer flex items-center gap-1.5"
             >
               <Sparkles className="w-4 h-4" />
               <span>Cargar Bitácora Técnica de Demostración</span>
             </button>
             <button
               onClick={() => onNavigate('#/service')}
-              className="px-4 py-2.5 bg-zinc-900 dark:bg-zinc-800 text-white font-bold rounded-xl text-xs transition-all cursor-pointer flex items-center gap-1.5"
+              className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer flex items-center gap-1.5 border border-zinc-700"
             >
               <Wrench className="w-4 h-4 text-amber-400" />
               <span>Agendar Mantenimiento Preventivo</span>
@@ -900,42 +901,42 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
             return (
               <div
                 key={record.id || record.orderNumber}
-                className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-5 sm:p-6 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-all space-y-4"
+                className="bg-zinc-900 rounded-[3px] border border-zinc-800 p-5 sm:p-6 shadow-sm hover:border-amber-400/30 transition-all space-y-4"
               >
                 {/* Header: Order Number, Date, Machine Unit & Status */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-100 dark:border-zinc-800">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-800">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-extrabold text-sm sm:text-base text-zinc-900 dark:text-white font-mono">
+                      <span className="font-extrabold text-sm sm:text-base text-white font-mono">
                         {record.orderNumber}
                       </span>
                       <button
                         onClick={() => handleCopy(record.orderNumber, record.orderNumber)}
                         title="Copiar Número de Orden"
-                        className="p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded text-zinc-400 hover:text-zinc-600 transition-colors"
+                        className="p-1 hover:bg-zinc-800 rounded-[2px] text-zinc-400 hover:text-white transition-colors"
                       >
                         {copiedId === record.orderNumber ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-500" />
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
                         ) : (
                           <Copy className="w-3.5 h-3.5" />
                         )}
                       </button>
 
                       {record.equipmentUnitId && (
-                        <span className="px-2 py-0.5 rounded-md bg-amber-500 text-black font-black text-[11px] font-mono">
+                        <span className="px-2 py-0.5 rounded-[2px] bg-amber-400 text-black font-black text-[11px] font-mono">
                           {record.equipmentUnitId}
                         </span>
                       )}
 
-                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-[2px] text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span>Completado & Certificado</span>
                       </span>
                     </div>
 
-                    <div className="flex items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400 flex-wrap">
-                      <span className="flex items-center gap-1 font-bold text-zinc-800 dark:text-zinc-200">
-                        <Truck className="w-3.5 h-3.5 text-amber-500" />
+                    <div className="flex items-center gap-3 text-xs text-zinc-400 flex-wrap">
+                      <span className="flex items-center gap-1 font-bold text-white font-display uppercase">
+                        <Truck className="w-3.5 h-3.5 text-amber-400" />
                         {record.machineModel}
                       </span>
                       <span>•</span>
@@ -945,7 +946,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                       {record.horometerHours && (
                         <>
                           <span>•</span>
-                          <span className="flex items-center gap-1 text-amber-600 dark:text-amber-400 font-bold">
+                          <span className="flex items-center gap-1 text-amber-400 font-bold font-mono">
                             <Clock className="w-3.5 h-3.5" />
                             {record.horometerHours.toLocaleString()} hrs de operación
                           </span>
@@ -958,14 +959,14 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setSelectedRecord(record)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-colors cursor-pointer border border-zinc-700"
                     >
                       <Eye className="w-3.5 h-3.5" />
                       <span>Ver Ficha Técnica</span>
                     </button>
                     <button
                       onClick={() => onNavigate('#/service')}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/20 font-bold rounded-xl text-xs transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-400/20 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-colors cursor-pointer"
                     >
                       <Wrench className="w-3.5 h-3.5" />
                       <span className="hidden sm:inline">Repetir / Nuevo Servicio</span>
@@ -978,25 +979,25 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                   {/* Left Column: Service Description & Diagnostic */}
                   <div className="md:col-span-6 space-y-3">
                     <div className="space-y-1">
-                      <span className="text-[10px] font-black uppercase text-zinc-400 tracking-wider block">
+                      <span className="text-[10px] font-black uppercase text-zinc-500 tracking-wider block font-display">
                         Tipo de Mantenimiento Ejecutado
                       </span>
-                      <h4 className="text-xs font-black text-zinc-900 dark:text-white">
+                      <h4 className="text-xs font-black text-white font-display uppercase tracking-tight">
                         {record.serviceCategory || record.serviceType.replace('_', ' ').toUpperCase()}
                       </h4>
-                      <p className="text-[11px] text-zinc-600 dark:text-zinc-400 whitespace-pre-line leading-relaxed">
+                      <p className="text-[11px] text-zinc-400 whitespace-pre-line leading-relaxed font-sans">
                         {record.workPerformed || record.description}
                       </p>
                     </div>
 
                     {record.assignedTechnician && (
-                      <div className="flex items-center gap-2 bg-zinc-50 dark:bg-zinc-800/40 p-2.5 rounded-xl border border-zinc-100 dark:border-zinc-800 text-[11px]">
-                        <User className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                      <div className="flex items-center gap-2 bg-zinc-950 p-2.5 rounded-[2px] border border-zinc-800 text-[11px]">
+                        <User className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                         <div>
-                          <span className="text-zinc-500">Técnico Certificado: </span>
-                          <strong className="text-zinc-900 dark:text-white">{record.assignedTechnician}</strong>
+                          <span className="text-zinc-500 font-sans">Técnico Certificado: </span>
+                          <strong className="text-white">{record.assignedTechnician}</strong>
                           {record.technicianTitle && (
-                            <span className="text-[10px] text-zinc-400 block">{record.technicianTitle}</span>
+                            <span className="text-[10px] text-zinc-500 block font-sans">{record.technicianTitle}</span>
                           )}
                         </div>
                       </div>
@@ -1006,12 +1007,12 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                   {/* Right Column: Installed OEM Parts (Repuestos Instalados) */}
                   <div className="md:col-span-6 space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-black uppercase text-zinc-400 tracking-wider flex items-center gap-1">
-                        <Settings className="w-3 h-3 text-amber-500" />
+                      <span className="text-[10px] font-black uppercase text-zinc-400 tracking-wider flex items-center gap-1 font-display">
+                        <Settings className="w-3 h-3 text-amber-400" />
                         Repuestos OEM Instalados ({installedCount} {installedCount === 1 ? 'pieza' : 'piezas'})
                       </span>
                       {record.warrantyMonths && (
-                        <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">
+                        <span className="text-[10px] font-bold text-emerald-400 font-mono">
                           Garantía: {record.warrantyMonths} meses
                         </span>
                       )}
@@ -1022,24 +1023,24 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                         {record.installedParts.slice(0, 3).map((part, pIdx) => (
                           <div
                             key={pIdx}
-                            className="bg-zinc-50 dark:bg-zinc-800/50 p-2 rounded-xl border border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs"
+                            className="bg-zinc-950 p-2 rounded-[2px] border border-zinc-800 flex items-center justify-between text-xs"
                           >
                             <div className="flex items-center gap-2 min-w-0">
-                              <span className="px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono text-[10px] font-bold shrink-0">
+                              <span className="px-1.5 py-0.5 rounded-[2px] bg-amber-500/10 text-amber-400 font-mono text-[10px] font-bold shrink-0 border border-amber-400/20">
                                 {part.partNumber}
                               </span>
                               <div className="min-w-0">
-                                <span className="font-extrabold text-[11px] text-zinc-900 dark:text-white truncate block">
+                                <span className="font-extrabold text-[11px] text-white truncate block">
                                   {part.name}
                                 </span>
-                                <span className="text-[10px] text-zinc-400">
-                                  Marca: {part.brand} • Cantidad: <strong>{part.quantity}</strong>
+                                <span className="text-[10px] text-zinc-500 font-sans">
+                                  Marca: {part.brand} • Cantidad: <strong className="text-zinc-300 font-mono">{part.quantity}</strong>
                                 </span>
                               </div>
                             </div>
 
                             {part.totalPriceUsd && (
-                              <span className="font-mono text-[11px] font-bold text-zinc-800 dark:text-zinc-200 shrink-0 ml-2">
+                              <span className="font-mono text-[11px] font-bold text-white shrink-0 ml-2">
                                 US$ {part.totalPriceUsd.toFixed(2)}
                               </span>
                             )}
@@ -1049,26 +1050,26 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                         {record.installedParts.length > 3 && (
                           <button
                             onClick={() => setSelectedRecord(record)}
-                            className="text-[10px] font-bold text-amber-500 hover:underline pl-2 cursor-pointer"
+                            className="text-[10px] font-bold text-amber-400 hover:underline pl-2 cursor-pointer font-sans"
                           >
                             + {record.installedParts.length - 3} repuesto(s) adicional(es) en este informe...
                           </button>
                         )}
                       </div>
                     ) : (
-                      <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/30 text-center text-xs text-zinc-400">
+                      <div className="p-3 rounded-[2px] bg-zinc-950 text-center text-xs text-zinc-500 border border-zinc-800 font-sans">
                         Mantenimiento preventivo por inspección y ajuste sin reemplazo de componentes mayores.
                       </div>
                     )}
 
                     {/* Service & Location Metadata Footer */}
-                    <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-[10px] text-zinc-500">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3 h-3 text-zinc-400" />
-                        Fecha: <strong>{record.completedDate || formatDate(record.scheduledDate)}</strong>
+                    <div className="pt-2 border-t border-zinc-800 flex items-center justify-between text-[10px] text-zinc-500">
+                      <span className="flex items-center gap-1 font-mono">
+                        <Calendar className="w-3 h-3 text-zinc-500" />
+                        Fecha: <strong className="text-zinc-300">{record.completedDate || formatDate(record.scheduledDate)}</strong>
                       </span>
                       {record.nextServiceDueHours && (
-                        <span className="text-amber-600 dark:text-amber-400 font-bold">
+                        <span className="text-amber-400 font-bold font-mono">
                           Próximo a: {record.nextServiceDueHours.toLocaleString()} hrs
                         </span>
                       )}
@@ -1082,252 +1083,35 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
       )}
 
       {/* Detailed Technical Sheet Modal */}
-      {selectedRecord && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white dark:bg-zinc-900 w-full max-w-3xl rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
-            {/* Modal Header */}
-            <div className="p-6 bg-zinc-900 text-white flex items-center justify-between relative overflow-hidden">
-              <div className="space-y-1 z-10">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-black uppercase text-amber-400 tracking-wider">
-                    Certificado de Mantenimiento TMD
-                  </span>
-                  <span className="font-mono text-xs font-bold bg-zinc-800 px-2 py-0.5 rounded">
-                    {selectedRecord.orderNumber}
-                  </span>
-                  {selectedRecord.equipmentUnitId && (
-                    <span className="px-2 py-0.5 rounded bg-amber-500 text-black text-xs font-black font-mono">
-                      {selectedRecord.equipmentUnitId}
-                    </span>
-                  )}
-                </div>
-                <h3 className="text-xl font-black font-display">
-                  Informe Técnico: {selectedRecord.machineModel}
-                </h3>
-              </div>
-
-              <button
-                onClick={() => setSelectedRecord(null)}
-                className="p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition-colors cursor-pointer"
-              >
-                ✕
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-6 overflow-y-auto space-y-6 text-zinc-900 dark:text-white">
-              {/* Equipment Info Box */}
-              <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
-                <div>
-                  <span className="text-[10px] uppercase font-bold text-zinc-400 block">Maquinaria</span>
-                  <strong className="text-zinc-900 dark:text-white block truncate">{selectedRecord.machineModel}</strong>
-                </div>
-                <div>
-                  <span className="text-[10px] uppercase font-bold text-zinc-400 block">Número de Serie / VIN</span>
-                  <strong className="font-mono text-zinc-900 dark:text-white block">{selectedRecord.machineSerial}</strong>
-                </div>
-                <div>
-                  <span className="text-[10px] uppercase font-bold text-zinc-400 block">Horómetro Registrado</span>
-                  <strong className="text-amber-500 block">{selectedRecord.horometerHours ? `${selectedRecord.horometerHours.toLocaleString()} hrs` : 'N/D'}</strong>
-                </div>
-                <div>
-                  <span className="text-[10px] uppercase font-bold text-zinc-400 block">Fecha Ejecución</span>
-                  <strong className="text-zinc-900 dark:text-white block">{selectedRecord.completedDate || selectedRecord.scheduledDate}</strong>
-                </div>
-              </div>
-
-              {/* Diagnostic and Work Summary */}
-              <div className="space-y-3">
-                <h4 className="font-black text-xs uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
-                  <Activity className="w-3.5 h-3.5 text-amber-500" />
-                  <span>Trabajos Ejecutados y Calibración Técnica</span>
-                </h4>
-                <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800 text-xs space-y-2">
-                  <p className="font-bold text-zinc-900 dark:text-white">
-                    {selectedRecord.serviceCategory}
-                  </p>
-                  <p className="text-zinc-600 dark:text-zinc-300 whitespace-pre-line leading-relaxed text-[11px]">
-                    {selectedRecord.workPerformed || selectedRecord.description}
-                  </p>
-                  {selectedRecord.diagnosticReport && (
-                    <div className="mt-3 pt-2.5 border-t border-zinc-200 dark:border-zinc-700 bg-amber-500/5 p-3 rounded-xl border border-amber-500/10">
-                      <span className="text-[10px] font-black uppercase text-amber-600 dark:text-amber-400 block">
-                        Lectura de Sensores & Presiones Hidráulicas
-                      </span>
-                      <p className="font-mono text-[11px] text-zinc-800 dark:text-zinc-200 mt-0.5">
-                        {selectedRecord.diagnosticReport}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Installed OEM Parts Detailed Table */}
-              <div className="space-y-2">
-                <h4 className="font-black text-xs uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
-                  <Settings className="w-3.5 h-3.5 text-amber-500" />
-                  <span>Lista Oficial de Repuestos OEM Instalados</span>
-                </h4>
-                
-                {selectedRecord.installedParts && selectedRecord.installedParts.length > 0 ? (
-                  <div className="divide-y divide-zinc-200 dark:divide-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden">
-                    {selectedRecord.installedParts.map((part, idx) => (
-                      <div key={idx} className="p-3.5 flex items-center justify-between gap-4 bg-white dark:bg-zinc-900 text-xs">
-                        <div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="font-mono font-bold text-xs text-amber-500 bg-amber-500/10 px-1.5 py-0.5 rounded">
-                              {part.partNumber}
-                            </span>
-                            <h5 className="font-extrabold text-zinc-900 dark:text-white">
-                              {part.name}
-                            </h5>
-                          </div>
-                          <div className="text-[10px] text-zinc-500 mt-0.5">
-                            Marca: <strong>{part.brand}</strong> • Cantidad Instalada: <strong>{part.quantity}</strong>
-                            {part.warrantyPeriod && (
-                              <span> • Garantía: <strong className="text-emerald-500">{part.warrantyPeriod}</strong></span>
-                            )}
-                            {part.serialBatch && (
-                              <span> • Lote: <strong className="font-mono">{part.serialBatch}</strong></span>
-                            )}
-                          </div>
-                        </div>
-
-                        {part.totalPriceUsd && (
-                          <div className="text-right shrink-0">
-                            <span className="font-mono font-bold text-zinc-900 dark:text-white block">
-                              US$ {part.totalPriceUsd.toFixed(2)}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/30 text-center text-xs text-zinc-400">
-                    No se requirió cambio de piezas en esta inspección.
-                  </div>
-                )}
-              </div>
-
-              {/* Technician Notes & Next Maintenance Recommendation */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800 space-y-1.5 text-xs">
-                  <span className="text-[10px] font-black uppercase text-zinc-400">Observaciones del Técnico</span>
-                  <p className="text-zinc-700 dark:text-zinc-300 text-[11px] leading-relaxed">
-                    {selectedRecord.technicianNotes || 'El equipo superó satisfactoriamente las pruebas de carga y presión bajo condiciones de operación.'}
-                  </p>
-                  <p className="text-[10px] text-zinc-500 font-semibold pt-1">
-                    Técnico: {selectedRecord.assignedTechnician}
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 space-y-1.5 text-xs">
-                  <span className="text-[10px] font-black uppercase text-amber-600 dark:text-amber-400">Próximo Mantenimiento Sugerido</span>
-                  <p className="text-zinc-900 dark:text-white font-extrabold text-sm">
-                    {selectedRecord.nextServiceDueHours ? `${selectedRecord.nextServiceDueHours.toLocaleString()} Horas` : 'Próximas +250 hrs'}
-                  </p>
-                  <p className="text-[11px] text-zinc-600 dark:text-zinc-300">
-                    Fecha estimada: {selectedRecord.nextServiceDueDate || 'En 90 días'}.
-                  </p>
-                </div>
-              </div>
-
-              {/* Fullbay Estimate Digital Approval Card */}
-              <div className="p-4 rounded-2xl bg-zinc-900 border border-amber-500/30 space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-amber-400" />
-                    <span className="font-extrabold text-xs text-white uppercase">Aprobación Digital de Presupuesto (Fullbay Connect)</span>
-                  </div>
-                  <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-400/20 text-amber-400 border border-amber-400/40 uppercase">
-                    {selectedRecord.status === 'requested' || selectedRecord.status === 'scheduled' ? 'Pendiente Aprobación' : 'Aprobado'}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between text-xs text-zinc-300">
-                  <span>Mano de obra: <strong>US$ {(selectedRecord.totalLaborCostUsd || 180).toFixed(2)}</strong></span>
-                  <span>Repuestos: <strong>US$ {(selectedRecord.totalPartsCostUsd || 74.5).toFixed(2)}</strong></span>
-                  <span className="text-sm font-black text-amber-400 font-mono">Total: US$ {(selectedRecord.totalCostUsd || 254.5).toFixed(2)}</span>
-                </div>
-                {selectedRecord.status !== 'in_progress' && selectedRecord.status !== 'completed' ? (
-                  <div className="flex items-center gap-2 pt-1">
-                    <button
-                      type="button"
-                      onClick={async () => {
-                        await approveFullbayEstimate(selectedRecord.id, true, userProfile?.displayName || 'Cliente TMD');
-                        setSelectedRecord({ ...selectedRecord, status: 'in_progress' });
-                        setHorometerFeedback(`¡Presupuesto para orden #${selectedRecord.orderNumber} APROBADO digitalmente!`);
-                      }}
-                      className="flex-1 py-2 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs uppercase flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm"
-                    >
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      <span>Aprobar Presupuesto & Iniciar Reparación</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={async () => {
-                        await approveFullbayEstimate(selectedRecord.id, false, userProfile?.displayName || 'Cliente TMD', 'Cliente solicita ajuste de alcance');
-                        setHorometerFeedback(`Solicitud de ajuste enviada a taller para orden #${selectedRecord.orderNumber}.`);
-                      }}
-                      className="py-2 px-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold text-xs uppercase transition-all cursor-pointer border border-zinc-700"
-                    >
-                      <span>Solicitar Ajuste</span>
-                    </button>
-                  </div>
-                ) : (
-                  <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    <span>Presupuesto aprobado y orden en ejecución por el equipo técnico en Km 22.</span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Modal Actions */}
-            <div className="p-5 bg-zinc-50 dark:bg-zinc-800/80 border-t border-zinc-200 dark:border-zinc-800 flex flex-wrap items-center justify-between gap-3">
-              <button
-                onClick={() => window.print()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 font-bold rounded-xl text-xs transition-colors cursor-pointer"
-              >
-                <Printer className="w-4 h-4" />
-                <span>Imprimir / Exportar Informe</span>
-              </button>
-
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => {
-                    setSelectedRecord(null);
-                    onNavigate('#/service');
-                  }}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl text-xs transition-colors cursor-pointer"
-                >
-                  <Wrench className="w-4 h-4" />
-                  <span>Programar Próximo Servicio</span>
-                </button>
-                <button
-                  onClick={() => setSelectedRecord(null)}
-                  className="px-4 py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-800 dark:text-zinc-200 font-bold rounded-xl text-xs transition-colors cursor-pointer"
-                >
-                  Cerrar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <ServiceDetailModal
+        order={selectedRecord}
+        onClose={() => setSelectedRecord(null)}
+        onApproveEstimate={async (orderId: string, approved: boolean) => {
+          await approveFullbayEstimate(orderId, approved, userProfile?.displayName || 'Cliente TMD');
+          if (selectedRecord && selectedRecord.id === orderId) {
+            setSelectedRecord({ ...selectedRecord, status: approved ? 'in_progress' : 'requested' });
+          }
+          setHorometerFeedback(
+            approved
+              ? `¡Presupuesto para orden #${selectedRecord?.orderNumber} APROBADO digitalmente!`
+              : `Solicitud de ajuste enviada a taller para orden #${selectedRecord?.orderNumber}.`
+          );
+        }}
+        onNavigate={onNavigate}
+      />
 
       {/* Add / Register Machine Modal */}
       {showAddMachineModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white dark:bg-zinc-900 w-full max-w-lg rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-hidden">
-            <div className="p-6 bg-zinc-900 text-white flex items-center justify-between">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-fadeIn">
+          <div className="bg-zinc-900 w-full max-w-lg rounded-[5px] border border-zinc-800 shadow-2xl overflow-hidden">
+            <div className="p-6 bg-zinc-950 text-white flex items-center justify-between border-b border-zinc-800">
               <div className="space-y-0.5">
-                <span className="text-xs font-black uppercase text-amber-400">Registro de Flota</span>
-                <h3 className="text-lg font-black font-display">Registrar Nuevo Equipo o Maquinaria</h3>
+                <span className="text-xs font-black uppercase text-amber-400 font-display tracking-wider">Registro de Flota</span>
+                <h3 className="text-lg font-black font-display uppercase tracking-tight text-white">Registrar Nuevo Equipo o Maquinaria</h3>
               </div>
               <button
                 onClick={() => setShowAddMachineModal(false)}
-                className="p-1.5 rounded-lg bg-zinc-800 text-zinc-400 hover:text-white"
+                className="p-1.5 rounded-[2px] bg-zinc-800 text-zinc-400 hover:text-white cursor-pointer"
               >
                 ✕
               </button>
@@ -1336,11 +1120,11 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
             <form onSubmit={handleRegisterMachine} className="p-6 space-y-4 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <label className="font-bold text-zinc-700 dark:text-zinc-300">Marca *</label>
+                  <label className="font-bold text-zinc-300 font-display uppercase tracking-wider">Marca *</label>
                   <select
                     value={newBrand}
                     onChange={(e) => setNewBrand(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white font-bold"
+                    className="w-full px-3 py-2 rounded-[2px] bg-zinc-950 border border-zinc-800 text-white font-bold font-mono"
                   >
                     <option value="LiuGong">LiuGong</option>
                     <option value="JCB">JCB</option>
@@ -1352,45 +1136,45 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-zinc-700 dark:text-zinc-300">Ficha Interna / ID *</label>
+                  <label className="font-bold text-zinc-300 font-display uppercase tracking-wider">Ficha Interna / ID *</label>
                   <input
                     type="text"
                     required
                     placeholder="Ej. EX-02 o Ficha #05"
                     value={newUnitId}
                     onChange={(e) => setNewUnitId(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white font-mono"
+                    className="w-full px-3 py-2 rounded-[2px] bg-zinc-950 border border-zinc-800 text-white font-mono placeholder:text-zinc-600"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="font-bold text-zinc-700 dark:text-zinc-300">Modelo del Equipo *</label>
+                <label className="font-bold text-zinc-300 font-display uppercase tracking-wider">Modelo del Equipo *</label>
                 <input
                   type="text"
                   required
                   placeholder="Ej. 922E Excavadora de Orugas o 3CX Retroexcavadora"
                   value={newModel}
                   onChange={(e) => setNewModel(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
+                  className="w-full px-3 py-2 rounded-[2px] bg-zinc-950 border border-zinc-800 text-white placeholder:text-zinc-600"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <label className="font-bold text-zinc-700 dark:text-zinc-300">Número de Serie / VIN *</label>
+                  <label className="font-bold text-zinc-300 font-display uppercase tracking-wider">Número de Serie / VIN *</label>
                   <input
                     type="text"
                     required
                     placeholder="Ej. LG922E-2024-1189"
                     value={newSerial}
                     onChange={(e) => setNewSerial(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white font-mono"
+                    className="w-full px-3 py-2 rounded-[2px] bg-zinc-950 border border-zinc-800 text-white font-mono placeholder:text-zinc-600"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-zinc-700 dark:text-zinc-300">Horómetro Actual (Hrs) *</label>
+                  <label className="font-bold text-zinc-300 font-display uppercase tracking-wider">Horómetro Actual (Hrs) *</label>
                   <input
                     type="number"
                     min="0"
@@ -1398,33 +1182,33 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                     placeholder="Ej. 450"
                     value={newHorometer}
                     onChange={(e) => setNewHorometer(Number(e.target.value))}
-                    className="w-full px-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
+                    className="w-full px-3 py-2 rounded-[2px] bg-zinc-950 border border-zinc-800 text-white font-mono"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="font-bold text-zinc-700 dark:text-zinc-300">Ubicación Actual de Operación</label>
+                <label className="font-bold text-zinc-300 font-display uppercase tracking-wider">Ubicación Actual de Operación</label>
                 <input
                   type="text"
                   placeholder="Ej. Proyecto Circunvalación Norte, Santiago"
                   value={newLocation}
                   onChange={(e) => setNewLocation(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
+                  className="w-full px-3 py-2 rounded-[2px] bg-zinc-950 border border-zinc-800 text-white placeholder:text-zinc-600"
                 />
               </div>
 
-              <div className="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-end gap-2">
+              <div className="pt-3 border-t border-zinc-800 flex items-center justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setShowAddMachineModal(false)}
-                  className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-bold rounded-xl"
+                  className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] cursor-pointer"
                 >
                   Cancelar
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl shadow-sm"
+                  className="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider rounded-[2px] shadow-sm cursor-pointer"
                 >
                   Guardar Equipo en Flota
                 </button>

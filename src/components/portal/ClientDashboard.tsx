@@ -82,6 +82,8 @@ interface ClientDashboardProps {
   onUpdateProfileDetails: (details: Partial<UserProfile>) => Promise<void>;
   onSignOut: () => Promise<void>;
   onOpenQrScanner?: () => void;
+  activeTab?: ClientPortalTab;
+  onTabChange?: (tab: ClientPortalTab) => void;
 }
 
 export const ClientDashboard: React.FC<ClientDashboardProps> = ({
@@ -100,9 +102,23 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
   onUpdateQuoteStatus,
   onUpdateProfileDetails,
   onSignOut,
-  onOpenQrScanner
+  onOpenQrScanner,
+  activeTab: activeTabProp,
+  onTabChange
 }) => {
-  const [activeTab, setActiveTab] = useState<ClientPortalTab>('quotes');
+  const [internalActiveTab, setInternalActiveTab] = useState<ClientPortalTab>(activeTabProp || 'quotes');
+  
+  useEffect(() => {
+    if (activeTabProp !== undefined) {
+      setInternalActiveTab(activeTabProp);
+    }
+  }, [activeTabProp]);
+
+  const activeTab = activeTabProp !== undefined ? activeTabProp : internalActiveTab;
+  const setActiveTab = (tab: ClientPortalTab) => {
+    setInternalActiveTab(tab);
+    if (onTabChange) onTabChange(tab);
+  };
   const [quoteSearch, setQuoteSearch] = useState('');
   const [quoteFilterStatus, setQuoteFilterStatus] = useState<string>('all');
   const [profileSavedFeedback, setProfileSavedFeedback] = useState(false);

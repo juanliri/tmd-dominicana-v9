@@ -261,15 +261,28 @@ export const ROUTE_REGISTRY: Record<string, RouteDefinition> = {
   PORTAL: {
     id: 'portal',
     canonicalPath: '#/portal',
-    title: 'Portal de Clientes & Flota',
-    subtitle: 'Acceso a facturas fiscales NCF B01, garantías y citas de patio',
+    title: 'Portal Empresarial & Operativo TMD',
+    subtitle: 'Acceso a facturas fiscales NCF B01, garantías, telemetría y centro de mando',
     category: 'operations',
-    aliases: ['#/clientes', '#/mi-cuenta', '#/login', '#/command-center', '#/staff-ops', '#/office-workflow'],
+    aliases: [
+      '#/clientes', 
+      '#/mi-cuenta', 
+      '#/login', 
+      '#/command-center', 
+      '#/staff-ops', 
+      '#/office-workflow',
+      '#/portal/login',
+      '#/portal/client',
+      '#/portal/dealer',
+      '#/portal/ops',
+      '#/portal/admin',
+      '#/portal/settings'
+    ],
     breadcrumbs: [
       { label: 'Inicio', path: '#/home' },
-      { label: 'Portal de Clientes', path: '#/portal' }
+      { label: 'Portal TMD', path: '#/portal' }
     ],
-    searchKeywords: ['portal', 'clientes', 'login', 'facturas', 'ncf', 'dgii', 'mi cuenta', 'historial']
+    searchKeywords: ['portal', 'clientes', 'login', 'facturas', 'ncf', 'dgii', 'mi cuenta', 'historial', 'staff', 'admin']
   },
   CHECKOUT: {
     id: 'checkout',
@@ -422,6 +435,9 @@ export function resolveRoute(rawHash: string): RouteDefinition {
   }
   if (cleanPath.startsWith('#/parts/') || cleanPath.startsWith('#/repuestos/')) {
     return ROUTE_REGISTRY.PARTS;
+  }
+  if (cleanPath.startsWith('#/portal') || cleanPath === '#/portal') {
+    return ROUTE_REGISTRY.PORTAL;
   }
 
   // Default fallback
