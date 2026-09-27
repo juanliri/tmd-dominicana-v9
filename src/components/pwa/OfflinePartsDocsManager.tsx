@@ -22,6 +22,7 @@ import {
   Layers
 } from 'lucide-react';
 import { useOfflineSync } from '../../context/OfflineSyncContext';
+import { TMDLogo } from '../common/BrandLogos';
 import { 
   CRITICAL_TECHNICAL_DATASHEETS, 
   CRITICAL_PARTS_MANUALS, 
@@ -86,8 +87,8 @@ export const OfflinePartsDocsManager: React.FC = () => {
           <div className="absolute top-0 left-0 right-0 h-1 bg-amber-400" />
           
           <div className="flex items-start sm:items-center gap-4 relative z-10">
-            <div className="w-12 h-12 rounded-[2px] bg-amber-400/10 text-amber-400 flex items-center justify-center border border-amber-400/30 shrink-0 shadow-xs">
-              <HardHat className="w-6 h-6" />
+            <div className="h-12 px-2.5 rounded-[2px] bg-black/60 border border-amber-400/30 flex items-center justify-center shrink-0 shadow-xs">
+              <TMDLogo variant="icon-only" className="h-8" />
             </div>
             <div>
               <div className="flex flex-wrap items-center gap-2">

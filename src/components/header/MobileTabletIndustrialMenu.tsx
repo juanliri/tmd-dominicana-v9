@@ -25,6 +25,7 @@ import {
   QrCode
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { TMDLogo } from '../common/BrandLogos';
 import { OFFICIAL_BRANDS } from '../../data/brandsData';
 import { useTheme } from '../../context/ThemeContext';
 import { useCart } from '../../context/CartContext';
@@ -95,6 +96,19 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
     <div className="w-full flex flex-col max-h-[86vh] sm:max-h-[82vh] overflow-hidden bg-white/98 dark:bg-[#0c0d10]/98 backdrop-blur-2xl text-zinc-900 dark:text-white">
       {/* 1. TOP MOBILE/TABLET TOOLBAR & SEARCH */}
       <div className="p-3.5 sm:p-4 border-b border-zinc-200/80 dark:border-white/[0.08] space-y-3 bg-zinc-50/70 dark:bg-zinc-900/50">
+        {/* Mobile Brand Banner */}
+        <div className="flex items-center justify-between pb-1 border-b border-zinc-200 dark:border-zinc-800/80">
+          <div className="flex items-center gap-2">
+            <TMDLogo variant="icon-only" className="h-6 sm:h-7" />
+            <span className="text-[10px] font-black uppercase tracking-wider text-amber-500 font-display">
+              TECNOMAQUINARIAS DIESEL
+            </span>
+          </div>
+          <span className="px-1.5 py-0.5 rounded-[2px] bg-zinc-200 dark:bg-zinc-800 text-[9px] font-mono font-bold text-zinc-600 dark:text-zinc-400">
+            OFICIAL RD
+          </span>
+        </div>
+
         {/* Search Input Bar Trigger & QR Scanner Button */}
         <div className="flex items-center gap-2">
           {onOpenSearch && (

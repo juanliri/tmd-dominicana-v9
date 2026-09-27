@@ -42,6 +42,7 @@ import {
   saveStoredPointsLedger 
 } from '../../data/proMemberData';
 import { ProMemberBadge } from '../common/ProMemberBadge';
+import { TMDLogo } from '../common/BrandLogos';
 import { IndustrialSectionDivider } from '../common/IndustrialSectionDivider';
 import { CustomerOrdersTab } from './CustomerOrdersTab';
 import { ServiceHistoryTab } from './ServiceHistoryTab';
@@ -226,8 +227,8 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
       {/* COMMERCIAL CONTRACTOR ACCOUNT BAR (ENTERPRISE STANDARD) */}
       <div className="p-3.5 sm:p-4 rounded-[5px] bg-zinc-900 text-white border border-zinc-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
         <div className="flex items-center gap-3 relative z-10">
-          <div className="w-10 h-10 rounded-[3px] bg-amber-400 text-black flex items-center justify-center font-black text-base shrink-0 shadow-xs">
-            {userProfile?.displayName ? userProfile.displayName.charAt(0).toUpperCase() : 'C'}
+          <div className="h-10 px-2 rounded-[3px] bg-black/60 border border-amber-500/30 flex items-center justify-center shrink-0 shadow-xs">
+            <TMDLogo variant="icon-only" className="h-7" />
           </div>
           <div className="space-y-0.5">
             <div className="flex items-center gap-2 flex-wrap">
@@ -264,37 +265,39 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
 
         {/* Client Top Action Controls */}
         <div className="flex items-center gap-2 self-start md:self-center flex-wrap relative z-10 w-full md:w-auto justify-between md:justify-end">
-          {/* Role switcher for testing */}
-          <div className="flex items-center gap-0.5 p-0.5 bg-zinc-950 rounded-[3px] border border-zinc-800 shadow-inner">
-            <span className="text-[10px] text-zinc-500 font-bold px-1 hidden sm:inline uppercase">VISTA:</span>
-            <button
-              type="button"
-              onClick={() => setSimulatedRole(null)}
-              className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                !simulatedRole ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              CLIENTE
-            </button>
-            <button
-              type="button"
-              onClick={() => setSimulatedRole('staff')}
-              className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                simulatedRole === 'staff' ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              STAFF
-            </button>
-            <button
-              type="button"
-              onClick={() => setSimulatedRole('admin')}
-              className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                simulatedRole === 'admin' ? 'bg-purple-500 text-white shadow-xs' : 'text-zinc-400 hover:text-white'
-              }`}
-            >
-              ADMIN
-            </button>
-          </div>
+          {/* Role switcher for testing - only in dev or for real admins */}
+          {(role === 'admin' || import.meta.env.DEV) && (
+            <div className="flex items-center gap-0.5 p-0.5 bg-zinc-950 rounded-[3px] border border-zinc-800 shadow-inner">
+              <span className="text-[10px] text-zinc-500 font-bold px-1 hidden sm:inline uppercase">VISTA:</span>
+              <button
+                type="button"
+                onClick={() => setSimulatedRole(null)}
+                className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
+                  !simulatedRole ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                CLIENTE
+              </button>
+              <button
+                type="button"
+                onClick={() => setSimulatedRole('staff')}
+                className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
+                  simulatedRole === 'staff' ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                STAFF
+              </button>
+              <button
+                type="button"
+                onClick={() => setSimulatedRole('admin')}
+                className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
+                  simulatedRole === 'admin' ? 'bg-purple-500 text-white shadow-xs' : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                ADMIN
+              </button>
+            </div>
+          )}
 
           <div className="flex items-center gap-1.5 sm:gap-2">
             <button
