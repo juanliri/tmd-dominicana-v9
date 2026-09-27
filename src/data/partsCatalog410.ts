@@ -34,7 +34,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.48,
     "totalWithItbisUsd": 42.48,
     "stockQty": 19,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador de Agua y Combustible Spin-On con Trampa Transparente. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -67,7 +67,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.38,
     "totalWithItbisUsd": 48.38,
     "stockQty": 32,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro de Combustible Primario StrataPore 10 Micrones. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -99,7 +99,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 45.18,
     "totalWithItbisUsd": 296.18,
     "stockQty": 45,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Kit de Filtración Integral de Mantenimiento 500H JCB 3CX. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -132,7 +132,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 5.22,
     "totalWithItbisUsd": 34.22,
     "stockQty": 13,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite de Motor Heavy Duty Flujo Pleno Sintético. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -165,7 +165,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 5.76,
     "totalWithItbisUsd": 37.76,
     "stockQty": 26,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Lubricante de Alta Eficiencia para Motores Cummins QSB. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -198,7 +198,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 11.88,
     "totalWithItbisUsd": 77.88,
     "stockQty": 39,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Aire RadialSeal Primario de Alta Retención de Polvo. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -230,7 +230,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 8.64,
     "totalWithItbisUsd": 56.64,
     "stockQty": 7,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento Filtrante de Aire Secundario de Seguridad Cabina/Motor. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -262,7 +262,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 14.04,
     "totalWithItbisUsd": 92.04,
     "stockQty": 20,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Hidráulico de Retorno Tanque Presurizado 10 Micrones. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -294,7 +294,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 16.92,
     "totalWithItbisUsd": 110.92,
     "stockQty": 33,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Cartucho Hidráulico de Alta Presión Microglass 450 Bar. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -326,7 +326,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 10.44,
     "totalWithItbisUsd": 68.44,
     "stockQty": 46,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Transmisión Powershift JCB Genuine Synchroshuttle. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -358,7 +358,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.92,
     "totalWithItbisUsd": 51.92,
     "stockQty": 14,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador Diésel Secundario con Sensor de Agua WIF. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -390,7 +390,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 9.72,
     "totalWithItbisUsd": 63.72,
     "stockQty": 27,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite Combo Venturi Bypass Cummins QSL9 / ISX. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -422,7 +422,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 4.86,
     "totalWithItbisUsd": 31.86,
     "stockQty": 40,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Refrigerante de Motor con Aditivo DCA4 Liberación Lenta. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -454,7 +454,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.96,
     "totalWithItbisUsd": 84.96,
     "stockQty": 8,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro Desecador de Aire de Freno Neumático JCB. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -486,7 +486,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 19.08,
     "totalWithItbisUsd": 125.08,
     "stockQty": 21,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento de Aire Donasonic Ciclónico para Ambientes Mineros. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -519,7 +519,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.02,
     "totalWithItbisUsd": 46.02,
     "stockQty": 34,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador de Agua y Combustible Spin-On con Trampa Transparente (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -552,7 +552,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.92,
     "totalWithItbisUsd": 51.92,
     "stockQty": 47,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro de Combustible Primario StrataPore 10 Micrones (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -584,7 +584,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 48.78,
     "totalWithItbisUsd": 319.78,
     "stockQty": 15,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Kit de Filtración Integral de Mantenimiento 500H JCB 3CX (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -617,7 +617,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 5.58,
     "totalWithItbisUsd": 36.58,
     "stockQty": 28,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite de Motor Heavy Duty Flujo Pleno Sintético (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -650,7 +650,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.3,
     "totalWithItbisUsd": 41.3,
     "stockQty": 41,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Lubricante de Alta Eficiencia para Motores Cummins QSB (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -683,7 +683,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.96,
     "totalWithItbisUsd": 84.96,
     "stockQty": 9,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Aire RadialSeal Primario de Alta Retención de Polvo (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -715,7 +715,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 9.36,
     "totalWithItbisUsd": 61.36,
     "stockQty": 22,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento Filtrante de Aire Secundario de Seguridad Cabina/Motor (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -747,7 +747,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 15.3,
     "totalWithItbisUsd": 100.3,
     "stockQty": 35,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Hidráulico de Retorno Tanque Presurizado 10 Micrones (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -779,7 +779,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 18.18,
     "totalWithItbisUsd": 119.18,
     "stockQty": 48,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Cartucho Hidráulico de Alta Presión Microglass 450 Bar (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -811,7 +811,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 11.34,
     "totalWithItbisUsd": 74.34,
     "stockQty": 16,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Transmisión Powershift JCB Genuine Synchroshuttle (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -843,7 +843,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 8.64,
     "totalWithItbisUsd": 56.64,
     "stockQty": 29,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador Diésel Secundario con Sensor de Agua WIF (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -875,7 +875,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 10.62,
     "totalWithItbisUsd": 69.62,
     "stockQty": 42,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite Combo Venturi Bypass Cummins QSL9 / ISX (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -907,7 +907,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 5.22,
     "totalWithItbisUsd": 34.22,
     "stockQty": 10,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Refrigerante de Motor con Aditivo DCA4 Liberación Lenta (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -939,7 +939,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 14.04,
     "totalWithItbisUsd": 92.04,
     "stockQty": 23,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro Desecador de Aire de Freno Neumático JCB (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -971,7 +971,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 20.7,
     "totalWithItbisUsd": 135.7,
     "stockQty": 36,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento de Aire Donasonic Ciclónico para Ambientes Mineros (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1004,7 +1004,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.56,
     "totalWithItbisUsd": 49.56,
     "stockQty": 49,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador de Agua y Combustible Spin-On con Trampa Transparente (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1037,7 +1037,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 8.64,
     "totalWithItbisUsd": 56.64,
     "stockQty": 17,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro de Combustible Primario StrataPore 10 Micrones (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1069,7 +1069,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 52.56,
     "totalWithItbisUsd": 344.56,
     "stockQty": 30,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Kit de Filtración Integral de Mantenimiento 500H JCB 3CX (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1102,7 +1102,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.12,
     "totalWithItbisUsd": 40.12,
     "stockQty": 43,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite de Motor Heavy Duty Flujo Pleno Sintético (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1135,7 +1135,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.84,
     "totalWithItbisUsd": 44.84,
     "stockQty": 11,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Lubricante de Alta Eficiencia para Motores Cummins QSB (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1168,7 +1168,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 13.86,
     "totalWithItbisUsd": 90.86,
     "stockQty": 24,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Aire RadialSeal Primario de Alta Retención de Polvo (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1200,7 +1200,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 9.9,
     "totalWithItbisUsd": 64.9,
     "stockQty": 37,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento Filtrante de Aire Secundario de Seguridad Cabina/Motor (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1232,7 +1232,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 16.38,
     "totalWithItbisUsd": 107.38,
     "stockQty": 50,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Hidráulico de Retorno Tanque Presurizado 10 Micrones (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1264,7 +1264,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 19.62,
     "totalWithItbisUsd": 128.62,
     "stockQty": 18,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Cartucho Hidráulico de Alta Presión Microglass 450 Bar (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1296,7 +1296,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.06,
     "totalWithItbisUsd": 79.06,
     "stockQty": 31,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Transmisión Powershift JCB Genuine Synchroshuttle (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1328,7 +1328,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 9.18,
     "totalWithItbisUsd": 60.18,
     "stockQty": 44,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador Diésel Secundario con Sensor de Agua WIF (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1360,7 +1360,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 11.34,
     "totalWithItbisUsd": 74.34,
     "stockQty": 12,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite Combo Venturi Bypass Cummins QSL9 / ISX (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1392,7 +1392,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 5.76,
     "totalWithItbisUsd": 37.76,
     "stockQty": 25,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Refrigerante de Motor con Aditivo DCA4 Liberación Lenta (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1424,7 +1424,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 15.12,
     "totalWithItbisUsd": 99.12,
     "stockQty": 38,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro Desecador de Aire de Freno Neumático JCB (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1456,7 +1456,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 22.32,
     "totalWithItbisUsd": 146.32,
     "stockQty": 6,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento de Aire Donasonic Ciclónico para Ambientes Mineros (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1489,7 +1489,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 8.1,
     "totalWithItbisUsd": 53.1,
     "stockQty": 19,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador de Agua y Combustible Spin-On con Trampa Transparente (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1522,7 +1522,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 9.18,
     "totalWithItbisUsd": 60.18,
     "stockQty": 32,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro de Combustible Primario StrataPore 10 Micrones (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1554,7 +1554,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 56.34,
     "totalWithItbisUsd": 369.34,
     "stockQty": 45,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Kit de Filtración Integral de Mantenimiento 500H JCB 3CX (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1587,7 +1587,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.48,
     "totalWithItbisUsd": 42.48,
     "stockQty": 13,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite de Motor Heavy Duty Flujo Pleno Sintético (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1620,7 +1620,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.2,
     "totalWithItbisUsd": 47.2,
     "stockQty": 26,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Lubricante de Alta Eficiencia para Motores Cummins QSB (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1653,7 +1653,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 14.94,
     "totalWithItbisUsd": 97.94,
     "stockQty": 39,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Aire RadialSeal Primario de Alta Retención de Polvo (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1685,7 +1685,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 10.62,
     "totalWithItbisUsd": 69.62,
     "stockQty": 7,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento Filtrante de Aire Secundario de Seguridad Cabina/Motor (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1717,7 +1717,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 17.64,
     "totalWithItbisUsd": 115.64,
     "stockQty": 20,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Hidráulico de Retorno Tanque Presurizado 10 Micrones (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1749,7 +1749,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 21.06,
     "totalWithItbisUsd": 138.06,
     "stockQty": 33,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Cartucho Hidráulico de Alta Presión Microglass 450 Bar (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1781,7 +1781,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.96,
     "totalWithItbisUsd": 84.96,
     "stockQty": 46,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Transmisión Powershift JCB Genuine Synchroshuttle (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1813,7 +1813,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 9.9,
     "totalWithItbisUsd": 64.9,
     "stockQty": 14,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador Diésel Secundario con Sensor de Agua WIF (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1845,7 +1845,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.24,
     "totalWithItbisUsd": 80.24,
     "stockQty": 27,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite Combo Venturi Bypass Cummins QSL9 / ISX (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1877,7 +1877,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.12,
     "totalWithItbisUsd": 40.12,
     "stockQty": 40,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Refrigerante de Motor con Aditivo DCA4 Liberación Lenta (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1909,7 +1909,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 16.2,
     "totalWithItbisUsd": 106.2,
     "stockQty": 8,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro Desecador de Aire de Freno Neumático JCB (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1941,7 +1941,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 23.94,
     "totalWithItbisUsd": 156.94,
     "stockQty": 21,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento de Aire Donasonic Ciclónico para Ambientes Mineros (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -1974,7 +1974,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 8.46,
     "totalWithItbisUsd": 55.46,
     "stockQty": 34,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador de Agua y Combustible Spin-On con Trampa Transparente (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2007,7 +2007,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 9.72,
     "totalWithItbisUsd": 63.72,
     "stockQty": 47,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro de Combustible Primario StrataPore 10 Micrones (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2039,7 +2039,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 59.94,
     "totalWithItbisUsd": 392.94,
     "stockQty": 15,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Kit de Filtración Integral de Mantenimiento 500H JCB 3CX (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2072,7 +2072,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.84,
     "totalWithItbisUsd": 44.84,
     "stockQty": 28,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite de Motor Heavy Duty Flujo Pleno Sintético (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2105,7 +2105,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.74,
     "totalWithItbisUsd": 50.74,
     "stockQty": 41,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Lubricante de Alta Eficiencia para Motores Cummins QSB (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2138,7 +2138,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 15.84,
     "totalWithItbisUsd": 103.84,
     "stockQty": 9,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Aire RadialSeal Primario de Alta Retención de Polvo (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2170,7 +2170,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 11.34,
     "totalWithItbisUsd": 74.34,
     "stockQty": 22,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento Filtrante de Aire Secundario de Seguridad Cabina/Motor (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2202,7 +2202,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 18.72,
     "totalWithItbisUsd": 122.72,
     "stockQty": 35,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Hidráulico de Retorno Tanque Presurizado 10 Micrones (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2234,7 +2234,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 22.32,
     "totalWithItbisUsd": 146.32,
     "stockQty": 48,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Cartucho Hidráulico de Alta Presión Microglass 450 Bar (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2266,7 +2266,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 13.86,
     "totalWithItbisUsd": 90.86,
     "stockQty": 16,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Transmisión Powershift JCB Genuine Synchroshuttle (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2298,7 +2298,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 10.62,
     "totalWithItbisUsd": 69.62,
     "stockQty": 29,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador Diésel Secundario con Sensor de Agua WIF (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2330,7 +2330,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.96,
     "totalWithItbisUsd": 84.96,
     "stockQty": 42,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite Combo Venturi Bypass Cummins QSL9 / ISX (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2362,7 +2362,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.48,
     "totalWithItbisUsd": 42.48,
     "stockQty": 10,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Refrigerante de Motor con Aditivo DCA4 Liberación Lenta (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2394,7 +2394,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 17.28,
     "totalWithItbisUsd": 113.28,
     "stockQty": 23,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro Desecador de Aire de Freno Neumático JCB (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2426,7 +2426,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 25.38,
     "totalWithItbisUsd": 166.38,
     "stockQty": 36,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento de Aire Donasonic Ciclónico para Ambientes Mineros (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2459,7 +2459,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.48,
     "totalWithItbisUsd": 42.48,
     "stockQty": 49,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador de Agua y Combustible Spin-On con Trampa Transparente (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2492,7 +2492,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.38,
     "totalWithItbisUsd": 48.38,
     "stockQty": 17,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro de Combustible Primario StrataPore 10 Micrones (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2524,7 +2524,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 45.18,
     "totalWithItbisUsd": 296.18,
     "stockQty": 30,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Kit de Filtración Integral de Mantenimiento 500H JCB 3CX (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2557,7 +2557,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 5.22,
     "totalWithItbisUsd": 34.22,
     "stockQty": 43,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite de Motor Heavy Duty Flujo Pleno Sintético (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2590,7 +2590,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 5.76,
     "totalWithItbisUsd": 37.76,
     "stockQty": 11,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Lubricante de Alta Eficiencia para Motores Cummins QSB (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2623,7 +2623,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 11.88,
     "totalWithItbisUsd": 77.88,
     "stockQty": 24,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Aire RadialSeal Primario de Alta Retención de Polvo (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2655,7 +2655,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 8.64,
     "totalWithItbisUsd": 56.64,
     "stockQty": 37,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento Filtrante de Aire Secundario de Seguridad Cabina/Motor (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2687,7 +2687,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 14.04,
     "totalWithItbisUsd": 92.04,
     "stockQty": 50,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Hidráulico de Retorno Tanque Presurizado 10 Micrones (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2719,7 +2719,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 16.92,
     "totalWithItbisUsd": 110.92,
     "stockQty": 18,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Cartucho Hidráulico de Alta Presión Microglass 450 Bar (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2751,7 +2751,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 10.44,
     "totalWithItbisUsd": 68.44,
     "stockQty": 31,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Transmisión Powershift JCB Genuine Synchroshuttle (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2783,7 +2783,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.92,
     "totalWithItbisUsd": 51.92,
     "stockQty": 44,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador Diésel Secundario con Sensor de Agua WIF (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2815,7 +2815,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 9.72,
     "totalWithItbisUsd": 63.72,
     "stockQty": 12,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite Combo Venturi Bypass Cummins QSL9 / ISX (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2847,7 +2847,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 4.86,
     "totalWithItbisUsd": 31.86,
     "stockQty": 25,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Refrigerante de Motor con Aditivo DCA4 Liberación Lenta (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2879,7 +2879,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.96,
     "totalWithItbisUsd": 84.96,
     "stockQty": 38,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro Desecador de Aire de Freno Neumático JCB (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2911,7 +2911,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 19.08,
     "totalWithItbisUsd": 125.08,
     "stockQty": 6,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento de Aire Donasonic Ciclónico para Ambientes Mineros (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2944,7 +2944,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.02,
     "totalWithItbisUsd": 46.02,
     "stockQty": 19,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador de Agua y Combustible Spin-On con Trampa Transparente (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -2977,7 +2977,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.92,
     "totalWithItbisUsd": 51.92,
     "stockQty": 32,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro de Combustible Primario StrataPore 10 Micrones (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3009,7 +3009,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 48.78,
     "totalWithItbisUsd": 319.78,
     "stockQty": 45,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Kit de Filtración Integral de Mantenimiento 500H JCB 3CX (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3042,7 +3042,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 5.58,
     "totalWithItbisUsd": 36.58,
     "stockQty": 13,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite de Motor Heavy Duty Flujo Pleno Sintético (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3075,7 +3075,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.3,
     "totalWithItbisUsd": 41.3,
     "stockQty": 26,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Lubricante de Alta Eficiencia para Motores Cummins QSB (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3108,7 +3108,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.96,
     "totalWithItbisUsd": 84.96,
     "stockQty": 39,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Aire RadialSeal Primario de Alta Retención de Polvo (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3140,7 +3140,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 9.36,
     "totalWithItbisUsd": 61.36,
     "stockQty": 7,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento Filtrante de Aire Secundario de Seguridad Cabina/Motor (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3172,7 +3172,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 15.3,
     "totalWithItbisUsd": 100.3,
     "stockQty": 20,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Hidráulico de Retorno Tanque Presurizado 10 Micrones (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3204,7 +3204,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 18.18,
     "totalWithItbisUsd": 119.18,
     "stockQty": 33,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Cartucho Hidráulico de Alta Presión Microglass 450 Bar (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3236,7 +3236,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 11.34,
     "totalWithItbisUsd": 74.34,
     "stockQty": 46,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Transmisión Powershift JCB Genuine Synchroshuttle (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3268,7 +3268,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 8.64,
     "totalWithItbisUsd": 56.64,
     "stockQty": 14,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador Diésel Secundario con Sensor de Agua WIF (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3300,7 +3300,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 10.62,
     "totalWithItbisUsd": 69.62,
     "stockQty": 27,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite Combo Venturi Bypass Cummins QSL9 / ISX (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3332,7 +3332,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 5.22,
     "totalWithItbisUsd": 34.22,
     "stockQty": 40,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro de Refrigerante de Motor con Aditivo DCA4 Liberación Lenta (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3364,7 +3364,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 14.04,
     "totalWithItbisUsd": 92.04,
     "stockQty": 8,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Filtro Desecador de Aire de Freno Neumático JCB (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3396,7 +3396,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 20.7,
     "totalWithItbisUsd": 135.7,
     "stockQty": 21,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Elemento de Aire Donasonic Ciclónico para Ambientes Mineros (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3429,7 +3429,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.56,
     "totalWithItbisUsd": 49.56,
     "stockQty": 34,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro Separador de Agua y Combustible Spin-On con Trampa Transparente (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3462,7 +3462,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 8.64,
     "totalWithItbisUsd": 56.64,
     "stockQty": 47,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/jcb_fuel_filter_oem.jpg",
     "description": "Filtro de Combustible Primario StrataPore 10 Micrones (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3494,7 +3494,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 52.56,
     "totalWithItbisUsd": 344.56,
     "stockQty": 15,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/oil_filter_spinon.jpg",
     "description": "Kit de Filtración Integral de Mantenimiento 500H JCB 3CX (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3527,7 +3527,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.12,
     "totalWithItbisUsd": 40.12,
     "stockQty": 28,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro de Aceite de Motor Heavy Duty Flujo Pleno Sintético (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3560,7 +3560,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.84,
     "totalWithItbisUsd": 44.84,
     "stockQty": 41,
-    "image": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Filtro Lubricante de Alta Eficiencia para Motores Cummins QSB (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3592,7 +3592,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 62.82,
     "totalWithItbisUsd": 411.82,
     "stockQty": 9,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Electrónico Bosch Common Rail Cummins QSB6.7. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3624,7 +3624,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 221.94,
     "totalWithItbisUsd": 1454.94,
     "stockQty": 22,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/engine_injection_pump.jpg",
     "description": "Bomba de Inyección de Alta Presión Delphi JCB Dieselmax 4.4L. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3656,7 +3656,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 140.76,
     "totalWithItbisUsd": 922.76,
     "stockQty": 35,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/turbocharger_holset.jpg",
     "description": "Turbocompresor de Geometría Fija Holset Heavy Duty Cummins. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3688,7 +3688,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 28.26,
     "totalWithItbisUsd": 185.26,
     "stockQty": 48,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Mecánico Doble Etapa Perkins Serie 1104D. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3720,7 +3720,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 35.28,
     "totalWithItbisUsd": 231.28,
     "stockQty": 16,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Agua con Turbina de Bronce Tropicalizada JCB 444. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3752,7 +3752,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 52.02,
     "totalWithItbisUsd": 341.02,
     "stockQty": 29,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Alternador Heavy Duty 12V 120A con Regulador Sellado. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3784,7 +3784,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 64.26,
     "totalWithItbisUsd": 421.26,
     "stockQty": 42,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Arranque Reducido por Engranajes 12V 3.2kW. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3816,7 +3816,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 32.94,
     "totalWithItbisUsd": 215.94,
     "stockQty": 10,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Kit de Pistón, Pasador y Anillos Cummins QSB 6.7L Grado A. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3848,7 +3848,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 22.14,
     "totalWithItbisUsd": 145.14,
     "stockQty": 23,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Empacadura de Culata Multi-Lámina MLS Perkins 1104D. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3880,7 +3880,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 58.14,
     "totalWithItbisUsd": 381.14,
     "stockQty": 36,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Enfriador de Aceite de Motor de Placas de Acero Inox JCB. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3912,7 +3912,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 67.86,
     "totalWithItbisUsd": 444.86,
     "stockQty": 49,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Electrónico Bosch Common Rail Cummins QSB6.7 (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3944,7 +3944,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 240.12,
     "totalWithItbisUsd": 1574.12,
     "stockQty": 17,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/engine_injection_pump.jpg",
     "description": "Bomba de Inyección de Alta Presión Delphi JCB Dieselmax 4.4L (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -3976,7 +3976,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 152.28,
     "totalWithItbisUsd": 998.28,
     "stockQty": 30,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/turbocharger_holset.jpg",
     "description": "Turbocompresor de Geometría Fija Holset Heavy Duty Cummins (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4008,7 +4008,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 30.6,
     "totalWithItbisUsd": 200.6,
     "stockQty": 43,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Mecánico Doble Etapa Perkins Serie 1104D (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4040,7 +4040,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 38.16,
     "totalWithItbisUsd": 250.16,
     "stockQty": 11,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Agua con Turbina de Bronce Tropicalizada JCB 444 (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4072,7 +4072,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 56.34,
     "totalWithItbisUsd": 369.34,
     "stockQty": 24,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Alternador Heavy Duty 12V 120A con Regulador Sellado (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4104,7 +4104,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 69.48,
     "totalWithItbisUsd": 455.48,
     "stockQty": 37,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Arranque Reducido por Engranajes 12V 3.2kW (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4136,7 +4136,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 35.64,
     "totalWithItbisUsd": 233.64,
     "stockQty": 50,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Kit de Pistón, Pasador y Anillos Cummins QSB 6.7L Grado A (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4168,7 +4168,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 23.94,
     "totalWithItbisUsd": 156.94,
     "stockQty": 18,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Empacadura de Culata Multi-Lámina MLS Perkins 1104D (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4200,7 +4200,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 63,
     "totalWithItbisUsd": 413,
     "stockQty": 31,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Enfriador de Aceite de Motor de Placas de Acero Inox JCB (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4232,7 +4232,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 73.08,
     "totalWithItbisUsd": 479.08,
     "stockQty": 44,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Electrónico Bosch Common Rail Cummins QSB6.7 (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4264,7 +4264,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 258.48,
     "totalWithItbisUsd": 1694.48,
     "stockQty": 12,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/engine_injection_pump.jpg",
     "description": "Bomba de Inyección de Alta Presión Delphi JCB Dieselmax 4.4L (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4296,7 +4296,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 163.98,
     "totalWithItbisUsd": 1074.98,
     "stockQty": 25,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/turbocharger_holset.jpg",
     "description": "Turbocompresor de Geometría Fija Holset Heavy Duty Cummins (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4328,7 +4328,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 32.94,
     "totalWithItbisUsd": 215.94,
     "stockQty": 38,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Mecánico Doble Etapa Perkins Serie 1104D (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4360,7 +4360,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 41.04,
     "totalWithItbisUsd": 269.04,
     "stockQty": 6,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Agua con Turbina de Bronce Tropicalizada JCB 444 (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4392,7 +4392,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 60.66,
     "totalWithItbisUsd": 397.66,
     "stockQty": 19,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Alternador Heavy Duty 12V 120A con Regulador Sellado (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4424,7 +4424,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 74.88,
     "totalWithItbisUsd": 490.88,
     "stockQty": 32,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Arranque Reducido por Engranajes 12V 3.2kW (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4456,7 +4456,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 38.34,
     "totalWithItbisUsd": 251.34,
     "stockQty": 45,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Kit de Pistón, Pasador y Anillos Cummins QSB 6.7L Grado A (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4488,7 +4488,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 25.92,
     "totalWithItbisUsd": 169.92,
     "stockQty": 13,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Empacadura de Culata Multi-Lámina MLS Perkins 1104D (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4520,7 +4520,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 67.68,
     "totalWithItbisUsd": 443.68,
     "stockQty": 26,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Enfriador de Aceite de Motor de Placas de Acero Inox JCB (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4552,7 +4552,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 78.3,
     "totalWithItbisUsd": 513.3,
     "stockQty": 39,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Electrónico Bosch Common Rail Cummins QSB6.7 (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4584,7 +4584,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 276.66,
     "totalWithItbisUsd": 1813.66,
     "stockQty": 7,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/engine_injection_pump.jpg",
     "description": "Bomba de Inyección de Alta Presión Delphi JCB Dieselmax 4.4L (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4616,7 +4616,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 175.5,
     "totalWithItbisUsd": 1150.5,
     "stockQty": 20,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/turbocharger_holset.jpg",
     "description": "Turbocompresor de Geometría Fija Holset Heavy Duty Cummins (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4648,7 +4648,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 35.28,
     "totalWithItbisUsd": 231.28,
     "stockQty": 33,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Mecánico Doble Etapa Perkins Serie 1104D (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4680,7 +4680,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 43.92,
     "totalWithItbisUsd": 287.92,
     "stockQty": 46,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Agua con Turbina de Bronce Tropicalizada JCB 444 (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4712,7 +4712,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 64.8,
     "totalWithItbisUsd": 424.8,
     "stockQty": 14,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Alternador Heavy Duty 12V 120A con Regulador Sellado (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4744,7 +4744,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 80.1,
     "totalWithItbisUsd": 525.1,
     "stockQty": 27,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Arranque Reducido por Engranajes 12V 3.2kW (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4776,7 +4776,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 41.04,
     "totalWithItbisUsd": 269.04,
     "stockQty": 40,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Kit de Pistón, Pasador y Anillos Cummins QSB 6.7L Grado A (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4808,7 +4808,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 27.72,
     "totalWithItbisUsd": 181.72,
     "stockQty": 8,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Empacadura de Culata Multi-Lámina MLS Perkins 1104D (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4840,7 +4840,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 72.54,
     "totalWithItbisUsd": 475.54,
     "stockQty": 21,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Enfriador de Aceite de Motor de Placas de Acero Inox JCB (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4872,7 +4872,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 83.34,
     "totalWithItbisUsd": 546.34,
     "stockQty": 34,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Electrónico Bosch Common Rail Cummins QSB6.7 (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4904,7 +4904,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 294.84,
     "totalWithItbisUsd": 1932.84,
     "stockQty": 47,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/engine_injection_pump.jpg",
     "description": "Bomba de Inyección de Alta Presión Delphi JCB Dieselmax 4.4L (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4936,7 +4936,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 187.2,
     "totalWithItbisUsd": 1227.2,
     "stockQty": 15,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/turbocharger_holset.jpg",
     "description": "Turbocompresor de Geometría Fija Holset Heavy Duty Cummins (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -4968,7 +4968,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 37.62,
     "totalWithItbisUsd": 246.62,
     "stockQty": 28,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Mecánico Doble Etapa Perkins Serie 1104D (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5000,7 +5000,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 46.8,
     "totalWithItbisUsd": 306.8,
     "stockQty": 41,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Agua con Turbina de Bronce Tropicalizada JCB 444 (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5032,7 +5032,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 69.12,
     "totalWithItbisUsd": 453.12,
     "stockQty": 9,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Alternador Heavy Duty 12V 120A con Regulador Sellado (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5064,7 +5064,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 85.5,
     "totalWithItbisUsd": 560.5,
     "stockQty": 22,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Arranque Reducido por Engranajes 12V 3.2kW (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5096,7 +5096,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 43.74,
     "totalWithItbisUsd": 286.74,
     "stockQty": 35,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Kit de Pistón, Pasador y Anillos Cummins QSB 6.7L Grado A (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5128,7 +5128,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 29.52,
     "totalWithItbisUsd": 193.52,
     "stockQty": 48,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Empacadura de Culata Multi-Lámina MLS Perkins 1104D (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5160,7 +5160,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 77.22,
     "totalWithItbisUsd": 506.22,
     "stockQty": 16,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Enfriador de Aceite de Motor de Placas de Acero Inox JCB (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5192,7 +5192,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 62.82,
     "totalWithItbisUsd": 411.82,
     "stockQty": 29,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Electrónico Bosch Common Rail Cummins QSB6.7 (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5224,7 +5224,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 221.94,
     "totalWithItbisUsd": 1454.94,
     "stockQty": 42,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/engine_injection_pump.jpg",
     "description": "Bomba de Inyección de Alta Presión Delphi JCB Dieselmax 4.4L (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5256,7 +5256,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 140.76,
     "totalWithItbisUsd": 922.76,
     "stockQty": 10,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/turbocharger_holset.jpg",
     "description": "Turbocompresor de Geometría Fija Holset Heavy Duty Cummins (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5288,7 +5288,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 28.26,
     "totalWithItbisUsd": 185.26,
     "stockQty": 23,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Mecánico Doble Etapa Perkins Serie 1104D (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5320,7 +5320,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 35.28,
     "totalWithItbisUsd": 231.28,
     "stockQty": 36,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Agua con Turbina de Bronce Tropicalizada JCB 444 (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5352,7 +5352,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 52.02,
     "totalWithItbisUsd": 341.02,
     "stockQty": 49,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Alternador Heavy Duty 12V 120A con Regulador Sellado (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5384,7 +5384,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 64.26,
     "totalWithItbisUsd": 421.26,
     "stockQty": 17,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Arranque Reducido por Engranajes 12V 3.2kW (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5416,7 +5416,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 32.94,
     "totalWithItbisUsd": 215.94,
     "stockQty": 30,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Kit de Pistón, Pasador y Anillos Cummins QSB 6.7L Grado A (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5448,7 +5448,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 22.14,
     "totalWithItbisUsd": 145.14,
     "stockQty": 43,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Empacadura de Culata Multi-Lámina MLS Perkins 1104D (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5480,7 +5480,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 58.14,
     "totalWithItbisUsd": 381.14,
     "stockQty": 11,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Enfriador de Aceite de Motor de Placas de Acero Inox JCB (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5512,7 +5512,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 67.86,
     "totalWithItbisUsd": 444.86,
     "stockQty": 24,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Electrónico Bosch Common Rail Cummins QSB6.7 (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5544,7 +5544,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 240.12,
     "totalWithItbisUsd": 1574.12,
     "stockQty": 37,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/engine_injection_pump.jpg",
     "description": "Bomba de Inyección de Alta Presión Delphi JCB Dieselmax 4.4L (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5576,7 +5576,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 152.28,
     "totalWithItbisUsd": 998.28,
     "stockQty": 50,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/turbocharger_holset.jpg",
     "description": "Turbocompresor de Geometría Fija Holset Heavy Duty Cummins (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5608,7 +5608,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 30.6,
     "totalWithItbisUsd": 200.6,
     "stockQty": 18,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Mecánico Doble Etapa Perkins Serie 1104D (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5640,7 +5640,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 38.16,
     "totalWithItbisUsd": 250.16,
     "stockQty": 31,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Agua con Turbina de Bronce Tropicalizada JCB 444 (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5672,7 +5672,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 56.34,
     "totalWithItbisUsd": 369.34,
     "stockQty": 44,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Alternador Heavy Duty 12V 120A con Regulador Sellado (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5704,7 +5704,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 69.48,
     "totalWithItbisUsd": 455.48,
     "stockQty": 12,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Arranque Reducido por Engranajes 12V 3.2kW (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5736,7 +5736,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 35.64,
     "totalWithItbisUsd": 233.64,
     "stockQty": 25,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Kit de Pistón, Pasador y Anillos Cummins QSB 6.7L Grado A (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5768,7 +5768,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 23.94,
     "totalWithItbisUsd": 156.94,
     "stockQty": 38,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Empacadura de Culata Multi-Lámina MLS Perkins 1104D (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5800,7 +5800,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 63,
     "totalWithItbisUsd": 413,
     "stockQty": 6,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Enfriador de Aceite de Motor de Placas de Acero Inox JCB (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5832,7 +5832,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 73.08,
     "totalWithItbisUsd": 479.08,
     "stockQty": 19,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Electrónico Bosch Common Rail Cummins QSB6.7 (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5864,7 +5864,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 258.48,
     "totalWithItbisUsd": 1694.48,
     "stockQty": 32,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/engine_injection_pump.jpg",
     "description": "Bomba de Inyección de Alta Presión Delphi JCB Dieselmax 4.4L (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5896,7 +5896,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 163.98,
     "totalWithItbisUsd": 1074.98,
     "stockQty": 45,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/turbocharger_holset.jpg",
     "description": "Turbocompresor de Geometría Fija Holset Heavy Duty Cummins (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5928,7 +5928,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 32.94,
     "totalWithItbisUsd": 215.94,
     "stockQty": 13,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Mecánico Doble Etapa Perkins Serie 1104D (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5960,7 +5960,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 41.04,
     "totalWithItbisUsd": 269.04,
     "stockQty": 26,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Agua con Turbina de Bronce Tropicalizada JCB 444 (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -5992,7 +5992,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 60.66,
     "totalWithItbisUsd": 397.66,
     "stockQty": 39,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Alternador Heavy Duty 12V 120A con Regulador Sellado (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6024,7 +6024,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 74.88,
     "totalWithItbisUsd": 490.88,
     "stockQty": 7,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Arranque Reducido por Engranajes 12V 3.2kW (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6056,7 +6056,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 38.34,
     "totalWithItbisUsd": 251.34,
     "stockQty": 20,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Kit de Pistón, Pasador y Anillos Cummins QSB 6.7L Grado A (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6088,7 +6088,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 25.92,
     "totalWithItbisUsd": 169.92,
     "stockQty": 33,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Empacadura de Culata Multi-Lámina MLS Perkins 1104D (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6120,7 +6120,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 67.68,
     "totalWithItbisUsd": 443.68,
     "stockQty": 46,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Enfriador de Aceite de Motor de Placas de Acero Inox JCB (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6152,7 +6152,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 78.3,
     "totalWithItbisUsd": 513.3,
     "stockQty": 14,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Electrónico Bosch Common Rail Cummins QSB6.7 (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6184,7 +6184,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 276.66,
     "totalWithItbisUsd": 1813.66,
     "stockQty": 27,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/engine_injection_pump.jpg",
     "description": "Bomba de Inyección de Alta Presión Delphi JCB Dieselmax 4.4L (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6216,7 +6216,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 175.5,
     "totalWithItbisUsd": 1150.5,
     "stockQty": 40,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/turbocharger_holset.jpg",
     "description": "Turbocompresor de Geometría Fija Holset Heavy Duty Cummins (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6248,7 +6248,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 35.28,
     "totalWithItbisUsd": 231.28,
     "stockQty": 8,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_diesel_injector_common_rail.jpg",
     "description": "Inyector Mecánico Doble Etapa Perkins Serie 1104D (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6280,7 +6280,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 43.92,
     "totalWithItbisUsd": 287.92,
     "stockQty": 21,
-    "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Agua con Turbina de Bronce Tropicalizada JCB 444 (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6312,7 +6312,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 527.94,
     "totalWithItbisUsd": 3460.94,
     "stockQty": 34,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba Hidráulica Principal Doble Pistón de Cilindrada Variable. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6344,7 +6344,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 442.26,
     "totalWithItbisUsd": 2899.26,
     "stockQty": 47,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Pistones Axiales Circuito Abierto Rexroth 350 Bar. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6376,7 +6376,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 321.3,
     "totalWithItbisUsd": 2106.3,
     "stockQty": 15,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Válvula de Control Seccional Husco JCB 3CX 6 Carreteles. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6408,7 +6408,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 19.08,
     "totalWithItbisUsd": 125.08,
     "stockQty": 28,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_cylinder_rod_seals.jpg",
     "description": "Kit Completo de Sellos de Cilindro de Levante Balde (Viton/PTFE). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6440,7 +6440,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 359.64,
     "totalWithItbisUsd": 2357.64,
     "stockQty": 41,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Giro Hidráulico de Pistones Oscilantes con Freno. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6472,7 +6472,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 482.04,
     "totalWithItbisUsd": 3160.04,
     "stockQty": 9,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Mando Final con Motor de Traslación Planetario 2 Velocidades. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6504,7 +6504,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 22.14,
     "totalWithItbisUsd": 145.14,
     "stockQty": 22,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tramo Manguera Hidráulica 4 Mallas Espiraladas 5000 PSI 1\" x 2.4m. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6536,7 +6536,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 571.32,
     "totalWithItbisUsd": 3745.32,
     "stockQty": 35,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba Hidráulica Principal Doble Pistón de Cilindrada Variable (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6568,7 +6568,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 478.62,
     "totalWithItbisUsd": 3137.62,
     "stockQty": 48,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Pistones Axiales Circuito Abierto Rexroth 350 Bar (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6600,7 +6600,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 347.76,
     "totalWithItbisUsd": 2279.76,
     "stockQty": 16,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Válvula de Control Seccional Husco JCB 3CX 6 Carreteles (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6632,7 +6632,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 20.7,
     "totalWithItbisUsd": 135.7,
     "stockQty": 29,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_cylinder_rod_seals.jpg",
     "description": "Kit Completo de Sellos de Cilindro de Levante Balde (Viton/PTFE) (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6664,7 +6664,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 389.16,
     "totalWithItbisUsd": 2551.16,
     "stockQty": 42,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Giro Hidráulico de Pistones Oscilantes con Freno (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6696,7 +6696,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 521.64,
     "totalWithItbisUsd": 3419.64,
     "stockQty": 10,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Mando Final con Motor de Traslación Planetario 2 Velocidades (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6728,7 +6728,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 23.94,
     "totalWithItbisUsd": 156.94,
     "stockQty": 23,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tramo Manguera Hidráulica 4 Mallas Espiraladas 5000 PSI 1\" x 2.4m (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6760,7 +6760,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 614.88,
     "totalWithItbisUsd": 4030.88,
     "stockQty": 36,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba Hidráulica Principal Doble Pistón de Cilindrada Variable (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6792,7 +6792,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 514.98,
     "totalWithItbisUsd": 3375.98,
     "stockQty": 49,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Pistones Axiales Circuito Abierto Rexroth 350 Bar (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6824,7 +6824,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 374.22,
     "totalWithItbisUsd": 2453.22,
     "stockQty": 17,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Válvula de Control Seccional Husco JCB 3CX 6 Carreteles (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6856,7 +6856,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 22.32,
     "totalWithItbisUsd": 146.32,
     "stockQty": 30,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_cylinder_rod_seals.jpg",
     "description": "Kit Completo de Sellos de Cilindro de Levante Balde (Viton/PTFE) (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6888,7 +6888,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 418.86,
     "totalWithItbisUsd": 2745.86,
     "stockQty": 43,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Giro Hidráulico de Pistones Oscilantes con Freno (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6920,7 +6920,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 561.42,
     "totalWithItbisUsd": 3680.42,
     "stockQty": 11,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Mando Final con Motor de Traslación Planetario 2 Velocidades (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6952,7 +6952,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 25.92,
     "totalWithItbisUsd": 169.92,
     "stockQty": 24,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tramo Manguera Hidráulica 4 Mallas Espiraladas 5000 PSI 1\" x 2.4m (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -6984,7 +6984,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 658.26,
     "totalWithItbisUsd": 4315.26,
     "stockQty": 37,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba Hidráulica Principal Doble Pistón de Cilindrada Variable (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7016,7 +7016,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 551.34,
     "totalWithItbisUsd": 3614.34,
     "stockQty": 50,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Pistones Axiales Circuito Abierto Rexroth 350 Bar (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7048,7 +7048,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 400.68,
     "totalWithItbisUsd": 2626.68,
     "stockQty": 18,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Válvula de Control Seccional Husco JCB 3CX 6 Carreteles (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7080,7 +7080,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 23.94,
     "totalWithItbisUsd": 156.94,
     "stockQty": 31,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_cylinder_rod_seals.jpg",
     "description": "Kit Completo de Sellos de Cilindro de Levante Balde (Viton/PTFE) (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7112,7 +7112,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 448.38,
     "totalWithItbisUsd": 2939.38,
     "stockQty": 44,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Giro Hidráulico de Pistones Oscilantes con Freno (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7144,7 +7144,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 601.02,
     "totalWithItbisUsd": 3940.02,
     "stockQty": 12,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Mando Final con Motor de Traslación Planetario 2 Velocidades (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7176,7 +7176,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 27.72,
     "totalWithItbisUsd": 181.72,
     "stockQty": 25,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tramo Manguera Hidráulica 4 Mallas Espiraladas 5000 PSI 1\" x 2.4m (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7208,7 +7208,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 701.64,
     "totalWithItbisUsd": 4599.64,
     "stockQty": 38,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba Hidráulica Principal Doble Pistón de Cilindrada Variable (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7240,7 +7240,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 587.88,
     "totalWithItbisUsd": 3853.88,
     "stockQty": 6,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Pistones Axiales Circuito Abierto Rexroth 350 Bar (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7272,7 +7272,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 427.14,
     "totalWithItbisUsd": 2800.14,
     "stockQty": 19,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Válvula de Control Seccional Husco JCB 3CX 6 Carreteles (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7304,7 +7304,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 25.38,
     "totalWithItbisUsd": 166.38,
     "stockQty": 32,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_cylinder_rod_seals.jpg",
     "description": "Kit Completo de Sellos de Cilindro de Levante Balde (Viton/PTFE) (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7336,7 +7336,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 477.9,
     "totalWithItbisUsd": 3132.9,
     "stockQty": 45,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Giro Hidráulico de Pistones Oscilantes con Freno (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7368,7 +7368,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 640.62,
     "totalWithItbisUsd": 4199.62,
     "stockQty": 13,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Mando Final con Motor de Traslación Planetario 2 Velocidades (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7400,7 +7400,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 29.52,
     "totalWithItbisUsd": 193.52,
     "stockQty": 26,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tramo Manguera Hidráulica 4 Mallas Espiraladas 5000 PSI 1\" x 2.4m (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7432,7 +7432,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 527.94,
     "totalWithItbisUsd": 3460.94,
     "stockQty": 39,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba Hidráulica Principal Doble Pistón de Cilindrada Variable (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7464,7 +7464,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 442.26,
     "totalWithItbisUsd": 2899.26,
     "stockQty": 7,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Pistones Axiales Circuito Abierto Rexroth 350 Bar (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7496,7 +7496,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 321.3,
     "totalWithItbisUsd": 2106.3,
     "stockQty": 20,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Válvula de Control Seccional Husco JCB 3CX 6 Carreteles (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7528,7 +7528,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 19.08,
     "totalWithItbisUsd": 125.08,
     "stockQty": 33,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_cylinder_rod_seals.jpg",
     "description": "Kit Completo de Sellos de Cilindro de Levante Balde (Viton/PTFE) (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7560,7 +7560,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 359.64,
     "totalWithItbisUsd": 2357.64,
     "stockQty": 46,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Giro Hidráulico de Pistones Oscilantes con Freno (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7592,7 +7592,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 482.04,
     "totalWithItbisUsd": 3160.04,
     "stockQty": 14,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Mando Final con Motor de Traslación Planetario 2 Velocidades (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7624,7 +7624,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 22.14,
     "totalWithItbisUsd": 145.14,
     "stockQty": 27,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tramo Manguera Hidráulica 4 Mallas Espiraladas 5000 PSI 1\" x 2.4m (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7656,7 +7656,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 571.32,
     "totalWithItbisUsd": 3745.32,
     "stockQty": 40,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba Hidráulica Principal Doble Pistón de Cilindrada Variable (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7688,7 +7688,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 478.62,
     "totalWithItbisUsd": 3137.62,
     "stockQty": 8,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Pistones Axiales Circuito Abierto Rexroth 350 Bar (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7720,7 +7720,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 347.76,
     "totalWithItbisUsd": 2279.76,
     "stockQty": 21,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Válvula de Control Seccional Husco JCB 3CX 6 Carreteles (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7752,7 +7752,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 20.7,
     "totalWithItbisUsd": 135.7,
     "stockQty": 34,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_cylinder_rod_seals.jpg",
     "description": "Kit Completo de Sellos de Cilindro de Levante Balde (Viton/PTFE) (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7784,7 +7784,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 389.16,
     "totalWithItbisUsd": 2551.16,
     "stockQty": 47,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Giro Hidráulico de Pistones Oscilantes con Freno (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7816,7 +7816,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 521.64,
     "totalWithItbisUsd": 3419.64,
     "stockQty": 15,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Mando Final con Motor de Traslación Planetario 2 Velocidades (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7848,7 +7848,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 23.94,
     "totalWithItbisUsd": 156.94,
     "stockQty": 28,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tramo Manguera Hidráulica 4 Mallas Espiraladas 5000 PSI 1\" x 2.4m (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7880,7 +7880,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 614.88,
     "totalWithItbisUsd": 4030.88,
     "stockQty": 41,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba Hidráulica Principal Doble Pistón de Cilindrada Variable (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7912,7 +7912,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 514.98,
     "totalWithItbisUsd": 3375.98,
     "stockQty": 9,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Pistones Axiales Circuito Abierto Rexroth 350 Bar (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7944,7 +7944,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 374.22,
     "totalWithItbisUsd": 2453.22,
     "stockQty": 22,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Válvula de Control Seccional Husco JCB 3CX 6 Carreteles (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -7976,7 +7976,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 22.32,
     "totalWithItbisUsd": 146.32,
     "stockQty": 35,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_cylinder_rod_seals.jpg",
     "description": "Kit Completo de Sellos de Cilindro de Levante Balde (Viton/PTFE) (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8008,7 +8008,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 418.86,
     "totalWithItbisUsd": 2745.86,
     "stockQty": 48,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Giro Hidráulico de Pistones Oscilantes con Freno (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8040,7 +8040,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 561.42,
     "totalWithItbisUsd": 3680.42,
     "stockQty": 16,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Mando Final con Motor de Traslación Planetario 2 Velocidades (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8072,7 +8072,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 25.92,
     "totalWithItbisUsd": 169.92,
     "stockQty": 29,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tramo Manguera Hidráulica 4 Mallas Espiraladas 5000 PSI 1\" x 2.4m (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8104,7 +8104,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 658.26,
     "totalWithItbisUsd": 4315.26,
     "stockQty": 42,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba Hidráulica Principal Doble Pistón de Cilindrada Variable (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8136,7 +8136,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 551.34,
     "totalWithItbisUsd": 3614.34,
     "stockQty": 10,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Pistones Axiales Circuito Abierto Rexroth 350 Bar (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8168,7 +8168,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 400.68,
     "totalWithItbisUsd": 2626.68,
     "stockQty": 23,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Válvula de Control Seccional Husco JCB 3CX 6 Carreteles (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8200,7 +8200,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 23.94,
     "totalWithItbisUsd": 156.94,
     "stockQty": 36,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_cylinder_rod_seals.jpg",
     "description": "Kit Completo de Sellos de Cilindro de Levante Balde (Viton/PTFE) (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8232,7 +8232,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 448.38,
     "totalWithItbisUsd": 2939.38,
     "stockQty": 49,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Giro Hidráulico de Pistones Oscilantes con Freno (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8264,7 +8264,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 601.02,
     "totalWithItbisUsd": 3940.02,
     "stockQty": 17,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Mando Final con Motor de Traslación Planetario 2 Velocidades (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8296,7 +8296,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 27.72,
     "totalWithItbisUsd": 181.72,
     "stockQty": 30,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tramo Manguera Hidráulica 4 Mallas Espiraladas 5000 PSI 1\" x 2.4m (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8328,7 +8328,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 701.64,
     "totalWithItbisUsd": 4599.64,
     "stockQty": 43,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba Hidráulica Principal Doble Pistón de Cilindrada Variable (Variante Esp. HD #10). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8360,7 +8360,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 587.88,
     "totalWithItbisUsd": 3853.88,
     "stockQty": 11,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Pistones Axiales Circuito Abierto Rexroth 350 Bar (Variante Esp. HD #10). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8392,7 +8392,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 427.14,
     "totalWithItbisUsd": 2800.14,
     "stockQty": 24,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Válvula de Control Seccional Husco JCB 3CX 6 Carreteles (Variante Esp. HD #10). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8424,7 +8424,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 25.38,
     "totalWithItbisUsd": 166.38,
     "stockQty": 37,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_cylinder_rod_seals.jpg",
     "description": "Kit Completo de Sellos de Cilindro de Levante Balde (Viton/PTFE) (Variante Esp. HD #10). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8456,7 +8456,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 477.9,
     "totalWithItbisUsd": 3132.9,
     "stockQty": 50,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Giro Hidráulico de Pistones Oscilantes con Freno (Variante Esp. HD #10). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8488,7 +8488,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 640.62,
     "totalWithItbisUsd": 4199.62,
     "stockQty": 18,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Mando Final con Motor de Traslación Planetario 2 Velocidades (Variante Esp. HD #10). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8520,7 +8520,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 29.52,
     "totalWithItbisUsd": 193.52,
     "stockQty": 31,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tramo Manguera Hidráulica 4 Mallas Espiraladas 5000 PSI 1\" x 2.4m (Variante Esp. HD #10). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8552,7 +8552,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 527.94,
     "totalWithItbisUsd": 3460.94,
     "stockQty": 44,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba Hidráulica Principal Doble Pistón de Cilindrada Variable (Variante Esp. HD #11). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8584,7 +8584,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 442.26,
     "totalWithItbisUsd": 2899.26,
     "stockQty": 12,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Bomba de Pistones Axiales Circuito Abierto Rexroth 350 Bar (Variante Esp. HD #11). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8616,7 +8616,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 321.3,
     "totalWithItbisUsd": 2106.3,
     "stockQty": 25,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Válvula de Control Seccional Husco JCB 3CX 6 Carreteles (Variante Esp. HD #11). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8648,7 +8648,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 19.08,
     "totalWithItbisUsd": 125.08,
     "stockQty": 38,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_cylinder_rod_seals.jpg",
     "description": "Kit Completo de Sellos de Cilindro de Levante Balde (Viton/PTFE) (Variante Esp. HD #11). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8680,7 +8680,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 359.64,
     "totalWithItbisUsd": 2357.64,
     "stockQty": 6,
-    "image": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Motor de Giro Hidráulico de Pistones Oscilantes con Freno (Variante Esp. HD #11). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8712,7 +8712,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 257.04,
     "totalWithItbisUsd": 1685.04,
     "stockQty": 19,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Cadena de Oruga Sellada y Lubricada 49 Eslabones 190mm Paso. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8744,7 +8744,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 29.88,
     "totalWithItbisUsd": 195.88,
     "stockQty": 32,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rodillo Inferior de Doble Pestaña Forjado con Sellos Duo-Cone. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8776,7 +8776,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 88.74,
     "totalWithItbisUsd": 581.74,
     "stockQty": 45,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rueda Guía (Idler) Delantera con Eje Endurecido por Inducción. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8808,7 +8808,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 52.02,
     "totalWithItbisUsd": 341.02,
     "stockQty": 13,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Rueda Cabilla (Sprocket) Empernada 21 Dientes Tratamiento Térmico. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8840,7 +8840,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 64.26,
     "totalWithItbisUsd": 421.26,
     "stockQty": 26,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Delantero 12.5/80-18 12 Lonas Tracción Industrial HD. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8872,7 +8872,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 136.26,
     "totalWithItbisUsd": 893.26,
     "stockQty": 39,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Trasero 19.5L-24 14 Lonas para Retroexcavadora R-4. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8904,7 +8904,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 278.28,
     "totalWithItbisUsd": 1824.28,
     "stockQty": 7,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Cadena de Oruga Sellada y Lubricada 49 Eslabones 190mm Paso (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8936,7 +8936,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 32.22,
     "totalWithItbisUsd": 211.22,
     "stockQty": 20,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rodillo Inferior de Doble Pestaña Forjado con Sellos Duo-Cone (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -8968,7 +8968,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 96.12,
     "totalWithItbisUsd": 630.12,
     "stockQty": 33,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rueda Guía (Idler) Delantera con Eje Endurecido por Inducción (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9000,7 +9000,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 56.34,
     "totalWithItbisUsd": 369.34,
     "stockQty": 46,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Rueda Cabilla (Sprocket) Empernada 21 Dientes Tratamiento Térmico (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9032,7 +9032,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 69.48,
     "totalWithItbisUsd": 455.48,
     "stockQty": 14,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Delantero 12.5/80-18 12 Lonas Tracción Industrial HD (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9064,7 +9064,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 147.42,
     "totalWithItbisUsd": 966.42,
     "stockQty": 27,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Trasero 19.5L-24 14 Lonas para Retroexcavadora R-4 (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9096,7 +9096,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 299.34,
     "totalWithItbisUsd": 1962.34,
     "stockQty": 40,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Cadena de Oruga Sellada y Lubricada 49 Eslabones 190mm Paso (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9128,7 +9128,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 34.74,
     "totalWithItbisUsd": 227.74,
     "stockQty": 8,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rodillo Inferior de Doble Pestaña Forjado con Sellos Duo-Cone (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9160,7 +9160,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 103.32,
     "totalWithItbisUsd": 677.32,
     "stockQty": 21,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rueda Guía (Idler) Delantera con Eje Endurecido por Inducción (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9192,7 +9192,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 60.66,
     "totalWithItbisUsd": 397.66,
     "stockQty": 34,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Rueda Cabilla (Sprocket) Empernada 21 Dientes Tratamiento Térmico (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9224,7 +9224,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 74.88,
     "totalWithItbisUsd": 490.88,
     "stockQty": 47,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Delantero 12.5/80-18 12 Lonas Tracción Industrial HD (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9256,7 +9256,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 158.58,
     "totalWithItbisUsd": 1039.58,
     "stockQty": 15,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Trasero 19.5L-24 14 Lonas para Retroexcavadora R-4 (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9288,7 +9288,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 320.58,
     "totalWithItbisUsd": 2101.58,
     "stockQty": 28,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Cadena de Oruga Sellada y Lubricada 49 Eslabones 190mm Paso (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9320,7 +9320,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 37.26,
     "totalWithItbisUsd": 244.26,
     "stockQty": 41,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rodillo Inferior de Doble Pestaña Forjado con Sellos Duo-Cone (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9352,7 +9352,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 110.7,
     "totalWithItbisUsd": 725.7,
     "stockQty": 9,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rueda Guía (Idler) Delantera con Eje Endurecido por Inducción (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9384,7 +9384,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 64.8,
     "totalWithItbisUsd": 424.8,
     "stockQty": 22,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Rueda Cabilla (Sprocket) Empernada 21 Dientes Tratamiento Térmico (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9416,7 +9416,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 80.1,
     "totalWithItbisUsd": 525.1,
     "stockQty": 35,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Delantero 12.5/80-18 12 Lonas Tracción Industrial HD (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9448,7 +9448,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 169.74,
     "totalWithItbisUsd": 1112.74,
     "stockQty": 48,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Trasero 19.5L-24 14 Lonas para Retroexcavadora R-4 (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9480,7 +9480,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 341.64,
     "totalWithItbisUsd": 2239.64,
     "stockQty": 16,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Cadena de Oruga Sellada y Lubricada 49 Eslabones 190mm Paso (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9512,7 +9512,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 39.6,
     "totalWithItbisUsd": 259.6,
     "stockQty": 29,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rodillo Inferior de Doble Pestaña Forjado con Sellos Duo-Cone (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9544,7 +9544,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 117.9,
     "totalWithItbisUsd": 772.9,
     "stockQty": 42,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rueda Guía (Idler) Delantera con Eje Endurecido por Inducción (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9576,7 +9576,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 69.12,
     "totalWithItbisUsd": 453.12,
     "stockQty": 10,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Rueda Cabilla (Sprocket) Empernada 21 Dientes Tratamiento Térmico (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9608,7 +9608,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 85.5,
     "totalWithItbisUsd": 560.5,
     "stockQty": 23,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Delantero 12.5/80-18 12 Lonas Tracción Industrial HD (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9640,7 +9640,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 181.08,
     "totalWithItbisUsd": 1187.08,
     "stockQty": 36,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Trasero 19.5L-24 14 Lonas para Retroexcavadora R-4 (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9672,7 +9672,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 257.04,
     "totalWithItbisUsd": 1685.04,
     "stockQty": 49,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Cadena de Oruga Sellada y Lubricada 49 Eslabones 190mm Paso (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9704,7 +9704,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 29.88,
     "totalWithItbisUsd": 195.88,
     "stockQty": 17,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rodillo Inferior de Doble Pestaña Forjado con Sellos Duo-Cone (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9736,7 +9736,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 88.74,
     "totalWithItbisUsd": 581.74,
     "stockQty": 30,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rueda Guía (Idler) Delantera con Eje Endurecido por Inducción (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9768,7 +9768,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 52.02,
     "totalWithItbisUsd": 341.02,
     "stockQty": 43,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Rueda Cabilla (Sprocket) Empernada 21 Dientes Tratamiento Térmico (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9800,7 +9800,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 64.26,
     "totalWithItbisUsd": 421.26,
     "stockQty": 11,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Delantero 12.5/80-18 12 Lonas Tracción Industrial HD (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9832,7 +9832,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 136.26,
     "totalWithItbisUsd": 893.26,
     "stockQty": 24,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Trasero 19.5L-24 14 Lonas para Retroexcavadora R-4 (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9864,7 +9864,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 278.28,
     "totalWithItbisUsd": 1824.28,
     "stockQty": 37,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Cadena de Oruga Sellada y Lubricada 49 Eslabones 190mm Paso (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9896,7 +9896,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 32.22,
     "totalWithItbisUsd": 211.22,
     "stockQty": 50,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rodillo Inferior de Doble Pestaña Forjado con Sellos Duo-Cone (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9928,7 +9928,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 96.12,
     "totalWithItbisUsd": 630.12,
     "stockQty": 18,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rueda Guía (Idler) Delantera con Eje Endurecido por Inducción (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9960,7 +9960,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 56.34,
     "totalWithItbisUsd": 369.34,
     "stockQty": 31,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Rueda Cabilla (Sprocket) Empernada 21 Dientes Tratamiento Térmico (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -9992,7 +9992,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 69.48,
     "totalWithItbisUsd": 455.48,
     "stockQty": 44,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Delantero 12.5/80-18 12 Lonas Tracción Industrial HD (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10024,7 +10024,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 147.42,
     "totalWithItbisUsd": 966.42,
     "stockQty": 12,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Trasero 19.5L-24 14 Lonas para Retroexcavadora R-4 (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10056,7 +10056,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 299.34,
     "totalWithItbisUsd": 1962.34,
     "stockQty": 25,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Cadena de Oruga Sellada y Lubricada 49 Eslabones 190mm Paso (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10088,7 +10088,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 34.74,
     "totalWithItbisUsd": 227.74,
     "stockQty": 38,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rodillo Inferior de Doble Pestaña Forjado con Sellos Duo-Cone (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10120,7 +10120,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 103.32,
     "totalWithItbisUsd": 677.32,
     "stockQty": 6,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rueda Guía (Idler) Delantera con Eje Endurecido por Inducción (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10152,7 +10152,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 60.66,
     "totalWithItbisUsd": 397.66,
     "stockQty": 19,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Rueda Cabilla (Sprocket) Empernada 21 Dientes Tratamiento Térmico (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10184,7 +10184,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 74.88,
     "totalWithItbisUsd": 490.88,
     "stockQty": 32,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Delantero 12.5/80-18 12 Lonas Tracción Industrial HD (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10216,7 +10216,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 158.58,
     "totalWithItbisUsd": 1039.58,
     "stockQty": 45,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/rubber_track_camso.jpg",
     "description": "Neumático Trasero 19.5L-24 14 Lonas para Retroexcavadora R-4 (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10248,7 +10248,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 320.58,
     "totalWithItbisUsd": 2101.58,
     "stockQty": 13,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/steel_track_chain_sprocket.jpg",
     "description": "Cadena de Oruga Sellada y Lubricada 49 Eslabones 190mm Paso (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10280,7 +10280,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 37.26,
     "totalWithItbisUsd": 244.26,
     "stockQty": 26,
-    "image": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/track_bottom_roller_idler.jpg",
     "description": "Rodillo Inferior de Doble Pestaña Forjado con Sellos Duo-Cone (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10312,7 +10312,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.84,
     "totalWithItbisUsd": 44.84,
     "stockQty": 39,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Diente de Balde Monotooth Forjado JCB con Pasador de Acero. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10344,7 +10344,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 9.54,
     "totalWithItbisUsd": 62.54,
     "stockQty": 7,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Punta de Balde Servicio Pesado J350 para Roca Volcánica y Cantera. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10376,7 +10376,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 44.46,
     "totalWithItbisUsd": 291.46,
     "stockQty": 20,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Juego de 5 Dientes de Excavadora 22T con Pasadores y Retenes. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10408,7 +10408,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 28.26,
     "totalWithItbisUsd": 185.26,
     "stockQty": 33,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cuchilla de Corte Reversible Curva para Motoniveladora 7 Pies. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10440,7 +10440,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 11.88,
     "totalWithItbisUsd": 77.88,
     "stockQty": 46,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cantonera Lateral Izquierda/Derecha Protectora de Balde. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10472,7 +10472,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.38,
     "totalWithItbisUsd": 48.38,
     "stockQty": 14,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Diente de Balde Monotooth Forjado JCB con Pasador de Acero (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10504,7 +10504,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 10.26,
     "totalWithItbisUsd": 67.26,
     "stockQty": 27,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Punta de Balde Servicio Pesado J350 para Roca Volcánica y Cantera (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10536,7 +10536,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 48.06,
     "totalWithItbisUsd": 315.06,
     "stockQty": 40,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Juego de 5 Dientes de Excavadora 22T con Pasadores y Retenes (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10568,7 +10568,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 30.6,
     "totalWithItbisUsd": 200.6,
     "stockQty": 8,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cuchilla de Corte Reversible Curva para Motoniveladora 7 Pies (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10600,7 +10600,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.96,
     "totalWithItbisUsd": 84.96,
     "stockQty": 21,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cantonera Lateral Izquierda/Derecha Protectora de Balde (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10632,7 +10632,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 8.1,
     "totalWithItbisUsd": 53.1,
     "stockQty": 34,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Diente de Balde Monotooth Forjado JCB con Pasador de Acero (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10664,7 +10664,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 10.98,
     "totalWithItbisUsd": 71.98,
     "stockQty": 47,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Punta de Balde Servicio Pesado J350 para Roca Volcánica y Cantera (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10696,7 +10696,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 51.66,
     "totalWithItbisUsd": 338.66,
     "stockQty": 15,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Juego de 5 Dientes de Excavadora 22T con Pasadores y Retenes (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10728,7 +10728,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 32.94,
     "totalWithItbisUsd": 215.94,
     "stockQty": 28,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cuchilla de Corte Reversible Curva para Motoniveladora 7 Pies (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10760,7 +10760,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 13.86,
     "totalWithItbisUsd": 90.86,
     "stockQty": 41,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cantonera Lateral Izquierda/Derecha Protectora de Balde (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10792,7 +10792,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 8.64,
     "totalWithItbisUsd": 56.64,
     "stockQty": 9,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Diente de Balde Monotooth Forjado JCB con Pasador de Acero (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10824,7 +10824,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 11.88,
     "totalWithItbisUsd": 77.88,
     "stockQty": 22,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Punta de Balde Servicio Pesado J350 para Roca Volcánica y Cantera (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10856,7 +10856,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 55.26,
     "totalWithItbisUsd": 362.26,
     "stockQty": 35,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Juego de 5 Dientes de Excavadora 22T con Pasadores y Retenes (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10888,7 +10888,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 35.28,
     "totalWithItbisUsd": 231.28,
     "stockQty": 48,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cuchilla de Corte Reversible Curva para Motoniveladora 7 Pies (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10920,7 +10920,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 14.94,
     "totalWithItbisUsd": 97.94,
     "stockQty": 16,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cantonera Lateral Izquierda/Derecha Protectora de Balde (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10952,7 +10952,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 9.18,
     "totalWithItbisUsd": 60.18,
     "stockQty": 29,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Diente de Balde Monotooth Forjado JCB con Pasador de Acero (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -10984,7 +10984,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.6,
     "totalWithItbisUsd": 82.6,
     "stockQty": 42,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Punta de Balde Servicio Pesado J350 para Roca Volcánica y Cantera (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11016,7 +11016,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 59.04,
     "totalWithItbisUsd": 387.04,
     "stockQty": 10,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Juego de 5 Dientes de Excavadora 22T con Pasadores y Retenes (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11048,7 +11048,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 37.62,
     "totalWithItbisUsd": 246.62,
     "stockQty": 23,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cuchilla de Corte Reversible Curva para Motoniveladora 7 Pies (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11080,7 +11080,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 15.84,
     "totalWithItbisUsd": 103.84,
     "stockQty": 36,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cantonera Lateral Izquierda/Derecha Protectora de Balde (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11112,7 +11112,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 6.84,
     "totalWithItbisUsd": 44.84,
     "stockQty": 49,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Diente de Balde Monotooth Forjado JCB con Pasador de Acero (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11144,7 +11144,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 9.54,
     "totalWithItbisUsd": 62.54,
     "stockQty": 17,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Punta de Balde Servicio Pesado J350 para Roca Volcánica y Cantera (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11176,7 +11176,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 44.46,
     "totalWithItbisUsd": 291.46,
     "stockQty": 30,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Juego de 5 Dientes de Excavadora 22T con Pasadores y Retenes (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11208,7 +11208,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 28.26,
     "totalWithItbisUsd": 185.26,
     "stockQty": 43,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cuchilla de Corte Reversible Curva para Motoniveladora 7 Pies (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11240,7 +11240,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 11.88,
     "totalWithItbisUsd": 77.88,
     "stockQty": 11,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cantonera Lateral Izquierda/Derecha Protectora de Balde (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11272,7 +11272,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 7.38,
     "totalWithItbisUsd": 48.38,
     "stockQty": 24,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Diente de Balde Monotooth Forjado JCB con Pasador de Acero (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11304,7 +11304,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 10.26,
     "totalWithItbisUsd": 67.26,
     "stockQty": 37,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Punta de Balde Servicio Pesado J350 para Roca Volcánica y Cantera (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11336,7 +11336,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 48.06,
     "totalWithItbisUsd": 315.06,
     "stockQty": 50,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Juego de 5 Dientes de Excavadora 22T con Pasadores y Retenes (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11368,7 +11368,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 30.6,
     "totalWithItbisUsd": 200.6,
     "stockQty": 18,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cuchilla de Corte Reversible Curva para Motoniveladora 7 Pies (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11400,7 +11400,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.96,
     "totalWithItbisUsd": 84.96,
     "stockQty": 31,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cantonera Lateral Izquierda/Derecha Protectora de Balde (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11432,7 +11432,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 8.1,
     "totalWithItbisUsd": 53.1,
     "stockQty": 44,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Diente de Balde Monotooth Forjado JCB con Pasador de Acero (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11464,7 +11464,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 10.98,
     "totalWithItbisUsd": 71.98,
     "stockQty": 12,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Punta de Balde Servicio Pesado J350 para Roca Volcánica y Cantera (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11496,7 +11496,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 51.66,
     "totalWithItbisUsd": 338.66,
     "stockQty": 25,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Juego de 5 Dientes de Excavadora 22T con Pasadores y Retenes (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11528,7 +11528,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 32.94,
     "totalWithItbisUsd": 215.94,
     "stockQty": 38,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cuchilla de Corte Reversible Curva para Motoniveladora 7 Pies (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11560,7 +11560,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 13.86,
     "totalWithItbisUsd": 90.86,
     "stockQty": 6,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cantonera Lateral Izquierda/Derecha Protectora de Balde (Variante Esp. HD #8). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11592,7 +11592,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 8.64,
     "totalWithItbisUsd": 56.64,
     "stockQty": 19,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Diente de Balde Monotooth Forjado JCB con Pasador de Acero (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11624,7 +11624,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 11.88,
     "totalWithItbisUsd": 77.88,
     "stockQty": 32,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Punta de Balde Servicio Pesado J350 para Roca Volcánica y Cantera (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11656,7 +11656,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 55.26,
     "totalWithItbisUsd": 362.26,
     "stockQty": 45,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/bucket_tooth_monotooth.jpg",
     "description": "Juego de 5 Dientes de Excavadora 22T con Pasadores y Retenes (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11688,7 +11688,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 35.28,
     "totalWithItbisUsd": 231.28,
     "stockQty": 13,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cuchilla de Corte Reversible Curva para Motoniveladora 7 Pies (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11720,7 +11720,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 14.94,
     "totalWithItbisUsd": 97.94,
     "stockQty": 26,
-    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/machinery/JCB_Extra_heavy_duty_bucket.jpg",
     "description": "Cantonera Lateral Izquierda/Derecha Protectora de Balde (Variante Esp. HD #9). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11752,7 +11752,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 140.76,
     "totalWithItbisUsd": 922.76,
     "stockQty": 39,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Tambor 55 Galones Aceite de Motor Mobil Delvac Modern 15W-40 CK-4. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11784,7 +11784,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 128.52,
     "totalWithItbisUsd": 842.52,
     "stockQty": 7,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tambor 55 Galones Aceite Hidráulico Anti-Desgaste ISO VG 46. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11816,7 +11816,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.96,
     "totalWithItbisUsd": 84.96,
     "stockQty": 20,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Caja 10 Tubos Grasa de Litio Complejo HD con 5% Bisulfuro Moly. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11848,7 +11848,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 104.04,
     "totalWithItbisUsd": 682.04,
     "stockQty": 33,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Tambor 55 Galones Refrigerante Orgánico OAT Rojo 50/50 Larga Vida. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11880,7 +11880,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 152.28,
     "totalWithItbisUsd": 998.28,
     "stockQty": 46,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Tambor 55 Galones Aceite de Motor Mobil Delvac Modern 15W-40 CK-4 (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11912,7 +11912,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 139.14,
     "totalWithItbisUsd": 912.14,
     "stockQty": 14,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tambor 55 Galones Aceite Hidráulico Anti-Desgaste ISO VG 46 (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11944,7 +11944,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 14.04,
     "totalWithItbisUsd": 92.04,
     "stockQty": 27,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Caja 10 Tubos Grasa de Litio Complejo HD con 5% Bisulfuro Moly (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -11976,7 +11976,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 112.68,
     "totalWithItbisUsd": 738.68,
     "stockQty": 40,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Tambor 55 Galones Refrigerante Orgánico OAT Rojo 50/50 Larga Vida (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12008,7 +12008,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 163.98,
     "totalWithItbisUsd": 1074.98,
     "stockQty": 8,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Tambor 55 Galones Aceite de Motor Mobil Delvac Modern 15W-40 CK-4 (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12040,7 +12040,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 149.76,
     "totalWithItbisUsd": 981.76,
     "stockQty": 21,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tambor 55 Galones Aceite Hidráulico Anti-Desgaste ISO VG 46 (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12072,7 +12072,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 15.12,
     "totalWithItbisUsd": 99.12,
     "stockQty": 34,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Caja 10 Tubos Grasa de Litio Complejo HD con 5% Bisulfuro Moly (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12104,7 +12104,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 121.14,
     "totalWithItbisUsd": 794.14,
     "stockQty": 47,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Tambor 55 Galones Refrigerante Orgánico OAT Rojo 50/50 Larga Vida (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12136,7 +12136,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 175.5,
     "totalWithItbisUsd": 1150.5,
     "stockQty": 15,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Tambor 55 Galones Aceite de Motor Mobil Delvac Modern 15W-40 CK-4 (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12168,7 +12168,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 160.2,
     "totalWithItbisUsd": 1050.2,
     "stockQty": 28,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tambor 55 Galones Aceite Hidráulico Anti-Desgaste ISO VG 46 (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12200,7 +12200,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 16.2,
     "totalWithItbisUsd": 106.2,
     "stockQty": 41,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Caja 10 Tubos Grasa de Litio Complejo HD con 5% Bisulfuro Moly (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12232,7 +12232,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 129.78,
     "totalWithItbisUsd": 850.78,
     "stockQty": 9,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Tambor 55 Galones Refrigerante Orgánico OAT Rojo 50/50 Larga Vida (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12264,7 +12264,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 187.2,
     "totalWithItbisUsd": 1227.2,
     "stockQty": 22,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Tambor 55 Galones Aceite de Motor Mobil Delvac Modern 15W-40 CK-4 (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12296,7 +12296,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 170.82,
     "totalWithItbisUsd": 1119.82,
     "stockQty": 35,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tambor 55 Galones Aceite Hidráulico Anti-Desgaste ISO VG 46 (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12328,7 +12328,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 17.28,
     "totalWithItbisUsd": 113.28,
     "stockQty": 48,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Caja 10 Tubos Grasa de Litio Complejo HD con 5% Bisulfuro Moly (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12360,7 +12360,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 138.24,
     "totalWithItbisUsd": 906.24,
     "stockQty": 16,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Tambor 55 Galones Refrigerante Orgánico OAT Rojo 50/50 Larga Vida (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12392,7 +12392,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 140.76,
     "totalWithItbisUsd": 922.76,
     "stockQty": 29,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Tambor 55 Galones Aceite de Motor Mobil Delvac Modern 15W-40 CK-4 (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12424,7 +12424,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 128.52,
     "totalWithItbisUsd": 842.52,
     "stockQty": 42,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/hydraulic_control_valve_bench.jpg",
     "description": "Tambor 55 Galones Aceite Hidráulico Anti-Desgaste ISO VG 46 (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12456,7 +12456,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 12.96,
     "totalWithItbisUsd": 84.96,
     "stockQty": 10,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Caja 10 Tubos Grasa de Litio Complejo HD con 5% Bisulfuro Moly (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12488,7 +12488,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 104.04,
     "totalWithItbisUsd": 682.04,
     "stockQty": 23,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/heavy_oil_filter.jpg",
     "description": "Tambor 55 Galones Refrigerante Orgánico OAT Rojo 50/50 Larga Vida (Variante Esp. HD #6). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12520,7 +12520,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 152.28,
     "totalWithItbisUsd": 998.28,
     "stockQty": 36,
-    "image": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Tambor 55 Galones Aceite de Motor Mobil Delvac Modern 15W-40 CK-4 (Variante Esp. HD #7). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12551,7 +12551,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 73.44,
     "totalWithItbisUsd": 481.44,
     "stockQty": 49,
-    "image": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Válvula de Disparo Neumática Rápida para Supresión en Motor Diésel. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12582,7 +12582,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 14.58,
     "totalWithItbisUsd": 95.58,
     "stockQty": 17,
-    "image": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/afex_fire_suppression_system.jpg",
     "description": "Boquilla Pulverizadora de Agente Químico Seco Cono Abierto. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12613,7 +12613,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 29.16,
     "totalWithItbisUsd": 191.16,
     "stockQty": 30,
-    "image": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/afex_fire_suppression_system.jpg",
     "description": "Cable Sensor Térmico Lineal de Detección de Fuego en Compartimiento. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12644,7 +12644,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 79.56,
     "totalWithItbisUsd": 521.56,
     "stockQty": 43,
-    "image": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Válvula de Disparo Neumática Rápida para Supresión en Motor Diésel (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12675,7 +12675,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 15.66,
     "totalWithItbisUsd": 102.66,
     "stockQty": 11,
-    "image": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/afex_fire_suppression_system.jpg",
     "description": "Boquilla Pulverizadora de Agente Químico Seco Cono Abierto (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12706,7 +12706,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 31.5,
     "totalWithItbisUsd": 206.5,
     "stockQty": 24,
-    "image": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/afex_fire_suppression_system.jpg",
     "description": "Cable Sensor Térmico Lineal de Detección de Fuego en Compartimiento (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12737,7 +12737,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 85.5,
     "totalWithItbisUsd": 560.5,
     "stockQty": 37,
-    "image": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Válvula de Disparo Neumática Rápida para Supresión en Motor Diésel (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12768,7 +12768,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 16.92,
     "totalWithItbisUsd": 110.92,
     "stockQty": 50,
-    "image": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/afex_fire_suppression_system.jpg",
     "description": "Boquilla Pulverizadora de Agente Químico Seco Cono Abierto (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12799,7 +12799,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 33.84,
     "totalWithItbisUsd": 221.84,
     "stockQty": 18,
-    "image": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/afex_fire_suppression_system.jpg",
     "description": "Cable Sensor Térmico Lineal de Detección de Fuego en Compartimiento (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12830,7 +12830,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 91.62,
     "totalWithItbisUsd": 600.62,
     "stockQty": 31,
-    "image": "https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/cummins_qsb_engine_powertrain.jpg",
     "description": "Válvula de Disparo Neumática Rápida para Supresión en Motor Diésel (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12861,7 +12861,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 52.02,
     "totalWithItbisUsd": 341.02,
     "stockQty": 44,
-    "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/imer_concrete_mixer_exploded_diagram.jpg",
     "description": "Juego de Aspas Helicoidales de Mezclado en Acero Resistente al Desgaste. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12892,7 +12892,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 17.64,
     "totalWithItbisUsd": 115.64,
     "stockQty": 12,
-    "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/imer_concrete_mixer_exploded_diagram.jpg",
     "description": "Sello Laberinto del Tambor Mezclador Anti-Fuga de Lechada. Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12923,7 +12923,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 56.34,
     "totalWithItbisUsd": 369.34,
     "stockQty": 25,
-    "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/imer_concrete_mixer_exploded_diagram.jpg",
     "description": "Juego de Aspas Helicoidales de Mezclado en Acero Resistente al Desgaste (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12954,7 +12954,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 19.08,
     "totalWithItbisUsd": 125.08,
     "stockQty": 38,
-    "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/imer_concrete_mixer_exploded_diagram.jpg",
     "description": "Sello Laberinto del Tambor Mezclador Anti-Fuga de Lechada (Variante Esp. HD #2). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -12985,7 +12985,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 60.66,
     "totalWithItbisUsd": 397.66,
     "stockQty": 6,
-    "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/imer_concrete_mixer_exploded_diagram.jpg",
     "description": "Juego de Aspas Helicoidales de Mezclado en Acero Resistente al Desgaste (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -13016,7 +13016,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 20.52,
     "totalWithItbisUsd": 134.52,
     "stockQty": 19,
-    "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/imer_concrete_mixer_exploded_diagram.jpg",
     "description": "Sello Laberinto del Tambor Mezclador Anti-Fuga de Lechada (Variante Esp. HD #3). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -13047,7 +13047,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 64.8,
     "totalWithItbisUsd": 424.8,
     "stockQty": 32,
-    "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/imer_concrete_mixer_exploded_diagram.jpg",
     "description": "Juego de Aspas Helicoidales de Mezclado en Acero Resistente al Desgaste (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -13078,7 +13078,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 21.96,
     "totalWithItbisUsd": 143.96,
     "stockQty": 45,
-    "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/imer_concrete_mixer_exploded_diagram.jpg",
     "description": "Sello Laberinto del Tambor Mezclador Anti-Fuga de Lechada (Variante Esp. HD #4). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -13109,7 +13109,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 69.12,
     "totalWithItbisUsd": 453.12,
     "stockQty": 13,
-    "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/imer_concrete_mixer_exploded_diagram.jpg",
     "description": "Juego de Aspas Helicoidales de Mezclado en Acero Resistente al Desgaste (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
@@ -13140,7 +13140,7 @@ export const PARTS_CATALOG_410: Part[] = [
     "itbisUsd": 23.4,
     "totalWithItbisUsd": 153.4,
     "stockQty": 26,
-    "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f8?auto=format&fit=crop&w=800&q=80",
+    "image": "/assets/parts/imer_concrete_mixer_exploded_diagram.jpg",
     "description": "Sello Laberinto del Tambor Mezclador Anti-Fuga de Lechada (Variante Esp. HD #5). Componente certificado grado OEM para servicio severo en canteras, minería y movimiento de tierras en República Dominicana. Cumple tolerancias ISO 9001 con garantía TMD Dominicana.",
     "isOem": true,
     "deliveryTimeHours": 4
