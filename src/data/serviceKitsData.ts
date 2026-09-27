@@ -21,7 +21,7 @@ export const OFFICIAL_SERVICE_KITS: ServiceKitDefinition[] = [
     priceUsd: 385,
     priceDop: Math.round(385 * USD_TO_DOP_RATE),
     inStock: true,
-    image: 'https://images.unsplash.com/photo-1579829366248-204fe8413f31?auto=format&fit=crop&w=600&q=80'
+    image: '/assets/parts/heavy_oil_filter.jpg'
   },
   // 2. LiuGong 922E Excavator - 500h Kit
   {
@@ -46,7 +46,7 @@ export const OFFICIAL_SERVICE_KITS: ServiceKitDefinition[] = [
     priceUsd: 850,
     priceDop: Math.round(850 * USD_TO_DOP_RATE),
     inStock: true,
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80'
+    image: '/assets/parts/oil_filter_spinon.jpg'
   },
   // 3. LiuGong 922E Excavator - 1000h Kit Mayor
   {
@@ -73,7 +73,7 @@ export const OFFICIAL_SERVICE_KITS: ServiceKitDefinition[] = [
     priceUsd: 1650,
     priceDop: Math.round(1650 * USD_TO_DOP_RATE),
     inStock: true,
-    image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80'
+    image: '/assets/parts/engine_gaskets_overhaul_kit.jpg'
   },
   // 4. JCB 3CX Eco Retroexcavadora - 500h Kit
   {
@@ -98,7 +98,7 @@ export const OFFICIAL_SERVICE_KITS: ServiceKitDefinition[] = [
     priceUsd: 720,
     priceDop: Math.round(720 * USD_TO_DOP_RATE),
     inStock: true,
-    image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80'
+    image: '/assets/parts/jcb_fuel_filter_oem.jpg'
   },
   // 5. LS Tractor MT357 - 250h Kit
   {
@@ -121,7 +121,7 @@ export const OFFICIAL_SERVICE_KITS: ServiceKitDefinition[] = [
     priceUsd: 410,
     priceDop: Math.round(410 * USD_TO_DOP_RATE),
     inStock: true,
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80'
+    image: '/assets/parts/hydraulic_control_valve_bench.jpg'
   },
   // 6. Ammann ARX 26-2 Compactador - 500h Kit
   {
@@ -144,7 +144,7 @@ export const OFFICIAL_SERVICE_KITS: ServiceKitDefinition[] = [
     priceUsd: 590,
     priceDop: Math.round(590 * USD_TO_DOP_RATE),
     inStock: true,
-    image: 'https://images.unsplash.com/photo-1579829366248-204fe8413f31?auto=format&fit=crop&w=600&q=80'
+    image: '/assets/parts/ammann_drum_vibration_system.jpg'
   }
 ];
 

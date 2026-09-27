@@ -33,7 +33,8 @@ import {
   Sparkles,
   Phone,
   Fingerprint,
-  QrCode
+  QrCode,
+  BookOpen
 } from 'lucide-react';
 import { PortalQuote, ServiceWorkOrder, UserProfile, UserRole, Currency, CartItem } from '../../types';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
@@ -51,6 +52,7 @@ import { StaffBiometricAuthModal } from '../auth/StaffBiometricAuthModal';
 import { getQuoteWhatsAppUrl, getWorkOrderDispatchWhatsAppUrl } from '../../utils/whatsappMessaging';
 import { getLocalFleet } from '../../services/serviceHistoryService';
 import { InventoryScanLogsPanel } from './InventoryScanLogsPanel';
+import { TechnicalDocumentationVaultTab } from './TechnicalDocumentationVaultTab';
 
 export type StaffPortalTab = 
   | 'command_center' 
@@ -61,6 +63,7 @@ export type StaffPortalTab =
   | 'livelink_telematics' 
   | 'service_history' 
   | 'inventory_logs'
+  | 'tech_docs'
   | 'users' 
   | 'profile';
 
@@ -459,6 +462,19 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
           <span>ESCANEOS QR</span>
         </button>
 
+        <button
+          type="button"
+          onClick={() => handleTabSelect('tech_docs')}
+          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
+            activeTab === 'tech_docs'
+              ? 'bg-amber-400 text-black shadow-xs font-black'
+              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+          }`}
+        >
+          <BookOpen className="w-3.5 h-3.5" />
+          <span>FICHAS & CATÁLOGOS PDF</span>
+        </button>
+
         {isAdmin && (
           <button
             type="button"
@@ -489,6 +505,7 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
               onSelectWorkflowSection={handleSelectWorkflowSection}
               onNavigate={onNavigate}
               onExportQuotePdf={onExportQuotePdf}
+              onOpenQrScanner={onOpenQrScanner}
             />
           )}
 
@@ -831,10 +848,15 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
           {activeTab === 'inventory_logs' && (
             <InventoryScanLogsPanel
               onNavigateToItem={(type, id) => {
-                onNavigate(type === 'machinery' ? 'machinery' : 'parts');
+                onNavigate(type === 'machinery' ? `#/machinery?id=${id}` : `#/parts?id=${id}`);
               }}
               onOpenScanner={onOpenQrScanner}
             />
+          )}
+
+          {/* TAB: TECH DOCS & CATALOGS VAULT */}
+          {activeTab === 'tech_docs' && (
+            <TechnicalDocumentationVaultTab />
           )}
 
           {/* TAB 8: ADMIN RBAC USER MANAGEMENT */}

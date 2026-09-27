@@ -317,6 +317,7 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
           onUpdateQuoteStatus={handleUpdateQuoteStatus}
           onUpdateProfileDetails={updateProfileDetails}
           onSignOut={signOut}
+          onOpenQrScanner={onOpenQrScanner}
         />
       )}
 

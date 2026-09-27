@@ -45,6 +45,7 @@ interface StaffCommandCenterPanelProps {
   onSelectWorkflowSection: (section: string) => void;
   onNavigate: (route: string) => void;
   onExportQuotePdf: (quote: PortalQuote) => void;
+  onOpenQrScanner?: () => void;
 }
 
 export const StaffCommandCenterPanel: React.FC<StaffCommandCenterPanelProps> = ({
@@ -55,7 +56,8 @@ export const StaffCommandCenterPanel: React.FC<StaffCommandCenterPanelProps> = (
   onOpenCreateQuote,
   onSelectWorkflowSection,
   onNavigate,
-  onExportQuotePdf
+  onExportQuotePdf,
+  onOpenQrScanner
 }) => {
   const [filterCategory, setFilterCategory] = useState<'all' | 'urgent' | 'sales' | 'service'>('all');
 
@@ -430,16 +432,16 @@ export const StaffCommandCenterPanel: React.FC<StaffCommandCenterPanelProps> = (
         {/* Recharts Scan Frequency Mini-Chart (Last 7 Days) */}
         <ScanFrequencyMiniChart
           onViewAllLogs={() => onSelectWorkflowSection('inventory_logs')}
-          onOpenScanner={() => onNavigate('scanner')}
+          onOpenScanner={onOpenQrScanner}
         />
 
         {/* Recent Scans Component (Last 5 Logs from inventory_logs) */}
         <RecentScans
           limitCount={5}
           onViewAllLogs={() => onSelectWorkflowSection('inventory_logs')}
-          onOpenScanner={() => onNavigate('scanner')}
-          onNavigateToItem={(type) => {
-            onNavigate(type === 'machinery' ? 'machinery' : 'parts');
+          onOpenScanner={onOpenQrScanner}
+          onNavigateToItem={(type, id) => {
+            onNavigate(type === 'machinery' ? `#/machinery?id=${id}` : `#/parts?id=${id}`);
           }}
         />
       </div>

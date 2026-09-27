@@ -70,7 +70,7 @@ export const generateDemoFleet = (): RegisteredEquipment[] => [
     jobsiteLocation: 'Cantera Autopista Duarte Km 28',
     assignedOperator: 'Juan Carlos Martínez',
     status: 'active',
-    image: 'https://images.unsplash.com/photo-1579829366248-204fe8413f31?auto=format&fit=crop&w=800&q=80'
+    image: '/assets/machinery/LiuGong_922E_Excavator_Official_Photo.jpg'
   },
   {
     id: 'eq-jcb-3cx',
@@ -89,7 +89,7 @@ export const generateDemoFleet = (): RegisteredEquipment[] => [
     jobsiteLocation: 'Proyecto Turístico Punta Cana - Sector Cap Cana',
     assignedOperator: 'Ramón Almonte',
     status: 'active',
-    image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80'
+    image: '/assets/machinery/classic_robust_yellow_jcb_3cx_backhoe.jpg'
   },
   {
     id: 'eq-ls-mt357',
@@ -108,7 +108,7 @@ export const generateDemoFleet = (): RegisteredEquipment[] => [
     jobsiteLocation: 'Finca Agropecuaria San Francisco de Macorís',
     assignedOperator: 'Manuel Tavárez (Hijo)',
     status: 'active',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80'
+    image: '/assets/machinery/heavy_blue_agricultural_tractor_ls_mt7.jpg'
   }
 ];
 

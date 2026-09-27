@@ -105,7 +105,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
       compatibleModels: [machine.model, machine.brand],
       priceUsd: 285.00,
       stockQty: 40,
-      image: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80',
+      image: '/assets/parts/heavy_oil_filter.jpg',
       description: `Kit completo con filtro de aceite de motor, elemento primario y secundario de aire, filtro de combustible con trampa de agua para ${machine.brand} ${machine.model} (${machine.unitId}, Serie: ${machine.serialNumber}). Entrega inmediata 2-4 horas en Santo Domingo o despacho nacional.`,
       isOem: true,
       deliveryTimeHours: 4
@@ -141,7 +141,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
         compatibleModels: [machine.model, machine.brand],
         priceUsd: 285.00,
         stockQty: 40,
-        image: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80',
+        image: '/assets/parts/heavy_oil_filter.jpg',
         description: `Kit completo para ${machine.brand} ${machine.model} (${machine.unitId}).`,
         isOem: true,
         deliveryTimeHours: 4

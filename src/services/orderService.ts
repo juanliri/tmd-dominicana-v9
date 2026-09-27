@@ -182,7 +182,7 @@ export const generateDemoOrders = (userId: string, userEmail: string, userName: 
           category: 'Filtros',
           priceUsd: 48.50,
           quantity: 4,
-          image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80',
+          image: '/assets/parts/jcb_fuel_filter_oem.jpg',
           isOem: true,
           type: 'part'
         },
@@ -194,7 +194,7 @@ export const generateDemoOrders = (userId: string, userEmail: string, userName: 
           category: 'Hidráulica',
           priceUsd: 115.00,
           quantity: 2,
-          image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80',
+          image: '/assets/parts/hydraulic_control_valve_bench.jpg',
           isOem: true,
           type: 'part'
         },
@@ -206,7 +206,7 @@ export const generateDemoOrders = (userId: string, userEmail: string, userName: 
           category: 'Desgaste y Balde',
           priceUsd: 38.00,
           quantity: 6,
-          image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80',
+          image: '/assets/parts/bucket_tooth_monotooth.jpg',
           isOem: true,
           type: 'part'
         }
@@ -274,7 +274,7 @@ export const generateDemoOrders = (userId: string, userEmail: string, userName: 
           category: 'Tren de Rodaje',
           priceUsd: 1450.00,
           quantity: 2,
-          image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=600&q=80',
+          image: '/assets/parts/steel_track_chain_sprocket.jpg',
           isOem: true,
           type: 'part'
         },
@@ -286,7 +286,7 @@ export const generateDemoOrders = (userId: string, userEmail: string, userName: 
           category: 'Motor Diesel',
           priceUsd: 85.00,
           quantity: 3,
-          image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80',
+          image: '/assets/parts/engine_gaskets_overhaul_kit.jpg',
           isOem: true,
           type: 'part'
         }

@@ -67,7 +67,7 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
     serialNumber: '',
     location: 'Patio Principal Km 22 Autopista Duarte',
     status: 'available' as InventoryMachine['status'],
-    image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1000&q=80',
+    image: '/assets/machinery/classic_robust_yellow_jcb_3cx_backhoe.jpg',
     description: ''
   });
 
@@ -137,7 +137,7 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
       serialNumber: `TMD-EQ-${Math.floor(10000 + Math.random() * 90000)}`,
       location: 'Patio Principal Km 22 Autopista Duarte',
       status: 'available',
-      image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1000&q=80',
+      image: '/assets/machinery/classic_robust_yellow_jcb_3cx_backhoe.jpg',
       description: ''
     });
     setModalOpen(true);
@@ -541,7 +541,7 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
                 {/* Image & Header Tags */}
                 <div className="relative h-44 bg-zinc-100 dark:bg-zinc-800 overflow-hidden rounded-t-2xl">
                   <img
-                    src={machine.image || 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=600&q=80'}
+                    src={machine.image || '/assets/machinery/classic_robust_yellow_jcb_3cx_backhoe.jpg'}
                     alt={machine.name}
                     className="w-full h-full object-cover"
                   />
@@ -855,7 +855,7 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
                     type="url"
                     value={formData.image}
                     onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                    placeholder="https://images.unsplash.com/..."
+                    placeholder="/assets/machinery/..."
                     className="w-full px-3.5 py-2 text-xs rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
                   />
                 </div>

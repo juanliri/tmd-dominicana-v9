@@ -81,6 +81,7 @@ interface ClientDashboardProps {
   onUpdateQuoteStatus?: (quoteId: string, status: PortalQuote['status']) => Promise<void>;
   onUpdateProfileDetails: (details: Partial<UserProfile>) => Promise<void>;
   onSignOut: () => Promise<void>;
+  onOpenQrScanner?: () => void;
 }
 
 export const ClientDashboard: React.FC<ClientDashboardProps> = ({
@@ -98,7 +99,8 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
   onExportQuotePdf,
   onUpdateQuoteStatus,
   onUpdateProfileDetails,
-  onSignOut
+  onSignOut,
+  onOpenQrScanner
 }) => {
   const [activeTab, setActiveTab] = useState<ClientPortalTab>('quotes');
   const [quoteSearch, setQuoteSearch] = useState('');
@@ -668,13 +670,13 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
             {/* YARD QR SCAN FREQUENCY & RECENT ACTIVITY AUDIT */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-6">
               <ScanFrequencyMiniChart
-                onOpenScanner={() => onNavigate('scanner')}
+                onOpenScanner={onOpenQrScanner}
               />
               <RecentScans
                 limitCount={5}
-                onOpenScanner={() => onNavigate('scanner')}
-                onNavigateToItem={(type) => {
-                  onNavigate(type === 'machinery' ? 'machinery' : 'parts');
+                onOpenScanner={onOpenQrScanner}
+                onNavigateToItem={(type, id) => {
+                  onNavigate(type === 'machinery' ? `#/machinery?id=${id}` : `#/parts?id=${id}`);
                 }}
               />
             </div>

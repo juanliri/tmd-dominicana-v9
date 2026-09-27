@@ -63,7 +63,7 @@ export const AdminPartsTab: React.FC<AdminPartsTabProps> = ({
     locationBin: 'Pasillo A - Estante 01',
     isOem: true,
     compatibleModels: 'JCB 3CX, LiuGong 922E',
-    image: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/parts/heavy_oil_filter.jpg',
     description: '',
     deliveryTimeHours: 4
   });
@@ -134,7 +134,7 @@ export const AdminPartsTab: React.FC<AdminPartsTabProps> = ({
       locationBin: 'Pasillo A - Estante 01',
       isOem: true,
       compatibleModels: 'JCB 3CX Eco, LiuGong 922E',
-      image: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80',
+      image: '/assets/parts/heavy_oil_filter.jpg',
       description: '',
       deliveryTimeHours: 4
     });
