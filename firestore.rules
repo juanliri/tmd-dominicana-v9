@@ -11,6 +11,10 @@ service cloud.firestore {
       return isSignedIn() && (
         request.auth.token.email == 'mrjliriano@gmail.com' ||
         request.auth.token.email == 'jliriano154@gmail.com' ||
+        request.auth.token.email == 'jayhlituh@gmail.com' ||
+        request.auth.token.email == 'todobuildgroup@gmail.com' ||
+        request.auth.token.email == 'juan@todobuild.us' ||
+        request.auth.token.email == 'perlacustodio9@gmail.com' ||
         exists(/databases/$(database)/documents/admins/$(request.auth.uid))
       );
     }
@@ -31,10 +35,11 @@ service cloud.firestore {
       allow read: if true;
     }
 
-    // Quotes and CRM RFQ conversion subcollection
+    // Quotes and CRM RFQ conversion subcollection (Scoped to owner or staff/admin)
     match /quotes/{quoteId} {
-      allow read: if isSignedIn();
-      allow create, update: if isSignedIn();
+      allow read: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
+      allow create: if isSignedIn() && (request.resource.data.clientId == request.auth.uid || isAdmin() || isStaff());
+      allow update: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
       allow delete: if isAdmin() || isStaff();
 
       match /crm_inquiries/{inquiryId} {
@@ -46,10 +51,11 @@ service cloud.firestore {
       }
     }
 
-    // Work orders (Service & Field)
+    // Work orders (Service & Field - Scoped to owner or staff/admin)
     match /work_orders/{orderId} {
-      allow read: if isSignedIn();
-      allow create, update: if isSignedIn();
+      allow read: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
+      allow create: if isSignedIn() && (request.resource.data.clientId == request.auth.uid || isAdmin() || isStaff());
+      allow update: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
       allow delete: if isAdmin() || isStaff();
 
       match /{subcollection=**} {
@@ -57,10 +63,11 @@ service cloud.firestore {
       }
     }
 
-    // Fullbay Heavy-Duty Shop Manager work orders
+    // Fullbay Heavy-Duty Shop Manager work orders (Scoped to owner or staff/admin)
     match /fullbay_work_orders/{orderId} {
-      allow read: if isSignedIn();
-      allow create, update: if isSignedIn();
+      allow read: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
+      allow create: if isSignedIn() && (request.resource.data.clientId == request.auth.uid || isAdmin() || isStaff());
+      allow update: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
       allow delete: if isAdmin() || isStaff();
 
       match /{subcollection=**} {
@@ -68,10 +75,11 @@ service cloud.firestore {
       }
     }
 
-    // Customer Purchase Orders
+    // Customer Purchase Orders (Scoped to owner or staff/admin)
     match /orders/{orderId} {
-      allow read: if isSignedIn();
-      allow create, update: if isSignedIn();
+      allow read: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
+      allow create: if isSignedIn() && (request.resource.data.clientId == request.auth.uid || isAdmin() || isStaff());
+      allow update: if isAdmin() || isStaff() || (isSignedIn() && resource.data.clientId == request.auth.uid);
       allow delete: if isAdmin() || isStaff();
 
       match /{subcollection=**} {

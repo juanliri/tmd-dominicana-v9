@@ -218,44 +218,46 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
               </button>
             )}
 
-            {/* Role Demo Simulator Switcher */}
-            <div className="pt-3 border-t border-zinc-200 dark:border-zinc-800 text-left space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-black uppercase tracking-wider text-zinc-400">
-                  Simulador de Roles (Entorno Demo):
-                </span>
-                <span className="text-[9px] font-bold text-amber-500">Pruebas en vivo</span>
+            {/* Role Demo Simulator Switcher (Restricted to genuine Admins or Local Dev Environment) */}
+            {(realRole === 'admin' || import.meta.env.DEV) && (
+              <div className="pt-3 border-t border-zinc-200 dark:border-zinc-800 text-left space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-zinc-400">
+                    Simulador de Roles (Entorno Demo):
+                  </span>
+                  <span className="text-[9px] font-bold text-amber-500">Pruebas en vivo</span>
+                </div>
+                <div className="grid grid-cols-3 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setSimulatedRole('client')}
+                    className={`py-2 px-2 rounded-xl text-[11px] font-black transition-colors cursor-pointer text-center ${
+                      role === 'client' ? 'bg-amber-500 text-black shadow-xs' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                    }`}
+                  >
+                    CLIENTE
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSimulatedRole('staff')}
+                    className={`py-2 px-2 rounded-xl text-[11px] font-black transition-colors cursor-pointer text-center ${
+                      role === 'staff' ? 'bg-amber-500 text-black shadow-xs' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                    }`}
+                  >
+                    STAFF TMD
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSimulatedRole('admin')}
+                    className={`py-2 px-2 rounded-xl text-[11px] font-black transition-colors cursor-pointer text-center ${
+                      role === 'admin' ? 'bg-amber-500 text-black shadow-xs' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                    }`}
+                  >
+                    ADMIN HQ
+                  </button>
+                </div>
               </div>
-              <div className="grid grid-cols-3 gap-2">
-                <button
-                  type="button"
-                  onClick={() => setSimulatedRole('client')}
-                  className={`py-2 px-2 rounded-xl text-[11px] font-black transition-colors cursor-pointer text-center ${
-                    role === 'client' ? 'bg-amber-500 text-black shadow-xs' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
-                  }`}
-                >
-                  CLIENTE
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSimulatedRole('staff')}
-                  className={`py-2 px-2 rounded-xl text-[11px] font-black transition-colors cursor-pointer text-center ${
-                    role === 'staff' ? 'bg-amber-500 text-black shadow-xs' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
-                  }`}
-                >
-                  STAFF TMD
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSimulatedRole('admin')}
-                  className={`py-2 px-2 rounded-xl text-[11px] font-black transition-colors cursor-pointer text-center ${
-                    role === 'admin' ? 'bg-amber-500 text-black shadow-xs' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700'
-                  }`}
-                >
-                  ADMIN HQ
-                </button>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
