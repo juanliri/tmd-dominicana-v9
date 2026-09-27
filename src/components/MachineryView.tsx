@@ -1484,7 +1484,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
 
       {/* MOBILE FILTERS DRAWER */}
       {isMobileFiltersOpen && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-xs p-0 sm:p-4 font-display">
+        <div className="fixed inset-0 z-[99999] flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-md p-0 sm:p-4 font-display">
           <div className="w-full max-w-lg bg-zinc-950 rounded-t-[5px] sm:rounded-[5px] max-h-[85vh] overflow-y-auto p-5 border border-zinc-800 shadow-2xl space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
               <h3 className="text-sm font-black text-white uppercase tracking-wider flex items-center gap-2">

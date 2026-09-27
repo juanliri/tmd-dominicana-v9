@@ -328,7 +328,7 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
 
       {/* New Work Order Modal (Shared for rapid dispatching/requesting) */}
       {showNewOrderModal && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-in fade-in font-mono">
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in font-mono">
           <div className="bg-zinc-900 rounded-[5px] border border-zinc-800 shadow-2xl max-w-lg w-full p-5 space-y-3.5">
             <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
               <div className="flex items-center gap-2">

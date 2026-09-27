@@ -467,7 +467,7 @@ export const OilLabDiagnosticsView: React.FC<OilLabDiagnosticsViewProps> = ({ on
 
       {/* New Sample Submission Modal */}
       {newSampleModalOpen && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-zinc-950 rounded-[5px] p-6 max-w-md w-full border border-zinc-800 shadow-2xl relative font-mono text-white">
             {submitSuccess ? (
               <div className="text-center py-6 space-y-3">

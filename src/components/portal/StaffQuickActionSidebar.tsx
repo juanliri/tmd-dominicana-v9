@@ -271,7 +271,7 @@ export const StaffQuickActionSidebar: React.FC<StaffQuickActionSidebarProps> = (
 
       {/* MODAL 1: TRADE-IN QUICK APPRAISAL */}
       {tradeInCalcModal && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-xs flex items-center justify-center p-4 font-mono">
+        <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 font-mono">
           <div className="w-full max-w-md bg-zinc-900 rounded-[5px] border border-zinc-800 p-5 space-y-3.5 shadow-2xl animate-in fade-in zoom-in-95 text-white">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -359,7 +359,7 @@ export const StaffQuickActionSidebar: React.FC<StaffQuickActionSidebarProps> = (
 
       {/* MODAL 2: NCF DGII SEQUENCE GENERATOR & VALIDATOR */}
       {quickNcfModal && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-xs flex items-center justify-center p-4 font-mono">
+        <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 font-mono">
           <div className="w-full max-w-md bg-zinc-900 rounded-[5px] border border-zinc-800 p-5 space-y-3.5 shadow-2xl animate-in fade-in zoom-in-95 text-white">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">

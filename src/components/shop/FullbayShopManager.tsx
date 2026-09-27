@@ -459,7 +459,7 @@ export const FullbayShopManager: React.FC<Props> = ({ initialSelectedOrderId, on
 
       {/* Modal: Create Work Order */}
       {showCreateModal && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-xs flex items-center justify-center p-4 animate-fadeIn">
+        <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
           <div className="bg-zinc-950 border border-zinc-800 rounded-[5px] max-w-xl w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto text-white font-mono">
             <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
               <h3 className="text-sm font-black uppercase text-white flex items-center gap-2 font-display">

@@ -283,7 +283,7 @@ export const ContractorTestimonials: React.FC<ContractorTestimonialsProps> = ({
 
       {/* Reference Modal */}
       {showReferenceModal && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-in fade-in font-mono">
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in font-mono">
           <div className="bg-zinc-900 rounded-[5px] border border-zinc-800 max-w-sm w-full p-4 shadow-2xl space-y-3">
             <div className="flex items-start justify-between">
               <div>
@@ -334,7 +334,7 @@ export const ContractorTestimonials: React.FC<ContractorTestimonialsProps> = ({
 
       {/* Add Review Modal */}
       {showAddReviewModal && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-in fade-in font-mono">
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in font-mono">
           <div className="bg-zinc-900 rounded-[5px] border border-zinc-800 max-w-sm w-full p-4 shadow-2xl space-y-3">
             <div className="flex items-start justify-between">
               <h3 className="text-xs font-black text-white uppercase font-display">

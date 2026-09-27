@@ -165,8 +165,8 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   const [isSalesInquiryModalOpen, setIsSalesInquiryModalOpen] = useState<boolean>(false);
 
   // Accordion visibility states for secondary technical details (compacts mobile & desktop viewports)
-  const [isExtendedSpecsExpanded, setIsExtendedSpecsExpanded] = useState<boolean>(false);
-  const [isApplicationsExpanded, setIsApplicationsExpanded] = useState<boolean>(false);
+  const [isExtendedSpecsExpanded, setIsExtendedSpecsExpanded] = useState<boolean>(true);
+  const [isApplicationsExpanded, setIsApplicationsExpanded] = useState<boolean>(true);
   const [isScheduleExpanded, setIsScheduleExpanded] = useState<boolean>(false);
 
   // Calculate pricing with attachments
@@ -651,7 +651,7 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                 </div>
               </div>
 
-              {/* Extended Specs from Machine Data */}
+              {/* Ficha Técnica Completa — Structured Spec Table */}
               {machine.specs && machine.specs.length > 0 && (
                 <div className="rounded-[2px] border border-zinc-800 bg-zinc-950 overflow-hidden">
                   <button
@@ -661,24 +661,33 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                   >
                     <span className="flex items-center gap-2">
                       <Layers className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                      <span>Detalles y Homologaciones Técnicas ({machine.specs.length})</span>
+                      <span>Ficha Técnica Completa ({machine.specs.length} parámetros)</span>
                     </span>
                     <span className="flex items-center gap-1.5 text-[10px] text-zinc-400 font-bold uppercase">
-                      <span>{isExtendedSpecsExpanded ? 'Ocultar' : 'Ver'}</span>
+                      <span>{isExtendedSpecsExpanded ? 'Colapsar' : 'Ver'}</span>
                       <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isExtendedSpecsExpanded ? 'rotate-180 text-amber-400' : ''}`} />
                     </span>
                   </button>
 
                   {isExtendedSpecsExpanded && (
-                    <div className="p-3 pt-0 border-t border-zinc-800 animate-in fade-in duration-150">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-2">
-                        {machine.specs.map((s, idx) => (
-                          <div key={idx} className="flex items-center justify-between p-2 rounded-[2px] bg-zinc-900 border border-zinc-800 text-xs">
-                            <span className="text-zinc-400 font-medium">{s.label}</span>
-                            <span className="font-bold text-zinc-100">{s.value}</span>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="border-t border-zinc-800 animate-in fade-in duration-150">
+                      <table className="w-full text-xs">
+                        <tbody>
+                          {machine.specs.map((s, idx) => (
+                            <tr
+                              key={idx}
+                              className={idx % 2 === 0 ? 'bg-zinc-900/60' : 'bg-zinc-950'}
+                            >
+                              <td className="px-3 py-2 text-zinc-400 font-bold uppercase text-[10px] tracking-wide w-[52%] border-r border-zinc-800">
+                                {s.label}
+                              </td>
+                              <td className="px-3 py-2 text-zinc-100 font-mono font-bold text-right">
+                                {s.value}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   )}
                 </div>

@@ -866,10 +866,10 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={() => handleNav('#/portal')}
               onMouseEnter={handleCloseMegaMenuImmediately}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all border border-blue-500/30 bg-blue-950/40 hover:bg-blue-900/50 text-blue-400 cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all border border-amber-500/30 bg-amber-950/30 hover:bg-amber-900/30 text-amber-400 cursor-pointer"
               title="Consola de Oficina & Ventas"
             >
-              <HardHat className="w-3.5 h-3.5 text-blue-400" />
+              <HardHat className="w-3.5 h-3.5 text-amber-400" />
               <span className="hidden md:inline">STAFF OPS</span>
             </button>
           )}
@@ -889,14 +889,14 @@ export const Header: React.FC<HeaderProps> = ({
       <AnimatePresence>
         {megaMenuOpen && (
           <>
-            {/* Click-away backdrop overlay */}
+            {/* Click-away backdrop overlay — 10% content blur effect */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.18, ease: "easeOut" }}
               onClick={handleForceCloseMegaMenu}
-              className="hidden lg:block fixed inset-0 top-[105px] bg-black/40 backdrop-blur-[2px] z-30 pointer-events-auto cursor-pointer"
+              className="hidden lg:block fixed inset-0 top-[105px] bg-black/20 backdrop-blur-[8px] z-30 pointer-events-auto cursor-pointer"
             />
             {/* Hover-bridge safe zone: invisible hit box eliminating any gap between header and menu */}
             <div 
@@ -936,14 +936,14 @@ export const Header: React.FC<HeaderProps> = ({
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
-            {/* Click-away backdrop overlay for tablet/mobile */}
+            {/* Click-away backdrop overlay for tablet/mobile — 10% content blur effect */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.18, ease: "easeOut" }}
               onClick={() => setMobileMenuOpen(false)}
-              className="lg:hidden fixed inset-0 top-[60px] sm:top-[105px] bg-black/50 backdrop-blur-[2px] z-30 pointer-events-auto"
+              className="lg:hidden fixed inset-0 top-[60px] sm:top-[105px] bg-black/40 backdrop-blur-[8px] z-30 pointer-events-auto"
             />
 
             <motion.div

@@ -1040,7 +1040,7 @@ export const PartsView = React.memo<PartsViewProps>(({
 
       {/* Part Technical Modal Detail */}
       {activePartDetail && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-in fade-in duration-200 font-display">
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200 font-display">
           <div className="w-full max-w-lg bg-zinc-950 rounded-[5px] shadow-2xl border border-zinc-800 overflow-hidden flex flex-col max-h-[90vh]">
             <div className="relative h-48 bg-zinc-900 shrink-0">
               <img

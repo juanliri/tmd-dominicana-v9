@@ -672,7 +672,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
 
       {/* Staff Member Detail Modal */}
       {selectedStaff && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-fadeIn font-display">
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn font-display">
           <div className="relative w-full max-w-lg bg-zinc-950 rounded-[5px] p-6 border border-zinc-800 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
             {/* Modal Top */}
             <div className="flex items-start justify-between">

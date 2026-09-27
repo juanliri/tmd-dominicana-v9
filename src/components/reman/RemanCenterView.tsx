@@ -269,7 +269,7 @@ export const RemanCenterView: React.FC<RemanCenterViewProps> = ({ onNavigate }) 
 
       {/* Dyno Report Modal */}
       {selectedComponentForModal && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-zinc-950 rounded-[5px] p-6 max-w-lg w-full border border-zinc-800 shadow-2xl relative font-mono text-white">
             <div className="flex items-center justify-between pb-3 border-b border-zinc-800 mb-3.5">
               <div>
