@@ -173,7 +173,7 @@ export const StaffQuickActionSidebar: React.FC<StaffQuickActionSidebarProps> = (
               <button
                 type="button"
                 onClick={onOpenQrScanner}
-                className={`w-full p-2 rounded-[3px] bg-zinc-950 hover:bg-zinc-850 border border-amber-500/40 hover:border-amber-400 text-amber-400 text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer uppercase ${
+                className={`w-full p-2 rounded-[3px] bg-zinc-950 hover:bg-zinc-800 border border-amber-500/40 hover:border-amber-400 text-amber-400 text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer uppercase ${
                   isCollapsed ? 'justify-center' : 'justify-between'
                 }`}
                 title="Escanear Código QR de Maquinaria o Repuesto"

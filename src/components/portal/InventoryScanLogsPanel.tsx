@@ -333,7 +333,7 @@ export const InventoryScanLogsPanel: React.FC<InventoryScanLogsPanelProps> = ({
                   return (
                     <tr
                       key={log.id}
-                      className="hover:bg-zinc-850/60 transition-colors group text-zinc-300"
+                      className="hover:bg-zinc-800/60 transition-colors group text-zinc-300"
                     >
                       {/* Timestamp */}
                       <td className="py-2.5 px-3 whitespace-nowrap">
