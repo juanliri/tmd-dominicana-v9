@@ -30,7 +30,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   onNavigate,
   customDeniedMessage
 }) => {
-  const { currentUser, role, isStaff, isAdmin, isClient, hasRole, loading, signInWithGoogle, setSimulatedRole } = useAuth();
+  const { currentUser, role, realRole, isStaff, isAdmin, isClient, hasRole, loading, signInWithGoogle, setSimulatedRole } = useAuth();
   const [redirectCountdown, setRedirectCountdown] = useState<number | null>(null);
 
   // Calculate permission based on requested role

@@ -218,7 +218,7 @@ export const RentalFleetView: React.FC<RentalFleetViewProps> = ({ onNavigate }) 
               <div className="flex items-center gap-3">
                 <div className="w-16 h-16 rounded-[4px] bg-zinc-950 border border-zinc-800 p-1 shrink-0 flex items-center justify-center overflow-hidden">
                   <img
-                    src={RENTAL_FLEET_DATA[0].imageUrl}
+                    src={RENTAL_FLEET_DATA[0].image}
                     alt={RENTAL_FLEET_DATA[0].name}
                     className="w-full h-full object-contain"
                   />

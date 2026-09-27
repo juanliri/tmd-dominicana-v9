@@ -906,6 +906,7 @@ export interface RentalEquipment {
   category: string;
   model: string;
   image: string;
+  imageUrl?: string;
   dayRateUsd: number;
   weekRateUsd: number;
   monthRateUsd: number;
