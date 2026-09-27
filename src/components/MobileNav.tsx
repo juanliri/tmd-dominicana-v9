@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, HardHat, Cog, Wrench, ShoppingBag, Shield, Truck } from 'lucide-react';
+import { Home, HardHat, Cog, ShoppingBag, Shield } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -30,9 +30,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentRoute, onNavigate }
   const items = [
     { label: 'INICIO', route: '#/home', icon: Home },
     { label: 'EQUIPOS', route: '#/machinery', icon: HardHat },
-    { label: 'RENTA', route: '#/rental', icon: Truck },
     { label: 'REPUESTOS', route: '#/parts', icon: Cog },
-    { label: 'TALLER', route: '#/service', icon: Wrench },
     { 
       label: isAdmin ? 'ADMIN' : isStaff ? 'OFICINA' : 'PORTAL', 
       route: '#/portal', 
@@ -46,7 +44,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentRoute, onNavigate }
       aria-label="Navegación Móvil Principal"
       className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#07070c]/95 backdrop-blur-xl border-t border-white/[0.08] pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_32px_rgba(0,0,0,0.8)] font-display"
     >
-      <div className="grid grid-cols-7 h-15 items-center px-1 max-w-lg mx-auto">
+      <div className="grid grid-cols-5 h-14 items-center px-2 max-w-md mx-auto">
         {items.map((item) => {
           const isActive = currentRoute === item.route || (item.route === '#/home' && (currentRoute === '' || currentRoute === '#' || currentRoute === '#/'));
           const Icon = item.icon;

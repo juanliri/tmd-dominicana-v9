@@ -219,62 +219,44 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, currentRoute = '' })
     <footer className="bg-gradient-to-b from-[#0e0e16] via-[#08080d] to-[#040407] text-zinc-100 border-t border-white/[0.08] pt-8 sm:pt-10 lg:pt-12 pb-24 lg:pb-10 text-sm font-medium font-display">
       <div className="w-full max-w-[1780px] mx-auto px-3.5 sm:px-6 lg:px-12 xl:px-16 space-y-6 sm:space-y-8">
         
-        {/* TOP CERTIFIED DISTRIBUTOR & NEWSLETTER BAR - RESPONSIVE & COMPACT */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 p-4 sm:p-6 lg:p-7 rounded-xl bg-gradient-to-r from-[#14141c] via-[#0c0c12] to-[#06060a] border border-white/[0.08] shadow-xl items-center">
+        {/* COMPACT BRAND CREDENTIALS & NEWSLETTER BAR */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-4 sm:p-5 rounded-xl bg-gradient-to-r from-[#14141c] via-[#0c0c12] to-[#06060a] border border-white/[0.08] shadow-md">
           {/* Left: Official Dealership Credentials */}
-          <div className="lg:col-span-6 space-y-2 sm:space-y-3">
+          <div className="space-y-1">
             <div className="flex items-center gap-2 flex-wrap font-display">
-              <span className="px-2.5 py-0.5 rounded-[4px] bg-[#d99b26] text-black text-[10px] sm:text-xs font-black uppercase tracking-wider shadow-xs">
+              <span className="px-2.5 py-0.5 rounded-[4px] bg-[#d99b26] text-black text-[10px] sm:text-xs font-black uppercase tracking-wider">
                 DISTRIBUCIÓN OFICIAL HOMOLOGADA
               </span>
-              <span className="text-zinc-300 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+              <span className="text-zinc-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
                 DESDE 2002 • PATIO KM 22 AUTOPISTA DUARTE
               </span>
             </div>
-            
-            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal font-sans">
-              Representante autorizado de <strong className="text-white font-black text-[#e0a22a]">JCB, LiuGong, Ammann, Kubota, Yomel, AFEX y Donaldson</strong> con soporte técnico local y stock permanente de partes OEM.
+            <p className="text-xs text-zinc-300 font-sans">
+              Representante oficial de <strong className="text-white font-black text-[#e0a22a]">JCB, LiuGong, Ammann, Kubota, Yomel, AFEX y Donaldson</strong> • Garantía 2 Años / 2,000h y Telemetría LiveLink™.
             </p>
-
-            <div className="flex items-center gap-1.5 pt-0.5 text-[11px] sm:text-xs font-black uppercase tracking-wider text-emerald-400">
-              <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>GARANTÍA DE FÁBRICA 2 AÑOS / 2,000H Y TELEMETRÍA SATELITAL LIVELINK™.</span>
-            </div>
           </div>
 
-          {/* Right: Fleet & Inventory Alerts Subscription */}
-          <div className="lg:col-span-6 lg:pl-6 lg:border-l lg:border-white/[0.08] pt-2 lg:pt-0 border-t lg:border-t-0 border-white/[0.08]">
-            <div className="space-y-1 mb-2.5">
-              <h3 className="text-xs sm:text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#e0a22a] shrink-0" />
-                <span>BOLETÍN DE EMBARQUES Y DESPACHO EXPRESS</span>
-              </h3>
-              <p className="text-[11px] sm:text-xs text-zinc-400 font-sans line-clamp-1 sm:line-clamp-none">
-                Llegada de contenedores Haina/Caucedo, ofertas en kits de filtros y disponibilidad de flota.
-              </p>
-            </div>
-
+          {/* Right: Compact Fleet Alerts Subscription */}
+          <div className="shrink-0 w-full lg:w-auto">
             {isSubscribed ? (
               <div className="px-3 py-2 rounded-lg bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 text-xs font-black uppercase tracking-wider flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>¡SUSCRITO CON ÉXITO! RECIBIRÁS LAS ALERTAS DE INVENTARIO.</span>
+                <span>¡SUSCRITO CON ÉXITO A ALERTAS DE INVENTARIO!</span>
               </div>
             ) : (
-              <form onSubmit={handleSubscribe} className="flex flex-row items-center gap-2">
-                <div className="relative flex-1 min-w-0">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="correo@empresa.com.do"
-                    required
-                    className="w-full px-3 py-2 sm:py-2.5 rounded-lg bg-[#07070b] border border-white/[0.08] text-white placeholder-zinc-500 text-xs font-mono font-medium focus:outline-none focus:border-[#d99b26] transition-colors"
-                  />
-                </div>
+              <form onSubmit={handleSubscribe} className="flex items-center gap-2">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="correo@empresa.com.do"
+                  required
+                  className="w-full sm:w-64 px-3 py-2 rounded-lg bg-[#07070b] border border-white/[0.08] text-white placeholder-zinc-500 text-xs font-mono focus:outline-none focus:border-[#d99b26] transition-colors"
+                />
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-4 py-2 sm:py-2.5 rounded-lg bg-[#d99b26] hover:bg-[#e0a22a] text-black font-black uppercase tracking-wider text-xs transition-colors shrink-0 flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
+                  className="px-3.5 py-2 rounded-lg bg-[#d99b26] hover:bg-[#e0a22a] text-black font-black uppercase tracking-wider text-xs transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer shadow-sm"
                 >
                   <span>{isSubmitting ? '...' : 'SUSCRIBIR'}</span>
                   <Send className="w-3.5 h-3.5" />
@@ -493,96 +475,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, currentRoute = '' })
           </div>
         </div>
 
-        {/* SOCIAL MEDIA & BRAND ENGAGEMENT HUB - INTERACTIVE ANIMATED CARDS */}
-        <div className="pt-2 sm:pt-4 border-t border-white/[0.08]">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-2.5 mb-3.5 sm:mb-4">
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#d99b26] animate-ping" />
-                <h4 className="text-xs sm:text-sm font-black uppercase tracking-wider text-white flex items-center gap-2">
-                  <span>CANALES DIGITALES & REDES SOCIALES TMD</span>
-                </h4>
-                <span className="px-2 py-0.5 rounded-[3px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-black uppercase">
-                  @TMDDOMINICANA
-                </span>
-              </div>
-              <p className="text-[11px] sm:text-xs text-zinc-400 font-sans mt-0.5">
-                Sigue nuestra actividad en obras, demostraciones de potencia y soporte técnico en toda República Dominicana.
-              </p>
-            </div>
 
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] text-zinc-400 hidden sm:inline font-mono">
-                CONÉCTATE DIRECTO:
-              </span>
-              <button
-                onClick={() => onNavigate('#/bio')}
-                className="px-2.5 py-1 rounded-md bg-[#141420] hover:bg-[#1c1c2e] text-amber-400 hover:text-amber-300 text-xs font-bold transition-colors cursor-pointer border border-white/[0.08] flex items-center gap-1.5"
-              >
-                <Share2 className="w-3.5 h-3.5" />
-                <span>VER BIO-HUB COMPLETO</span>
-              </button>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {SOCIAL_LINKS.map((social) => {
-              const Icon = social.icon;
-              return (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`group relative p-3.5 sm:p-4 rounded-xl bg-gradient-to-b from-[#0e0e16] to-[#08080c] border border-white/[0.08] transition-all duration-300 cursor-pointer overflow-hidden ${social.hoverGlow} hover:-translate-y-1`}
-                >
-                  {/* Subtle hover gradient wash */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-10 bg-gradient-to-r from-amber-400 to-rose-400 transition-opacity duration-300 pointer-events-none" />
-
-                  <div className="relative flex items-start justify-between gap-3">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className={`w-10 h-10 rounded-lg bg-zinc-900 border border-white/[0.08] flex items-center justify-center text-zinc-300 transition-all duration-300 shrink-0 ${social.hoverIconBg} shadow-sm`}>
-                        <Icon className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-1.5">
-                          <span className="font-black text-xs sm:text-sm text-white uppercase group-hover:text-amber-400 transition-colors">
-                            {social.name}
-                          </span>
-                        </div>
-                        <span className="font-mono text-[11px] font-bold text-amber-400/90 block truncate">
-                          {social.handle}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="shrink-0 flex flex-col items-end gap-1">
-                      <span className={`px-1.5 py-0.5 rounded-[3px] text-[9px] font-black uppercase border ${social.badgeColor}`}>
-                        {social.tag}
-                      </span>
-                      <ExternalLink className="w-3.5 h-3.5 text-zinc-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
-                    </div>
-                  </div>
-
-                  <p className="relative mt-2.5 text-[11px] text-zinc-400 font-sans leading-relaxed line-clamp-2 group-hover:text-zinc-300 transition-colors">
-                    {social.subtitle}
-                  </p>
-
-                  <div className="relative mt-3 pt-2 border-t border-white/[0.06] flex items-center justify-between text-[10px] font-black uppercase tracking-wider">
-                    <span className="text-zinc-500 group-hover:text-zinc-300 transition-colors flex items-center gap-1">
-                      <Radio className="w-2.5 h-2.5 text-emerald-400 animate-pulse" />
-                      CANAL OFICIAL
-                    </span>
-                    <span className="text-amber-400 group-hover:underline flex items-center gap-0.5">
-                      <span>SEGUIR</span>
-                      <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-                    </span>
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        </div>
 
         {/* BOTTOM METRIC & LEGAL BAR - COMPACT & ORGANIZED */}
         <div className="pt-4 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 text-zinc-400 text-xs font-bold">

@@ -1,31 +1,9 @@
 import React, { useState, useMemo, useRef } from 'react';
 import { 
-  Award, 
   ShieldCheck, 
-  Truck, 
-  Wrench, 
-  CheckCircle2, 
-  ArrowRight, 
-  ExternalLink, 
   ChevronRight, 
   ChevronLeft,
-  Activity, 
-  Landmark, 
-  HardHat, 
-  Building2, 
-  Sparkles, 
-  FileText, 
-  PhoneCall, 
-  HelpCircle,
-  Factory,
-  Globe2,
-  Filter,
-  Flame,
-  Layers,
-  Star,
-  Search,
-  Quote,
-  MapPin
+  Search
 } from 'lucide-react';
 import { OFFICIAL_BRANDS, BrandInfo } from '../../data/brandsData';
 import { BrandLogo } from '../common/BrandLogos';
@@ -94,150 +72,131 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
     <section className="w-full px-3 sm:px-6 lg:px-8 xl:px-12 max-w-[1780px] mx-auto py-6 sm:py-10 space-y-8 sm:space-y-12" id="industrial-ecosystem-grid">
       
       {/* ========================================================================= */}
-      {/* LAYER 1: COMPACT TMD MULTI-BRAND ALLIANCE SHOWROOM (HORIZONTAL SCROLLABLE)*/}
+      {/* LAYER 1: SLEEK TMD MULTI-BRAND ALLIANCE SHOWROOM (HORIZONTAL SCROLLABLE)  */}
       {/* ========================================================================= */}
       <div id="brand-pavilion-section" className="space-y-3 scroll-mt-28">
-        {/* Compact TMD Authority Banner & Brand Selector */}
-        <div className="rounded-xl bg-gradient-to-r from-[#14141c] via-[#0c0c12] to-[#06060a] border border-white/[0.08] p-4 sm:p-5 relative overflow-hidden">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5 relative z-10">
-            {/* TMD Brand Framing */}
-            <div className="space-y-1 max-w-2xl">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-[#d99b26] text-black text-[10px] font-black uppercase tracking-wider">
-                  <Factory className="w-3 h-3" />
-                  TMD TECNOMAQUINARIAS
-                </span>
-                <span className="text-[#e0a22a] text-xs font-bold flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  Distribuidor Autorizado en República Dominicana
-                </span>
-              </div>
-              <h2 className="text-base sm:text-xl font-black text-white tracking-tight">
+        {/* Sleek TMD Authority Header & Category Selector */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/[0.08]">
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-[#d99b26]/10 border border-[#d99b26]/20 text-[#e0a22a] text-[10px] font-black uppercase tracking-wider">
+                <ShieldCheck className="w-3 h-3" />
+                DISTRIBUIDOR AUTORIZADO RD
+              </span>
+              <h2 className="text-sm sm:text-base font-black text-white tracking-tight">
                 Alianza Oficial de Marcas Homologadas
               </h2>
-              <p className="text-xs text-zinc-400 leading-relaxed">
-                Stock físico en Patio Km 22, garantía oficial y despacho de repuestos genuinos.
-              </p>
+            </div>
+            <p className="text-xs text-zinc-400">
+              Stock físico en Patio Km 22, garantía directa de fábrica y despacho de repuestos genuinos.
+            </p>
+          </div>
+
+          {/* Quick Category Filters & Carousel Navigation */}
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-0.5 bg-[#09090e] p-1 rounded-lg border border-white/[0.06] overflow-x-auto scrollbar-none">
+              <button
+                type="button"
+                onClick={() => setSelectedBrandCategory('all')}
+                className={`px-2 py-0.5 rounded-[4px] text-[11px] font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  selectedBrandCategory === 'all'
+                    ? 'bg-[#d99b26] text-black font-black shadow-xs'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                Todas ({OFFICIAL_BRANDS.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedBrandCategory('construction')}
+                className={`px-2 py-0.5 rounded-[4px] text-[11px] font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  selectedBrandCategory === 'construction'
+                    ? 'bg-[#d99b26] text-black font-black shadow-xs'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                Construcción
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedBrandCategory('agri')}
+                className={`px-2 py-0.5 rounded-[4px] text-[11px] font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  selectedBrandCategory === 'agri'
+                    ? 'bg-[#d99b26] text-black font-black shadow-xs'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                Agro
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedBrandCategory('mining')}
+                className={`px-2 py-0.5 rounded-[4px] text-[11px] font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  selectedBrandCategory === 'mining'
+                    ? 'bg-[#d99b26] text-black font-black shadow-xs'
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+              >
+                Minería
+              </button>
             </div>
 
-            {/* Quick Category Filters & Carousel Navigation */}
-            <div className="flex flex-wrap items-center gap-2 shrink-0">
-              <div className="flex items-center gap-1 bg-[#09090e] p-1 rounded-lg border border-white/[0.06] overflow-x-auto scrollbar-none">
-                <button
-                  type="button"
-                  onClick={() => setSelectedBrandCategory('all')}
-                  className={`px-2.5 py-1 rounded-[4px] text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                    selectedBrandCategory === 'all'
-                      ? 'bg-[#d99b26] text-black shadow-xs font-black'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  Todas ({OFFICIAL_BRANDS.length})
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSelectedBrandCategory('construction')}
-                  className={`px-2.5 py-1 rounded-[4px] text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                    selectedBrandCategory === 'construction'
-                      ? 'bg-[#d99b26] text-black shadow-xs font-black'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  Construcción
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSelectedBrandCategory('agri')}
-                  className={`px-2.5 py-1 rounded-[4px] text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                    selectedBrandCategory === 'agri'
-                      ? 'bg-[#d99b26] text-black shadow-xs font-black'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  Agro
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSelectedBrandCategory('mining')}
-                  className={`px-2.5 py-1 rounded-[4px] text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                    selectedBrandCategory === 'mining'
-                      ? 'bg-[#d99b26] text-black shadow-xs font-black'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  Minería
-                </button>
-              </div>
-
-              {/* Scroll buttons for brands */}
-              <div className="flex items-center gap-1">
-                <button
-                  type="button"
-                  onClick={() => scrollBrands('left')}
-                  className="p-1.5 rounded-lg bg-[#0e0e16] hover:bg-[#181824] text-zinc-300 hover:text-white border border-white/[0.08] transition-colors cursor-pointer"
-                  title="Desplazar a la izquierda"
-                  aria-label="Desplazar marcas a la izquierda"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => scrollBrands('right')}
-                  className="p-1.5 rounded-lg bg-[#0e0e16] hover:bg-[#181824] text-zinc-300 hover:text-white border border-white/[0.08] transition-colors cursor-pointer"
-                  title="Desplazar a la derecha"
-                  aria-label="Desplazar marcas a la derecha"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
+            {/* Scroll buttons for brands */}
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => scrollBrands('left')}
+                className="p-1.5 rounded-lg bg-[#0e0e16] hover:bg-[#181824] text-zinc-300 hover:text-white border border-white/[0.08] transition-colors cursor-pointer"
+                title="Desplazar a la izquierda"
+                aria-label="Desplazar marcas a la izquierda"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollBrands('right')}
+                className="p-1.5 rounded-lg bg-[#0e0e16] hover:bg-[#181824] text-zinc-300 hover:text-white border border-white/[0.08] transition-colors cursor-pointer"
+                title="Desplazar a la derecha"
+                aria-label="Desplazar marcas a la derecha"
+              >
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Horizontal Scroll-in-Place Brands Ribbon (Clean obsidian cards, single direct click) */}
+        {/* Compact Horizontal Brand Track (Low Profile Luxury Obsidian Cards) */}
         <div 
           ref={brandScrollRef}
-          className="flex items-stretch gap-3 overflow-x-auto scrollbar-none pb-1 scroll-smooth snap-x snap-mandatory"
+          className="flex items-stretch gap-2.5 overflow-x-auto scrollbar-none pb-1 scroll-smooth snap-x snap-mandatory"
         >
           {filteredBrands.map((brand: BrandInfo) => {
             return (
               <div
                 key={brand.id}
                 onClick={() => handleBrandCardClick(brand.name)}
-                className="w-[240px] sm:w-[260px] shrink-0 snap-start rounded-xl bg-gradient-to-b from-[#13131c] via-[#0b0b10] to-[#040407] border border-white/[0.08] hover:border-[#d99b26]/60 transition-all p-3.5 flex flex-col justify-between group shadow-sm cursor-pointer"
+                className="w-[210px] sm:w-[230px] shrink-0 snap-start rounded-lg bg-gradient-to-b from-[#13131c] via-[#0b0b10] to-[#040407] border border-white/[0.08] hover:border-[#d99b26]/60 transition-all p-3 flex flex-col justify-between group shadow-xs cursor-pointer"
               >
-                <div className="space-y-2.5">
-                  {/* Top Row: Logo & Country */}
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <div className="h-7 px-2 rounded-[4px] bg-[#07070b] border border-white/[0.08] flex items-center justify-center">
-                        <BrandLogo brandId={brand.id} className="h-4 max-w-[65px]" />
-                      </div>
-                      <span className="text-xs font-black text-white group-hover:text-[#e0a22a] transition-colors truncate">
-                        {brand.name}
-                      </span>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <div className="h-6 px-1.5 rounded-[3px] bg-[#07070b] border border-white/[0.08] flex items-center justify-center shrink-0">
+                      <BrandLogo brandId={brand.id} className="h-3.5 max-w-[55px]" />
                     </div>
-
-                    <span className="px-1.5 py-0.5 rounded-[3px] text-[9px] font-bold bg-[#0a0a10] text-zinc-400 border border-white/[0.06] shrink-0">
-                      {brand.country}
+                    <span className="text-xs font-black text-white group-hover:text-[#e0a22a] transition-colors truncate">
+                      {brand.name}
                     </span>
                   </div>
 
-                  {/* Machinery Lines */}
-                  <p className="text-[10px] text-zinc-400 truncate">
-                    {brand.equipmentLines.slice(0, 2).join(' • ')}
-                  </p>
+                  <span className="px-1 py-0.5 rounded-[2px] text-[8px] font-bold bg-[#0a0a10] text-zinc-400 border border-white/[0.06] shrink-0">
+                    {brand.country}
+                  </span>
                 </div>
 
-                {/* Bottom Action Strip: Minimal single affordance */}
-                <div className="pt-2 mt-2 border-t border-white/[0.06] flex items-center justify-between gap-2">
-                  <span className="text-[10px] font-medium text-zinc-400 flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3 text-[#d99b26] shrink-0" />
-                    <span>Garantía Oficial</span>
+                <div className="pt-2 mt-2 border-t border-white/[0.06] flex items-center justify-between gap-2 text-[10px]">
+                  <span className="text-zinc-400 truncate font-sans">
+                    {brand.equipmentLines[0]}
                   </span>
-
-                  <span className="text-[11px] font-black text-[#e0a22a] group-hover:text-white flex items-center gap-0.5 transition-colors">
-                    <span>Ver Modelos</span>
+                  <span className="font-bold text-[#e0a22a] group-hover:text-white flex items-center shrink-0 transition-colors">
                     <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                   </span>
                 </div>
@@ -248,144 +207,14 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
       </div>
 
       {/* ========================================================================= */}
-      {/* LAYER 2: INSTITUTIONAL INFRASTRUCTURE & ENGINEERING MATRIX (BENTO)       */}
-      {/* ========================================================================= */}
-      <div id="infrastructure-capacity-section" className="space-y-3.5 scroll-mt-28">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 border-b border-white/[0.08]">
-          <div>
-            <div className="flex items-center gap-2 mb-0.5">
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] bg-[#d99b26]/10 border border-[#d99b26]/20 text-[#e0a22a] text-[10px] font-black uppercase tracking-wider">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                INFRAESTRUCTURA TÉCNICA Y POSTVENTA RD
-              </span>
-            </div>
-            <h2 className="text-lg sm:text-xl font-black text-white tracking-tight">
-              Capacidad Operativa & Cobertura Nacional
-            </h2>
-          </div>
-          <button
-            type="button"
-            onClick={() => onNavigate('#/fullbay')}
-            className="text-xs font-black text-[#e0a22a] hover:underline flex items-center gap-1 cursor-pointer self-start sm:self-center"
-          >
-            <span>Conoce nuestras 12 bahías de taller</span>
-            <ChevronRight className="w-3.5 h-3.5" />
-          </button>
-        </div>
-
-        {/* Clean, low-density 4-Card Obsidian Matrix */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {/* Bento Item 1: Sede Central Patio Km 22 */}
-          <div className="rounded-xl bg-gradient-to-b from-[#13131c] via-[#0b0b10] to-[#040407] border border-white/[0.08] hover:border-white/[0.16] p-4 flex flex-col justify-between space-y-3 transition-all group">
-            <div className="space-y-1.5">
-              <div className="w-8 h-8 rounded-lg bg-[#d99b26]/10 border border-[#d99b26]/20 flex items-center justify-center text-[#e0a22a]">
-                <Building2 className="w-4 h-4" />
-              </div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-[#e0a22a] block">
-                Sede Central Nacional
-              </span>
-              <h3 className="text-sm font-black text-white">
-                Patio Km 22 Duarte
-              </h3>
-              <p className="text-xs text-zinc-400 leading-relaxed line-clamp-2">
-                15,000 m² con pista de pruebas dinámicas, 12 bahías y despacho inmediato.
-              </p>
-            </div>
-            <div className="pt-2 border-t border-white/[0.06] text-[10px] text-zinc-500 font-mono">
-              Salida inmediata Cibao & Sto. Dgo.
-            </div>
-          </div>
-
-          {/* Bento Item 2: SOS Móvil 24/7 */}
-          <div className="rounded-xl bg-gradient-to-b from-[#13131c] via-[#0b0b10] to-[#040407] border border-white/[0.08] hover:border-[#d99b26]/40 p-4 flex flex-col justify-between space-y-3 transition-all group">
-            <div className="space-y-1.5">
-              <div className="w-8 h-8 rounded-lg bg-[#d99b26]/10 border border-[#d99b26]/20 flex items-center justify-center text-[#e0a22a]">
-                <Flame className="w-4 h-4" />
-              </div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-[#e0a22a] block">
-                Respuesta en Obra
-              </span>
-              <h3 className="text-sm font-black text-white">
-                Talleres Móviles SOS 24/7
-              </h3>
-              <p className="text-xs text-zinc-400 leading-relaxed line-clamp-2">
-                Camiones 4x4 con compresor, generador y diagnóstico computarizado a tu proyecto.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => onNavigate('#/emergency-dispatch')}
-              className="pt-2 border-t border-white/[0.06] text-[10px] font-bold text-[#e0a22a] hover:text-white flex items-center justify-between cursor-pointer transition-colors"
-            >
-              <span>Despachar auxilio mecánico</span>
-              <ArrowRight className="w-3 h-3" />
-            </button>
-          </div>
-
-          {/* Bento Item 3: Laboratorio de Aceites SOS */}
-          <div className="rounded-xl bg-gradient-to-b from-[#13131c] via-[#0b0b10] to-[#040407] border border-white/[0.08] hover:border-[#d99b26]/40 p-4 flex flex-col justify-between space-y-3 transition-all group">
-            <div className="space-y-1.5">
-              <div className="w-8 h-8 rounded-lg bg-[#d99b26]/10 border border-[#d99b26]/20 flex items-center justify-center text-[#e0a22a]">
-                <Activity className="w-4 h-4" />
-              </div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-[#e0a22a] block">
-                Diagnóstico Predictivo
-              </span>
-              <h3 className="text-sm font-black text-white">
-                Laboratorio de Fluidos
-              </h3>
-              <p className="text-xs text-zinc-400 leading-relaxed line-clamp-2">
-                Espectrometría y análisis preventivo de partículas para evitar fallas costosas.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => onNavigate('#/oil-lab')}
-              className="pt-2 border-t border-white/[0.06] text-[10px] font-bold text-[#e0a22a] hover:text-white flex items-center justify-between cursor-pointer transition-colors"
-            >
-              <span>Análisis preventivo SOS</span>
-              <ArrowRight className="w-3 h-3" />
-            </button>
-          </div>
-
-          {/* Bento Item 4: Telemetría & Bóveda Técnica */}
-          <div className="rounded-xl bg-gradient-to-b from-[#13131c] via-[#0b0b10] to-[#040407] border border-white/[0.08] hover:border-[#d99b26]/40 p-4 flex flex-col justify-between space-y-3 transition-all group">
-            <div className="space-y-1.5">
-              <div className="w-8 h-8 rounded-lg bg-[#d99b26]/10 border border-[#d99b26]/20 flex items-center justify-center text-[#e0a22a]">
-                <FileText className="w-4 h-4" />
-              </div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-[#e0a22a] block">
-                Ingeniería Residente
-              </span>
-              <h3 className="text-sm font-black text-white">
-                Bóveda Técnica PWA
-              </h3>
-              <p className="text-xs text-zinc-400 leading-relaxed line-clamp-2">
-                Fichas técnicas oficiales y diagramas hidráulicos sin necesidad de conexión.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => onNavigate('#/tech-docs')}
-              className="pt-2 border-t border-white/[0.06] text-[10px] font-bold text-[#e0a22a] hover:text-white flex items-center justify-between cursor-pointer transition-colors"
-            >
-              <span>Fichas técnicas descargables</span>
-              <ArrowRight className="w-3 h-3" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* ========================================================================= */}
-      {/* LAYER 3: CONTRACTOR VERIFICATION, TESTIMONIALS & INSTITUTIONAL FAQS      */}
+      {/* LAYER 2: STREAMLINED CONTRACTOR EXPERIENCE & PROCUREMENT FAQS             */}
       {/* ========================================================================= */}
       <div className="rounded-xl bg-gradient-to-b from-[#14141c] via-[#0c0c12] to-[#06060a] border border-white/[0.08] p-4 sm:p-6 space-y-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          {/* Left: Real Dominican Contractors Experience with Interactive Switcher */}
+          {/* Left: Real Dominican Contractors Experience */}
           <div id="contractors-testimonials-section" className="lg:col-span-6 space-y-3.5 scroll-mt-28">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pb-1 border-b border-white/[0.06]">
               <div>
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#e0a22a] block mb-0.5">
                   Voces del Sector Construcción RD
@@ -402,7 +231,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
                   title="Anterior testimonio"
                   aria-label="Testimonio anterior"
                 >
-                  <ChevronLeft className="w-4 h-4" />
+                  <ChevronLeft className="w-3.5 h-3.5" />
                 </button>
                 <button
                   type="button"
@@ -411,7 +240,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
                   title="Siguiente testimonio"
                   aria-label="Siguiente testimonio"
                 >
-                  <ChevronRight className="w-4 h-4" />
+                  <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
@@ -465,7 +294,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
 
           {/* Right: Institutional FAQ for Contractors & Procurement with Fast Search */}
           <div id="procurement-faqs-section" className="lg:col-span-6 space-y-3.5 scroll-mt-28">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1 border-b border-white/[0.06]">
               <div>
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#e0a22a] block mb-0.5">
                   Preguntas Frecuentes
