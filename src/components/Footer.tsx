@@ -289,7 +289,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, currentRoute = '' })
           {/* Column 1: Brand & Official Status */}
           <div className="space-y-3 bg-[#0a0a10]/50 sm:bg-transparent p-3.5 sm:p-0 rounded-xl border sm:border-0 border-white/[0.08]">
             <div className="flex items-center justify-between">
-              <TMDLogo className="h-8 sm:h-9" />
+              <TMDLogo variant="icon-only" className="h-8 sm:h-9" />
               <span className="sm:hidden px-2 py-0.5 rounded-[2px] bg-[#14141c] text-[#e0a22a] text-[10px] font-black uppercase border border-white/[0.08]">
                 OFICIAL RD
               </span>

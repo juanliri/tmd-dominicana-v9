@@ -200,7 +200,7 @@ export const Header: React.FC<HeaderProps> = ({
               className="flex items-center gap-2 cursor-pointer group"
               title="Ir al Showroom Público"
             >
-              <TMDLogo className="h-9 group-hover:scale-105 transition-transform" />
+              <TMDLogo variant="responsive" className="h-8 sm:h-9 group-hover:scale-105 transition-transform" />
             </button>
             <span className="text-zinc-700">/</span>
             <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-black">
@@ -296,7 +296,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-12 max-w-[1780px] mx-auto h-15 flex items-center justify-between gap-4 bg-transparent">
           <div className="flex items-center gap-3">
             <button onClick={() => handleNav('#/home')} className="flex items-center gap-2 cursor-pointer group" title="Ir al Showroom Principal">
-              <TMDLogo className="h-9 group-hover:scale-105 transition-transform" />
+              <TMDLogo variant="responsive" className="h-8 sm:h-9 group-hover:scale-105 transition-transform" />
               <div className="hidden sm:block pl-3 border-l border-white/10">
                 <div className="flex items-center gap-1.5 leading-none">
                   <span className="font-extrabold text-sm tracking-tight text-white">
@@ -410,7 +410,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-12 max-w-[1780px] mx-auto h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <button onClick={() => handleNav('#/home')} className="flex items-center gap-2 cursor-pointer group" title="Ir al Showroom Principal">
-              <TMDLogo className="h-8 group-hover:scale-105 transition-transform" />
+              <TMDLogo variant="responsive" className="h-7 sm:h-8 group-hover:scale-105 transition-transform" />
             </button>
             <span className="text-zinc-300 dark:text-zinc-700">/</span>
             <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-800 dark:text-zinc-200">
@@ -475,7 +475,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => handleNav('#/home')} 
             className="flex items-center gap-3 text-left focus:outline-none cursor-pointer"
           >
-            <TMDLogo className="h-10 hover:scale-102 transition-transform" />
+            <TMDLogo variant="responsive" className="h-8 sm:h-10 hover:scale-102 transition-transform" />
             <div className="hidden sm:block pl-3 border-l border-zinc-200 dark:border-zinc-800">
               <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 block">
                 Checkout & Proforma Fiscal NCF
@@ -628,7 +628,7 @@ export const Header: React.FC<HeaderProps> = ({
           onMouseEnter={handleCloseMegaMenuImmediately}
           className="flex items-center gap-3 text-left group focus:outline-none cursor-pointer shrink-0"
         >
-          <TMDLogo className="h-10 group-hover:scale-103 transition-transform" />
+          <TMDLogo variant="responsive" className="h-8 sm:h-10 group-hover:scale-103 transition-transform" />
         </button>
 
         {/* Primary Desktop Navigation Links: Icon-Free, Short, Bold ALL CAPS */}

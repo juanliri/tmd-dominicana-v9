@@ -443,7 +443,7 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
             {/* Terminal Header */}
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <TMDLogo className="h-7 sm:h-8" />
+                <TMDLogo variant="responsive" className="h-7 sm:h-8" />
                 <div className="flex items-center gap-1 text-[9px] sm:text-[10px] text-zinc-400 font-mono">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   <span>CONEXIÓN SEGURA</span>

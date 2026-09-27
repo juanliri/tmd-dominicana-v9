@@ -2,28 +2,61 @@ import React from 'react';
 
 export const TMD_OFFICIAL_LOGO_SRC = '/assets/logos/tmd_logo_official.png';
 export const TMD_GOLD_LOGO_SRC = '/assets/logos/tmd_logo_gold.png';
+export const TMD_ICON_MARK_SRC = '/assets/logos/tmd_icon_mark.png';
+export const TMD_ICON_SVG_SRC = '/assets/logos/tmd_icon_mark.svg';
 
 export interface TMDLogoProps {
   className?: string;
-  variant?: 'official' | 'gold' | 'compact' | 'minimal' | 'white-text' | 'monochrome';
+  variant?: 'official' | 'gold' | 'compact' | 'minimal' | 'white-text' | 'monochrome' | 'icon-only' | 'responsive';
   hideSubtext?: boolean;
 }
 
 /**
  * TMD Official Company Logo Component
- * Uses the exact original logo asset in the authentic setup and format without modifying the design.
+ * Supports:
+ * - 'official': Full authentic brand mark with 'TECNOMAQUINARIAS DIESEL' subtext
+ * - 'icon-only': Compact TMD chevron icon mark without descriptive subtext (ideal for mobile, sticky bars & footer)
+ * - 'responsive': Auto-switches to icon-only mark on mobile (<640px) and official full logo on desktop
  */
 export const TMDLogo: React.FC<TMDLogoProps> = ({ 
   className = 'h-10', 
-  variant = 'official'
+  variant = 'official',
+  hideSubtext = false
 }) => {
-  const src = variant === 'gold' ? TMD_GOLD_LOGO_SRC : TMD_OFFICIAL_LOGO_SRC;
+  if (variant === 'responsive') {
+    return (
+      <div className={`inline-flex items-center select-none ${className}`}>
+        {/* Mobile / Compact Screens (< 640px): Icon-only mark without subtext */}
+        <img
+          src={TMD_ICON_MARK_SRC}
+          alt="TMD"
+          className="h-full w-auto object-contain select-none pointer-events-none drop-shadow-sm sm:hidden"
+          draggable={false}
+        />
+        {/* Desktop / Tablet Screens (>= 640px): Official full brand logo */}
+        <img
+          src={TMD_OFFICIAL_LOGO_SRC}
+          alt="TMD - Tecnomaquinarias Diesel"
+          className="h-full w-auto object-contain select-none pointer-events-none drop-shadow-sm hidden sm:block"
+          draggable={false}
+        />
+      </div>
+    );
+  }
+
+  const isIconOnly = variant === 'icon-only' || variant === 'compact' || variant === 'minimal' || hideSubtext;
+  let src = TMD_OFFICIAL_LOGO_SRC;
+  if (variant === 'gold') {
+    src = TMD_GOLD_LOGO_SRC;
+  } else if (isIconOnly) {
+    src = TMD_ICON_MARK_SRC;
+  }
 
   return (
     <div className={`inline-flex items-center select-none ${className}`}>
       <img
         src={src}
-        alt="TMD - Tecnomaquinarias Diesel"
+        alt={isIconOnly ? 'TMD' : 'TMD - Tecnomaquinarias Diesel'}
         className="h-full w-auto object-contain select-none pointer-events-none drop-shadow-sm"
         draggable={false}
       />
