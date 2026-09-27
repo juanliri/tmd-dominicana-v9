@@ -27,6 +27,8 @@ import { motion } from 'motion/react';
 import { UserRole } from '../../types';
 import { TMDLogo } from '../common/BrandLogos';
 import portalBgMachinery from '../../assets/images/portal_bg_machinery_1790441100418.jpg';
+import tmdDealershipBg from '../../assets/images/tmd_dealership_bg_1790439101712.jpg';
+import tmdPatioBg from '../../assets/images/tmd_sede_central_patio_km22.jpg';
 import { PIN_ACCOUNTS, PIN_ALIASES, PinAccount } from '../../data/pinAuthAccounts';
 
 interface EnterprisePortalLoginProps {
@@ -345,18 +347,25 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
   };
 
   const [activeMobileView, setActiveMobileView] = useState<'terminal' | 'info'>('terminal');
+  const [activeBg, setActiveBg] = useState<'dealership' | 'patio' | 'fleet'>('dealership');
+
+  const currentBgImage = activeBg === 'dealership' 
+    ? tmdDealershipBg 
+    : activeBg === 'patio' 
+    ? tmdPatioBg 
+    : portalBgMachinery;
 
   return (
     <div className="w-full flex-1 h-[calc(100dvh-60px)] lg:h-[calc(100vh-60px)] max-h-screen bg-zinc-950 text-white font-mono flex flex-col relative selection:bg-amber-400 selection:text-black overflow-hidden">
       
-      {/* Cinematic Heavy Machinery Background Image (No text, pure industrial power) */}
+      {/* Premier Luxury Dealership & Heavy Fleet Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none z-0 brightness-110 contrast-105"
-        style={{ backgroundImage: `url(${portalBgMachinery})` }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none z-0 brightness-105 contrast-110 transition-all duration-700"
+        style={{ backgroundImage: `url(${currentBgImage})` }}
       >
-        {/* Balanced cinematic atmospheric gradient - machinery is vivid & clearly visible */}
-        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/80 via-zinc-950/40 to-zinc-950/75" />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-transparent to-zinc-950/35" />
+        {/* Balanced cinematic atmospheric gradient - ensures 100% contrast for PIN terminal */}
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/85 via-zinc-950/45 to-zinc-950/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/95 via-transparent to-zinc-950/45" />
       </div>
 
       {/* Hardware-Accelerated Ambient Ember Particle Canvas */}
@@ -422,14 +431,51 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
         >
           {/* Top Header: Official Certification & Title */}
           <div className="space-y-1.5 sm:space-y-2">
-            <div className="flex flex-wrap items-center gap-1.5">
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-400/15 border border-amber-400/40 text-amber-400 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider backdrop-blur-md">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>PORTAL DE CLIENTES & CONTRATISTAS</span>
-              </span>
-              <span className="text-[9px] sm:text-[10px] text-zinc-400 font-mono uppercase inline-block px-1.5 py-0.5 rounded bg-zinc-900/60 border border-white/10">
-                RNC 1-31-89421-5 • DGII B01
-              </span>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-1.5">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-400/15 border border-amber-400/40 text-amber-400 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider backdrop-blur-md">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>PORTAL DE CLIENTES &amp; CONTRATISTAS</span>
+                </span>
+                <span className="text-[9px] sm:text-[10px] text-zinc-400 font-mono uppercase inline-block px-1.5 py-0.5 rounded bg-zinc-900/60 border border-white/10">
+                  RNC 1-31-89421-5 • DGII B01
+                </span>
+              </div>
+
+              {/* Background Preset Selector */}
+              <div className="hidden sm:flex items-center gap-1 bg-black/60 p-0.5 rounded border border-white/10 text-[9px] font-mono">
+                <span className="text-zinc-500 px-1 uppercase font-bold text-[8px]">FONDO:</span>
+                <button
+                  type="button"
+                  onClick={() => setActiveBg('dealership')}
+                  className={`px-1.5 py-0.5 rounded-[2px] transition-all cursor-pointer uppercase ${
+                    activeBg === 'dealership' ? 'bg-amber-400 text-black font-black' : 'text-zinc-400 hover:text-white'
+                  }`}
+                  title="Showroom Dealership TMD"
+                >
+                  Showroom
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveBg('patio')}
+                  className={`px-1.5 py-0.5 rounded-[2px] transition-all cursor-pointer uppercase ${
+                    activeBg === 'patio' ? 'bg-amber-400 text-black font-black' : 'text-zinc-400 hover:text-white'
+                  }`}
+                  title="Patio Km 22 Autopista Duarte"
+                >
+                  Patio Km 22
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveBg('fleet')}
+                  className={`px-1.5 py-0.5 rounded-[2px] transition-all cursor-pointer uppercase ${
+                    activeBg === 'fleet' ? 'bg-amber-400 text-black font-black' : 'text-zinc-400 hover:text-white'
+                  }`}
+                  title="Flota Pesada en Campo"
+                >
+                  Flota
+                </button>
+              </div>
             </div>
 
             <div className="space-y-1">
