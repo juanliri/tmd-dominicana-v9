@@ -14,6 +14,7 @@ export function useScrollReveal(routeDependency?: string) {
 
     const observedElements = new Set<Element>();
 
+    // Ultra-lightweight native IntersectionObserver - 0 layout thrashing, 60fps smooth scroll
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -28,63 +29,38 @@ export function useScrollReveal(routeDependency?: string) {
       },
       {
         threshold: 0.05,
-        rootMargin: '0px 0px -30px 0px',
+        rootMargin: '40px 0px 40px 0px',
       }
     );
 
-    const scanAndObserve = () => {
-      // Selectors for major layout sections and cards
+    const observeNewElements = () => {
       const selectors = [
         'main section',
         'section[data-reveal]',
         '.reveal-on-scroll',
         '.tmd-luxury-card',
         '.tmd-industrial-card',
-        '.glass-card-dark',
-        '[data-scroll-reveal]',
-        '.bento-card',
-        '.mega-interactive-card'
+        '[data-scroll-reveal]'
       ];
 
       const elements = document.querySelectorAll(selectors.join(', '));
       elements.forEach((el) => {
         if (!observedElements.has(el) && !el.classList.contains('animate-content-come-up')) {
-          // Check if already in viewport or scrolled past
-          const rect = el.getBoundingClientRect();
-          const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-          if (rect.top < windowHeight * 0.85 && rect.bottom > 0) {
-            // Already visible: animate immediately
-            el.classList.add('animate-content-come-up');
-          } else {
-            // Below fold: observe for scroll trigger
-            observer.observe(el);
-            observedElements.add(el);
-          }
+          observer.observe(el);
+          observedElements.add(el);
         }
       });
     };
 
-    // Initial scan
-    scanAndObserve();
+    // Initial passive observation
+    observeNewElements();
 
-    // Re-scan with small delay for dynamic content and images
-    const timer = setTimeout(scanAndObserve, 150);
-
-    // Mutation observer to capture lazy-loaded content or tab switches
-    const mutationObserver = new MutationObserver(() => {
-      scanAndObserve();
-    });
-
-    const mainContainer = document.querySelector('main') || document.body;
-    mutationObserver.observe(mainContainer, {
-      childList: true,
-      subtree: true,
-    });
+    // Single delayed pass for dynamically rendered components
+    const timer = setTimeout(observeNewElements, 350);
 
     return () => {
       clearTimeout(timer);
       observer.disconnect();
-      mutationObserver.disconnect();
       observedElements.clear();
     };
   }, [routeDependency]);

@@ -59,6 +59,8 @@ import { BrandLogo } from './common/BrandLogos';
 import { OFFICIAL_BRANDS } from '../data/brandsData';
 import { PatioKm22DroneVideoShowcase } from './media/PatioKm22DroneVideoShowcase';
 import { TestDriveBookingModal } from './media/TestDriveBookingModal';
+import tmdEntranceImg from '../assets/images/tmd_sede_central_entrance_km22.jpg';
+import tmdPatioImg from '../assets/images/tmd_sede_central_patio_km22.jpg';
 import { IndustrialTiltCard } from './effects/IndustrialTiltCard';
 import { useAuth } from '../context/AuthContext';
 
@@ -263,38 +265,49 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
           const pct = Math.min(100, Math.max(0, (currentY / totalScroll) * 100));
           progressBarRef.current.style.width = `${pct}%`;
         }
-
-        // 3. Active Section anchor spy (only updates state when active section changes)
-        const sectionIds = [
-          'top-hero-section',
-          'fleet-catalog-section',
-          'executive-commercial-profiles',
-          'tradein-valuation-module',
-          'official-company-video',
-          'strategic-services-section',
-          'industrial-ecosystem-grid',
-        ];
-
-        for (const id of sectionIds) {
-          const el = document.getElementById(id);
-          if (el) {
-            const rect = el.getBoundingClientRect();
-            if (rect.top <= 200 && rect.bottom >= 120) {
-              if (id !== activeSectionIdRef.current) {
-                activeSectionIdRef.current = id;
-                setActiveSectionId(id);
-              }
-              break;
-            }
-          }
-        }
       });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // 3. Active Section anchor spy using lightweight IntersectionObserver (0 layout reflow)
+    const sectionIds = [
+      'top-hero-section',
+      'fleet-catalog-section',
+      'executive-commercial-profiles',
+      'tradein-valuation-module',
+      'official-company-video',
+      'strategic-services-section',
+      'industrial-ecosystem-grid',
+    ];
+
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            if (id && id !== activeSectionIdRef.current) {
+              activeSectionIdRef.current = id;
+              setActiveSectionId(id);
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '-15% 0px -65% 0px',
+        threshold: 0,
+      }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) sectionObserver.observe(el);
+    });
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (scrollRafId.current !== null) cancelAnimationFrame(scrollRafId.current);
+      sectionObserver.disconnect();
     };
   }, []);
 
@@ -1227,6 +1240,41 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                   <Calendar className="w-4 h-4" />
                   <span>Agendar Prueba en Patio</span>
                 </button>
+              </div>
+            </div>
+
+            {/* Real Authentic Physical Photos: TMD Km 22 Entrance & 15,000 m² Yard */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3 font-mono">
+              <div className="group relative rounded-[4px] overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-black aspect-[16/9] shadow-md">
+                <img
+                  src={tmdEntranceImg}
+                  alt="Fachada y Entrada Principal Sede Central TMD Km 22 Autopista Duarte"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-[2px] bg-black/80 border border-amber-500/40 text-amber-400 text-[10px] font-bold uppercase tracking-wider">
+                  FACHADA OFICIAL • KM 22
+                </span>
+                <span className="absolute bottom-2.5 left-2.5 text-white font-black text-xs uppercase drop-shadow-md">
+                  Acceso Principal &amp; Showroom Central
+                </span>
+              </div>
+
+              <div className="group relative rounded-[4px] overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-black aspect-[16/9] shadow-md">
+                <img
+                  src={tmdPatioImg}
+                  alt="Patio Central de Maniobras y Flota en Stock Km 22"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-[2px] bg-black/80 border border-emerald-500/40 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
+                  PATIO DE PRUEBAS • 15,000+ M²
+                </span>
+                <span className="absolute bottom-2.5 left-2.5 text-white font-black text-xs uppercase drop-shadow-md">
+                  Pistas de Maniobras en Tierra &amp; Flota en Stock
+                </span>
               </div>
             </div>
 

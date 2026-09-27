@@ -22,6 +22,8 @@ import {
 import { TMD_WORKSHOPS } from '../data/workshops';
 import { TmdWorkshop } from '../types';
 import { useTheme } from '../context/ThemeContext';
+import tmdEntranceImg from '../assets/images/tmd_sede_central_entrance_km22.jpg';
+import tmdPatioImg from '../assets/images/tmd_sede_central_patio_km22.jpg';
 
 interface WorkshopsInteractiveMapProps {
   onSelectWorkshop?: (workshop: TmdWorkshop) => void;
@@ -733,6 +735,32 @@ export const WorkshopsInteractiveMap: React.FC<WorkshopsInteractiveMapProps> = (
                   </a>
                 </div>
               </div>
+
+              {/* Authentic Physical Photos for Sede Central Km 22 */}
+              {activeWorkshop.isMainHub && (
+                <div className="grid grid-cols-2 gap-2 pt-1 pb-1">
+                  <div className="relative aspect-[16/9] rounded-[3px] overflow-hidden border border-zinc-800 bg-zinc-950">
+                    <img 
+                      src={tmdEntranceImg} 
+                      alt="Entrada Sede Central Km 22" 
+                      className="w-full h-full object-cover"
+                    />
+                    <span className="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded-[1px] bg-black/80 text-[8px] font-bold text-amber-400 uppercase">
+                      Fachada &amp; Acceso
+                    </span>
+                  </div>
+                  <div className="relative aspect-[16/9] rounded-[3px] overflow-hidden border border-zinc-800 bg-zinc-950">
+                    <img 
+                      src={tmdPatioImg} 
+                      alt="Patio de Pruebas Km 22" 
+                      className="w-full h-full object-cover"
+                    />
+                    <span className="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded-[1px] bg-black/80 text-[8px] font-bold text-emerald-400 uppercase">
+                      Patio 15,000+ m²
+                    </span>
+                  </div>
+                </div>
+              )}
 
               {/* Grid with Schedule, Certifications and Technical Capabilities */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">

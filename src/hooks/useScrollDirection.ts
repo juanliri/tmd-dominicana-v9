@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export function useScrollDirection(threshold: number = 10) {
+export function useScrollDirection(threshold: number = 25) {
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
 

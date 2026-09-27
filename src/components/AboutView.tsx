@@ -43,6 +43,8 @@ import { TMDLogo, BrandLogo } from './common/BrandLogos';
 import { StaffOrganigramaView } from './team/StaffOrganigramaView';
 import { PatioKm22DroneVideoShowcase } from './media/PatioKm22DroneVideoShowcase';
 import { TestDriveBookingModal } from './media/TestDriveBookingModal';
+import tmdEntranceImg from '../assets/images/tmd_sede_central_entrance_km22.jpg';
+import tmdPatioImg from '../assets/images/tmd_sede_central_patio_km22.jpg';
 
 interface AboutViewProps {
   onNavigate?: (route: string) => void;
@@ -318,6 +320,57 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
               <ExternalLink className="w-3.5 h-3.5 text-amber-400" />
               <span>GOOGLE MAPS</span>
             </a>
+          </div>
+        </div>
+
+        {/* Authentic Original TMD Physical Facilities Gallery */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="group relative rounded-[5px] overflow-hidden border border-zinc-800 bg-zinc-950 shadow-xl">
+            <div className="relative aspect-[16/9] w-full overflow-hidden">
+              <img 
+                src={tmdEntranceImg} 
+                alt="Fachada y Entrada Principal Sede TMD Km 22 Autopista Duarte"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+              <div className="absolute top-3 left-3">
+                <span className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 border border-amber-500/40 text-amber-400 font-mono text-[10px] font-black uppercase tracking-wider shadow-md">
+                  FACHADA OFICIAL • KM 22
+                </span>
+              </div>
+              <div className="absolute bottom-3 left-3 right-3">
+                <span className="text-sm font-black text-white uppercase block leading-tight font-display drop-shadow-md">
+                  ACCESO PRINCIPAL &amp; SHOWROOM COMERCIAL
+                </span>
+                <span className="text-[11px] text-zinc-300 font-sans block mt-0.5">
+                  Autopista Duarte Km 22, Pedro Brand, Santo Domingo Oeste
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="group relative rounded-[5px] overflow-hidden border border-zinc-800 bg-zinc-950 shadow-xl">
+            <div className="relative aspect-[16/9] w-full overflow-hidden">
+              <img 
+                src={tmdPatioImg} 
+                alt="Patio Central de Maniobras y Flota de Entrega Inmediata Km 22"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+              <div className="absolute top-3 left-3">
+                <span className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 border border-emerald-500/40 text-emerald-400 font-mono text-[10px] font-black uppercase tracking-wider shadow-md">
+                  PATIO DE PRUEBAS • 15,000+ M²
+                </span>
+              </div>
+              <div className="absolute bottom-3 left-3 right-3">
+                <span className="text-sm font-black text-white uppercase block leading-tight font-display drop-shadow-md">
+                  PATIO CENTRAL DE MAQUINARIA &amp; BAHÍAS
+                </span>
+                <span className="text-[11px] text-zinc-300 font-sans block mt-0.5">
+                  Pistas de demostración en tierra, stock 0 Km y bahías de servicio pesado
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
