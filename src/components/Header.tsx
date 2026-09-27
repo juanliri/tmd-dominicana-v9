@@ -526,7 +526,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1.5 text-zinc-200 font-bold uppercase tracking-wider text-[10px]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] animate-pulse" />
-            <span className="text-[#e0a22a]">DISTRIBUIDOR OFICIAL</span> REPÚBLICA DOMINICANA
+            <span className="text-brand-gold">DISTRIBUIDOR OFICIAL</span> REPÚBLICA DOMINICANA
           </span>
           <span className="text-zinc-700 hidden md:inline">•</span>
           <span className="hidden md:inline text-[10px] uppercase font-bold text-zinc-400 tracking-wider">SEDE CENTRAL KM 22, AUTOPISTA DUARTE</span>
@@ -536,7 +536,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Emergencias 24/7 Hotline */}
           <a
             href="tel:18095601234"
-            className="flex items-center gap-1.5 text-zinc-300 hover:text-[#e0a22a] transition-colors font-medium text-[10px] uppercase tracking-wider"
+            className="flex items-center gap-1.5 text-zinc-300 hover:text-brand-gold transition-colors font-medium text-[10px] uppercase tracking-wider"
           >
             <Phone className="w-3 h-3 text-emerald-400" />
             <span className="hidden lg:inline text-zinc-400">EMERGENCIAS 24/7: </span>
@@ -551,7 +551,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 onClick={() => setCurrency('USD')}
                 className={`px-1.5 py-0.5 rounded-[2px] text-[10px] font-black uppercase transition-colors cursor-pointer ${
-                  currency === 'USD' ? 'bg-[#181824] text-[#e0a22a] border border-[#d99b26]/50 shadow-xs' : 'text-zinc-400 hover:text-white'
+                  currency === 'USD' ? 'bg-[#181824] text-brand-gold border border-brand-gold-dark/50 shadow-xs' : 'text-zinc-400 hover:text-white'
                 }`}
               >
                 USD
@@ -559,7 +559,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 onClick={() => setCurrency('DOP')}
                 className={`px-1.5 py-0.5 rounded-[2px] text-[10px] font-black uppercase transition-colors cursor-pointer ${
-                  currency === 'DOP' ? 'bg-[#181824] text-[#e0a22a] border border-[#d99b26]/50 shadow-xs' : 'text-zinc-400 hover:text-white'
+                  currency === 'DOP' ? 'bg-[#181824] text-brand-gold border border-brand-gold-dark/50 shadow-xs' : 'text-zinc-400 hover:text-white'
                 }`}
               >
                 RD$
@@ -587,7 +587,7 @@ export const Header: React.FC<HeaderProps> = ({
             title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
             className="flex items-center gap-1 px-2 py-0.5 rounded-[3px] text-zinc-300 hover:text-white hover:bg-[#12121c] transition-colors cursor-pointer border border-white/[0.08] text-[10px] font-black uppercase"
           >
-            {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-[#e0a22a]" /> : <Moon className="w-3.5 h-3.5 text-zinc-300" />}
+            {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-brand-gold" /> : <Moon className="w-3.5 h-3.5 text-zinc-300" />}
             <span className="hidden lg:inline">{theme === 'dark' ? 'OSCURO' : 'CLARO'}</span>
           </button>
 
@@ -610,11 +610,11 @@ export const Header: React.FC<HeaderProps> = ({
             title={isMenuPinned ? 'Desfijar menú (cierre automático)' : 'Fijar menú para navegación continua'}
             className={`flex items-center gap-1 px-2 py-0.5 rounded-[3px] text-[10px] font-black uppercase tracking-wider transition-colors cursor-pointer border ${
               isMenuPinned
-                ? 'bg-[#181824] text-[#e0a22a] border-[#d99b26]/50'
+                ? 'bg-[#181824] text-brand-gold border-brand-gold-dark/50'
                 : 'text-zinc-400 hover:text-zinc-200 border-white/[0.08] hover:bg-[#12121c]'
             }`}
           >
-            {isMenuPinned ? <PinOff className="w-3 h-3 text-[#e0a22a]" /> : <Pin className="w-3 h-3" />}
+            {isMenuPinned ? <PinOff className="w-3 h-3 text-brand-gold" /> : <Pin className="w-3 h-3" />}
             <span className="hidden xl:inline">{isMenuPinned ? 'FIJADO' : 'FIJAR'}</span>
           </button>
         </div>
@@ -802,11 +802,11 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={onOpenSearch}
               onMouseEnter={handleCloseMegaMenuImmediately}
               aria-label="Buscar en catálogo"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#09090f] border border-white/[0.08] text-zinc-300 hover:text-white hover:border-[#d99b26]/50 transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#09090f] border border-white/[0.08] text-zinc-300 hover:text-white hover:border-brand-gold-dark/50 transition-colors cursor-pointer"
             >
-              <Search className="w-3.5 h-3.5 text-[#e0a22a]" />
+              <Search className="w-3.5 h-3.5 text-brand-gold" />
               <span className="hidden xl:inline text-xs font-black uppercase tracking-wider text-zinc-400">BUSCAR...</span>
-              <kbd className="hidden sm:inline-flex px-1.5 py-0.5 rounded-[2px] text-[10px] font-mono font-black bg-[#14141c] text-[#e0a22a] border border-white/[0.08]">
+              <kbd className="hidden sm:inline-flex px-1.5 py-0.5 rounded-[2px] text-[10px] font-mono font-black bg-[#14141c] text-brand-gold border border-white/[0.08]">
                 ⌘K
               </kbd>
             </button>
@@ -818,10 +818,10 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={onOpenQrScanner}
               onMouseEnter={handleCloseMegaMenuImmediately}
               aria-label="Escanear código QR de maquinaria o repuesto"
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#09090f] border border-white/[0.08] text-zinc-300 hover:text-[#e0a22a] hover:border-[#d99b26]/50 transition-colors cursor-pointer group"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#09090f] border border-white/[0.08] text-zinc-300 hover:text-brand-gold hover:border-brand-gold-dark/50 transition-colors cursor-pointer group"
               title="Escanear Código QR Industrial (Ctrl+Shift+Q)"
             >
-              <QrCode className="w-3.5 h-3.5 text-[#e0a22a] group-hover:scale-110 transition-transform" />
+              <QrCode className="w-3.5 h-3.5 text-brand-gold group-hover:scale-110 transition-transform" />
               <span className="hidden xl:inline text-xs font-black uppercase tracking-wider text-zinc-400 group-hover:text-white">QR SCAN</span>
             </button>
           )}
@@ -833,7 +833,7 @@ export const Header: React.FC<HeaderProps> = ({
             aria-label="Ver cotización y carrito"
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg font-black uppercase tracking-wider text-xs transition-all cursor-pointer border ${
               totalBadges > 0
-                ? 'bg-[#d99b26] hover:bg-[#e0a22a] text-black border-[#d99b26] shadow-sm'
+                ? 'bg-brand-gold-dark hover:bg-brand-gold text-black border-brand-gold-dark shadow-sm'
                 : 'bg-[#09090f] hover:bg-[#14141c] text-zinc-200 border-white/[0.08]'
             }`}
           >
@@ -842,7 +842,7 @@ export const Header: React.FC<HeaderProps> = ({
               {totalQuotesCount > 0 && totalCartCount === 0 ? 'COTIZACIÓN' : 'CARRITO'}
             </span>
             {totalBadges > 0 && (
-              <span className="w-4 h-4 rounded-[2px] bg-black text-[#e0a22a] text-[10px] font-black flex items-center justify-center">
+              <span className="w-4 h-4 rounded-[2px] bg-black text-brand-gold text-[10px] font-black flex items-center justify-center">
                 {totalBadges}
               </span>
             )}
@@ -853,7 +853,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={() => handleNav('#/admin-dashboard')}
               onMouseEnter={handleCloseMegaMenuImmediately}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all border border-white/[0.08] bg-[#09090f] hover:bg-[#14141c] text-[#e0a22a] cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all border border-white/[0.08] bg-[#09090f] hover:bg-[#14141c] text-brand-gold cursor-pointer"
               title="Panel Administrativo"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
