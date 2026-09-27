@@ -1,6 +1,6 @@
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { PortalQuote, Machine, CustomerPurchaseOrder } from '../types';
+import { PortalQuote, Machine, CustomerPurchaseOrder, ServiceWorkOrder, LiveLinkUnit } from '../types';
 import { USD_TO_DOP_RATE, MACHINES_DATA } from '../data/catalog';
 
 export interface ExportQuotePdfOptions {
@@ -558,5 +558,356 @@ export const downloadOrderInvoicePDF = (order: CustomerPurchaseOrder, filename?:
   doc.rect(0, pageHeight - 2, pageWidth, 2, 'F');
 
   const safeName = filename || `Factura_${order.orderNumber}.pdf`;
+  doc.save(safeName);
+};
+
+export const downloadWorkOrderPDF = (order: ServiceWorkOrder, filename?: string) => {
+  const doc = new jsPDF({
+    orientation: 'portrait',
+    unit: 'mm',
+    format: 'a4'
+  });
+
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 14;
+
+  const brandAmber: [number, number, number] = [245, 158, 11];
+  const brandDark: [number, number, number] = [24, 24, 27];
+  const brandGray: [number, number, number] = [113, 113, 122];
+
+  // Top header accent
+  doc.setFillColor(...brandAmber);
+  doc.rect(0, 0, pageWidth, 5, 'F');
+
+  // Official TMD Chevron Logo
+  drawTmdOfficialLogoPdf(doc, margin, 10, 44, 16);
+
+  // Company info
+  doc.setTextColor(...brandDark);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.text('TECNOMAQUINARIAS DIESEL DOMINICANA S.R.L.', pageWidth - margin, 14, { align: 'right' });
+  
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(...brandGray);
+  doc.text('TALLER CENTRAL & SERVICIO MÓVIL EN OBRA | FULLBAY INTEGRATED', pageWidth - margin, 18.5, { align: 'right' });
+  doc.text('Km 22 Autopista Duarte, Santo Domingo Oeste, R.D. | Tel: +1 (809) 560-1234', pageWidth - margin, 22.5, { align: 'right' });
+
+  doc.setDrawColor(228, 228, 231);
+  doc.setLineWidth(0.5);
+  doc.line(margin, 30, pageWidth - margin, 30);
+
+  let currentY = 38;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(...brandDark);
+  doc.text('ORDEN DE SERVICIO TÉCNICO & DIAGNÓSTICO FULLBAY', margin, currentY);
+
+  doc.setFontSize(8.5);
+  doc.text(`ORDEN: ${order.orderNumber}`, pageWidth - margin, currentY, { align: 'right' });
+
+  currentY += 8;
+
+  // Metadata boxes
+  const colW = (pageWidth - margin * 2 - 6) / 2;
+  doc.setFillColor(250, 250, 250);
+  doc.roundedRect(margin, currentY, colW, 28, 2, 2, 'F');
+  doc.roundedRect(margin + colW + 6, currentY, colW, 28, 2, 2, 'F');
+
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...brandDark);
+  doc.text('DATOS DEL CLIENTE / PROYECTO:', margin + 4, currentY + 6);
+  doc.setFont('helvetica', 'normal');
+  doc.text(`Cliente: ${order.clientName || 'Cliente TMD'}`, margin + 4, currentY + 11);
+  doc.text(`Empresa: ${order.companyName || 'Constructora / Operador'}`, margin + 4, currentY + 16);
+  doc.text(`Ubicación: ${order.location || 'Patio Km 22 Autopista Duarte'}`, margin + 4, currentY + 21);
+  doc.text(`Prioridad: ${(order.priority || 'routine').toUpperCase()}`, margin + 4, currentY + 26);
+
+  const rX = margin + colW + 6;
+  doc.setFont('helvetica', 'bold');
+  doc.text('DATOS DEL EQUIPO & DIAGNÓSTICO:', rX + 4, currentY + 6);
+  doc.setFont('helvetica', 'normal');
+  doc.text(`Equipo: ${order.machineModel} (${order.equipmentBrand || 'TMD'})`, rX + 4, currentY + 11);
+  doc.text(`Serie / VIN: ${order.machineSerial || 'N/A'}`, rX + 4, currentY + 16);
+  doc.text(`Horómetro: ${order.horometerHours ? `${order.horometerHours.toLocaleString()} hrs` : 'N/A'}`, rX + 4, currentY + 21);
+  doc.text(`Estado: ${(order.status || 'in_progress').toUpperCase()}`, rX + 4, currentY + 26);
+
+  currentY += 34;
+
+  // Description / Diagnostic box
+  doc.setFillColor(244, 244, 245);
+  doc.roundedRect(margin, currentY, pageWidth - margin * 2, 18, 2, 2, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(7.5);
+  doc.setTextColor(...brandDark);
+  doc.text('MOTIVO DE INTERVENCIÓN / TRABAJO SOLICITADO:', margin + 4, currentY + 5.5);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(...brandGray);
+  const descLines = doc.splitTextToSize(order.description || 'Mantenimiento preventivo general y chequeo de sistemas.', pageWidth - margin * 2 - 8);
+  doc.text(descLines, margin + 4, currentY + 10.5);
+
+  currentY += 24;
+
+  // Parts & Services Table
+  const parts = order.installedParts || [];
+  const rows = parts.length > 0 
+    ? parts.map((part, idx) => [
+        String(idx + 1).padStart(2, '0'),
+        part.partName,
+        part.partNumber || 'OEM-GENUINE',
+        String(part.quantity),
+        part.status.toUpperCase(),
+        `US$ ${(part.totalCostUsd || part.unitCostUsd * part.quantity).toFixed(2)}`
+      ])
+    : [
+        ['01', order.serviceType ? order.serviceType.replace(/_/g, ' ').toUpperCase() : 'SERVICIO TÉCNICO ESPECIALIZADO', 'LABOR-01', '1', 'INSTALADO', `US$ ${(order.totalLaborCostUsd || 450).toFixed(2)}`],
+        ['02', 'Kit de Filtros y Fluidos Certificados OEM', 'KIT-OEM-TMD', '1', 'SUMINISTRADO', `US$ ${(order.totalPartsCostUsd || 850).toFixed(2)}`]
+      ];
+
+  autoTable(doc, {
+    startY: currentY,
+    head: [['#', 'DESCRIPCIÓN DE PIEZA / MANO DE OBRA', 'CÓDIGO OEM', 'CANT', 'ESTADO', 'SUBTOTAL (USD)']],
+    body: rows,
+    theme: 'grid',
+    headStyles: {
+      fillColor: brandDark,
+      textColor: [255, 255, 255],
+      fontSize: 8,
+      halign: 'center'
+    },
+    columnStyles: {
+      0: { halign: 'center', cellWidth: 12 },
+      1: { halign: 'left', cellWidth: 'auto' },
+      2: { halign: 'center', cellWidth: 32 },
+      3: { halign: 'center', cellWidth: 16 },
+      4: { halign: 'center', cellWidth: 26 },
+      5: { halign: 'right', cellWidth: 32, fontStyle: 'bold' }
+    },
+    styles: { fontSize: 8, cellPadding: 3 }
+  });
+
+  // @ts-expect-error autoTable finalY
+  currentY = (doc.lastAutoTable?.finalY || currentY + 30) + 6;
+
+  // Totals box
+  const tW = 85;
+  const tX = pageWidth - margin - tW;
+  const partsCost = order.totalPartsCostUsd || 850;
+  const laborCost = order.totalLaborCostUsd || 450;
+  const subtotal = partsCost + laborCost;
+  const itbis = subtotal * 0.18;
+  const total = subtotal + itbis;
+
+  doc.setFillColor(250, 250, 250);
+  doc.roundedRect(tX, currentY, tW, 30, 2, 2, 'F');
+  doc.roundedRect(tX, currentY, tW, 30, 2, 2, 'D');
+
+  doc.setFontSize(7.5);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Costo Repuestos:', tX + 4, currentY + 6);
+  doc.text(`US$ ${partsCost.toFixed(2)}`, pageWidth - margin - 4, currentY + 6, { align: 'right' });
+
+  doc.text('Mano de Obra Taller:', tX + 4, currentY + 11);
+  doc.text(`US$ ${laborCost.toFixed(2)}`, pageWidth - margin - 4, currentY + 11, { align: 'right' });
+
+  doc.text('ITBIS (18%):', tX + 4, currentY + 16);
+  doc.text(`US$ ${itbis.toFixed(2)}`, pageWidth - margin - 4, currentY + 16, { align: 'right' });
+
+  doc.setFillColor(...brandAmber);
+  doc.roundedRect(tX + 2, currentY + 20, tW - 4, 8, 1, 1, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8.5);
+  doc.setTextColor(0, 0, 0);
+  doc.text('TOTAL DE ORDEN:', tX + 4, currentY + 25.5);
+  doc.text(`US$ ${total.toFixed(2)}`, pageWidth - margin - 4, currentY + 25.5, { align: 'right' });
+
+  // Signatures
+  const sigY = pageHeight - 20;
+  doc.setDrawColor(180, 180, 180);
+  doc.setLineWidth(0.3);
+
+  doc.line(margin + 10, sigY, margin + 70, sigY);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(6.5);
+  doc.setTextColor(...brandDark);
+  doc.text('TÉCNICO / JEFE DE TALLER TMD', margin + 40, sigY + 3.5, { align: 'center' });
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(5.5);
+  doc.setTextColor(...brandGray);
+  doc.text(order.assignedTechnician || 'Ing. Carlos Mendoza (Jefe de Taller)', margin + 40, sigY + 6.5, { align: 'center' });
+
+  const rSigX = pageWidth - margin - 70;
+  doc.line(rSigX, sigY, rSigX + 60, sigY);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(6.5);
+  doc.setTextColor(...brandDark);
+  doc.text('RECIBIDO CONFORME CLIENTE', rSigX + 30, sigY + 3.5, { align: 'center' });
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(5.5);
+  doc.setTextColor(...brandGray);
+  doc.text(order.clientName || 'Representante Autorizado', rSigX + 30, sigY + 6.5, { align: 'center' });
+
+  doc.setFillColor(...brandAmber);
+  doc.rect(0, pageHeight - 2, pageWidth, 2, 'F');
+
+  const safeName = filename || `OrdenServicio_${order.orderNumber}.pdf`;
+  doc.save(safeName);
+};
+
+export const downloadTelematicsReportPDF = (unit: LiveLinkUnit, filename?: string) => {
+  const doc = new jsPDF({
+    orientation: 'portrait',
+    unit: 'mm',
+    format: 'a4'
+  });
+
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 14;
+
+  const brandAmber: [number, number, number] = [245, 158, 11];
+  const brandDark: [number, number, number] = [24, 24, 27];
+  const brandGray: [number, number, number] = [113, 113, 122];
+
+  // Top header accent
+  doc.setFillColor(...brandAmber);
+  doc.rect(0, 0, pageWidth, 5, 'F');
+
+  drawTmdOfficialLogoPdf(doc, margin, 10, 44, 16);
+
+  doc.setTextColor(...brandDark);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.text('TECNOMAQUINARIAS DIESEL DOMINICANA S.R.L.', pageWidth - margin, 14, { align: 'right' });
+  
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(...brandGray);
+  doc.text('LIVELINK™ TELEMATICS & DIAGNOSTICS GATEWAY (CAN BUS J1939)', pageWidth - margin, 18.5, { align: 'right' });
+  doc.text(`Fecha de Emisión: ${new Date().toLocaleDateString('es-DO')} | Hora: ${new Date().toLocaleTimeString('es-DO')}`, pageWidth - margin, 22.5, { align: 'right' });
+
+  doc.setDrawColor(228, 228, 231);
+  doc.setLineWidth(0.5);
+  doc.line(margin, 30, pageWidth - margin, 30);
+
+  let currentY = 38;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(13);
+  doc.setTextColor(...brandDark);
+  doc.text('REPORTE TÉCNICO DE TELEMETRÍA LIVELINK™', margin, currentY);
+
+  doc.setFontSize(8.5);
+  doc.text(`UNIDAD: ${unit.name} (${unit.brand})`, pageWidth - margin, currentY, { align: 'right' });
+
+  currentY += 8;
+
+  // Unit Summary Grid
+  const cardW = (pageWidth - margin * 2 - 9) / 4;
+  const metrics = [
+    { label: 'HORÓMETRO', val: `${unit.horometerHours.toLocaleString()} hrs` },
+    { label: 'TEMP. REFRIGERANTE', val: `${unit.engineCoolantTempC} °C` },
+    { label: 'TEMP. HIDRÁULICO', val: `${unit.hydraulicOilTempC} °C` },
+    { label: 'COMBUSTIBLE', val: `${unit.fuelLevelPercent}% (${unit.fuelConsumptionLph} L/h)` }
+  ];
+
+  metrics.forEach((m, idx) => {
+    const x = margin + idx * (cardW + 3);
+    doc.setFillColor(248, 250, 252);
+    doc.roundedRect(x, currentY, cardW, 18, 1.5, 1.5, 'F');
+    doc.setDrawColor(226, 232, 240);
+    doc.roundedRect(x, currentY, cardW, 18, 1.5, 1.5, 'D');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(6.5);
+    doc.setTextColor(...brandGray);
+    doc.text(m.label, x + 3, currentY + 6);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.setTextColor(...brandDark);
+    doc.text(m.val, x + 3, currentY + 13);
+  });
+
+  currentY += 24;
+
+  // Unit details box
+  doc.setFillColor(250, 250, 250);
+  doc.roundedRect(margin, currentY, pageWidth - margin * 2, 26, 2, 2, 'F');
+  doc.roundedRect(margin, currentY, pageWidth - margin * 2, 26, 2, 2, 'D');
+
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...brandDark);
+  doc.text('INFORMACIÓN DE MAQUINARIA & ENLACE SATELITAL:', margin + 4, currentY + 6);
+  
+  doc.setFont('helvetica', 'normal');
+  doc.text(`Cliente / Empresa: ${unit.customerCompany} (${unit.customerName})`, margin + 4, currentY + 12);
+  doc.text(`VIN / Serie Chasis: ${unit.vin} | Modelo: ${unit.model}`, margin + 4, currentY + 17);
+  doc.text(`Ubicación Satelital: ${unit.location.address}, ${unit.location.province} (${unit.location.lat.toFixed(4)}, ${unit.location.lng.toFixed(4)})`, margin + 4, currentY + 22);
+
+  doc.text(`Geocerca: ${unit.geofenceName} [${unit.geofenceStatus.toUpperCase()}]`, pageWidth - margin - 75, currentY + 12);
+  doc.text(`Voltaje Batería: ${unit.batteryVoltage} V`, pageWidth - margin - 75, currentY + 17);
+  doc.text(`Estado Motor: ${unit.status.toUpperCase()}`, pageWidth - margin - 75, currentY + 22);
+
+  currentY += 32;
+
+  // DTC Fault Codes Table
+  const dtcRows = (unit.faultCodes || []).map(f => [
+    f.code,
+    f.spnFmi || 'SPN-999 / FMI-0',
+    f.description,
+    f.severity.toUpperCase(),
+    f.timestamp ? new Date(f.timestamp).toLocaleDateString('es-DO') : 'Activo'
+  ]);
+
+  if (dtcRows.length === 0) {
+    dtcRows.push(['DTC-NONE', 'CAN-BUS-OK', 'Sin códigos de falla activos en memoria ECM.', 'NORMAL', 'Activo']);
+  }
+
+  autoTable(doc, {
+    startY: currentY,
+    head: [['CÓDIGO DTC', 'SPN / FMI', 'DESCRIPCIÓN DE DIAGNÓSTICO', 'SEVERIDAD', 'REGISTRO']],
+    body: dtcRows,
+    theme: 'grid',
+    headStyles: {
+      fillColor: brandDark,
+      textColor: [255, 255, 255],
+      fontSize: 8,
+      halign: 'center'
+    },
+    columnStyles: {
+      0: { halign: 'center', cellWidth: 26, fontStyle: 'bold' },
+      1: { halign: 'center', cellWidth: 30 },
+      2: { halign: 'left', cellWidth: 'auto' },
+      3: { halign: 'center', cellWidth: 26 },
+      4: { halign: 'center', cellWidth: 24 }
+    },
+    styles: { fontSize: 8, cellPadding: 3 }
+  });
+
+  // @ts-expect-error autoTable finalY
+  currentY = (doc.lastAutoTable?.finalY || currentY + 30) + 10;
+
+  // Maintenance forecast
+  doc.setFillColor(244, 244, 245);
+  doc.roundedRect(margin, currentY, pageWidth - margin * 2, 20, 2, 2, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8);
+  doc.setTextColor(...brandDark);
+  doc.text('PROYECCIÓN DE MANTENIMIENTO PREVENTIVO:', margin + 4, currentY + 6);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(7.5);
+  doc.setTextColor(...brandGray);
+  doc.text(`Próximo servicio requerido en: ${unit.serviceCountdownHours} horas operativas.`, margin + 4, currentY + 11.5);
+  doc.text('Recomendación técnica TMD: Solicitar despacho preventivo de kit de filtros y fluidos 15 días antes del vencimiento.', margin + 4, currentY + 16);
+
+  // Footer Bottom Line
+  doc.setFillColor(...brandAmber);
+  doc.rect(0, pageHeight - 2, pageWidth, 2, 'F');
+
+  const safeName = filename || `Telemetria_LiveLink_${unit.vin}.pdf`;
   doc.save(safeName);
 };

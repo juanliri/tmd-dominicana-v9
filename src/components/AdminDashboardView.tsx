@@ -38,7 +38,8 @@ import { AdminPatioKm22Manager } from './admin/AdminPatioKm22Manager';
 import { FirestoreBulkManagerModal } from './FirestoreBulkManagerModal';
 import { FullbayShopManager } from './shop/FullbayShopManager';
 import { AdminIntegrationsHealthView } from './admin/AdminIntegrationsHealthView';
-import { LayoutGrid, Sparkles, Flame, ShieldCheck as ShieldCheckIcon, TrendingUp, Calendar as CalendarIcon, Activity as ActivityIcon } from 'lucide-react';
+import { MonthlyBusinessConfigModal } from './admin/MonthlyBusinessConfigModal';
+import { LayoutGrid, Sparkles, Flame, ShieldCheck as ShieldCheckIcon, TrendingUp, Calendar as CalendarIcon, Activity as ActivityIcon, Settings } from 'lucide-react';
 
 interface AdminDashboardViewProps {
   onNavigate: (route: string) => void;
@@ -57,6 +58,7 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
   const [loadingData, setLoadingData] = useState(true);
   const [isNotificationCenterOpen, setIsNotificationCenterOpen] = useState(false);
   const [isBulkManagerOpen, setIsBulkManagerOpen] = useState(false);
+  const [isMonthlyConfigOpen, setIsMonthlyConfigOpen] = useState(false);
   const [highlightItemId, setHighlightItemId] = useState<string | null>(null);
 
   // Firestore Real-Time Listeners for quotes, machines, and parts
@@ -339,6 +341,17 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
 
             {/* Right Quick Controls: Bell Notification, Currency Toggle & Logout */}
             <div className="flex items-center gap-2 self-end sm:self-center">
+              {/* Monthly Business Variables Trigger Button */}
+              <button
+                type="button"
+                onClick={() => setIsMonthlyConfigOpen(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                title="Gestor de Variables Mensuales, Banners y Tasas"
+              >
+                <Settings className="w-3.5 h-3.5 text-amber-400" />
+                <span className="hidden md:inline">Variables Mensuales</span>
+              </button>
+
               {/* Firestore Bulk Manager Trigger Button */}
               <button
                 onClick={() => setIsBulkManagerOpen(true)}
@@ -808,6 +821,13 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
       <FirestoreBulkManagerModal
         isOpen={isBulkManagerOpen}
         onClose={() => setIsBulkManagerOpen(false)}
+      />
+
+      {/* Monthly Dynamic Business Config Modal */}
+      <MonthlyBusinessConfigModal
+        isOpen={isMonthlyConfigOpen}
+        onClose={() => setIsMonthlyConfigOpen(false)}
+        adminName={currentUser?.displayName || 'Administrador General TMD'}
       />
     </div>
   );

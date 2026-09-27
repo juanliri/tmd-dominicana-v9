@@ -37,6 +37,7 @@ import {
 import { LiveLinkUnit, LiveLinkTelemetrySummary, LiveLinkFaultCode, UserProfile } from '../../types';
 import { fetchLiveLinkFleet, fetchLiveLinkSummary, sendLiveLinkCommand } from '../../services/livelinkService';
 import { createFullbayOrderFromLiveLink } from '../../services/fullbayService';
+import { downloadTelematicsReportPDF } from '../../utils/pdfGenerator';
 
 interface LiveLinkCustomerTelematicsTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -483,6 +484,16 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                     <span className="w-2 h-2 rounded-[1px] bg-current animate-pulse" />
                     {selectedUnit.status === 'running' ? 'MOTOR EN MARCHA' : selectedUnit.status === 'idle' ? 'EN ESPERA (RALENTÍ)' : 'MOTOR APAGADO'}
                   </div>
+
+                  <button
+                    type="button"
+                    onClick={() => downloadTelematicsReportPDF(selectedUnit)}
+                    className="px-2.5 py-1.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider text-[11px] flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+                    title="Exportar Reporte Oficial PDF de Telemetría CAN-Bus"
+                  >
+                    <FileText className="w-3.5 h-3.5" />
+                    <span>Reporte PDF</span>
+                  </button>
 
                   <button
                     type="button"

@@ -668,7 +668,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
       className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8"
     >
       {/* 1. TIER-1 DEPARTMENT LANDING HUB HERO (Apple/Tesla Grade) */}
-      <motion.div variants={machineryFadeInItem} className="mb-6 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950 relative shadow-2xl">
+      <motion.div variants={machineryFadeInItem} className="mb-6 rounded-[5px] overflow-hidden border border-zinc-800 bg-zinc-950 relative shadow-2xl">
         <div className="relative min-h-[220px] sm:min-h-[260px] flex items-center p-6 sm:p-8 lg:p-10 overflow-hidden">
           {/* Background image with luxury atmospheric dark gradient */}
           <div className="absolute inset-0">
@@ -753,13 +753,13 @@ export const MachineryView = React.memo<MachineryViewProps>(({
         {MACHINES_DATA[0] && (
           <div className="bg-zinc-900/95 border-t border-zinc-800 p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 font-display">
             <div className="flex items-center gap-4 w-full md:w-auto">
-              <div className="relative w-20 h-16 sm:w-24 sm:h-20 rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800 shrink-0">
+              <div className="relative w-20 h-16 sm:w-24 sm:h-20 rounded-[3px] overflow-hidden bg-zinc-950 border border-zinc-800 shrink-0">
                 <img 
                   src={MACHINES_DATA[0].image} 
-                  alt={MACHINES_DATA[0].name}
+                  alt={MACHINES_DATA[0].name} 
                   className="w-full h-full object-cover" 
                 />
-                <span className="absolute bottom-1 left-1 px-1.5 py-0.2 rounded text-[8px] font-mono font-black bg-amber-500 text-black uppercase">
+                <span className="absolute bottom-1 left-1 px-1.5 py-0.2 rounded-[2px] text-[8px] font-mono font-black bg-amber-500 text-black uppercase">
                   DESTACADO
                 </span>
               </div>
@@ -768,7 +768,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                   <span className="text-[10px] font-mono font-bold text-amber-400 uppercase">
                     {MACHINES_DATA[0].brand} • MOD. {MACHINES_DATA[0].modelCode}
                   </span>
-                  <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-400 font-mono font-bold">
+                  <span className="text-[9px] px-1.5 py-0.2 rounded-[2px] bg-emerald-500/20 text-emerald-400 font-mono font-bold">
                     STOCK EN KM 22
                   </span>
                 </div>
@@ -799,7 +799,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                     setActive360Tab('360');
                     setActive360Machine(MACHINES_DATA[0]);
                   }}
-                  className="p-2 sm:px-3 sm:py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-amber-400 text-xs font-black uppercase transition-colors cursor-pointer border border-zinc-700 flex items-center gap-1"
+                  className="p-2 sm:px-3 sm:py-2 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-amber-400 text-xs font-black uppercase transition-colors cursor-pointer border border-zinc-700 flex items-center gap-1"
                   title="Ver Giro 360°"
                 >
                   <RotateCw className="w-3.5 h-3.5" />
@@ -808,7 +808,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                 <button
                   type="button"
                   onClick={() => handleOpenSpecs(MACHINES_DATA[0])}
-                  className="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center gap-1"
+                  className="px-3.5 py-2 rounded-[2px] bg-amber-500 hover:bg-amber-400 text-black text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center gap-1"
                 >
                   <span>Ver Ficha</span>
                   <ChevronRight className="w-3.5 h-3.5" />

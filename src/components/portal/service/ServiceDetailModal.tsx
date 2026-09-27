@@ -5,6 +5,7 @@ import {
   FileText, 
   CheckCircle2, 
   Printer, 
+  Download,
   X, 
   Building2, 
   Truck, 
@@ -12,6 +13,7 @@ import {
   Calendar 
 } from 'lucide-react';
 import { ServiceWorkOrder, InstalledServicePart } from '../../../types';
+import { downloadWorkOrderPDF } from '../../../utils/pdfGenerator';
 
 interface ServiceDetailModalProps {
   order: ServiceWorkOrder | null;
@@ -199,14 +201,26 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
 
         {/* Modal Actions */}
         <div className="p-4 bg-zinc-950 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-3">
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="inline-flex items-center gap-1.5 px-4 py-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-200 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-colors cursor-pointer"
-          >
-            <Printer className="w-4 h-4" />
-            <span>Imprimir Informe</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => downloadWorkOrderPDF(order)}
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider rounded-[2px] text-xs transition-colors cursor-pointer shadow-md"
+              title="Descargar Orden de Servicio Oficial en formato PDF"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Descargar Orden PDF</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="inline-flex items-center gap-1.5 px-3 py-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-colors cursor-pointer"
+              title="Imprimir resumen de servicio"
+            >
+              <Printer className="w-3.5 h-3.5 text-zinc-400" />
+              <span>Imprimir</span>
+            </button>
+          </div>
 
           <div className="flex items-center gap-2">
             <button

@@ -51,7 +51,7 @@ export const FleetAcquisitionFilterBar = React.memo<FleetAcquisitionFilterBarPro
   ];
 
   return (
-    <div className="mb-4 bg-gradient-to-r from-[#14141c] via-[#0c0c12] to-[#06060a] p-1.5 sm:p-2 rounded-xl border border-white/[0.08] shadow-xl">
+    <div className="mb-4 bg-gradient-to-r from-[#14141c] via-[#0c0c12] to-[#06060a] p-1.5 sm:p-2 rounded-[5px] border border-white/[0.08] shadow-xl">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 sm:gap-2">
         {tabs.map((tab) => {
           const isActive = activeCondition === tab.id;
@@ -62,7 +62,7 @@ export const FleetAcquisitionFilterBar = React.memo<FleetAcquisitionFilterBarPro
               key={tab.id}
               type="button"
               onClick={() => onChangeCondition(tab.id)}
-              className={`p-2.5 sm:p-3 rounded-lg text-left transition-all flex flex-col justify-between gap-1.5 cursor-pointer select-none border ${
+              className={`p-2.5 sm:p-3 rounded-[2px] text-left transition-all flex flex-col justify-between gap-1.5 cursor-pointer select-none border ${
                 isActive
                   ? 'bg-[#181826] text-white border-[#d99b26]/80 shadow-md ring-1 ring-[#d99b26]/30'
                   : 'bg-[#08080d]/60 text-zinc-300 hover:text-white hover:bg-[#12121c] border-white/[0.06]'
