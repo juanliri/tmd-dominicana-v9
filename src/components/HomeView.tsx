@@ -190,12 +190,6 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
   // Featured parts preview for instant checkout
   const featuredParts = useMemo(() => PARTS_DATA.slice(0, 4), []);
 
-  // Section Accordion Visibility Controls (Non-essential & Secondary Sections)
-  const [isProfilesExpanded, setIsProfilesExpanded] = useState<boolean>(true);
-  const [isTradeInExpanded, setIsTradeInExpanded] = useState<boolean>(true);
-  const [isVideoExpanded, setIsVideoExpanded] = useState<boolean>(true);
-  const [isServicesExpanded, setIsServicesExpanded] = useState<boolean>(true);
-
   // Fleet Show More / Less & Bounded Container Controls
   const [fleetVisibleLimit, setFleetVisibleLimit] = useState<number>(6);
   const [isFleetContainerBounded, setIsFleetContainerBounded] = useState<boolean>(false);
@@ -1070,395 +1064,302 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
             ))}
           </div>
 
-          {/* Desktop/Mobile Show More / Less & In-Place Scroll Controls */}
-          {desktopFleetViewMode === 'grid' && (
-            <div className="flex flex-wrap items-center justify-between gap-3 mt-4 pt-3 border-t border-zinc-800 font-display">
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setIsFleetContainerBounded(!isFleetContainerBounded)}
-                  className={`px-3 py-1.5 rounded-[4px] text-xs font-black uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer border ${
-                    isFleetContainerBounded
-                      ? 'bg-zinc-800 text-amber-400 border-amber-500/80 shadow-xs'
-                      : 'bg-zinc-900 text-zinc-300 border-zinc-800 hover:bg-zinc-800'
-                  }`}
-                >
-                  <Layers className="w-3.5 h-3.5 text-amber-400" />
-                  <span>{isFleetContainerBounded ? 'CAJA DE DESPLAZAMIENTO ACTIVA' : 'FIJAR ALTURA CON DESPLAZAMIENTO'}</span>
-                </button>
-              </div>
-
-              {!isFleetContainerBounded && filteredMachines.length > 6 && (
-                <div className="flex items-center gap-2">
-                  {fleetVisibleLimit < filteredMachines.length ? (
-                    <button
-                      type="button"
-                      onClick={() => setFleetVisibleLimit(prev => Math.min(prev + 6, filteredMachines.length))}
-                      className="px-4 py-2 rounded-[4px] bg-zinc-900 hover:bg-zinc-800 text-amber-400 border border-zinc-800 hover:border-amber-500/60 text-xs font-black uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
-                    >
-                      <span>MOSTRAR MÁS MODELOS (+{filteredMachines.length - fleetVisibleLimit} RESTANTES)</span>
-                      <ChevronDown className="w-3.5 h-3.5" />
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      onClick={() => setFleetVisibleLimit(6)}
-                      className="px-4 py-2 rounded-[4px] bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-xs font-black uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
-                    >
-                      <span>MOSTRAR MENOS (6 INICIALES)</span>
-                      <ChevronUp className="w-3.5 h-3.5" />
-                    </button>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Mobile swipe hint and count */}
-          {desktopFleetViewMode === 'carousel' && (
-            <div className="flex items-center justify-between text-[10px] sm:text-[11px] text-zinc-500 mt-1 px-1 sm:hidden font-mono uppercase">
-              <span>← DESLIZA PARA VER MÁS →</span>
-              <span>{filteredMachines.length} MODELOS CON PRECIO</span>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* 3. EXECUTIVE COMMERCIAL PROFILES & PROTOCOLS (ACCORDION TOGGLE) */}
-      <section id="executive-commercial-profiles" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 max-w-[1780px] mx-auto scroll-mt-24">
-        <div className="flex items-center justify-between py-2 px-3.5 rounded-[6px] bg-gradient-to-r from-[#14141c] via-[#0c0c12] to-[#06060a] border border-white/[0.08] hover:border-[#d99b26]/40 mb-2 transition-all">
-          <button
-            type="button"
-            onClick={() => setIsProfilesExpanded(!isProfilesExpanded)}
-            className="flex items-center gap-2 text-left font-black text-xs sm:text-sm text-zinc-100 cursor-pointer hover:text-[#e0a22a] transition-colors"
-          >
-            <DollarSign className="w-3.5 h-3.5 text-[#e0a22a] shrink-0" />
-            <span>Perfiles Comerciales & Protocolos de Compra</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-[3px] bg-[#1a1a24] text-zinc-300 font-mono font-bold border border-white/[0.06]">
-              {isProfilesExpanded ? 'Contraer' : 'Expandir'}
-            </span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsProfilesExpanded(!isProfilesExpanded)}
-            className="p-1 rounded-[4px] bg-[#14141c] text-zinc-400 hover:text-white cursor-pointer transition-colors border border-white/[0.06]"
-            aria-label={isProfilesExpanded ? "Contraer perfiles comerciales" : "Expandir perfiles comerciales"}
-          >
-            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isProfilesExpanded ? 'rotate-180' : ''}`} />
-          </button>
-        </div>
-        {isProfilesExpanded && <ExecutiveTargetProfilesBar onNavigate={onNavigate} />}
-      </section>
-
-      {/* 4. EXECUTIVE TRADE-IN & VALUATION MODULE (ACCORDION TOGGLE) */}
-      <section id="tradein-valuation-module" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 max-w-[1780px] mx-auto scroll-mt-24">
-        <div className="flex items-center justify-between py-2 px-3.5 rounded-[6px] bg-gradient-to-r from-[#14141c] via-[#0c0c12] to-[#06060a] border border-white/[0.08] hover:border-[#d99b26]/40 mb-2 transition-all">
-          <button
-            type="button"
-            onClick={() => setIsTradeInExpanded(!isTradeInExpanded)}
-            className="flex items-center gap-2 text-left font-black text-xs sm:text-sm text-zinc-100 cursor-pointer hover:text-[#e0a22a] transition-colors"
-          >
-            <RefreshCw className="w-3.5 h-3.5 text-[#e0a22a] shrink-0" />
-            <span>Módulo de Venta y Trade-In de Maquinaria Usada</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-[3px] bg-[#1a1a24] text-zinc-300 font-mono font-bold border border-white/[0.06]">
-              {isTradeInExpanded ? 'Contraer' : 'Expandir'}
-            </span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsTradeInExpanded(!isTradeInExpanded)}
-            className="p-1 rounded-[4px] bg-[#14141c] text-zinc-400 hover:text-white cursor-pointer transition-colors border border-white/[0.06]"
-            aria-label={isTradeInExpanded ? "Contraer módulo trade-in" : "Expandir módulo trade-in"}
-          >
-            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isTradeInExpanded ? 'rotate-180' : ''}`} />
-          </button>
-        </div>
-        {isTradeInExpanded && <ExecutiveTradeInSellingModule onNavigate={onNavigate} />}
-      </section>
-
-      {/* 4.5 INSTALACIONES & PATIO DE DEMOSTRACIONES KM 22 (VIDEO OFICIAL TMD - ACCORDION TOGGLE) */}
-      <section id="official-company-video" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 scroll-mt-24">
-        <div className="flex items-center justify-between py-2 px-3.5 rounded-[6px] bg-gradient-to-r from-[#14141c] via-[#0c0c12] to-[#06060a] border border-white/[0.08] hover:border-[#d99b26]/40 mb-3 transition-all">
-          <button
-            type="button"
-            onClick={() => setIsVideoExpanded(!isVideoExpanded)}
-            className="flex items-center gap-2 text-left font-black text-xs sm:text-sm text-zinc-100 cursor-pointer hover:text-[#e0a22a] transition-colors"
-          >
-            <Video className="w-3.5 h-3.5 text-[#e0a22a] shrink-0" />
-            <span>Video Oficial: Recorrido y Pista de Pruebas Km 22</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-[3px] bg-[#1a1a24] text-zinc-300 font-mono font-bold border border-white/[0.06]">
-              {isVideoExpanded ? 'Contraer' : 'Expandir'}
-            </span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsVideoExpanded(!isVideoExpanded)}
-            className="p-1 rounded-[4px] bg-[#14141c] text-zinc-400 hover:text-white cursor-pointer transition-colors border border-white/[0.06]"
-            aria-label={isVideoExpanded ? "Contraer video oficial" : "Expandir video oficial"}
-          >
-            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isVideoExpanded ? 'rotate-180' : ''}`} />
-          </button>
-        </div>
-
-        {isVideoExpanded && (
-          <div className="space-y-4">
-            <div className="mb-2 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-              <div>
-                <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500 text-black shadow-xs">
-                    Video Oficial Corporativo
-                  </span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
-                    1080p HD • Patio Km 22
-                  </span>
-                  <span className="text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                    Autopista Duarte Km 22, Pedro Brand, Sto. Dgo.
-                  </span>
-                </div>
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-zinc-900 dark:text-white tracking-tight">
-                  Instalaciones Centrales & Patio de Demostraciones TMD
-                </h2>
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1 max-w-2xl leading-relaxed">
-                  Recorra en video nuestras 15,000 m² de inventario multimarca en stock físico (JCB, LiuGong, Yanmar, Ammann), pruebas operacionales en terreno real y nave principal de taller con 12 bahías de servicio técnico.
-                </p>
-              </div>
-              <div className="flex items-center gap-2 flex-wrap">
-                <button
-                  type="button"
-                  onClick={() => onNavigate('#/machinery')}
-                  className="px-3.5 py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer border border-zinc-200 dark:border-zinc-700"
-                >
-                  <HardHat className="w-3.5 h-3.5 text-amber-500" />
-                  <span>Ver Equipos en Stock</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setIsTestDriveModalOpen(true)}
-                  className="px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-black transition-all flex items-center gap-2 cursor-pointer shadow-md active:scale-95"
-                >
-                  <Calendar className="w-4 h-4" />
-                  <span>Agendar Prueba en Patio</span>
-                </button>
-              </div>
+          {/* Full Fleet Direct Entry Banner (Apple/Tesla Grade) */}
+          <div className="mt-4 pt-3 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-white/[0.08]">
+            <div className="text-[11px] text-zinc-400 font-mono uppercase flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Inventario Físico Certificado • Entrega Inmediata en Patio Km 22</span>
             </div>
 
-            {/* Real Authentic Physical Photos: TMD Km 22 Entrance & 15,000 m² Yard */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3 font-mono">
-              <div className="group relative rounded-[4px] overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-black aspect-[16/9] shadow-md">
-                <img
-                  src={tmdEntranceImg}
-                  alt="Fachada y Entrada Principal Sede Central TMD Km 22 Autopista Duarte"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-[2px] bg-black/80 border border-amber-500/40 text-amber-400 text-[10px] font-bold uppercase tracking-wider">
-                  FACHADA OFICIAL • KM 22
-                </span>
-                <span className="absolute bottom-2.5 left-2.5 text-white font-black text-xs uppercase drop-shadow-md">
-                  Acceso Principal &amp; Showroom Central
-                </span>
-              </div>
-
-              <div className="group relative rounded-[4px] overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-black aspect-[16/9] shadow-md">
-                <img
-                  src={tmdPatioImg}
-                  alt="Patio Central de Maniobras y Flota en Stock Km 22"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-[2px] bg-black/80 border border-emerald-500/40 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
-                  PATIO DE PRUEBAS • 15,000+ M²
-                </span>
-                <span className="absolute bottom-2.5 left-2.5 text-white font-black text-xs uppercase drop-shadow-md">
-                  Pistas de Maniobras en Tierra &amp; Flota en Stock
-                </span>
-              </div>
-            </div>
-
-            <PatioKm22DroneVideoShowcase 
-              onScheduleTestDrive={() => setIsTestDriveModalOpen(true)}
-              onNavigate={onNavigate}
-            />
-          </div>
-        )}
-      </section>
-
-      {/* 4.8 STRATEGIC SERVICES: Compact Ergonomic Micro-Grid (ACCORDION TOGGLE) */}
-      <section id="strategic-services-section" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 max-w-[1780px] mx-auto py-2 scroll-mt-24">
-        <div className="flex items-center justify-between py-2 px-3.5 rounded-[6px] bg-gradient-to-r from-[#14141c] via-[#0c0c12] to-[#06060a] border border-white/[0.08] hover:border-[#d99b26]/40 mb-3 transition-all">
-          <button
-            type="button"
-            onClick={() => setIsServicesExpanded(!isServicesExpanded)}
-            className="flex items-center gap-2 text-left font-black text-xs sm:text-sm text-zinc-100 cursor-pointer hover:text-[#e0a22a] transition-colors"
-          >
-            <Wrench className="w-3.5 h-3.5 text-[#e0a22a] shrink-0" />
-            <span>Ecosistema de Soluciones Operativas Directas</span>
-            <span className="text-[10px] px-2 py-0.5 rounded-[3px] bg-[#1a1a24] text-zinc-300 font-mono font-bold border border-white/[0.06]">
-              {isServicesExpanded ? 'Contraer' : 'Expandir'}
-            </span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsServicesExpanded(!isServicesExpanded)}
-            className="p-1 rounded-[4px] bg-[#14141c] text-zinc-400 hover:text-white cursor-pointer transition-colors border border-white/[0.06]"
-            aria-label={isServicesExpanded ? "Contraer servicios estratégicos" : "Expandir servicios estratégicos"}
-          >
-            <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isServicesExpanded ? 'rotate-180' : ''}`} />
-          </button>
-        </div>
-
-        {isServicesExpanded && (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3.5">
-            <div
+            <button
+              type="button"
               onClick={() => onNavigate('#/machinery')}
-              className="tmd-luxury-card p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-amber-500/50 shadow-xs transition-all cursor-pointer flex flex-col justify-between group"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-black font-black text-xs uppercase tracking-wider shadow-md shadow-amber-500/20 flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-98"
             >
-              <div>
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
-                  <HardHat className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                </div>
-                <h3 className="text-xs sm:text-sm font-extrabold text-zinc-900 dark:text-white mb-0.5">
-                  Maquinaria
-                </h3>
-                <p className="text-[10px] text-zinc-500 dark:text-zinc-400 line-clamp-1">
-                  Stock físico en Patio Km 22.
-                </p>
-              </div>
-              <span className="text-[10px] font-bold text-amber-500 mt-2 flex items-center gap-0.5">
-                Ver Equipos <ChevronRight className="w-3 h-3" />
-              </span>
-            </div>
-
-            <div
-              onClick={() => onNavigate('#/parts')}
-              className="tmd-luxury-card p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-amber-500/50 shadow-xs transition-all cursor-pointer flex flex-col justify-between group"
-            >
-              <div>
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
-                  <Cog className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                </div>
-                <h3 className="text-xs sm:text-sm font-extrabold text-zinc-900 dark:text-white mb-0.5">
-                  Repuestos OEM
-                </h3>
-                <p className="text-[10px] text-zinc-500 dark:text-zinc-400 line-clamp-1">
-                  Filtros, rodaje e hidráulica.
-                </p>
-              </div>
-              <span className="text-[10px] font-bold text-amber-500 mt-2 flex items-center gap-0.5">
-                Ver Catálogo <ChevronRight className="w-3 h-3" />
-              </span>
-            </div>
-
-            <div
-              onClick={() => {
-                if (currentUser) {
-                  onNavigate('#/livelink');
-                } else {
-                  setAuthPromptFeature({
-                    title: 'LiveLink™ IoT Telemetría',
-                    route: '#/livelink',
-                    description: 'Acceso seguro al portal de telemetría CAN Bus en tiempo real y geocercas GPS de maquinaria.'
-                  });
-                }
-              }}
-              className="tmd-luxury-card p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-amber-500/30 hover:border-amber-500 shadow-xs transition-all cursor-pointer flex flex-col justify-between relative overflow-hidden group"
-            >
-              <span className="absolute top-1.5 right-1.5 px-1.5 py-0.2 rounded bg-amber-500 text-zinc-950 text-[8px] font-black uppercase">
-                {currentUser ? 'Live' : 'Portal'}
-              </span>
-              <div>
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
-                  <Cpu className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                </div>
-                <h3 className="text-xs sm:text-sm font-extrabold text-zinc-900 dark:text-white mb-0.5">
-                  LiveLink™ IoT
-                </h3>
-                <p className="text-[10px] text-zinc-500 dark:text-zinc-400 line-clamp-1">
-                  GPS satelital y horómetros.
-                </p>
-              </div>
-              <span className="text-[10px] font-bold text-amber-500 mt-2 flex items-center gap-0.5">
-                {currentUser ? 'Telemetría' : 'Acceso'} <ChevronRight className="w-3 h-3" />
-              </span>
-            </div>
-
-            <div
-              onClick={() => {
-                if (currentUser) {
-                  onNavigate('#/fullbay');
-                } else {
-                  setAuthPromptFeature({
-                    title: 'Taller Central Fullbay',
-                    route: '#/fullbay',
-                    description: 'Monitoreo de órdenes de servicio, estado de mecánicos y diagnósticos en bahías de taller.'
-                  });
-                }
-              }}
-              className="tmd-luxury-card p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-amber-500/30 hover:border-amber-500 shadow-xs transition-all cursor-pointer flex flex-col justify-between relative overflow-hidden group"
-            >
-              <span className="absolute top-1.5 right-1.5 px-1.5 py-0.2 rounded bg-amber-500 text-zinc-950 text-[8px] font-black uppercase">
-                {currentUser ? 'Fullbay' : 'Taller'}
-              </span>
-              <div>
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
-                  <Wrench className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                </div>
-                <h3 className="text-xs sm:text-sm font-extrabold text-zinc-900 dark:text-white mb-0.5">
-                  Taller 12 Bahías
-                </h3>
-                <p className="text-[10px] text-zinc-500 dark:text-zinc-400 line-clamp-1">
-                  Diagnóstico y overhaul.
-                </p>
-              </div>
-              <span className="text-[10px] font-bold text-amber-500 mt-2 flex items-center gap-0.5">
-                {currentUser ? 'Ver Taller' : 'Acceso Taller'} <ChevronRight className="w-3 h-3" />
-              </span>
-            </div>
-
-            <div
-              onClick={() => onNavigate('#/service')}
-              className="tmd-luxury-card p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-amber-500/50 shadow-xs transition-all cursor-pointer flex flex-col justify-between group"
-            >
-              <div>
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
-                  <Truck className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                </div>
-                <h3 className="text-xs sm:text-sm font-extrabold text-zinc-900 dark:text-white mb-0.5">
-                  Servicio Móvil
-                </h3>
-                <p className="text-[10px] text-zinc-500 dark:text-zinc-400 line-clamp-1">
-                  Auxilio SOS 24/7 en mina.
-                </p>
-              </div>
-              <span className="text-[10px] font-bold text-amber-500 mt-2 flex items-center gap-0.5">
-                Pedir SOS <ChevronRight className="w-3 h-3" />
-              </span>
-            </div>
-
-            <div
-              onClick={() => onNavigate('#/checkout')}
-              className="tmd-luxury-card tmd-shimmer-btn p-3 sm:p-4 rounded-2xl bg-amber-500 text-black shadow-md transition-all cursor-pointer flex flex-col justify-between group"
-            >
-              <div>
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-black/10 text-black flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
-                  <Zap className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-                </div>
-                <h3 className="text-xs sm:text-sm font-black mb-0.5">
-                  Cotizar NCF
-                </h3>
-                <p className="text-[10px] text-black/80 line-clamp-1">
-                  Comprobante fiscal B01 DGII.
-                </p>
-              </div>
-              <span className="text-[10px] font-black mt-2 flex items-center gap-0.5">
-                Cotizar Ya <ChevronRight className="w-3 h-3" />
-              </span>
-            </div>
+              <span>Ver Catálogo Completo ({MACHINES_DATA.length} Modelos)</span>
+              <ArrowRight className="w-3.5 h-3.5 stroke-[2.5]" />
+            </button>
           </div>
-        )}
+        </div>
+      </section>
+
+      {/* 3. EXECUTIVE COMMERCIAL PROFILES & PROTOCOLS */}
+      <section id="executive-commercial-profiles" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 max-w-[1780px] mx-auto scroll-mt-24 space-y-3">
+        <div className="flex items-center justify-between border-b border-white/[0.08] pb-2">
+          <div className="flex items-center gap-2">
+            <DollarSign className="w-4 h-4 text-[#e0a22a]" />
+            <h3 className="text-xs sm:text-sm font-black uppercase tracking-wider text-white">
+              Perfiles Comerciales &amp; Protocolos de Adquisición
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono text-zinc-400 uppercase">
+            Planes a la Medida
+          </span>
+        </div>
+        <ExecutiveTargetProfilesBar onNavigate={onNavigate} />
+      </section>
+
+      {/* 4. EXECUTIVE TRADE-IN & VALUATION MODULE */}
+      <section id="tradein-valuation-module" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 max-w-[1780px] mx-auto scroll-mt-24 space-y-3">
+        <div className="flex items-center justify-between border-b border-white/[0.08] pb-2">
+          <div className="flex items-center gap-2">
+            <RefreshCw className="w-4 h-4 text-[#e0a22a]" />
+            <h3 className="text-xs sm:text-sm font-black uppercase tracking-wider text-white">
+              Valoración &amp; Trade-In de Maquinaria Usada
+            </h3>
+          </div>
+          <button
+            type="button"
+            onClick={() => onNavigate('#/trade-in')}
+            className="text-[10px] font-mono text-[#e0a22a] hover:underline uppercase flex items-center gap-1 cursor-pointer font-bold"
+          >
+            <span>Ir a Portal Usados</span>
+            <ChevronRight className="w-3 h-3" />
+          </button>
+        </div>
+        <ExecutiveTradeInSellingModule onNavigate={onNavigate} />
+      </section>
+
+      {/* 4.5 INSTALACIONES & PATIO DE DEMOSTRACIONES KM 22 */}
+      <section id="official-company-video" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 scroll-mt-24 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-zinc-800 pb-3">
+          <div>
+            <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500 text-black shadow-xs">
+                Sede Central Oficial
+              </span>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+                15,000+ M² • Patio Km 22
+              </span>
+              <span className="text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-1">
+                <MapPin className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                Autopista Duarte Km 22, Pedro Brand, Sto. Dgo.
+              </span>
+            </div>
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-zinc-900 dark:text-white tracking-tight">
+              Instalaciones Centrales &amp; Patio de Pruebas TMD
+            </h2>
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1 max-w-2xl leading-relaxed">
+              Showroom multimarca físico (JCB, LiuGong, Yanmar, Ammann), pistas de demostración en terreno real y nave principal con 12 bahías de servicio diésel pesado.
+            </p>
+          </div>
+          <div className="flex items-center gap-2 flex-wrap">
+            <button
+              type="button"
+              onClick={() => onNavigate('#/about')}
+              className="px-3.5 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer border border-zinc-200 dark:border-zinc-700"
+            >
+              <Building2 className="w-3.5 h-3.5 text-amber-500" />
+              <span>Ver Video &amp; Organigrama</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsTestDriveModalOpen(true)}
+              className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-black transition-all flex items-center gap-2 cursor-pointer shadow-md active:scale-95"
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Agendar Prueba en Patio</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Real Authentic Physical Photos: TMD Km 22 Entrance & 15,000 m² Yard */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 font-mono">
+          <div className="group relative rounded-[4px] overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-black aspect-[16/9] shadow-md">
+            <img
+              src={tmdEntranceImg}
+              alt="Fachada y Entrada Principal Sede Central TMD Km 22 Autopista Duarte"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+            <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-[2px] bg-black/80 border border-amber-500/40 text-amber-400 text-[10px] font-bold uppercase tracking-wider">
+              FACHADA OFICIAL • KM 22
+            </span>
+            <span className="absolute bottom-2.5 left-2.5 text-white font-black text-xs uppercase drop-shadow-md">
+              Acceso Principal &amp; Showroom Central
+            </span>
+          </div>
+
+          <div className="group relative rounded-[4px] overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-black aspect-[16/9] shadow-md">
+            <img
+              src={tmdPatioImg}
+              alt="Patio Central de Maniobras y Flota en Stock Km 22"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+            <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-[2px] bg-black/80 border border-emerald-500/40 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
+              PATIO DE PRUEBAS • 15,000+ M²
+            </span>
+            <span className="absolute bottom-2.5 left-2.5 text-white font-black text-xs uppercase drop-shadow-md">
+              Pistas de Maniobras en Tierra &amp; Flota en Stock
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* 4.8 STRATEGIC SERVICES: Direct Operations Ribbon */}
+      <section id="strategic-services-section" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 max-w-[1780px] mx-auto py-2 scroll-mt-24 space-y-3">
+        <div className="flex items-center justify-between border-b border-white/[0.08] pb-2">
+          <div className="flex items-center gap-2">
+            <Wrench className="w-4 h-4 text-[#e0a22a]" />
+            <h3 className="text-xs sm:text-sm font-black uppercase tracking-wider text-white">
+              Ecosistema de Soluciones Operativas Directas
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono text-zinc-400 uppercase">
+            Soporte Integral 24/7
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3.5">
+          <div
+            onClick={() => onNavigate('#/machinery')}
+            className="tmd-luxury-card p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-amber-500/50 shadow-xs transition-all cursor-pointer flex flex-col justify-between group"
+          >
+            <div>
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+                <HardHat className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+              </div>
+              <h3 className="text-xs sm:text-sm font-extrabold text-zinc-900 dark:text-white mb-0.5">
+                Maquinaria
+              </h3>
+              <p className="text-[10px] text-zinc-500 dark:text-zinc-400 line-clamp-1">
+                Stock físico en Patio Km 22.
+              </p>
+            </div>
+            <span className="text-[10px] font-bold text-amber-500 mt-2 flex items-center gap-0.5">
+              Ver Equipos <ChevronRight className="w-3 h-3" />
+            </span>
+          </div>
+
+          <div
+            onClick={() => onNavigate('#/parts')}
+            className="tmd-luxury-card p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-amber-500/50 shadow-xs transition-all cursor-pointer flex flex-col justify-between group"
+          >
+            <div>
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+                <Cog className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+              </div>
+              <h3 className="text-xs sm:text-sm font-extrabold text-zinc-900 dark:text-white mb-0.5">
+                Repuestos OEM
+              </h3>
+              <p className="text-[10px] text-zinc-500 dark:text-zinc-400 line-clamp-1">
+                Filtros, rodaje e hidráulica.
+              </p>
+            </div>
+            <span className="text-[10px] font-bold text-amber-500 mt-2 flex items-center gap-0.5">
+              Ver Catálogo <ChevronRight className="w-3 h-3" />
+            </span>
+          </div>
+
+          <div
+            onClick={() => {
+              if (currentUser) {
+                onNavigate('#/livelink');
+              } else {
+                setAuthPromptFeature({
+                  title: 'LiveLink™ IoT Telemetría',
+                  route: '#/livelink',
+                  description: 'Acceso seguro al portal de telemetría CAN Bus en tiempo real y geocercas GPS de maquinaria.'
+                });
+              }
+            }}
+            className="tmd-luxury-card p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-amber-500/30 hover:border-amber-500 shadow-xs transition-all cursor-pointer flex flex-col justify-between relative overflow-hidden group"
+          >
+            <span className="absolute top-1.5 right-1.5 px-1.5 py-0.2 rounded bg-amber-500 text-zinc-950 text-[8px] font-black uppercase">
+              {currentUser ? 'Live' : 'Portal'}
+            </span>
+            <div>
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+                <Cpu className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+              </div>
+              <h3 className="text-xs sm:text-sm font-extrabold text-zinc-900 dark:text-white mb-0.5">
+                LiveLink™ IoT
+              </h3>
+              <p className="text-[10px] text-zinc-500 dark:text-zinc-400 line-clamp-1">
+                GPS satelital y horómetros.
+              </p>
+            </div>
+            <span className="text-[10px] font-bold text-amber-500 mt-2 flex items-center gap-0.5">
+              {currentUser ? 'Telemetría' : 'Acceso'} <ChevronRight className="w-3 h-3" />
+            </span>
+          </div>
+
+          <div
+            onClick={() => {
+              if (currentUser) {
+                onNavigate('#/fullbay');
+              } else {
+                setAuthPromptFeature({
+                  title: 'Taller Central Fullbay',
+                  route: '#/fullbay',
+                  description: 'Monitoreo de órdenes de servicio, estado de mecánicos y diagnósticos en bahías de taller.'
+                });
+              }
+            }}
+            className="tmd-luxury-card p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-amber-500/30 hover:border-amber-500 shadow-xs transition-all cursor-pointer flex flex-col justify-between relative overflow-hidden group"
+          >
+            <span className="absolute top-1.5 right-1.5 px-1.5 py-0.2 rounded bg-amber-500 text-zinc-950 text-[8px] font-black uppercase">
+              {currentUser ? 'Fullbay' : 'Taller'}
+            </span>
+            <div>
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+                <Wrench className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+              </div>
+              <h3 className="text-xs sm:text-sm font-extrabold text-zinc-900 dark:text-white mb-0.5">
+                Taller 12 Bahías
+              </h3>
+              <p className="text-[10px] text-zinc-500 dark:text-zinc-400 line-clamp-1">
+                Diagnóstico y overhaul.
+              </p>
+            </div>
+            <span className="text-[10px] font-bold text-amber-500 mt-2 flex items-center gap-0.5">
+              {currentUser ? 'Ver Taller' : 'Acceso Taller'} <ChevronRight className="w-3 h-3" />
+            </span>
+          </div>
+
+          <div
+            onClick={() => onNavigate('#/service')}
+            className="tmd-luxury-card p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-amber-500/50 shadow-xs transition-all cursor-pointer flex flex-col justify-between group"
+          >
+            <div>
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+                <Truck className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+              </div>
+              <h3 className="text-xs sm:text-sm font-extrabold text-zinc-900 dark:text-white mb-0.5">
+                Servicio Móvil
+              </h3>
+              <p className="text-[10px] text-zinc-500 dark:text-zinc-400 line-clamp-1">
+                Auxilio SOS 24/7 en mina.
+              </p>
+            </div>
+            <span className="text-[10px] font-bold text-amber-500 mt-2 flex items-center gap-0.5">
+              Pedir SOS <ChevronRight className="w-3 h-3" />
+            </span>
+          </div>
+
+          <div
+            onClick={() => onNavigate('#/checkout')}
+            className="tmd-luxury-card tmd-shimmer-btn p-3 sm:p-4 rounded-2xl bg-amber-500 text-black shadow-md transition-all cursor-pointer flex flex-col justify-between group"
+          >
+            <div>
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-black/10 text-black flex items-center justify-center mb-2 group-hover:scale-105 transition-transform">
+                <Zap className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+              </div>
+              <h3 className="text-xs sm:text-sm font-black mb-0.5">
+                Cotizar NCF
+              </h3>
+              <p className="text-[10px] text-black/80 line-clamp-1">
+                Comprobante fiscal B01 DGII.
+              </p>
+            </div>
+            <span className="text-[10px] font-black mt-2 flex items-center gap-0.5">
+              Cotizar Ya <ChevronRight className="w-3 h-3" />
+            </span>
+          </div>
+        </div>
       </section>
 
       {/* 5. DYNAMIC MULTI-LAYERED INDUSTRIAL GRID (BRAND PAVILION, INFRASTRUCTURE BENTO & CONTRACTOR PROOF) */}

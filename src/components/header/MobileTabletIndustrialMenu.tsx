@@ -176,14 +176,25 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
 
       {/* 2. SCROLLABLE TAB CONTENT (TABLET 2-COLUMN & MOBILE ADAPTIVE) */}
       <div className="flex-1 overflow-y-auto p-3.5 sm:p-5 space-y-4">
-        {/* Tab Context Banner */}
-        <div className="flex items-center justify-between bg-zinc-100/70 dark:bg-zinc-900/60 p-3 rounded-2xl border border-zinc-200/60 dark:border-zinc-800/60">
+        {/* Tab Context Banner: 1-Tap Direct Landing Navigation */}
+        <button
+          type="button"
+          onClick={() => {
+            if (activeTab === 'heavy_machinery') handleActionNavigate('#/machinery');
+            else if (activeTab === 'contractor_deploy') handleActionNavigate('#/rental');
+            else if (activeTab === 'parts_service') handleActionNavigate('#/parts');
+            else if (activeTab === 'gov_bids') handleActionNavigate('#/tech-docs');
+            else if (activeTab === 'brands') handleActionNavigate('#/machinery');
+            else handleActionNavigate('#/machinery');
+          }}
+          className="w-full flex items-center justify-between bg-zinc-100/70 dark:bg-zinc-900/60 hover:bg-amber-500/10 dark:hover:bg-zinc-800/80 p-3 rounded-2xl border border-zinc-200/60 dark:border-zinc-800/60 hover:border-amber-500/40 transition-all cursor-pointer group text-left"
+        >
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+            <div className="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
               <ActiveIcon className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <h3 className="text-xs font-black text-zinc-900 dark:text-white truncate">
+              <h3 className="text-xs font-black text-zinc-900 dark:text-white truncate group-hover:text-amber-500 transition-colors">
                 {currentTabConfig.label}
               </h3>
               <p className="text-[11px] text-zinc-500 dark:text-zinc-400 truncate">
@@ -191,10 +202,11 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
               </p>
             </div>
           </div>
-          <span className="hidden sm:inline-flex px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-700 dark:text-amber-400 shrink-0">
-            Patio Km 22
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl text-[10px] font-black bg-amber-500 text-black shadow-xs shrink-0 group-hover:bg-amber-400">
+            <span>Abrir Landing</span>
+            <ChevronRight className="w-3 h-3 stroke-[2.5]" />
           </span>
-        </div>
+        </button>
 
         {/* TAB 5: MARCAS OFICIALES (SPECIAL BRAND PAVILION GRID) */}
         {activeTab === 'brands' ? (

@@ -207,8 +207,6 @@ export const PartsView = React.memo<PartsViewProps>(({
 
   // Accordion & Bounded Container States
   const [isBoundedContainer, setIsBoundedContainer] = useState<boolean>(false);
-  const [isCategoriesExpanded, setIsCategoriesExpanded] = useState<boolean>(true);
-  const [isHighDemandExpanded, setIsHighDemandExpanded] = useState<boolean>(true);
 
   // Floating Scroll to Top State
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -531,26 +529,20 @@ export const PartsView = React.memo<PartsViewProps>(({
       )}
 
       {/* ============================================================ */}
-      {/* HORIZONTAL SCROLLABLE CATEGORY NAVIGATION BAR (Accordion)    */}
+      {/* HORIZONTAL SCROLLABLE CATEGORY NAVIGATION BAR                */}
       {/* ============================================================ */}
       <div className="relative mb-6">
         <div className="flex items-center justify-between gap-2 mb-2 px-1 font-display">
-          <button
-            type="button"
-            onClick={() => setIsCategoriesExpanded(!isCategoriesExpanded)}
-            className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider text-zinc-300 hover:text-amber-400 cursor-pointer transition-colors"
-          >
+          <div className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider text-zinc-300">
             <Package className="w-3.5 h-3.5 text-amber-400" />
             <span>CATEGORÍAS DE REPUESTOS OEM</span>
-            <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isCategoriesExpanded ? 'rotate-180' : ''}`} />
-          </button>
+          </div>
           <span className="text-[10px] font-mono text-zinc-500 hidden sm:inline uppercase">
             DESLIZA PARA NAVEGAR POR CATEGORÍA
           </span>
         </div>
 
-        {isCategoriesExpanded && (
-          <div className="relative bg-zinc-950 rounded-[5px] border border-zinc-800 p-2 shadow-sm animate-in fade-in">
+        <div className="relative bg-zinc-950 rounded-[5px] border border-zinc-800 p-2 shadow-sm">
             {/* Left scroll button */}
             {canScrollLeft && (
               <button
@@ -636,8 +628,7 @@ export const PartsView = React.memo<PartsViewProps>(({
               </button>
             )}
           </div>
-        )}
-      </div>
+        </div>
 
       {/* Search & Filter Bar */}
       <div className="bg-zinc-950 p-3.5 sm:p-4 rounded-[5px] border border-zinc-800 shadow-sm space-y-3 mb-6">

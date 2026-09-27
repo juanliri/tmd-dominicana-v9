@@ -653,23 +653,13 @@ export const Header: React.FC<HeaderProps> = ({
             whileTap={{ scale: 0.97 }}
             onMouseEnter={() => handleOpenMegaMenu('heavy_machinery')}
             onClick={() => {
-              if (megaMenuOpen && (activeSegment === 'heavy_machinery' || activeSegment === 'construction')) {
-                if (isMenuPinned) {
-                  setIsMenuPinned(false);
-                  setMegaMenuOpen(false);
-                } else {
-                  setIsMenuPinned(true);
-                }
-              } else {
-                handleOpenMegaMenu('heavy_machinery');
-              }
+              handleCloseMegaMenuImmediately();
+              handleNav('#/machinery');
             }}
             aria-expanded={megaMenuOpen && (activeSegment === 'heavy_machinery' || activeSegment === 'construction')}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-              megaMenuOpen && (activeSegment === 'heavy_machinery' || activeSegment === 'construction')
+            className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
+              currentRoute === '#/machinery'
                 ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
-                : currentRoute === '#/machinery'
-                ? 'text-white bg-zinc-800/90 border border-zinc-700'
                 : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
             }`}
           >
@@ -685,23 +675,13 @@ export const Header: React.FC<HeaderProps> = ({
             whileTap={{ scale: 0.97 }}
             onMouseEnter={() => handleOpenMegaMenu('contractor_deploy')}
             onClick={() => {
-              if (megaMenuOpen && (activeSegment === 'contractor_deploy' || activeSegment === 'contractors' || activeSegment === 'rental')) {
-                if (isMenuPinned) {
-                  setIsMenuPinned(false);
-                  setMegaMenuOpen(false);
-                } else {
-                  setIsMenuPinned(true);
-                }
-              } else {
-                handleOpenMegaMenu('contractor_deploy');
-              }
+              handleCloseMegaMenuImmediately();
+              handleNav('#/rental');
             }}
             aria-expanded={megaMenuOpen && (activeSegment === 'contractor_deploy' || activeSegment === 'contractors')}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-              megaMenuOpen && (activeSegment === 'contractor_deploy' || activeSegment === 'contractors' || activeSegment === 'rental')
+            className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
+              currentRoute === '#/rental'
                 ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
-                : currentRoute === '#/rental'
-                ? 'text-white bg-zinc-800/90 border border-zinc-700'
                 : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
             }`}
           >
@@ -711,29 +691,59 @@ export const Header: React.FC<HeaderProps> = ({
             }`} />
           </motion.button>
 
-          {/* Trigger 3: LICITACIONES */}
+          {/* Trigger 3: REPUESTOS */}
+          <motion.button
+            whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
+            whileTap={{ scale: 0.97 }}
+            onMouseEnter={() => handleOpenMegaMenu('parts')}
+            onClick={() => {
+              handleCloseMegaMenuImmediately();
+              handleNav('#/parts');
+            }}
+            aria-expanded={megaMenuOpen && (activeSegment === 'parts' || activeSegment === 'parts_service')}
+            className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
+              currentRoute === '#/parts'
+                ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
+                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
+            }`}
+          >
+            <span>REPUESTOS</span>
+            <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
+              megaMenuOpen && (activeSegment === 'parts' || activeSegment === 'parts_service') ? 'rotate-180 text-amber-400' : 'text-zinc-400'
+            }`} />
+          </motion.button>
+
+          {/* Trigger 4: SERVICIOS */}
+          <motion.button
+            whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
+            whileTap={{ scale: 0.97 }}
+            onMouseEnter={handleCloseMegaMenuImmediately}
+            onClick={() => {
+              handleCloseMegaMenuImmediately();
+              handleNav('#/service');
+            }}
+            className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
+              currentRoute === '#/service'
+                ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
+                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
+            }`}
+          >
+            <span>SERVICIOS</span>
+          </motion.button>
+
+          {/* Trigger 5: LICITACIONES */}
           <motion.button
             whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
             whileTap={{ scale: 0.97 }}
             onMouseEnter={() => handleOpenMegaMenu('gov_bids')}
             onClick={() => {
-              if (megaMenuOpen && (activeSegment === 'gov_bids' || activeSegment === 'government' || activeSegment === 'bids')) {
-                if (isMenuPinned) {
-                  setIsMenuPinned(false);
-                  setMegaMenuOpen(false);
-                } else {
-                  setIsMenuPinned(true);
-                }
-              } else {
-                handleOpenMegaMenu('gov_bids');
-              }
+              handleCloseMegaMenuImmediately();
+              handleNav('#/tech-docs');
             }}
             aria-expanded={megaMenuOpen && (activeSegment === 'gov_bids' || activeSegment === 'government')}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-              megaMenuOpen && (activeSegment === 'gov_bids' || activeSegment === 'government' || activeSegment === 'bids')
+            className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
+              currentRoute === '#/tech-docs'
                 ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
-                : currentRoute === '#/tech-docs'
-                ? 'text-white bg-zinc-800/90 border border-zinc-700'
                 : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
             }`}
           >
@@ -743,74 +753,33 @@ export const Header: React.FC<HeaderProps> = ({
             }`} />
           </motion.button>
 
-          {/* Trigger 4: REPUESTOS */}
+          {/* Trigger 6: NOSOTROS */}
           <motion.button
             whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
             whileTap={{ scale: 0.97 }}
-            onMouseEnter={() => handleOpenMegaMenu('parts')}
+            onMouseEnter={handleCloseMegaMenuImmediately}
             onClick={() => {
-              if (megaMenuOpen && (activeSegment === 'parts' || activeSegment === 'parts_service' || activeSegment === 'services')) {
-                if (isMenuPinned) {
-                  setIsMenuPinned(false);
-                  setMegaMenuOpen(false);
-                } else {
-                  setIsMenuPinned(true);
-                }
-              } else {
-                handleOpenMegaMenu('parts');
-              }
+              handleCloseMegaMenuImmediately();
+              handleNav('#/about');
             }}
-            aria-expanded={megaMenuOpen && (activeSegment === 'parts' || activeSegment === 'parts_service' || activeSegment === 'services')}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-              megaMenuOpen && (activeSegment === 'parts' || activeSegment === 'parts_service' || activeSegment === 'services')
-                ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
-                : currentRoute === '#/parts' || currentRoute === '#/service'
-                ? 'text-white bg-zinc-800/90 border border-zinc-700'
-                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
-            }`}
-          >
-            <span>REPUESTOS</span>
-            <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
-              megaMenuOpen && (activeSegment === 'parts' || activeSegment === 'parts_service' || activeSegment === 'services') ? 'rotate-180 text-amber-400' : 'text-zinc-400'
-            }`} />
-          </motion.button>
-
-          {/* Trigger 5: MARCAS */}
-          <motion.button
-            whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
-            whileTap={{ scale: 0.97 }}
-            onMouseEnter={() => handleOpenMegaMenu('brands')}
-            onClick={() => {
-              if (megaMenuOpen && activeSegment === 'brands') {
-                if (isMenuPinned) {
-                  setIsMenuPinned(false);
-                  setMegaMenuOpen(false);
-                } else {
-                  setIsMenuPinned(true);
-                }
-              } else {
-                handleOpenMegaMenu('brands');
-              }
-            }}
-            aria-expanded={megaMenuOpen && activeSegment === 'brands'}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-              megaMenuOpen && activeSegment === 'brands'
+            className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
+              currentRoute === '#/about'
                 ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
                 : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
             }`}
           >
-            <span>MARCAS</span>
-            <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
-              megaMenuOpen && activeSegment === 'brands' ? 'rotate-180 text-amber-400' : 'text-zinc-400'
-            }`} />
+            <span>NOSOTROS</span>
           </motion.button>
 
           {/* PORTAL */}
           <motion.button
             whileTap={{ scale: 0.97 }}
-            onClick={() => handleNav('#/portal')}
+            onClick={() => {
+              handleCloseMegaMenuImmediately();
+              handleNav('#/portal');
+            }}
             onMouseEnter={handleCloseMegaMenuImmediately}
-            className={`flex items-center gap-1 px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
+            className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
               currentRoute === '#/portal'
                 ? 'text-white bg-zinc-800/90 border border-zinc-700'
                 : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'

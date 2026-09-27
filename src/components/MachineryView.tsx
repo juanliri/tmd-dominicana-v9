@@ -67,6 +67,7 @@ import { MachineryMosaicGrid, MosaicLayoutMode } from './machinery/MachineryMosa
 import { PublicLiveLinkSimulatorModal } from './telematics/PublicLiveLinkSimulatorModal';
 import { IndustrialSectionDivider } from './common/IndustrialSectionDivider';
 import { USD_TO_DOP_RATE } from '../data/catalog';
+import jcbBannerImg from '../assets/images/jcb_machinery_banner_1789963695284.jpg';
 import { motion, AnimatePresence, type Variants } from 'motion/react';
 
 const machineryContainerVariants: Variants = {
@@ -678,77 +679,156 @@ export const MachineryView = React.memo<MachineryViewProps>(({
       animate="visible"
       className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8"
     >
-      {/* Header Banner */}
-      <motion.div variants={machineryFadeInItem} className="mb-6 flex flex-col md:flex-row md:items-end justify-between gap-4 font-display">
-        <div>
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[3px] bg-zinc-900 border border-zinc-800 text-amber-400 type-badge mb-2">
-            <HardHat className="w-3.5 h-3.5" />
-            <span>FLOTA OFICIAL & GARANTÍA TMD 2026</span>
+      {/* 1. TIER-1 DEPARTMENT LANDING HUB HERO (Apple/Tesla Grade) */}
+      <motion.div variants={machineryFadeInItem} className="mb-6 rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950 relative shadow-2xl">
+        <div className="relative min-h-[220px] sm:min-h-[260px] flex items-center p-6 sm:p-8 lg:p-10 overflow-hidden">
+          {/* Background image with luxury atmospheric dark gradient */}
+          <div className="absolute inset-0">
+            <img 
+              src={jcbBannerImg} 
+              alt="Flota de Maquinaria Pesada JCB y LiuGong TMD Dominicana" 
+              className="w-full h-full object-cover object-center brightness-75 scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/40" />
+            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-black/30" />
           </div>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl type-section-title text-white">
-            CATÁLOGO DE MAQUINARIA PESADA
-          </h1>
-          <p className="text-xs sm:text-sm type-body text-zinc-400 mt-1 max-w-2xl">
-            Excavadoras, retroexcavadoras, tractores y rodillos con respaldo de taller central y stock de repuestos en Km 22 Autopista Duarte.
-          </p>
+
+          {/* Hero Content */}
+          <div className="relative z-10 max-w-3xl space-y-3 font-display">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[4px] bg-black/80 border border-amber-500/40 text-amber-400 text-xs font-mono font-bold uppercase tracking-wider backdrop-blur-md">
+              <HardHat className="w-3.5 h-3.5 text-amber-400" />
+              <span>DEPARTAMENTO DE MAQUINARIA PESADA • PATIO KM 22</span>
+            </div>
+
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white uppercase tracking-tight leading-tight">
+              FLOTA OFICIAL &amp; <span className="text-amber-400">ENTREGA INMEDIATA</span>
+            </h1>
+
+            <p className="text-xs sm:text-sm text-zinc-300 font-sans max-w-2xl leading-relaxed">
+              Distribuidor oficial exclusivo JCB y LiuGong en República Dominicana. Más de 39 modelos pesados 0 Horas con garantía de fábrica, leasing comercial pre-aprobado en 24h y respaldo técnico de 12 bahías en Autopista Duarte.
+            </p>
+
+            {/* Quick Trust Pillars & Utility Actions */}
+            <div className="flex flex-wrap items-center gap-2 pt-2">
+              <span className="flex items-center gap-1.5 bg-black/70 px-2.5 py-1 rounded-[3px] border border-white/[0.1] text-[11px] font-mono font-bold uppercase text-zinc-300 backdrop-blur-md">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Garantía Oficial 2 Años / 2,000h</span>
+              </span>
+              <span className="flex items-center gap-1.5 bg-black/70 px-2.5 py-1 rounded-[3px] border border-white/[0.1] text-[11px] font-mono font-bold uppercase text-zinc-300 backdrop-blur-md">
+                <Building2 className="w-3.5 h-3.5 text-blue-400" />
+                <span>15,000 m² Patio Km 22</span>
+              </span>
+
+              {/* Quick Action Buttons inside Hero */}
+              <button
+                type="button"
+                onClick={() => setIsLiveLinkModalOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[3px] bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 font-mono text-[11px] font-bold uppercase border border-amber-500/50 backdrop-blur-md transition-all cursor-pointer"
+                title="Probar simulador de telemetría satelital LiveLink"
+              >
+                <Radio className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+                <span>Simulador LiveLink™</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={handleRefreshInventory}
+                disabled={isSyncing}
+                title="Sincronizar disponibilidad en tiempo real"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[3px] bg-black/70 hover:bg-zinc-800 text-zinc-300 font-mono text-[11px] font-bold uppercase border border-white/[0.1] backdrop-blur-md transition-all cursor-pointer"
+              >
+                <RefreshCw className={`w-3 h-3 text-amber-400 ${isSyncing ? 'animate-spin' : ''}`} />
+                <span>{isSyncing ? 'Sincronizando...' : 'Stock en Vivo'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsExportPdfOpen(true)}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[3px] bg-black/70 hover:bg-zinc-800 text-zinc-300 font-mono text-[11px] font-bold uppercase border border-white/[0.1] backdrop-blur-md transition-all cursor-pointer"
+              >
+                <FileDown className="w-3 h-3 text-amber-400" />
+                <span>Exportar PDF</span>
+              </button>
+
+              <button
+                onClick={openComparison}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[3px] bg-amber-500 text-black font-mono text-[11px] font-black uppercase transition-all cursor-pointer shadow-md"
+              >
+                <Scale className="w-3 h-3 text-black" />
+                <span>Comparar ({selectedMachines.length}/{maxMachines})</span>
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Top Action Buttons */}
-        <div className="flex items-center gap-2 shrink-0 flex-wrap font-display">
-          {/* Mobile Filter Toggle Button */}
-          <button
-            type="button"
-            onClick={() => setIsMobileFiltersOpen(true)}
-            className="lg:hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[3px] bg-amber-500 text-black font-black text-xs uppercase tracking-wider shadow-sm cursor-pointer"
-          >
-            <Filter className="w-3.5 h-3.5" />
-            <span>FILTROS</span>
-            {hasActiveFilters && (
-              <span className="w-2 h-2 rounded-full bg-black"></span>
-            )}
-          </button>
+        {/* Spotlight "Especial de Flota" (Deal of the Month) */}
+        {MACHINES_DATA[0] && (
+          <div className="bg-zinc-900/95 border-t border-zinc-800 p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 font-display">
+            <div className="flex items-center gap-4 w-full md:w-auto">
+              <div className="relative w-20 h-16 sm:w-24 sm:h-20 rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800 shrink-0">
+                <img 
+                  src={MACHINES_DATA[0].image} 
+                  alt={MACHINES_DATA[0].name}
+                  className="w-full h-full object-cover" 
+                />
+                <span className="absolute bottom-1 left-1 px-1.5 py-0.2 rounded text-[8px] font-mono font-black bg-amber-500 text-black uppercase">
+                  DESTACADO
+                </span>
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-mono font-bold text-amber-400 uppercase">
+                    {MACHINES_DATA[0].brand} • MOD. {MACHINES_DATA[0].modelCode}
+                  </span>
+                  <span className="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-400 font-mono font-bold">
+                    STOCK EN KM 22
+                  </span>
+                </div>
+                <h4 className="text-sm sm:text-base font-black text-white uppercase truncate">
+                  {MACHINES_DATA[0].name}
+                </h4>
+                <p className="text-[11px] text-zinc-400 font-mono">
+                  {MACHINES_DATA[0].powerHp} HP • {MACHINES_DATA[0].operatingWeightKg.toLocaleString()} kg • Motor {MACHINES_DATA[0].engine}
+                </p>
+              </div>
+            </div>
 
-          <button
-            type="button"
-            onClick={() => setIsLiveLinkModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[3px] bg-zinc-900 hover:bg-zinc-800 text-amber-400 font-black text-xs uppercase tracking-wider border border-zinc-800 transition-all cursor-pointer shadow-xs"
-            title="Probar simulador de telemetría satelital LiveLink"
-          >
-            <Radio className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-            <span>SIMULADOR LIVELINK™</span>
-          </button>
+            <div className="flex items-center justify-between md:justify-end gap-3 w-full md:w-auto shrink-0 border-t md:border-t-0 pt-3 md:pt-0 border-zinc-800">
+              <div className="text-left md:text-right font-mono">
+                <span className="text-[10px] text-zinc-400 uppercase block">Inversión Desde</span>
+                <span className="text-base sm:text-lg font-black text-amber-400 block leading-tight">
+                  {formatEquiposPrice(MACHINES_DATA[0].basePriceUsd)}
+                </span>
+                <span className="text-[10px] text-emerald-400 font-bold block">
+                  Leasing {getMonthlyLeasingEstimate(MACHINES_DATA[0].basePriceUsd)}/mes
+                </span>
+              </div>
 
-          <button
-            type="button"
-            onClick={handleRefreshInventory}
-            disabled={isSyncing}
-            title="Sincronizar disponibilidad en tiempo real"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[3px] bg-zinc-900 hover:bg-zinc-800 text-zinc-300 font-black text-xs uppercase tracking-wider border border-zinc-800 transition-all cursor-pointer"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 text-amber-400 ${isSyncing ? 'animate-spin' : ''}`} />
-            <span className="hidden sm:inline">{isSyncing ? 'SINCRONIZANDO...' : 'ACTUALIZAR STOCK'}</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setIsExportPdfOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[3px] bg-zinc-900 hover:bg-zinc-800 text-zinc-300 font-black text-xs uppercase tracking-wider border border-zinc-800 shadow-sm transition-all cursor-pointer"
-          >
-            <FileDown className="w-3.5 h-3.5 text-amber-400" />
-            <span>EXPORTAR PDF</span>
-          </button>
-
-          <button
-            onClick={openComparison}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[3px] bg-zinc-800 hover:bg-zinc-700 text-amber-400 font-black text-xs uppercase tracking-wider border border-zinc-700 shadow-md transition-all shrink-0 cursor-pointer"
-          >
-            <Scale className="w-3.5 h-3.5 text-amber-400" />
-            <span>COMPARAR</span>
-            <span className="px-1.5 py-0.2 rounded-[2px] bg-amber-400 text-black text-[10px] font-mono font-black">
-              {selectedMachines.length}/{maxMachines}
-            </span>
-          </button>
-        </div>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setActive360Tab('360');
+                    setActive360Machine(MACHINES_DATA[0]);
+                  }}
+                  className="p-2 sm:px-3 sm:py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-amber-400 text-xs font-black uppercase transition-colors cursor-pointer border border-zinc-700 flex items-center gap-1"
+                  title="Ver Giro 360°"
+                >
+                  <RotateCw className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">360°</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleOpenSpecs(MACHINES_DATA[0])}
+                  className="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center gap-1"
+                >
+                  <span>Ver Ficha</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </motion.div>
 
       {/* ============================================================ */}
