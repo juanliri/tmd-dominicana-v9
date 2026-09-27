@@ -254,15 +254,15 @@ function AppContent() {
   }, []);
 
   const navigateTo = (route: string) => {
-    if (route === '#official-company-video') {
-      window.location.hash = '#/home';
-      setCurrentRoute('#/home');
+    if (route === '#official-company-video' || route === '#/about#official-company-video') {
+      window.location.hash = '#/about';
+      setCurrentRoute('#/about');
       setTimeout(() => {
         const el = document.getElementById('official-company-video');
         if (el) {
           el.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 120);
+      }, 150);
       return;
     }
 

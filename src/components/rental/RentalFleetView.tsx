@@ -31,6 +31,8 @@ import { RentalEquipment } from '../../types';
 import { useCart } from '../../context/CartContext';
 import { UniversalBreadcrumbs } from '../common/navigation/UniversalBreadcrumbs';
 
+import rentalHeroBannerImg from '../../assets/images/liugong_machinery_banner_1789963706661.jpg';
+
 interface RentalFleetViewProps {
   onNavigate: (route: string) => void;
 }
@@ -124,69 +126,134 @@ export const RentalFleetView: React.FC<RentalFleetViewProps> = ({ onNavigate }) 
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 transition-colors pb-16">
-      {/* Top Hero Banner - Compact Commercial Standard */}
+      {/* ========================================================================= */}
+      {/* TIER-1 BRAND DEPARTMENT LANDING HUB HERO (Apple / Tesla / SpaceX Grade)    */}
+      {/* ========================================================================= */}
       <div className="relative bg-zinc-950 text-white border-b border-zinc-800 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10 space-y-4">
+        {/* Cinematic Atmospheric Machinery Background */}
+        <div className="absolute inset-0 pointer-events-none">
+          <img
+            src={rentalHeroBannerImg}
+            alt="División Oficial de Renta TMD Dominicana"
+            className="w-full h-full object-cover object-center opacity-30 scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/90 to-zinc-950/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-zinc-950/40" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-9 relative z-10 space-y-5">
           <UniversalBreadcrumbs currentRoute="#/rental" onNavigate={onNavigate} />
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-            <div className="lg:col-span-8 space-y-3">
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[3px] bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[11px] font-mono font-bold uppercase tracking-wider">
-                <Truck className="w-3.5 h-3.5 text-amber-400" />
-                <span>DIVISIÓN DE RENTA & FLOTA PESADA TMD</span>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left: Department Credentials & Mission (7 cols) */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-[3px] bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-mono font-black uppercase tracking-wider shadow-sm">
+                  <Truck className="w-3.5 h-3.5 text-amber-400" />
+                  <span>DIVISIÓN OFICIAL DE RENTA &amp; FLOTA PESADA TMD</span>
+                </span>
+                <span className="px-2.5 py-1 rounded-[3px] bg-zinc-900/90 border border-zinc-800 text-zinc-300 text-xs font-mono font-bold uppercase">
+                  ENTREGA LOWBOY 32 PROVINCIAS
+                </span>
               </div>
 
-              <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-wider font-display text-white">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight font-display text-white leading-tight">
                 RENTA DE MAQUINARIA PESADA EN <span className="text-amber-400">REPÚBLICA DOMINICANA</span>
               </h1>
 
-              <p className="text-xs text-zinc-400 font-mono uppercase leading-relaxed max-w-2xl">
-                Flota moderna con telemetría satelital LiveLink™ activa. Alquiler en seco o con operadores certificados TMD con traslado en cama baja directa a obra nacional.
+              <p className="text-xs sm:text-sm text-zinc-300 font-sans leading-relaxed max-w-2xl">
+                Flota moderna JCB, LiuGong y Ammann con telemetría satelital LiveLink™ activa. Alquiler en seco o con operadores certificados de plantilla, despacho en cama baja directo a su frente de obra y facturación fiscal NCF B01.
               </p>
 
-              {/* Verified Trust Badges */}
-              <div className="flex flex-wrap gap-2 pt-1 text-xs font-mono font-bold uppercase text-zinc-300">
-                <span className="flex items-center gap-1.5 bg-zinc-900 px-2.5 py-1 rounded-[3px] border border-zinc-800 text-[11px]">
-                  <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-                  <span>SEGURO TODO RIESGO</span>
-                </span>
-                <span className="flex items-center gap-1.5 bg-zinc-900 px-2.5 py-1 rounded-[3px] border border-zinc-800 text-[11px]">
-                  <Clock className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>AUXILIO SOS &lt; 3H</span>
-                </span>
-                <span className="flex items-center gap-1.5 bg-zinc-900 px-2.5 py-1 rounded-[3px] border border-zinc-800 text-[11px]">
-                  <FileText className="w-3.5 h-3.5 text-amber-400" />
-                  <span>DGII FISCAL B01</span>
-                </span>
-                <span className="flex items-center gap-1.5 bg-zinc-900 px-2.5 py-1 rounded-[3px] border border-zinc-800 text-[11px]">
-                  <Radio className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
-                  <span>LIVELINK™ GPS</span>
-                </span>
+              {/* 4 Verified Operational Badges */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 font-mono text-xs">
+                <div className="p-2.5 rounded-[4px] bg-zinc-900/80 border border-zinc-800/90 flex flex-col justify-center">
+                  <div className="flex items-center gap-1.5 text-amber-400 text-[10px] font-black uppercase">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>SEGURO</span>
+                  </div>
+                  <span className="text-[11px] font-bold text-white uppercase mt-0.5">TODO RIESGO</span>
+                </div>
+
+                <div className="p-2.5 rounded-[4px] bg-zinc-900/80 border border-zinc-800/90 flex flex-col justify-center">
+                  <div className="flex items-center gap-1.5 text-emerald-400 text-[10px] font-black uppercase">
+                    <Clock className="w-3.5 h-3.5" />
+                    <span>RESPUESTA</span>
+                  </div>
+                  <span className="text-[11px] font-bold text-white uppercase mt-0.5">SOS &lt; 3H OBRA</span>
+                </div>
+
+                <div className="p-2.5 rounded-[4px] bg-zinc-900/80 border border-zinc-800/90 flex flex-col justify-center">
+                  <div className="flex items-center gap-1.5 text-amber-400 text-[10px] font-black uppercase">
+                    <FileText className="w-3.5 h-3.5" />
+                    <span>DGII RD</span>
+                  </div>
+                  <span className="text-[11px] font-bold text-white uppercase mt-0.5">FISCAL NCF B01</span>
+                </div>
+
+                <div className="p-2.5 rounded-[4px] bg-zinc-900/80 border border-zinc-800/90 flex flex-col justify-center">
+                  <div className="flex items-center gap-1.5 text-amber-400 text-[10px] font-black uppercase">
+                    <Radio className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+                    <span>GPS 24/7</span>
+                  </div>
+                  <span className="text-[11px] font-bold text-white uppercase mt-0.5">LIVELINK™ IOT</span>
+                </div>
               </div>
             </div>
 
-            {/* Quick Brand Matrix Card */}
-            <div className="lg:col-span-4 bg-zinc-900 rounded-[5px] p-4 border border-zinc-800 shadow-xl space-y-2.5 font-mono">
-              <div className="flex items-center justify-between pb-1.5 border-b border-zinc-800">
+            {/* Right: Featured Fleet Deal Spotlight Card (5 cols) */}
+            <div className="lg:col-span-5 bg-gradient-to-b from-zinc-900/95 to-zinc-950/95 rounded-[6px] p-5 border border-amber-500/30 shadow-2xl space-y-3 font-mono relative overflow-hidden backdrop-blur-md">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
+
+              <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
                 <span className="text-[10px] font-black uppercase tracking-wider text-amber-400 flex items-center gap-1.5 font-display">
                   <Sparkles className="w-3.5 h-3.5" />
-                  MARCAS EN RENTA
+                  UNIDAD DESTACADA EN RENTA ESTE MES
                 </span>
-                <span className="text-[10px] text-emerald-400 font-bold uppercase">100% STOCK RD</span>
+                <span className="text-[10px] text-emerald-400 font-bold uppercase bg-emerald-950/60 px-2 py-0.5 rounded-[2px] border border-emerald-500/30">
+                  DISPONIBLE PATIO KM 22
+                </span>
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
-                {RENTAL_BRAND_LOGOS.map((b) => (
-                  <div key={b.name} className="p-2 rounded-[3px] bg-zinc-950 border border-zinc-800">
-                    <span className={`text-xs font-black ${b.color} block uppercase`}>{b.name}</span>
-                    <span className="text-[10px] text-zinc-400 block truncate uppercase">{b.tag}</span>
-                  </div>
-                ))}
+              <div className="flex items-center gap-3">
+                <div className="w-16 h-16 rounded-[4px] bg-zinc-950 border border-zinc-800 p-1 shrink-0 flex items-center justify-center overflow-hidden">
+                  <img
+                    src={RENTAL_FLEET_DATA[0].imageUrl}
+                    alt={RENTAL_FLEET_DATA[0].name}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[10px] font-black text-amber-400 uppercase tracking-wider">
+                    {RENTAL_FLEET_DATA[0].brand} • {RENTAL_FLEET_DATA[0].category}
+                  </span>
+                  <h3 className="text-sm font-black text-white uppercase font-display truncate">
+                    {RENTAL_FLEET_DATA[0].name}
+                  </h3>
+                  <span className="text-[11px] text-zinc-400 block font-mono">
+                    Tarifa desde <strong className="text-amber-400">{formatPrice(RENTAL_FLEET_DATA[0].dayRateUsd)}</strong> / día
+                  </span>
+                </div>
               </div>
 
-              <div className="pt-1.5 text-[11px] text-zinc-400 flex items-center justify-between border-t border-zinc-800 uppercase">
-                <span>ENTREGA EN LOWBOY:</span>
-                <strong className="text-white">32 PROVINCIAS</strong>
+              <div className="grid grid-cols-2 gap-2 pt-1 text-[11px]">
+                <div className="p-2 rounded-[3px] bg-zinc-950 border border-zinc-800">
+                  <span className="text-[9px] text-zinc-500 uppercase block">SEMANAL (7 DÍAS):</span>
+                  <strong className="text-white">{formatPrice(RENTAL_FLEET_DATA[0].weekRateUsd)}</strong>
+                </div>
+                <div className="p-2 rounded-[3px] bg-zinc-950 border border-zinc-800">
+                  <span className="text-[9px] text-zinc-500 uppercase block">MENSUAL (30 DÍAS):</span>
+                  <strong className="text-emerald-400">{formatPrice(RENTAL_FLEET_DATA[0].monthRateUsd)}</strong>
+                </div>
               </div>
+
+              <button
+                type="button"
+                onClick={() => handleSelectForQuote(RENTAL_FLEET_DATA[0])}
+                className="w-full py-2.5 px-3 rounded-[3px] bg-amber-500 hover:bg-amber-400 text-black text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              >
+                <span>CALCULAR PROFORMA CON ESTA UNIDAD →</span>
+              </button>
             </div>
           </div>
         </div>

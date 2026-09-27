@@ -339,8 +339,6 @@ export const MachineryView = React.memo<MachineryViewProps>(({
   // Machine Quick Calculator Modal State
   const [calculatorMachine, setCalculatorMachine] = useState<Machine | null>(null);
 
-  // Bounded In-Place Scroll Container State
-  const [isBoundedContainer, setIsBoundedContainer] = useState<boolean>(false);
 
   // Filter Accordion Collapsible Sections
   const [isBrandFilterOpen, setIsBrandFilterOpen] = useState<boolean>(true);
@@ -366,16 +364,6 @@ export const MachineryView = React.memo<MachineryViewProps>(({
   const [active360Machine, setActive360Machine] = useState<Machine | null>(null);
   const [active360Tab, setActive360Tab] = useState<'360' | 'video' | 'gallery' | 'dimensions'>('360');
 
-  // Floating Scroll to Top State
-  const [showScrollTop, setShowScrollTop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Simulated initial fetch
   useEffect(() => {
@@ -1039,22 +1027,8 @@ export const MachineryView = React.memo<MachineryViewProps>(({
               </select>
             </div>
 
-            {/* View Mode Switcher & Bounded Scroll Toggle */}
+            {/* View Mode Switcher */}
             <div className="flex items-center bg-zinc-900 p-0.5 rounded-[4px] border border-zinc-800 gap-0.5 font-display">
-              <button
-                type="button"
-                onClick={() => setIsBoundedContainer(!isBoundedContainer)}
-                className={`p-1.5 rounded-[3px] text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1 ${
-                  isBoundedContainer
-                    ? 'bg-zinc-800 text-amber-400 border border-zinc-700'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-                title={isBoundedContainer ? 'Desactivar contenedor acotado' : 'Fijar altura con desplazamiento interno'}
-              >
-                <Compass className="w-3.5 h-3.5 text-amber-400" />
-                <span className="hidden xl:inline text-[10px]">{isBoundedContainer ? 'ACOTADO' : 'FLUJO'}</span>
-              </button>
-              <div className="w-px h-3.5 bg-zinc-800" />
               <button
                 type="button"
                 onClick={() => setViewMode('mosaic')}
@@ -1304,8 +1278,8 @@ export const MachineryView = React.memo<MachineryViewProps>(({
         {/* ============================================================ */}
         <main className="lg:col-span-9 space-y-5 font-display">
           
-          {/* DYNAMIC MACHINERY GRID / TABLE CONTENT (Optionally Bounded) */}
-          <div className={isBoundedContainer ? "max-h-[75vh] overflow-y-auto pr-1 rounded-[5px] border border-zinc-800 p-2 bg-zinc-950/40 shadow-inner" : ""}>
+          {/* DYNAMIC MACHINERY GRID / TABLE CONTENT */}
+          <div>
             <AnimatePresence mode="wait">
               {isLoading ? (
                 <MachineryGridSkeleton key="skeleton" count={navigationMode === 'load_more' ? visibleCount : itemsPerPage} />
@@ -1735,18 +1709,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
         onNavigate={onNavigate}
       />
 
-      {/* Floating Scroll-to-Top Pill */}
-      {showScrollTop && (
-        <button
-          type="button"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-20 sm:bottom-8 right-4 sm:right-6 z-40 p-3 sm:px-4 sm:py-2.5 rounded-2xl bg-amber-500 text-black shadow-2xl border border-amber-400/80 font-black flex items-center gap-1.5 hover:bg-amber-400 active:scale-95 transition-all cursor-pointer animate-in fade-in slide-in-from-bottom-3"
-          aria-label="Volver arriba en catálogo"
-        >
-          <ChevronUp className="w-5 h-5 sm:w-4 sm:h-4 stroke-[3]" />
-          <span className="text-xs hidden sm:inline">Subir</span>
-        </button>
-      )}
+
     </motion.div>
   );
 });

@@ -230,10 +230,8 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
     return () => clearTimeout(timeout);
   }, [typewriterText, isDeleting, typewriterIndex, HERO_ROTATING_PHRASES]);
 
-  // Mobile Quick Anchor Jump & Scroll-To-Top state (Optimized with rAF & zero layout thrashing)
-  const [showScrollTop, setShowScrollTop] = useState(false);
+  // Mobile Quick Anchor Jump state & Direct DOM scroll progress bar (Optimized with rAF & zero layout thrashing)
   const [activeSectionId, setActiveSectionId] = useState<string>('top-hero-section');
-  const showScrollTopRef = useRef(false);
   const activeSectionIdRef = useRef('top-hero-section');
   const scrollRafId = useRef<number | null>(null);
   const progressBarRef = useRef<HTMLDivElement | null>(null);
@@ -246,14 +244,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
         scrollRafId.current = null;
         const currentY = window.scrollY;
 
-        // 1. Show scroll-to-top button threshold (only updates state on change)
-        const shouldShow = currentY > 450;
-        if (shouldShow !== showScrollTopRef.current) {
-          showScrollTopRef.current = shouldShow;
-          setShowScrollTop(shouldShow);
-        }
-
-        // 2. Direct DOM update for scroll progress bar (prevents full-tree re-renders!)
+        // Direct DOM update for scroll progress bar (prevents full-tree re-renders!)
         const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
         if (totalScroll > 0 && progressBarRef.current) {
           const pct = Math.min(100, Math.max(0, (currentY / totalScroll) * 100));
@@ -1631,18 +1622,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
         document.body
       )}
 
-      {/* Floating Scroll-to-Top Button for Mobile & Desktop (Zero Scroll Fatigue) */}
-      {showScrollTop && (
-        <button
-          type="button"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-20 sm:bottom-8 right-4 sm:right-6 z-40 p-3 sm:px-4 sm:py-2.5 rounded-2xl bg-amber-500 text-black shadow-2xl border border-amber-400/80 font-black flex items-center gap-1.5 hover:bg-amber-400 active:scale-95 transition-all cursor-pointer animate-in fade-in slide-in-from-bottom-3"
-          aria-label="Volver arriba"
-        >
-          <ChevronUp className="w-5 h-5 sm:w-4 sm:h-4 stroke-[3]" />
-          <span className="text-xs hidden sm:inline">Subir al Inicio</span>
-        </button>
-      )}
+
     </motion.div>
   );
 };

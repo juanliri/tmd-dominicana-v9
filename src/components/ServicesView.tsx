@@ -187,15 +187,6 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
   const [ticketNumber, setTicketNumber] = useState<string>('');
   
   // Floating Scroll to Top State
-  const [showScrollTop, setShowScrollTop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -858,18 +849,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
         </div>
       </div>
 
-      {/* Floating Scroll-to-Top Pill */}
-      {showScrollTop && (
-        <button
-          type="button"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-20 sm:bottom-8 right-4 sm:right-6 z-40 p-3 sm:px-4 sm:py-2.5 rounded-[3px] bg-amber-500 text-black shadow-2xl border border-amber-400 font-black uppercase tracking-wider flex items-center gap-1.5 hover:bg-amber-400 active:scale-95 transition-all cursor-pointer animate-in fade-in slide-in-from-bottom-3 font-display"
-          aria-label="Volver arriba en servicios"
-        >
-          <ChevronUp className="w-4 h-4 stroke-[3]" />
-          <span className="text-xs hidden sm:inline">SUBIR</span>
-        </button>
-      )}
+
     </div>
   );
 };

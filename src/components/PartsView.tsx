@@ -205,19 +205,7 @@ export const PartsView = React.memo<PartsViewProps>(({
   const [labelPdfPart, setLabelPdfPart] = useState<Part | null>(null);
   const [isExportPdfOpen, setIsExportPdfOpen] = useState<boolean>(false);
 
-  // Accordion & Bounded Container States
-  const [isBoundedContainer, setIsBoundedContainer] = useState<boolean>(false);
 
-  // Floating Scroll to Top State
-  const [showScrollTop, setShowScrollTop] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const partsTopRef = useRef<HTMLDivElement>(null);
   const partsNavScrollRef = useRef<HTMLDivElement>(null);
@@ -830,21 +818,8 @@ export const PartsView = React.memo<PartsViewProps>(({
             </select>
           </div>
 
-          {/* View Mode Switcher & Bounded Scroll Toggle */}
+          {/* View Mode Switcher */}
           <div className="flex items-center bg-zinc-900 p-1 rounded-[4px] border border-zinc-800 gap-0.5 font-display">
-            <button
-              onClick={() => setIsBoundedContainer(!isBoundedContainer)}
-              className={`px-2 py-1 rounded-[3px] text-[10px] font-black uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer ${
-                isBoundedContainer
-                  ? 'bg-zinc-800 text-amber-400 border border-zinc-700'
-                  : 'text-zinc-400 hover:text-white'
-              }`}
-              title={isBoundedContainer ? 'Desactivar contenedor acotado' : 'Fijar altura con desplazamiento interno'}
-            >
-              <Layers className="w-3.5 h-3.5 text-amber-400" />
-              <span className="hidden md:inline">{isBoundedContainer ? 'ACOTADO' : 'FLUJO'}</span>
-            </button>
-            <div className="w-px h-3.5 bg-zinc-200 dark:border-zinc-800" />
             <button
               onClick={() => setViewMode('mosaic')}
               className={`px-2.5 py-1.5 rounded-[3px] text-xs font-black uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer border ${
@@ -886,7 +861,7 @@ export const PartsView = React.memo<PartsViewProps>(({
       </div>
 
       {/* PARTS LISTING CONTENT (Optionally Bounded) */}
-      <div className={isBoundedContainer ? "max-h-[75vh] overflow-y-auto pr-1 rounded-[5px] border border-zinc-800 p-2 bg-zinc-950/40 shadow-inner mb-6 font-display" : "font-display"}>
+      <div className="font-display">
         {isLoadingParts ? (
           <PartsGridSkeleton count={8} />
         ) : filteredAndSortedParts.length === 0 ? (
@@ -1262,18 +1237,7 @@ export const PartsView = React.memo<PartsViewProps>(({
         parts={filteredAndSortedParts}
       />
 
-      {/* Floating Scroll-to-Top Pill */}
-      {showScrollTop && (
-        <button
-          type="button"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-20 sm:bottom-8 right-4 sm:right-6 z-40 p-3 sm:px-4 sm:py-2.5 rounded-[3px] bg-amber-500 text-black shadow-2xl border border-amber-400 font-black uppercase tracking-wider flex items-center gap-1.5 hover:bg-amber-400 active:scale-95 transition-all cursor-pointer animate-in fade-in slide-in-from-bottom-3 font-display"
-          aria-label="Volver arriba en catálogo de repuestos"
-        >
-          <ChevronUp className="w-4 h-4 stroke-[3]" />
-          <span className="text-xs hidden sm:inline">SUBIR</span>
-        </button>
-      )}
+
     </div>
   );
 });

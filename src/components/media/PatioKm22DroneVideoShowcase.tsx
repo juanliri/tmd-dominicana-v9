@@ -271,7 +271,7 @@ export const PatioKm22DroneVideoShowcase: React.FC<PatioKm22DroneVideoShowcasePr
   };
 
   return (
-    <div id="patio-km22-video-showcase" className="w-full font-mono">
+    <div id="official-company-video" data-section="patio-km22-video-showcase" className="w-full font-mono">
       <div className="rounded-[5px] overflow-hidden border border-zinc-800 bg-zinc-950 shadow-lg relative transition-all">
         {/* Sleek, Compact Header Bar */}
         <div className="bg-zinc-900 border-b border-zinc-800 px-3.5 py-2 flex items-center justify-between gap-3">
