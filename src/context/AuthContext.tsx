@@ -23,6 +23,16 @@ import {
   BiometricCredentialRecord, 
   BiometricAuthResult 
 } from '../services/webAuthnService';
+import { 
+  PIN_ACCOUNTS, 
+  PIN_ALIASES, 
+  getPinAccountByRole, 
+  createMockFirebaseUser, 
+  createMockUserProfile, 
+  savePinSession, 
+  getStoredPinSession, 
+  clearStoredPinSession 
+} from '../data/pinAuthAccounts';
 
 interface AuthContextType {
   currentUser: User | null;
@@ -42,6 +52,8 @@ interface AuthContextType {
   canAccessOfficeWorkflow: boolean;
   loading: boolean;
   signInWithGoogle: () => Promise<void>;
+  signInWithPin: (pin: string) => Promise<{ success: boolean; error?: string; role?: UserRole }>;
+  signInAsRole: (targetRole: 'client' | 'staff' | 'admin') => Promise<void>;
   signInWithBiometrics: (targetEmail?: string) => Promise<BiometricAuthResult>;
   registerBiometrics: (deviceName?: string) => Promise<BiometricAuthResult>;
   isBiometricsSupported: boolean;
@@ -65,9 +77,10 @@ const BOOTSTRAP_ADMIN_EMAILS = [
 ];
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const initialPinSession = getStoredPinSession();
+  const [currentUser, setCurrentUser] = useState<User | null>(initialPinSession ? initialPinSession.user : null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(initialPinSession ? initialPinSession.profile : null);
+  const [loading, setLoading] = useState<boolean>(!initialPinSession);
   const [simulatedRole, setSimulatedRole] = useState<UserRole | null>(null);
   const [storedBiometricKeys, setStoredBiometricKeys] = useState<BiometricCredentialRecord[]>([]);
   const isBiometricsSupported = isWebAuthnSupported();
@@ -82,15 +95,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [userProfile?.id]);
 
   useEffect(() => {
-    // Check for existing active biometric session if Firebase is not yet logged in
-    const bioSession = getActiveBiometricSession();
-    if (bioSession && !userProfile) {
-      setUserProfile(bioSession);
+    // Check for existing active PIN or biometric session on boot
+    const storedPin = getStoredPinSession();
+    if (storedPin) {
+      setCurrentUser(storedPin.user);
+      setUserProfile(storedPin.profile);
+      setLoading(false);
+    } else {
+      const bioSession = getActiveBiometricSession();
+      if (bioSession && !userProfile) {
+        setUserProfile(bioSession);
+      }
     }
 
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      setLoading(true);
       if (firebaseUser) {
+        setLoading(true);
         setCurrentUser(firebaseUser);
         const userEmail = (firebaseUser.email || '').toLowerCase().trim();
         const isBootstrapAdmin = BOOTSTRAP_ADMIN_EMAILS.some(e => e.toLowerCase() === userEmail);
@@ -111,7 +131,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
               };
               try {
                 await updateDoc(userDocRef, { role: 'admin', updatedAt: updated.updatedAt });
-                // Also add to admins collection
                 await setDoc(doc(db, 'admins', firebaseUser.uid), {
                   email: firebaseUser.email,
                   role: 'admin'
@@ -154,7 +173,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           }
         } catch (err) {
           console.error("Error loading user profile:", err);
-          // Graceful fallback profile to ensure seamless app experience
           const fallbackRole: UserRole = isBootstrapAdmin ? 'admin' : 'client';
           const fallbackProfile: UserProfile = {
             id: firebaseUser.uid,
@@ -168,16 +186,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           };
           setUserProfile(fallbackProfile);
         }
+        setLoading(false);
       } else {
-        const activeBio = getActiveBiometricSession();
-        if (activeBio) {
-          setUserProfile(activeBio);
+        // If Firebase is not logged in, check if we have a valid PIN session active
+        const stored = getStoredPinSession();
+        if (stored) {
+          setCurrentUser(stored.user);
+          setUserProfile(stored.profile);
         } else {
-          setCurrentUser(null);
-          setUserProfile(null);
+          const activeBio = getActiveBiometricSession();
+          if (activeBio) {
+            setUserProfile(activeBio);
+          } else {
+            setCurrentUser(null);
+            setUserProfile(null);
+          }
         }
+        setLoading(false);
       }
-      setLoading(false);
     });
 
     return () => unsubscribe();
@@ -189,6 +215,53 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch (error) {
       console.error("Google sign in failed:", error);
       throw error;
+    }
+  };
+
+  const signInWithPin = async (rawPin: string): Promise<{ success: boolean; error?: string; role?: UserRole }> => {
+    setLoading(true);
+    try {
+      const cleanPin = rawPin.trim();
+      const resolvedPin = PIN_ALIASES[cleanPin] || cleanPin;
+      const account = PIN_ACCOUNTS[resolvedPin];
+
+      if (!account) {
+        return {
+          success: false,
+          error: 'Código PIN no reconocido. Use 1111 (Cliente), 2222 (Staff) o 3333 (Admin).'
+        };
+      }
+
+      const mockUser = createMockFirebaseUser(account);
+      const mockProfile = createMockUserProfile(account);
+
+      savePinSession(account);
+      setCurrentUser(mockUser);
+      setUserProfile(mockProfile);
+      setSimulatedRole(null);
+
+      return {
+        success: true,
+        role: account.role
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signInAsRole = async (targetRole: 'client' | 'staff' | 'admin'): Promise<void> => {
+    setLoading(true);
+    try {
+      const account = getPinAccountByRole(targetRole);
+      const mockUser = createMockFirebaseUser(account);
+      const mockProfile = createMockUserProfile(account);
+
+      savePinSession(account);
+      setCurrentUser(mockUser);
+      setUserProfile(mockProfile);
+      setSimulatedRole(null);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -231,12 +304,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signOut = async () => {
     try {
+      clearStoredPinSession();
       clearBiometricSession();
-      await fbSignOut(auth);
+      try {
+        await fbSignOut(auth);
+      } catch (fbErr) {
+        console.warn('Firebase signout skipped or already signed out:', fbErr);
+      }
+      setCurrentUser(null);
       setUserProfile(null);
+      setSimulatedRole(null);
     } catch (error) {
       console.error("Sign out error:", error);
-      throw error;
+      clearStoredPinSession();
+      setCurrentUser(null);
+      setUserProfile(null);
     }
   };
 
@@ -346,6 +428,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         canAccessOfficeWorkflow,
         loading,
         signInWithGoogle,
+        signInWithPin,
+        signInAsRole,
         signInWithBiometrics,
         registerBiometrics,
         isBiometricsSupported,

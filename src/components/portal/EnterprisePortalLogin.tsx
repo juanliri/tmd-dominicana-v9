@@ -13,15 +13,26 @@ import {
   Eye, 
   EyeOff, 
   AlertCircle,
-  Flame
+  Flame,
+  KeyRound,
+  Crown,
+  Building2,
+  Sparkles,
+  Delete,
+  CheckCircle2,
+  Hash,
+  UserCheck
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { UserRole } from '../../types';
 import { TMDLogo } from '../common/BrandLogos';
 import portalBgMachinery from '../../assets/images/portal_bg_machinery_1790441100418.jpg';
+import { PIN_ACCOUNTS, PIN_ALIASES, PinAccount } from '../../data/pinAuthAccounts';
 
 interface EnterprisePortalLoginProps {
   onSignInWithGoogle: () => Promise<void>;
+  onSignInWithPin?: (pin: string) => Promise<{ success: boolean; error?: string; role?: UserRole }>;
+  onSignInAsRole?: (role: 'client' | 'staff' | 'admin') => Promise<void>;
   onOpenBiometrics: () => void;
   loading: boolean;
   storedBiometricKeysCount: number;
@@ -164,6 +175,8 @@ const PortalParticleCanvas: React.FC<{ active: boolean }> = ({ active }) => {
 
 export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
   onSignInWithGoogle,
+  onSignInWithPin,
+  onSignInAsRole,
   onOpenBiometrics,
   loading,
   storedBiometricKeysCount,
@@ -173,7 +186,16 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
   // Ambient Particles & Deep Frosted Glass
   const [particlesAndGlass, setParticlesAndGlass] = useState(true);
 
-  // Form states
+  // Login Mode: 'pin' (default, instant & reliable) vs 'credentials' (password/google)
+  const [loginMethod, setLoginMethod] = useState<'pin' | 'credentials'>('pin');
+
+  // PIN states
+  const [pinDigits, setPinDigits] = useState<string>('');
+  const [pinError, setPinError] = useState<string | null>(null);
+  const [pinSuccess, setPinSuccess] = useState<string | null>(null);
+  const [isVerifyingPin, setIsVerifyingPin] = useState(false);
+
+  // Form states (for credentials mode)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -194,62 +216,132 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
     return () => clearInterval(interval);
   }, []);
 
+  // Handle PIN authentication
+  const executePinAuth = async (pinToVerify: string) => {
+    setIsVerifyingPin(true);
+    setPinError(null);
+    try {
+      if (onSignInWithPin) {
+        const res = await onSignInWithPin(pinToVerify);
+        if (!res.success) {
+          setPinError(res.error || 'PIN incorrecto. Ingrese 1111 (Cliente), 2222 (Staff) o 3333 (Admin).');
+          setPinDigits('');
+        } else {
+          setPinSuccess(`¡Acceso concedido como ${res.role?.toUpperCase()}!`);
+        }
+      } else if (onSignInAsRole) {
+        const resolved = PIN_ALIASES[pinToVerify] || pinToVerify;
+        if (resolved === '1111') await onSignInAsRole('client');
+        else if (resolved === '2222') await onSignInAsRole('staff');
+        else if (resolved === '3333') await onSignInAsRole('admin');
+        else {
+          setPinError('PIN incorrecto. Ingrese 1111, 2222 o 3333.');
+          setPinDigits('');
+        }
+      }
+    } catch (e: any) {
+      setPinError('Error de autenticación: ' + (e?.message || 'Intente nuevamente'));
+      setPinDigits('');
+    } finally {
+      setIsVerifyingPin(false);
+    }
+  };
+
+  const handleDigitPress = (digit: string) => {
+    if (pinDigits.length >= 4) return;
+    const newPin = pinDigits + digit;
+    setPinDigits(newPin);
+    setPinError(null);
+    if (newPin.length === 4) {
+      executePinAuth(newPin);
+    }
+  };
+
+  const handleDeleteDigit = () => {
+    setPinDigits(prev => prev.slice(0, -1));
+    setPinError(null);
+  };
+
+  const handleClearPin = () => {
+    setPinDigits('');
+    setPinError(null);
+  };
+
+  const handleQuickRoleLogin = async (role: 'client' | 'staff' | 'admin') => {
+    setIsVerifyingPin(true);
+    setPinError(null);
+    try {
+      if (onSignInAsRole) {
+        await onSignInAsRole(role);
+      } else if (onSignInWithPin) {
+        const pinMap = { client: '1111', staff: '2222', admin: '3333' };
+        await onSignInWithPin(pinMap[role]);
+      } else if (onQuickAccess) {
+        onQuickAccess(role);
+      }
+    } catch (err: any) {
+      setPinError(err?.message || 'Error al iniciar sesión');
+    } finally {
+      setIsVerifyingPin(false);
+    }
+  };
+
+  // Keyboard listener for physical numpad / digit keys
+  useEffect(() => {
+    if (loginMethod !== 'pin') return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement)?.tagName)) return;
+      if (e.key >= '0' && e.key <= '9') {
+        handleDigitPress(e.key);
+      } else if (e.key === 'Backspace') {
+        handleDeleteDigit();
+      } else if (e.key === 'Escape') {
+        handleClearPin();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [loginMethod, pinDigits]);
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormError(null);
 
-    if (!email) {
-      setFormError('Por favor ingrese su correo corporativo o ID de cliente.');
+    const lowerEmail = email.toLowerCase().trim();
+    const cleanPass = password.trim();
+
+    // Check if password entered is a PIN
+    if (cleanPass === '1111' || cleanPass === '1234') {
+      await handleQuickRoleLogin('client');
+      return;
+    } else if (cleanPass === '2222' || cleanPass === '5555') {
+      await handleQuickRoleLogin('staff');
+      return;
+    } else if (cleanPass === '3333' || cleanPass === '9999') {
+      await handleQuickRoleLogin('admin');
       return;
     }
 
-    setIsSubmitting(true);
-
-    const lowerEmail = email.toLowerCase().trim();
-    if (lowerEmail.includes('admin') || lowerEmail.includes('jliriano') || lowerEmail.includes('jayh') || lowerEmail.includes('todobuild')) {
-      if (onQuickAccess) {
-        onQuickAccess('admin');
-        setIsSubmitting(false);
-        return;
-      }
-    } else if (lowerEmail.includes('staff') || lowerEmail.includes('tecnico') || lowerEmail.includes('taller')) {
-      if (onQuickAccess) {
-        onQuickAccess('staff');
-        setIsSubmitting(false);
-        return;
-      }
+    if (lowerEmail.includes('admin') || lowerEmail.includes('jliriano') || lowerEmail.includes('juan') || lowerEmail.includes('todobuild')) {
+      await handleQuickRoleLogin('admin');
+      return;
+    } else if (lowerEmail.includes('staff') || lowerEmail.includes('tecnico') || lowerEmail.includes('taller') || lowerEmail.includes('mendoza')) {
+      await handleQuickRoleLogin('staff');
+      return;
     } else if (lowerEmail.length > 3) {
-      if (onQuickAccess) {
-        onQuickAccess('client');
-        setIsSubmitting(false);
-        return;
-      }
+      await handleQuickRoleLogin('client');
+      return;
     }
 
     try {
       await onSignInWithGoogle();
     } catch {
-      setFormError('Verificación no completada. Puede utilizar el Acceso Biométrico o Google SSO.');
-    } finally {
-      setIsSubmitting(false);
+      setFormError('Verificación no completada. Puede utilizar el Acceso por PIN Directo arriba.');
     }
   };
 
   const fillQuickDemo = (role: 'client' | 'staff' | 'admin') => {
-    if (role === 'client') {
-      setEmail('operaciones@constructora-rd.com');
-      setPassword('••••••••••••');
-      setActiveRoleTab('contractor');
-    } else if (role === 'staff') {
-      setEmail('tecnico.taller@tmd.com.do');
-      setPassword('••••••••••••');
-      setActiveRoleTab('staff');
-    } else {
-      setEmail('gerencia@tmd.com.do');
-      setPassword('••••••••••••');
-      setActiveRoleTab('staff');
-    }
-    setFormError(null);
+    handleQuickRoleLogin(role);
   };
 
   const [activeMobileView, setActiveMobileView] = useState<'terminal' | 'info'>('terminal');
@@ -446,195 +538,402 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
                 <TMDLogo variant="responsive" className="h-7 sm:h-8" />
                 <div className="flex items-center gap-1 text-[9px] sm:text-[10px] text-zinc-400 font-mono">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>CONEXIÓN SEGURA</span>
+                  <span>TERMINAL ACTIVA KM 22</span>
                 </div>
               </div>
 
               <div>
                 <h2 className="text-base sm:text-xl font-black text-white uppercase tracking-tight font-display leading-tight drop-shadow-md">
-                  TERMINAL DE ACCESO <span className="text-amber-400">CLIENTES & STAFF</span>
+                  TERMINAL DE ACCESO <span className="text-amber-400">PIN & IDENTIDAD</span>
                 </h2>
                 <p className="text-[10px] sm:text-[11px] text-zinc-300 font-sans leading-tight">
-                  Acceda a órdenes de servicio, telemetría o facturación DGII.
+                  Seleccione su cuenta con PIN o ingrese con credenciales corporativas.
                 </p>
               </div>
             </div>
 
-            {/* Role Switcher Tabs (Contractor vs Staff) */}
-            <div className="flex items-center p-0.5 rounded-[4px] bg-black/60 border border-white/10">
+            {/* Authentication Method Switcher */}
+            <div className="flex items-center p-0.5 rounded-[4px] bg-black/70 border border-white/10">
               <button
                 type="button"
-                onClick={() => { setActiveRoleTab('contractor'); fillQuickDemo('client'); }}
-                className={`flex-1 py-1.5 min-h-[32px] sm:min-h-[36px] text-center text-[10px] sm:text-[11px] font-bold uppercase transition-all rounded-[3px] cursor-pointer touch-manipulation active:scale-[0.98] ${
-                  activeRoleTab === 'contractor'
+                onClick={() => { setLoginMethod('pin'); setPinError(null); }}
+                className={`flex-1 py-1.5 min-h-[32px] sm:min-h-[34px] text-center text-[10px] sm:text-[11px] font-bold uppercase transition-all rounded-[3px] cursor-pointer touch-manipulation active:scale-[0.98] flex items-center justify-center gap-1.5 ${
+                  loginMethod === 'pin'
                     ? 'bg-amber-400 text-black font-black shadow-md'
                     : 'text-zinc-300 hover:text-white'
                 }`}
               >
-                CONTRATISTAS / FLOTAS
+                <Hash className="w-3.5 h-3.5" />
+                <span>ACCESO PIN DIRECTO</span>
               </button>
               <button
                 type="button"
-                onClick={() => { setActiveRoleTab('staff'); fillQuickDemo('staff'); }}
-                className={`flex-1 py-1.5 min-h-[32px] sm:min-h-[36px] text-center text-[10px] sm:text-[11px] font-bold uppercase transition-all rounded-[3px] cursor-pointer touch-manipulation active:scale-[0.98] ${
-                  activeRoleTab === 'staff'
+                onClick={() => { setLoginMethod('credentials'); setFormError(null); }}
+                className={`flex-1 py-1.5 min-h-[32px] sm:min-h-[34px] text-center text-[10px] sm:text-[11px] font-bold uppercase transition-all rounded-[3px] cursor-pointer touch-manipulation active:scale-[0.98] flex items-center justify-center gap-1.5 ${
+                  loginMethod === 'credentials'
                     ? 'bg-amber-400 text-black font-black shadow-md'
                     : 'text-zinc-300 hover:text-white'
                 }`}
               >
-                STAFF KM 22
+                <KeyRound className="w-3.5 h-3.5" />
+                <span>CLAVE / GOOGLE</span>
               </button>
             </div>
 
-            {/* Primary High-Impact Biometric Passkey Action */}
-            <button
-              type="button"
-              onClick={onOpenBiometrics}
-              className="w-full p-2 sm:p-2.5 rounded-[5px] bg-amber-400 hover:bg-amber-300 active:scale-[0.98] text-black font-black text-[11px] sm:text-xs uppercase tracking-wider transition-all shadow-[0_8px_24px_rgba(251,191,36,0.3)] flex items-center justify-between group cursor-pointer min-h-[40px] sm:min-h-[44px] touch-manipulation"
-            >
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-black text-amber-400 flex items-center justify-center group-hover:scale-105 transition-transform shadow-inner shrink-0">
-                  <Fingerprint className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-pulse" />
+            {/* =============================================================
+                MODE 1: INSTANT PIN ACCESS (100% RELIABLE FOR 3 ACCOUNTS)
+                ============================================================= */}
+            {loginMethod === 'pin' ? (
+              <div className="space-y-2 sm:space-y-2.5">
+                {/* Feedback Alerts */}
+                {pinError && (
+                  <div className="p-2 rounded-[4px] bg-rose-500/15 border border-rose-500/40 text-rose-300 text-[10px] sm:text-xs flex items-start gap-1.5 font-sans backdrop-blur-md">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5 text-rose-400" />
+                    <span>{pinError}</span>
+                  </div>
+                )}
+                {pinSuccess && (
+                  <div className="p-2 rounded-[4px] bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-[10px] sm:text-xs flex items-center gap-1.5 font-sans backdrop-blur-md">
+                    <CheckCircle2 className="w-3.5 h-3.5 shrink-0 text-emerald-400" />
+                    <span>{pinSuccess}</span>
+                  </div>
+                )}
+
+                {/* 3 Account Cards with 1-Click Instant Login */}
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between text-[9px] font-bold text-zinc-400 uppercase tracking-wider">
+                    <span>SELECCIONE CUENTA O DIGITE PIN:</span>
+                    <span className="text-amber-400 font-mono">1111 / 2222 / 3333</span>
+                  </div>
+
+                  {/* Account 1: Cliente VIP */}
+                  <div className="p-2 rounded-[5px] bg-black/60 border border-amber-400/30 hover:border-amber-400/80 transition-all flex items-center justify-between gap-2 group">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div className="w-7 h-7 rounded-[3px] bg-amber-400/15 text-amber-400 border border-amber-400/30 flex items-center justify-center font-black shrink-0">
+                        <Crown className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="text-[10px] sm:text-[11px] font-black text-white uppercase truncate">
+                            Ing. Manuel Tavares
+                          </span>
+                          <span className="px-1 py-0.2 rounded-[2px] bg-amber-400 text-black text-[8px] font-black uppercase">
+                            CLIENTE VIP
+                          </span>
+                        </div>
+                        <p className="text-[9px] text-zinc-400 truncate">Constructora Tavares S.R.L.</p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      disabled={isVerifyingPin}
+                      onClick={() => handleQuickRoleLogin('client')}
+                      className="px-2.5 py-1.5 rounded-[3px] bg-amber-400 hover:bg-amber-300 text-black font-black text-[10px] uppercase shrink-0 transition-all cursor-pointer shadow-xs active:scale-95 disabled:opacity-50"
+                    >
+                      {isVerifyingPin ? 'ENTRANDO...' : 'ENTRAR • 1111'}
+                    </button>
+                  </div>
+
+                  {/* Account 2: Staff Técnico */}
+                  <div className="p-2 rounded-[5px] bg-black/60 border border-sky-400/30 hover:border-sky-400/80 transition-all flex items-center justify-between gap-2 group">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div className="w-7 h-7 rounded-[3px] bg-sky-400/15 text-sky-400 border border-sky-400/30 flex items-center justify-center font-black shrink-0">
+                        <HardHat className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="text-[10px] sm:text-[11px] font-black text-white uppercase truncate">
+                            Carlos Mendoza
+                          </span>
+                          <span className="px-1 py-0.2 rounded-[2px] bg-sky-400 text-black text-[8px] font-black uppercase">
+                            STAFF TÉCNICO
+                          </span>
+                        </div>
+                        <p className="text-[9px] text-zinc-400 truncate">Jefe de Taller & Patio Km 22</p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      disabled={isVerifyingPin}
+                      onClick={() => handleQuickRoleLogin('staff')}
+                      className="px-2.5 py-1.5 rounded-[3px] bg-sky-400 hover:bg-sky-300 text-black font-black text-[10px] uppercase shrink-0 transition-all cursor-pointer shadow-xs active:scale-95 disabled:opacity-50"
+                    >
+                      {isVerifyingPin ? 'ENTRANDO...' : 'ENTRAR • 2222'}
+                    </button>
+                  </div>
+
+                  {/* Account 3: Admin General */}
+                  <div className="p-2 rounded-[5px] bg-black/60 border border-purple-400/30 hover:border-purple-400/80 transition-all flex items-center justify-between gap-2 group">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div className="w-7 h-7 rounded-[3px] bg-purple-400/15 text-purple-400 border border-purple-400/30 flex items-center justify-center font-black shrink-0">
+                        <Shield className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="text-[10px] sm:text-[11px] font-black text-white uppercase truncate">
+                            Juan Liriano
+                          </span>
+                          <span className="px-1 py-0.2 rounded-[2px] bg-purple-500 text-white text-[8px] font-black uppercase">
+                            ADMIN TOTAL
+                          </span>
+                        </div>
+                        <p className="text-[9px] text-zinc-400 truncate">Director General TMD</p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      disabled={isVerifyingPin}
+                      onClick={() => handleQuickRoleLogin('admin')}
+                      className="px-2.5 py-1.5 rounded-[3px] bg-purple-500 hover:bg-purple-400 text-white font-black text-[10px] uppercase shrink-0 transition-all cursor-pointer shadow-xs active:scale-95 disabled:opacity-50"
+                    >
+                      {isVerifyingPin ? 'ENTRANDO...' : 'ENTRAR • 3333'}
+                    </button>
+                  </div>
                 </div>
-                <div className="text-left font-mono">
-                  <span className="block text-[10px] sm:text-[11px] font-black leading-tight">DESBLOQUEO BIOMÉTRICO FIDO2</span>
-                  <span className="block text-[8px] sm:text-[9px] text-black/80 font-bold">Touch ID, Face ID o Windows Hello</span>
+
+                {/* 4-Digit Indicator Display */}
+                <div className="pt-1.5 border-t border-white/10 space-y-1.5">
+                  <div className="flex items-center justify-center gap-2.5 py-1">
+                    {[0, 1, 2, 3].map((index) => {
+                      const isFilled = pinDigits.length > index;
+                      const isCurrent = pinDigits.length === index;
+                      return (
+                        <div
+                          key={index}
+                          className={`w-9 h-10 sm:w-10 sm:h-11 rounded-[4px] flex items-center justify-center text-base sm:text-lg font-black font-mono transition-all ${
+                            isFilled
+                              ? 'bg-amber-400 text-black shadow-[0_0_15px_rgba(251,191,36,0.4)]'
+                              : isCurrent
+                                ? 'bg-zinc-900 border-2 border-amber-400 text-amber-400 animate-pulse'
+                                : 'bg-zinc-900/80 border border-white/15 text-zinc-600'
+                          }`}
+                        >
+                          {isFilled ? '●' : '-'}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Compact Numeric Keypad Grid */}
+                  <div className="grid grid-cols-3 gap-1 max-w-[240px] mx-auto">
+                    {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((digit) => (
+                      <button
+                        key={digit}
+                        type="button"
+                        onClick={() => handleDigitPress(digit)}
+                        className="h-8 sm:h-9 rounded-[4px] bg-zinc-900 hover:bg-zinc-800 active:bg-amber-400 active:text-black border border-white/10 text-white font-mono font-bold text-xs sm:text-sm transition-all cursor-pointer touch-manipulation shadow-xs"
+                      >
+                        {digit}
+                      </button>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={handleClearPin}
+                      className="h-8 sm:h-9 rounded-[4px] bg-zinc-950 hover:bg-zinc-800 active:scale-95 border border-zinc-800 text-zinc-400 hover:text-white font-mono text-[9px] font-bold uppercase transition-all cursor-pointer touch-manipulation"
+                      title="Borrar todo"
+                    >
+                      C
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleDigitPress('0')}
+                      className="h-8 sm:h-9 rounded-[4px] bg-zinc-900 hover:bg-zinc-800 active:bg-amber-400 active:text-black border border-white/10 text-white font-mono font-bold text-xs sm:text-sm transition-all cursor-pointer touch-manipulation shadow-xs"
+                    >
+                      0
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleDeleteDigit}
+                      className="h-8 sm:h-9 rounded-[4px] bg-zinc-950 hover:bg-zinc-800 active:scale-95 border border-zinc-800 text-amber-400 font-mono flex items-center justify-center transition-all cursor-pointer touch-manipulation"
+                      title="Borrar dígito"
+                    >
+                      <Delete className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               </div>
-              {storedBiometricKeysCount > 0 ? (
-                <span className="px-1.5 py-0.5 rounded-[3px] bg-black/20 text-black text-[8px] sm:text-[9px] font-bold shrink-0">
-                  {storedBiometricKeysCount} LLAVE(S)
-                </span>
-              ) : (
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform shrink-0" />
-              )}
-            </button>
+            ) : (
+              /* =============================================================
+                 MODE 2: CREDENTIALS, GOOGLE SSO & BIOMETRIC AUTH
+                 ============================================================= */
+              <div className="space-y-2 sm:space-y-2.5">
+                {/* Role Switcher Tabs */}
+                <div className="flex items-center p-0.5 rounded-[4px] bg-black/60 border border-white/10">
+                  <button
+                    type="button"
+                    onClick={() => { setActiveRoleTab('contractor'); fillQuickDemo('client'); }}
+                    className={`flex-1 py-1.5 min-h-[30px] sm:min-h-[32px] text-center text-[10px] sm:text-[11px] font-bold uppercase transition-all rounded-[3px] cursor-pointer touch-manipulation active:scale-[0.98] ${
+                      activeRoleTab === 'contractor'
+                        ? 'bg-amber-400 text-black font-black shadow-md'
+                        : 'text-zinc-300 hover:text-white'
+                    }`}
+                  >
+                    CONTRATISTAS / FLOTAS
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setActiveRoleTab('staff'); fillQuickDemo('staff'); }}
+                    className={`flex-1 py-1.5 min-h-[30px] sm:min-h-[32px] text-center text-[10px] sm:text-[11px] font-bold uppercase transition-all rounded-[3px] cursor-pointer touch-manipulation active:scale-[0.98] ${
+                      activeRoleTab === 'staff'
+                        ? 'bg-amber-400 text-black font-black shadow-md'
+                        : 'text-zinc-300 hover:text-white'
+                    }`}
+                  >
+                    STAFF KM 22
+                  </button>
+                </div>
 
-            {/* Error Banner */}
-            {formError && (
-              <div className="p-2 rounded-[4px] bg-rose-500/15 border border-rose-500/40 text-rose-300 text-[10px] sm:text-xs flex items-start gap-1.5 font-sans backdrop-blur-md">
-                <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5 text-rose-400" />
-                <span>{formError}</span>
+                {/* Biometric FIDO2 Button */}
+                <button
+                  type="button"
+                  onClick={onOpenBiometrics}
+                  className="w-full p-2 sm:p-2.5 rounded-[5px] bg-amber-400 hover:bg-amber-300 active:scale-[0.98] text-black font-black text-[11px] sm:text-xs uppercase tracking-wider transition-all shadow-[0_8px_24px_rgba(251,191,36,0.3)] flex items-center justify-between group cursor-pointer min-h-[38px] sm:min-h-[42px] touch-manipulation"
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-black text-amber-400 flex items-center justify-center group-hover:scale-105 transition-transform shadow-inner shrink-0">
+                      <Fingerprint className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-pulse" />
+                    </div>
+                    <div className="text-left font-mono">
+                      <span className="block text-[10px] sm:text-[11px] font-black leading-tight">DESBLOQUEO BIOMÉTRICO FIDO2</span>
+                      <span className="block text-[8px] sm:text-[9px] text-black/80 font-bold">Touch ID, Face ID o Windows Hello</span>
+                    </div>
+                  </div>
+                  {storedBiometricKeysCount > 0 ? (
+                    <span className="px-1.5 py-0.5 rounded-[3px] bg-black/20 text-black text-[8px] sm:text-[9px] font-bold shrink-0">
+                      {storedBiometricKeysCount} LLAVE(S)
+                    </span>
+                  ) : (
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform shrink-0" />
+                  )}
+                </button>
+
+                {/* Error Banner */}
+                {formError && (
+                  <div className="p-2 rounded-[4px] bg-rose-500/15 border border-rose-500/40 text-rose-300 text-[10px] sm:text-xs flex items-start gap-1.5 font-sans backdrop-blur-md">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5 text-rose-400" />
+                    <span>{formError}</span>
+                  </div>
+                )}
+
+                {/* Credential Form */}
+                <form onSubmit={handleFormSubmit} className="space-y-1.5 sm:space-y-2">
+                  <div className="space-y-0.5">
+                    <label className="text-[9px] sm:text-[10px] font-bold text-zinc-300 uppercase">
+                      CORREO O IDENTIFICADOR CORPORATIVO
+                    </label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="usuario@constructora.com.do"
+                      className="w-full px-2.5 py-1.5 min-h-[32px] sm:min-h-[36px] rounded-[4px] bg-black/70 backdrop-blur-xl border border-white/15 text-white placeholder-zinc-500 text-xs font-mono focus:border-amber-400 focus:bg-black/90 focus:ring-1 focus:ring-amber-400/50 outline-none transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-0.5">
+                    <div className="flex justify-between items-center">
+                      <label className="text-[9px] sm:text-[10px] font-bold text-zinc-300 uppercase">
+                        CONTRASEÑA O PIN DE SEGURIDAD
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => setLoginMethod('pin')}
+                        className="text-[8px] sm:text-[9px] text-amber-400 hover:underline uppercase font-bold cursor-pointer touch-manipulation"
+                      >
+                        Usar PIN 4 Dígitos
+                      </button>
+                    </div>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="••••••••••••"
+                        className="w-full px-2.5 py-1.5 min-h-[32px] sm:min-h-[36px] rounded-[4px] bg-black/70 backdrop-blur-xl border border-white/15 text-white placeholder-zinc-500 text-xs font-mono focus:border-amber-400 focus:bg-black/90 focus:ring-1 focus:ring-amber-400/50 outline-none transition-all pr-8"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-200 cursor-pointer p-1 touch-manipulation"
+                        aria-label={showPassword ? 'Ocultar clave' : 'Mostrar clave'}
+                      >
+                        {showPassword ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between text-xs pt-0.5">
+                    <label className="flex items-center gap-1.5 cursor-pointer select-none text-zinc-300 hover:text-white touch-manipulation">
+                      <input
+                        type="checkbox"
+                        checked={rememberMe}
+                        onChange={(e) => setRememberMe(e.target.checked)}
+                        className="w-3.5 h-3.5 rounded-[2px] bg-black border-zinc-700 text-amber-400 focus:ring-0 accent-amber-400 cursor-pointer"
+                      />
+                      <span className="text-[9px] sm:text-[10px] font-sans">Recordar terminal</span>
+                    </label>
+                    <span className="text-[8px] sm:text-[9px] text-zinc-400 uppercase">SESIÓN AUDITADA</span>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2 pt-0.5">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting || loading}
+                      className="py-1.5 px-2 min-h-[32px] sm:min-h-[36px] rounded-[4px] bg-zinc-900 hover:bg-zinc-800 active:scale-[0.98] border border-white/15 hover:border-amber-400/60 text-white font-bold text-[11px] sm:text-xs uppercase transition-all cursor-pointer disabled:opacity-50 text-center touch-manipulation shadow-md"
+                    >
+                      {isSubmitting || loading ? 'AUTENTICANDO...' : 'ENTRAR CON CLAVE'}
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={onSignInWithGoogle}
+                      disabled={loading}
+                      className="py-1.5 px-2 min-h-[32px] sm:min-h-[36px] rounded-[4px] bg-zinc-900 hover:bg-zinc-800 active:scale-[0.98] border border-white/15 hover:border-amber-400/60 text-white font-bold text-[11px] sm:text-xs uppercase flex items-center justify-center gap-1 transition-all cursor-pointer disabled:opacity-50 touch-manipulation shadow-md"
+                    >
+                      <LogIn className="w-3.5 h-3.5 text-amber-400" />
+                      <span>GOOGLE SSO</span>
+                    </button>
+                  </div>
+                </form>
+
+                {/* 1-Click Evaluation Shortcuts */}
+                <div className="pt-1.5 border-t border-white/10 space-y-1">
+                  <div className="flex items-center justify-between text-[8px] sm:text-[9px] text-zinc-400 font-bold uppercase">
+                    <span>ACCESO RÁPIDO PARA EVALUACIÓN:</span>
+                    <span className="text-amber-400 font-mono font-bold">1-CLICK</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-1">
+                    <button
+                      type="button"
+                      onClick={() => handleQuickRoleLogin('client')}
+                      className="py-1 px-1 min-h-[26px] sm:min-h-[28px] rounded-[3px] bg-black/60 border border-white/10 hover:border-amber-400 active:bg-zinc-800 text-zinc-300 hover:text-white text-[9px] sm:text-[10px] uppercase font-bold text-center transition-all cursor-pointer touch-manipulation"
+                    >
+                      CLIENTE
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleQuickRoleLogin('staff')}
+                      className="py-1 px-1 min-h-[26px] sm:min-h-[28px] rounded-[3px] bg-black/60 border border-white/10 hover:border-amber-400 active:bg-zinc-800 text-zinc-300 hover:text-white text-[9px] sm:text-[10px] uppercase font-bold text-center transition-all cursor-pointer touch-manipulation"
+                    >
+                      STAFF
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleQuickRoleLogin('admin')}
+                      className="py-1 px-1 min-h-[26px] sm:min-h-[28px] rounded-[3px] bg-black/60 border border-white/10 hover:border-amber-400 active:bg-zinc-800 text-zinc-300 hover:text-white text-[9px] sm:text-[10px] uppercase font-bold text-center transition-all cursor-pointer touch-manipulation"
+                    >
+                      ADMIN
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
-
-            {/* Credential Form */}
-            <form onSubmit={handleFormSubmit} className="space-y-1.5 sm:space-y-2">
-              <div className="space-y-0.5">
-                <label className="text-[9px] sm:text-[10px] font-bold text-zinc-300 uppercase">
-                  CORREO O IDENTIFICADOR CORPORATIVO
-                </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="usuario@constructora.com.do"
-                  className="w-full px-2.5 py-1.5 min-h-[34px] sm:min-h-[38px] rounded-[4px] bg-black/70 backdrop-blur-xl border border-white/15 text-white placeholder-zinc-500 text-xs font-mono focus:border-amber-400 focus:bg-black/90 focus:ring-1 focus:ring-amber-400/50 outline-none transition-all"
-                />
-              </div>
-
-              <div className="space-y-0.5">
-                <div className="flex justify-between items-center">
-                  <label className="text-[9px] sm:text-[10px] font-bold text-zinc-300 uppercase">
-                    CONTRASEÑA O PIN DE SEGURIDAD
-                  </label>
-                  <button
-                    type="button"
-                    onClick={() => setFormError('Comuníquese con soporte Km 22 o use Acceso Biométrico / Google SSO.')}
-                    className="text-[8px] sm:text-[9px] text-amber-400 hover:underline uppercase font-bold cursor-pointer touch-manipulation"
-                  >
-                    ¿Olvidó clave?
-                  </button>
-                </div>
-                <div className="relative">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••••••"
-                    className="w-full px-2.5 py-1.5 min-h-[34px] sm:min-h-[38px] rounded-[4px] bg-black/70 backdrop-blur-xl border border-white/15 text-white placeholder-zinc-500 text-xs font-mono focus:border-amber-400 focus:bg-black/90 focus:ring-1 focus:ring-amber-400/50 outline-none transition-all pr-8"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-200 cursor-pointer p-1 touch-manipulation"
-                    aria-label={showPassword ? 'Ocultar clave' : 'Mostrar clave'}
-                  >
-                    {showPassword ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between text-xs pt-0.5">
-                <label className="flex items-center gap-1.5 cursor-pointer select-none text-zinc-300 hover:text-white touch-manipulation">
-                  <input
-                    type="checkbox"
-                    checked={rememberMe}
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    className="w-3.5 h-3.5 rounded-[2px] bg-black border-zinc-700 text-amber-400 focus:ring-0 accent-amber-400 cursor-pointer"
-                  />
-                  <span className="text-[9px] sm:text-[10px] font-sans">Recordar terminal</span>
-                </label>
-                <span className="text-[8px] sm:text-[9px] text-zinc-400 uppercase">SESIÓN AUDITADA</span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-2 pt-0.5">
-                <button
-                  type="submit"
-                  disabled={isSubmitting || loading}
-                  className="py-1.5 px-2 min-h-[34px] sm:min-h-[38px] rounded-[4px] bg-zinc-900 hover:bg-zinc-800 active:scale-[0.98] border border-white/15 hover:border-amber-400/60 text-white font-bold text-[11px] sm:text-xs uppercase transition-all cursor-pointer disabled:opacity-50 text-center touch-manipulation shadow-md"
-                >
-                  {isSubmitting || loading ? 'AUTENTICANDO...' : 'ENTRAR CON CLAVE'}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={onSignInWithGoogle}
-                  disabled={loading}
-                  className="py-1.5 px-2 min-h-[34px] sm:min-h-[38px] rounded-[4px] bg-zinc-900 hover:bg-zinc-800 active:scale-[0.98] border border-white/15 hover:border-amber-400/60 text-white font-bold text-[11px] sm:text-xs uppercase flex items-center justify-center gap-1 transition-all cursor-pointer disabled:opacity-50 touch-manipulation shadow-md"
-                >
-                  <LogIn className="w-3.5 h-3.5 text-amber-400" />
-                  <span>GOOGLE SSO</span>
-                </button>
-              </div>
-            </form>
-
-            {/* 1-Click Evaluation Shortcuts */}
-            <div className="pt-1.5 border-t border-white/10 space-y-1">
-              <div className="flex items-center justify-between text-[8px] sm:text-[9px] text-zinc-400 font-bold uppercase">
-                <span>ACCESO RÁPIDO PARA EVALUACIÓN:</span>
-                <span className="text-amber-400 font-mono font-bold">1-CLICK</span>
-              </div>
-              <div className="grid grid-cols-3 gap-1">
-                <button
-                  type="button"
-                  onClick={() => fillQuickDemo('client')}
-                  className="py-1 px-1 min-h-[28px] sm:min-h-[30px] rounded-[3px] bg-black/60 border border-white/10 hover:border-amber-400 active:bg-zinc-800 text-zinc-300 hover:text-white text-[9px] sm:text-[10px] uppercase font-bold text-center transition-all cursor-pointer touch-manipulation"
-                >
-                  CLIENTE
-                </button>
-                <button
-                  type="button"
-                  onClick={() => fillQuickDemo('staff')}
-                  className="py-1 px-1 min-h-[28px] sm:min-h-[30px] rounded-[3px] bg-black/60 border border-white/10 hover:border-amber-400 active:bg-zinc-800 text-zinc-300 hover:text-white text-[9px] sm:text-[10px] uppercase font-bold text-center transition-all cursor-pointer touch-manipulation"
-                >
-                  STAFF
-                </button>
-                <button
-                  type="button"
-                  onClick={() => fillQuickDemo('admin')}
-                  className="py-1 px-1 min-h-[28px] sm:min-h-[30px] rounded-[3px] bg-black/60 border border-white/10 hover:border-amber-400 active:bg-zinc-800 text-zinc-300 hover:text-white text-[9px] sm:text-[10px] uppercase font-bold text-center transition-all cursor-pointer touch-manipulation"
-                >
-                  ADMIN
-                </button>
-              </div>
-            </div>
 
             {/* Footer Cryptographic Status */}
             <div className="pt-1.5 border-t border-white/10 flex items-center justify-between text-[8px] sm:text-[9px] text-zinc-400 font-mono">
               <div className="flex items-center gap-1">
                 <Lock className="w-2.5 h-2.5 text-emerald-400" />
-                <span>ENCLAVE FIDO2 ACTIVO</span>
+                <span>TERMINAL LOCAL SEGURA</span>
               </div>
               <span>LATENCIA: {liveLatency}ms</span>
             </div>

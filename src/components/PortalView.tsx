@@ -65,6 +65,8 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
     isClient, 
     loading, 
     signInWithGoogle, 
+    signInWithPin,
+    signInAsRole,
     signInWithBiometrics,
     isBiometricsSupported,
     storedBiometricKeys,
@@ -257,6 +259,8 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
     return (
       <EnterprisePortalLogin
         onSignInWithGoogle={signInWithGoogle}
+        onSignInWithPin={signInWithPin}
+        onSignInAsRole={signInAsRole}
         onOpenBiometrics={() => {
           setBiometricModalMode('login');
           setShowBiometricModal(true);
@@ -264,6 +268,7 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
         loading={loading}
         storedBiometricKeysCount={storedBiometricKeys.length}
         onNavigate={onNavigate}
+        onQuickAccess={(targetRole) => signInAsRole(targetRole as any)}
       />
     );
   }
