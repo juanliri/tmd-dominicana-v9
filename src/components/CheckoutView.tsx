@@ -49,6 +49,7 @@ import { CardnetAzulPaymentModal, CardPaymentResult } from './checkout/CardnetAz
 import { QuoteExpirationAlertModal } from './quotes/QuoteExpirationAlertModal';
 import { TradeInValuationModal } from './machinery/TradeInValuationModal';
 import { SmartAttachmentsUpsell } from './checkout/SmartAttachmentsUpsell';
+import { DigitalSignaturePad } from './common/DigitalSignaturePad';
 
 interface CheckoutViewProps {
   onNavigate: (route: string) => void;
@@ -104,6 +105,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
   const [authorizedSigner, setAuthorizedSigner] = useState('');
   const [signerRole, setSignerRole] = useState('Ing. Residente de Obra / Gerente de Compras');
   const [isSignatureConfirmed, setIsSignatureConfirmed] = useState(true);
+  const [signatureImage, setSignatureImage] = useState<string | null>(null);
 
   // Toggle for optional Dominican fiscal tax invoice (RNC / DGII B01)
   const [needsFiscalInvoice, setNeedsFiscalInvoice] = useState(false);
@@ -1994,6 +1996,14 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                     </div>
                   </div>
 
+                  {/* Task #65: HTML5 Touch & Stylus Canvas Signature Pad */}
+                  <div className="pt-2 border-t border-zinc-800">
+                    <DigitalSignaturePad
+                      signerName={authorizedSigner || customer.fullName}
+                      onSignatureChange={setSignatureImage}
+                    />
+                  </div>
+
                   <div className="flex items-start gap-2.5 pt-1">
                     <input
                       type="checkbox"
@@ -2009,12 +2019,24 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
 
                   {/* Digital cryptographic stamp preview */}
                   <div className="p-3 rounded-[3px] bg-zinc-950 border border-amber-500/20 text-[10px] text-zinc-400 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <span className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
                       <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                      <span>
-                        SELLO DIGITAL TMD: <strong>{authorizedSigner || customer.fullName || 'AUTORIZADO'}</strong> • {signerRole}
-                      </span>
-                    </span>
+                      <div>
+                        <span>
+                          SELLO DIGITAL TMD: <strong>{authorizedSigner || customer.fullName || 'AUTORIZADO'}</strong> • {signerRole}
+                        </span>
+                        {signatureImage && (
+                          <span className="text-emerald-400 block text-[9px] font-mono">
+                            ✓ Firma táctil incrustada en orden digital
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    {signatureImage && (
+                      <div className="h-8 max-w-[120px] bg-zinc-900 px-2 py-0.5 rounded-[2px] border border-zinc-800 flex items-center shrink-0">
+                        <img src={signatureImage} alt="Firma Capturada" className="h-full object-contain filter invert contrast-150" />
+                      </div>
+                    )}
                     <span className="text-zinc-500 font-mono shrink-0">
                       EMISIÓN: {new Date().toLocaleDateString('es-DO')} • SEDE KM 22
                     </span>

@@ -54,6 +54,7 @@ import { InventoryLabelPdfModal } from './common/InventoryLabelPdfModal';
 import { WarehouseBinLabelModal } from './common/WarehouseBinLabelModal';
 import { RemanExchangeCatalogModal } from './reman/RemanExchangeCatalogModal';
 import { CriticalStockReorderModal } from './parts/CriticalStockReorderModal';
+import { MobileTruckInventoryModal } from './parts/MobileTruckInventoryModal';
 import { TextHighlight } from './common/TextHighlight';
 import { downloadProductQrCode } from '../utils/qrExporter';
 
@@ -214,6 +215,7 @@ export const PartsView = React.memo<PartsViewProps>(({
   const [binLabelPart, setBinLabelPart] = useState<Part | null>(null);
   const [isRemanModalOpen, setIsRemanModalOpen] = useState<boolean>(false);
   const [isCriticalStockOpen, setIsCriticalStockOpen] = useState<boolean>(false);
+  const [isMobileTruckOpen, setIsMobileTruckOpen] = useState<boolean>(false);
   const [isExportPdfOpen, setIsExportPdfOpen] = useState<boolean>(false);
 
 
@@ -520,6 +522,17 @@ export const PartsView = React.memo<PartsViewProps>(({
             >
               <Package className="w-3.5 h-3.5 text-amber-400" />
               <span>REORDEN STOCK</span>
+            </button>
+
+            {/* Task #99: Mobile Service Truck Inventory Sync */}
+            <button
+              type="button"
+              onClick={() => setIsMobileTruckOpen(true)}
+              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border-zinc-800 shadow-xs"
+              title="Control de inventario en camionetas móviles 4x4 y sincronización con almacén Km 22"
+            >
+              <Truck className="w-3.5 h-3.5 text-amber-400" />
+              <span>STOCK CAMIONETAS 4X4</span>
             </button>
 
             {/* Task #85: Warehouse Shelf Bin Label Generator (Zebra / Avery 100x50mm) */}
@@ -1308,6 +1321,12 @@ export const PartsView = React.memo<PartsViewProps>(({
       <CriticalStockReorderModal
         isOpen={isCriticalStockOpen}
         onClose={() => setIsCriticalStockOpen(false)}
+      />
+
+      {/* Task #99: Mobile Service Truck Inventory Sync Modal */}
+      <MobileTruckInventoryModal
+        isOpen={isMobileTruckOpen}
+        onClose={() => setIsMobileTruckOpen(false)}
       />
     </div>
   );

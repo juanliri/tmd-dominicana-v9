@@ -31,7 +31,8 @@ import {
   Tag,
   Hash,
   ShoppingBag,
-  Scale
+  Scale,
+  Droplets
 } from 'lucide-react';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../../lib/firebase';
@@ -56,6 +57,7 @@ import { FullbayActiveRepairOrder } from '../../types';
 import { ServiceDetailModal } from './service/ServiceDetailModal';
 import { OemWarrantyClaimModal } from '../workshop/OemWarrantyClaimModal';
 import { CalibratedToolInventoryModal } from '../workshop/CalibratedToolInventoryModal';
+import { UsedOilDisposalModal } from '../eco/UsedOilDisposalModal';
 
 interface ServiceHistoryTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -91,6 +93,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
   const [showAddMachineModal, setShowAddMachineModal] = useState<boolean>(false);
   const [showWarrantyModal, setShowWarrantyModal] = useState<boolean>(false);
   const [showCalibratedToolsModal, setShowCalibratedToolsModal] = useState<boolean>(false);
+  const [showUsedOilModal, setShowUsedOilModal] = useState<boolean>(false);
   const [newUnitId, setNewUnitId] = useState<string>('');
   const [newBrand, setNewBrand] = useState<string>('LiuGong');
   const [newModel, setNewModel] = useState<string>('');
@@ -437,6 +440,16 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           >
             <Scale className="w-4 h-4 text-amber-400" />
             <span>Herramientas Taller</span>
+          </button>
+
+          {/* Task #97: Used Oil Disposal & Eco Management Modal Trigger */}
+          <button
+            onClick={() => setShowUsedOilModal(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-emerald-500/30 text-emerald-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
+            title="Control de Aceites Usados y Disposición Ecológica MIMARENA"
+          >
+            <Droplets className="w-4 h-4 text-emerald-400" />
+            <span>Aceites Usados / Eco</span>
           </button>
 
           <button
@@ -1252,6 +1265,12 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
       <CalibratedToolInventoryModal
         isOpen={showCalibratedToolsModal}
         onClose={() => setShowCalibratedToolsModal(false)}
+      />
+
+      {/* Task #97: Used Oil Disposal & MIMARENA Ecological Manifests Modal */}
+      <UsedOilDisposalModal
+        isOpen={showUsedOilModal}
+        onClose={() => setShowUsedOilModal(false)}
       />
     </div>
   );

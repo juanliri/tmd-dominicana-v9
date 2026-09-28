@@ -21,8 +21,9 @@ Esta matriz contiene **100 recomendaciones de grado de ingeniería y dirección 
 | **Sprint 9** | Redes Sociales, Seguridad Diésel, Batería 24V, Auxilio 4x4 & Reorden Crítico | #17 (Flyer Social 1080x1920/1x1), #45 (Centinela Diésel J1939 Anti-Robo), #54 (Inspector 24V Alternador/Batería), #81 (Radar Despacho Auxilio 4x4 GPS), #92 (Puntos Reorden Crítico & PO) | `bf854f8` | 🟢 Producción Desplegado |
 | **Sprint 10** | Comparador 4-Equipos, Geocercas Obra, Tasa BCRD, Garantías OEM & Huella CO2 | #6 (Comparador Flotante Drag-and-Drop 4 Uds), #43 (Geocercas Poligonales Dinámicas), #51 (Tipo de Cambio BCRD & Spread Bancario), #83 (Expediente Pericial Garantías OEM), #96 (Auditoría Huella Carbono ISO 14001) | `419de8a` | 🟢 Producción Desplegado |
 | **Sprint 11** | Facetas Acordeón, Outbox PWA Offline, Presión Hidráulica 350 Bar, DGII 606/607 & Herramientas Calibradas | #18 (Filtros Multifaceta en Acordeón), #24 (Background Sync API & Outbox PWA), #53 (Sensor 350 Bar Presión Hidráulica & Sobreesfuerzo), #64 (Exportación Formal 606/607 DGII), #95 (Control Herramientas Calibradas ISO 9001) | `3dd3e29` | 🟢 Producción Desplegado |
+| **Sprint 12** | Inmovilización J1939, Monitoreo DEF Tier 4F, Firma Digital Táctil, Aceites Usados MIMARENA & Stock Camionetas 4x4 | #44 (Inmovilización Remota Antirrobo), #60 (Monitoreo Urea DEF & Anti-Derate SCR), #65 (Firma Digital Táctil en Pantalla), #97 (Control Aceites Usados Ley 64-00), #99 (Stock Camionetas Móviles 4x4) | *S12 Deploy* | 🟢 Producción Desplegado |
 
-**Avance Acumulado:** **55 de 100 Tareas Estratégicas (55% del Plan Maestro completado)**.
+**Avance Acumulado:** **60 de 100 Tareas Estratégicas (60% del Plan Maestro completado — HITO 60% ALCANZADO)**.
 
 ---
 

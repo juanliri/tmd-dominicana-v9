@@ -33,7 +33,8 @@ import {
   PhoneCall,
   Navigation,
   FileText,
-  TrendingDown
+  TrendingDown,
+  Droplet
 } from 'lucide-react';
 import { LiveLinkUnit, LiveLinkTelemetrySummary, LiveLinkFaultCode, UserProfile } from '../../types';
 import { fetchLiveLinkFleet, fetchLiveLinkSummary, sendLiveLinkCommand } from '../../services/livelinkService';
@@ -47,6 +48,8 @@ import { FieldServiceDispatchRadarModal } from '../emergency/FieldServiceDispatc
 import { GeofenceManagerModal } from '../telematics/GeofenceManagerModal';
 import { CarbonFootprintAuditModal } from '../sustainability/CarbonFootprintAuditModal';
 import { HydraulicPressureMonitorModal } from '../telematics/HydraulicPressureMonitorModal';
+import { RemoteImmobilizerModal } from '../telematics/RemoteImmobilizerModal';
+import { DefFluidMonitorModal } from '../telematics/DefFluidMonitorModal';
 import { Leaf } from 'lucide-react';
 
 interface LiveLinkCustomerTelematicsTabProps {
@@ -93,6 +96,8 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
   const [showDispatchRadarModal, setShowDispatchRadarModal] = useState<boolean>(false);
   const [showCarbonModal, setShowCarbonModal] = useState<boolean>(false);
   const [showHydraulicModal, setShowHydraulicModal] = useState<boolean>(false);
+  const [showImmobilizerModal, setShowImmobilizerModal] = useState<boolean>(false);
+  const [showDefModal, setShowDefModal] = useState<boolean>(false);
 
   const loadData = async () => {
     try {
@@ -536,6 +541,28 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                     <span>Geocercas</span>
                   </button>
 
+                  {/* Task #44: Remote Engine Immobilizer Trigger */}
+                  <button
+                    type="button"
+                    onClick={() => setShowImmobilizerModal(true)}
+                    className="px-2.5 py-1.5 rounded-[2px] bg-rose-950/60 hover:bg-rose-900/80 text-rose-400 border border-rose-500/40 font-bold font-display uppercase tracking-wider text-[11px] flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+                    title="Inmovilización Remota Antirrobo de Motor CAN-Bus J1939"
+                  >
+                    <Lock className="w-3.5 h-3.5 text-rose-400" />
+                    <span>Inmovilizador</span>
+                  </button>
+
+                  {/* Task #60: DEF / Urea Monitor Trigger */}
+                  <button
+                    type="button"
+                    onClick={() => setShowDefModal(true)}
+                    className="px-2.5 py-1.5 rounded-[2px] bg-cyan-950/60 hover:bg-cyan-900/80 text-cyan-400 border border-cyan-500/40 font-bold font-display uppercase tracking-wider text-[11px] flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+                    title="Monitoreo de Nivel de Fluido DEF / Urea y Sistema Anti-Derate"
+                  >
+                    <Droplet className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>DEF / Urea</span>
+                  </button>
+
                   <button
                     type="button"
                     onClick={() => downloadTelematicsReportPDF(selectedUnit)}
@@ -701,15 +728,27 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                         </div>
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => setShowBatteryModal(true)}
-                        className="mt-2 text-[10px] text-cyan-400 hover:text-cyan-300 font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer pt-1 border-t border-zinc-900"
-                        title="Inspeccionar salud del bus eléctrico 24V y alternador"
-                      >
-                        <span>Diagnóstico 24V</span>
-                        <ChevronRight className="w-3 h-3" />
-                      </button>
+                      <div className="flex items-center gap-2 mt-2 pt-1 border-t border-zinc-900">
+                        <button
+                          type="button"
+                          onClick={() => setShowBatteryModal(true)}
+                          className="text-[10px] text-cyan-400 hover:text-cyan-300 font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer"
+                          title="Inspeccionar salud del bus eléctrico 24V y alternador"
+                        >
+                          <span>Diagnóstico 24V</span>
+                          <ChevronRight className="w-3 h-3" />
+                        </button>
+                        <span className="text-zinc-700">&bull;</span>
+                        <button
+                          type="button"
+                          onClick={() => setShowDefModal(true)}
+                          className="text-[10px] text-emerald-400 hover:text-emerald-300 font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer"
+                          title="Abrir telemetría de urea DEF y protección anti-derate Tier 4F"
+                        >
+                          <span>DEF Urea</span>
+                          <ChevronRight className="w-3 h-3" />
+                        </button>
+                      </div>
                     </div>
                   </div>
 
@@ -1230,6 +1269,23 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
         isOpen={showHydraulicModal}
         onClose={() => setShowHydraulicModal(false)}
         unit={selectedUnit}
+      />
+
+      {/* Task #44: Remote Engine Immobilizer Anti-Theft Modal */}
+      <RemoteImmobilizerModal
+        isOpen={showImmobilizerModal}
+        onClose={() => setShowImmobilizerModal(false)}
+        machineName={selectedUnit?.name}
+        machineSerial={selectedUnit?.serialNumber}
+        currentLocation={selectedUnit?.location ? `${selectedUnit.location.address}, ${selectedUnit.location.province}` : undefined}
+      />
+
+      {/* Task #60: DEF Fluid (Urea) & Anti-Derate Monitor Modal */}
+      <DefFluidMonitorModal
+        isOpen={showDefModal}
+        onClose={() => setShowDefModal(false)}
+        machineName={selectedUnit?.name}
+        machineSerial={selectedUnit?.serialNumber}
       />
 
     </div>
