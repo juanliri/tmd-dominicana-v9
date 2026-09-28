@@ -1423,13 +1423,13 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.98 }}
                   transition={{ duration: 0.3 }}
-                  className="text-center py-16 bg-zinc-950 rounded-[5px] border border-zinc-800 p-8 shadow-xl"
+                  className="text-center py-16 bg-white dark:bg-zinc-950 rounded-[5px] border border-slate-200 dark:border-zinc-800 p-8 shadow-sm dark:shadow-xl"
                 >
-                  <HardHat className="w-12 h-12 text-amber-400 mx-auto mb-3" />
-                  <h3 className="text-base sm:text-lg font-black uppercase tracking-wider text-white">
+                  <HardHat className="w-12 h-12 text-amber-500 mx-auto mb-3" />
+                  <h3 className="text-base sm:text-lg font-black uppercase tracking-wider text-slate-900 dark:text-white">
                     NO SE ENCONTRARON MODELOS CON ESTOS FILTROS
                   </h3>
-                  <p className="text-xs text-zinc-400 mt-1 max-w-md mx-auto font-sans">
+                  <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1 max-w-md mx-auto font-sans">
                     Intenta seleccionando otra categoría o limpiando la búsqueda para ver la flota completa disponible.
                   </p>
                   <button
@@ -1447,11 +1447,11 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.28 }}
-                  className="bg-zinc-950 rounded-[5px] border border-zinc-800 overflow-hidden shadow-xl"
+                  className="bg-white dark:bg-zinc-950 rounded-[5px] border border-slate-200 dark:border-zinc-800 overflow-hidden shadow-sm dark:shadow-xl"
                 >
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs">
-                      <thead className="bg-zinc-900 border-b border-zinc-800 text-zinc-400 uppercase tracking-wider text-[10px] font-black">
+                      <thead className="bg-slate-100 dark:bg-zinc-900 border-b border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 uppercase tracking-wider text-[10px] font-black">
                         <tr>
                           <th className="py-3 px-4">EQUIPO / MODELO</th>
                           <th className="py-3 px-3">MARCA</th>
@@ -1466,7 +1466,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                         variants={machineryTableStaggerVariants}
                         initial="hidden"
                         animate="visible"
-                        className="divide-y divide-zinc-800"
+                        className="divide-y divide-slate-200 dark:divide-zinc-800"
                       >
                         {displayedMachines.map((machine) => (
                           <MachineTableRow
@@ -1517,14 +1517,14 @@ export const MachineryView = React.memo<MachineryViewProps>(({
           {navigationMode === 'load_more' ? (
             /* Progressive Load More Trigger */
             totalItems > 0 && (
-              <div className="mt-6 p-4 rounded-[5px] bg-zinc-950 border border-zinc-800 text-center space-y-3 shadow-xl">
+              <div className="mt-6 p-4 rounded-[5px] bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-center space-y-3 shadow-sm dark:shadow-xl">
                 <div className="max-w-md mx-auto space-y-1.5 font-mono">
-                  <div className="flex justify-between text-xs text-zinc-400 font-bold uppercase">
+                  <div className="flex justify-between text-xs text-slate-500 dark:text-zinc-400 font-bold uppercase">
                     <span>MOSTRANDO {Math.min(visibleCount, totalItems)} DE {totalItems} MODELOS</span>
                     <span>{Math.round((Math.min(visibleCount, totalItems) / totalItems) * 100)}%</span>
                   </div>
                   {/* Visual Progress Bar */}
-                  <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
+                  <div className="w-full h-1.5 bg-slate-200 dark:bg-zinc-900 rounded-full overflow-hidden border border-slate-300 dark:border-zinc-800">
                     <div 
                       className="h-full bg-amber-400 transition-all duration-300"
                       style={{ width: `${(Math.min(visibleCount, totalItems) / totalItems) * 100}%` }}
@@ -1555,14 +1555,14 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                     <button
                       type="button"
                       onClick={handleShowAll}
-                      className="px-4 py-2.5 rounded-[3px] bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white font-black uppercase tracking-wider text-xs border border-zinc-800 transition-all cursor-pointer"
+                      className="px-4 py-2.5 rounded-[3px] bg-slate-100 dark:bg-zinc-900 hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white font-black uppercase tracking-wider text-xs border border-slate-300 dark:border-zinc-800 transition-all cursor-pointer shadow-xs"
                     >
                       MOSTRAR TODOS ({totalItems})
                     </button>
                   </div>
                 ) : (
-                  <span className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-black uppercase tracking-wider">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span className="inline-flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-black uppercase tracking-wider">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                     <span>TODOS LOS {totalItems} MODELOS CERTIFICADOS ESTÁN VISIBLES</span>
                   </span>
                 )}
@@ -1571,16 +1571,16 @@ export const MachineryView = React.memo<MachineryViewProps>(({
           ) : (
             /* Traditional Pagination Controls */
             totalPages > 1 && (
-              <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-[5px] bg-zinc-950 border border-zinc-800 shadow-xl font-display">
-                <div className="text-xs text-zinc-400 font-mono uppercase font-bold">
-                  PÁGINA <strong className="text-white">{validPage}</strong> DE <strong className="text-white">{totalPages}</strong> ({totalItems} MODELOS)
+              <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-[5px] bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 shadow-sm dark:shadow-xl font-display">
+                <div className="text-xs text-slate-500 dark:text-zinc-400 font-mono uppercase font-bold">
+                  PÁGINA <strong className="text-slate-900 dark:text-white">{validPage}</strong> DE <strong className="text-slate-900 dark:text-white">{totalPages}</strong> ({totalItems} MODELOS)
                 </div>
 
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => handlePageChange(validPage - 1)}
                     disabled={validPage === 1}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-[3px] border border-zinc-800 bg-zinc-900 text-xs font-black uppercase tracking-wider text-zinc-300 hover:text-white hover:bg-zinc-800 disabled:opacity-40 disabled:pointer-events-none transition-colors"
+                    className="flex items-center gap-1 px-3 py-1.5 rounded-[3px] border border-slate-300 dark:border-zinc-800 bg-slate-100 dark:bg-zinc-900 text-xs font-black uppercase tracking-wider text-slate-700 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-zinc-800 disabled:opacity-40 disabled:pointer-events-none transition-colors"
                   >
                     <ChevronLeft className="w-4 h-4" />
                     <span>ANTERIOR</span>

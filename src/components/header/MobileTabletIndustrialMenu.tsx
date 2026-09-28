@@ -480,6 +480,113 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
             </span>
           </button>
         </div>
+
+        {/* 3.1 DIRECT ACCESS TO ALL SECONDARY SERVICES (PARITY WITH DESKTOP SERVICES DROPDOWN) */}
+        <div className="pt-2.5 border-t border-zinc-200/80 dark:border-zinc-800/80 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono flex items-center gap-1.5">
+              <Wrench className="w-3 h-3 text-amber-500" />
+              Más Servicios & Taller en Obra
+            </span>
+            <span className="text-[9px] text-zinc-400 font-mono">11 Especialidades</span>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <button
+              onClick={() => handleActionNavigate('#/service')}
+              className="p-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-500 transition-colors flex items-center justify-between cursor-pointer"
+            >
+              <div className="min-w-0">
+                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate">Taller Central</span>
+                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">12 Bahías & Overhaul</span>
+              </div>
+              <ChevronRight className="w-3 h-3 text-zinc-400 shrink-0" />
+            </button>
+
+            <button
+              onClick={() => handleActionNavigate('#/emergency-dispatch')}
+              className="p-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-left hover:border-rose-500 transition-colors flex items-center justify-between cursor-pointer"
+            >
+              <div className="min-w-0">
+                <span className="text-xs font-bold text-rose-700 dark:text-rose-400 block truncate">SOS 24/7 en Obra</span>
+                <span className="text-[9px] text-rose-600/70 dark:text-rose-400/70 block truncate">Taller Móvil 4x4</span>
+              </div>
+              <ChevronRight className="w-3 h-3 text-rose-400 shrink-0" />
+            </button>
+
+            <button
+              onClick={() => handleActionNavigate('#/oil-lab')}
+              className="p-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-500 transition-colors flex items-center justify-between cursor-pointer"
+            >
+              <div className="min-w-0">
+                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate">Lab de Aceites</span>
+                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">Espectrometría S.O.S.</span>
+              </div>
+              <ChevronRight className="w-3 h-3 text-zinc-400 shrink-0" />
+            </button>
+
+            <button
+              onClick={() => handleActionNavigate('#/livelink')}
+              className="p-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-500 transition-colors flex items-center justify-between cursor-pointer"
+            >
+              <div className="min-w-0">
+                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate">JCB LiveLink™</span>
+                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">GPS & Horómetros</span>
+              </div>
+              <ChevronRight className="w-3 h-3 text-zinc-400 shrink-0" />
+            </button>
+
+            <button
+              onClick={() => handleActionNavigate('#/trade-in')}
+              className="p-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-500 transition-colors flex items-center justify-between cursor-pointer"
+            >
+              <div className="min-w-0">
+                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate">Trade-In Usados</span>
+                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">Avalúo en 24h</span>
+              </div>
+              <ChevronRight className="w-3 h-3 text-zinc-400 shrink-0" />
+            </button>
+
+            <button
+              onClick={() => handleActionNavigate('#/about')}
+              className="p-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-500 transition-colors flex items-center justify-between cursor-pointer"
+            >
+              <div className="min-w-0">
+                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate">Sobre TMD</span>
+                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">Directiva & Historia</span>
+              </div>
+              <ChevronRight className="w-3 h-3 text-zinc-400 shrink-0" />
+            </button>
+          </div>
+
+          {/* Specialist Tools Horizontal Strip */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+            <button
+              onClick={() => handleActionNavigate('#/tco')}
+              className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700 shrink-0 whitespace-nowrap cursor-pointer hover:border-amber-500 transition-colors"
+            >
+              📊 Calculadora TCO
+            </button>
+            <button
+              onClick={() => handleActionNavigate('#/pma-contracts')}
+              className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700 shrink-0 whitespace-nowrap cursor-pointer hover:border-amber-500 transition-colors"
+            >
+              🛡️ Contratos PMA
+            </button>
+            <button
+              onClick={() => handleActionNavigate('#/academy')}
+              className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700 shrink-0 whitespace-nowrap cursor-pointer hover:border-amber-500 transition-colors"
+            >
+              🎓 Academia Operadores
+            </button>
+            <button
+              onClick={() => handleActionNavigate('#/reman')}
+              className="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200/80 dark:border-zinc-700 shrink-0 whitespace-nowrap cursor-pointer hover:border-amber-500 transition-colors"
+            >
+              ♻️ Centro REMAN
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* 4. EXECUTIVE BOTTOM CONTROL BAR (CURRENCY, THEME, NOTIFICATIONS, EMERGENCY, PWA) */}

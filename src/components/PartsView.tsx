@@ -470,27 +470,27 @@ export const PartsView = React.memo<PartsViewProps>(({
   return (
     <div ref={partsTopRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* Header Banner - Synced with Home Luxury Industrial Style */}
-      <div className="mb-6 bg-zinc-950 border border-zinc-800 rounded-[5px] p-6 sm:p-8 text-white shadow-xl relative overflow-hidden font-display">
+      <div className="mb-6 bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-[5px] p-6 sm:p-8 text-slate-900 dark:text-white shadow-sm dark:shadow-xl relative overflow-hidden font-display">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[3px] bg-zinc-900 border border-zinc-800 text-amber-400 type-badge">
-              <Cog className="w-3.5 h-3.5 text-amber-400" />
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[3px] bg-amber-500/10 dark:bg-zinc-900 border border-amber-500/30 dark:border-zinc-800 text-amber-700 dark:text-amber-400 type-badge">
+              <Cog className="w-3.5 h-3.5 text-amber-500" />
               <span>CENTRO DE DISTRIBUCIÓN OEM • KM 22 AUTOPISTA DUARTE</span>
             </div>
-            <h1 className="text-2xl sm:text-4xl type-section-title text-white">
-              REPUESTOS GENUINOS & <span className="text-amber-400">FILTRACIÓN CERTIFICADA</span>
+            <h1 className="text-2xl sm:text-4xl type-section-title text-slate-900 dark:text-white">
+              REPUESTOS GENUINOS & <span className="text-amber-500">FILTRACIÓN CERTIFICADA</span>
             </h1>
-            <p className="text-xs sm:text-sm type-body text-zinc-400 max-w-2xl leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm type-body text-slate-600 dark:text-zinc-400 max-w-2xl leading-relaxed font-sans">
               Más de 40,000 números de parte en inventario físico para JCB, Donaldson, Fleetguard, LiuGong, Ammann y Cummins con despacho express en 24h a toda República Dominicana.
             </p>
 
             {/* Quick Brand Badges */}
             <div className="flex flex-wrap gap-2 pt-1 type-badge">
-              <span className="bg-zinc-900 px-2.5 py-1 rounded-[3px] text-amber-400 border border-zinc-800">JCB GENUINE</span>
-              <span className="bg-zinc-900 px-2.5 py-1 rounded-[3px] text-white border border-zinc-800">DONALDSON BLUE®</span>
-              <span className="bg-zinc-900 px-2.5 py-1 rounded-[3px] text-amber-400 border border-zinc-800">FLEETGUARD CUMMINS</span>
-              <span className="bg-zinc-900 px-2.5 py-1 rounded-[3px] text-white border border-zinc-800">LIUGONG OEM</span>
-              <span className="bg-zinc-900 px-2.5 py-1 rounded-[3px] text-zinc-300 border border-zinc-800">COMPROBANTE NCF B01</span>
+              <span className="bg-slate-100 dark:bg-zinc-900 px-2.5 py-1 rounded-[3px] text-amber-600 dark:text-amber-400 border border-slate-200 dark:border-zinc-800">JCB GENUINE</span>
+              <span className="bg-slate-100 dark:bg-zinc-900 px-2.5 py-1 rounded-[3px] text-slate-800 dark:text-white border border-slate-200 dark:border-zinc-800">DONALDSON BLUE®</span>
+              <span className="bg-slate-100 dark:bg-zinc-900 px-2.5 py-1 rounded-[3px] text-amber-600 dark:text-amber-400 border border-slate-200 dark:border-zinc-800">FLEETGUARD CUMMINS</span>
+              <span className="bg-slate-100 dark:bg-zinc-900 px-2.5 py-1 rounded-[3px] text-slate-800 dark:text-white border border-slate-200 dark:border-zinc-800">LIUGONG OEM</span>
+              <span className="bg-slate-100 dark:bg-zinc-900 px-2.5 py-1 rounded-[3px] text-slate-600 dark:text-zinc-300 border border-slate-200 dark:border-zinc-800">COMPROBANTE NCF B01</span>
             </div>
           </div>
 
@@ -501,18 +501,18 @@ export const PartsView = React.memo<PartsViewProps>(({
               onClick={handleRefreshStock}
               disabled={isSyncingStock}
               title="Sincronizar inventario en tiempo real del Almacén Km 22"
-              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-zinc-900 text-zinc-200 border-zinc-800 hover:bg-zinc-800 shadow-xs"
+              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-slate-100 dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 border-slate-300 dark:border-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-800 shadow-xs"
             >
-              <RefreshCw className={`w-3.5 h-3.5 text-amber-400 ${isSyncingStock ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`w-3.5 h-3.5 text-amber-500 ${isSyncingStock ? 'animate-spin' : ''}`} />
               <span>{isSyncingStock ? 'SINCRONIZANDO...' : 'ACTUALIZAR STOCK'}</span>
             </button>
 
             <button
               type="button"
               onClick={() => setIsExportPdfOpen(true)}
-              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border-zinc-800 shadow-xs"
+              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-slate-100 dark:bg-zinc-900 hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-200 border-slate-300 dark:border-zinc-800 shadow-xs"
             >
-              <FileDown className="w-3.5 h-3.5 text-amber-400" />
+              <FileDown className="w-3.5 h-3.5 text-amber-500" />
               <span>EXPORTAR PDF</span>
             </button>
 
@@ -786,17 +786,17 @@ export const PartsView = React.memo<PartsViewProps>(({
       </div>
 
       {/* PARTS CONTROL BAR: Result counts, Sorting, View Modes & Items per page */}
-      <div className="bg-zinc-950 p-3 rounded-[5px] border border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3 mb-6 font-display">
-        <div className="flex items-center gap-2 text-xs text-zinc-300 w-full sm:w-auto justify-between sm:justify-start font-mono">
+      <div className="bg-white dark:bg-zinc-950 p-3 rounded-[5px] border border-slate-200 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3 mb-6 font-display shadow-xs">
+        <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-zinc-300 w-full sm:w-auto justify-between sm:justify-start font-mono">
           <span>
             {navigationMode === 'load_more' ? (
-              <>MOSTRANDO <strong className="text-white">{displayedParts.length}</strong> DE <strong className="text-white">{totalItems}</strong> REPUESTOS OEM</>
+              <>MOSTRANDO <strong className="text-slate-900 dark:text-white">{displayedParts.length}</strong> DE <strong className="text-slate-900 dark:text-white">{totalItems}</strong> REPUESTOS OEM</>
             ) : (
-              <>MOSTRANDO <strong className="text-white">{totalItems > 0 ? startIndex + 1 : 0}–{endIndex}</strong> DE <strong className="text-white">{totalItems}</strong> REPUESTOS OEM</>
+              <>MOSTRANDO <strong className="text-slate-900 dark:text-white">{totalItems > 0 ? startIndex + 1 : 0}–{endIndex}</strong> DE <strong className="text-slate-900 dark:text-white">{totalItems}</strong> REPUESTOS OEM</>
             )}
           </span>
           {hasActiveFilters && (
-            <span className="px-2 py-0.5 rounded-[3px] bg-zinc-900 text-amber-400 border border-zinc-800 font-bold text-[9px] uppercase">
+            <span className="px-2 py-0.5 rounded-[3px] bg-amber-50 dark:bg-zinc-900 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-zinc-800 font-bold text-[9px] uppercase">
               FILTROS ACTIVOS
             </span>
           )}
@@ -951,12 +951,12 @@ export const PartsView = React.memo<PartsViewProps>(({
         {isLoadingParts ? (
           <PartsGridSkeleton count={8} />
         ) : filteredAndSortedParts.length === 0 ? (
-          <div className="text-center py-16 bg-zinc-950 rounded-[5px] border border-zinc-800 p-8 shadow-xl">
-            <Package className="w-12 h-12 text-amber-400 mx-auto mb-3 opacity-60" />
-            <h3 className="text-base font-black uppercase tracking-wider text-white">
+          <div className="text-center py-16 bg-white dark:bg-zinc-950 rounded-[5px] border border-slate-200 dark:border-zinc-800 p-8 shadow-sm dark:shadow-xl">
+            <Package className="w-12 h-12 text-amber-500 mx-auto mb-3 opacity-60" />
+            <h3 className="text-base font-black uppercase tracking-wider text-slate-900 dark:text-white">
               NO ENCONTRAMOS ESE REPUESTO EN EL FILTRO ACTUAL
             </h3>
-            <p className="text-xs text-zinc-400 mt-1 max-w-md mx-auto font-sans">
+            <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1 max-w-md mx-auto font-sans">
               Disponemos de más de 40,000 números de parte en inventario físico en el Km 22. Consúltanos directamente con tu número de serie.
             </p>
             <div className="mt-4">
@@ -971,10 +971,10 @@ export const PartsView = React.memo<PartsViewProps>(({
           </div>
         ) : viewMode === 'table' ? (
           /* INDUSTRIAL HIGH-DENSITY SCANNING TABLE VIEW */
-          <div className="bg-zinc-950 rounded-[5px] border border-zinc-800 overflow-hidden shadow-xl">
+          <div className="bg-white dark:bg-zinc-950 rounded-[5px] border border-slate-200 dark:border-zinc-800 overflow-hidden shadow-sm dark:shadow-xl">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-zinc-900 border-b border-zinc-800 text-zinc-400 uppercase tracking-wider text-[10px] font-black">
+                <thead className="bg-slate-100 dark:bg-zinc-900 border-b border-slate-200 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 uppercase tracking-wider text-[10px] font-black">
                   <tr>
                     <th className="py-3 px-4">PARTE OEM / NOMBRE</th>
                     <th className="py-3 px-3">MARCA</th>
@@ -985,7 +985,7 @@ export const PartsView = React.memo<PartsViewProps>(({
                     <th className="py-3 px-4 text-center">ACCIONES</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-800">
+                <tbody className="divide-y divide-slate-200 dark:divide-zinc-800">
                   {displayedParts.map((part) => (
                     <PartTableRow
                       key={part.id}
@@ -1020,14 +1020,14 @@ export const PartsView = React.memo<PartsViewProps>(({
       {/* ============================================================ */}
       {navigationMode === 'load_more' ? (
         totalItems > 0 && (
-          <div className="mt-6 p-4 rounded-[5px] bg-zinc-950 border border-zinc-800 text-center space-y-3 shadow-xl font-display">
+          <div className="mt-6 p-4 rounded-[5px] bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-center space-y-3 shadow-sm dark:shadow-xl font-display">
             <div className="max-w-md mx-auto space-y-1.5 font-mono">
-              <div className="flex justify-between text-xs text-zinc-400 font-bold uppercase">
+              <div className="flex justify-between text-xs text-slate-500 dark:text-zinc-400 font-bold uppercase">
                 <span>MOSTRANDO {Math.min(visibleCount, totalItems)} DE {totalItems} REPUESTOS</span>
                 <span>{Math.round((Math.min(visibleCount, totalItems) / totalItems) * 100)}%</span>
               </div>
               {/* Visual Progress Bar */}
-              <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
+              <div className="w-full h-1.5 bg-slate-200 dark:bg-zinc-900 rounded-full overflow-hidden border border-slate-300 dark:border-zinc-800">
                 <div
                   className="h-full bg-amber-400 transition-all duration-300"
                   style={{ width: `${(Math.min(visibleCount, totalItems) / totalItems) * 100}%` }}
@@ -1058,14 +1058,14 @@ export const PartsView = React.memo<PartsViewProps>(({
                 <button
                   type="button"
                   onClick={handleShowAll}
-                  className="px-4 py-2.5 rounded-[3px] bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white font-black uppercase tracking-wider text-xs border border-zinc-800 transition-all cursor-pointer"
+                  className="px-4 py-2.5 rounded-[3px] bg-slate-100 dark:bg-zinc-900 hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white font-black uppercase tracking-wider text-xs border border-slate-300 dark:border-zinc-800 transition-all cursor-pointer shadow-xs"
                 >
                   MOSTRAR TODOS ({totalItems})
                 </button>
               </div>
             ) : (
-              <span className="inline-flex items-center gap-1.5 text-xs text-emerald-400 font-black uppercase tracking-wider">
-                <Check className="w-4 h-4 text-emerald-400" />
+              <span className="inline-flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-black uppercase tracking-wider">
+                <Check className="w-4 h-4 text-emerald-500" />
                 <span>TODOS LOS {totalItems} REPUESTOS OEM ESTÁN VISIBLES</span>
               </span>
             )}
@@ -1074,16 +1074,16 @@ export const PartsView = React.memo<PartsViewProps>(({
       ) : (
         /* SMART COMPACT PAGINATION BAR */
         totalPages > 1 && (
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-[5px] bg-zinc-950 border border-zinc-800 shadow-xl font-display">
-            <div className="text-xs text-zinc-400 font-mono uppercase font-bold">
-              PÁGINA <strong className="text-white">{validPage}</strong> DE <strong className="text-white">{totalPages}</strong> ({totalItems} REPUESTOS)
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-[5px] bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 shadow-sm dark:shadow-xl font-display">
+            <div className="text-xs text-slate-500 dark:text-zinc-400 font-mono uppercase font-bold">
+              PÁGINA <strong className="text-slate-900 dark:text-white">{validPage}</strong> DE <strong className="text-slate-900 dark:text-white">{totalPages}</strong> ({totalItems} REPUESTOS)
             </div>
 
             <div className="flex items-center gap-1.5">
               <button
                 onClick={() => handlePageChange(validPage - 1)}
                 disabled={validPage === 1}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-[3px] border border-zinc-800 bg-zinc-900 text-xs font-black uppercase tracking-wider text-zinc-300 hover:text-white hover:bg-zinc-800 disabled:opacity-40 disabled:pointer-events-none transition-colors"
+                className="flex items-center gap-1 px-3 py-1.5 rounded-[3px] border border-slate-300 dark:border-zinc-800 bg-slate-100 dark:bg-zinc-900 text-xs font-black uppercase tracking-wider text-slate-700 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-zinc-800 disabled:opacity-40 disabled:pointer-events-none transition-colors"
               >
                 <ChevronLeft className="w-4 h-4" />
                 <span>ANTERIOR</span>

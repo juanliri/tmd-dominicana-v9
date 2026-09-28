@@ -242,24 +242,24 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white transition-colors pb-16 font-display">
+    <div className="min-h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-white transition-colors pb-16 font-display">
       {/* Top Hero Banner - Industrial Heavy Engineering Style */}
-      <div className="relative bg-zinc-950 text-white border-b border-zinc-800 overflow-hidden">
+      <div className="relative bg-white dark:bg-zinc-950 text-slate-900 dark:text-white border-b border-slate-200 dark:border-zinc-800 overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[3px] bg-zinc-900 border border-zinc-800 text-amber-400 type-badge">
-                <Wrench className="w-3.5 h-3.5 text-amber-400" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-[3px] bg-amber-500/10 dark:bg-zinc-900 border border-amber-500/30 dark:border-zinc-800 text-amber-700 dark:text-amber-400 type-badge">
+                <Wrench className="w-3.5 h-3.5 text-amber-500" />
                 <span>TALLER CENTRAL KM 22 & RED NACIONAL DE ASISTENCIA 24/7</span>
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl type-section-title text-white">
-                SERVICIO TÉCNICO CERTIFICADO Y <span className="text-amber-400">RESPALDO OFICIAL</span> EN RD
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl type-section-title text-slate-900 dark:text-white">
+                SERVICIO TÉCNICO CERTIFICADO Y <span className="text-amber-500">RESPALDO OFICIAL</span> EN RD
               </h1>
 
-              <p className="text-sm sm:text-base type-body-lead text-zinc-300 max-w-2xl">
+              <p className="text-sm sm:text-base type-body-lead text-slate-600 dark:text-zinc-300 max-w-2xl">
                 12 bahías de servicio diésel pesado, bancos de prueba de bombas hidráulicas hasta 350 bar, técnicos homologados de fábrica y despacho de unidades móviles 4x4 a canteras y obras.
               </p>
 
@@ -276,47 +276,47 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                   href="https://wa.me/18095601234?text=Hola%20TMD%20Dominicana,%20solicito%20asistencia%20tecnica%20de%20taller%20en%20obra"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3 bg-zinc-900 hover:bg-zinc-850 text-emerald-400 border border-zinc-800 font-black uppercase tracking-wider text-xs rounded-[3px] transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 px-5 py-3 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30 font-black uppercase tracking-wider text-xs rounded-[3px] transition-all cursor-pointer"
                 >
                   <span>DESPACHO SOS WHATSAPP</span>
                 </a>
                 <button
                   type="button"
                   onClick={() => onNavigate('#/fullbay')}
-                  className="inline-flex items-center gap-2 px-4 py-3 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 font-black uppercase tracking-wider text-xs rounded-[3px] transition-all cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-3 bg-white dark:bg-zinc-900 hover:bg-slate-100 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white border border-slate-300 dark:border-zinc-800 font-black uppercase tracking-wider text-xs rounded-[3px] transition-all cursor-pointer shadow-xs"
                 >
-                  <Building2 className="w-4 h-4 text-amber-400" />
+                  <Building2 className="w-4 h-4 text-amber-500" />
                   <span>PANEL FULLBAY TALLER</span>
                 </button>
               </div>
             </div>
 
             {/* Quick Stats Matrix */}
-            <div className="lg:col-span-4 bg-zinc-900/90 rounded-[5px] p-5 border border-zinc-800 shadow-xl space-y-3 font-mono">
-              <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
-                <span className="text-[10px] font-black uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+            <div className="lg:col-span-4 bg-slate-50 dark:bg-zinc-900/90 rounded-[5px] p-5 border border-slate-200 dark:border-zinc-800 shadow-sm dark:shadow-xl space-y-3 font-mono">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-zinc-800">
+                <span className="text-[10px] font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5" />
                   CAPACIDAD OPERATIVA
                 </span>
-                <span className="text-[10px] text-emerald-400 font-bold uppercase">AUTOPISTA DUARTE KM 22</span>
+                <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold uppercase">AUTOPISTA DUARTE KM 22</span>
               </div>
 
               <div className="grid grid-cols-2 gap-2">
-                <div className="p-2.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
-                  <span className="text-base font-black text-amber-400 block">12 BAHÍAS</span>
-                  <span className="text-[10px] text-zinc-400 block uppercase">LÍNEAS HD</span>
+                <div className="p-2.5 rounded-[3px] bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 shadow-xs">
+                  <span className="text-base font-black text-amber-600 dark:text-amber-400 block">12 BAHÍAS</span>
+                  <span className="text-[10px] text-slate-500 dark:text-zinc-400 block uppercase">LÍNEAS HD</span>
                 </div>
-                <div className="p-2.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
-                  <span className="text-base font-black text-white block">350 BAR</span>
-                  <span className="text-[10px] text-zinc-400 block uppercase">BANCO HIDRÁULICO</span>
+                <div className="p-2.5 rounded-[3px] bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 shadow-xs">
+                  <span className="text-base font-black text-slate-900 dark:text-white block">350 BAR</span>
+                  <span className="text-[10px] text-slate-500 dark:text-zinc-400 block uppercase">BANCO HIDRÁULICO</span>
                 </div>
-                <div className="p-2.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
-                  <span className="text-base font-black text-amber-400 block">&lt; 3 HORAS</span>
-                  <span className="text-[10px] text-zinc-400 block uppercase">LLEGADA A OBRA</span>
+                <div className="p-2.5 rounded-[3px] bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 shadow-xs">
+                  <span className="text-base font-black text-amber-600 dark:text-amber-400 block">&lt; 3 HORAS</span>
+                  <span className="text-[10px] text-slate-500 dark:text-zinc-400 block uppercase">LLEGADA A OBRA</span>
                 </div>
-                <div className="p-2.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
-                  <span className="text-base font-black text-emerald-400 block">100% NCF</span>
-                  <span className="text-[10px] text-zinc-400 block uppercase">CRÉDITO FISCAL B01</span>
+                <div className="p-2.5 rounded-[3px] bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 shadow-xs">
+                  <span className="text-base font-black text-emerald-600 dark:text-emerald-400 block">100% NCF</span>
+                  <span className="text-[10px] text-slate-500 dark:text-zinc-400 block uppercase">CRÉDITO FISCAL B01</span>
                 </div>
               </div>
             </div>
@@ -329,80 +329,80 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div 
             onClick={() => onNavigate('#/fullbay')}
-            className="p-5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-amber-400/50 shadow-xl transition-all cursor-pointer group flex flex-col justify-between"
+            className="p-5 rounded-[5px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 hover:border-amber-500/50 shadow-sm dark:shadow-xl transition-all cursor-pointer group flex flex-col justify-between"
           >
             <div>
-              <div className="w-10 h-10 rounded-[3px] bg-zinc-950 text-amber-400 border border-zinc-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-[3px] bg-slate-100 dark:bg-zinc-950 text-amber-500 border border-slate-200 dark:border-zinc-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
                 <Building2 className="w-5 h-5" />
               </div>
-              <h3 className="text-sm font-black text-white mb-1 uppercase tracking-tight">
+              <h3 className="text-sm font-black text-slate-900 dark:text-white mb-1 uppercase tracking-tight">
                 FULLBAY SHOP MANAGEMENT
               </h3>
-              <p className="text-xs text-zinc-400 font-sans">
+              <p className="text-xs text-slate-500 dark:text-zinc-400 font-sans">
                 Monitoreo en vivo de 12 bahías, diagnósticos, órdenes abiertas y mecánicos asignados.
               </p>
             </div>
-            <span className="text-xs font-black uppercase tracking-wider text-amber-400 mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
               ABRIR FULLBAY <ChevronRight className="w-3.5 h-3.5" />
             </span>
           </div>
 
           <div 
             onClick={() => onNavigate('#/reman')}
-            className="p-5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-emerald-400/50 shadow-xl transition-all cursor-pointer group flex flex-col justify-between"
+            className="p-5 rounded-[5px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 hover:border-emerald-500/50 shadow-sm dark:shadow-xl transition-all cursor-pointer group flex flex-col justify-between"
           >
             <div>
-              <div className="w-10 h-10 rounded-[3px] bg-zinc-950 text-emerald-400 border border-zinc-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-[3px] bg-slate-100 dark:bg-zinc-950 text-emerald-500 border border-slate-200 dark:border-zinc-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
                 <Layers className="w-5 h-5" />
               </div>
-              <h3 className="text-sm font-black text-white mb-1 uppercase tracking-tight">
+              <h3 className="text-sm font-black text-slate-900 dark:text-white mb-1 uppercase tracking-tight">
                 PROGRAMA REMAN & ECO
               </h3>
-              <p className="text-xs text-zinc-400 font-sans">
+              <p className="text-xs text-slate-500 dark:text-zinc-400 font-sans">
                 Intercambio de motores, bombas y transmisiones reconstruidas con garantía de 12 meses.
               </p>
             </div>
-            <span className="text-xs font-black uppercase tracking-wider text-emerald-400 mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            <span className="text-xs font-black uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
               VER PROGRAMA REMAN <ChevronRight className="w-3.5 h-3.5" />
             </span>
           </div>
 
           <div 
             onClick={() => onNavigate('#/pma')}
-            className="p-5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-amber-400/50 shadow-xl transition-all cursor-pointer group flex flex-col justify-between"
+            className="p-5 rounded-[5px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 hover:border-amber-500/50 shadow-sm dark:shadow-xl transition-all cursor-pointer group flex flex-col justify-between"
           >
             <div>
-              <div className="w-10 h-10 rounded-[3px] bg-zinc-950 text-amber-400 border border-zinc-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-[3px] bg-slate-100 dark:bg-zinc-950 text-amber-500 border border-slate-200 dark:border-zinc-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
                 <ShieldCheck className="w-5 h-5" />
               </div>
-              <h3 className="text-sm font-black text-white mb-1 uppercase tracking-tight">
+              <h3 className="text-sm font-black text-slate-900 dark:text-white mb-1 uppercase tracking-tight">
                 CONTRATOS PMA MASTERCARE
               </h3>
-              <p className="text-xs text-zinc-400 font-sans">
+              <p className="text-xs text-slate-500 dark:text-zinc-400 font-sans">
                 Planes preventivos programados a 250h, 500h y 1,000h con kits de filtros genuinos.
               </p>
             </div>
-            <span className="text-xs font-black uppercase tracking-wider text-amber-400 mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
               COTIZAR CONTRATOS PMA <ChevronRight className="w-3.5 h-3.5" />
             </span>
           </div>
 
           <div 
             onClick={() => onNavigate('#/portal')}
-            className="p-5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-amber-400/50 shadow-xl transition-all cursor-pointer group flex flex-col justify-between"
+            className="p-5 rounded-[5px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 hover:border-amber-500/50 shadow-sm dark:shadow-xl transition-all cursor-pointer group flex flex-col justify-between"
           >
             <div>
-              <div className="w-10 h-10 rounded-[3px] bg-zinc-950 text-amber-400 border border-zinc-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-[3px] bg-slate-100 dark:bg-zinc-950 text-amber-500 border border-slate-200 dark:border-zinc-800 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
                 <Cpu className="w-5 h-5" />
               </div>
-              <h3 className="text-sm font-black text-white mb-1 uppercase tracking-tight">
+              <h3 className="text-sm font-black text-slate-900 dark:text-white mb-1 uppercase tracking-tight">
                 TELEMETRÍA LIVELINK™
               </h3>
-              <p className="text-xs text-zinc-400 font-sans">
+              <p className="text-xs text-slate-500 dark:text-zinc-400 font-sans">
                 Horómetros satelitales, códigos de falla DTC en vivo y alertas automáticas de servicio.
               </p>
             </div>
-            <span className="text-xs font-black uppercase tracking-wider text-amber-400 mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+            <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
               PORTAL TELEMATICS <ChevronRight className="w-3.5 h-3.5" />
             </span>
           </div>
@@ -413,47 +413,47 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
 
         {/* Grid of Capabilities */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 rounded-[5px] bg-zinc-900 border border-zinc-800 shadow-xl space-y-3">
-            <div className="w-12 h-12 rounded-[3px] bg-zinc-950 border border-zinc-800 text-amber-400 flex items-center justify-center">
+          <div className="p-6 rounded-[5px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-sm dark:shadow-xl space-y-3">
+            <div className="w-12 h-12 rounded-[3px] bg-slate-100 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-amber-500 flex items-center justify-center">
               <Truck className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-black text-white uppercase tracking-wider">
+            <h3 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-wider">
               UNIDADES MÓVILES 4X4
             </h3>
-            <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+            <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed font-sans">
               Camionetas equipadas con generador, compresor de aire, herramientas de torque y escáner electrónico oficial para calibración y reparación in situ en cualquier punto de RD.
             </p>
-            <span className="text-xs font-mono font-bold text-amber-400 block uppercase">
+            <span className="text-xs font-mono font-bold text-amber-600 dark:text-amber-400 block uppercase">
               COBERTURA: CIBAO, ESTE, SUR Y SANTO DOMINGO
             </span>
           </div>
 
-          <div className="p-6 rounded-[5px] bg-zinc-900 border border-zinc-800 shadow-xl space-y-3">
-            <div className="w-12 h-12 rounded-[3px] bg-zinc-950 border border-zinc-800 text-amber-400 flex items-center justify-center">
+          <div className="p-6 rounded-[5px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-sm dark:shadow-xl space-y-3">
+            <div className="w-12 h-12 rounded-[3px] bg-slate-100 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-amber-500 flex items-center justify-center">
               <Gauge className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-black text-white uppercase tracking-wider">
+            <h3 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-wider">
               BANCO DE PRUEBAS HIDRÁULICO
             </h3>
-            <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+            <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed font-sans">
               Laboratorio hidráulico certificado en el Km 22 con capacidad de prueba dinámica de bombas, válvulas y motores de giro hasta 350 bar de presión con reporte computarizado.
             </p>
-            <span className="text-xs font-mono font-bold text-amber-400 block uppercase">
+            <span className="text-xs font-mono font-bold text-amber-600 dark:text-amber-400 block uppercase">
               REPORTE GRÁFICO DE FLUJO Y PRESIÓN CERTIFICADO
             </span>
           </div>
 
-          <div className="p-6 rounded-[5px] bg-zinc-900 border border-zinc-800 shadow-xl space-y-3">
-            <div className="w-12 h-12 rounded-[3px] bg-zinc-950 border border-zinc-800 text-amber-400 flex items-center justify-center">
+          <div className="p-6 rounded-[5px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-sm dark:shadow-xl space-y-3">
+            <div className="w-12 h-12 rounded-[3px] bg-slate-100 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-amber-500 flex items-center justify-center">
               <ShieldCheck className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-black text-white uppercase tracking-wider">
+            <h3 className="text-base font-black text-slate-900 dark:text-white uppercase tracking-wider">
               CONTRATOS TMD MASTERCARE
             </h3>
-            <p className="text-xs text-zinc-400 leading-relaxed font-sans">
+            <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed font-sans">
               Programas preventivos programados cada 250, 500 y 1,000 horas de operación para minimizar paradas imprevistas y extender la vida útil de su flota pesada con kits OEM.
             </p>
-            <span className="text-xs font-mono font-bold text-amber-400 block uppercase">
+            <span className="text-xs font-mono font-bold text-amber-600 dark:text-amber-400 block uppercase">
               TARIFAS PREFERENCIALES FIJAS Y GARANTÍA EXTENDIDA
             </span>
           </div>
@@ -466,23 +466,23 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
         <div className="space-y-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[2px] bg-zinc-900 border border-zinc-800 text-amber-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-2">
-                <Sparkles className="w-3 h-3 text-amber-400" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[2px] bg-amber-500/10 dark:bg-zinc-900 border border-amber-500/30 dark:border-zinc-800 text-amber-700 dark:text-amber-400 text-[10px] font-mono font-bold uppercase tracking-wider mb-2">
+                <Sparkles className="w-3 h-3 text-amber-500" />
                 <span>PLANIFICACIÓN TÉCNICA CERTIFICADA • INTERVALOS 250H / 500H / 1,000H / 2,000H</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight font-display">
-                SELECTOR DE INTERVALOS <span className="text-amber-400">TMD INDUSTRIAL</span>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white uppercase tracking-tight font-display">
+                SELECTOR DE INTERVALOS <span className="text-amber-500">TMD INDUSTRIAL</span>
               </h2>
-              <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-3xl font-sans leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 mt-1 max-w-3xl font-sans leading-relaxed">
                 Seleccione el intervalo según el horómetro de su máquina para consultar el resumen visual de tareas técnicas obligatorias, kits de filtración genuinos y agendar la cuadrilla móvil 4x4 o ingreso a bahía en el Taller Km 22.
               </p>
             </div>
 
             {/* Current Active Selection Pill */}
-            <div className="self-start md:self-auto px-3.5 py-2 rounded-[3px] bg-zinc-900 border border-zinc-800 flex items-center gap-2.5 font-mono text-xs shadow-md">
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-              <span className="text-zinc-400 text-[11px] uppercase">INTERVALO ACTIVO:</span>
-              <span className="font-black text-amber-400 uppercase">
+            <div className="self-start md:self-auto px-3.5 py-2 rounded-[3px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 flex items-center gap-2.5 font-mono text-xs shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+              <span className="text-slate-500 dark:text-zinc-400 text-[11px] uppercase">INTERVALO ACTIVO:</span>
+              <span className="font-black text-amber-600 dark:text-amber-400 uppercase">
                 {MAINTENANCE_TIERS.find(t => t.id === selectedTier)?.label}
               </span>
             </div>
@@ -498,16 +498,16 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                 <div
                   key={tier.id}
                   onClick={() => handleSelectTier(tier.id, tier.serviceTypeName)}
-                  className={`relative flex flex-col justify-between p-5 sm:p-6 rounded-[5px] bg-zinc-900 border transition-all duration-300 cursor-pointer group overflow-hidden ${
+                  className={`relative flex flex-col justify-between p-5 sm:p-6 rounded-[5px] border transition-all duration-300 cursor-pointer group overflow-hidden ${
                     isSelected
-                      ? 'border-amber-400 bg-zinc-900 shadow-[0_0_35px_rgba(251,191,36,0.16)] ring-1 ring-amber-400/50'
-                      : 'border-zinc-800 hover:border-amber-400/70 hover:shadow-[0_0_25px_rgba(251,191,36,0.09)] bg-zinc-900/90'
+                      ? 'border-amber-500 bg-amber-50/30 dark:bg-zinc-900 shadow-md ring-1 ring-amber-500/50'
+                      : 'border-slate-200 dark:border-zinc-800 hover:border-amber-500/70 bg-white dark:bg-zinc-900/90 shadow-sm'
                   }`}
                 >
                   {/* Top Amber Accent Strip (Illuminates on Hover & Selected) */}
                   <div 
                     className={`absolute top-0 left-0 right-0 h-1 transition-all duration-300 ${
-                      isSelected ? 'bg-amber-400' : 'bg-transparent group-hover:bg-amber-400'
+                      isSelected ? 'bg-amber-500' : 'bg-transparent group-hover:bg-amber-500'
                     }`} 
                   />
 
@@ -517,16 +517,16 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                   {/* Card Content Top Header */}
                   <div>
                     {/* Top Row: Horometer Display + Category Badge */}
-                    <div className="flex items-center justify-between gap-2 pb-3 border-b border-zinc-800/80">
+                    <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-200 dark:border-zinc-800/80">
                       <div className="flex items-baseline gap-1 font-mono font-black">
-                        <span className="text-2xl sm:text-3xl text-white tracking-tight group-hover:text-amber-400 transition-colors">
+                        <span className="text-2xl sm:text-3xl text-slate-900 dark:text-white tracking-tight group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
                           {tier.hours}
                         </span>
-                        <span className="text-amber-400 text-xs tracking-wider">HORAS</span>
+                        <span className="text-amber-600 dark:text-amber-400 text-xs tracking-wider">HORAS</span>
                       </div>
 
                       {isSelected ? (
-                        <span className="px-2 py-0.5 rounded-[2px] bg-amber-400 text-black text-[9px] font-mono font-black uppercase tracking-wider flex items-center gap-1 shadow-xs">
+                        <span className="px-2 py-0.5 rounded-[2px] bg-amber-500 text-black text-[9px] font-mono font-black uppercase tracking-wider flex items-center gap-1 shadow-xs">
                           <Check className="w-3 h-3 stroke-[3]" /> ACTIVO
                         </span>
                       ) : (
@@ -538,31 +538,31 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
 
                     {/* Icon & Title */}
                     <div className="mt-4 flex items-start gap-3">
-                      <div className="w-11 h-11 rounded-[3px] bg-zinc-950 border border-zinc-800 text-amber-400 flex items-center justify-center group-hover:border-amber-400/50 group-hover:scale-105 group-hover:text-amber-300 transition-all duration-300 shrink-0 shadow-xs">
+                      <div className="w-11 h-11 rounded-[3px] bg-slate-100 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-amber-500 flex items-center justify-center group-hover:border-amber-500/50 group-hover:scale-105 transition-all duration-300 shrink-0 shadow-xs">
                         <IconComp className="w-5 h-5" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-sm font-black text-white uppercase tracking-tight font-display group-hover:text-amber-400 transition-colors">
+                        <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight font-display group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
                           {tier.title}
                         </h3>
-                        <p className="text-[11px] text-zinc-400 font-sans mt-0.5 leading-snug">
+                        <p className="text-[11px] text-slate-500 dark:text-zinc-400 font-sans mt-0.5 leading-snug">
                           {tier.tagline}
                         </p>
                       </div>
                     </div>
 
                     {/* Quick Operational Metrics */}
-                    <div className="p-2.5 rounded-[3px] bg-zinc-950 border border-zinc-800 grid grid-cols-2 gap-2 text-xs font-mono my-3.5">
+                    <div className="p-2.5 rounded-[3px] bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 grid grid-cols-2 gap-2 text-xs font-mono my-3.5">
                       <div>
-                        <span className="text-[9px] text-zinc-500 uppercase block font-bold">DURACIÓN TÉCNICA</span>
-                        <span className="text-[11px] font-bold text-amber-400 flex items-center gap-1 mt-0.5">
-                          <Clock className="w-3 h-3 text-amber-400" />
+                        <span className="text-[9px] text-slate-500 dark:text-zinc-500 uppercase block font-bold">DURACIÓN TÉCNICA</span>
+                        <span className="text-[11px] font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1 mt-0.5">
+                          <Clock className="w-3 h-3 text-amber-500" />
                           {tier.estimatedTime}
                         </span>
                       </div>
                       <div>
-                        <span className="text-[9px] text-zinc-500 uppercase block font-bold">MODALIDAD DESPACHO</span>
-                        <span className="text-[11px] font-bold text-zinc-300 block truncate mt-0.5">
+                        <span className="text-[9px] text-slate-500 dark:text-zinc-500 uppercase block font-bold">MODALIDAD DESPACHO</span>
+                        <span className="text-[11px] font-bold text-slate-800 dark:text-zinc-300 block truncate mt-0.5">
                           {tier.laborType}
                         </span>
                       </div>
@@ -570,18 +570,18 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
 
                     {/* Visual Summary of Included Service Tasks */}
                     <div className="space-y-2 pt-1">
-                      <div className="flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-400 pb-1.5 border-b border-zinc-800">
-                        <span className="flex items-center gap-1.5 text-zinc-300">
-                          <Wrench className="w-3 h-3 text-amber-400" />
+                      <div className="flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 dark:text-zinc-400 pb-1.5 border-b border-slate-200 dark:border-zinc-800">
+                        <span className="flex items-center gap-1.5 text-slate-700 dark:text-zinc-300">
+                          <Wrench className="w-3 h-3 text-amber-500" />
                           TAREAS INCLUIDAS ({tier.tasks.length})
                         </span>
-                        <span className="text-amber-400 font-black">OFICIAL</span>
+                        <span className="text-amber-600 dark:text-amber-400 font-black">OFICIAL</span>
                       </div>
                       
                       <ul className="space-y-2 my-2">
                         {tier.tasks.map((task, tIdx) => (
-                          <li key={tIdx} className="flex items-start gap-2 text-xs text-zinc-300 font-sans leading-relaxed">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                          <li key={tIdx} className="flex items-start gap-2 text-xs text-slate-700 dark:text-zinc-300 font-sans leading-relaxed">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-amber-500 shrink-0 mt-0.5" />
                             <span>{task}</span>
                           </li>
                         ))}
@@ -589,16 +589,16 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                     </div>
 
                     {/* Key OEM Parts & Filtration Box */}
-                    <div className="p-2.5 rounded-[3px] bg-zinc-950 border border-zinc-800 space-y-1.5 my-3.5 font-mono">
+                    <div className="p-2.5 rounded-[3px] bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 space-y-1.5 my-3.5 font-mono">
                       <div className="flex items-center justify-between text-[9px] font-bold uppercase tracking-wider">
-                        <span className="text-amber-400">REPUESTOS & FLUIDOS OEM:</span>
-                        <span className="text-zinc-500">{tier.frequencyNote}</span>
+                        <span className="text-amber-600 dark:text-amber-400">REPUESTOS & FLUIDOS OEM:</span>
+                        <span className="text-slate-500 dark:text-zinc-500">{tier.frequencyNote}</span>
                       </div>
                       <div className="flex flex-wrap gap-1">
                         {tier.keyParts.map((part, pIdx) => (
                           <span 
                             key={pIdx} 
-                            className="px-1.5 py-0.5 rounded-[2px] bg-zinc-900 border border-zinc-800 text-[10px] text-zinc-300 font-sans"
+                            className="px-1.5 py-0.5 rounded-[2px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-[10px] text-slate-700 dark:text-zinc-300 font-sans"
                           >
                             {part}
                           </span>
@@ -608,10 +608,10 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                   </div>
 
                   {/* Bottom Footer & Action Buttons */}
-                  <div className="pt-3 border-t border-zinc-800/80 space-y-2 mt-2">
-                    <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400">
-                      <span className="text-zinc-500">DIAGNÓSTICO:</span>
-                      <span className="text-emerald-400 font-bold truncate max-w-[170px] text-right">
+                  <div className="pt-3 border-t border-slate-200 dark:border-zinc-800/80 space-y-2 mt-2">
+                    <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 dark:text-zinc-400">
+                      <span className="text-slate-500 dark:text-zinc-500">DIAGNÓSTICO:</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-bold truncate max-w-[170px] text-right">
                         {tier.fluidInspection}
                       </span>
                     </div>
@@ -624,8 +624,8 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                       }}
                       className={`w-full py-2.5 px-3 rounded-[2px] font-mono text-xs font-black uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-xs ${
                         isSelected
-                          ? 'bg-amber-400 text-black shadow-md ring-1 ring-amber-400'
-                          : 'bg-zinc-950 border border-zinc-800 text-zinc-300 group-hover:bg-amber-400 group-hover:text-black group-hover:border-amber-400'
+                          ? 'bg-amber-500 text-black shadow-md ring-1 ring-amber-500'
+                          : 'bg-slate-100 dark:bg-zinc-950 border border-slate-300 dark:border-zinc-800 text-slate-800 dark:text-zinc-300 group-hover:bg-amber-500 group-hover:text-black group-hover:border-amber-500'
                       }`}
                     >
                       <span>{isSelected ? 'INTERVALO SELECCIONADO' : 'AGENDAR ESTE INTERVALO'}</span>
@@ -653,32 +653,32 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
         {/* Service Booking Request Form */}
         <div 
           ref={formSectionRef}
-          className="bg-zinc-900 rounded-[5px] border border-zinc-800 p-6 sm:p-10 shadow-2xl"
+          className="bg-white dark:bg-zinc-900 rounded-[5px] border border-slate-200 dark:border-zinc-800 p-6 sm:p-10 shadow-sm dark:shadow-2xl"
         >
           <div className="max-w-2xl mb-8">
-            <span className="text-[10px] font-mono font-black uppercase tracking-wider text-amber-400">
+            <span className="text-[10px] font-mono font-black uppercase tracking-wider text-amber-600 dark:text-amber-400">
               AGENDAMIENTO DIRECTO CON TALLER
             </span>
-            <h2 className="text-2xl font-black text-white mt-1 uppercase tracking-tight">
+            <h2 className="text-2xl font-black text-slate-900 dark:text-white mt-1 uppercase tracking-tight">
               SOLICITAR ASISTENCIA TÉCNICA O TALLER MÓVIL
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-400 mt-1 font-sans">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 mt-1 font-sans">
               Complete la ficha técnica para que el jefe de taller de TMD asigne el mecánico certificado y la unidad móvil más cercana a su obra.
             </p>
           </div>
 
           {submitted ? (
-            <div className="p-8 rounded-[5px] bg-zinc-950 border border-emerald-500/30 text-center max-w-lg mx-auto space-y-4 font-mono">
-              <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
+            <div className="p-8 rounded-[5px] bg-slate-50 dark:bg-zinc-950 border border-emerald-500/30 text-center max-w-lg mx-auto space-y-4 font-mono shadow-xs">
+              <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
               <div>
-                <span className="px-3 py-1 rounded-[3px] bg-zinc-900 border border-zinc-800 text-emerald-400 font-black text-xs uppercase">
+                <span className="px-3 py-1 rounded-[3px] bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-400 font-black text-xs uppercase">
                   TICKET: {ticketNumber}
                 </span>
-                <h3 className="text-lg font-black text-white mt-2 uppercase font-display">
+                <h3 className="text-lg font-black text-slate-900 dark:text-white mt-2 uppercase font-display">
                   ¡SOLICITUD DE SERVICIO REGISTRADA!
                 </h3>
               </div>
-              <p className="text-xs text-zinc-300 leading-relaxed font-sans">
+              <p className="text-xs text-slate-600 dark:text-zinc-300 leading-relaxed font-sans">
                 El equipo de guardia técnica de TMD Dominicana le contactará al teléfono <strong>{formData.phone}</strong> en los próximos 15 minutos para coordinar la intervención en {formData.location || 'su obra'}.
               </p>
               
@@ -687,13 +687,13 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                   href={`https://wa.me/18095601234?text=${encodeURIComponent(`Hola TMD, he registrado la solicitud ${ticketNumber} para el equipo ${formData.equipment || 'maquinaria'} en ${formData.location || 'obra'}.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-5 py-2.5 bg-zinc-900 hover:bg-zinc-850 text-emerald-400 border border-zinc-800 font-black uppercase tracking-wider text-xs rounded-[3px] transition-all flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-5 py-2.5 bg-emerald-500 hover:bg-emerald-400 text-black font-black uppercase tracking-wider text-xs rounded-[3px] transition-all flex items-center justify-center gap-2 shadow-xs"
                 >
                   <span>CONFIRMAR POR WHATSAPP</span>
                 </a>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="w-full sm:w-auto px-5 py-2.5 bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white font-black uppercase tracking-wider text-xs rounded-[3px] border border-zinc-800 transition-all cursor-pointer"
+                  className="w-full sm:w-auto px-5 py-2.5 bg-slate-100 dark:bg-zinc-900 hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-300 hover:text-slate-950 dark:hover:text-white font-black uppercase tracking-wider text-xs rounded-[3px] border border-slate-300 dark:border-zinc-800 transition-all cursor-pointer shadow-xs"
                 >
                   NUEVA SOLICITUD
                 </button>
@@ -702,7 +702,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
           ) : (
             <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
               <div>
-                <label className="block font-black text-zinc-400 mb-1.5 text-[11px] uppercase tracking-wider font-mono">
+                <label className="block font-black text-slate-600 dark:text-zinc-400 mb-1.5 text-[11px] uppercase tracking-wider font-mono">
                   NOMBRE DE CONTACTO *
                 </label>
                 <input
@@ -711,12 +711,12 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                   placeholder="ING. JUAN PÉREZ"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full p-3 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white text-xs placeholder-zinc-600 focus:border-amber-400 focus:outline-none uppercase font-mono"
+                  className="w-full p-3 rounded-[3px] bg-slate-50 dark:bg-zinc-950 border border-slate-300 dark:border-zinc-800 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-zinc-600 focus:border-amber-500 focus:bg-white dark:focus:bg-zinc-950 focus:outline-none uppercase font-mono"
                 />
               </div>
 
               <div>
-                <label className="block font-black text-zinc-400 mb-1.5 text-[11px] uppercase tracking-wider font-mono">
+                <label className="block font-black text-slate-600 dark:text-zinc-400 mb-1.5 text-[11px] uppercase tracking-wider font-mono">
                   TELÉFONO / WHATSAPP *
                 </label>
                 <input
@@ -725,12 +725,12 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                   placeholder="(809) 555-0123"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full p-3 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white text-xs placeholder-zinc-600 focus:border-amber-400 focus:outline-none font-mono"
+                  className="w-full p-3 rounded-[3px] bg-slate-50 dark:bg-zinc-950 border border-slate-300 dark:border-zinc-800 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-zinc-600 focus:border-amber-500 focus:bg-white dark:focus:bg-zinc-950 focus:outline-none font-mono"
                 />
               </div>
 
               <div>
-                <label className="block font-black text-zinc-400 mb-1.5 text-[11px] uppercase tracking-wider font-mono">
+                <label className="block font-black text-slate-600 dark:text-zinc-400 mb-1.5 text-[11px] uppercase tracking-wider font-mono">
                   EMPRESA O CONTRATISTA
                 </label>
                 <input
@@ -738,12 +738,12 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                   placeholder="CONSTRUCTORA DEL CARIBE S.R.L."
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="w-full p-3 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white text-xs placeholder-zinc-600 focus:border-amber-400 focus:outline-none uppercase font-mono"
+                  className="w-full p-3 rounded-[3px] bg-slate-50 dark:bg-zinc-950 border border-slate-300 dark:border-zinc-800 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-zinc-600 focus:border-amber-500 focus:bg-white dark:focus:bg-zinc-950 focus:outline-none uppercase font-mono"
                 />
               </div>
 
               <div>
-                <label className="block font-black text-zinc-400 mb-1.5 text-[11px] uppercase tracking-wider font-mono">
+                <label className="block font-black text-slate-600 dark:text-zinc-400 mb-1.5 text-[11px] uppercase tracking-wider font-mono">
                   EQUIPO Y MODELO *
                 </label>
                 <input
@@ -752,12 +752,12 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                   placeholder="JCB 3CX, LIUGONG 922E, ETC."
                   value={formData.equipment}
                   onChange={(e) => setFormData({ ...formData, equipment: e.target.value })}
-                  className="w-full p-3 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white text-xs placeholder-zinc-600 focus:border-amber-400 focus:outline-none uppercase font-mono"
+                  className="w-full p-3 rounded-[3px] bg-slate-50 dark:bg-zinc-950 border border-slate-300 dark:border-zinc-800 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-zinc-600 focus:border-amber-500 focus:bg-white dark:focus:bg-zinc-950 focus:outline-none uppercase font-mono"
                 />
               </div>
 
               <div>
-                <label className="block font-black text-zinc-400 mb-1.5 text-[11px] uppercase tracking-wider font-mono">
+                <label className="block font-black text-slate-600 dark:text-zinc-400 mb-1.5 text-[11px] uppercase tracking-wider font-mono">
                   UBICACIÓN / PROYECTO EN RD *
                 </label>
                 <input
@@ -766,16 +766,16 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                   placeholder="PUNTA CANA, BÁVARO, SANTIAGO, ETC."
                   value={formData.location}
                   onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                  className="w-full p-3 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white text-xs placeholder-zinc-600 focus:border-amber-400 focus:outline-none uppercase font-mono"
+                  className="w-full p-3 rounded-[3px] bg-slate-50 dark:bg-zinc-950 border border-slate-300 dark:border-zinc-800 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-zinc-600 focus:border-amber-500 focus:bg-white dark:focus:bg-zinc-950 focus:outline-none uppercase font-mono"
                 />
               </div>
 
               <div className="sm:col-span-2">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                  <label className="block font-black text-zinc-400 text-[11px] uppercase tracking-wider font-mono">
+                  <label className="block font-black text-slate-600 dark:text-zinc-400 text-[11px] uppercase tracking-wider font-mono">
                     TIPO DE REQUERIMIENTO O INTERVALO OEM *
                   </label>
-                  <span className="text-[10px] font-mono text-amber-400 font-bold uppercase">
+                  <span className="text-[10px] font-mono text-amber-600 dark:text-amber-400 font-bold uppercase">
                     SELECCIÓN RÁPIDA POR HORÓMETRO:
                   </span>
                 </div>
@@ -791,8 +791,8 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                         onClick={() => handleSelectTier(tier.id, tier.serviceTypeName)}
                         className={`p-2.5 rounded-[3px] border font-mono text-left transition-all duration-200 cursor-pointer ${
                           isTierSelected
-                            ? 'bg-amber-400 text-black border-amber-400 shadow-md font-bold'
-                            : 'bg-zinc-950 border-zinc-800 text-zinc-300 hover:border-amber-400/60 hover:text-white'
+                            ? 'bg-amber-500 text-black border-amber-500 shadow-sm font-bold'
+                            : 'bg-slate-50 dark:bg-zinc-950 border-slate-300 dark:border-zinc-800 text-slate-700 dark:text-zinc-300 hover:border-amber-500/60'
                         }`}
                       >
                         <div className="flex items-center justify-between">
@@ -808,7 +808,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                 <select
                   value={formData.serviceType}
                   onChange={(e) => handleServiceTypeChange(e.target.value)}
-                  className="w-full p-3 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white text-xs focus:border-amber-400 focus:outline-none uppercase font-mono"
+                  className="w-full p-3 rounded-[3px] bg-slate-50 dark:bg-zinc-950 border border-slate-300 dark:border-zinc-800 text-slate-900 dark:text-white text-xs focus:border-amber-500 focus:bg-white dark:focus:bg-zinc-950 focus:outline-none uppercase font-mono"
                 >
                   <option value="Mantenimiento Preventivo (250h)">Mantenimiento Preventivo (250h) - Menor & Lubricación Crítica</option>
                   <option value="Mantenimiento Preventivo (500h)">Mantenimiento Preventivo (500h) - Estándar & Filtración Total Diésel</option>
@@ -823,7 +823,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
               </div>
 
               <div className="sm:col-span-2">
-                <label className="block font-black text-zinc-400 mb-1.5 text-[11px] uppercase tracking-wider font-mono">
+                <label className="block font-black text-slate-600 dark:text-zinc-400 mb-1.5 text-[11px] uppercase tracking-wider font-mono">
                   DESCRIPCIÓN DE LA FALLA O SÍNTOMAS
                 </label>
                 <textarea
@@ -831,7 +831,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                   placeholder="Describa brevemente la anomalía..."
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full p-3 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white text-xs placeholder-zinc-600 focus:border-amber-400 focus:outline-none font-mono"
+                  className="w-full p-3 rounded-[3px] bg-slate-50 dark:bg-zinc-950 border border-slate-300 dark:border-zinc-800 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-zinc-600 focus:border-amber-500 focus:bg-white dark:focus:bg-zinc-950 focus:outline-none font-mono"
                 />
               </div>
 

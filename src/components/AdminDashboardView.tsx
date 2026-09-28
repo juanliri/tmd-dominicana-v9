@@ -324,16 +324,16 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
   const partAlertsCount = alerts.filter(a => a.itemType === 'part').length;
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 pb-20">
+    <div className="min-h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 pb-20">
       {/* Top Banner & Navigation Header */}
-      <div className="bg-zinc-900 border-b border-zinc-800 sticky top-0 z-30 shadow-2xl">
+      <div className="bg-white dark:bg-zinc-900 border-b border-slate-200 dark:border-zinc-800 sticky top-0 z-30 shadow-sm dark:shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             {/* Left Brand & Title */}
             <div className="flex items-center gap-3">
               <button
                 onClick={() => onNavigate('#/portal')}
-                className="p-2 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 transition-colors cursor-pointer"
+                className="p-2 rounded-[2px] bg-slate-100 dark:bg-zinc-950 hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-700 dark:text-zinc-300 border border-slate-300 dark:border-zinc-800 transition-colors cursor-pointer"
                 title="Volver al Portal General"
               >
                 <ArrowLeft className="w-4 h-4" />
@@ -344,11 +344,11 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
                   <span className="px-2 py-0.5 rounded-[2px] text-[10px] font-mono font-bold uppercase tracking-wider bg-amber-400 text-black">
                     ADMIN HQ
                   </span>
-                  <h1 className="text-sm sm:text-base font-black uppercase tracking-tight text-white">
+                  <h1 className="text-sm sm:text-base font-black uppercase tracking-tight text-slate-900 dark:text-white">
                     Dashboard de Administración
                   </h1>
                 </div>
-                <p className="text-[11px] font-mono text-zinc-400">
+                <p className="text-[11px] font-mono text-slate-500 dark:text-zinc-400">
                   TMD Dominicana • {currentUser.email}
                 </p>
               </div>
@@ -510,13 +510,13 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
           </div>
 
           {/* Navigation Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pt-3 border-t border-zinc-800 mt-2.5 scrollbar-none font-mono text-xs">
+          <div className="flex items-center gap-1.5 overflow-x-auto pt-3 border-t border-slate-200 dark:border-zinc-800 mt-2.5 scrollbar-none font-mono text-xs">
             <button
               onClick={() => setActiveTab('command_grid')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap ${
                 activeTab === 'command_grid'
                   ? 'bg-amber-400 text-black font-mono shadow-xs'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+                  : 'text-slate-600 dark:text-zinc-400 hover:bg-slate-100 dark:hover:bg-zinc-800 hover:text-slate-900 dark:hover:text-zinc-200'
               }`}
             >
               <LayoutGrid className="w-3.5 h-3.5" />
