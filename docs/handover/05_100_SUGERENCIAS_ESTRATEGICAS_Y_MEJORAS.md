@@ -17,7 +17,7 @@ Esta matriz contiene **100 recomendaciones de grado de ingeniería y dirección 
 | **Sprint 5** | Geotecnia, Suelos RD & Operaciones Taller | #4 (Presión Suelo / Orugas), #8 (Baldes Geología RD), #86 (Espectrometría S.O.S.), #87 (Bahías Taller), #91 (Test Drive Patio) | `c70b7d5` | 🟢 Producción Desplegado |
 | **Sprint 6** | Fiscalidad DGII, Contratos PMA & Taller Pericial | #70 (Desglose ITBIS & Retenciones), #76 (PMA 1k/2k/3k Horas), #82 (Acta Pericial Taller), #85 (Rótulos Zebra 100x50), #90 (TMD Reman) | `cf531eb` | 🟢 Producción Desplegado |
 | **Sprint 7** | UX Cotización, Búsqueda, Vencimiento & Pagos Tarjeta | #14 (Stepper 4 Pasos & Firma), #19 (Match Highlight Repuestos), #67 (Control Vigencia 15D), #68 (Permuta Usados Trade-In), #75 (Cardnet/Azul 3DS) | `cdc5859` | 🟢 Producción Desplegado |
-| **Sprint 8** | Telemetría Satelital, Control Ralentí & Salvaguarda Comercial | #10 (Toast Agrupables), #49 (Playback Rutas GPS 7D), #50 (Ralentí & Desperdicio Diésel), #73 (Implementos OEM Checkout), #77 (Guardia Margen Mínimo 12%) | Pendiente | 🟢 Producción Desplegado |
+| **Sprint 8** | Telemetría Satelital, Control Ralentí & Salvaguarda Comercial | #10 (Toast Agrupables), #49 (Playback Rutas GPS 7D), #50 (Ralentí & Desperdicio Diésel), #73 (Implementos OEM Checkout), #77 (Guardia Margen Mínimo 12%) | `d4787c3` | 🟢 Producción Desplegado |
 
 **Avance Acumulado:** **40 de 100 Tareas Estratégicas (40% del Plan Maestro completado)**.
 
