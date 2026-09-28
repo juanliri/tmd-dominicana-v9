@@ -18,8 +18,9 @@ Esta matriz contiene **100 recomendaciones de grado de ingeniería y dirección 
 | **Sprint 6** | Fiscalidad DGII, Contratos PMA & Taller Pericial | #70 (Desglose ITBIS & Retenciones), #76 (PMA 1k/2k/3k Horas), #82 (Acta Pericial Taller), #85 (Rótulos Zebra 100x50), #90 (TMD Reman) | `cf531eb` | 🟢 Producción Desplegado |
 | **Sprint 7** | UX Cotización, Búsqueda, Vencimiento & Pagos Tarjeta | #14 (Stepper 4 Pasos & Firma), #19 (Match Highlight Repuestos), #67 (Control Vigencia 15D), #68 (Permuta Usados Trade-In), #75 (Cardnet/Azul 3DS) | `cdc5859` | 🟢 Producción Desplegado |
 | **Sprint 8** | Telemetría Satelital, Control Ralentí & Salvaguarda Comercial | #10 (Toast Agrupables), #49 (Playback Rutas GPS 7D), #50 (Ralentí & Desperdicio Diésel), #73 (Implementos OEM Checkout), #77 (Guardia Margen Mínimo 12%) | `d4787c3` | 🟢 Producción Desplegado |
+| **Sprint 9** | Redes Sociales, Seguridad Diésel, Batería 24V, Auxilio 4x4 & Reorden Crítico | #17 (Flyer Social 1080x1920/1x1), #45 (Centinela Diésel J1939 Anti-Robo), #54 (Inspector 24V Alternador/Batería), #81 (Radar Despacho Auxilio 4x4 GPS), #92 (Puntos Reorden Crítico & PO) | `PENDING_COMMIT` | 🟢 Producción Desplegado |
 
-**Avance Acumulado:** **40 de 100 Tareas Estratégicas (40% del Plan Maestro completado)**.
+**Avance Acumulado:** **45 de 100 Tareas Estratégicas (45% del Plan Maestro completado)**.
 
 ---
 

@@ -35,7 +35,8 @@ import {
   FlaskConical,
   Mountain,
   Repeat,
-  Clock
+  Clock,
+  Share2
 } from 'lucide-react';
 import { Machine, MachineCustomizationOption } from '../../types';
 import { useCart } from '../../context/CartContext';
@@ -69,6 +70,7 @@ import { RemanExchangeCatalogModal } from '../reman/RemanExchangeCatalogModal';
 import { DgiiTaxWithholdingBreakdown } from '../calculator/DgiiTaxWithholdingBreakdown';
 import { TradeInValuationModal } from './TradeInValuationModal';
 import { QuoteExpirationAlertModal } from '../quotes/QuoteExpirationAlertModal';
+import { MachineSocialFlyerModal } from './MachineSocialFlyerModal';
 
 interface MachineDetailStudioModalProps {
   machine: Machine | null;
@@ -206,6 +208,7 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   const [isRemanCatalogOpen, setIsRemanCatalogOpen] = useState<boolean>(false);
   const [isTradeInOpen, setIsTradeInOpen] = useState<boolean>(false);
   const [isQuoteExpirationOpen, setIsQuoteExpirationOpen] = useState<boolean>(false);
+  const [isSocialFlyerOpen, setIsSocialFlyerOpen] = useState<boolean>(false);
   const [tradeInCredit, setTradeInCredit] = useState<{ creditUsd: number; summary: string } | null>(null);
 
   // Accordion visibility states for secondary technical details (compacts mobile & desktop viewports)
@@ -369,6 +372,17 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
             >
               <Gauge className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Presión Suelo</span>
+            </button>
+
+            {/* Social Flyer & Story Generator (Sprint 9 Task #17) */}
+            <button
+              type="button"
+              onClick={() => setIsSocialFlyerOpen(true)}
+              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
+              title="Generar Flyer publicitario descargable en HD (1080x1920) para WhatsApp y Redes Sociales"
+            >
+              <Share2 className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Flyer Social</span>
             </button>
 
             {onOpen360 && (
@@ -1513,6 +1527,13 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
         machineOrItemsSummary={machine.name}
         totalUsd={totalInvestmentUsd}
         exchangeRate={USD_TO_DOP_RATE}
+      />
+
+      {/* Sprint 9 Task #17: Social Flyer & Story Generator Modal */}
+      <MachineSocialFlyerModal
+        isOpen={isSocialFlyerOpen}
+        onClose={() => setIsSocialFlyerOpen(false)}
+        machine={machine}
       />
     </div>,
     document.body

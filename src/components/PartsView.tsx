@@ -53,6 +53,7 @@ import { InventoryAuditTrail } from './common/InventoryAuditTrail';
 import { InventoryLabelPdfModal } from './common/InventoryLabelPdfModal';
 import { WarehouseBinLabelModal } from './common/WarehouseBinLabelModal';
 import { RemanExchangeCatalogModal } from './reman/RemanExchangeCatalogModal';
+import { CriticalStockReorderModal } from './parts/CriticalStockReorderModal';
 import { TextHighlight } from './common/TextHighlight';
 import { downloadProductQrCode } from '../utils/qrExporter';
 
@@ -212,6 +213,7 @@ export const PartsView = React.memo<PartsViewProps>(({
   const [labelPdfPart, setLabelPdfPart] = useState<Part | null>(null);
   const [binLabelPart, setBinLabelPart] = useState<Part | null>(null);
   const [isRemanModalOpen, setIsRemanModalOpen] = useState<boolean>(false);
+  const [isCriticalStockOpen, setIsCriticalStockOpen] = useState<boolean>(false);
   const [isExportPdfOpen, setIsExportPdfOpen] = useState<boolean>(false);
 
 
@@ -507,6 +509,17 @@ export const PartsView = React.memo<PartsViewProps>(({
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>REMAN (-45%)</span>
+            </button>
+
+            {/* Sprint 9 Task #92: Automated Reorder Points & Critical Stock Management */}
+            <button
+              type="button"
+              onClick={() => setIsCriticalStockOpen(true)}
+              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-amber-400/10 hover:bg-amber-400/20 text-amber-400 border-amber-400/30 shadow-xs"
+              title="Monitoreo de Puntos de Reorden y Generador de Órdenes de Compra (PO)"
+            >
+              <Package className="w-3.5 h-3.5 text-amber-400" />
+              <span>REORDEN STOCK</span>
             </button>
 
             {/* Task #85: Warehouse Shelf Bin Label Generator (Zebra / Avery 100x50mm) */}
@@ -1289,6 +1302,12 @@ export const PartsView = React.memo<PartsViewProps>(({
         isOpen={isRemanModalOpen}
         onClose={() => setIsRemanModalOpen(false)}
         onNavigate={onNavigate}
+      />
+
+      {/* Task #92: Automated Reorder Points & Critical Stock Management Modal */}
+      <CriticalStockReorderModal
+        isOpen={isCriticalStockOpen}
+        onClose={() => setIsCriticalStockOpen(false)}
       />
     </div>
   );

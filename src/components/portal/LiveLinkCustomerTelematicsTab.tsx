@@ -41,6 +41,9 @@ import { createFullbayOrderFromLiveLink } from '../../services/fullbayService';
 import { downloadTelematicsReportPDF } from '../../utils/pdfGenerator';
 import { RoutePlaybackModal } from '../telematics/RoutePlaybackModal';
 import { IdleTimeAnalyticsModal } from '../telematics/IdleTimeAnalyticsModal';
+import { FuelTheftProtectionModal } from '../telematics/FuelTheftProtectionModal';
+import { BatteryHealthModal } from '../telematics/BatteryHealthModal';
+import { FieldServiceDispatchRadarModal } from '../emergency/FieldServiceDispatchRadarModal';
 
 interface LiveLinkCustomerTelematicsTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -79,6 +82,11 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
   // Sprint 8 Task #49 & #50 Modals State
   const [showRoutePlaybackModal, setShowRoutePlaybackModal] = useState<boolean>(false);
   const [showIdleModal, setShowIdleModal] = useState<boolean>(false);
+
+  // Sprint 9 Task #45, #54 & #81 Modals State
+  const [showFuelTheftModal, setShowFuelTheftModal] = useState<boolean>(false);
+  const [showBatteryModal, setShowBatteryModal] = useState<boolean>(false);
+  const [showDispatchRadarModal, setShowDispatchRadarModal] = useState<boolean>(false);
 
   const loadData = async () => {
     try {
@@ -494,6 +502,16 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
 
                   <button
                     type="button"
+                    onClick={() => setShowDispatchRadarModal(true)}
+                    className="px-2.5 py-1.5 rounded-[2px] bg-rose-600 hover:bg-rose-500 text-white font-bold font-display uppercase tracking-wider text-[11px] flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+                    title="Despachar Unidad Móvil de Auxilio Técnico 4x4 con GPS en Vivo"
+                  >
+                    <Truck className="w-3.5 h-3.5 text-white" />
+                    <span>Auxilio 4x4</span>
+                  </button>
+
+                  <button
+                    type="button"
                     onClick={() => setShowRoutePlaybackModal(true)}
                     className="px-2.5 py-1.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-amber-400 border border-amber-400/40 font-bold font-display uppercase tracking-wider text-[11px] flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
                     title="Reproducir Historial Satelital de Rutas (7 Días)"
@@ -608,14 +626,26 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                     </div>
 
                     {/* Fuel Level */}
-                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800">
-                      <span className="text-[11px] font-bold text-zinc-400 block font-display uppercase tracking-wider">Combustible Diésel</span>
-                      <div className="text-2xl font-black text-amber-400 mt-1 font-mono">
-                        {selectedUnit.fuelLevelPercent}%
+                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800 flex flex-col justify-between">
+                      <div>
+                        <span className="text-[11px] font-bold text-zinc-400 block font-display uppercase tracking-wider">Combustible Diésel</span>
+                        <div className="text-2xl font-black text-amber-400 mt-1 font-mono">
+                          {selectedUnit.fuelLevelPercent}%
+                        </div>
+                        <div className="mt-1 text-[11px] text-zinc-400 font-mono">
+                          Consumo: {selectedUnit.fuelConsumptionLph} L/h
+                        </div>
                       </div>
-                      <div className="mt-2 text-[11px] text-zinc-400 font-mono">
-                        Consumo: {selectedUnit.fuelConsumptionLph} L/h
-                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setShowFuelTheftModal(true)}
+                        className="mt-2 text-[10px] text-amber-400 hover:text-amber-300 font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer pt-1 border-t border-zinc-900"
+                        title="Abrir Algoritmo Predictivo y Centinela Antirrobo de Diésel"
+                      >
+                        <span>Centinela Antirrobo</span>
+                        <ChevronRight className="w-3 h-3" />
+                      </button>
                     </div>
 
                     {/* Engine Temperature */}
@@ -632,14 +662,26 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                     </div>
 
                     {/* Battery Voltage */}
-                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800">
-                      <span className="text-[11px] font-bold text-zinc-400 block font-display uppercase tracking-wider">Batería Alternador</span>
-                      <div className="text-2xl font-black text-cyan-400 mt-1 font-mono">
-                        {selectedUnit.batteryVoltage} V
+                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800 flex flex-col justify-between">
+                      <div>
+                        <span className="text-[11px] font-bold text-zinc-400 block font-display uppercase tracking-wider">Batería Alternador</span>
+                        <div className="text-2xl font-black text-cyan-400 mt-1 font-mono">
+                          {selectedUnit.batteryVoltage} V
+                        </div>
+                        <div className="mt-1 text-[11px] text-emerald-400 font-mono">
+                          DEF / Urea: {selectedUnit.defLevelPercent}%
+                        </div>
                       </div>
-                      <div className="mt-2 text-[11px] text-emerald-400 font-mono">
-                        DEF / Urea: {selectedUnit.defLevelPercent}%
-                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setShowBatteryModal(true)}
+                        className="mt-2 text-[10px] text-cyan-400 hover:text-cyan-300 font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer pt-1 border-t border-zinc-900"
+                        title="Inspeccionar salud del bus eléctrico 24V y alternador"
+                      >
+                        <span>Diagnóstico 24V</span>
+                        <ChevronRight className="w-3 h-3" />
+                      </button>
                     </div>
                   </div>
 
@@ -1192,6 +1234,27 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
         isOpen={showIdleModal}
         onClose={() => setShowIdleModal(false)}
         unit={selectedUnit}
+      />
+
+      {/* Fuel Theft Protection & Night Sentry Modal (Sprint 9 Task #45) */}
+      <FuelTheftProtectionModal
+        isOpen={showFuelTheftModal}
+        onClose={() => setShowFuelTheftModal(false)}
+        unit={selectedUnit}
+      />
+
+      {/* 24V Electrical Bus & Battery Health Modal (Sprint 9 Task #54) */}
+      <BatteryHealthModal
+        isOpen={showBatteryModal}
+        onClose={() => setShowBatteryModal(false)}
+        unit={selectedUnit}
+      />
+
+      {/* 4x4 Mobile Field Rescue Dispatch Radar Modal (Sprint 9 Task #81) */}
+      <FieldServiceDispatchRadarModal
+        isOpen={showDispatchRadarModal}
+        onClose={() => setShowDispatchRadarModal(false)}
+        targetUnit={selectedUnit}
       />
 
     </div>
