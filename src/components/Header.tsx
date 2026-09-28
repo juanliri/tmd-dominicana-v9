@@ -194,7 +194,7 @@ export const Header: React.FC<HeaderProps> = ({
   // -------------------------------------------------------------
   if (isAdminMode) {
     return (
-      <header className="sticky top-0 z-40 w-full border-b border-zinc-800 bg-zinc-950 text-white shadow-md">
+      <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-950 text-slate-900 dark:text-white shadow-xs dark:shadow-md">
         <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-12 max-w-[1780px] mx-auto h-14 flex items-center justify-between gap-4">
           {/* Brand & Admin Badge */}
           <div className="flex items-center gap-3">
@@ -205,12 +205,12 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <TMDLogo variant="responsive" className="h-8 sm:h-9 group-hover:scale-105 transition-transform" />
             </button>
-            <span className="text-zinc-700">/</span>
-            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-black">
+            <span className="text-slate-300 dark:text-zinc-700">/</span>
+            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-black">
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>ADMIN HQ</span>
             </div>
-            <div className="hidden lg:flex items-center gap-1.5 text-[11px] text-zinc-400 pl-2 border-l border-zinc-800">
+            <div className="hidden lg:flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-zinc-400 pl-2 border-l border-slate-200 dark:border-zinc-800">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>Firestore En Vivo</span>
             </div>
@@ -221,23 +221,23 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Quick Showroom Exit */}
             <button
               onClick={() => handleNav('#/home')}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-800 text-xs font-bold transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-slate-700 hover:text-slate-900 dark:text-zinc-300 dark:hover:text-white border border-slate-300 dark:border-zinc-800 text-xs font-bold transition-all cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5 text-amber-500" />
               <span className="hidden sm:inline">Ver Showroom</span>
             </button>
 
             {/* Currency selector for admin valuations */}
-            <div className="hidden sm:flex items-center gap-1 bg-zinc-900 rounded-lg p-0.5 border border-zinc-800">
+            <div className="hidden sm:flex items-center gap-1 bg-slate-100 dark:bg-zinc-900 rounded-lg p-0.5 border border-slate-300 dark:border-zinc-800">
               <button
                 onClick={() => setCurrency('USD')}
-                className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${currency === 'USD' ? 'bg-amber-500 text-black' : 'text-zinc-400 hover:text-white'}`}
+                className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${currency === 'USD' ? 'bg-amber-500 text-black' : 'text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'}`}
               >
                 USD
               </button>
               <button
                 onClick={() => setCurrency('DOP')}
-                className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${currency === 'DOP' ? 'bg-amber-500 text-black' : 'text-zinc-400 hover:text-white'}`}
+                className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${currency === 'DOP' ? 'bg-amber-500 text-black' : 'text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'}`}
               >
                 DOP
               </button>
@@ -246,7 +246,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Notifications */}
             <button
               onClick={openNotificationPanel}
-              className="relative p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors cursor-pointer"
+              className="relative p-2 rounded-lg text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
               title="Notificaciones Administrativas"
             >
               <Bell className="w-4 h-4" />
@@ -258,26 +258,27 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors cursor-pointer"
-              title="Alternar Tema"
+              aria-label="Alternar tema claro/oscuro"
+              className="p-2 rounded-lg text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
+              title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4" />}
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
             </button>
 
             {/* User Session Info */}
             {currentUser && (
-              <div className="hidden md:flex items-center gap-2 pl-2 border-l border-zinc-800 text-xs">
+              <div className="hidden md:flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-zinc-800 text-xs">
                 <div className="text-right">
-                  <div className="font-bold text-white leading-none">
+                  <div className="font-bold text-slate-900 dark:text-white leading-none">
                     {userProfile?.displayName || currentUser.email?.split('@')[0]}
                   </div>
-                  <div className="text-[10px] text-amber-400 uppercase font-semibold mt-0.5">
+                  <div className="text-[10px] text-amber-600 dark:text-amber-400 uppercase font-semibold mt-0.5">
                     {role || 'Admin'}
                   </div>
                 </div>
                 <button
                   onClick={signOut}
-                  className="p-1.5 rounded-lg text-zinc-400 hover:text-red-400 hover:bg-zinc-900 transition-colors"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:text-red-400 dark:hover:bg-zinc-900 transition-colors"
                   title="Cerrar Sesión"
                 >
                   <LogOut className="w-3.5 h-3.5" />
@@ -295,19 +296,19 @@ export const Header: React.FC<HeaderProps> = ({
   // -------------------------------------------------------------
   if (isPortalMode) {
     return (
-      <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-zinc-950/80 backdrop-blur-md text-white">
+      <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-white/10 bg-white/95 dark:bg-zinc-950/80 backdrop-blur-md text-slate-800 dark:text-white shadow-xs dark:shadow-md">
         <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-12 max-w-[1780px] mx-auto h-15 flex items-center justify-between gap-4 bg-transparent">
           <div className="flex items-center gap-3">
             <button onClick={() => handleNav('#/home')} className="flex items-center gap-2 cursor-pointer group" title="Ir al Showroom Principal">
               <TMDLogo variant="responsive" className="h-8 sm:h-9 group-hover:scale-105 transition-transform" />
-              <div className="hidden sm:block pl-3 border-l border-white/10">
+              <div className="hidden sm:block pl-3 border-l border-slate-200 dark:border-white/10">
                 <div className="flex items-center gap-1.5 leading-none">
-                  <span className="font-extrabold text-sm tracking-tight text-white">
+                  <span className="font-extrabold text-sm tracking-tight text-slate-900 dark:text-white">
                     {isAdmin ? 'PORTAL ADMINISTRATIVO' : isStaff ? 'PORTAL DE OFICINA & STAFF' : 'PORTAL DE CLIENTES'}
                   </span>
-                  <span className="text-amber-400 font-bold text-xs">RD</span>
+                  <span className="text-amber-500 font-bold text-xs">RD</span>
                 </div>
-                <span className="text-[10px] font-semibold text-zinc-400">
+                <span className="text-[10px] font-semibold text-slate-500 dark:text-zinc-400">
                   {isAdmin || isStaff ? 'Cotizaciones DGII, Despacho Km 22 y Clientes' : 'Flota, Facturación NCF y Servicios'}
                 </span>
               </div>
@@ -318,7 +319,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Quick Catalog Access */}
             <button
               onClick={() => handleNav('#/machinery')}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-900/70 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-white/10 text-xs font-bold transition-all cursor-pointer backdrop-blur-sm"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-zinc-900/70 dark:hover:bg-zinc-800 text-slate-700 hover:text-slate-900 dark:text-zinc-300 dark:hover:text-white border border-slate-200 dark:border-white/10 text-xs font-bold transition-all cursor-pointer backdrop-blur-sm"
             >
               <HardHat className="w-3.5 h-3.5 text-amber-500" />
               <span>Ver Catálogo Maquinaria</span>
@@ -329,10 +330,10 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={openVaultModal}
               className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer backdrop-blur-sm ${
                 !effectiveOnline || isSimulatedOffline
-                  ? 'bg-amber-500/20 text-amber-400 border-amber-500/40'
+                  ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/40'
                   : syncState === 'syncing'
-                  ? 'bg-blue-500/20 text-blue-400 border-blue-500/30'
-                  : 'bg-zinc-900/70 text-zinc-300 border-white/10 hover:border-amber-500'
+                  ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400 border-blue-500/30'
+                  : 'bg-slate-100 dark:bg-zinc-900/70 text-slate-700 dark:text-zinc-300 border-slate-200 dark:border-white/10 hover:border-amber-500'
               }`}
               title="Bóveda Técnica Offline PWA"
             >
@@ -355,7 +356,7 @@ export const Header: React.FC<HeaderProps> = ({
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-bold text-xs transition-all cursor-pointer backdrop-blur-sm ${
                 totalBadges > 0
                   ? 'bg-amber-500 hover:bg-amber-400 text-black shadow-sm'
-                  : 'bg-zinc-900/70 text-zinc-300 border border-white/10 hover:border-white/20'
+                  : 'bg-slate-100 hover:bg-slate-200 dark:bg-zinc-900/70 text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20'
               }`}
             >
               <ShoppingCart className="w-3.5 h-3.5" />
@@ -369,7 +370,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Notifications */}
             <button
               onClick={openNotificationPanel}
-              className="relative p-2 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-900/70 border border-transparent hover:border-white/10 transition-colors cursor-pointer"
+              className="relative p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-zinc-300 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-900/70 border border-transparent hover:border-slate-200 dark:hover:border-white/10 transition-colors cursor-pointer"
             >
               <Bell className="w-4 h-4" />
               {unreadCount > 0 && (
@@ -380,18 +381,20 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-900/70 border border-transparent hover:border-white/10 transition-colors cursor-pointer"
+              aria-label="Alternar tema claro/oscuro"
+              title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
+              className="p-2 rounded-xl text-slate-600 hover:text-slate-900 dark:text-zinc-300 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-900/70 border border-transparent hover:border-slate-200 dark:hover:border-white/10 transition-colors cursor-pointer"
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-zinc-300" />}
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
             </button>
 
             {/* Admin HQ shortcut if user is admin */}
             {isAdmin && (
               <button
                 onClick={() => handleNav('#/admin-dashboard')}
-                className="hidden lg:flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-zinc-900 text-amber-400 border border-zinc-700 text-xs font-black cursor-pointer"
+                className="hidden lg:flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-slate-100 dark:bg-zinc-900 text-amber-600 dark:text-amber-400 border border-slate-300 dark:border-zinc-700 text-xs font-black cursor-pointer"
               >
-                <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                <ShieldCheck className="w-3.5 h-3.5 text-amber-500" />
                 <span>Admin HQ</span>
               </button>
             )}
@@ -516,45 +519,47 @@ export const Header: React.FC<HeaderProps> = ({
       ref={headerRef}
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         isScrolled 
-          ? 'bg-[#06060a]/95 backdrop-blur-xl border-b border-white/[0.08] shadow-lg shadow-black/50' 
-          : 'bg-[#0a0a10]/90 backdrop-blur-xl border-b border-white/[0.06]'
+          ? 'bg-white/95 dark:bg-[#06060a]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/[0.08] shadow-lg shadow-black/5 dark:shadow-black/50' 
+          : 'bg-white/90 dark:bg-[#0a0a10]/90 backdrop-blur-xl border-b border-slate-200/60 dark:border-white/[0.06]'
       }`}
       onMouseLeave={handleScheduleMegaMenuClose}
     >
       {/* Sleek Top Micro-Bar (On top of menu bar) */}
       <div 
         onMouseEnter={handleCloseMegaMenuImmediately}
-        className="bg-[#050508]/95 backdrop-blur-md text-zinc-400 text-[11px] py-1.5 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-white/[0.06] hidden sm:flex items-center justify-between"
+        className="bg-slate-100/95 dark:bg-[#050508]/95 backdrop-blur-md text-slate-600 dark:text-zinc-400 text-[11px] py-1.5 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-slate-200/80 dark:border-white/[0.06] hidden sm:flex items-center justify-between"
       >
         <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1.5 text-zinc-200 font-bold uppercase tracking-wider text-[10px]">
+          <span className="flex items-center gap-1.5 text-slate-800 dark:text-zinc-200 font-bold uppercase tracking-wider text-[10px]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] animate-pulse" />
-            <span className="text-brand-gold">DISTRIBUIDOR OFICIAL</span> REPÚBLICA DOMINICANA
+            <span className="text-amber-600 dark:text-brand-gold">DISTRIBUIDOR OFICIAL</span> REPÚBLICA DOMINICANA
           </span>
-          <span className="text-zinc-700 hidden md:inline">•</span>
-          <span className="hidden md:inline text-[10px] uppercase font-bold text-zinc-400 tracking-wider">SEDE CENTRAL KM 22, AUTOPISTA DUARTE</span>
+          <span className="text-slate-300 dark:text-zinc-700 hidden md:inline">•</span>
+          <span className="hidden md:inline text-[10px] uppercase font-bold text-slate-500 dark:text-zinc-400 tracking-wider">SEDE CENTRAL KM 22, AUTOPISTA DUARTE</span>
         </div>
 
         <div className="flex items-center gap-3">
           {/* Emergencias 24/7 Hotline */}
           <a
             href="tel:18095601234"
-            className="flex items-center gap-1.5 text-zinc-300 hover:text-brand-gold transition-colors font-medium text-[10px] uppercase tracking-wider"
+            className="flex items-center gap-1.5 text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold transition-colors font-medium text-[10px] uppercase tracking-wider"
           >
-            <Phone className="w-3 h-3 text-emerald-400" />
-            <span className="hidden lg:inline text-zinc-400">EMERGENCIAS 24/7: </span>
-            <strong className="text-white font-mono font-bold">+1 (809) 560-1234</strong>
+            <Phone className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
+            <span className="hidden lg:inline text-slate-500 dark:text-zinc-400">EMERGENCIAS 24/7: </span>
+            <strong className="text-slate-900 dark:text-white font-mono font-bold">+1 (809) 560-1234</strong>
           </a>
 
-          <div className="h-3 w-px bg-white/[0.08]" />
+          <div className="h-3 w-px bg-slate-200 dark:bg-white/[0.08]" />
 
           {/* Currency Switcher & Live Rate Sync */}
           <div className="flex items-center gap-1.5 font-mono">
-            <div className="flex items-center gap-0.5 bg-[#09090e] rounded-[3px] p-0.5 border border-white/[0.08]">
+            <div className="flex items-center gap-0.5 bg-white dark:bg-[#09090e] rounded-[3px] p-0.5 border border-slate-200 dark:border-white/[0.08]">
               <button
                 onClick={() => setCurrency('USD')}
                 className={`px-1.5 py-0.5 rounded-[2px] text-[10px] font-black uppercase transition-colors cursor-pointer ${
-                  currency === 'USD' ? 'bg-[#181824] text-brand-gold border border-brand-gold-dark/50 shadow-xs' : 'text-zinc-400 hover:text-white'
+                  currency === 'USD' 
+                    ? 'bg-amber-100 dark:bg-[#181824] text-amber-700 dark:text-brand-gold border border-amber-300 dark:border-brand-gold-dark/50 shadow-xs' 
+                    : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 USD
@@ -562,7 +567,9 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 onClick={() => setCurrency('DOP')}
                 className={`px-1.5 py-0.5 rounded-[2px] text-[10px] font-black uppercase transition-colors cursor-pointer ${
-                  currency === 'DOP' ? 'bg-[#181824] text-brand-gold border border-brand-gold-dark/50 shadow-xs' : 'text-zinc-400 hover:text-white'
+                  currency === 'DOP' 
+                    ? 'bg-amber-100 dark:bg-[#181824] text-amber-700 dark:text-brand-gold border border-amber-300 dark:border-brand-gold-dark/50 shadow-xs' 
+                    : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
                 RD$
@@ -572,11 +579,11 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={() => setIsBcrdModalOpen(true)}
               title={`Tasa Oficial Banco Central (BCRD): 1 USD = RD$ ${exchangeRate.toFixed(2)}. Click para abrir monitor de divisas y simulador bancario.`}
-              className="hidden xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[2px] bg-zinc-900 border border-zinc-800 hover:border-amber-400 text-[9px] text-zinc-300 hover:text-amber-400 transition-all cursor-pointer font-mono"
+              className="hidden xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[2px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 hover:border-amber-400 text-[9px] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 transition-all cursor-pointer font-mono"
             >
               <span className={`w-1.5 h-1.5 rounded-full ${exchangeRateData.isLive ? 'bg-emerald-400' : 'bg-amber-400'}`} />
               <span className="font-bold">BCRD: RD$ {exchangeRate.toFixed(2)}</span>
-              <Building2 className="w-2.5 h-2.5 text-amber-400" />
+              <Building2 className="w-2.5 h-2.5 text-amber-500 dark:text-amber-400" />
             </button>
 
             {/* Live Network Latency & Connectivity Badge (Task #9) */}
@@ -585,16 +592,16 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          <div className="h-3 w-px bg-white/[0.08]" />
+          <div className="h-3 w-px bg-slate-200 dark:bg-white/[0.08]" />
 
           {/* Theme Switcher Moved to Top of Menu Bar */}
           <button
             onClick={toggleTheme}
             aria-label="Alternar tema claro/oscuro"
             title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
-            className="flex items-center gap-1 px-2 py-0.5 rounded-[3px] text-zinc-300 hover:text-white hover:bg-[#12121c] transition-colors cursor-pointer border border-white/[0.08] text-[10px] font-black uppercase"
+            className="flex items-center gap-1 px-2 py-0.5 rounded-[3px] text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-[#12121c] transition-colors cursor-pointer border border-slate-200 dark:border-white/[0.08] text-[10px] font-black uppercase"
           >
-            {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-brand-gold" /> : <Moon className="w-3.5 h-3.5 text-zinc-300" />}
+            {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-brand-gold" /> : <Moon className="w-3.5 h-3.5 text-slate-700" />}
             <span className="hidden lg:inline">{theme === 'dark' ? 'OSCURO' : 'CLARO'}</span>
           </button>
 
@@ -606,10 +613,10 @@ export const Header: React.FC<HeaderProps> = ({
             className={`flex items-center gap-1 px-2 py-0.5 rounded-[3px] text-[10px] font-black uppercase transition-all cursor-pointer border ${
               isCanteraMode
                 ? 'bg-amber-400 text-black border-amber-300 shadow-[0_0_8px_rgba(251,191,36,0.6)] font-bold'
-                : 'text-zinc-300 hover:text-white hover:bg-[#12121c] border-white/[0.08]'
+                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-[#12121c] border-slate-200 dark:border-white/[0.08]'
             }`}
           >
-            <Mountain className={`w-3.5 h-3.5 ${isCanteraMode ? 'text-black' : 'text-amber-400'}`} />
+            <Mountain className={`w-3.5 h-3.5 ${isCanteraMode ? 'text-black' : 'text-amber-500 dark:text-amber-400'}`} />
             <span className="hidden xl:inline">{isCanteraMode ? 'SOLAR ON' : 'SOLAR'}</span>
           </button>
 
@@ -618,7 +625,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={openNotificationPanel}
             aria-label="Ver notificaciones"
             title="Notificaciones"
-            className="relative p-1 rounded-[3px] text-zinc-300 hover:text-white hover:bg-[#12121c] transition-colors cursor-pointer border border-white/[0.08]"
+            className="relative p-1 rounded-[3px] text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-[#12121c] transition-colors cursor-pointer border border-slate-200 dark:border-white/[0.08]"
           >
             <Bell className="w-3.5 h-3.5" />
             {unreadCount > 0 && (
@@ -632,11 +639,11 @@ export const Header: React.FC<HeaderProps> = ({
             title={isMenuPinned ? 'Desfijar menú (cierre automático)' : 'Fijar menú para navegación continua'}
             className={`flex items-center gap-1 px-2 py-0.5 rounded-[3px] text-[10px] font-black uppercase tracking-wider transition-colors cursor-pointer border ${
               isMenuPinned
-                ? 'bg-[#181824] text-brand-gold border-brand-gold-dark/50'
-                : 'text-zinc-400 hover:text-zinc-200 border-white/[0.08] hover:bg-[#12121c]'
+                ? 'bg-amber-100 dark:bg-[#181824] text-amber-700 dark:text-brand-gold border-amber-300 dark:border-brand-gold-dark/50'
+                : 'text-slate-500 dark:text-zinc-400 hover:text-slate-800 dark:hover:text-zinc-200 border-slate-200 dark:border-white/[0.08] hover:bg-slate-200/60 dark:hover:bg-[#12121c]'
             }`}
           >
-            {isMenuPinned ? <PinOff className="w-3 h-3 text-brand-gold" /> : <Pin className="w-3 h-3" />}
+            {isMenuPinned ? <PinOff className="w-3 h-3 text-amber-600 dark:text-brand-gold" /> : <Pin className="w-3 h-3" />}
             <span className="hidden xl:inline">{isMenuPinned ? 'FIJADO' : 'FIJAR'}</span>
           </button>
         </div>
@@ -662,8 +669,8 @@ export const Header: React.FC<HeaderProps> = ({
             onMouseEnter={handleCloseMegaMenuImmediately}
             className={`px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
               currentRoute === '#/home' && !megaMenuOpen
-                ? 'text-white bg-zinc-800/90 border border-zinc-700 shadow-xs'
-                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
+                ? 'text-slate-900 dark:text-white bg-slate-200 dark:bg-zinc-800/90 border border-slate-300 dark:border-zinc-700 shadow-xs'
+                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
           >
             INICIO
@@ -681,13 +688,13 @@ export const Header: React.FC<HeaderProps> = ({
             aria-expanded={megaMenuOpen && (activeSegment === 'heavy_machinery' || activeSegment === 'construction')}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
               currentRoute === '#/machinery'
-                ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
-                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
+                ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
+                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
           >
             <span>MAQUINARIA</span>
             <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
-              megaMenuOpen && (activeSegment === 'heavy_machinery' || activeSegment === 'construction') ? 'rotate-180 text-amber-400' : 'text-zinc-400'
+              megaMenuOpen && (activeSegment === 'heavy_machinery' || activeSegment === 'construction') ? 'rotate-180 text-amber-500 dark:text-amber-400' : 'text-slate-400 dark:text-zinc-400'
             }`} />
           </motion.button>
 
@@ -703,13 +710,13 @@ export const Header: React.FC<HeaderProps> = ({
             aria-expanded={megaMenuOpen && (activeSegment === 'contractor_deploy' || activeSegment === 'contractors')}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
               currentRoute === '#/rental'
-                ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
-                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
+                ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
+                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
           >
             <span>RENTA</span>
             <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
-              megaMenuOpen && (activeSegment === 'contractor_deploy' || activeSegment === 'contractors') ? 'rotate-180 text-amber-400' : 'text-zinc-400'
+              megaMenuOpen && (activeSegment === 'contractor_deploy' || activeSegment === 'contractors') ? 'rotate-180 text-amber-500 dark:text-amber-400' : 'text-slate-400 dark:text-zinc-400'
             }`} />
           </motion.button>
 
@@ -725,13 +732,13 @@ export const Header: React.FC<HeaderProps> = ({
             aria-expanded={megaMenuOpen && (activeSegment === 'parts' || activeSegment === 'parts_service')}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
               currentRoute === '#/parts'
-                ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
-                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
+                ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
+                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
           >
             <span>REPUESTOS</span>
             <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
-              megaMenuOpen && (activeSegment === 'parts' || activeSegment === 'parts_service') ? 'rotate-180 text-amber-400' : 'text-zinc-400'
+              megaMenuOpen && (activeSegment === 'parts' || activeSegment === 'parts_service') ? 'rotate-180 text-amber-500 dark:text-amber-400' : 'text-slate-400 dark:text-zinc-400'
             }`} />
           </motion.button>
 
@@ -746,8 +753,8 @@ export const Header: React.FC<HeaderProps> = ({
             }}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
               currentRoute === '#/service'
-                ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
-                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
+                ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
+                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
           >
             <span>SERVICIOS</span>
@@ -765,13 +772,13 @@ export const Header: React.FC<HeaderProps> = ({
             aria-expanded={megaMenuOpen && (activeSegment === 'gov_bids' || activeSegment === 'government')}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
               currentRoute === '#/tech-docs'
-                ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
-                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
+                ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
+                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
           >
             <span>LICITACIONES</span>
             <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
-              megaMenuOpen && (activeSegment === 'gov_bids' || activeSegment === 'government') ? 'rotate-180 text-amber-400' : 'text-zinc-400'
+              megaMenuOpen && (activeSegment === 'gov_bids' || activeSegment === 'government') ? 'rotate-180 text-amber-500 dark:text-amber-400' : 'text-slate-400 dark:text-zinc-400'
             }`} />
           </motion.button>
 
@@ -786,8 +793,8 @@ export const Header: React.FC<HeaderProps> = ({
             }}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
               currentRoute === '#/about'
-                ? 'text-amber-400 bg-zinc-900 border border-amber-500/50 shadow-inner'
-                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
+                ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
+                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
           >
             <span>NOSOTROS</span>
@@ -803,13 +810,13 @@ export const Header: React.FC<HeaderProps> = ({
             onMouseEnter={handleCloseMegaMenuImmediately}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
               currentRoute === '#/portal'
-                ? 'text-white bg-zinc-800/90 border border-zinc-700'
-                : 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
+                ? 'text-slate-900 dark:text-white bg-slate-200 dark:bg-zinc-800/90 border border-slate-300 dark:border-zinc-700'
+                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
           >
             <span>{isAdmin ? 'PORTAL ADMIN' : isStaff ? 'PORTAL OFICINA' : 'PORTAL'}</span>
             {(isAdmin || isStaff) && (
-              <span className="px-1.5 py-0.2 rounded text-[9px] font-black uppercase bg-zinc-700 text-amber-400 border border-zinc-600">
+              <span className="px-1.5 py-0.2 rounded text-[9px] font-black uppercase bg-amber-100 text-amber-800 dark:bg-zinc-700 dark:text-amber-400 border border-amber-300 dark:border-zinc-600">
                 Staff
               </span>
             )}
@@ -824,11 +831,11 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={onOpenSearch}
               onMouseEnter={handleCloseMegaMenuImmediately}
               aria-label="Buscar en catálogo"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#09090f] border border-white/[0.08] text-zinc-300 hover:text-white hover:border-brand-gold-dark/50 transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#09090f] border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:border-amber-400 dark:hover:border-brand-gold-dark/50 transition-colors cursor-pointer"
             >
-              <Search className="w-3.5 h-3.5 text-brand-gold" />
-              <span className="hidden xl:inline text-xs font-black uppercase tracking-wider text-zinc-400">BUSCAR...</span>
-              <kbd className="hidden sm:inline-flex px-1.5 py-0.5 rounded-[2px] text-[10px] font-mono font-black bg-[#14141c] text-brand-gold border border-white/[0.08]">
+              <Search className="w-3.5 h-3.5 text-amber-600 dark:text-brand-gold" />
+              <span className="hidden xl:inline text-xs font-black uppercase tracking-wider text-slate-500 dark:text-zinc-400">BUSCAR...</span>
+              <kbd className="hidden sm:inline-flex px-1.5 py-0.5 rounded-[2px] text-[10px] font-mono font-black bg-white dark:bg-[#14141c] text-amber-700 dark:text-brand-gold border border-slate-200 dark:border-white/[0.08]">
                 ⌘K
               </kbd>
             </button>
@@ -840,11 +847,11 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={onOpenQrScanner}
               onMouseEnter={handleCloseMegaMenuImmediately}
               aria-label="Escanear código QR de maquinaria o repuesto"
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#09090f] border border-white/[0.08] text-zinc-300 hover:text-brand-gold hover:border-brand-gold-dark/50 transition-colors cursor-pointer group"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#09090f] border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold hover:border-amber-400 dark:hover:border-brand-gold-dark/50 transition-colors cursor-pointer group"
               title="Escanear Código QR Industrial (Ctrl+Shift+Q)"
             >
-              <QrCode className="w-3.5 h-3.5 text-brand-gold group-hover:scale-110 transition-transform" />
-              <span className="hidden xl:inline text-xs font-black uppercase tracking-wider text-zinc-400 group-hover:text-white">QR SCAN</span>
+              <QrCode className="w-3.5 h-3.5 text-amber-600 dark:text-brand-gold group-hover:scale-110 transition-transform" />
+              <span className="hidden xl:inline text-xs font-black uppercase tracking-wider text-slate-500 dark:text-zinc-400 group-hover:text-slate-900 dark:group-hover:text-white">QR SCAN</span>
             </button>
           )}
 
@@ -855,8 +862,8 @@ export const Header: React.FC<HeaderProps> = ({
             aria-label="Ver cotización y carrito"
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg font-black uppercase tracking-wider text-xs transition-all cursor-pointer border ${
               totalBadges > 0
-                ? 'bg-brand-gold-dark hover:bg-brand-gold text-black border-brand-gold-dark shadow-sm'
-                : 'bg-[#09090f] hover:bg-[#14141c] text-zinc-200 border-white/[0.08]'
+                ? 'bg-amber-400 hover:bg-amber-500 text-black border-amber-500 shadow-sm'
+                : 'bg-slate-100 hover:bg-slate-200 dark:bg-[#09090f] dark:hover:bg-[#14141c] text-slate-800 dark:text-zinc-200 border-slate-200 dark:border-white/[0.08]'
             }`}
           >
             <ShoppingCart className="w-3.5 h-3.5 text-inherit" />
@@ -864,7 +871,7 @@ export const Header: React.FC<HeaderProps> = ({
               {totalQuotesCount > 0 && totalCartCount === 0 ? 'COTIZACIÓN' : 'CARRITO'}
             </span>
             {totalBadges > 0 && (
-              <span className="w-4 h-4 rounded-[2px] bg-black text-brand-gold text-[10px] font-black flex items-center justify-center">
+              <span className="w-4 h-4 rounded-[2px] bg-black text-amber-400 text-[10px] font-black flex items-center justify-center">
                 {totalBadges}
               </span>
             )}
@@ -875,10 +882,10 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={() => handleNav('#/admin-dashboard')}
               onMouseEnter={handleCloseMegaMenuImmediately}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all border border-white/[0.08] bg-[#09090f] hover:bg-[#14141c] text-brand-gold cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all border border-slate-200 dark:border-white/[0.08] bg-slate-100 dark:bg-[#09090f] hover:bg-slate-200 dark:hover:bg-[#14141c] text-amber-700 dark:text-brand-gold cursor-pointer"
               title="Panel Administrativo"
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
               <span className="hidden md:inline">ADMIN HQ</span>
             </button>
           )}
@@ -888,10 +895,10 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={() => handleNav('#/portal')}
               onMouseEnter={handleCloseMegaMenuImmediately}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all border border-amber-500/30 bg-amber-950/30 hover:bg-amber-900/30 text-amber-400 cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all border border-amber-300 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-950/30 hover:bg-amber-100 dark:hover:bg-amber-900/30 text-amber-800 dark:text-amber-400 cursor-pointer"
               title="Consola de Oficina & Ventas"
             >
-              <HardHat className="w-3.5 h-3.5 text-amber-400" />
+              <HardHat className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
               <span className="hidden md:inline">STAFF OPS</span>
             </button>
           )}
@@ -900,7 +907,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Abrir menú"
-            className="lg:hidden p-2 rounded-lg text-zinc-200 bg-[#09090f] border border-white/[0.08] hover:bg-[#14141c] transition-colors cursor-pointer"
+            className="lg:hidden p-2 rounded-lg text-slate-700 dark:text-zinc-200 bg-slate-100 dark:bg-[#09090f] border border-slate-200 dark:border-white/[0.08] hover:bg-slate-200 dark:hover:bg-[#14141c] transition-colors cursor-pointer"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>

@@ -699,7 +699,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
 
       {/* 1.5 LIVE UPDATES MARQUEE: Streamlined Real-Time Ticker */}
       <div className="w-full px-3 sm:px-6 lg:px-8 xl:px-12 max-w-[1780px] mx-auto -mt-3 sm:-mt-6 relative z-20">
-        <div className="rounded-[6px] overflow-hidden shadow-md border border-white/[0.08] bg-[#07070b]/90 backdrop-blur-md">
+        <div className="rounded-[6px] overflow-hidden shadow-md border border-slate-200 dark:border-white/[0.08] bg-white/90 dark:bg-[#07070b]/90 backdrop-blur-md">
           <LiveMarquee onNavigate={onNavigate} />
         </div>
       </div>
@@ -713,9 +713,9 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
 
       {/* MINIMAL FLOATING ANCHOR CAPSULE DOCK (Minimal Icons & Smooth Scrolling Animation) */}
       <div className="sticky top-14 sm:top-16 z-30 w-full px-3 max-w-fit mx-auto py-1 pointer-events-none">
-        <div className="pointer-events-auto relative flex items-center gap-1 sm:gap-1.5 px-2 py-1 rounded-full bg-[#0a0a10]/95 backdrop-blur-xl border border-white/[0.12] shadow-[0_10px_35px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.15)] overflow-hidden">
+        <div className="pointer-events-auto relative flex items-center gap-1 sm:gap-1.5 px-2 py-1 rounded-full bg-white/95 dark:bg-[#0a0a10]/95 backdrop-blur-xl border border-slate-200 dark:border-white/[0.12] shadow-lg dark:shadow-[0_10px_35px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.15)] overflow-hidden">
           {/* Animated Dynamic Scroll Progress Indicator along the base */}
-          <div className="absolute bottom-0 inset-x-0 h-[2px] bg-white/[0.05] pointer-events-none">
+          <div className="absolute bottom-0 inset-x-0 h-[2px] bg-slate-200 dark:bg-white/[0.05] pointer-events-none">
             <div 
               ref={progressBarRef}
               className="h-full bg-gradient-to-r from-[#d99b26] to-[#f0b54d] transition-all duration-75 ease-out" 
@@ -746,40 +746,40 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 {isActive && (
                   <motion.div
                     layoutId="activeDockIndicator"
-                    className="absolute inset-0 rounded-full bg-gradient-to-b from-[#22222e] to-[#0f0f16] border border-[#d99b26]/70 shadow-[0_2px_10px_rgba(217,155,38,0.25),inset_0_1px_0_rgba(255,255,255,0.18)]"
+                    className="absolute inset-0 rounded-full bg-slate-100 dark:bg-gradient-to-b dark:from-[#22222e] dark:to-[#0f0f16] border border-amber-500/70 shadow-sm"
                     transition={{ type: "spring", stiffness: 450, damping: 32 }}
                   />
                 )}
 
                 <div className="relative z-10 flex items-center gap-1">
-                  <Icon className={`w-3.5 h-3.5 transition-colors ${isActive ? 'text-[#e0a22a]' : 'text-zinc-400 group-hover:text-white'}`} />
+                  <Icon className={`w-3.5 h-3.5 transition-colors ${isActive ? 'text-amber-600 dark:text-[#e0a22a]' : 'text-slate-500 dark:text-zinc-400 group-hover:text-slate-900 dark:group-hover:text-white'}`} />
                   {item.count && (
-                    <span className={`text-[9px] font-mono px-1 rounded-full ${isActive ? 'text-[#e0a22a] font-bold' : 'text-zinc-500'}`}>
+                    <span className={`text-[9px] font-mono px-1 rounded-full ${isActive ? 'text-amber-700 dark:text-[#e0a22a] font-bold' : 'text-slate-500 dark:text-zinc-500'}`}>
                       {item.count}
                     </span>
                   )}
                 </div>
 
                 {/* Minimal Micro Tooltip on Hover */}
-                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-[4px] bg-[#0c0c14] border border-white/[0.12] text-[10px] font-mono font-bold text-zinc-200 uppercase tracking-wider whitespace-nowrap shadow-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
+                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-[4px] bg-slate-900/90 dark:bg-[#0c0c14] border border-slate-700 dark:border-white/[0.12] text-[10px] font-mono font-bold text-white dark:text-zinc-200 uppercase tracking-wider whitespace-nowrap shadow-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
                   {item.label}
                 </span>
               </button>
             );
           })}
 
-          <div className="h-4 w-[1px] bg-white/[0.1] mx-0.5" />
+          <div className="h-4 w-[1px] bg-slate-200 dark:bg-white/[0.1] mx-0.5" />
 
           {/* Quick Back to Top Minimal Icon */}
           <button
             type="button"
             onClick={() => scrollToAnchor('top-hero-section')}
-            className="p-2 rounded-full text-zinc-400 hover:text-[#e0a22a] hover:bg-white/[0.06] transition-colors cursor-pointer group relative"
+            className="p-2 rounded-full text-slate-500 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-[#e0a22a] hover:bg-slate-100 dark:hover:bg-white/[0.06] transition-colors cursor-pointer group relative"
             title="Volver arriba"
             aria-label="Volver arriba"
           >
             <ChevronUp className="w-3.5 h-3.5" />
-            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-[4px] bg-[#0c0c14] border border-white/[0.12] text-[10px] font-mono font-bold text-zinc-200 uppercase tracking-wider whitespace-nowrap shadow-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
+            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-[4px] bg-slate-900/90 dark:bg-[#0c0c14] border border-slate-700 dark:border-white/[0.12] text-[10px] font-mono font-bold text-white dark:text-zinc-200 uppercase tracking-wider whitespace-nowrap shadow-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
               Arriba
             </span>
           </button>
@@ -808,10 +808,10 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 </button>
               )}
             </div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black font-display tracking-tight text-white uppercase">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-black font-display tracking-tight text-slate-900 dark:text-white uppercase">
               MAQUINARIA PESADA LISTA EN SHOWROOM
             </h2>
-            <p className="text-xs sm:text-sm text-zinc-400 mt-0.5 max-w-2xl">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 mt-0.5 max-w-2xl">
               Equipos de entrega inmediata con precios en USD y RD$, leasing pre-aprobado y cotización NCF instantánea para contratistas e ingenieros.
             </p>
           </div>

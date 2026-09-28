@@ -917,21 +917,21 @@ export const MachineryView = React.memo<MachineryViewProps>(({
         />
 
         {/* Clean Horizontal Category Navigation Bar */}
-        <div className="relative bg-zinc-950 rounded-[5px] border border-zinc-800 p-1.5 sm:p-2 shadow-xs group/nav font-display">
+        <div className="relative bg-white dark:bg-zinc-950 rounded-[5px] border border-slate-200 dark:border-zinc-800 p-1.5 sm:p-2 shadow-xs group/nav font-display">
           {/* Left scroll control arrow */}
           {canScrollLeft && (
             <button
               type="button"
               onClick={() => scrollNav('left')}
               aria-label="Desplazar categorías hacia la izquierda"
-              className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-[3px] bg-zinc-900 text-zinc-200 border border-zinc-700 shadow-md flex items-center justify-center hover:bg-zinc-800 hover:text-amber-400 transition-all cursor-pointer"
+              className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-[3px] bg-slate-100 text-slate-700 dark:bg-zinc-900 dark:text-zinc-200 border border-slate-300 dark:border-zinc-700 shadow-md flex items-center justify-center hover:bg-slate-200 hover:text-amber-600 dark:hover:bg-zinc-800 dark:hover:text-amber-400 transition-all cursor-pointer"
             >
               <ChevronLeft className="w-3.5 h-3.5" />
             </button>
           )}
 
           {canScrollLeft && (
-            <div className="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none rounded-l-[5px]" />
+            <div className="absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-white dark:from-zinc-950 to-transparent z-10 pointer-events-none rounded-l-[5px]" />
           )}
 
           {/* Scrollable Category Track */}
@@ -961,16 +961,16 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                   }}
                   className={`group/btn flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] text-xs font-black uppercase tracking-wider shrink-0 transition-all cursor-pointer select-none border ${
                     isActive
-                      ? 'bg-zinc-800 text-amber-400 border-amber-500/80 shadow-xs'
-                      : 'bg-zinc-900 text-zinc-300 hover:bg-zinc-800 hover:text-white border-zinc-800'
+                      ? 'bg-amber-100 text-amber-800 border-amber-300 dark:bg-zinc-800 dark:text-amber-400 dark:border-amber-500/80 shadow-xs'
+                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 border-slate-200 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white dark:border-zinc-800'
                   }`}
                 >
-                  <IconComponent className={`w-3.5 h-3.5 ${isActive ? 'text-amber-400' : 'text-zinc-400 group-hover/btn:text-amber-400'}`} />
+                  <IconComponent className={`w-3.5 h-3.5 ${isActive ? 'text-amber-600 dark:text-amber-400' : 'text-slate-500 dark:text-zinc-400 group-hover/btn:text-amber-600 dark:group-hover/btn:text-amber-400'}`} />
                   <span className="whitespace-nowrap tracking-tight">{item.name.toUpperCase()}</span>
                   <span className={`text-[9px] px-1.5 py-0.2 rounded-[2px] font-mono font-black ${
                     isActive
-                      ? 'bg-zinc-950 text-amber-400 border border-zinc-700'
-                      : 'bg-zinc-950 text-zinc-400'
+                      ? 'bg-white text-amber-800 border border-amber-200 dark:bg-zinc-950 dark:text-amber-400 dark:border-zinc-700'
+                      : 'bg-white text-slate-500 border border-slate-200 dark:bg-zinc-950 dark:text-zinc-400'
                   }`}>
                     {count}
                   </span>
@@ -980,7 +980,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
           </div>
 
           {canScrollRight && (
-            <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-zinc-950 to-transparent z-10 pointer-events-none rounded-r-[5px]" />
+            <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-white dark:from-zinc-950 to-transparent z-10 pointer-events-none rounded-r-[5px]" />
           )}
 
           {/* Right scroll control arrow */}
@@ -989,7 +989,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
               type="button"
               onClick={() => scrollNav('right')}
               aria-label="Desplazar categorías hacia la derecha"
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-[3px] bg-zinc-900 text-zinc-200 border border-zinc-700 shadow-md flex items-center justify-center hover:bg-zinc-800 hover:text-amber-400 transition-all cursor-pointer"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-[3px] bg-slate-100 text-slate-700 dark:bg-zinc-900 dark:text-zinc-200 border border-slate-300 dark:border-zinc-700 shadow-md flex items-center justify-center hover:bg-slate-200 hover:text-amber-600 dark:hover:bg-zinc-800 dark:hover:text-amber-400 transition-all cursor-pointer"
             >
               <ChevronRight className="w-3.5 h-3.5" />
             </button>
@@ -997,10 +997,10 @@ export const MachineryView = React.memo<MachineryViewProps>(({
         </div>
 
         {/* Clean Controls & Search Bar (Level with Catalog Top) */}
-        <div className="bg-zinc-950 p-2.5 sm:p-3 rounded-[5px] border border-zinc-800 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5 font-display">
+        <div className="bg-white dark:bg-zinc-950 p-2.5 sm:p-3 rounded-[5px] border border-slate-200 dark:border-zinc-800 shadow-xs flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5 font-display">
           {/* Search Input */}
           <div className="relative flex-1 min-w-[240px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-zinc-500" />
             <input
               type="text"
               value={searchTerm}
@@ -1010,7 +1010,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                 setCurrentPage(1);
               }}
               placeholder="BUSCAR MODELO O PALABRA CLAVE (EJ. 3CX, 922E, 4WD)..."
-              className="w-full pl-9 pr-8 py-1.5 sm:py-2 rounded-[3px] bg-zinc-900 border border-zinc-800 text-white text-xs placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-amber-400 uppercase font-mono transition-all"
+              className="w-full pl-9 pr-8 py-1.5 sm:py-2 rounded-[3px] bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-amber-400 uppercase font-mono transition-all"
             />
             {searchTerm && (
               <button
@@ -1020,7 +1020,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                   setVisibleCount(6);
                   setCurrentPage(1);
                 }}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white cursor-pointer p-0.5"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white cursor-pointer p-0.5"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -1036,7 +1036,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
               className={`px-2.5 py-1.5 rounded-[3px] text-xs font-black uppercase flex items-center gap-1.5 transition-all cursor-pointer border ${
                 (facetFilters.brands.length + facetFilters.tonnageRange.length + facetFilters.powerRange.length + facetFilters.availability.length) > 0
                   ? 'bg-amber-400 text-black border-amber-400 font-black'
-                  : 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border-zinc-800'
+                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-800'
               }`}
               title="Abrir Filtros Multifaceta Colapsables en Acordeón"
             >
@@ -1045,12 +1045,12 @@ export const MachineryView = React.memo<MachineryViewProps>(({
             </button>
             {/* Active Category Badge if filtered */}
             {selectedCategory !== 'Todas' && (
-              <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-[3px] bg-zinc-900 text-amber-400 text-xs font-black uppercase border border-zinc-800">
+              <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-[3px] bg-slate-100 text-amber-800 border-slate-200 dark:bg-zinc-900 dark:text-amber-400 text-xs font-black uppercase border dark:border-zinc-800">
                 <span>{selectedCategory.toUpperCase()}</span>
                 <button
                   type="button"
                   onClick={() => handleCategoryChange('Todas')}
-                  className="hover:text-white cursor-pointer p-0.5"
+                  className="hover:text-slate-900 dark:hover:text-white cursor-pointer p-0.5"
                   title="Quitar filtro de categoría"
                 >
                   <X className="w-3 h-3" />
@@ -1059,19 +1059,19 @@ export const MachineryView = React.memo<MachineryViewProps>(({
             )}
 
             {/* Total Results Count */}
-            <span className="text-xs text-zinc-400 font-mono px-1 hidden sm:inline uppercase">
-              <strong className="text-white">{totalItems}</strong> MODELOS
+            <span className="text-xs text-slate-500 dark:text-zinc-400 font-mono px-1 hidden sm:inline uppercase">
+              <strong className="text-slate-900 dark:text-white">{totalItems}</strong> MODELOS
             </span>
 
             {/* Currency Selector Pill */}
-            <div className="flex items-center bg-zinc-900 p-0.5 rounded-[4px] border border-zinc-800 text-xs font-mono">
+            <div className="flex items-center bg-slate-100 dark:bg-zinc-900 p-0.5 rounded-[4px] border border-slate-200 dark:border-zinc-800 text-xs font-mono">
               <button
                 type="button"
                 onClick={() => setCurrency('USD')}
                 className={`px-2 py-1 rounded-[3px] text-[10px] font-black uppercase transition-all cursor-pointer ${
                   currency === 'USD'
-                    ? 'bg-zinc-800 text-amber-400 border border-zinc-700'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-white text-amber-800 border border-slate-200 dark:bg-zinc-800 dark:text-amber-400 dark:border-zinc-700'
+                    : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
                 title="Precios en Dólares Estadounidenses (USD)"
               >
@@ -1082,8 +1082,8 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                 onClick={() => setCurrency('DOP')}
                 className={`px-2 py-1 rounded-[3px] text-[10px] font-black uppercase transition-all cursor-pointer ${
                   currency === 'DOP'
-                    ? 'bg-zinc-800 text-amber-400 border border-zinc-700'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-white text-amber-800 border border-slate-200 dark:bg-zinc-800 dark:text-amber-400 dark:border-zinc-700'
+                    : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
                 title="Precios en Pesos Dominicanos (RD$)"
               >
@@ -1097,12 +1097,12 @@ export const MachineryView = React.memo<MachineryViewProps>(({
               onClick={() => setShowMonthlyLeasing(!showMonthlyLeasing)}
               className={`px-2.5 py-1 rounded-[3px] text-xs font-black uppercase tracking-wider transition-all border flex items-center gap-1.5 cursor-pointer ${
                 showMonthlyLeasing
-                  ? 'bg-zinc-800 text-amber-400 border-amber-500/80 shadow-xs'
-                  : 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:text-white'
+                  ? 'bg-amber-100 text-amber-800 border-amber-300 dark:bg-zinc-800 dark:text-amber-400 dark:border-amber-500/80 shadow-xs'
+                  : 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-zinc-900 dark:text-zinc-400 dark:border-zinc-800 hover:text-slate-900 dark:hover:text-white'
               }`}
               title="Activar cálculo aproximado de cuota leasing mensual"
             >
-              <Calculator className="w-3.5 h-3.5 text-amber-400" />
+              <Calculator className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
               <span className="hidden sm:inline">LEASING</span>
             </button>
 
@@ -1110,7 +1110,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
             <button
               type="button"
               onClick={() => setIsTenderDossierOpen(true)}
-              className="px-2.5 py-1 rounded-[3px] text-xs font-black uppercase tracking-wider transition-all border flex items-center gap-1.5 cursor-pointer bg-zinc-900 text-amber-400 border-amber-400/40 hover:bg-amber-400 hover:text-black shadow-xs"
+              className="px-2.5 py-1 rounded-[3px] text-xs font-black uppercase tracking-wider transition-all border flex items-center gap-1.5 cursor-pointer bg-slate-100 text-amber-700 border-slate-300 dark:bg-zinc-900 dark:text-amber-400 dark:border-amber-400/40 hover:bg-amber-400 hover:text-black shadow-xs"
               title="Generar Dossier Técnico consolidado para Licitaciones Públicas del Estado Dominicano (MOPC/INAPA/CPB)"
             >
               <FileStack className="w-3.5 h-3.5" />
@@ -1121,7 +1121,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
             <button
               type="button"
               onClick={() => setIsKioskOpen(true)}
-              className="px-2.5 py-1 rounded-[3px] text-xs font-black uppercase tracking-wider transition-all border flex items-center gap-1.5 cursor-pointer bg-zinc-900 text-amber-400 border-amber-400/40 hover:bg-amber-400 hover:text-black shadow-xs"
+              className="px-2.5 py-1 rounded-[3px] text-xs font-black uppercase tracking-wider transition-all border flex items-center gap-1.5 cursor-pointer bg-slate-100 text-amber-700 border-slate-300 dark:bg-zinc-900 dark:text-amber-400 dark:border-amber-400/40 hover:bg-amber-400 hover:text-black shadow-xs"
               title="Activar Modo Kiosco Pantalla Completa para Salas de Ventas y Ferias"
             >
               <MonitorPlay className="w-3.5 h-3.5" />
@@ -1132,7 +1132,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
             <button
               type="button"
               onClick={() => setIsLowboyOpen(true)}
-              className="px-2.5 py-1 rounded-[3px] text-xs font-black uppercase tracking-wider transition-all border flex items-center gap-1.5 cursor-pointer bg-zinc-900 text-emerald-400 border-emerald-500/40 hover:bg-emerald-500 hover:text-black shadow-xs"
+              className="px-2.5 py-1 rounded-[3px] text-xs font-black uppercase tracking-wider transition-all border flex items-center gap-1.5 cursor-pointer bg-slate-100 text-emerald-700 border-slate-300 dark:bg-zinc-900 dark:text-emerald-400 dark:border-emerald-500/40 hover:bg-emerald-500 hover:text-black shadow-xs"
               title="Cotizar Flete en Cama Baja (Lowboy) a Cualquier Provincia"
             >
               <Truck className="w-3.5 h-3.5" />

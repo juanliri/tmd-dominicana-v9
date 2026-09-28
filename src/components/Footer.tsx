@@ -216,7 +216,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, currentRoute = '' })
 
   // 2. High-End, Structured Industrial Public Footer with Compact Mobile/Tablet Design
   return (
-    <footer className="bg-gradient-to-b from-[#0e0e16] via-[#08080d] to-[#040407] text-zinc-100 border-t border-white/[0.08] pt-8 sm:pt-10 lg:pt-12 pb-24 lg:pb-10 text-sm font-medium font-display">
+    <footer className="bg-gradient-to-b from-[#0e0e16] via-[#08080d] to-[#040407] text-zinc-100 border-t border-white/[0.08] pt-8 sm:pt-10 lg:pt-12 pb-24 lg:pb-10 text-sm font-medium font-display dark-preserve">
       <div className="w-full max-w-[1780px] mx-auto px-3.5 sm:px-6 lg:px-12 xl:px-16 space-y-6 sm:space-y-8">
         
         {/* COMPACT BRAND CREDENTIALS & NEWSLETTER BAR */}

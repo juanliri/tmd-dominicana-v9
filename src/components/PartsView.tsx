@@ -607,23 +607,23 @@ export const PartsView = React.memo<PartsViewProps>(({
       {/* ============================================================ */}
       <div className="relative mb-6">
         <div className="flex items-center justify-between gap-2 mb-2 px-1 font-display">
-          <div className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider text-zinc-300">
-            <Package className="w-3.5 h-3.5 text-amber-400" />
+          <div className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider text-slate-800 dark:text-zinc-300">
+            <Package className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
             <span>CATEGORÍAS DE REPUESTOS OEM</span>
           </div>
-          <span className="text-[10px] font-mono text-zinc-500 hidden sm:inline uppercase">
+          <span className="text-[10px] font-mono text-slate-500 dark:text-zinc-500 hidden sm:inline uppercase">
             DESLIZA PARA NAVEGAR POR CATEGORÍA
           </span>
         </div>
 
-        <div className="relative bg-zinc-950 rounded-[5px] border border-zinc-800 p-2 shadow-sm">
+        <div className="relative bg-white dark:bg-zinc-950 rounded-[5px] border border-slate-200 dark:border-zinc-800 p-2 shadow-sm">
             {/* Left scroll button */}
             {canScrollLeft && (
               <button
                 type="button"
                 onClick={() => scrollPartsNav('left')}
                 aria-label="Desplazar categorías hacia la izquierda"
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-[3px] bg-zinc-900 text-zinc-200 border border-zinc-700 shadow-lg flex items-center justify-center hover:bg-zinc-800 hover:text-amber-400 transition-all cursor-pointer"
+                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-[3px] bg-slate-100 text-slate-700 dark:bg-zinc-900 dark:text-zinc-200 border border-slate-300 dark:border-zinc-700 shadow-lg flex items-center justify-center hover:bg-slate-200 hover:text-amber-600 dark:hover:bg-zinc-800 dark:hover:text-amber-400 transition-all cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
@@ -631,7 +631,7 @@ export const PartsView = React.memo<PartsViewProps>(({
 
             {/* Left edge shadow gradient fade */}
             {canScrollLeft && (
-              <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none rounded-l-[5px]" />
+              <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-white dark:from-zinc-950 to-transparent z-10 pointer-events-none rounded-l-[5px]" />
             )}
 
             {/* Scrollable Track */}
@@ -659,14 +659,14 @@ export const PartsView = React.memo<PartsViewProps>(({
                     }}
                     className={`group/btn flex items-center gap-2 px-3 py-1.5 rounded-[4px] text-xs font-black uppercase tracking-wider shrink-0 transition-all cursor-pointer select-none border ${
                       isActive
-                        ? 'bg-zinc-800 text-amber-400 border-amber-500/80 shadow-md scale-[1.01]'
-                        : 'bg-zinc-900 text-zinc-300 hover:bg-zinc-800 hover:text-white border-zinc-800 hover:border-zinc-700'
+                        ? 'bg-amber-100 text-amber-800 border-amber-300 dark:bg-zinc-800 dark:text-amber-400 dark:border-amber-500/80 shadow-md scale-[1.01]'
+                        : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 border-slate-200 hover:border-slate-300 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white dark:border-zinc-800 dark:hover:border-zinc-700'
                     }`}
                   >
                     <div className={`p-1 rounded-[3px] transition-colors ${
                       isActive
-                        ? 'bg-zinc-950 text-amber-400 border border-zinc-800'
-                        : 'bg-zinc-950 text-zinc-400 group-hover/btn:text-amber-400'
+                        ? 'bg-white text-amber-800 border border-amber-200 dark:bg-zinc-950 dark:text-amber-400 dark:border-zinc-800'
+                        : 'bg-white text-slate-500 dark:bg-zinc-950 dark:text-zinc-400 group-hover/btn:text-amber-600 dark:group-hover/btn:text-amber-400'
                     }`}>
                       <IconComponent className="w-3.5 h-3.5" />
                     </div>
@@ -675,8 +675,8 @@ export const PartsView = React.memo<PartsViewProps>(({
 
                     <span className={`text-[9px] px-1.5 py-0.5 rounded-[3px] font-mono font-black ${
                       isActive
-                        ? 'bg-zinc-950 text-amber-400 border border-zinc-700'
-                        : 'bg-zinc-950 text-zinc-400'
+                        ? 'bg-white text-amber-800 border border-amber-200 dark:bg-zinc-950 dark:text-amber-400 dark:border-zinc-700'
+                        : 'bg-white text-slate-500 border border-slate-200 dark:bg-zinc-950 dark:text-zinc-400'
                     }`}>
                       {count}
                     </span>
@@ -687,7 +687,7 @@ export const PartsView = React.memo<PartsViewProps>(({
 
             {/* Right edge shadow gradient fade */}
             {canScrollRight && (
-              <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-zinc-950 to-transparent z-10 pointer-events-none rounded-r-[5px]" />
+              <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-white dark:from-zinc-950 to-transparent z-10 pointer-events-none rounded-r-[5px]" />
             )}
 
             {/* Right scroll button */}
@@ -696,7 +696,7 @@ export const PartsView = React.memo<PartsViewProps>(({
                 type="button"
                 onClick={() => scrollPartsNav('right')}
                 aria-label="Desplazar categorías hacia la derecha"
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-[3px] bg-zinc-900 text-zinc-200 border border-zinc-700 shadow-lg flex items-center justify-center hover:bg-zinc-800 hover:text-amber-400 transition-all cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-[3px] bg-slate-100 text-slate-700 dark:bg-zinc-900 dark:text-zinc-200 border border-slate-300 dark:border-zinc-700 shadow-lg flex items-center justify-center hover:bg-slate-200 hover:text-amber-600 dark:hover:bg-zinc-800 dark:hover:text-amber-400 transition-all cursor-pointer"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -705,21 +705,21 @@ export const PartsView = React.memo<PartsViewProps>(({
         </div>
 
       {/* Search & Filter Bar */}
-      <div className="bg-zinc-950 p-3.5 sm:p-4 rounded-[5px] border border-zinc-800 shadow-sm space-y-3 mb-6">
+      <div className="bg-white dark:bg-zinc-950 p-3.5 sm:p-4 rounded-[5px] border border-slate-200 dark:border-zinc-800 shadow-sm space-y-3 mb-6">
         {/* Active Assembly Filter Indicator */}
         {selectedAssemblyId && (
-          <div className="p-2 bg-zinc-900 border border-zinc-800 rounded-[3px] flex items-center justify-between gap-3 text-xs font-mono">
-            <div className="flex items-center gap-2 text-white font-bold uppercase">
-              <Crosshair className="w-4 h-4 text-amber-400" />
+          <div className="p-2 bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-[3px] flex items-center justify-between gap-3 text-xs font-mono">
+            <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold uppercase">
+              <Crosshair className="w-4 h-4 text-amber-600 dark:text-amber-400" />
               <span>ENSAMBLE:</span>
-              <span className="px-2 py-0.5 rounded-[3px] bg-zinc-800 text-amber-400 font-black border border-zinc-700">
+              <span className="px-2 py-0.5 rounded-[3px] bg-amber-100 dark:bg-zinc-800 text-amber-800 dark:text-amber-400 font-black border border-amber-300 dark:border-zinc-700">
                 {assemblyLabels[selectedAssemblyId]}
               </span>
             </div>
             <button
               type="button"
               onClick={() => handleAssemblySelect(null)}
-              className="text-zinc-400 hover:text-white flex items-center gap-1 font-bold uppercase cursor-pointer"
+              className="text-slate-500 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white flex items-center gap-1 font-bold uppercase cursor-pointer"
             >
               <X className="w-3.5 h-3.5" />
               <span>QUITAR</span>
@@ -730,7 +730,7 @@ export const PartsView = React.memo<PartsViewProps>(({
         {/* Search input with instant reset */}
         <div className="flex items-center gap-2">
           <div className="relative flex-1">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-zinc-500" />
             <input
               type="text"
               value={searchTerm}
@@ -739,7 +739,7 @@ export const PartsView = React.memo<PartsViewProps>(({
                 setCurrentPage(1);
               }}
               placeholder="BUSCAR POR NÚMERO DE PARTE OEM, NOMBRE O MODELO (EJ. JCB-320, 922E, BOMBA, FILTRO)..."
-              className="w-full pl-9 pr-8 py-2 rounded-[3px] bg-zinc-900 border border-zinc-800 text-white text-xs sm:text-sm placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-amber-400 uppercase font-mono"
+              className="w-full pl-9 pr-8 py-2 rounded-[3px] bg-slate-100 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-white text-xs sm:text-sm placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-1 focus:ring-amber-400 uppercase font-mono"
             />
             {searchTerm && (
               <button
@@ -747,7 +747,7 @@ export const PartsView = React.memo<PartsViewProps>(({
                   setSearchTerm('');
                   setCurrentPage(1);
                 }}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white cursor-pointer"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white cursor-pointer"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -757,7 +757,7 @@ export const PartsView = React.memo<PartsViewProps>(({
           {hasActiveFilters && (
             <button
               onClick={handleResetFilters}
-              className="px-3 py-2 rounded-[3px] bg-zinc-900 hover:bg-zinc-800 text-zinc-300 text-xs font-black uppercase tracking-wider font-display border border-zinc-800 transition-colors shrink-0"
+              className="px-3 py-2 rounded-[3px] bg-slate-100 hover:bg-slate-200 text-slate-700 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:text-zinc-300 text-xs font-black uppercase tracking-wider font-display border border-slate-200 dark:border-zinc-800 transition-colors shrink-0"
               title="Limpiar filtros"
             >
               LIMPIAR
