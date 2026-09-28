@@ -165,9 +165,10 @@ Esta matriz contiene **100 recomendaciones de grado de ingeniería y dirección 
 - **Sprint 12 (60%):** Tareas #14, #44, #68, #75, #97 completadas y desplegadas.
 - **Sprint 13 (65%):** Tareas #59, #62, #71, #89, #100 completadas y desplegadas.
 - **Sprint 14 (70%):** Tareas #8, #66, #72, #84, #88 completadas y desplegadas.
-- **Sprint 15 (75%):** Tareas #1, #2, #58, #78, #94 completadas y desplegadas:
+- **Sprint 15 (75%):** Tareas #1, #2, #58, #78, #94 completadas y desplegadas (Commit `f1bce7d`):
   - Task #1: `GlobalCommandPaletteModal.tsx` con atajo omnidireccional `Ctrl+K`, búsqueda unificada de máquinas/piezas/comandos.
   - Task #2: `SunlightQuarryModeToggle.tsx` con modo solar polar de alto contraste para visibilidad extrema bajo el sol caribeño.
   - Task #58: `PasskeyBiometricAuthModal.tsx` con WebAuthn FIDO2 / Face ID / Touch ID / Windows Hello para contratistas VIP.
   - Task #78: `WhatsAppShortLinkModal.tsx` con generador de URLs cortas (`tmd.com.do/q/84920`) y vista previa para juntas directivas.
   - Task #94: `CabinQrManualViewerModal.tsx` con visor de manual oficial en español, tabla de lubricación y fusibles por QR de cabina.
+
