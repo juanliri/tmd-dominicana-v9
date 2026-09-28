@@ -27,7 +27,10 @@ import {
   ChevronDown,
   ChevronUp,
   Crown,
-  Tag
+  Tag,
+  Clock,
+  Repeat,
+  PenTool
 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
@@ -42,6 +45,9 @@ import { createFullbayCounterSale } from '../lib/fullbayService';
 import { PortalQuote } from '../types';
 import { verifyDgiiTaxId, DOMINICAN_RNC_REGISTRY } from '../services/dgiiRncService';
 import { DgiiTaxWithholdingBreakdown, DgiiTaxRegime } from './calculator/DgiiTaxWithholdingBreakdown';
+import { CardnetAzulPaymentModal, CardPaymentResult } from './checkout/CardnetAzulPaymentModal';
+import { QuoteExpirationAlertModal } from './quotes/QuoteExpirationAlertModal';
+import { TradeInValuationModal } from './machinery/TradeInValuationModal';
 
 interface CheckoutViewProps {
   onNavigate: (route: string) => void;
@@ -83,8 +89,20 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
   const [couponInput, setCouponInput] = useState('');
   const [couponMessage, setCouponMessage] = useState<{ text: string; error?: boolean } | null>(null);
 
-  // Multi-step progress state: 1 = Review Items, 2 = Contact & Delivery, 3 = Payment & Finalize
-  const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
+  // Multi-step progress state (Task #14): 1 = Review Items, 2 = Site & DGII, 3 = Payment Method, 4 = Emission & Signature
+  const [currentStep, setCurrentStep] = useState<1 | 2 | 3 | 4>(1);
+
+  // Sprint 7 Modals and Extensions
+  const [isCardnetModalOpen, setIsCardnetModalOpen] = useState(false);
+  const [isQuoteExpirationModalOpen, setIsQuoteExpirationModalOpen] = useState(false);
+  const [isTradeInModalOpen, setIsTradeInModalOpen] = useState(false);
+  const [cardPaymentData, setCardPaymentData] = useState<CardPaymentResult | null>(null);
+  const [tradeInCredit, setTradeInCredit] = useState<{ creditUsd: number; summary: string } | null>(null);
+
+  // Formal digital signature & technical approval (Step 4)
+  const [authorizedSigner, setAuthorizedSigner] = useState('');
+  const [signerRole, setSignerRole] = useState('Ing. Residente de Obra / Gerente de Compras');
+  const [isSignatureConfirmed, setIsSignatureConfirmed] = useState(true);
 
   // Toggle for optional Dominican fiscal tax invoice (RNC / DGII B01)
   const [needsFiscalInvoice, setNeedsFiscalInvoice] = useState(false);
@@ -146,6 +164,12 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleStep3Submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setCurrentStep(4);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleFinalSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!hasItems) return;
@@ -171,8 +195,17 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
 
     const randomId = `TMD-2026-${Math.floor(1000 + Math.random() * 9000)}`;
     const effectiveShipping = customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd;
-    const finalTotalUsd = Math.max(0, subtotalUsd - discountUsd) + itbisUsd + effectiveShipping;
+    const baseTotalUsd = Math.max(0, subtotalUsd - discountUsd) + itbisUsd + effectiveShipping;
+    const appliedTradeInCreditUsd = tradeInCredit ? Math.min(baseTotalUsd, tradeInCredit.creditUsd) : 0;
+    const finalTotalUsd = Math.max(0, baseTotalUsd - appliedTradeInCreditUsd);
     const finalTotalDop = Number((finalTotalUsd * exchangeRate).toFixed(2));
+
+    const finalNotes = [
+      customer.notes || '',
+      cardPaymentData ? `[PAGO APROBADO: ${cardPaymentData.gateway.toUpperCase()} Auth: ${cardPaymentData.authorizationCode} | ${cardPaymentData.cardBrand.toUpperCase()} ****${cardPaymentData.last4}]` : '',
+      tradeInCredit ? `[CRÉDITO PERMUTA TRADE-IN APLICADO: -US$ ${tradeInCredit.creditUsd.toLocaleString()} (${tradeInCredit.summary})]` : '',
+      authorizedSigner ? `[FIRMA DIGITAL: ${authorizedSigner} (${signerRole})]` : ''
+    ].filter(Boolean).join(' • ');
 
     const newOrder: CompletedOrder = {
       orderId: randomId,
@@ -183,7 +216,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
         hour: '2-digit',
         minute: '2-digit'
       }),
-      customer: { ...customer },
+      customer: { ...customer, notes: finalNotes },
       items: [...cart],
       machineQuotes: [...machineQuotes],
       subtotalUsd,
@@ -731,58 +764,89 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
         </div>
       ) : (
         <div className="space-y-6">
-          {/* CLEAR PROGRESS STEPPER INDICATOR */}
+          {/* CLEAR 4-STAGE INTERACTIVE PROGRESS STEPPER (Task #14) */}
           <div className="bg-zinc-950 rounded-[5px] border border-zinc-800 p-4 shadow-sm">
-            <div className="flex items-center justify-between max-w-2xl mx-auto relative">
-              {/* Connecting line */}
+            <div className="flex items-center justify-between max-w-3xl mx-auto relative">
+              {/* Background Connecting track */}
               <div className="absolute left-6 right-6 top-1/2 -translate-y-1/2 h-0.5 bg-zinc-800 -z-0" />
+              {/* Dynamic Animated Gold Progress Fill */}
+              <div 
+                className="absolute left-6 top-1/2 -translate-y-1/2 h-0.5 bg-amber-400 transition-all duration-300 -z-0"
+                style={{ 
+                  width: currentStep === 1 ? '0%' : currentStep === 2 ? '33%' : currentStep === 3 ? '66%' : '94%' 
+                }}
+              />
 
-              {/* Step 1 */}
+              {/* Step 1: Revisión de Artículos */}
               <button
                 type="button"
                 onClick={() => setCurrentStep(1)}
-                className={`relative z-10 flex items-center gap-2 px-3 py-1.5 rounded-[4px] text-xs font-black uppercase tracking-wider transition-all cursor-pointer border ${
+                className={`relative z-10 flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-[4px] text-[11px] sm:text-xs font-black uppercase tracking-wider transition-all cursor-pointer border ${
                   currentStep === 1
                     ? 'bg-zinc-800 text-amber-400 border-amber-500/80 shadow-md ring-1 ring-amber-500/40'
                     : currentStep > 1
                     ? 'bg-zinc-900 text-zinc-200 border-zinc-700'
                     : 'bg-zinc-900 text-zinc-500 border-zinc-800'
                 }`}
+                title="Paso 1: Revisión de Repuestos y Maquinaria"
               >
                 {currentStep > 1 ? <Check className="w-3.5 h-3.5 text-amber-400" /> : <span>1</span>}
-                <span className="hidden sm:inline">REVISIÓN</span>
+                <span className="hidden sm:inline">1. ARTÍCULOS</span>
               </button>
 
-              {/* Step 2 */}
+              {/* Step 2: Datos de Obra & Fiscalidad DGII */}
               <button
                 type="button"
-                onClick={() => setCurrentStep(2)}
-                className={`relative z-10 flex items-center gap-2 px-3 py-1.5 rounded-[4px] text-xs font-black uppercase tracking-wider transition-all cursor-pointer border ${
+                onClick={() => {
+                  if (hasItems) setCurrentStep(2);
+                }}
+                className={`relative z-10 flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-[4px] text-[11px] sm:text-xs font-black uppercase tracking-wider transition-all cursor-pointer border ${
                   currentStep === 2
                     ? 'bg-zinc-800 text-amber-400 border-amber-500/80 shadow-md ring-1 ring-amber-500/40'
                     : currentStep > 2
                     ? 'bg-zinc-900 text-zinc-200 border-zinc-700'
                     : 'bg-zinc-900 text-zinc-500 border-zinc-800'
                 }`}
+                title="Paso 2: Datos de Obra y Fiscalidad DGII"
               >
                 {currentStep > 2 ? <Check className="w-3.5 h-3.5 text-amber-400" /> : <span>2</span>}
-                <span className="hidden sm:inline">CONTACTO & ENTREGA</span>
+                <span className="hidden sm:inline">2. OBRA & DGII</span>
               </button>
 
-              {/* Step 3 */}
+              {/* Step 3: Método de Pago & Facilidades */}
               <button
                 type="button"
                 onClick={() => {
                   if (customer.fullName && customer.phone) setCurrentStep(3);
                 }}
-                className={`relative z-10 flex items-center gap-2 px-3 py-1.5 rounded-[4px] text-xs font-black uppercase tracking-wider transition-all cursor-pointer border ${
+                className={`relative z-10 flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-[4px] text-[11px] sm:text-xs font-black uppercase tracking-wider transition-all cursor-pointer border ${
                   currentStep === 3
+                    ? 'bg-zinc-800 text-amber-400 border-amber-500/80 shadow-md ring-1 ring-amber-500/40'
+                    : currentStep > 3
+                    ? 'bg-zinc-900 text-zinc-200 border-zinc-700'
+                    : 'bg-zinc-900 text-zinc-500 border-zinc-800'
+                }`}
+                title="Paso 3: Método de Pago y Permuta Trade-In"
+              >
+                {currentStep > 3 ? <Check className="w-3.5 h-3.5 text-amber-400" /> : <span>3</span>}
+                <span className="hidden sm:inline">3. PAGO</span>
+              </button>
+
+              {/* Step 4: Emisión Oficial & Firma */}
+              <button
+                type="button"
+                onClick={() => {
+                  if (customer.fullName && customer.phone) setCurrentStep(4);
+                }}
+                className={`relative z-10 flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-[4px] text-[11px] sm:text-xs font-black uppercase tracking-wider transition-all cursor-pointer border ${
+                  currentStep === 4
                     ? 'bg-zinc-800 text-amber-400 border-amber-500/80 shadow-md ring-1 ring-amber-500/40'
                     : 'bg-zinc-900 text-zinc-500 border-zinc-800'
                 }`}
+                title="Paso 4: Emisión Oficial y Firma Digital"
               >
-                <span>3</span>
-                <span className="hidden sm:inline">PAGO & CONFIRMACIÓN</span>
+                <span>4</span>
+                <span className="hidden sm:inline">4. EMISIÓN & FIRMA</span>
               </button>
             </div>
           </div>
@@ -1012,7 +1076,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                     }}
                     className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-3 px-8 rounded-[3px] bg-amber-500 hover:bg-amber-400 text-black font-black uppercase tracking-wider text-xs shadow-md transition-all cursor-pointer"
                   >
-                    <span>CONTINUAR A CONTACTO & ENTREGA</span>
+                    <span>CONTINUAR A DATOS DE OBRA & FISCALIDAD (PASO 2)</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
@@ -1475,9 +1539,10 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
 
                   <button
                     type="submit"
-                    className="py-3 px-8 rounded-[3px] bg-amber-500 hover:bg-amber-400 text-black font-black uppercase tracking-wider text-xs shadow-md transition-all cursor-pointer"
+                    className="py-3 px-8 rounded-[3px] bg-amber-500 hover:bg-amber-400 text-black font-black uppercase tracking-wider text-xs shadow-md transition-all cursor-pointer flex items-center gap-2"
                   >
-                    <span>CONTINUAR AL PASO 3: PAGO</span>
+                    <span>CONTINUAR AL PASO 3: MÉTODO DE PAGO & PERMUTA</span>
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -1519,20 +1584,21 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
             </form>
           )}
 
-          {/* STEP 3: PAYMENT & FINAL CONFIRMATION */}
+          {/* STEP 3: PAYMENT METHOD & TRADE-IN APPRAISAL (Task #14, #68, #75) */}
           {currentStep === 3 && (
-            <form onSubmit={handleFinalSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <form onSubmit={handleStep3Submit} className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               <div className="lg:col-span-8 bg-zinc-950 rounded-[5px] border border-zinc-800 p-5 sm:p-7 shadow-sm space-y-6 text-white">
                 <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
                   <div>
                     <h3 className="text-sm sm:text-base font-black uppercase tracking-wider text-white">
-                      3. MÉTODO DE PAGO & EMISIÓN DE PROFORMA
+                      3. MÉTODO DE PAGO & FACILIDADES COMERCIALES
                     </h3>
-                    <span className="text-xs text-zinc-400 font-mono">PASO 3 DE 3 • PAGO 100% SEGURO</span>
+                    <span className="text-xs text-zinc-400 font-mono">SELECCIONA TU FORMA DE PAGO O APLICA PERMUTA DE MAQUINARIA.</span>
                   </div>
-                  <span className="text-xs text-zinc-400 font-mono">FINAL</span>
+                  <span className="text-xs text-zinc-400 font-mono">PASO 3 DE 4</span>
                 </div>
 
+                {/* 3 Payment Options */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <label
                     className={`p-4 rounded-[4px] border cursor-pointer transition-all flex flex-col justify-between ${
@@ -1558,7 +1624,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                       </span>
                     </div>
                     <span className="text-[10px] text-amber-400 font-mono font-bold mt-2 uppercase">
-                      SIN CARGOS ADICIONALES
+                      APARTADO INMEDIATO EN KM 22
                     </span>
                   </label>
 
@@ -1580,13 +1646,13 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                           className="accent-amber-500"
                         />
                       </div>
-                      <span className="font-bold text-xs block uppercase text-white">TARJETA DE CRÉDITO</span>
+                      <span className="font-bold text-xs block uppercase text-white">TARJETA CORPORATIVA</span>
                       <span className="text-[11px] text-zinc-400 block mt-1 font-mono">
-                        VISA, MASTERCARD, AMEX
+                        CARDNET / AZUL DOMINICANA (3D-SECURE 2.0)
                       </span>
                     </div>
-                    <span className="text-[10px] text-zinc-500 font-mono mt-2 uppercase">
-                      PROCESAMIENTO SEGURO
+                    <span className="text-[10px] text-emerald-400 font-mono font-bold mt-2 uppercase">
+                      DESPACHO EXPRESS &lt; RD$ 150K
                     </span>
                   </label>
 
@@ -1610,48 +1676,368 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                       </div>
                       <span className="font-bold text-xs block uppercase text-white">CRÉDITO COMERCIAL TMD</span>
                       <span className="text-[11px] text-zinc-400 block mt-1 font-mono">
-                        CUENTA CORRIENTE AUTORIZADA A 30 DÍAS
+                        CUENTA CORRIENTE A 30 DÍAS
                       </span>
                     </div>
                     <span className="text-[10px] text-zinc-500 font-mono mt-2 uppercase">
-                      SUJETO A CUENTA ACTIVA
+                      CLIENTES EMPRESARIALES ACTIVOS
                     </span>
                   </label>
                 </div>
 
-                {/* Bank account details preview for confidence */}
+                {/* Cardnet / Azul Interactive Details & Launch Action (Task #75) */}
+                {customer.paymentMethod === 'card' && (
+                  <div className="p-4 rounded-[3px] bg-zinc-900 border border-amber-500/30 text-xs space-y-3 font-mono">
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="px-2 py-0.5 rounded-[2px] bg-amber-500/20 text-amber-400 border border-amber-500/30 text-[10px] font-black uppercase">
+                            CARDNET / AZUL DOMINICANA
+                          </span>
+                          <span className="text-[10px] text-zinc-400 uppercase">
+                            VOUCHER FISCAL AUTOMÁTICO
+                          </span>
+                        </div>
+                        <p className="text-zinc-300">
+                          Habilita el cobro directo con tarjeta de crédito o débito corporativa para pedidos de emergencia menores a RD$ 150,000 con autenticación biométrica y clave dinámica OTP.
+                        </p>
+                      </div>
+                    </div>
+
+                    {cardPaymentData ? (
+                      <div className="p-3 rounded-[2px] bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div className="space-y-0.5">
+                          <span className="font-black text-xs block uppercase">
+                            ✓ PAGO AUTORIZADO CON ÉXITO ({cardPaymentData.gateway.toUpperCase()})
+                          </span>
+                          <span className="text-[11px] text-emerald-300/80 block">
+                            AUT: {cardPaymentData.authorizationCode} • {cardPaymentData.cardBrand.toUpperCase()} ****{cardPaymentData.last4} • NCF: {cardPaymentData.ncfReference || 'B0100098492'}
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setCardPaymentData(null);
+                            setIsCardnetModalOpen(true);
+                          }}
+                          className="px-3 py-1.5 rounded-[2px] bg-zinc-900 text-zinc-300 hover:text-white border border-zinc-700 text-[10px] font-bold uppercase cursor-pointer shrink-0"
+                        >
+                          CAMBIAR TARJETA
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-zinc-800">
+                        <span className="text-[11px] text-zinc-400">
+                          Total a Procesar: <strong className="text-amber-400">{formatPrice(totalUsd)}</strong> (RD$ {(totalUsd * exchangeRate).toLocaleString('es-DO', { maximumFractionDigits: 2 })})
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setIsCardnetModalOpen(true)}
+                          className="w-full sm:w-auto px-5 py-2.5 rounded-[3px] bg-amber-500 hover:bg-amber-400 text-black font-black uppercase tracking-wider text-xs shadow-md transition-all cursor-pointer flex items-center justify-center gap-2"
+                        >
+                          <CreditCard className="w-4 h-4" />
+                          <span>ABRIR PASARELA CARDNET / AZUL (3D-SECURE 2.0)</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Transfer Details Preview */}
                 {customer.paymentMethod === 'transfer' && (
                   <div className="p-4 rounded-[3px] bg-zinc-900 border border-zinc-800 text-xs space-y-1.5 font-mono">
                     <span className="font-bold text-white block uppercase">
                       INSTRUCCIONES DE TRANSFERENCIA:
                     </span>
                     <p className="text-zinc-400">
-                      Al confirmar, recibirás tu orden con número fiscal oficial para transferir a nuestras cuentas autorizadas del Banco Popular Dominicano o BHD León. El pedido queda apartado de inmediato.
+                      Al confirmar, recibirás tu orden con número fiscal oficial para transferir a nuestras cuentas autorizadas del Banco Popular Dominicano o BHD León. El pedido queda apartado de inmediato en almacén.
                     </p>
                   </div>
                 )}
 
-                {/* Final Navigation Buttons */}
+                {/* Credit Line Preview */}
+                {customer.paymentMethod === 'credit_line' && (
+                  <div className="p-4 rounded-[3px] bg-zinc-900 border border-zinc-800 text-xs space-y-1.5 font-mono">
+                    <span className="font-bold text-white block uppercase">
+                      CUENTA CORRIENTE TMD DOMINICANA (30 DÍAS):
+                    </span>
+                    <p className="text-zinc-400">
+                      Sujeto a verificación de línea de crédito aprobada con el departamento de administración de TMD. La mercancía se despacha con Conduce Fiscal y Factura B01.
+                    </p>
+                  </div>
+                )}
+
+                {/* Used Machinery Trade-In Valuation Module (Task #68) */}
+                <div className="p-4 rounded-[3px] bg-zinc-900 border border-zinc-800 space-y-3 font-mono">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-[2px] bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
+                        <Repeat className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <span className="font-bold text-xs uppercase text-white block">
+                          ¿TIENE MAQUINARIA USADA PARA ABONAR A ESTA COMPRA? (TRADE-IN)
+                        </span>
+                        <span className="text-[11px] text-zinc-400 block font-sans">
+                          Aceptamos excavadoras, palas, rodillos y retroexcavadoras usadas multimarca (Cat, Komatsu, JCB, LiuGong) con tasación pericial oficial.
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setIsTradeInOpen(true)}
+                      className="w-full sm:w-auto px-4 py-2 rounded-[2px] bg-zinc-950 hover:bg-zinc-850 text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-colors shrink-0 cursor-pointer flex items-center justify-center gap-1.5"
+                    >
+                      <Repeat className="w-3.5 h-3.5" />
+                      <span>{tradeInCredit ? 'MODIFICAR TASACIÓN' : 'TASAR MAQUINARIA USADA'}</span>
+                    </button>
+                  </div>
+
+                  {tradeInCredit && (
+                    <div className="p-3 rounded-[2px] bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 flex items-center justify-between text-xs">
+                      <div>
+                        <span className="font-black block uppercase">
+                          ✓ CRÉDITO DE TRADE-IN APLICADO: -US$ {tradeInCredit.creditUsd.toLocaleString()}
+                        </span>
+                        <span className="text-[11px] text-emerald-300/80 block">
+                          {tradeInCredit.summary}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setTradeInCredit(null)}
+                        className="text-zinc-500 hover:text-red-400 text-[11px] underline cursor-pointer"
+                      >
+                        QUITAR
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Navigation Buttons */}
                 <div className="pt-4 flex items-center justify-between gap-3 border-t border-zinc-800">
                   <button
                     type="button"
                     onClick={() => setCurrentStep(2)}
                     className="py-2.5 px-5 rounded-[3px] bg-zinc-900 hover:bg-zinc-800 text-zinc-300 font-black uppercase tracking-wider text-xs border border-zinc-800 transition-colors cursor-pointer"
                   >
-                    VOLVER A DATOS DE ENTREGA
+                    VOLVER A DATOS DE OBRA
                   </button>
 
                   <button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="py-3 px-8 rounded-[3px] bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-black font-black uppercase tracking-wider text-xs shadow-xl transition-all cursor-pointer flex items-center gap-2"
+                    className="py-3 px-8 rounded-[3px] bg-amber-500 hover:bg-amber-400 text-black font-black uppercase tracking-wider text-xs shadow-md transition-all cursor-pointer flex items-center gap-2"
+                  >
+                    <span>CONTINUAR A EMISIÓN OFICIAL & FIRMA (PASO 4)</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Step 3 Sidebar */}
+              <div className="lg:col-span-4 bg-zinc-950 rounded-[5px] border border-zinc-800 p-5 shadow-sm text-xs font-mono text-white space-y-3">
+                <h4 className="font-black text-sm uppercase tracking-wider text-white pb-2 border-b border-zinc-800 font-display">
+                  RESUMEN DE PAGO
+                </h4>
+                <div className="flex justify-between">
+                  <span className="text-zinc-400 uppercase">MÉTODO:</span>
+                  <span className="font-bold text-amber-400 uppercase">
+                    {customer.paymentMethod === 'card' ? 'TARJETA CARDNET/AZUL' : customer.paymentMethod === 'transfer' ? 'TRANSFERENCIA' : 'CRÉDITO TMD 30D'}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-zinc-400 uppercase">ESTADO DE PAGO:</span>
+                  <span className={`font-bold uppercase ${cardPaymentData ? 'text-emerald-400' : 'text-zinc-300'}`}>
+                    {cardPaymentData ? 'AUTORIZADO 3DS' : 'PENDIENTE EMISIÓN'}
+                  </span>
+                </div>
+                {tradeInCredit && (
+                  <div className="flex justify-between text-emerald-400 font-bold">
+                    <span className="uppercase">CRÉDITO PERMUTA:</span>
+                    <span>-US$ {tradeInCredit.creditUsd.toLocaleString()}</span>
+                  </div>
+                )}
+                <div className="pt-2 border-t border-zinc-800 flex justify-between items-baseline">
+                  <span className="font-black text-xs uppercase">TOTAL A LIQUIDAR:</span>
+                  <span className="text-base font-black text-amber-400">
+                    {formatPrice(
+                      Math.max(
+                        0,
+                        (subtotalUsd - discountUsd) +
+                          itbisUsd +
+                          (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd) -
+                          (tradeInCredit ? tradeInCredit.creditUsd : 0)
+                      )
+                    )}
+                  </span>
+                </div>
+              </div>
+            </form>
+          )}
+
+          {/* STEP 4: FORMAL EMISSION, 15-DAY VALIDITY GUARANTEE & DIGITAL SIGNATURE (Task #14, #67) */}
+          {currentStep === 4 && (
+            <form onSubmit={handleFinalSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              <div className="lg:col-span-8 bg-zinc-950 rounded-[5px] border border-zinc-800 p-5 sm:p-7 shadow-sm space-y-6 text-white">
+                <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+                  <div>
+                    <h3 className="text-sm sm:text-base font-black uppercase tracking-wider text-white">
+                      4. EMISIÓN OFICIAL, GARANTÍA 15 DÍAS & FIRMA DIGITAL
+                    </h3>
+                    <span className="text-xs text-zinc-400 font-mono">PASO FINAL • PROFORMA VINCULANTE CON NCF DGII</span>
+                  </div>
+                  <span className="text-xs text-amber-400 font-mono font-black uppercase">PASO 4 DE 4</span>
+                </div>
+
+                {/* Work & Fiscal Order Summary Card */}
+                <div className="p-4 rounded-[4px] bg-zinc-900 border border-zinc-800 space-y-2.5 text-xs font-mono">
+                  <span className="text-zinc-400 font-bold uppercase block text-[11px]">
+                    EXPEDIENTE DE ORDEN Y FISCALIDAD:
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-zinc-300">
+                    <div>
+                      <span className="text-zinc-500 block">CLIENTE / RAZÓN SOCIAL:</span>
+                      <strong className="text-white uppercase">{customer.fullName} {customer.companyName && `(${customer.companyName})`}</strong>
+                    </div>
+                    <div>
+                      <span className="text-zinc-500 block">RNC / CÉDULA & COMPROBANTE:</span>
+                      <strong className="text-white uppercase">
+                        {customer.rncOrCedula ? `${customer.rncOrCedula} • ${customer.ncfType}` : 'CONSUMIDOR FINAL (B02)'}
+                      </strong>
+                    </div>
+                    <div>
+                      <span className="text-zinc-500 block">TELÉFONO DE CONTACTO:</span>
+                      <strong className="text-white">{customer.phone}</strong>
+                    </div>
+                    <div>
+                      <span className="text-zinc-500 block">ENTREGA O RETIRO:</span>
+                      <strong className="text-amber-400 uppercase">
+                        {customer.deliveryMethod === 'pickup_km22' ? 'RETIRO EN ALMACÉN CENTRAL KM 22' : `ENVÍO A ${customer.deliveryAddress || customer.city}`}
+                      </strong>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 15-Day Official Quote Expiration Guarantee Card (Task #67) */}
+                <div className="p-4 rounded-[4px] bg-zinc-900 border border-amber-500/30 text-xs font-mono space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-[2px] bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
+                        <Clock className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-black uppercase text-white">
+                            GARANTÍA DE PRECIO & TASA OFICIAL (15 DÍAS)
+                          </span>
+                          <span className="px-1.5 py-0.5 rounded-[2px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[9px] font-black uppercase">
+                            PROTEGIDO
+                          </span>
+                        </div>
+                        <span className="text-[11px] text-zinc-400 font-sans block mt-0.5">
+                          Tasa Banco Central (RD$ {exchangeRate.toFixed(2)}) y precios garantizados por 15 días calendario ante fluctuaciones marítimas.
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => setIsQuoteExpirationModalOpen(true)}
+                      className="px-3.5 py-2 rounded-[2px] bg-zinc-950 hover:bg-zinc-855 text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-colors shrink-0 cursor-pointer flex items-center justify-center gap-1.5"
+                    >
+                      <Clock className="w-3.5 h-3.5" />
+                      <span>CONTROL DE VIGENCIA & PRÓRROGA</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Digital Signature & Technical Approval Box (Task #14 & #65) */}
+                <div className="p-4 rounded-[4px] bg-zinc-900 border border-zinc-800 text-xs font-mono space-y-4">
+                  <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
+                    <span className="text-white font-bold uppercase flex items-center gap-1.5 font-display text-sm">
+                      <PenTool className="w-4 h-4 text-amber-400" />
+                      <span>CONFORMIDAD TÉCNICA & FIRMA DIGITAL DEL SOLICITANTE</span>
+                    </span>
+                    <span className="text-[10px] text-zinc-400">DGII / AUDITABLE</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-zinc-400 font-bold uppercase mb-1">
+                        NOMBRE COMPLETO DEL FIRMANTE / APODERADO *
+                      </label>
+                      <input
+                        type="text"
+                        value={authorizedSigner || customer.fullName}
+                        onChange={(e) => setAuthorizedSigner(e.target.value)}
+                        placeholder="ING. CARLOS PERALTA"
+                        className="w-full p-2.5 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-500 uppercase"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-zinc-400 font-bold uppercase mb-1">
+                        CARGO O ROL DE APROBACIÓN
+                      </label>
+                      <input
+                        type="text"
+                        value={signerRole}
+                        onChange={(e) => setSignerRole(e.target.value)}
+                        placeholder="Ing. Residente de Obra / Gerente de Compras"
+                        className="w-full p-2.5 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-500 uppercase"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2.5 pt-1">
+                    <input
+                      type="checkbox"
+                      id="signatureConsent"
+                      checked={isSignatureConfirmed}
+                      onChange={(e) => setIsSignatureConfirmed(e.target.checked)}
+                      className="w-4 h-4 accent-amber-500 rounded-[2px] mt-0.5"
+                    />
+                    <label htmlFor="signatureConsent" className="text-[11px] text-zinc-300 leading-relaxed cursor-pointer font-sans">
+                      Declaro conformidad técnica de los ítems cotizados y autorizo la emisión formal de la orden/proforma con validez legal y tributaria ante la DGII por parte de TECNOMAQUINARIAS DIESEL S.R.L.
+                    </label>
+                  </div>
+
+                  {/* Digital cryptographic stamp preview */}
+                  <div className="p-3 rounded-[3px] bg-zinc-950 border border-amber-500/20 text-[10px] text-zinc-400 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <span className="flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <span>
+                        SELLO DIGITAL TMD: <strong>{authorizedSigner || customer.fullName || 'AUTORIZADO'}</strong> • {signerRole}
+                      </span>
+                    </span>
+                    <span className="text-zinc-500 font-mono shrink-0">
+                      EMISIÓN: {new Date().toLocaleDateString('es-DO')} • SEDE KM 22
+                    </span>
+                  </div>
+                </div>
+
+                {/* Final Navigation Buttons */}
+                <div className="pt-4 flex items-center justify-between gap-3 border-t border-zinc-800">
+                  <button
+                    type="button"
+                    onClick={() => setCurrentStep(3)}
+                    className="py-2.5 px-5 rounded-[3px] bg-zinc-900 hover:bg-zinc-800 text-zinc-300 font-black uppercase tracking-wider text-xs border border-zinc-800 transition-colors cursor-pointer"
+                  >
+                    VOLVER A MÉTODO DE PAGO
+                  </button>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !isSignatureConfirmed}
+                    className="py-3 px-8 rounded-[3px] bg-amber-500 hover:bg-amber-400 active:bg-amber-600 text-black font-black uppercase tracking-wider text-xs shadow-xl transition-all cursor-pointer flex items-center gap-2 disabled:opacity-50"
                   >
                     {isSubmitting ? (
-                      <span>GENERANDO ORDEN...</span>
+                      <span>GENERANDO ORDEN Y PROFORMA...</span>
                     ) : (
                       <>
                         <CheckCircle2 className="w-4 h-4" />
-                        <span>CONFIRMAR Y GENERAR ORDEN</span>
+                        <span>CONFIRMAR Y EMITIR PROFORMA OFICIAL</span>
                       </>
                     )}
                   </button>
@@ -1674,9 +2060,13 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                     <span className="font-bold text-white">{customer.phone}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="uppercase">MÉTODO ENTREGA:</span>
+                    <span className="uppercase">MÉTODO PAGO:</span>
+                    <span className="font-bold text-white uppercase">{customer.paymentMethod}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="uppercase">DESPACHO:</span>
                     <span className="font-bold text-amber-400 uppercase">
-                      {customer.deliveryMethod === 'pickup_km22' ? 'RETIRO SEDE KM 22' : `ENVÍO A ${customer.city}`}
+                      {customer.deliveryMethod === 'pickup_km22' ? 'RETIRO KM 22' : `ENVÍO A ${customer.city}`}
                     </span>
                   </div>
                 </div>
@@ -1701,6 +2091,13 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                     <span className="text-white">{customer.deliveryMethod === 'pickup_km22' ? 'GRATIS' : formatPrice(shippingUsd)}</span>
                   </div>
 
+                  {tradeInCredit && (
+                    <div className="flex justify-between text-emerald-400 font-bold uppercase">
+                      <span>(-) ABONO TRADE-IN:</span>
+                      <span>-US$ {tradeInCredit.creditUsd.toLocaleString()}</span>
+                    </div>
+                  )}
+
                   {needsFiscalInvoice && taxRegime === 'ESTADO_B15' && (
                     <div className="pt-2 border-t border-zinc-800/80 space-y-1 text-red-400 text-[11px]">
                       <div className="flex justify-between uppercase">
@@ -1713,7 +2110,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                       </div>
                       <div className="flex justify-between uppercase text-emerald-400 font-bold pt-1 border-t border-zinc-800/60">
                         <span>NETO A DESEMBOLSAR:</span>
-                        <span>{formatPrice((subtotalUsd - discountUsd) * 0.95 + (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd))}</span>
+                        <span>{formatPrice(Math.max(0, (subtotalUsd - discountUsd) * 0.95 + (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd) - (tradeInCredit ? tradeInCredit.creditUsd : 0)))}</span>
                       </div>
                     </div>
                   )}
@@ -1726,28 +2123,36 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                       </div>
                       <div className="flex justify-between uppercase text-emerald-400 font-bold pt-1 border-t border-zinc-800/60">
                         <span>NETO A DESEMBOLSAR:</span>
-                        <span>{formatPrice((subtotalUsd - discountUsd) + (itbisUsd * 0.70) + (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd))}</span>
+                        <span>{formatPrice(Math.max(0, (subtotalUsd - discountUsd) + (itbisUsd * 0.70) + (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd) - (tradeInCredit ? tradeInCredit.creditUsd : 0)))}</span>
                       </div>
                     </div>
                   )}
+
                   <div className="pt-2 border-t border-zinc-800 flex justify-between items-baseline">
                     <span className="font-black text-xs text-white uppercase">TOTAL GENERAL:</span>
                     <div className="text-right">
                       <span className="text-lg font-black text-amber-400 block">
                         {formatPrice(
-                          (subtotalUsd - discountUsd) +
-                            itbisUsd +
-                            (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd)
+                          Math.max(
+                            0,
+                            (subtotalUsd - discountUsd) +
+                              itbisUsd +
+                              (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd) -
+                              (tradeInCredit ? tradeInCredit.creditUsd : 0)
+                          )
                         )}
                       </span>
                       {currency === 'USD' && (
                         <span className="text-[10px] text-zinc-400 block">
                           ≈ RD${' '}
                           {(
-                            ((subtotalUsd - discountUsd) +
-                              itbisUsd +
-                              (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd)) *
-                            exchangeRate
+                            Math.max(
+                              0,
+                              (subtotalUsd - discountUsd) +
+                                itbisUsd +
+                                (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd) -
+                                (tradeInCredit ? tradeInCredit.creditUsd : 0)
+                            ) * exchangeRate
                           ).toLocaleString('es-DO', { maximumFractionDigits: 2 })}
                         </span>
                       )}
@@ -1764,6 +2169,48 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
           )}
         </div>
       )}
+
+      {/* Task #75: Cardnet / Azul Payment Gateway Modal */}
+      <CardnetAzulPaymentModal
+        isOpen={isCardnetModalOpen}
+        onClose={() => setIsCardnetModalOpen(false)}
+        totalUsd={Math.max(0, (subtotalUsd - discountUsd) + itbisUsd + (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd) - (tradeInCredit ? tradeInCredit.creditUsd : 0))}
+        totalDop={Number((Math.max(0, (subtotalUsd - discountUsd) + itbisUsd + (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd) - (tradeInCredit ? tradeInCredit.creditUsd : 0)) * exchangeRate).toFixed(2))}
+        currency={currency}
+        clientName={customer.fullName || 'Cliente TMD'}
+        clientRnc={customer.rncOrCedula}
+        onPaymentSuccess={(authResult) => {
+          setCardPaymentData(authResult);
+          setCustomer(prev => ({ ...prev, paymentMethod: 'card' }));
+          setIsCardnetModalOpen(false);
+          setCurrentStep(4);
+        }}
+      />
+
+      {/* Task #68: Used Machinery Trade-In Appraisal Modal */}
+      <TradeInValuationModal
+        isOpen={isTradeInOpen}
+        onClose={() => setIsTradeInOpen(false)}
+        targetMachineName={machineQuotes.length > 0 ? machineQuotes[0].machine.name : 'Repuestos / Maquinaria TMD'}
+        targetMachinePriceUsd={totalUsd}
+        exchangeRate={exchangeRate}
+        onApplyTradeInCredit={(creditUsd, summary) => {
+          setTradeInCredit({ creditUsd, summary });
+          setIsTradeInOpen(false);
+        }}
+      />
+
+      {/* Task #67: Quote Expiration & Commercial Extension Modal */}
+      <QuoteExpirationAlertModal
+        isOpen={isQuoteExpirationModalOpen}
+        onClose={() => setIsQuoteExpirationModalOpen(false)}
+        quoteId={'TMD-PROFORMA-2026'}
+        quoteDate={new Date().toISOString()}
+        clientName={customer.fullName || 'Cliente TMD'}
+        machineOrItemsSummary={cart.length > 0 ? `${cart.length} Repuestos en Canasta` : (machineQuotes[0]?.machine.name || 'Maquinaria de Flota')}
+        totalUsd={Math.max(0, (subtotalUsd - discountUsd) + itbisUsd + (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd) - (tradeInCredit ? tradeInCredit.creditUsd : 0))}
+        exchangeRate={exchangeRate}
+      />
     </div>
   );
 };

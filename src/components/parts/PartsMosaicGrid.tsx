@@ -21,6 +21,7 @@ import { Part } from '../../types';
 import { downloadProductQrCode } from '../../utils/qrExporter';
 import { LastScannedBadge } from '../common/LastScannedBadge';
 import { RecentlyVerifiedBadge } from '../common/RecentlyVerifiedBadge';
+import { TextHighlight } from '../common/TextHighlight';
 
 export type PartsLayoutMode = 'mosaic' | 'uniform';
 
@@ -39,6 +40,7 @@ interface PartCardProps {
   setQrModalPart: (part: Part) => void;
   addToCart: (part: Part) => void;
   formatPrice: (usd: number) => string;
+  searchTerm?: string;
 }
 
 export const PartCard = React.memo<PartCardProps>(({
@@ -48,7 +50,8 @@ export const PartCard = React.memo<PartCardProps>(({
   setActivePartDetail,
   setQrModalPart,
   addToCart,
-  formatPrice
+  formatPrice,
+  searchTerm
 }) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
 
@@ -171,7 +174,7 @@ export const PartCard = React.memo<PartCardProps>(({
               {/* Part Number & Code */}
               <div className="flex items-center justify-between gap-1 mb-1">
                 <span className="font-mono text-[10px] font-black text-amber-400 tracking-wider truncate uppercase">
-                  P/N: {part.partNumber}
+                  P/N: <TextHighlight text={part.partNumber} query={searchTerm} />
                 </span>
                 {part.assemblyId && (
                   <span className="text-[8px] uppercase font-mono font-bold text-zinc-400 bg-zinc-900 px-1.5 py-0.5 rounded-[3px] border border-zinc-800">
@@ -192,7 +195,7 @@ export const PartCard = React.memo<PartCardProps>(({
 
               {/* Name */}
               <h3 className="text-xs font-black font-display text-white line-clamp-2 mb-1 group-hover:text-amber-400 transition-colors uppercase leading-snug">
-                {part.name}
+                <TextHighlight text={part.name} query={searchTerm} />
               </h3>
 
               {/* Description */}
@@ -398,6 +401,7 @@ interface PartsMosaicGridProps {
   setQrModalPart: (part: Part) => void;
   addToCart: (part: Part) => void;
   formatPrice: (usd: number) => string;
+  searchTerm?: string;
 }
 
 export const PartsMosaicGrid = React.memo<PartsMosaicGridProps>(({
@@ -406,7 +410,8 @@ export const PartsMosaicGrid = React.memo<PartsMosaicGridProps>(({
   setActivePartDetail,
   setQrModalPart,
   addToCart,
-  formatPrice
+  formatPrice,
+  searchTerm
 }) => {
   // Determine card aspect ratio & spans dynamically based on part type
   const getPartCardConfig = (part: Part, index: number): PartCardConfig => {
@@ -470,6 +475,7 @@ export const PartsMosaicGrid = React.memo<PartsMosaicGridProps>(({
             setQrModalPart={setQrModalPart}
             addToCart={addToCart}
             formatPrice={formatPrice}
+            searchTerm={searchTerm}
           />
         );
       })}

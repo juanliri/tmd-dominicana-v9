@@ -33,7 +33,9 @@ import {
   FileStack,
   Fuel,
   FlaskConical,
-  Mountain
+  Mountain,
+  Repeat,
+  Clock
 } from 'lucide-react';
 import { Machine, MachineCustomizationOption } from '../../types';
 import { useCart } from '../../context/CartContext';
@@ -65,6 +67,8 @@ import { WorkshopCheckInModal } from '../workshop/WorkshopCheckInModal';
 import { WarehouseBinLabelModal } from '../common/WarehouseBinLabelModal';
 import { RemanExchangeCatalogModal } from '../reman/RemanExchangeCatalogModal';
 import { DgiiTaxWithholdingBreakdown } from '../calculator/DgiiTaxWithholdingBreakdown';
+import { TradeInValuationModal } from './TradeInValuationModal';
+import { QuoteExpirationAlertModal } from '../quotes/QuoteExpirationAlertModal';
 
 interface MachineDetailStudioModalProps {
   machine: Machine | null;
@@ -200,6 +204,9 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   const [isWorkshopCheckInOpen, setIsWorkshopCheckInOpen] = useState<boolean>(false);
   const [isBinLabelOpen, setIsBinLabelOpen] = useState<boolean>(false);
   const [isRemanCatalogOpen, setIsRemanCatalogOpen] = useState<boolean>(false);
+  const [isTradeInOpen, setIsTradeInOpen] = useState<boolean>(false);
+  const [isQuoteExpirationOpen, setIsQuoteExpirationOpen] = useState<boolean>(false);
+  const [tradeInCredit, setTradeInCredit] = useState<{ creditUsd: number; summary: string } | null>(null);
 
   // Accordion visibility states for secondary technical details (compacts mobile & desktop viewports)
   const [isExtendedSpecsExpanded, setIsExtendedSpecsExpanded] = useState<boolean>(true);
@@ -876,6 +883,79 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                   currency={currency}
                 />
               </div>
+
+              {/* Sprint 7 Features: Trade-In Valuation & Quote Expiration */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                {/* Task #68: Permuta & Tasación de Usados */}
+                <div className="p-3.5 rounded-[2px] bg-zinc-950 border border-zinc-800 space-y-2 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="flex items-center gap-1.5 text-xs font-bold uppercase text-white">
+                        <Repeat className="w-3.5 h-3.5 text-amber-400" />
+                        <span>Permuta de Usados (Trade-In)</span>
+                      </span>
+                      {tradeInCredit ? (
+                        <span className="text-[10px] px-1.5 py-0.5 rounded-[2px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono font-bold">
+                          Crédito Aprobado
+                        </span>
+                      ) : (
+                        <span className="text-[10px] text-zinc-500 font-mono font-bold uppercase">
+                          Multimarca
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[11px] text-zinc-400 leading-relaxed font-sans">
+                      Abona tu equipo usado (Caterpillar, Komatsu, JCB) directamente a la inicial de este equipo nuevo con tasación pericial oficial.
+                    </p>
+                    {tradeInCredit && (
+                      <div className="mt-2 p-2 rounded-[2px] bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold">
+                        <span>Abono Aplicado: -US$ {tradeInCredit.creditUsd.toLocaleString()}</span>
+                        <span className="block text-[10px] text-emerald-300/80 font-normal">{tradeInCredit.summary}</span>
+                      </div>
+                    )}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      triggerHaptic('mechanicalClick');
+                      setIsTradeInOpen(true);
+                    }}
+                    className="w-full py-2 px-3 rounded-[2px] bg-zinc-900 hover:bg-zinc-850 text-amber-400 border border-amber-400/40 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+                  >
+                    <Repeat className="w-3.5 h-3.5" />
+                    <span>{tradeInCredit ? 'Revisar / Modificar Tasación' : 'Calcular Tasación Trade-In'}</span>
+                  </button>
+                </div>
+
+                {/* Task #67: Alerta de Vencimiento de Cotización (15 Días) */}
+                <div className="p-3.5 rounded-[2px] bg-zinc-950 border border-zinc-800 space-y-2 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="flex items-center gap-1.5 text-xs font-bold uppercase text-white">
+                        <Clock className="w-3.5 h-3.5 text-amber-400" />
+                        <span>Garantía de Precio (15 Días)</span>
+                      </span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-[2px] bg-amber-500/10 text-amber-400 border border-amber-500/20 font-mono font-bold uppercase">
+                        Vigencia Oficial
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-zinc-400 leading-relaxed font-sans">
+                      La cotización oficial de TMD Dominicana garantiza el precio de lista y la tasa de cambio del Banco Central durante 15 días continuos.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      triggerHaptic('mechanicalClick');
+                      setIsQuoteExpirationOpen(true);
+                    }}
+                    className="w-full py-2 px-3 rounded-[2px] bg-zinc-900 hover:bg-zinc-850 text-zinc-200 border border-zinc-800 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+                  >
+                    <Clock className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Ver Vigencia & Extensión</span>
+                  </button>
+                </div>
+              </div>
             </div>
           )}
 
@@ -1410,6 +1490,29 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
         isOpen={isRemanCatalogOpen}
         onClose={() => setIsRemanCatalogOpen(false)}
         onNavigate={onNavigate}
+      />
+
+      {/* Task #68: Trade-In Used Machinery Appraisal Modal */}
+      <TradeInValuationModal
+        isOpen={isTradeInOpen}
+        onClose={() => setIsTradeInOpen(false)}
+        targetMachineName={machine.name}
+        targetMachinePriceUsd={totalInvestmentUsd}
+        exchangeRate={USD_TO_DOP_RATE}
+        onApplyTradeInCredit={(creditUsd, summary) => {
+          setTradeInCredit({ creditUsd, summary });
+        }}
+      />
+
+      {/* Task #67: Commercial Quote Expiration Alert Modal */}
+      <QuoteExpirationAlertModal
+        isOpen={isQuoteExpirationOpen}
+        onClose={() => setIsQuoteExpirationOpen(false)}
+        quoteId={`TMD-PRO-${machine.modelCode || machine.id.toUpperCase()}-2026`}
+        clientName="Constructor Dominicano"
+        machineOrItemsSummary={machine.name}
+        totalUsd={totalInvestmentUsd}
+        exchangeRate={USD_TO_DOP_RATE}
       />
     </div>,
     document.body

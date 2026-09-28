@@ -53,6 +53,7 @@ import { InventoryAuditTrail } from './common/InventoryAuditTrail';
 import { InventoryLabelPdfModal } from './common/InventoryLabelPdfModal';
 import { WarehouseBinLabelModal } from './common/WarehouseBinLabelModal';
 import { RemanExchangeCatalogModal } from './reman/RemanExchangeCatalogModal';
+import { TextHighlight } from './common/TextHighlight';
 import { downloadProductQrCode } from '../utils/qrExporter';
 
 interface PartsViewProps {
@@ -70,6 +71,7 @@ interface PartTableRowProps {
   setActivePartDetail: (part: Part) => void;
   setQrModalPart: (part: Part) => void;
   addToCart: (part: Part) => void;
+  searchTerm?: string;
 }
 
 const PartTableRow = React.memo<PartTableRowProps>(({
@@ -77,7 +79,8 @@ const PartTableRow = React.memo<PartTableRowProps>(({
   formatPrice,
   setActivePartDetail,
   setQrModalPart,
-  addToCart
+  addToCart,
+  searchTerm
 }) => {
   return (
     <tr
@@ -98,10 +101,10 @@ const PartTableRow = React.memo<PartTableRowProps>(({
           />
           <div>
             <span className="font-black text-white text-xs uppercase tracking-tight block group-hover:text-amber-400 transition-colors">
-              {part.name}
+              <TextHighlight text={part.name} query={searchTerm} />
             </span>
             <span className="text-[10px] font-mono text-amber-400 font-bold uppercase">
-              PN: {part.partNumber}
+              PN: <TextHighlight text={part.partNumber} query={searchTerm} />
             </span>
           </div>
         </div>
@@ -940,6 +943,7 @@ export const PartsView = React.memo<PartsViewProps>(({
                       setActivePartDetail={setActivePartDetail}
                       setQrModalPart={setQrModalPart}
                       addToCart={addToCart}
+                      searchTerm={searchTerm}
                     />
                   ))}
                 </tbody>
@@ -955,6 +959,7 @@ export const PartsView = React.memo<PartsViewProps>(({
             setActivePartDetail={setActivePartDetail}
             setQrModalPart={setQrModalPart}
             addToCart={addToCart}
+            searchTerm={searchTerm}
           />
         )}
       </div>
