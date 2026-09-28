@@ -36,8 +36,14 @@ import {
   Mountain,
   Repeat,
   Clock,
-  Share2
+  Share2,
+  TrendingDown,
+  ClipboardCheck,
+  Camera,
+  Tag,
+  RotateCcw
 } from 'lucide-react';
+import { triggerHaptic } from '../../utils/haptics';
 import { Machine, MachineCustomizationOption } from '../../types';
 import { useCart } from '../../context/CartContext';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
@@ -71,6 +77,8 @@ import { DgiiTaxWithholdingBreakdown } from '../calculator/DgiiTaxWithholdingBre
 import { TradeInValuationModal } from './TradeInValuationModal';
 import { QuoteExpirationAlertModal } from '../quotes/QuoteExpirationAlertModal';
 import { MachineSocialFlyerModal } from './MachineSocialFlyerModal';
+import { TcoComparisonCalculatorModal } from '../finance/TcoComparisonCalculatorModal';
+import { PreDeliveryInspectionPdiModal } from '../workshop/PreDeliveryInspectionPdiModal';
 
 interface MachineDetailStudioModalProps {
   machine: Machine | null;
@@ -209,6 +217,8 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   const [isTradeInOpen, setIsTradeInOpen] = useState<boolean>(false);
   const [isQuoteExpirationOpen, setIsQuoteExpirationOpen] = useState<boolean>(false);
   const [isSocialFlyerOpen, setIsSocialFlyerOpen] = useState<boolean>(false);
+  const [isTcoModalOpen, setIsTcoModalOpen] = useState<boolean>(false);
+  const [isPdiModalOpen, setIsPdiModalOpen] = useState<boolean>(false);
   const [tradeInCredit, setTradeInCredit] = useState<{ creditUsd: number; summary: string } | null>(null);
 
   // Accordion visibility states for secondary technical details (compacts mobile & desktop viewports)
@@ -383,6 +393,28 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
             >
               <Share2 className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Flyer Social</span>
+            </button>
+
+            {/* Task #72: 5-Year Total Cost of Ownership (TCO) Calculator Trigger */}
+            <button
+              type="button"
+              onClick={() => setIsTcoModalOpen(true)}
+              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-emerald-500 hover:text-black text-emerald-400 border border-emerald-500/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
+              title="Calcular TCO a 5 Años: Ahorro de Diésel, Mantenimiento y Valor Residual vs. Competidores"
+            >
+              <TrendingDown className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">TCO 5 Años</span>
+            </button>
+
+            {/* Task #88: Official Pre-Delivery Inspection (PDI) 85-Point Audit Trigger */}
+            <button
+              type="button"
+              onClick={() => setIsPdiModalOpen(true)}
+              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
+              title="Protocolo Oficial de Inspección Pre-Entrega de 85 Puntos"
+            >
+              <ClipboardCheck className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Auditoría PDI</span>
             </button>
 
             {onOpen360 && (
@@ -1534,6 +1566,22 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
         isOpen={isSocialFlyerOpen}
         onClose={() => setIsSocialFlyerOpen(false)}
         machine={machine}
+      />
+
+      {/* Task #72: 5-Year Total Cost of Ownership (TCO) Calculator Modal */}
+      <TcoComparisonCalculatorModal
+        isOpen={isTcoModalOpen}
+        onClose={() => setIsTcoModalOpen(false)}
+        machineName={machine.name}
+        machineBasePriceUsd={machine.basePriceUsd}
+      />
+
+      {/* Task #88: Official 85-Point Pre-Delivery Inspection Modal */}
+      <PreDeliveryInspectionPdiModal
+        isOpen={isPdiModalOpen}
+        onClose={() => setIsPdiModalOpen(false)}
+        machineName={machine.name}
+        machineSerial={machine.modelCode || `TMD-${machine.brand.toUpperCase()}-2026`}
       />
     </div>,
     document.body

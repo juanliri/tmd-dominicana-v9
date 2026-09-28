@@ -33,7 +33,8 @@ import {
   ShoppingBag,
   Scale,
   Droplets,
-  Award
+  Award,
+  ClipboardCheck
 } from 'lucide-react';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../../lib/firebase';
@@ -60,6 +61,7 @@ import { OemWarrantyClaimModal } from '../workshop/OemWarrantyClaimModal';
 import { CalibratedToolInventoryModal } from '../workshop/CalibratedToolInventoryModal';
 import { UsedOilDisposalModal } from '../eco/UsedOilDisposalModal';
 import { PostServiceCsatModal } from './PostServiceCsatModal';
+import { PreDeliveryInspectionPdiModal } from '../workshop/PreDeliveryInspectionPdiModal';
 
 interface ServiceHistoryTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -97,6 +99,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
   const [showCalibratedToolsModal, setShowCalibratedToolsModal] = useState<boolean>(false);
   const [showUsedOilModal, setShowUsedOilModal] = useState<boolean>(false);
   const [showCsatModal, setShowCsatModal] = useState<boolean>(false);
+  const [showPdiModal, setShowPdiModal] = useState<boolean>(false);
   const [newUnitId, setNewUnitId] = useState<string>('');
   const [newBrand, setNewBrand] = useState<string>('LiuGong');
   const [newModel, setNewModel] = useState<string>('');
@@ -463,6 +466,16 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           >
             <Award className="w-4 h-4 text-amber-400" />
             <span>Encuesta CSAT</span>
+          </button>
+
+          {/* Task #88: Pre-Delivery Inspection (PDI) 85-Point Checklist Modal Trigger */}
+          <button
+            onClick={() => setShowPdiModal(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-cyan-500/40 text-cyan-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
+            title="Inspección Pre-Entrega Oficial de 85 Puntos para Máquinas Nuevas"
+          >
+            <ClipboardCheck className="w-4 h-4 text-cyan-400" />
+            <span>Auditoría PDI</span>
           </button>
 
           <button
@@ -1290,6 +1303,12 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
       <PostServiceCsatModal
         isOpen={showCsatModal}
         onClose={() => setShowCsatModal(false)}
+      />
+
+      {/* Task #88: Official Pre-Delivery Inspection (PDI) Modal */}
+      <PreDeliveryInspectionPdiModal
+        isOpen={showPdiModal}
+        onClose={() => setShowPdiModal(false)}
       />
     </div>
   );

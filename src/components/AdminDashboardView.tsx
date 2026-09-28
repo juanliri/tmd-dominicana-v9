@@ -43,6 +43,7 @@ import { MonthlyBusinessConfigModal } from './admin/MonthlyBusinessConfigModal';
 import { Dgii606_607ExporterModal } from './accounting/Dgii606_607ExporterModal';
 import { SalesKanbanPipelineModal } from './commercial/SalesKanbanPipelineModal';
 import { TechnicianLaborHoursModal } from './workshop/TechnicianLaborHoursModal';
+import { PatioGatePassModal } from './security/PatioGatePassModal';
 import { LayoutGrid, Sparkles, Flame, ShieldCheck as ShieldCheckIcon, TrendingUp, Calendar as CalendarIcon, Activity as ActivityIcon, Settings } from 'lucide-react';
 
 interface AdminDashboardViewProps {
@@ -66,6 +67,7 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
   const [isDgiiExporterOpen, setIsDgiiExporterOpen] = useState(false);
   const [isKanbanOpen, setIsKanbanOpen] = useState(false);
   const [isLaborHoursOpen, setIsLaborHoursOpen] = useState(false);
+  const [isGatePassOpen, setIsGatePassOpen] = useState(false);
   const [highlightItemId, setHighlightItemId] = useState<string | null>(null);
 
   // Firestore Real-Time Listeners for quotes, machines, and parts
@@ -390,6 +392,17 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
               >
                 <Clock className="w-3.5 h-3.5" />
                 <span className="hidden lg:inline">Horas Taller</span>
+              </button>
+
+              {/* Task #84: Gate Pass Security Ticket Trigger */}
+              <button
+                type="button"
+                onClick={() => setIsGatePassOpen(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-amber-400/40 text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                title="Pase de Puerta Digital con QR para Garita de Salida Km 22"
+              >
+                <Shield className="w-3.5 h-3.5" />
+                <span className="hidden lg:inline">Pase Garita</span>
               </button>
 
               {/* Firestore Bulk Manager Trigger Button */}
@@ -886,6 +899,12 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
       <TechnicianLaborHoursModal
         isOpen={isLaborHoursOpen}
         onClose={() => setIsLaborHoursOpen(false)}
+      />
+
+      {/* Task #84: Gate Pass Security Ticket Modal */}
+      <PatioGatePassModal
+        isOpen={isGatePassOpen}
+        onClose={() => setIsGatePassOpen(false)}
       />
     </div>
   );

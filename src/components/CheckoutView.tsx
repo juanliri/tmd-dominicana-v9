@@ -51,6 +51,8 @@ import { TradeInValuationModal } from './machinery/TradeInValuationModal';
 import { SmartAttachmentsUpsell } from './checkout/SmartAttachmentsUpsell';
 import { DigitalSignaturePad } from './common/DigitalSignaturePad';
 import { DgiiElectronicInvoiceQrModal } from './accounting/DgiiElectronicInvoiceQrModal';
+import { LowboyFreightCalculatorModal } from './logistics/LowboyFreightCalculatorModal';
+import { PatioGatePassModal } from './security/PatioGatePassModal';
 
 interface CheckoutViewProps {
   onNavigate: (route: string) => void;
@@ -102,6 +104,8 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
   const [cardPaymentData, setCardPaymentData] = useState<CardPaymentResult | null>(null);
   const [tradeInCredit, setTradeInCredit] = useState<{ creditUsd: number; summary: string } | null>(null);
   const [isDgiiQrOpen, setIsDgiiQrOpen] = useState(false);
+  const [isLowboyModalOpen, setIsLowboyModalOpen] = useState(false);
+  const [isGatePassModalOpen, setIsGatePassModalOpen] = useState(false);
 
   // Formal digital signature & technical approval (Step 4)
   const [authorizedSigner, setAuthorizedSigner] = useState('');
@@ -583,6 +587,17 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
             >
               <FileText className="w-4 h-4" />
               <span>TIMBRE QR DGII</span>
+            </button>
+
+            {/* Task #84: Gate Pass Security Ticket Trigger */}
+            <button
+              type="button"
+              onClick={() => setIsGatePassModalOpen(true)}
+              className="inline-flex items-center justify-center gap-2 py-3 px-5 bg-zinc-900 hover:bg-zinc-850 text-emerald-400 border border-emerald-500/40 font-black uppercase tracking-wider rounded-[3px] text-xs transition-colors shadow-lg cursor-pointer"
+              title="Generar Pase de Garita con Código QR para Retiro en Km 22"
+            >
+              <Lock className="w-4 h-4" />
+              <span>PASE GARITA KM 22</span>
             </button>
 
             <button
@@ -2261,6 +2276,24 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
         buyerName={customer.companyName || customer.fullName || 'Cliente TMD'}
         totalDop={completedOrder?.totalDop || totalDop}
         totalUsd={completedOrder?.totalUsd || totalUsd}
+      />
+
+      {/* Task #66: Lowboy Heavy Equipment Freight Calculator Modal */}
+      <LowboyFreightCalculatorModal
+        isOpen={isLowboyModalOpen}
+        onClose={() => setIsLowboyModalOpen(false)}
+        machineName={machineQuotes[0]?.machine.name || 'Maquinaria TMD'}
+        machineWeightTon={machineQuotes[0]?.machine.operatingWeightKg ? Math.round(machineQuotes[0].machine.operatingWeightKg / 1000) : 22}
+      />
+
+      {/* Task #84: Gate Pass Security Ticket Modal */}
+      <PatioGatePassModal
+        isOpen={isGatePassModalOpen}
+        onClose={() => setIsGatePassModalOpen(false)}
+        orderNumber={completedOrder?.orderId || 'ORD-2026-8812'}
+        itemSummary={completedOrder?.items && completedOrder.items.length > 0 ? `${completedOrder.items.length} Repuestos OEM` : (machineQuotes[0]?.machine.name || 'Equipo LiuGong')}
+        recipientName={customer.fullName || 'Cliente TMD'}
+        recipientCedula={customer.rncOrCedula || '001-0000000-0'}
       />
     </div>
   );

@@ -43,6 +43,7 @@ import {
   Award,
   Radio,
   Download,
+  MonitorPlay,
   FileStack
 } from 'lucide-react';
 import { MACHINES_DATA } from '../data/catalog';
@@ -69,6 +70,8 @@ import { MachineryMosaicGrid, MosaicLayoutMode } from './machinery/MachineryMosa
 import { PublicLiveLinkSimulatorModal } from './telematics/PublicLiveLinkSimulatorModal';
 import { IndustrialSectionDivider } from './common/IndustrialSectionDivider';
 import { MachineryFacetFilterDrawer, FacetFilterState } from './machinery/MachineryFacetFilterDrawer';
+import { ShowroomKioskModeModal } from './showroom/ShowroomKioskModeModal';
+import { LowboyFreightCalculatorModal } from './logistics/LowboyFreightCalculatorModal';
 import { USD_TO_DOP_RATE } from '../data/catalog';
 import jcbBannerImg from '../assets/images/jcb_machinery_banner_1789963695284.jpg';
 import { motion, AnimatePresence, type Variants } from 'motion/react';
@@ -371,6 +374,8 @@ export const MachineryView = React.memo<MachineryViewProps>(({
 
   // LiveLink Telematics Simulator Modal State
   const [isLiveLinkModalOpen, setIsLiveLinkModalOpen] = useState<boolean>(false);
+  const [isKioskOpen, setIsKioskOpen] = useState<boolean>(false);
+  const [isLowboyOpen, setIsLowboyOpen] = useState<boolean>(false);
 
   // Machine 360 & Advanced Video/Gallery Modal State
   const [active360Machine, setActive360Machine] = useState<Machine | null>(null);
@@ -1079,6 +1084,28 @@ export const MachineryView = React.memo<MachineryViewProps>(({
             >
               <FileStack className="w-3.5 h-3.5" />
               <span className="hidden lg:inline">DOSSIER LICITACIÓN</span>
+            </button>
+
+            {/* Task #8: Showroom Kiosk Mode Presentation Button */}
+            <button
+              type="button"
+              onClick={() => setIsKioskOpen(true)}
+              className="px-2.5 py-1 rounded-[3px] text-xs font-black uppercase tracking-wider transition-all border flex items-center gap-1.5 cursor-pointer bg-zinc-900 text-amber-400 border-amber-400/40 hover:bg-amber-400 hover:text-black shadow-xs"
+              title="Activar Modo Kiosco Pantalla Completa para Salas de Ventas y Ferias"
+            >
+              <MonitorPlay className="w-3.5 h-3.5" />
+              <span className="hidden xl:inline">MODO KIOSCO</span>
+            </button>
+
+            {/* Task #66: Nationwide Lowboy Heavy Freight Calculator */}
+            <button
+              type="button"
+              onClick={() => setIsLowboyOpen(true)}
+              className="px-2.5 py-1 rounded-[3px] text-xs font-black uppercase tracking-wider transition-all border flex items-center gap-1.5 cursor-pointer bg-zinc-900 text-emerald-400 border-emerald-500/40 hover:bg-emerald-500 hover:text-black shadow-xs"
+              title="Cotizar Flete en Cama Baja (Lowboy) a Cualquier Provincia"
+            >
+              <Truck className="w-3.5 h-3.5" />
+              <span className="hidden xl:inline">FLETES LOWBOY</span>
             </button>
 
             {/* Sorting Select */}
@@ -1800,6 +1827,26 @@ export const MachineryView = React.memo<MachineryViewProps>(({
         onChange={setFacetFilters}
         onReset={() => setFacetFilters({ brands: [], tonnageRange: [], powerRange: [], fuelTypes: [], availability: [] })}
         totalFilteredCount={totalItems}
+      />
+
+      {/* Task #8: Showroom Kiosk Presentation Modal */}
+      <ShowroomKioskModeModal
+        isOpen={isKioskOpen}
+        onClose={() => setIsKioskOpen(false)}
+        onSelectMachine={(machineId) => {
+          const found = MACHINES_DATA.find(m => m.id === machineId);
+          if (found) {
+            setActiveModalMachine(found);
+          }
+        }}
+      />
+
+      {/* Task #66: Lowboy Heavy Equipment Freight Calculator Modal */}
+      <LowboyFreightCalculatorModal
+        isOpen={isLowboyOpen}
+        onClose={() => setIsLowboyOpen(false)}
+        machineName={filteredAndSortedMachines[0]?.name || 'LiuGong 922E HD'}
+        machineWeightTon={filteredAndSortedMachines[0]?.operatingWeightKg ? Math.round(filteredAndSortedMachines[0].operatingWeightKg / 1000) : 22}
       />
 
     </motion.div>
