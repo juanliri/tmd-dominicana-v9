@@ -165,11 +165,12 @@ export const IndustrialMegaMenu: React.FC<IndustrialMegaMenuProps> = ({
         <div className="flex items-center gap-2.5 shrink-0 self-end sm:self-center">
           <button
             onClick={() => {
-              if (activeTab === 'heavy_machinery') handleActionNavigate('#/machinery');
-              else if (activeTab === 'contractor_deploy') handleActionNavigate('#/rental');
-              else if (activeTab === 'parts_service') handleActionNavigate('#/parts');
-              else if (activeTab === 'gov_bids') handleActionNavigate('#/tech-docs');
-              else handleActionNavigate('#/machinery');
+              if (activeTab === 'heavy_machinery') handleActionNavigate('#/machinery-hub');
+              else if (activeTab === 'contractor_deploy') handleActionNavigate('#/rental-hub');
+              else if (activeTab === 'parts_service') handleActionNavigate('#/parts-hub');
+              else if (activeTab === 'gov_bids') handleActionNavigate('#/services-hub');
+              else if (activeTab === 'brands') handleActionNavigate('#/brands-directory');
+              else handleActionNavigate('#/machinery-hub');
             }}
             className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-[#e0a22a] hover:text-slate-900 dark:hover:text-white flex items-center gap-1 transition-colors cursor-pointer"
           >
@@ -276,18 +277,43 @@ export const IndustrialMegaMenu: React.FC<IndustrialMegaMenuProps> = ({
               </div>
             </div>
           ) : (
-            /* 3 COLUMN CATEGORY DIRECTORY + 1 SPOTLIGHT */
+            /* 3 COLUMN PHOTO-RICH CATEGORY DIRECTORY + 1 EDITORIAL SPOTLIGHT */
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
-              {/* Left 3 Category Columns (8-9 cols) */}
+              {/* Left 3 Photo-Card Category Columns (8-9 cols) */}
               <div className="lg:col-span-8 xl:col-span-9 grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {currentTabConfig.subcategories.map(sub => {
                   const SubIcon = sub.icon;
                   return (
                     <div 
                       key={sub.id}
-                      className="p-3.5 rounded-xl bg-slate-50 dark:bg-zinc-900/70 border border-slate-200/80 dark:border-white/[0.06] hover:border-amber-400/60 dark:hover:border-white/[0.14] flex flex-col justify-between transition-colors"
+                      className="rounded-xl bg-slate-50 dark:bg-zinc-900/70 border border-slate-200/80 dark:border-white/[0.06] hover:border-amber-400/60 dark:hover:border-white/[0.14] flex flex-col justify-between transition-all group/card overflow-hidden"
                     >
-                      <div>
+                      {/* Featured Product Photo */}
+                      <button
+                        onClick={() => handleActionNavigate(sub.featuredProduct.route)}
+                        className="relative w-full h-28 xl:h-32 overflow-hidden bg-slate-100 dark:bg-zinc-800/50 cursor-pointer block"
+                      >
+                        <img
+                          src={sub.featuredProduct.image}
+                          alt={sub.featuredProduct.name}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-110"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                        {/* Product Info Overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 p-2.5">
+                          <div className="flex items-center gap-1.5">
+                            <span className="px-1.5 py-0.5 rounded-[2px] text-[8px] font-black uppercase bg-amber-400/90 text-black backdrop-blur-sm">
+                              {sub.featuredProduct.brand}
+                            </span>
+                          </div>
+                          <p className="text-[11px] font-bold text-white leading-tight mt-1 line-clamp-1 drop-shadow-md">
+                            {sub.featuredProduct.name}
+                          </p>
+                        </div>
+                      </button>
+
+                      <div className="p-3">
                         {/* Subcategory Title */}
                         <div className="flex items-center justify-between gap-1.5 pb-2 mb-2 border-b border-slate-200/80 dark:border-white/[0.06]">
                           <div className="flex items-center gap-2 min-w-0">
@@ -303,29 +329,29 @@ export const IndustrialMegaMenu: React.FC<IndustrialMegaMenuProps> = ({
                           )}
                         </div>
 
-                        {/* Typographic Quick Links */}
-                        <div className="space-y-1 py-1">
-                          {sub.quickLinks.map((link, lIdx) => (
+                        {/* Streamlined Quick Links (max 2 for cleaner visual) */}
+                        <div className="space-y-0.5 py-1">
+                          {sub.quickLinks.slice(0, 2).map((link, lIdx) => (
                             <button
                               key={lIdx}
                               onClick={() => handleActionNavigate(link.route)}
-                              className="w-full text-left py-1 px-1.5 rounded-[3px] text-xs font-semibold text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-white/[0.05] flex items-center justify-between group transition-colors cursor-pointer"
+                              className="w-full text-left py-1 px-1.5 rounded-[3px] text-[11px] font-semibold text-slate-600 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-white/[0.05] flex items-center justify-between group transition-colors cursor-pointer"
                             >
                               <span className="truncate">{link.label}</span>
                               <ChevronRight className="w-3 h-3 text-slate-400 dark:text-zinc-500 group-hover:text-amber-600 dark:group-hover:text-[#e0a22a] group-hover:translate-x-0.5 transition-transform shrink-0" />
                             </button>
                           ))}
                         </div>
-                      </div>
 
-                      {/* Direct Category View */}
-                      <button
-                        onClick={() => handleActionNavigate(sub.linkRoute)}
-                        className="mt-2 pt-2 border-t border-slate-200/80 dark:border-white/[0.06] text-[11px] font-black uppercase text-amber-700 dark:text-[#e0a22a] hover:text-amber-800 dark:hover:text-white flex items-center justify-between transition-colors cursor-pointer group"
-                      >
-                        <span>Ver modelos</span>
-                        <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                      </button>
+                        {/* Direct Category View */}
+                        <button
+                          onClick={() => handleActionNavigate(sub.linkRoute)}
+                          className="w-full mt-1.5 pt-2 border-t border-slate-200/80 dark:border-white/[0.06] text-[11px] font-black uppercase text-amber-700 dark:text-[#e0a22a] hover:text-amber-800 dark:hover:text-white flex items-center justify-between transition-colors cursor-pointer group"
+                        >
+                          <span>Ver Catálogo</span>
+                          <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                        </button>
+                      </div>
                     </div>
                   );
                 })}

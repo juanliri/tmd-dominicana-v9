@@ -60,6 +60,20 @@ export const ROUTE_REGISTRY: Record<string, RouteDefinition> = {
     ],
     searchKeywords: ['maquinaria', 'excavadora', 'pala', 'motoniveladora', 'rodillo', 'retroexcavadora', 'bulldozer', 'flota', 'equipos', 'amarillo']
   },
+  MACHINERY_HUB: {
+    id: 'machinery-hub',
+    canonicalPath: '#/machinery-hub',
+    title: 'Centro de Maquinaria Pesada',
+    subtitle: 'Explorar categorías, marcas y equipos disponibles en RD',
+    category: 'showroom',
+    aliases: ['#/equipos-hub', '#/maquinaria-hub'],
+    isEligibleForComparison: true,
+    breadcrumbs: [
+      { label: 'Inicio', path: '#/home' },
+      { label: 'Centro de Maquinaria', path: '#/machinery-hub' }
+    ],
+    searchKeywords: ['centro', 'hub', 'categorias', 'explorar', 'maquinaria', 'equipos', 'marcas']
+  },
   PARTS: {
     id: 'parts',
     canonicalPath: '#/parts',
@@ -86,6 +100,58 @@ export const ROUTE_REGISTRY: Record<string, RouteDefinition> = {
       { label: 'Renta de Equipos', path: '#/rental' }
     ],
     searchKeywords: ['renta', 'alquiler', 'leasing operativo', 'contratistas', 'alquiler maquinaria', 'obra']
+  },
+  PARTS_HUB: {
+    id: 'parts-hub',
+    canonicalPath: '#/parts-hub',
+    title: 'Centro de Repuestos Genuinos & Filtros OEM',
+    subtitle: 'Explorar categorías de repuestos, filtros y mantenimiento por marca',
+    category: 'showroom',
+    aliases: ['#/repuestos-hub', '#/piezas-hub'],
+    breadcrumbs: [
+      { label: 'Inicio', path: '#/home' },
+      { label: 'Centro de Repuestos', path: '#/parts-hub' }
+    ],
+    searchKeywords: ['repuestos hub', 'filtros', 'piezas', 'oem', 'categorias repuestos']
+  },
+  RENTAL_HUB: {
+    id: 'rental-hub',
+    canonicalPath: '#/rental-hub',
+    title: 'Centro de Renta de Maquinaria Pesada',
+    subtitle: 'Tarifario, disponibilidad y modelos de alquiler en RD',
+    category: 'showroom',
+    aliases: ['#/renta-hub', '#/alquiler-hub'],
+    breadcrumbs: [
+      { label: 'Inicio', path: '#/home' },
+      { label: 'Centro de Renta', path: '#/rental-hub' }
+    ],
+    searchKeywords: ['renta hub', 'alquiler equipos', 'tarifas renta', 'disponibilidad']
+  },
+  SERVICES_HUB: {
+    id: 'services-hub',
+    canonicalPath: '#/services-hub',
+    title: 'Centro de Servicios Técnicos & Postventa',
+    subtitle: 'Taller Km 22, SOS Móvil en obra, laboratorio diésel y telemetría',
+    category: 'technical',
+    aliases: ['#/servicios-hub', '#/taller-hub'],
+    breadcrumbs: [
+      { label: 'Inicio', path: '#/home' },
+      { label: 'Centro de Servicios', path: '#/services-hub' }
+    ],
+    searchKeywords: ['servicios hub', 'taller central', 'sos movil', 'laboratorio', 'livelink']
+  },
+  BRANDS_DIRECTORY: {
+    id: 'brands-directory',
+    canonicalPath: '#/brands-directory',
+    title: 'Directorio de Marcas Oficiales Homologadas',
+    subtitle: 'JCB, LiuGong, Ammann, Kubota, Yanmar, LS Tractor y más',
+    category: 'showroom',
+    aliases: ['#/marcas', '#/directorio-marcas', '#/marcas-oficiales'],
+    breadcrumbs: [
+      { label: 'Inicio', path: '#/home' },
+      { label: 'Directorio de Marcas', path: '#/brands-directory' }
+    ],
+    searchKeywords: ['marcas', 'directorio', 'jcb', 'liugong', 'ammann', 'kubota', 'yanmar']
   },
   SERVICE: {
     id: 'service',

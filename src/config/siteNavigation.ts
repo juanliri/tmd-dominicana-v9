@@ -55,6 +55,20 @@ export const SiteNavigation = {
       inHeaderNav: true,
       inMobileNav: true
     },
+    'machinery-hub': {
+      id: 'machinery-hub',
+      name: 'Centro de Maquinaria Pesada',
+      shortName: 'Centro Maquinaria',
+      path: '#/machinery-hub',
+      description: 'Explorar categorías, marcas y equipos disponibles',
+      category: 'showroom' as RouteCategory,
+      aliases: ['#/equipos-hub', '#/maquinaria-hub'],
+      isEligibleForComparison: true,
+      searchKeywords: ['centro', 'hub', 'categorias', 'explorar', 'maquinaria', 'equipos', 'marcas'],
+      iconName: 'Layers',
+      inHeaderNav: false,
+      inMobileNav: false
+    },
     parts: {
       id: 'parts',
       name: 'Catálogo de Repuestos OEM',
@@ -80,6 +94,59 @@ export const SiteNavigation = {
       searchKeywords: ['renta', 'alquiler', 'leasing operativo', 'lowboy'],
       iconName: 'Layers',
       inHeaderNav: true,
+      inMobileNav: false
+    },
+    'parts-hub': {
+      id: 'parts-hub',
+      name: 'Centro de Repuestos Genuinos & Filtros OEM',
+      shortName: 'Centro Repuestos',
+      path: '#/parts-hub',
+      description: 'Explorar categorías de repuestos y filtros OEM',
+      category: 'showroom' as RouteCategory,
+      aliases: ['#/repuestos-hub', '#/piezas-hub'],
+      searchKeywords: ['repuestos hub', 'filtros', 'piezas', 'oem'],
+      iconName: 'Cog',
+      inHeaderNav: false,
+      inMobileNav: false
+    },
+    'rental-hub': {
+      id: 'rental-hub',
+      name: 'Centro de Renta de Maquinaria Pesada',
+      shortName: 'Centro Renta',
+      path: '#/rental-hub',
+      description: 'Tarifario y modelos de renta de maquinaria pesada',
+      category: 'showroom' as RouteCategory,
+      aliases: ['#/renta-hub', '#/alquiler-hub'],
+      isEligibleForComparison: true,
+      searchKeywords: ['renta hub', 'alquiler equipos', 'tarifas renta'],
+      iconName: 'Layers',
+      inHeaderNav: false,
+      inMobileNav: false
+    },
+    'services-hub': {
+      id: 'services-hub',
+      name: 'Centro de Servicios Técnicos & Postventa',
+      shortName: 'Centro Servicios',
+      path: '#/services-hub',
+      description: 'Taller Km 22, SOS en obra y telemetría satelital',
+      category: 'technical' as RouteCategory,
+      aliases: ['#/servicios-hub', '#/taller-hub'],
+      searchKeywords: ['servicios hub', 'taller central', 'sos movil'],
+      iconName: 'Wrench',
+      inHeaderNav: false,
+      inMobileNav: false
+    },
+    'brands-directory': {
+      id: 'brands-directory',
+      name: 'Directorio de Marcas Oficiales Homologadas',
+      shortName: 'Marcas',
+      path: '#/brands-directory',
+      description: 'Fabricantes OEM autorizados en República Dominicana',
+      category: 'showroom' as RouteCategory,
+      aliases: ['#/marcas', '#/directorio-marcas'],
+      searchKeywords: ['marcas', 'directorio', 'jcb', 'liugong', 'ammann'],
+      iconName: 'Sparkles',
+      inHeaderNav: false,
       inMobileNav: false
     },
     service: {

@@ -580,7 +580,7 @@ export const Header: React.FC<HeaderProps> = ({
         handleScheduleServicesDropdownClose();
       }}
     >
-      {/* Sleek Top Micro-Bar (On top of menu bar) */}
+      {/* Streamlined Top Micro-Bar — 3 Clean Zones */}
       <div 
         onMouseEnter={() => {
           handleCloseMegaMenuImmediately();
@@ -588,18 +588,19 @@ export const Header: React.FC<HeaderProps> = ({
         }}
         className="bg-slate-100/95 dark:bg-[#050508]/95 backdrop-blur-md text-slate-600 dark:text-zinc-400 text-[11px] py-1.5 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-slate-200/80 dark:border-white/[0.06] hidden sm:flex items-center justify-between gap-3"
       >
+        {/* Zone 1: Distributor Identity */}
         <div className="flex items-center gap-3 shrink-0">
           <span className="flex items-center gap-1.5 text-slate-800 dark:text-zinc-200 font-bold uppercase tracking-wider text-[10px]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] animate-pulse" />
             <span className="text-amber-600 dark:text-brand-gold">DISTRIBUIDOR OFICIAL</span> REPÚBLICA DOMINICANA
           </span>
-          <span className="text-slate-300 dark:text-zinc-700 hidden 2xl:inline">•</span>
-          <span className="hidden 2xl:inline text-[10px] uppercase font-bold text-slate-500 dark:text-zinc-400 tracking-wider">
-            SEDE CENTRAL KM 22, AUTOPISTA DUARTE
+          <span className="text-slate-300 dark:text-zinc-700 hidden xl:inline">·</span>
+          <span className="hidden xl:inline text-[10px] uppercase font-bold text-slate-500 dark:text-zinc-400 tracking-wider">
+            PATIO KM 22, AUTOPISTA DUARTE
           </span>
         </div>
 
-        {/* Center: Search Bar Trigger Moved to Top Micro-Bar */}
+        {/* Zone 2: Omnibox Search Bar */}
         {onOpenSearch && (
           <div className="hidden lg:flex items-center flex-1 max-w-xs xl:max-w-md mx-3">
             <button
@@ -619,20 +620,20 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         )}
 
-        <div className="flex items-center gap-3 shrink-0">
-          {/* Emergencias 24/7 Hotline */}
+        {/* Zone 3: Compact Utilities */}
+        <div className="flex items-center gap-2.5 shrink-0">
+          {/* Hotline */}
           <a
             href="tel:18095601234"
             className="flex items-center gap-1.5 text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold transition-colors font-medium text-[10px] uppercase tracking-wider"
           >
             <Phone className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
-            <span className="hidden xl:inline text-slate-500 dark:text-zinc-400">EMERGENCIAS 24/7: </span>
-            <strong className="text-slate-900 dark:text-white font-mono font-bold">+1 (809) 560-1234</strong>
+            <strong className="text-slate-900 dark:text-white font-mono font-bold">(809) 560-1234</strong>
           </a>
 
           <div className="h-3 w-px bg-slate-200 dark:bg-white/[0.08]" />
 
-          {/* Currency Switcher & Live Rate Sync */}
+          {/* Currency Switcher + Rate */}
           <div className="flex items-center gap-1.5 font-mono">
             <div className="flex items-center gap-0.5 bg-white dark:bg-[#09090e] rounded-[3px] p-0.5 border border-slate-200 dark:border-white/[0.08]">
               <button
@@ -659,73 +660,38 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               onClick={() => setIsBcrdModalOpen(true)}
-              title={`Tasa Oficial Banco Central (BCRD): 1 USD = RD$ ${exchangeRate.toFixed(2)}. Click para abrir monitor de divisas y simulador bancario.`}
-              className="hidden xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[2px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 hover:border-amber-400 text-[9px] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 transition-all cursor-pointer font-mono"
+              title={`Tasa Oficial Banco Central (BCRD): 1 USD = RD$ ${exchangeRate.toFixed(2)}`}
+              className="hidden xl:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[2px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 hover:border-amber-400 text-[9px] text-slate-600 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 transition-all cursor-pointer font-mono"
             >
               <span className={`w-1.5 h-1.5 rounded-full ${exchangeRateData.isLive ? 'bg-emerald-400' : 'bg-amber-400'}`} />
-              <span className="font-bold">BCRD: RD$ {exchangeRate.toFixed(2)}</span>
-              <Building2 className="w-2.5 h-2.5 text-amber-500 dark:text-amber-400" />
+              <span className="font-bold">RD$ {exchangeRate.toFixed(2)}</span>
             </button>
-
-            {/* Live Network Latency & Connectivity Badge (Task #9) */}
-            <div className="hidden sm:inline-flex items-center">
-              <NetworkPingBadge />
-            </div>
           </div>
 
           <div className="h-3 w-px bg-slate-200 dark:bg-white/[0.08]" />
 
-          {/* Theme Switcher Moved to Top of Menu Bar */}
+          {/* Theme Toggle (Compact) */}
           <button
             onClick={toggleTheme}
             aria-label="Alternar tema claro/oscuro"
             title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
-            className="flex items-center gap-1 px-2 py-0.5 rounded-[3px] text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-[#12121c] transition-colors cursor-pointer border border-slate-200 dark:border-white/[0.08] text-[10px] font-black uppercase"
+            className="flex items-center gap-1 px-1.5 py-0.5 rounded-[3px] text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-[#12121c] transition-colors cursor-pointer border border-slate-200 dark:border-white/[0.08] text-[10px] font-black uppercase"
           >
             {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-brand-gold" /> : <Moon className="w-3.5 h-3.5 text-slate-700" />}
-            <span className="hidden lg:inline">{theme === 'dark' ? 'OSCURO' : 'CLARO'}</span>
           </button>
 
-          {/* Cantera High Contrast Solar Mode (Task #11) */}
+          {/* Cantera Solar Mode */}
           <button
             onClick={toggleCanteraMode}
             aria-label="Alternar modo cantera de alto contraste solar"
-            title={isCanteraMode ? 'Desactivar modo cantera solar' : 'Activar modo cantera solar (alto contraste bajo sol directo)'}
-            className={`flex items-center gap-1 px-2 py-0.5 rounded-[3px] text-[10px] font-black uppercase transition-all cursor-pointer border ${
+            title={isCanteraMode ? 'Desactivar modo cantera solar' : 'Activar modo cantera solar'}
+            className={`flex items-center gap-1 px-1.5 py-0.5 rounded-[3px] text-[10px] font-black uppercase transition-all cursor-pointer border ${
               isCanteraMode
-                ? 'bg-amber-400 text-black border-amber-300 shadow-[0_0_8px_rgba(251,191,36,0.6)] font-bold'
-                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-[#12121c] border-slate-200 dark:border-white/[0.08]'
-            }`}
-          >
-            <Mountain className={`w-3.5 h-3.5 ${isCanteraMode ? 'text-black' : 'text-amber-500 dark:text-amber-400'}`} />
-            <span className="hidden xl:inline">{isCanteraMode ? 'SOLAR ON' : 'SOLAR'}</span>
-          </button>
-
-          {/* Notifications Bell Moved to Top of Menu Bar */}
-          <button
-            onClick={openNotificationPanel}
-            aria-label="Ver notificaciones"
-            title="Notificaciones"
-            className="relative p-1 rounded-[3px] text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-[#12121c] transition-colors cursor-pointer border border-slate-200 dark:border-white/[0.08]"
-          >
-            <Bell className="w-3.5 h-3.5" />
-            {unreadCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] animate-pulse" />
-            )}
-          </button>
-
-          {/* Pin Mega Menu Toggle */}
-          <button
-            onClick={() => setIsMenuPinned(!isMenuPinned)}
-            title={isMenuPinned ? 'Desfijar menú (cierre automático)' : 'Fijar menú para navegación continua'}
-            className={`flex items-center gap-1 px-2 py-0.5 rounded-[3px] text-[10px] font-black uppercase tracking-wider transition-colors cursor-pointer border ${
-              isMenuPinned
-                ? 'bg-amber-100 dark:bg-[#181824] text-amber-700 dark:text-brand-gold border-amber-300 dark:border-brand-gold-dark/50'
+                ? 'bg-amber-400 text-black border-amber-300 shadow-[0_0_8px_rgba(251,191,36,0.6)]'
                 : 'text-slate-500 dark:text-zinc-400 hover:text-slate-800 dark:hover:text-zinc-200 border-slate-200 dark:border-white/[0.08] hover:bg-slate-200/60 dark:hover:bg-[#12121c]'
             }`}
           >
-            {isMenuPinned ? <PinOff className="w-3 h-3 text-amber-600 dark:text-brand-gold" /> : <Pin className="w-3 h-3" />}
-            <span className="hidden xl:inline">{isMenuPinned ? 'FIJADO' : 'FIJAR'}</span>
+            <Mountain className={`w-3 h-3 ${isCanteraMode ? 'text-black' : 'text-amber-500 dark:text-amber-400'}`} />
           </button>
         </div>
       </div>
@@ -852,7 +818,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
               }`}
             >
-              <span>MÁS SERVICIOS</span>
+              <span>SERVICIOS</span>
               <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
                 servicesDropdownOpen ? 'rotate-180 text-amber-500 dark:text-amber-400' : 'text-slate-400 dark:text-zinc-400'
               }`} />
@@ -885,7 +851,7 @@ export const Header: React.FC<HeaderProps> = ({
                 : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
           >
-            <span>{isAdmin ? 'PORTAL ADMIN' : isStaff ? 'PORTAL OFICINA' : 'PORTAL'}</span>
+            <span>{isAdmin ? 'ADMIN' : isStaff ? 'OFICINA' : 'MI PORTAL'}</span>
             {(isAdmin || isStaff) && (
               <span className="px-1.5 py-0.2 rounded text-[9px] font-black uppercase bg-amber-100 text-amber-800 dark:bg-zinc-700 dark:text-amber-400 border border-amber-300 dark:border-zinc-600">
                 Staff
@@ -896,6 +862,23 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Right Action Icons & Controls */}
         <div className="flex items-center gap-2 sm:gap-2.5">
+          {/* Notifications Bell (Moved from micro-bar for better visibility) */}
+          <button
+            onClick={openNotificationPanel}
+            onMouseEnter={() => {
+              handleCloseMegaMenuImmediately();
+              handleCloseServicesDropdownImmediately();
+            }}
+            aria-label="Ver notificaciones"
+            title="Notificaciones"
+            className="relative p-2 rounded-lg bg-slate-100 dark:bg-[#09090f] border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold transition-colors cursor-pointer"
+          >
+            <Bell className="w-4 h-4" />
+            {unreadCount > 0 && (
+              <span className="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-amber-500 border-2 border-white dark:border-[#09090f] animate-pulse" />
+            )}
+          </button>
+
           {/* Quick Omnibox Search Button on Mobile & Tablets (Shown when top bar search is hidden on < lg) */}
           {onOpenSearch && (
             <button

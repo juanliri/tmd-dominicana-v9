@@ -54,6 +54,11 @@ import { GuidedWalkthroughTour } from './components/tour/GuidedWalkthroughTour';
 import { ProductQrScannerModal } from './components/ProductQrScannerModal';
 import { FloatingActionOrchestrator } from './components/common/actions/FloatingActionOrchestrator';
 import { IndustrialScrollProgressBar } from './components/effects/IndustrialScrollProgressBar';
+import { MachineryHubView } from './components/hub/MachineryHubView';
+import { PartsHubView } from './components/hub/PartsHubView';
+import { RentalHubView } from './components/hub/RentalHubView';
+import { ServicesHubView } from './components/hub/ServicesHubView';
+import { BrandsDirectoryView } from './components/hub/BrandsDirectoryView';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle, X, Sparkles } from 'lucide-react';
@@ -124,6 +129,16 @@ function AppContent() {
             onClearSelectedMachine={() => setSelectedMachineId(null)}
           />
         );
+      case 'machinery-hub':
+        return <MachineryHubView onNavigate={navigateTo} />;
+      case 'parts-hub':
+        return <PartsHubView onNavigate={navigateTo} />;
+      case 'rental-hub':
+        return <RentalHubView onNavigate={navigateTo} />;
+      case 'services-hub':
+        return <ServicesHubView onNavigate={navigateTo} />;
+      case 'brands-directory':
+        return <BrandsDirectoryView onNavigate={navigateTo} />;
       case 'parts':
         return (
           <PartsView
