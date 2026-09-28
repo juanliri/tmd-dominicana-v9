@@ -15,7 +15,7 @@ Esta matriz contiene **100 recomendaciones de grado de ingeniería y dirección 
 | **Sprint 3** | Terreno, Inspección & Logística | #3 (Haptics), #9 (Ping Latency), #12 (Zoom Cinemático), #66 (Cotizador Lowboy RD), #13 (Badges Semáforo) | `340b243` | 🟢 Producción Desplegado |
 | **Sprint 4** | Inspección Pre-Entrega & Licitaciones | #16/#88 (Checklist PDI 85 Pts), #6 (Guía Fluidos), #84 (Pase Garita QR), #23 (OEM vs Aftermarket), #74 (Dossier Licitación) | `a413151` | 🟢 Producción Desplegado |
 | **Sprint 5** | Geotecnia, Suelos RD & Operaciones Taller | #4 (Presión Suelo / Orugas), #8 (Baldes Geología RD), #86 (Espectrometría S.O.S.), #87 (Bahías Taller), #91 (Test Drive Patio) | `c70b7d5` | 🟢 Producción Desplegado |
-| **Sprint 6** | Fiscalidad DGII, Contratos PMA & Taller Pericial | #70 (Desglose ITBIS & Retenciones), #76 (PMA 1k/2k/3k Horas), #82 (Acta Pericial Taller), #85 (Rótulos Zebra 100x50), #90 (TMD Reman) | *(Pendiente)* | 🟢 Producción Desplegado |
+| **Sprint 6** | Fiscalidad DGII, Contratos PMA & Taller Pericial | #70 (Desglose ITBIS & Retenciones), #76 (PMA 1k/2k/3k Horas), #82 (Acta Pericial Taller), #85 (Rótulos Zebra 100x50), #90 (TMD Reman) | `cf531eb` | 🟢 Producción Desplegado |
 
 **Avance Acumulado:** **30 de 100 Tareas Estratégicas (30% del Plan Maestro completado)**.
 
