@@ -238,15 +238,59 @@ function AppContent() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Global Shortcuts: Cmd+K / Ctrl+K for Search, Cmd+Shift+Q / Ctrl+Shift+Q for QR Scanner
+  // Global Shortcuts: Cmd+K (Search), Cmd+Shift+Q (QR), Cmd+M (Machinery), Cmd+P (Parts), Cmd+T (Service), Cmd+Q (Checkout), Cmd+L (Portal), Esc (Close modals)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Escape closes open modals first
+      if (e.key === 'Escape') {
+        setIsSearchOpen(false);
+        setIsQrScannerOpen(false);
+        setIsTourOpen(false);
+        return;
+      }
+
+      // Check if user is typing in an active text input or editable element
+      const target = e.target as HTMLElement | null;
+      const isInputFocused = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
+
+      // Search and QR scanner can be triggered anywhere
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         setIsSearchOpen((prev) => !prev);
-      } else if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === 'q') {
+        return;
+      }
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === 'q') {
         e.preventDefault();
         setIsQrScannerOpen((prev) => !prev);
+        return;
+      }
+
+      // If typing inside an input field, do not hijack normal typing shortcuts
+      if (isInputFocused) return;
+
+      if (e.metaKey || e.ctrlKey) {
+        switch (e.key.toLowerCase()) {
+          case 'm':
+            e.preventDefault();
+            navigateTo('#/machinery');
+            break;
+          case 'p':
+            e.preventDefault();
+            navigateTo('#/parts');
+            break;
+          case 't':
+            e.preventDefault();
+            navigateTo('#/service');
+            break;
+          case 'q':
+            e.preventDefault();
+            navigateTo('#/checkout');
+            break;
+          case 'l':
+            e.preventDefault();
+            navigateTo('#/portal');
+            break;
+        }
       }
     };
     window.addEventListener('keydown', handleKeyDown);

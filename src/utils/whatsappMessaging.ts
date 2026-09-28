@@ -70,8 +70,11 @@ export const generateQuoteWhatsAppMessage = (
     lines.push(`⚖️ *Saldo Pendiente para Despacho:* *US$ ${balanceUsd.toLocaleString()}*`);
   }
 
+  const quoteUrl = generateShortQuoteShareUrl(quote.id || quote.quoteNumber);
+
   lines.push(
     `━━━━━━━━━━━━━━━━━━━━━━━━`,
+    `🔗 *Ver Proforma Online:* ${quoteUrl}`,
     `📍 *Lugar de Entrega:* Patio Central Km 22, Autopista Duarte, Sto. Dgo. Oeste`,
     `🛡️ *Garantía:* Oficial TMD Care con Respaldo de Fábrica`,
     `⏱️ *Validez de Oferta:* 15 Días Calendario`,
@@ -82,6 +85,33 @@ export const generateQuoteWhatsAppMessage = (
   );
 
   return lines.join('\n');
+};
+
+/**
+ * Generates an official short share link for online review of a quote or proforma
+ */
+export const generateShortQuoteShareUrl = (quoteId?: string): string => {
+  if (!quoteId) return 'https://tmd-dominicana.com.do/#/portal';
+  const origin = typeof window !== 'undefined' && window.location.origin
+    ? window.location.origin
+    : 'https://tmd-dominicana.com.do';
+  return `${origin}/#/portal?quoteId=${encodeURIComponent(quoteId)}`;
+};
+
+/**
+ * Copies the short quote URL to clipboard with fallback
+ */
+export const copyQuoteShareLink = async (quoteId?: string): Promise<boolean> => {
+  const url = generateShortQuoteShareUrl(quoteId);
+  try {
+    if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(url);
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
 };
 
 /**

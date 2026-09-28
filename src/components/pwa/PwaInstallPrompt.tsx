@@ -18,8 +18,11 @@ export const PwaInstallPrompt: React.FC = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [isInstallable, setIsInstallable] = useState<boolean>(false);
   const [isInstalled, setIsInstalled] = useState<boolean>(false);
+  const [isIos, setIsIos] = useState<boolean>(false);
   const [dismissed, setDismissed] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
+      const until = localStorage.getItem('tmd_pwa_dismissed_until');
+      if (until && Number(until) > Date.now()) return true;
       return sessionStorage.getItem('tmd_pwa_dismissed') === 'true';
     }
     return false;
@@ -27,10 +30,21 @@ export const PwaInstallPrompt: React.FC = () => {
   const [showInstructionsModal, setShowInstructionsModal] = useState<boolean>(false);
 
   useEffect(() => {
-    // Check if already in standalone mode
-    if (window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone) {
+    if (typeof window === 'undefined') return;
+
+    // Check if running in standalone mode (already installed)
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || (window.navigator as any).standalone;
+    if (isStandalone) {
       setIsInstalled(true);
       return;
+    }
+
+    // Detect iOS devices (Safari does not emit beforeinstallprompt)
+    const isIosDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+    setIsIos(isIosDevice);
+
+    if (isIosDevice) {
+      setIsInstallable(true);
     }
 
     const handler = (e: Event) => {
@@ -55,6 +69,9 @@ export const PwaInstallPrompt: React.FC = () => {
   const handleDismiss = () => {
     setDismissed(true);
     if (typeof window !== 'undefined') {
+      // Remember dismissal for 7 days
+      const expiry = Date.now() + 7 * 24 * 60 * 60 * 1000;
+      localStorage.setItem('tmd_pwa_dismissed_until', String(expiry));
       sessionStorage.setItem('tmd_pwa_dismissed', 'true');
     }
   };

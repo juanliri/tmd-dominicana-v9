@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { PortalQuote } from '../../../types';
 import { USD_TO_DOP_RATE } from '../../../data/catalog';
+import { verifyDgiiTaxId, DOMINICAN_RNC_REGISTRY } from '../../../services/dgiiRncService';
 
 interface NcfGeneratorProps {
   isOpen: boolean;
@@ -43,8 +44,8 @@ export const NcfGenerator: React.FC<NcfGeneratorProps> = ({
   const [saving, setSaving] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const cleanRnc = rnc.replace(/\D/g, '');
-  const isRncValid = cleanRnc.length === 9 || cleanRnc.length === 11;
+  const rncVerification = verifyDgiiTaxId(rnc);
+  const isRncValid = rncVerification.isValid;
   const fullNcf = `${ncfType}${sequenceNumber.padStart(8, '0')}`;
 
   const totalUsd = quote.total || 0;
@@ -56,7 +57,7 @@ export const NcfGenerator: React.FC<NcfGeneratorProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isRncValid) {
-      setErrorMsg('El RNC debe contener 9 dígitos (empresas) u 11 dígitos (cédula física).');
+      setErrorMsg(rncVerification.validationMessage || 'El RNC o Cédula no supera la validación oficial DGII.');
       return;
     }
 
@@ -182,20 +183,33 @@ export const NcfGenerator: React.FC<NcfGeneratorProps> = ({
                     type="text"
                     required
                     value={rnc}
-                    onChange={(e) => setRnc(e.target.value)}
-                    placeholder="1-31-45678-9"
+                    onChange={(e) => {
+                      const raw = e.target.value;
+                      const verif = verifyDgiiTaxId(raw);
+                      setRnc(verif.formatted || raw);
+                      if (verif.record) {
+                        setCompanyName(verif.record.businessName);
+                        if (verif.record.ncfPreferred.startsWith('B14')) setNcfType('B14');
+                        else if (verif.record.ncfPreferred.startsWith('B15')) setNcfType('B15');
+                        else setNcfType('B01');
+                      }
+                    }}
+                    placeholder="1-31-89024-5"
                     className={`w-full px-3 py-2 rounded-[2px] bg-zinc-900 border text-xs font-mono font-bold focus:outline-hidden ${
-                      isRncValid ? 'border-emerald-500/50 text-white' : 'border-rose-500/50 text-rose-300'
+                      isRncValid ? 'border-emerald-500/50 text-white' : 'border-amber-500/50 text-amber-300'
                     }`}
                   />
                   <div className="absolute right-3 top-1/2 -translate-y-1/2">
                     {isRncValid ? (
                       <Check className="w-3.5 h-3.5 text-emerald-400" />
                     ) : (
-                      <span className="text-[10px] text-rose-400 font-bold">9 u 11 dígitos</span>
+                      <span className="text-[10px] text-amber-400 font-bold">Módulo 11</span>
                     )}
                   </div>
                 </div>
+                <p className={`text-[10px] mt-0.5 ${isRncValid ? 'text-emerald-400' : 'text-zinc-500'}`}>
+                  {rncVerification.validationMessage}
+                </p>
               </div>
 
               <div className="space-y-1">
@@ -210,6 +224,27 @@ export const NcfGenerator: React.FC<NcfGeneratorProps> = ({
                   className="w-full px-3 py-2 rounded-[2px] bg-zinc-900 border border-zinc-800 text-xs font-bold text-white focus:outline-hidden font-sans"
                 />
               </div>
+            </div>
+
+            {/* Quick Contractor Presets */}
+            <div className="flex items-center gap-1.5 flex-wrap pt-1 text-[9px]">
+              <span className="text-zinc-500 uppercase">Cargar Contratista:</span>
+              {Object.values(DOMINICAN_RNC_REGISTRY).slice(0, 4).map((c) => (
+                <button
+                  key={c.rnc}
+                  type="button"
+                  onClick={() => {
+                    setRnc(c.rnc);
+                    setCompanyName(c.businessName);
+                    if (c.ncfPreferred.startsWith('B14')) setNcfType('B14');
+                    else if (c.ncfPreferred.startsWith('B15')) setNcfType('B15');
+                    else setNcfType('B01');
+                  }}
+                  className="px-1.5 py-0.5 rounded-[2px] bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 cursor-pointer uppercase"
+                >
+                  {c.commercialName}
+                </button>
+              ))}
             </div>
           </div>
 

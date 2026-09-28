@@ -1339,26 +1339,49 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
         </div>
 
         {/* Footer Navigation & Shortcut Hints */}
-        <div className="p-2.5 sm:p-3 bg-zinc-950 border-t border-zinc-800 flex items-center justify-between text-[10px] text-zinc-400">
-          <div className="flex items-center gap-3 flex-wrap">
+        <div className="p-2.5 sm:p-3 bg-zinc-950 border-t border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[10px] text-zinc-400">
+          <div className="flex items-center gap-2.5 flex-wrap">
             <span className="flex items-center gap-1">
-              <kbd className="px-1 py-0.2 rounded-[2px] bg-zinc-800 font-mono text-[9px] text-zinc-300">↑</kbd>
-              <kbd className="px-1 py-0.2 rounded-[2px] bg-zinc-800 font-mono text-[9px] text-zinc-300">↓</kbd>
-              <span>NAVEGAR</span>
+              <kbd className="px-1 py-0.2 rounded-[2px] bg-zinc-800 font-mono text-[9px] text-zinc-300">↑↓</kbd>
+              <span>Navegar</span>
             </span>
             <span className="flex items-center gap-1">
               <kbd className="px-1 py-0.2 rounded-[2px] bg-zinc-800 font-mono text-[9px] text-zinc-300">↵</kbd>
-              <span>SELECCIONAR</span>
+              <span>Abrir</span>
+            </span>
+            <span className="flex items-center gap-1">
+              <kbd className="px-1 py-0.2 rounded-[2px] bg-zinc-800 font-mono text-[9px] text-zinc-300">Esc</kbd>
+              <span>Cerrar</span>
             </span>
             {topPredictiveSuggestion && query.trim() && (
               <span className="hidden md:flex items-center gap-1">
                 <kbd className="px-1 py-0.2 rounded-[2px] bg-amber-400/20 text-amber-400 font-mono text-[9px]">Tab</kbd>
-                <span>AUTOCOMPLETAR</span>
+                <span>Autocompletar</span>
               </span>
             )}
           </div>
-          <div className="text-zinc-500 font-mono font-bold hidden sm:block uppercase text-[9px]">
-            Motor Predictivo TMD • Catálogo Oficial JCB, LiuGong, Kubota
+          <div className="flex items-center gap-2 text-[9px] font-mono text-zinc-500 overflow-x-auto max-w-full">
+            <span className="text-zinc-400 font-bold uppercase hidden md:inline">Atajos Globales:</span>
+            <span className="inline-flex items-center gap-1">
+              <kbd className="px-1 py-0.2 rounded-[2px] bg-zinc-900 border border-zinc-800 text-amber-400">Ctrl+M</kbd>
+              <span>Maquinaria</span>
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <kbd className="px-1 py-0.2 rounded-[2px] bg-zinc-900 border border-zinc-800 text-amber-400">Ctrl+P</kbd>
+              <span>Repuestos</span>
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <kbd className="px-1 py-0.2 rounded-[2px] bg-zinc-900 border border-zinc-800 text-amber-400">Ctrl+T</kbd>
+              <span>Taller</span>
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <kbd className="px-1 py-0.2 rounded-[2px] bg-zinc-900 border border-zinc-800 text-amber-400">Ctrl+Q</kbd>
+              <span>Cotizar</span>
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <kbd className="px-1 py-0.2 rounded-[2px] bg-zinc-900 border border-zinc-800 text-amber-400">Ctrl+L</kbd>
+              <span>Telemetría</span>
+            </span>
           </div>
         </div>
       </div>

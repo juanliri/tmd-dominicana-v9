@@ -22,6 +22,8 @@ import {
 import { PortalQuote, Machine } from '../../types';
 import { USD_TO_DOP_RATE, MACHINES_DATA } from '../../data/catalog';
 import { downloadQuotePDF } from '../../utils/pdfGenerator';
+import { getQuoteWhatsAppUrl, copyQuoteShareLink, generateShortQuoteShareUrl } from '../../utils/whatsappMessaging';
+import { Share2, Phone, Link2 } from 'lucide-react';
 
 interface QuotePdfExportModalProps {
   quote: PortalQuote;
@@ -49,6 +51,7 @@ export const QuotePdfExportModal: React.FC<QuotePdfExportModalProps> = ({
   const [includeSpecs, setIncludeSpecs] = useState<boolean>(true);
   const [isExporting, setIsExporting] = useState<boolean>(false);
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
+  const [copiedShortUrl, setCopiedShortUrl] = useState<boolean>(false);
 
   const selectedMachine = MACHINES_DATA.find((m) => m.id === selectedMachineId) || initialMachine;
 
@@ -122,6 +125,19 @@ export const QuotePdfExportModal: React.FC<QuotePdfExportModalProps> = ({
         console.warn('Could not copy summary to clipboard:', fallbackErr);
       }
     }
+  };
+
+  const handleCopyShortUrl = async () => {
+    const success = await copyQuoteShareLink(quote.id || quote.quoteNumber);
+    if (success) {
+      setCopiedShortUrl(true);
+      setTimeout(() => setCopiedShortUrl(false), 2000);
+    }
+  };
+
+  const handleShareWhatsApp = () => {
+    const waUrl = getQuoteWhatsAppUrl(quote, quote.phone);
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
   };
 
   if (typeof document === 'undefined') return null;
@@ -338,14 +354,35 @@ export const QuotePdfExportModal: React.FC<QuotePdfExportModalProps> = ({
 
         {/* Footer Actions */}
         <div className="p-3.5 sm:p-4 bg-zinc-950 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-3">
-          <button
-            type="button"
-            onClick={handleCopySummary}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-900 border border-zinc-800 text-zinc-300 hover:bg-zinc-800 font-bold rounded-[2px] text-xs uppercase transition-colors cursor-pointer"
-          >
-            {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-            <span>{copiedLink ? 'Copiado al Portapapeles' : 'Copiar Resumen'}</span>
-          </button>
+          <div className="flex items-center gap-2 flex-wrap">
+            <button
+              type="button"
+              onClick={handleCopySummary}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-900 border border-zinc-800 text-zinc-300 hover:bg-zinc-800 font-bold rounded-[2px] text-xs uppercase transition-colors cursor-pointer"
+            >
+              {copiedLink ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copiedLink ? 'Resumen Copiado' : 'Copiar Resumen'}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleCopyShortUrl}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-900 border border-zinc-800 text-amber-400 hover:bg-zinc-800 font-bold rounded-[2px] text-xs uppercase transition-colors cursor-pointer"
+              title="Copiar enlace web directo para ver proforma online"
+            >
+              {copiedShortUrl ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Link2 className="w-3.5 h-3.5" />}
+              <span>{copiedShortUrl ? 'Enlace Web Copiado' : 'Copiar Link Proforma'}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleShareWhatsApp}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 font-bold rounded-[2px] text-xs uppercase transition-colors cursor-pointer"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              <span>WhatsApp Proforma</span>
+            </button>
+          </div>
 
           <div className="flex items-center gap-2">
             <button

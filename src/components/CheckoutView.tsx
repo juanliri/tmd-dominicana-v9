@@ -40,6 +40,7 @@ import { downloadOrderInvoicePDF } from '../utils/pdfGenerator';
 import { triggerRfqCrmInquiryLogging } from '../services/crmService';
 import { createFullbayCounterSale } from '../lib/fullbayService';
 import { PortalQuote } from '../types';
+import { verifyDgiiTaxId, DOMINICAN_RNC_REGISTRY } from '../services/dgiiRncService';
 
 interface CheckoutViewProps {
   onNavigate: (route: string) => void;
@@ -1324,35 +1325,104 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                     </span>
                   </button>
 
-                  {needsFiscalInvoice && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 p-3.5 rounded-[3px] bg-zinc-900 border border-zinc-800 text-xs font-mono animate-in fade-in">
-                      <div>
-                        <label className="block font-bold uppercase text-zinc-300 mb-1">
-                          RNC O CÉDULA FISCAL
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="1-01-85732-1"
-                          value={customer.rncOrCedula || ''}
-                          onChange={(e) => setCustomer({ ...customer, rncOrCedula: e.target.value })}
-                          className="w-full p-2.5 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-500 uppercase"
-                        />
+                  {needsFiscalInvoice && (() => {
+                    const rncVerification = verifyDgiiTaxId(customer.rncOrCedula || '');
+                    return (
+                      <div className="space-y-3 mt-3 p-3.5 rounded-[3px] bg-zinc-900 border border-zinc-800 text-xs font-mono animate-in fade-in">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div>
+                            <div className="flex items-center justify-between mb-1">
+                              <label className="block font-bold uppercase text-zinc-300">
+                                RNC O CÉDULA FISCAL
+                              </label>
+                              {customer.rncOrCedula && (
+                                <span className={`text-[10px] font-bold uppercase ${rncVerification.isValid ? 'text-emerald-400' : 'text-amber-400'}`}>
+                                  {rncVerification.isValid ? '✓ VÁLIDO DGII' : 'VERIFICANDO'}
+                                </span>
+                              )}
+                            </div>
+                            <input
+                              type="text"
+                              placeholder="1-31-89024-5"
+                              value={customer.rncOrCedula || ''}
+                              onChange={(e) => {
+                                const raw = e.target.value;
+                                const verif = verifyDgiiTaxId(raw);
+                                setCustomer((prev) => {
+                                  const updated = { ...prev, rncOrCedula: verif.formatted || raw };
+                                  if (verif.record) {
+                                    updated.companyName = verif.record.businessName;
+                                    updated.ncfType = verif.record.ncfPreferred;
+                                  }
+                                  return updated;
+                                });
+                              }}
+                              className="w-full p-2.5 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-500 uppercase focus:border-amber-400 focus:outline-none"
+                            />
+                            {customer.rncOrCedula && (
+                              <p className={`text-[10px] mt-1 ${rncVerification.isValid ? 'text-emerald-400' : 'text-zinc-400'}`}>
+                                {rncVerification.validationMessage}
+                              </p>
+                            )}
+                          </div>
+                          <div>
+                            <label className="block font-bold uppercase text-zinc-300 mb-1">
+                              TIPO DE COMPROBANTE DGII
+                            </label>
+                            <select
+                              value={customer.ncfType}
+                              onChange={(e: any) => setCustomer({ ...customer, ncfType: e.target.value })}
+                              className="w-full p-2.5 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white uppercase focus:border-amber-400 focus:outline-none"
+                            >
+                              <option value="B01_CREDITO_FISCAL">B01 - CRÉDITO FISCAL (EMPRESAS)</option>
+                              <option value="B02_CONSUMIDOR_FINAL">B02 - CONSUMIDOR FINAL</option>
+                              <option value="B14_REGIMEN_ESPECIAL">B14 - RÉGIMEN ESPECIAL (MINERÍA/ZONA FRANCA)</option>
+                              <option value="B15_GUBERNAMENTAL">B15 - GUBERNAMENTAL (OBRAS PÚBLICAS)</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        {/* If contractor record identified, show quick preview */}
+                        {rncVerification.record && (
+                          <div className="p-2.5 rounded-[3px] bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 flex items-center justify-between gap-2">
+                            <div>
+                              <span className="font-bold uppercase block text-[11px] text-white">
+                                {rncVerification.record.businessName}
+                              </span>
+                              <span className="text-[10px] text-zinc-400 block font-sans">
+                                {rncVerification.record.category} • Régimen: {rncVerification.record.regime}
+                              </span>
+                            </div>
+                            <span className="px-2 py-0.5 rounded-[2px] bg-emerald-400 text-black font-black text-[9px] uppercase tracking-wider shrink-0">
+                              DGII ACTIVO
+                            </span>
+                          </div>
+                        )}
+
+                        {/* Quick Dominican Contractor Presets for Rapid Testing */}
+                        <div className="pt-2 border-t border-zinc-800 flex items-center gap-1.5 flex-wrap">
+                          <span className="text-[10px] text-zinc-500 uppercase">Sugerencias RNC:</span>
+                          {Object.values(DOMINICAN_RNC_REGISTRY).slice(0, 3).map((reg) => (
+                            <button
+                              key={reg.rnc}
+                              type="button"
+                              onClick={() => {
+                                setCustomer((prev) => ({
+                                  ...prev,
+                                  rncOrCedula: reg.rnc,
+                                  companyName: reg.businessName,
+                                  ncfType: reg.ncfPreferred
+                                }));
+                              }}
+                              className="text-[9px] px-1.5 py-0.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 uppercase cursor-pointer"
+                            >
+                              {reg.commercialName}
+                            </button>
+                          ))}
+                        </div>
                       </div>
-                      <div>
-                        <label className="block font-bold uppercase text-zinc-300 mb-1">
-                          TIPO DE COMPROBANTE
-                        </label>
-                        <select
-                          value={customer.ncfType}
-                          onChange={(e: any) => setCustomer({ ...customer, ncfType: e.target.value })}
-                          className="w-full p-2.5 rounded-[3px] bg-zinc-950 border border-zinc-800 text-white uppercase"
-                        >
-                          <option value="B01_CREDITO_FISCAL">B01 - CRÉDITO FISCAL (EMPRESAS)</option>
-                          <option value="B02_CONSUMIDOR_FINAL">B02 - CONSUMIDOR FINAL</option>
-                        </select>
-                      </div>
-                    </div>
-                  )}
+                    );
+                  })()}
                 </div>
 
                 {/* Remember Me / Save Information Securely */}
