@@ -27,7 +27,8 @@ import {
   AlertCircle,
   Download,
   Printer,
-  BookOpen
+  BookOpen,
+  Crosshair
 } from 'lucide-react';
 import { Machine, MachineCustomizationOption } from '../../types';
 import { useCart } from '../../context/CartContext';
@@ -41,6 +42,9 @@ import { TractorSalesInquiryModal } from './TractorSalesInquiryModal';
 import { generateSingleMachineSpecPdf } from '../../services/catalogPdfExport';
 import { InteractiveMachineryFinancing } from '../common/InteractiveMachineryFinancing';
 import { getMachinePdfUrls } from '../../data/machinePdfsData';
+import { CinematicZoomViewer } from '../common/CinematicZoomViewer';
+import { LowboyFreightCalculator } from '../calculator/LowboyFreightCalculator';
+import { AvailabilityBadge } from '../common/AvailabilityBadge';
 
 interface MachineDetailStudioModalProps {
   machine: Machine | null;
@@ -163,6 +167,7 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   const [isExportingBankPdf, setIsExportingBankPdf] = useState<boolean>(false);
   const [isLabelPdfModalOpen, setIsLabelPdfModalOpen] = useState<boolean>(false);
   const [isSalesInquiryModalOpen, setIsSalesInquiryModalOpen] = useState<boolean>(false);
+  const [isZoomOpen, setIsZoomOpen] = useState<boolean>(false);
 
   // Accordion visibility states for secondary technical details (compacts mobile & desktop viewports)
   const [isExtendedSpecsExpanded, setIsExtendedSpecsExpanded] = useState<boolean>(true);
@@ -294,6 +299,17 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
           
           {/* Top Control Buttons */}
           <div className="absolute top-4 right-4 flex items-center gap-2">
+            {/* Cinematic Inspection Zoom Lens Button (Task #12) */}
+            <button
+              type="button"
+              onClick={() => setIsZoomOpen(true)}
+              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
+              title="Abrir lente cinematográfica de inspección de zapatas, cabina y motor"
+            >
+              <Crosshair className="w-3.5 h-3.5" />
+              <span>Zoom Inspección</span>
+            </button>
+
             {onOpen360 && (
               <button
                 type="button"
@@ -394,10 +410,10 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                 <span className="px-2 py-0.5 rounded-[2px] bg-zinc-900/90 text-zinc-200 text-[10px] font-bold uppercase border border-zinc-800 backdrop-blur-md">
                   {machine.category} • Mod. {machine.modelCode}
                 </span>
-                <span className="px-2 py-0.5 rounded-[2px] bg-emerald-950/90 text-emerald-400 text-[10px] font-bold uppercase border border-emerald-500/30 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-[1px] bg-emerald-400 animate-pulse" />
-                  <span>Disponible Km 22</span>
-                </span>
+                <AvailabilityBadge
+                  status={machine.inStock ? 'immediate' : (machine.year >= 2025 ? 'transit' : 'factory_order')}
+                  variant="pill"
+                />
                 {/* Recently Verified Status Indicator */}
                 <RecentlyVerifiedBadge
                   itemId={machine.id}
@@ -881,60 +897,48 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
             </div>
           )}
 
-          {/* TAB 5: DELIVERY & FIELD DEMO */}
+          {/* TAB 5: DELIVERY & LOWBOY FREIGHT CALCULATOR (Task #66) */}
           {activeTab === 'delivery' && (
             <div className="space-y-4 animate-in fade-in duration-150">
-              <div className="p-3.5 rounded-[2px] bg-zinc-950 border border-zinc-800 space-y-3">
-                <h5 className="text-xs font-bold uppercase tracking-wider text-white">
-                  Programar Demostración de Campo o Entrega en Obra
-                </h5>
-                <p className="text-xs text-zinc-400 font-sans">
-                  Pruebe el equipo en nuestro patio de pruebas de Km 22 Autopista Duarte o solicite transporte cama baja certificado a su frente de obra.
-                </p>
+              <LowboyFreightCalculator
+                initialWeightKg={machine.operatingWeightKg || 18000}
+                initialMachineName={machine.name}
+                initialCategory={machine.category}
+              />
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                  <div>
-                    <label className="text-[10px] font-bold text-zinc-400 uppercase block mb-1">
-                      Provincia de Destino / Prueba:
-                    </label>
-                    <select
-                      value={selectedProvince}
-                      onChange={(e) => setSelectedProvince(e.target.value)}
-                      className="w-full text-xs font-bold p-2 rounded-[2px] border border-zinc-800 bg-zinc-900 text-white"
-                    >
-                      <option value="Santo Domingo">Santo Domingo & D.N. (Km 22 Duarte)</option>
-                      <option value="Santiago">Santiago & Región Norte / Cibao</option>
-                      <option value="Punta Cana">Bávaro / Punta Cana / La Altagracia</option>
-                      <option value="La Romana">La Romana / San Pedro de Macorís</option>
-                      <option value="Puerto Plata">Puerto Plata & Costa Norte</option>
-                      <option value="Azua / Barahona">Región Sur (Azua, Barahona, San Juan)</option>
-                    </select>
-                  </div>
-
-                  <div className="flex flex-col justify-end">
-                    <button
-                      type="button"
-                      onClick={() => setTestDriveBooked(true)}
-                      className={`w-full py-2 px-3 rounded-[2px] text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                        testDriveBooked
-                          ? 'bg-emerald-600 text-white'
-                          : 'bg-amber-400 text-black hover:bg-amber-300'
-                      }`}
-                    >
-                      {testDriveBooked ? (
-                        <>
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          <span>¡Solicitud Recibida!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Calendar className="w-3.5 h-3.5" />
-                          <span>Agendar Test Drive</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
+              <div className="p-3.5 rounded-[2px] bg-zinc-950 border border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <h5 className="text-xs font-bold uppercase tracking-wider text-white">
+                    ¿Desea Probar el Equipo en Patio Antes del Despacho?
+                  </h5>
+                  <p className="text-xs text-zinc-400 font-sans mt-0.5">
+                    Coordinamos prueba de carga y maniobras en el área de excavación en nuestro patio de Km 22 Autopista Duarte.
+                  </p>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    triggerHaptic('success');
+                    setTestDriveBooked(true);
+                  }}
+                  className={`py-2 px-4 rounded-[2px] text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer shrink-0 ${
+                    testDriveBooked
+                      ? 'bg-emerald-600 text-white'
+                      : 'bg-amber-400 text-black hover:bg-amber-300'
+                  }`}
+                >
+                  {testDriveBooked ? (
+                    <>
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      <span>¡Demostración Agendada!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Calendar className="w-3.5 h-3.5" />
+                      <span>Agendar Test Drive en Patio</span>
+                    </>
+                  )}
+                </button>
               </div>
             </div>
           )}
@@ -1057,6 +1061,16 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
           }}
         />
       )}
+
+      {/* Cinematic Inspection Zoom Lens Lightbox (Task #12) */}
+      <CinematicZoomViewer
+        isOpen={isZoomOpen}
+        onClose={() => setIsZoomOpen(false)}
+        imageUrl={machine.image}
+        title={machine.name}
+        subtitle={machine.modelCode}
+        category={machine.category}
+      />
     </div>,
     document.body
   );

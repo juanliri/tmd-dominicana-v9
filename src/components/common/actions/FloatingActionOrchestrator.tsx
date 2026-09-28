@@ -11,6 +11,7 @@ import {
   ShieldAlert
 } from 'lucide-react';
 import { useComparison } from '../../../context/ComparisonContext';
+import { triggerHaptic } from '../../../utils/haptics';
 
 interface FloatingActionOrchestratorProps {
   currentRoute: string;
@@ -43,6 +44,7 @@ export const FloatingActionOrchestrator: React.FC<FloatingActionOrchestratorProp
   }, []);
 
   const scrollToTop = () => {
+    triggerHaptic('light');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -76,7 +78,10 @@ export const FloatingActionOrchestrator: React.FC<FloatingActionOrchestratorProp
             </div>
             <button
               type="button"
-              onClick={() => setIsSosOpen(false)}
+              onClick={() => {
+                triggerHaptic('selection');
+                setIsSosOpen(false);
+              }}
               className="p-1 rounded-[2px] text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
@@ -150,7 +155,10 @@ export const FloatingActionOrchestrator: React.FC<FloatingActionOrchestratorProp
         {!isEmergencyRoute && (
           <button
             type="button"
-            onClick={() => setIsSosOpen(!isSosOpen)}
+            onClick={() => {
+              triggerHaptic('heavy');
+              setIsSosOpen(!isSosOpen);
+            }}
             className="flex items-center gap-2 py-2 px-3 rounded-full bg-red-600 hover:bg-red-500 text-white font-black text-xs border border-red-400/50 shadow-xl shadow-red-600/30 transition-all cursor-pointer pointer-events-auto active:scale-95 animate-in fade-in slide-in-from-bottom-2 duration-200"
             title="Llamada de Emergencia 24/7 para averías en obra"
           >
@@ -167,7 +175,10 @@ export const FloatingActionOrchestrator: React.FC<FloatingActionOrchestratorProp
         {hasActiveComparison && (
           <button
             type="button"
-            onClick={openComparison}
+            onClick={() => {
+              triggerHaptic('medium');
+              openComparison();
+            }}
             className="flex items-center gap-2 py-2 px-3.5 rounded-full bg-amber-500 hover:bg-amber-400 text-zinc-950 font-black text-xs border border-amber-300 shadow-xl shadow-amber-500/25 transition-all cursor-pointer pointer-events-auto active:scale-95 animate-in bounce-in duration-200"
           >
             <Scale className="w-4 h-4 shrink-0" />

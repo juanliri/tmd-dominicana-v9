@@ -18,6 +18,8 @@ interface OfflineSyncContextType {
   syncState: 'synced' | 'syncing' | 'offline_cached' | 'error';
   syncProgress: number;
   syncStatusLabel: string;
+  latencyMs: number | null;
+  checkLatency: () => Promise<number | null>;
   vaultState: VaultState;
   isVaultModalOpen: boolean;
   openVaultModal: () => void;
@@ -35,6 +37,7 @@ export const OfflineSyncProvider: React.FC<{ children: ReactNode }> = ({ childre
   const [syncState, setSyncState] = useState<'synced' | 'syncing' | 'offline_cached' | 'error'>('synced');
   const [syncProgress, setSyncProgress] = useState<number>(100);
   const [syncStatusLabel, setSyncStatusLabel] = useState<string>('Bóveda 100% Sincronizada');
+  const [latencyMs, setLatencyMs] = useState<number | null>(32);
   const [vaultState, setVaultState] = useState<VaultState>(getStoredVaultState);
   const [isVaultModalOpen, setIsVaultModalOpen] = useState<boolean>(false);
   const [offlineQueueCount, setOfflineQueueCount] = useState<number>(0);
@@ -78,15 +81,44 @@ export const OfflineSyncProvider: React.FC<{ children: ReactNode }> = ({ childre
     };
   }, [isSimulatedOffline]);
 
+  const checkLatency = async (): Promise<number | null> => {
+    if (typeof navigator !== 'undefined' && (!navigator.onLine || isSimulatedOffline)) {
+      setLatencyMs(null);
+      return null;
+    }
+    const start = performance.now();
+    try {
+      await fetch('/index.html?t=' + Date.now(), { method: 'HEAD', cache: 'no-store' });
+      const duration = Math.max(12, Math.round(performance.now() - start));
+      setLatencyMs(duration);
+      return duration;
+    } catch {
+      setLatencyMs(null);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    if (effectiveOnline) {
+      checkLatency();
+      const interval = setInterval(checkLatency, 25000);
+      return () => clearInterval(interval);
+    } else {
+      setLatencyMs(null);
+    }
+  }, [effectiveOnline]);
+
   const toggleSimulatedOffline = () => {
     setIsSimulatedOffline((prev) => {
       const next = !prev;
       if (next) {
+        setLatencyMs(null);
         setSyncState('offline_cached');
         setSyncStatusLabel('Modo Mina Simulado (Sin Señal Celular)');
       } else {
         setSyncState('synced');
         setSyncStatusLabel('Modo Online Restaurado');
+        setTimeout(checkLatency, 200);
       }
       return next;
     });
@@ -135,6 +167,8 @@ export const OfflineSyncProvider: React.FC<{ children: ReactNode }> = ({ childre
         syncState: effectiveOnline ? (syncState === 'offline_cached' ? 'synced' : syncState) : 'offline_cached',
         syncProgress,
         syncStatusLabel,
+        latencyMs,
+        checkLatency,
         vaultState,
         isVaultModalOpen,
         openVaultModal,

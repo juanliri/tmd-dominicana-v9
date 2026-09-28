@@ -47,6 +47,7 @@ import { useOfflineSync } from '../context/OfflineSyncContext';
 import { IndustrialMegaMenu, IndustrialSegmentKey } from './header/IndustrialMegaMenu';
 import { MobileTabletIndustrialMenu } from './header/MobileTabletIndustrialMenu';
 import { TMDLogo } from './common/BrandLogos';
+import { NetworkPingBadge } from './common/NetworkPingBadge';
 
 interface HeaderProps {
   currentRoute: string;
@@ -576,6 +577,11 @@ export const Header: React.FC<HeaderProps> = ({
               <span>RD$ {exchangeRate.toFixed(2)}</span>
               <RefreshCw className={`w-2.5 h-2.5 ${isSyncingRate ? 'animate-spin text-amber-400' : 'text-zinc-500'}`} />
             </button>
+
+            {/* Live Network Latency & Connectivity Badge (Task #9) */}
+            <div className="hidden sm:inline-flex items-center">
+              <NetworkPingBadge />
+            </div>
           </div>
 
           <div className="h-3 w-px bg-white/[0.08]" />

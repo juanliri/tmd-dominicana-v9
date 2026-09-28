@@ -18,6 +18,7 @@ import { Machine } from '../../types';
 import { downloadProductQrCode } from '../../utils/qrExporter';
 import { LastScannedBadge } from '../common/LastScannedBadge';
 import { RecentlyVerifiedBadge } from '../common/RecentlyVerifiedBadge';
+import { AvailabilityBadge } from '../common/AvailabilityBadge';
 
 export type MosaicLayoutMode = 'mosaic' | 'uniform';
 
@@ -224,10 +225,10 @@ export const MachineCard = React.memo<MachineCardProps>(({
             compact={true}
             showEmptyState={false}
           />
-          <div className="bg-zinc-950/90 backdrop-blur-md px-2 py-0.5 rounded-[4px] text-[9px] font-bold uppercase text-zinc-300 border border-zinc-700 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-            <span>KM 22 LISTO</span>
-          </div>
+          <AvailabilityBadge
+            status={machine.inStock ? 'immediate' : (machine.year >= 2025 ? 'transit' : 'factory_order')}
+            variant="card-compact"
+          />
         </div>
       </div>
 

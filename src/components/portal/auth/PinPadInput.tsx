@@ -17,6 +17,7 @@ import {
   logAuthEvent 
 } from '../../../services/authSecurity';
 import { UserRole } from '../../../types';
+import { triggerHaptic } from '../../../utils/haptics';
 
 interface PinPadInputProps {
   onVerifyPin: (pin: string) => Promise<{ success: boolean; error?: string; role?: UserRole }>;
@@ -61,6 +62,7 @@ export const PinPadInput: React.FC<PinPadInputProps> = ({
       const res = await onVerifyPin(pin);
 
       if (!res.success) {
+        triggerHaptic('error');
         const lockout = recordFailedAttempt();
         setLockoutState(getLockoutState());
 
@@ -77,6 +79,7 @@ export const PinPadInput: React.FC<PinPadInputProps> = ({
         }
         setPinDigits('');
       } else {
+        triggerHaptic('success');
         resetFailedAttempts();
         await logAuthEvent({
           eventType: 'login_success',
@@ -87,6 +90,7 @@ export const PinPadInput: React.FC<PinPadInputProps> = ({
         setPinSuccess(`¡Acceso concedido como ${res.role?.toUpperCase()}!`);
       }
     } catch (e: any) {
+      triggerHaptic('error');
       setPinError('Error de autenticación: ' + (e?.message || 'Intente nuevamente'));
       setPinDigits('');
     } finally {
@@ -98,6 +102,7 @@ export const PinPadInput: React.FC<PinPadInputProps> = ({
     if (lockoutState.isLocked || isVerifying || loading) return;
     if (pinDigits.length >= 4) return;
 
+    triggerHaptic('light');
     const newPin = pinDigits + digit;
     setPinDigits(newPin);
     setPinError(null);
@@ -109,18 +114,21 @@ export const PinPadInput: React.FC<PinPadInputProps> = ({
 
   const handleDeleteDigit = () => {
     if (lockoutState.isLocked || isVerifying || loading) return;
+    triggerHaptic('selection');
     setPinDigits(prev => prev.slice(0, -1));
     setPinError(null);
   };
 
   const handleClearPin = () => {
     if (lockoutState.isLocked || isVerifying || loading) return;
+    triggerHaptic('selection');
     setPinDigits('');
     setPinError(null);
   };
 
   const handleQuickRole = async (role: 'client' | 'staff' | 'admin') => {
     if (lockoutState.isLocked || isVerifying || loading) return;
+    triggerHaptic('medium');
     if (onQuickAccess) {
       setIsVerifying(true);
       try {
