@@ -16,11 +16,15 @@ import {
   CheckCircle2, 
   Sliders, 
   ChevronRight,
-  Truck
+  Truck,
+  Volume2,
+  VolumeX,
+  Volume1
 } from 'lucide-react';
 import { LiveLinkUnit, LiveLinkTelemetrySummary } from '../../types';
 import { fetchLiveLinkFleet, fetchLiveLinkSummary, sendLiveLinkCommand } from '../../services/livelinkService';
 import { createFullbayOrderFromLiveLink } from '../../services/fullbayService';
+import { industrialCabinAudio } from '../../utils/industrialAudio';
 
 interface Props {
   onOpenFullbayWorkOrder?: (orderId?: string) => void;
@@ -36,6 +40,7 @@ export const LiveLinkTelematicsDashboard: React.FC<Props> = ({ onOpenFullbayWork
   const [feedbackMessage, setFeedbackMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [filterBrand, setFilterBrand] = useState<string>('all');
   const [filterStatus, setFilterStatus] = useState<string>('all');
+  const [isAudioMuted, setIsAudioMuted] = useState<boolean>(() => industrialCabinAudio.getMuted());
 
   const loadData = async () => {
     try {
@@ -79,6 +84,7 @@ export const LiveLinkTelematicsDashboard: React.FC<Props> = ({ onOpenFullbayWork
     setCommandLoading(false);
     if (res.success) {
       setFeedbackMessage({ type: 'success', text: res.message });
+      industrialCabinAudio.playAlarm('warning');
       loadData();
     } else {
       setFeedbackMessage({ type: 'error', text: res.message });
@@ -92,6 +98,7 @@ export const LiveLinkTelematicsDashboard: React.FC<Props> = ({ onOpenFullbayWork
     setCommandLoading(false);
     if (res.success) {
       setFeedbackMessage({ type: 'success', text: res.message });
+      industrialCabinAudio.playAlarm('chime');
     } else {
       setFeedbackMessage({ type: 'error', text: res.message });
     }
@@ -151,7 +158,27 @@ export const LiveLinkTelematicsDashboard: React.FC<Props> = ({ onOpenFullbayWork
             </p>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex flex-wrap items-center gap-2.5">
+            {/* Cabin Audio Toggle (Task #48) */}
+            <button
+              onClick={() => {
+                const nextMuted = industrialCabinAudio.toggleMute();
+                setIsAudioMuted(nextMuted);
+                if (!nextMuted) {
+                  industrialCabinAudio.playAlarm('chime');
+                }
+              }}
+              className={`inline-flex items-center gap-1.5 px-3 py-2.5 rounded-[3px] border font-mono font-bold uppercase text-xs tracking-wider transition-all cursor-pointer ${
+                isAudioMuted 
+                  ? 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-zinc-300' 
+                  : 'bg-amber-500/10 border-amber-500/40 text-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.2)]'
+              }`}
+              title={isAudioMuted ? 'Activar alarmas sonoras de cabina (Web Audio API)' : 'Silenciar alarmas de cabina'}
+            >
+              {isAudioMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-amber-400 animate-pulse" />}
+              <span>{isAudioMuted ? 'CABINA: MUTE' : 'SONIDO CABINA'}</span>
+            </button>
+
             <button
               onClick={handleRefresh}
               disabled={refreshing}
@@ -456,10 +483,20 @@ export const LiveLinkTelematicsDashboard: React.FC<Props> = ({ onOpenFullbayWork
 
               {/* DTC Diagnostic Codes & 1-Click Fullbay Bridge */}
               <div className="space-y-3 font-mono">
-                <h3 className="text-xs font-black uppercase tracking-wider text-white flex items-center gap-2 font-display">
-                  <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
-                  CÓDIGOS DE DIAGNÓSTICO TELEMÁTICO (J1939 CAN BUS)
-                </h3>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <h3 className="text-xs font-black uppercase tracking-wider text-white flex items-center gap-2 font-display">
+                    <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
+                    CÓDIGOS DE DIAGNÓSTICO TELEMÁTICO (J1939 CAN BUS)
+                  </h3>
+                  <button
+                    onClick={() => industrialCabinAudio.playAlarm('critical')}
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 text-[10px] font-mono font-bold uppercase transition-all cursor-pointer self-start sm:self-auto"
+                    title="Emitir tono piezoeléctrico de alarma crítica de cabina"
+                  >
+                    <Volume1 className="w-3 h-3" />
+                    <span>PROBAR ALARMA ACÚSTICA CABINA</span>
+                  </button>
+                </div>
 
                 {selectedUnit.faultCodes && selectedUnit.faultCodes.length > 0 ? (
                   <div className="space-y-2">

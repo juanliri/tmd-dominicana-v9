@@ -356,6 +356,120 @@ export const ProductQrCodeModal: React.FC<ProductQrCodeModalProps> = ({
     }
   };
 
+  // Generate 100x70mm DIN Industrial Metal Chassis Tag (Task #71)
+  const handleDownloadMetalPlatePdf = () => {
+    if (!qrDataUrl || !product) return;
+    try {
+      // Standard DIN Industrial Metal Plate: 100mm x 70mm Landscape
+      const doc = new jsPDF({
+        orientation: 'landscape',
+        unit: 'mm',
+        format: [100, 70]
+      });
+
+      const w = 100;
+      const h = 70;
+
+      // Dark Industrial Metallic Charcoal Base
+      doc.setFillColor(15, 17, 23);
+      doc.rect(0, 0, w, h, 'F');
+
+      // Outer Laser Engraving Guide Border
+      doc.setDrawColor(245, 158, 11); // Amber
+      doc.setLineWidth(0.6);
+      doc.roundedRect(3, 3, w - 6, h - 6, 2, 2, 'S');
+
+      // 4 Rivet Drill-Hole Guides (Ø 3.5mm rivets at 6.5mm offsets)
+      const rivetRadius = 1.6;
+      const rivetCoords: [number, number][] = [
+        [6.5, 6.5],
+        [w - 6.5, 6.5],
+        [6.5, h - 6.5],
+        [w - 6.5, h - 6.5]
+      ];
+      doc.setDrawColor(161, 161, 170);
+      doc.setFillColor(9, 9, 11);
+      rivetCoords.forEach(([cx, cy]) => {
+        doc.circle(cx, cy, rivetRadius, 'FD');
+      });
+
+      // Top Title Bar
+      doc.setFillColor(245, 158, 11);
+      doc.rect(12, 4.5, w - 24, 6.5, 'F');
+      doc.setTextColor(0, 0, 0);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7.5);
+      doc.text('TMD DOMINICANA • PLACA OFICIAL DE CHASIS & IDENTIFICACIÓN', w / 2, 9, { align: 'center' });
+
+      // Model & Brand Headline
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.text((brand || 'TMD').toUpperCase() + ' ' + (identifier || title).toUpperCase().slice(0, 22), 11, 16);
+
+      // Specifications Grid
+      let yPos = 21;
+      const drawField = (label: string, value: string) => {
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(5.8);
+        doc.setTextColor(245, 158, 11);
+        doc.text(label, 11, yPos);
+        doc.setFont('courier', 'bold');
+        doc.setFontSize(6.2);
+        doc.setTextColor(255, 255, 255);
+        doc.text(value, 36, yPos);
+        yPos += 4.5;
+      };
+
+      drawField('VIN / SERIE:', (product.id || 'TMD-RD-2026').toUpperCase().slice(0, 18));
+      drawField('CATEGORÍA:', (isMachine ? (machine?.category || 'MAQUINARIA') : (part?.category || 'REPUESTO')).toUpperCase().slice(0, 18));
+      if (isMachine && machine) {
+        drawField('POTENCIA:', `${machine.powerHp} HP • ${machine.engine.slice(0, 15)}`);
+        drawField('PESO OPERATIVO:', `${machine.operatingWeightKg.toLocaleString()} KG`);
+        drawField('AÑO FABRICACIÓN:', `${machine.year || 2026}`);
+      } else if (part) {
+        drawField('NO. PARTE OEM:', part.partNumber);
+        drawField('COMPATIBILIDAD:', (part.compatibleModels?.[0] || 'GENUINO OEM').slice(0, 16));
+        drawField('ORIGEN:', 'OFICIAL TMD DISTRIBUTOR');
+      }
+
+      // QR Code on right side (24mm x 24mm)
+      const qrSize = 24;
+      const qrX = w - 11 - qrSize;
+      const qrY = 16;
+      doc.setFillColor(255, 255, 255);
+      doc.roundedRect(qrX - 1, qrY - 1, qrSize + 2, qrSize + 2, 1, 1, 'F');
+      doc.addImage(qrDataUrl, 'PNG', qrX, qrY, qrSize, qrSize);
+
+      // Label below QR Code
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(4.6);
+      doc.setTextColor(245, 158, 11);
+      doc.text('TELEMETRÍA & MANUAL', qrX + qrSize / 2, qrY + qrSize + 2.8, { align: 'center' });
+      doc.setFontSize(4);
+      doc.setTextColor(212, 212, 216);
+      doc.text('ESCANEE PARA ESTADO LIVE', qrX + qrSize / 2, qrY + qrSize + 5, { align: 'center' });
+
+      // Bottom Footer Bar: Support Hotline & Yard
+      doc.setDrawColor(63, 63, 70);
+      doc.line(10, h - 9, w - 10, h - 9);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(5);
+      doc.setTextColor(228, 228, 231);
+      doc.text('TALLER MÓVIL 24/7: +1 (809) 560-8484 • KM 22 AUTOPISTA DUARTE, RD', w / 2, h - 5.5, { align: 'center' });
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(4);
+      doc.setTextColor(161, 161, 170);
+      doc.text('NORMA DIN / ISO 9001 METAL PLATE SPECIFICATION • 100 x 70 MM', w / 2, h - 3.2, { align: 'center' });
+
+      const safeBrand = (brand || 'TMD').replace(/\s+/g, '-');
+      const safeId = (identifier || product.id).replace(/\s+/g, '-');
+      doc.save(`PLACA-METAL-CHASIS-100x70mm-${safeBrand}-${safeId}.pdf`);
+    } catch (e) {
+      console.error('Failed to generate metal chassis plate PDF:', e);
+    }
+  };
+
   return createPortal(
     <div
       id="product-qr-modal-overlay"
@@ -631,6 +745,19 @@ export const ProductQrCodeModal: React.FC<ProductQrCodeModalProps> = ({
                 >
                   <FileText className="w-3.5 h-3.5 text-amber-400" />
                   <span>Ficha PDF</span>
+                </button>
+
+                {/* Chassis Metal Plate 100x70mm Button (Task #71) */}
+                <button
+                  id="download-metal-chassis-plate-btn"
+                  type="button"
+                  onClick={handleDownloadMetalPlatePdf}
+                  disabled={!qrDataUrl}
+                  className="p-2 rounded-[2px] border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-[11px] font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 shadow-xs uppercase"
+                  title="Descargar Placa Metálica de Chasis (100x70mm DIN) lista para grabado láser / remaches en obra"
+                >
+                  <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Placa Chasis (100x70)</span>
                 </button>
 
                 <button

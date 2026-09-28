@@ -63,7 +63,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenTour,
   onOpenQrScanner
 }) => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, isCanteraMode, toggleCanteraMode } = useTheme();
   const { 
     totalCartCount, 
     totalQuotesCount, 
@@ -589,6 +589,21 @@ export const Header: React.FC<HeaderProps> = ({
           >
             {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-brand-gold" /> : <Moon className="w-3.5 h-3.5 text-zinc-300" />}
             <span className="hidden lg:inline">{theme === 'dark' ? 'OSCURO' : 'CLARO'}</span>
+          </button>
+
+          {/* Cantera High Contrast Solar Mode (Task #11) */}
+          <button
+            onClick={toggleCanteraMode}
+            aria-label="Alternar modo cantera de alto contraste solar"
+            title={isCanteraMode ? 'Desactivar modo cantera solar' : 'Activar modo cantera solar (alto contraste bajo sol directo)'}
+            className={`flex items-center gap-1 px-2 py-0.5 rounded-[3px] text-[10px] font-black uppercase transition-all cursor-pointer border ${
+              isCanteraMode
+                ? 'bg-amber-400 text-black border-amber-300 shadow-[0_0_8px_rgba(251,191,36,0.6)] font-bold'
+                : 'text-zinc-300 hover:text-white hover:bg-[#12121c] border-white/[0.08]'
+            }`}
+          >
+            <Mountain className={`w-3.5 h-3.5 ${isCanteraMode ? 'text-black' : 'text-amber-400'}`} />
+            <span className="hidden xl:inline">{isCanteraMode ? 'SOLAR ON' : 'SOLAR'}</span>
           </button>
 
           {/* Notifications Bell Moved to Top of Menu Bar */}

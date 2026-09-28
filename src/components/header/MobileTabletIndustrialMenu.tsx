@@ -22,7 +22,8 @@ import {
   FileText,
   ExternalLink,
   ChevronDown,
-  QrCode
+  QrCode,
+  Mountain
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { TMDLogo } from '../common/BrandLogos';
@@ -56,7 +57,7 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
   onOpenQrScanner,
   initialTab = 'heavy_machinery'
 }) => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, isCanteraMode, toggleCanteraMode } = useTheme();
   const { currency, setCurrency, totalCartCount, totalQuotesCount } = useCart();
   const { currentUser, userProfile, isAdmin, isStaff, role } = useAuth();
   const { unreadCount, openNotificationPanel } = useNotifications();
@@ -530,6 +531,19 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
             title="Alternar tema"
           >
             {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-zinc-800" />}
+          </button>
+
+          {/* Cantera Solar Mode (Task #11) */}
+          <button
+            onClick={toggleCanteraMode}
+            className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
+              isCanteraMode 
+                ? 'bg-amber-400 text-black shadow-[0_0_8px_rgba(251,191,36,0.6)] font-bold' 
+                : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-white'
+            }`}
+            title={isCanteraMode ? 'Desactivar Modo Cantera Solar' : 'Activar Modo Cantera (Alto Contraste Solar)'}
+          >
+            <Mountain className={`w-4 h-4 ${isCanteraMode ? 'text-black' : 'text-amber-500'}`} />
           </button>
 
           {/* Notifications */}

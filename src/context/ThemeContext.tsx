@@ -6,6 +6,8 @@ interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
   setTheme: (theme: Theme) => void;
+  isCanteraMode: boolean;
+  toggleCanteraMode: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -20,6 +22,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       return 'dark'; // Industrial dark default for TMD Dominicana
     }
     return 'dark';
+  });
+
+  const [isCanteraMode, setIsCanteraMode] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('tmd-cantera-mode') === 'true';
+    }
+    return false;
   });
 
   useEffect(() => {
@@ -38,6 +47,20 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [theme]);
 
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isCanteraMode) {
+      root.classList.add('cantera-mode');
+    } else {
+      root.classList.remove('cantera-mode');
+    }
+    try {
+      localStorage.setItem('tmd-cantera-mode', String(isCanteraMode));
+    } catch {
+      // ignore
+    }
+  }, [isCanteraMode]);
+
   const toggleTheme = () => {
     setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
@@ -46,8 +69,12 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setThemeState(t);
   };
 
+  const toggleCanteraMode = () => {
+    setIsCanteraMode((prev) => !prev);
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme, isCanteraMode, toggleCanteraMode }}>
       {children}
     </ThemeContext.Provider>
   );

@@ -689,3 +689,61 @@ html, body, #root {
     transition: transform 0.08s ease-out;
   }
 }
+
+/* ==========================================================================
+   MODO CANTERA / ALTO CONTRASTE SOLAR (SPRINT 2 - TASK #11)
+   Ultra-high visibility under direct Caribbean solar radiation & quarry glare
+   ========================================================================== */
+html.cantera-mode {
+  --color-brand-gold: #ffcc00;
+  --color-brand-gold-light: #ffea00;
+}
+
+html.cantera-mode body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  text-rendering: geometricPrecision !important;
+}
+
+html.cantera-mode .bg-zinc-950,
+html.cantera-mode .bg-zinc-900,
+html.cantera-mode .bg-zinc-900\/90,
+html.cantera-mode .bg-zinc-900\/80,
+html.cantera-mode .bg-zinc-900\/50,
+html.cantera-mode .bg-black\/80 {
+  background-color: #050505 !important;
+  backdrop-filter: none !important;
+}
+
+html.cantera-mode .border-zinc-800,
+html.cantera-mode .border-zinc-700 {
+  border-color: #ffcc00 !important;
+  border-width: 1.5px !important;
+}
+
+html.cantera-mode .text-zinc-400,
+html.cantera-mode .text-zinc-500,
+html.cantera-mode .text-zinc-600 {
+  color: #f4f4f5 !important; /* Maximized stark white contrast against deep black */
+  font-weight: 600 !important;
+}
+
+html.cantera-mode .text-amber-400,
+html.cantera-mode .text-amber-500,
+html.cantera-mode .text-yellow-400 {
+  color: #ffcc00 !important;
+  text-shadow: 0 0 2px rgba(255, 204, 0, 0.4);
+}
+
+html.cantera-mode input,
+html.cantera-mode select,
+html.cantera-mode textarea {
+  background-color: #000000 !important;
+  border-color: #ffcc00 !important;
+  border-width: 2px !important;
+  color: #ffffff !important;
+}
+
+html.cantera-mode button {
+  box-shadow: 0 0 0 1px #ffcc00 inset !important;
+}
