@@ -46,6 +46,7 @@ import { BatteryHealthModal } from '../telematics/BatteryHealthModal';
 import { FieldServiceDispatchRadarModal } from '../emergency/FieldServiceDispatchRadarModal';
 import { GeofenceManagerModal } from '../telematics/GeofenceManagerModal';
 import { CarbonFootprintAuditModal } from '../sustainability/CarbonFootprintAuditModal';
+import { HydraulicPressureMonitorModal } from '../telematics/HydraulicPressureMonitorModal';
 import { Leaf } from 'lucide-react';
 
 interface LiveLinkCustomerTelematicsTabProps {
@@ -91,6 +92,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
   const [showBatteryModal, setShowBatteryModal] = useState<boolean>(false);
   const [showDispatchRadarModal, setShowDispatchRadarModal] = useState<boolean>(false);
   const [showCarbonModal, setShowCarbonModal] = useState<boolean>(false);
+  const [showHydraulicModal, setShowHydraulicModal] = useState<boolean>(false);
 
   const loadData = async () => {
     try {
@@ -662,17 +664,29 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                       </button>
                     </div>
 
-                    {/* Engine Temperature */}
-                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800">
-                      <span className="text-[11px] font-bold text-zinc-400 block font-display uppercase tracking-wider">Temp. Refrigerante</span>
-                      <div className={`text-2xl font-black mt-1 font-mono ${
-                        selectedUnit.engineCoolantTempC > 95 ? 'text-rose-400' : 'text-white'
-                      }`}>
-                        {selectedUnit.engineCoolantTempC}°C
+                    {/* Engine Temperature & Hydraulic Pressure */}
+                    <div className="p-4 rounded-[3px] bg-zinc-950 border border-zinc-800 flex flex-col justify-between">
+                      <div>
+                        <span className="text-[11px] font-bold text-zinc-400 block font-display uppercase tracking-wider">Temp. Motor & Hidráulico</span>
+                        <div className={`text-2xl font-black mt-1 font-mono ${
+                          selectedUnit.engineCoolantTempC > 95 ? 'text-rose-400' : 'text-white'
+                        }`}>
+                          {selectedUnit.engineCoolantTempC}°C
+                        </div>
+                        <div className="mt-1 text-[11px] text-cyan-400 font-mono">
+                          Aceite: {selectedUnit.hydraulicOilTempC}°C &bull; 318 Bar
+                        </div>
                       </div>
-                      <div className="mt-2 text-[11px] text-zinc-400 font-mono">
-                        Hidráulico: {selectedUnit.hydraulicOilTempC}°C
-                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setShowHydraulicModal(true)}
+                        className="mt-2 text-[10px] text-cyan-400 hover:text-cyan-300 font-bold uppercase tracking-wider flex items-center gap-1 cursor-pointer pt-1 border-t border-zinc-900"
+                        title="Abrir telemetría de presión hidráulica 350 bar y sobreesfuerzo"
+                      >
+                        <span>Presión 350 Bar</span>
+                        <ChevronRight className="w-3 h-3" />
+                      </button>
                     </div>
 
                     {/* Battery Voltage */}
@@ -1209,6 +1223,13 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
       <CarbonFootprintAuditModal
         isOpen={showCarbonModal}
         onClose={() => setShowCarbonModal(false)}
+      />
+
+      {/* Task #53: 350 Bar Hydraulic Pressure & Rock Overload Monitor Modal */}
+      <HydraulicPressureMonitorModal
+        isOpen={showHydraulicModal}
+        onClose={() => setShowHydraulicModal(false)}
+        unit={selectedUnit}
       />
 
     </div>

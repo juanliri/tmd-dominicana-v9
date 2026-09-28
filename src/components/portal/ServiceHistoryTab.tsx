@@ -30,7 +30,8 @@ import {
   HelpCircle,
   Tag,
   Hash,
-  ShoppingBag
+  ShoppingBag,
+  Scale
 } from 'lucide-react';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../../lib/firebase';
@@ -54,6 +55,7 @@ import { fetchFullbayActiveRepairOrders } from '../../services/fullbayConnectMoc
 import { FullbayActiveRepairOrder } from '../../types';
 import { ServiceDetailModal } from './service/ServiceDetailModal';
 import { OemWarrantyClaimModal } from '../workshop/OemWarrantyClaimModal';
+import { CalibratedToolInventoryModal } from '../workshop/CalibratedToolInventoryModal';
 
 interface ServiceHistoryTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -88,6 +90,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
   // Register machine modal
   const [showAddMachineModal, setShowAddMachineModal] = useState<boolean>(false);
   const [showWarrantyModal, setShowWarrantyModal] = useState<boolean>(false);
+  const [showCalibratedToolsModal, setShowCalibratedToolsModal] = useState<boolean>(false);
   const [newUnitId, setNewUnitId] = useState<string>('');
   const [newBrand, setNewBrand] = useState<string>('LiuGong');
   const [newModel, setNewModel] = useState<string>('');
@@ -424,6 +427,16 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           >
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
             <span>Garantías OEM</span>
+          </button>
+
+          {/* Task #95: Calibrated Workshop Tools Modal Trigger */}
+          <button
+            onClick={() => setShowCalibratedToolsModal(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-amber-400/30 text-amber-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
+            title="Control de Préstamo de Herramientas Calibradas e Inventario ISO 9001"
+          >
+            <Scale className="w-4 h-4 text-amber-400" />
+            <span>Herramientas Taller</span>
           </button>
 
           <button
@@ -1233,6 +1246,12 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
       <OemWarrantyClaimModal
         isOpen={showWarrantyModal}
         onClose={() => setShowWarrantyModal(false)}
+      />
+
+      {/* Task #95: Calibrated Tool Inventory & Loan Control Modal */}
+      <CalibratedToolInventoryModal
+        isOpen={showCalibratedToolsModal}
+        onClose={() => setShowCalibratedToolsModal(false)}
       />
     </div>
   );

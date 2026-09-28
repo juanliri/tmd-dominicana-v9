@@ -68,6 +68,7 @@ import { MachineDetailStudioModal } from './machinery/MachineDetailStudioModal';
 import { MachineryMosaicGrid, MosaicLayoutMode } from './machinery/MachineryMosaicGrid';
 import { PublicLiveLinkSimulatorModal } from './telematics/PublicLiveLinkSimulatorModal';
 import { IndustrialSectionDivider } from './common/IndustrialSectionDivider';
+import { MachineryFacetFilterDrawer, FacetFilterState } from './machinery/MachineryFacetFilterDrawer';
 import { USD_TO_DOP_RATE } from '../data/catalog';
 import jcbBannerImg from '../assets/images/jcb_machinery_banner_1789963695284.jpg';
 import { motion, AnimatePresence, type Variants } from 'motion/react';
@@ -301,6 +302,14 @@ export const MachineryView = React.memo<MachineryViewProps>(({
   const [itemsPerPage, setItemsPerPage] = useState<number>(6);
   
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState<boolean>(false);
+  const [isFacetDrawerOpen, setIsFacetDrawerOpen] = useState<boolean>(false);
+  const [facetFilters, setFacetFilters] = useState<FacetFilterState>({
+    brands: [],
+    tonnageRange: [],
+    powerRange: [],
+    fuelTypes: [],
+    availability: []
+  });
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
   const [isSyncing, setIsSyncing] = useState<boolean>(false);
@@ -572,7 +581,45 @@ export const MachineryView = React.memo<MachineryViewProps>(({
         m.brand.toLowerCase().includes(q) ||
         m.description.toLowerCase().includes(q);
 
-      return matchCategory && matchBrand && matchStock && matchCondition && matchPower && matchSearch;
+      // Facet Filters (Sprint 11 Task #18)
+      let matchFacetBrands = true;
+      if (facetFilters.brands.length > 0) {
+        matchFacetBrands = facetFilters.brands.includes(m.brand);
+      }
+
+      let matchFacetTonnage = true;
+      if (facetFilters.tonnageRange.length > 0) {
+        matchFacetTonnage = facetFilters.tonnageRange.some(t => {
+          if (t === 'mini') return m.operatingWeightKg <= 6000;
+          if (t === 'medium') return m.operatingWeightKg > 6000 && m.operatingWeightKg <= 15000;
+          if (t === 'heavy') return m.operatingWeightKg > 15000 && m.operatingWeightKg <= 25000;
+          if (t === 'extra_heavy') return m.operatingWeightKg > 25000;
+          return true;
+        });
+      }
+
+      let matchFacetPower = true;
+      if (facetFilters.powerRange.length > 0) {
+        matchFacetPower = facetFilters.powerRange.some(p => {
+          if (p === 'low') return m.powerHp <= 60;
+          if (p === 'mid') return m.powerHp > 60 && m.powerHp <= 120;
+          if (p === 'high') return m.powerHp > 120 && m.powerHp <= 200;
+          if (p === 'ultra') return m.powerHp > 200;
+          return true;
+        });
+      }
+
+      let matchFacetAvailability = true;
+      if (facetFilters.availability.length > 0) {
+        matchFacetAvailability = facetFilters.availability.some(a => {
+          if (a === 'in_stock') return m.inStock;
+          if (a === 'transit') return !m.inStock && m.year >= 2025;
+          if (a === 'factory') return !m.inStock && m.year < 2025;
+          return true;
+        });
+      }
+
+      return matchCategory && matchBrand && matchStock && matchCondition && matchPower && matchSearch && matchFacetBrands && matchFacetTonnage && matchFacetPower && matchFacetAvailability;
     });
 
     return list.sort((a, b) => {
@@ -583,7 +630,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
       if (sortBy === 'name_asc') return a.name.localeCompare(b.name);
       return 0; // featured default
     });
-  }, [allStoreMachines, selectedCategory, selectedBrand, fleetCondition, powerFilter, onlyInStock, searchTerm, sortBy]);
+  }, [allStoreMachines, selectedCategory, selectedBrand, fleetCondition, powerFilter, onlyInStock, searchTerm, sortBy, facetFilters]);
 
   // Total results
   const totalItems = filteredAndSortedMachines.length;
@@ -946,6 +993,20 @@ export const MachineryView = React.memo<MachineryViewProps>(({
 
           {/* Action Tools: Counter, Currency, Sorting, View Toggle */}
           <div className="flex items-center gap-2 shrink-0 flex-wrap justify-between md:justify-end">
+            {/* Task #18: Facet Filter Trigger Button */}
+            <button
+              type="button"
+              onClick={() => setIsFacetDrawerOpen(true)}
+              className={`px-2.5 py-1.5 rounded-[3px] text-xs font-black uppercase flex items-center gap-1.5 transition-all cursor-pointer border ${
+                (facetFilters.brands.length + facetFilters.tonnageRange.length + facetFilters.powerRange.length + facetFilters.availability.length) > 0
+                  ? 'bg-amber-400 text-black border-amber-400 font-black'
+                  : 'bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border-zinc-800'
+              }`}
+              title="Abrir Filtros Multifaceta Colapsables en Acordeón"
+            >
+              <Filter className="w-3.5 h-3.5" />
+              <span>FACETAS {(facetFilters.brands.length + facetFilters.tonnageRange.length + facetFilters.powerRange.length + facetFilters.availability.length) > 0 ? `(${facetFilters.brands.length + facetFilters.tonnageRange.length + facetFilters.powerRange.length + facetFilters.availability.length})` : ''}</span>
+            </button>
             {/* Active Category Badge if filtered */}
             {selectedCategory !== 'Todas' && (
               <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-[3px] bg-zinc-900 text-amber-400 text-xs font-black uppercase border border-zinc-800">
@@ -1730,6 +1791,16 @@ export const MachineryView = React.memo<MachineryViewProps>(({
         onNavigate={onNavigate}
       />
 
+
+      {/* Task #18: Multifacet Collapsible Accordion Filter Drawer */}
+      <MachineryFacetFilterDrawer
+        isOpen={isFacetDrawerOpen}
+        onClose={() => setIsFacetDrawerOpen(false)}
+        filters={facetFilters}
+        onChange={setFacetFilters}
+        onReset={() => setFacetFilters({ brands: [], tonnageRange: [], powerRange: [], fuelTypes: [], availability: [] })}
+        totalFilteredCount={totalItems}
+      />
 
     </motion.div>
   );

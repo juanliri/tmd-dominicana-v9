@@ -24,7 +24,8 @@ import {
   Trash2,
   Copy,
   ExternalLink,
-  ChevronRight
+  ChevronRight,
+  Send
 } from 'lucide-react';
 import { useOfflineSync } from '../../context/OfflineSyncContext';
 import { 
@@ -33,6 +34,8 @@ import {
   TechnicalDatasheet, 
   PartsTechnicalManual 
 } from '../../services/offlineVaultService';
+import { OfflineQuotationOutboxModal } from './OfflineQuotationOutboxModal';
+import { getStoredOutbox } from '../../services/offlineOutboxService';
 
 export const OfflineVaultModal: React.FC = () => {
   const {
@@ -56,6 +59,7 @@ export const OfflineVaultModal: React.FC = () => {
   const [selectedDatasheet, setSelectedDatasheet] = useState<TechnicalDatasheet>(CRITICAL_TECHNICAL_DATASHEETS[0]);
   const [selectedManual, setSelectedManual] = useState<PartsTechnicalManual>(CRITICAL_PARTS_MANUALS[0]);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const [isOutboxOpen, setIsOutboxOpen] = useState<boolean>(false);
 
   if (!isVaultModalOpen || typeof document === 'undefined') return null;
 
@@ -150,6 +154,17 @@ export const OfflineVaultModal: React.FC = () => {
             >
               <RefreshCw className={`w-3.5 h-3.5 ${syncState === 'syncing' ? 'animate-spin' : ''}`} />
               <span>{syncState === 'syncing' ? 'Precargando...' : 'Sincronizar Bóveda'}</span>
+            </button>
+
+            {/* Task #24: Offline Outbox Modal Trigger */}
+            <button
+              type="button"
+              onClick={() => setIsOutboxOpen(true)}
+              className="px-3.5 py-1.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-amber-400 border border-amber-400/40 text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
+              title="Bandeja de Salida de Cotizaciones Offline (Background Sync)"
+            >
+              <Send className="w-3.5 h-3.5 text-amber-400" />
+              <span>Outbox ({getStoredOutbox().filter(x => x.status === 'pending').length})</span>
             </button>
 
             {/* Close Modal */}
@@ -679,6 +694,12 @@ export const OfflineVaultModal: React.FC = () => {
           <span className="font-bold text-amber-400 font-mono">TMD PWA Ready</span>
         </div>
       </div>
+
+      {/* Task #24: Offline Quotation Outbox Modal */}
+      <OfflineQuotationOutboxModal
+        isOpen={isOutboxOpen}
+        onClose={() => setIsOutboxOpen(false)}
+      />
     </div>,
     document.body
   );

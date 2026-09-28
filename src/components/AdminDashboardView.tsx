@@ -39,6 +39,7 @@ import { FirestoreBulkManagerModal } from './FirestoreBulkManagerModal';
 import { FullbayShopManager } from './shop/FullbayShopManager';
 import { AdminIntegrationsHealthView } from './admin/AdminIntegrationsHealthView';
 import { MonthlyBusinessConfigModal } from './admin/MonthlyBusinessConfigModal';
+import { Dgii606_607ExporterModal } from './accounting/Dgii606_607ExporterModal';
 import { LayoutGrid, Sparkles, Flame, ShieldCheck as ShieldCheckIcon, TrendingUp, Calendar as CalendarIcon, Activity as ActivityIcon, Settings } from 'lucide-react';
 
 interface AdminDashboardViewProps {
@@ -59,6 +60,7 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
   const [isNotificationCenterOpen, setIsNotificationCenterOpen] = useState(false);
   const [isBulkManagerOpen, setIsBulkManagerOpen] = useState(false);
   const [isMonthlyConfigOpen, setIsMonthlyConfigOpen] = useState(false);
+  const [isDgiiExporterOpen, setIsDgiiExporterOpen] = useState(false);
   const [highlightItemId, setHighlightItemId] = useState<string | null>(null);
 
   // Firestore Real-Time Listeners for quotes, machines, and parts
@@ -350,6 +352,17 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
               >
                 <Settings className="w-3.5 h-3.5 text-amber-400" />
                 <span className="hidden md:inline">Variables Mensuales</span>
+              </button>
+
+              {/* DGII 606 & 607 Tax Exporter Button */}
+              <button
+                type="button"
+                onClick={() => setIsDgiiExporterOpen(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-emerald-500/40 text-emerald-400 hover:text-emerald-300 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                title="Exportación Formal DGII Formatos 606 y 607"
+              >
+                <FileText className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="hidden lg:inline">DGII 606/607</span>
               </button>
 
               {/* Firestore Bulk Manager Trigger Button */}
@@ -828,6 +841,12 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
         isOpen={isMonthlyConfigOpen}
         onClose={() => setIsMonthlyConfigOpen(false)}
         adminName={currentUser?.displayName || 'Administrador General TMD'}
+      />
+
+      {/* DGII 606 & 607 Exporter Modal */}
+      <Dgii606_607ExporterModal
+        isOpen={isDgiiExporterOpen}
+        onClose={() => setIsDgiiExporterOpen(false)}
       />
     </div>
   );
