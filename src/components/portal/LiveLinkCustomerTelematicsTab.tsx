@@ -42,7 +42,7 @@ import { fetchLiveLinkFleet, fetchLiveLinkSummary, sendLiveLinkCommand } from '.
 import { createFullbayOrderFromLiveLink } from '../../services/fullbayService';
 import { downloadTelematicsReportPDF } from '../../utils/pdfGenerator';
 import { RoutePlaybackModal } from '../telematics/RoutePlaybackModal';
-import { IdleTimeAnalyticsModal } from '../telematics/IdleTimeAnalyticsModal';
+import { IdleTimeProductivityModal } from '../telematics/IdleTimeProductivityModal';
 import { FuelTheftProtectionModal } from '../telematics/FuelTheftProtectionModal';
 import { BatteryHealthModal } from '../telematics/BatteryHealthModal';
 import { FieldServiceDispatchRadarModal } from '../emergency/FieldServiceDispatchRadarModal';
@@ -50,7 +50,7 @@ import { GeofenceManagerModal } from '../telematics/GeofenceManagerModal';
 import { CarbonFootprintAuditModal } from '../sustainability/CarbonFootprintAuditModal';
 import { HydraulicPressureMonitorModal } from '../telematics/HydraulicPressureMonitorModal';
 import { RemoteImmobilizerModal } from '../telematics/RemoteImmobilizerModal';
-import { DefFluidMonitorModal } from '../telematics/DefFluidMonitorModal';
+import { DefFluidLevelModal } from '../telematics/DefFluidLevelModal';
 import { ImpactGForceMonitorModal } from '../telematics/ImpactGForceMonitorModal';
 import { Leaf } from 'lucide-react';
 
@@ -288,8 +288,12 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
               <div className="text-xl font-black text-emerald-400 mt-1 font-mono">{summary.runningUnits} <span className="text-xs font-normal text-zinc-500 font-sans">trabajando</span></div>
             </div>
 
-            <div className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
-              <span className="text-[11px] font-bold text-amber-400 block font-display uppercase tracking-wider">En Ralentí</span>
+            <div
+              onClick={() => setShowIdleModal(true)}
+              className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800 cursor-pointer hover:border-amber-400/60 transition-colors"
+              title="Click para ver auditoría de horas en ralentí vs horas productivas de excavación"
+            >
+              <span className="text-[11px] font-bold text-amber-400 block font-display uppercase tracking-wider">En Ralentí (Ver)</span>
               <div className="text-xl font-black text-amber-400 mt-1 font-mono">{summary.idleUnits} <span className="text-xs font-normal text-zinc-500 font-sans">en espera</span></div>
             </div>
 
@@ -1294,8 +1298,17 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
         currentLocation={selectedUnit?.location ? `${selectedUnit.location.address}, ${selectedUnit.location.province}` : undefined}
       />
 
+      {/* Task #50: J1939 Idle vs Productive Hours & Fuel Waste Audit Modal */}
+      <IdleTimeProductivityModal
+        isOpen={showIdleModal}
+        onClose={() => setShowIdleModal(false)}
+        machineName={selectedUnit?.name}
+        machineSerial={selectedUnit?.serialNumber}
+        totalEngineHours={selectedUnit?.operatingHours}
+      />
+
       {/* Task #60: DEF Fluid (Urea) & Anti-Derate Monitor Modal */}
-      <DefFluidMonitorModal
+      <DefFluidLevelModal
         isOpen={showDefModal}
         onClose={() => setShowDefModal(false)}
         machineName={selectedUnit?.name}

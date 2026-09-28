@@ -165,10 +165,12 @@ Esta matriz contiene **100 recomendaciones de grado de ingeniería y dirección 
 - **Sprint 12 (60%):** Tareas #14, #44, #68, #75, #97 completadas y desplegadas.
 - **Sprint 13 (65%):** Tareas #59, #62, #71, #89, #100 completadas y desplegadas.
 - **Sprint 14 (70%):** Tareas #8, #66, #72, #84, #88 completadas y desplegadas.
-- **Sprint 15 (75%):** Tareas #1, #2, #58, #78, #94 completadas y desplegadas (Commit `f1bce7d`):
-  - Task #1: `GlobalCommandPaletteModal.tsx` con atajo omnidireccional `Ctrl+K`, búsqueda unificada de máquinas/piezas/comandos.
-  - Task #2: `SunlightQuarryModeToggle.tsx` con modo solar polar de alto contraste para visibilidad extrema bajo el sol caribeño.
-  - Task #58: `PasskeyBiometricAuthModal.tsx` con WebAuthn FIDO2 / Face ID / Touch ID / Windows Hello para contratistas VIP.
-  - Task #78: `WhatsAppShortLinkModal.tsx` con generador de URLs cortas (`tmd.com.do/q/84920`) y vista previa para juntas directivas.
-  - Task #94: `CabinQrManualViewerModal.tsx` con visor de manual oficial en español, tabla de lubricación y fusibles por QR de cabina.
+- **Sprint 15 (75%):** Tareas #1, #2, #58, #78, #94 completadas y desplegadas (Commit `f1bce7d`).
+- **Sprint 16 (80% — Hito 80 de 100 Tareas):** Tareas #16, #50, #60, #77, #93 completadas y desplegadas:
+  - Task #16: `PartQuickViewModal.tsx` con visor de especificaciones OEM, compatibilidad de chasis, disponibilidad en anaqueles Km 22 y botón de compra directa sin recargar página.
+  - Task #50: `IdleTimeProductivityModal.tsx` con análisis satelital J1939 de horas en ralentí vs horas productivas de excavación, cálculo de desperdicio de diésel (US$/RD$) y recomendaciones de apagado automático de motor.
+  - Task #60: `DefFluidLevelModal.tsx` con telemetría de urea sintética ISO 22241 (SPN 1761), termómetro de tanque y prevención de degradación de potencia (Anti-Derate Fase 1/2) en motores Tier 4 Final.
+  - Task #77: `MinimumMarginGuardModal.tsx` con bloqueo comercial para cotizaciones con margen bruto menor al 12.0%, cálculo de utilidad sobre costo fábrica y autorización mediante PIN de Gerencia General.
+  - Task #93: `TiresBatteriesWarrantyModal.tsx` con registro de acumuladores 24V y neumáticos OTR (DOT), horómetros iniciales, cálculo de meses/horas restantes y generador de dossier de reclamo ante fabricantes.
+
 

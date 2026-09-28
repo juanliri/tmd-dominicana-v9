@@ -62,6 +62,7 @@ import { CalibratedToolInventoryModal } from '../workshop/CalibratedToolInventor
 import { UsedOilDisposalModal } from '../eco/UsedOilDisposalModal';
 import { PostServiceCsatModal } from './PostServiceCsatModal';
 import { PreDeliveryInspectionPdiModal } from '../workshop/PreDeliveryInspectionPdiModal';
+import { TiresBatteriesWarrantyModal } from '../workshop/TiresBatteriesWarrantyModal';
 
 interface ServiceHistoryTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -100,6 +101,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
   const [showUsedOilModal, setShowUsedOilModal] = useState<boolean>(false);
   const [showCsatModal, setShowCsatModal] = useState<boolean>(false);
   const [showPdiModal, setShowPdiModal] = useState<boolean>(false);
+  const [showTiresBatteriesModal, setShowTiresBatteriesModal] = useState<boolean>(false);
   const [newUnitId, setNewUnitId] = useState<string>('');
   const [newBrand, setNewBrand] = useState<string>('LiuGong');
   const [newModel, setNewModel] = useState<string>('');
@@ -476,6 +478,16 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           >
             <ClipboardCheck className="w-4 h-4 text-cyan-400" />
             <span>Auditoría PDI</span>
+          </button>
+
+          {/* Task #93: Tires & Batteries OEM Warranty Management */}
+          <button
+            onClick={() => setShowTiresBatteriesModal(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-amber-400/40 text-amber-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
+            title="Gestión de Garantías de Baterías 24V y Neumáticos OTR"
+          >
+            <ShieldCheck className="w-4 h-4 text-amber-400" />
+            <span>Garantías Gomas/Baterías</span>
           </button>
 
           <button
@@ -1309,6 +1321,14 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
       <PreDeliveryInspectionPdiModal
         isOpen={showPdiModal}
         onClose={() => setShowPdiModal(false)}
+      />
+
+      {/* Task #93: Industrial Tires & 24V Batteries Warranty Modal */}
+      <TiresBatteriesWarrantyModal
+        isOpen={showTiresBatteriesModal}
+        onClose={() => setShowTiresBatteriesModal(false)}
+        machineName={selectedMachineForDetail ? `${selectedMachineForDetail.brand} ${selectedMachineForDetail.model}` : undefined}
+        machineSerial={selectedMachineForDetail?.serialNumber}
       />
     </div>
   );

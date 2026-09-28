@@ -53,6 +53,7 @@ import { DigitalSignaturePad } from './common/DigitalSignaturePad';
 import { DgiiElectronicInvoiceQrModal } from './accounting/DgiiElectronicInvoiceQrModal';
 import { LowboyFreightCalculatorModal } from './logistics/LowboyFreightCalculatorModal';
 import { PatioGatePassModal } from './security/PatioGatePassModal';
+import { MinimumMarginGuardModal } from './quotes/MinimumMarginGuardModal';
 
 interface CheckoutViewProps {
   onNavigate: (route: string) => void;
@@ -106,6 +107,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
   const [isDgiiQrOpen, setIsDgiiQrOpen] = useState(false);
   const [isLowboyModalOpen, setIsLowboyModalOpen] = useState(false);
   const [isGatePassModalOpen, setIsGatePassModalOpen] = useState(false);
+  const [isMarginGuardOpen, setIsMarginGuardOpen] = useState(false);
 
   // Formal digital signature & technical approval (Step 4)
   const [authorizedSigner, setAuthorizedSigner] = useState('');
@@ -2294,6 +2296,14 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
         itemSummary={completedOrder?.items && completedOrder.items.length > 0 ? `${completedOrder.items.length} Repuestos OEM` : (machineQuotes[0]?.machine.name || 'Equipo LiuGong')}
         recipientName={customer.fullName || 'Cliente TMD'}
         recipientCedula={customer.rncOrCedula || '001-0000000-0'}
+      />
+
+      {/* Task #77: Minimum Margin Guard (<12% GM Authorization) Modal */}
+      <MinimumMarginGuardModal
+        isOpen={isMarginGuardOpen}
+        onClose={() => setIsMarginGuardOpen(false)}
+        machineName={machineQuotes[0]?.machine.name || 'Lote de Repuestos & Equipos TMD'}
+        listPriceUsd={subtotalUsd}
       />
     </div>
   );

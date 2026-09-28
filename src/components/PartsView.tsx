@@ -33,7 +33,8 @@ import {
   Download,
   Printer,
   RotateCcw,
-  Tag
+  Tag,
+  Eye
 } from 'lucide-react';
 import { PARTS_DATA } from '../data/parts';
 import { Part, AssemblyType } from '../types';
@@ -55,6 +56,7 @@ import { WarehouseBinLabelModal } from './common/WarehouseBinLabelModal';
 import { RemanExchangeCatalogModal } from './reman/RemanExchangeCatalogModal';
 import { CriticalStockReorderModal } from './parts/CriticalStockReorderModal';
 import { MobileTruckInventoryModal } from './parts/MobileTruckInventoryModal';
+import { PartQuickViewModal } from './parts/PartQuickViewModal';
 import { TextHighlight } from './common/TextHighlight';
 import { downloadProductQrCode } from '../utils/qrExporter';
 
@@ -148,6 +150,15 @@ const PartTableRow = React.memo<PartTableRowProps>(({
           >
             FICHA
           </button>
+          <button
+            type="button"
+            onClick={() => setQuickViewPart(part)}
+            className="px-2 py-1.5 rounded-[3px] bg-zinc-900 hover:bg-amber-400 hover:text-black text-amber-400 border border-zinc-800 text-[10px] font-black uppercase tracking-wider cursor-pointer transition-colors flex items-center gap-1"
+            title="Vista Rápida OEM sin salir del catálogo"
+          >
+            <Eye className="w-3.5 h-3.5" />
+            <span className="hidden xl:inline">VISTA</span>
+          </button>
           <RecentlyVerifiedBadge
             itemId={part.id}
             itemCode={part.partNumber}
@@ -217,6 +228,7 @@ export const PartsView = React.memo<PartsViewProps>(({
   const [isCriticalStockOpen, setIsCriticalStockOpen] = useState<boolean>(false);
   const [isMobileTruckOpen, setIsMobileTruckOpen] = useState<boolean>(false);
   const [isExportPdfOpen, setIsExportPdfOpen] = useState<boolean>(false);
+  const [quickViewPart, setQuickViewPart] = useState<Part | null>(null);
 
 
 
@@ -1327,6 +1339,14 @@ export const PartsView = React.memo<PartsViewProps>(({
       <MobileTruckInventoryModal
         isOpen={isMobileTruckOpen}
         onClose={() => setIsMobileTruckOpen(false)}
+      />
+
+      {/* Task #16: OEM Part Quick View Modal */}
+      <PartQuickViewModal
+        part={quickViewPart}
+        isOpen={Boolean(quickViewPart)}
+        onClose={() => setQuickViewPart(null)}
+        onAddToCart={(p) => addToCart(p)}
       />
     </div>
   );
