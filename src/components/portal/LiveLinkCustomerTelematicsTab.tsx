@@ -56,7 +56,8 @@ import { TmdProMemberPointsModal } from '../loyalty/TmdProMemberPointsModal';
 import { TmdPublicApiKeysModal } from '../api/TmdPublicApiKeysModal';
 import { DtcAlertNotificationRulesModal } from '../telematics/DtcAlertNotificationRulesModal';
 import { PredictiveMaintenanceScheduleModal } from '../telematics/PredictiveMaintenanceScheduleModal';
-import { Leaf, Award, Key } from 'lucide-react';
+import { CanBusGatewaySimulatorModal } from '../telematics/CanBusGatewaySimulatorModal';
+import { Leaf, Award, Key, Cpu } from 'lucide-react';
 
 interface LiveLinkCustomerTelematicsTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -109,6 +110,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
   const [showApiKeysModal, setShowApiKeysModal] = useState<boolean>(false);
   const [showDtcAlertRulesModal, setShowDtcAlertRulesModal] = useState<boolean>(false);
   const [showPredictivePmModal, setShowPredictivePmModal] = useState<boolean>(false);
+  const [showCanBusGatewayModal, setShowCanBusGatewayModal] = useState<boolean>(false);
 
   const loadData = async () => {
     try {
@@ -312,6 +314,17 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
               <span>API Clientes ERP</span>
             </button>
 
+            {/* Task #56: CAN Bus J1939 Gateway Protocol Modal */}
+            <button
+              type="button"
+              onClick={() => setShowCanBusGatewayModal(true)}
+              className="px-4 py-2.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 font-display uppercase tracking-wider font-bold text-xs flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
+              title="Gateway CAN Bus J1939 / ISO 15143-3 (AEMP 2.0) para flotas mixtas"
+            >
+              <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Gateway J1939</span>
+            </button>
+
             <button
               type="button"
               onClick={() => onNavigate('#/emergency-dispatch')}
@@ -359,8 +372,15 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
               <div className="text-xl font-black text-rose-400 mt-1 font-mono">{summary.criticalAlertsCount} <span className="text-xs font-normal text-zinc-500 font-sans">críticas</span></div>
             </div>
 
-            <div className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
-              <span className="text-[11px] font-bold text-cyan-400 block font-display uppercase tracking-wider">Salud CAN Bus</span>
+            <div 
+              onClick={() => setShowCanBusGatewayModal(true)}
+              className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800 cursor-pointer hover:border-cyan-400/60 transition-colors"
+              title="Click para abrir el Gateway CAN Bus J1939 / ISO 15143-3"
+            >
+              <span className="text-[11px] font-bold text-cyan-400 block font-display uppercase tracking-wider flex items-center justify-between">
+                <span>Salud CAN Bus</span>
+                <Cpu className="w-3 h-3 text-cyan-400" />
+              </span>
               <div className="text-xl font-black text-cyan-400 mt-1 font-mono">{summary.fleetHealthScore}% <span className="text-xs font-normal text-zinc-500 font-sans">óptima</span></div>
             </div>
           </div>
@@ -1401,6 +1421,12 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
         machineSerial={selectedUnit?.serialNumber}
         currentHours={selectedUnit?.operatingHours}
         onBookService={onOpenServiceTab}
+      />
+
+      {/* Task #56: Universal Mixed-Fleet CAN Bus J1939 & AEMP 2.0 Gateway Modal */}
+      <CanBusGatewaySimulatorModal
+        isOpen={showCanBusGatewayModal}
+        onClose={() => setShowCanBusGatewayModal(false)}
       />
 
     </div>

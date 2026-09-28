@@ -46,7 +46,8 @@ import { TechnicianLaborHoursModal } from './workshop/TechnicianLaborHoursModal'
 import { PatioGatePassModal } from './security/PatioGatePassModal';
 import { CustomerCallLogCrmModal } from './crm/CustomerCallLogCrmModal';
 import { MonthlyExecutiveReportModal } from './admin/MonthlyExecutiveReportModal';
-import { LayoutGrid, Sparkles, Flame, ShieldCheck as ShieldCheckIcon, TrendingUp, Calendar as CalendarIcon, Activity as ActivityIcon, Settings, PhoneCall } from 'lucide-react';
+import { S3GlacierBackupModal } from './security/S3GlacierBackupModal';
+import { LayoutGrid, Sparkles, Flame, ShieldCheck as ShieldCheckIcon, TrendingUp, Calendar as CalendarIcon, Activity as ActivityIcon, Settings, PhoneCall, HardDrive } from 'lucide-react';
 
 interface AdminDashboardViewProps {
   onNavigate: (route: string) => void;
@@ -72,6 +73,7 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
   const [isGatePassOpen, setIsGatePassOpen] = useState(false);
   const [isCallLogOpen, setIsCallLogOpen] = useState(false);
   const [isExecutiveReportOpen, setIsExecutiveReportOpen] = useState(false);
+  const [isGlacierBackupOpen, setIsGlacierBackupOpen] = useState(false);
   const [highlightItemId, setHighlightItemId] = useState<string | null>(null);
 
   // Firestore Real-Time Listeners for quotes, machines, and parts
@@ -429,6 +431,17 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
               >
                 <TrendingUp className="w-3.5 h-3.5" />
                 <span className="hidden lg:inline">Reporte CFO</span>
+              </button>
+
+              {/* Task #56: S3 Glacier Cold Storage Backup Trigger */}
+              <button
+                type="button"
+                onClick={() => setIsGlacierBackupOpen(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-blue-500/40 text-blue-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                title="Backups en Frío Semanales en Amazon S3 Glacier (AES-256 / Retención 7 Años)"
+              >
+                <HardDrive className="w-3.5 h-3.5 text-blue-400" />
+                <span className="hidden lg:inline">S3 Glacier</span>
               </button>
 
               {/* Firestore Bulk Manager Trigger Button */}
@@ -943,6 +956,12 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
       <MonthlyExecutiveReportModal
         isOpen={isExecutiveReportOpen}
         onClose={() => setIsExecutiveReportOpen(false)}
+      />
+
+      {/* Task #56: S3 Glacier Cold Storage Backup Modal */}
+      <S3GlacierBackupModal
+        isOpen={isGlacierBackupOpen}
+        onClose={() => setIsGlacierBackupOpen(false)}
       />
     </div>
   );
