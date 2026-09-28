@@ -19,7 +19,7 @@ Esta matriz contiene **100 recomendaciones de grado de ingeniería y dirección 
 | **Sprint 7** | UX Cotización, Búsqueda, Vencimiento & Pagos Tarjeta | #14 (Stepper 4 Pasos & Firma), #19 (Match Highlight Repuestos), #67 (Control Vigencia 15D), #68 (Permuta Usados Trade-In), #75 (Cardnet/Azul 3DS) | `cdc5859` | 🟢 Producción Desplegado |
 | **Sprint 8** | Telemetría Satelital, Control Ralentí & Salvaguarda Comercial | #10 (Toast Agrupables), #49 (Playback Rutas GPS 7D), #50 (Ralentí & Desperdicio Diésel), #73 (Implementos OEM Checkout), #77 (Guardia Margen Mínimo 12%) | `d4787c3` | 🟢 Producción Desplegado |
 | **Sprint 9** | Redes Sociales, Seguridad Diésel, Batería 24V, Auxilio 4x4 & Reorden Crítico | #17 (Flyer Social 1080x1920/1x1), #45 (Centinela Diésel J1939 Anti-Robo), #54 (Inspector 24V Alternador/Batería), #81 (Radar Despacho Auxilio 4x4 GPS), #92 (Puntos Reorden Crítico & PO) | `bf854f8` | 🟢 Producción Desplegado |
-| **Sprint 10** | Comparador 4-Equipos, Geocercas Obra, Tasa BCRD, Garantías OEM & Huella CO2 | #6 (Comparador Flotante Drag-and-Drop 4 Uds), #43 (Geocercas Poligonales Dinámicas), #51 (Tipo de Cambio BCRD & Spread Bancario), #83 (Expediente Pericial Garantías OEM), #96 (Auditoría Huella Carbono ISO 14001) | `PENDING_COMMIT` | 🟢 Producción Desplegado |
+| **Sprint 10** | Comparador 4-Equipos, Geocercas Obra, Tasa BCRD, Garantías OEM & Huella CO2 | #6 (Comparador Flotante Drag-and-Drop 4 Uds), #43 (Geocercas Poligonales Dinámicas), #51 (Tipo de Cambio BCRD & Spread Bancario), #83 (Expediente Pericial Garantías OEM), #96 (Auditoría Huella Carbono ISO 14001) | `419de8a` | 🟢 Producción Desplegado |
 
 **Avance Acumulado:** **50 de 100 Tareas Estratégicas (50% del Plan Maestro completado — HITO 50% ALCANZADO)**.
 
