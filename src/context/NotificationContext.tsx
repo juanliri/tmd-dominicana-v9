@@ -28,6 +28,10 @@ interface NotificationContextType {
   pushPermission: NotificationPermission;
   isNotificationPanelOpen: boolean;
   activeToast: AppNotification | null;
+  activeToasts: AppNotification[];
+  pushToast: (toast: Partial<AppNotification> & { title: string; body: string }) => void;
+  dismissToastById: (id: string) => void;
+  dismissAllToasts: () => void;
   requestPermission: () => Promise<NotificationPermission>;
   openNotificationPanel: () => void;
   closeNotificationPanel: () => void;
@@ -90,8 +94,11 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     return 'Notification' in window ? Notification.permission : 'denied';
   });
   const [isNotificationPanelOpen, setIsNotificationPanelOpen] = useState(false);
-  const [activeToast, setActiveToast] = useState<AppNotification | null>(null);
+  const [activeToasts, setActiveToasts] = useState<AppNotification[]>([]);
   const isFirstMount = useRef(true);
+
+  // Derive activeToast for backwards compatibility
+  const activeToast = activeToasts.length > 0 ? activeToasts[0] : null;
 
   // Sync Push Permission State
   useEffect(() => {
@@ -141,11 +148,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
           if (!latest.isRead) {
             playNotificationSound();
             showBrowserNotification(latest.title, latest.body, latest.actionUrl);
-            setActiveToast(latest);
-            // Auto dismiss toast after 6s
-            setTimeout(() => {
-              setActiveToast(prev => prev?.id === latest.id ? null : prev);
-            }, 6000);
+            setActiveToasts(prev => [latest, ...prev.filter(t => t.id !== latest.id)].slice(0, 4));
           }
         }
 
@@ -204,6 +207,9 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
       const fleet = customFleet || getLocalFleet();
       if (fleet.length === 0) return [];
       const triggered = await checkAndTriggerFleetMaintenanceReminders(fleet, currentUser.uid);
+      if (triggered.length > 0) {
+        setActiveToasts(prev => [...triggered, ...prev].slice(0, 4));
+      }
       return triggered;
     } catch (e) {
       console.warn('Error evaluating fleet maintenance reminders:', e);
@@ -221,12 +227,39 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
     }
   }, [currentUser, checkMaintenanceReminders]);
 
+  const pushToast = useCallback((toastData: Partial<AppNotification> & { title: string; body: string }) => {
+    const newToast: AppNotification = {
+      id: toastData.id || `toast_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+      userId: toastData.userId || currentUser?.uid || 'all',
+      title: toastData.title,
+      body: toastData.body,
+      type: toastData.type || 'system',
+      offerCode: toastData.offerCode,
+      discountPercent: toastData.discountPercent,
+      validUntil: toastData.validUntil,
+      targetCategory: toastData.targetCategory,
+      actionUrl: toastData.actionUrl,
+      isRead: false,
+      createdAt: toastData.createdAt || new Date().toISOString()
+    };
+    playNotificationSound();
+    setActiveToasts(prev => [newToast, ...prev.filter(t => t.id !== newToast.id)].slice(0, 4));
+  }, [currentUser]);
+
+  const dismissToastById = useCallback((id: string) => {
+    setActiveToasts(prev => prev.filter(t => t.id !== id));
+  }, []);
+
+  const dismissAllToasts = useCallback(() => {
+    setActiveToasts([]);
+  }, []);
+
   const sendTestPushAlert = useCallback(async () => {
     const testNotif: AppNotification = {
       id: `test_${Date.now()}`,
       userId: currentUser?.uid || 'all',
-      title: '🔔 Notificación de Prueba: TMD Dominicana',
-      body: 'Sistema de notificaciones push activo para presupuestos de maquinaria y ofertas especiales.',
+      title: '🔔 Alerta Telemática J1939: TMD Dominicana',
+      body: 'Sensor SPN 110: Monitoreo activo de temperatura y presión hidráulica en tiempo real.',
       type: 'system',
       isRead: false,
       createdAt: new Date().toISOString()
@@ -234,12 +267,11 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
 
     playNotificationSound();
     showBrowserNotification(testNotif.title, testNotif.body);
-    setActiveToast(testNotif);
-    setTimeout(() => setActiveToast(null), 5000);
+    setActiveToasts(prev => [testNotif, ...prev].slice(0, 4));
   }, [currentUser]);
 
   const dismissToast = useCallback(() => {
-    setActiveToast(null);
+    setActiveToasts(prev => prev.slice(1));
   }, []);
 
   const unreadCount = notifications.filter(n => !n.isRead).length;
@@ -252,6 +284,10 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
         pushPermission,
         isNotificationPanelOpen,
         activeToast,
+        activeToasts,
+        pushToast,
+        dismissToastById,
+        dismissAllToasts,
         requestPermission,
         openNotificationPanel,
         closeNotificationPanel,

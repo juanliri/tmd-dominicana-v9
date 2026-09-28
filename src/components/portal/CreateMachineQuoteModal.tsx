@@ -17,7 +17,10 @@ import {
   MessageSquare,
   FileCheck,
   Send,
-  HelpCircle
+  HelpCircle,
+  ShieldAlert,
+  TrendingDown,
+  Key
 } from 'lucide-react';
 import { PortalQuote, Machine, UserProfile } from '../../types';
 import { MACHINES_DATA, USD_TO_DOP_RATE } from '../../data/catalog';
@@ -26,6 +29,7 @@ import { collection, addDoc } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../../lib/firebase';
 import { triggerRfqCrmInquiryLogging } from '../../services/crmService';
 import { getQuoteWhatsAppUrl } from '../../utils/whatsappMessaging';
+import { MarginGuardValidatorModal } from '../commercial/MarginGuardValidatorModal';
 
 interface CreateMachineQuoteModalProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -67,16 +71,35 @@ export const CreateMachineQuoteModal: React.FC<CreateMachineQuoteModalProps> = (
   const [advanceBank, setAdvanceBank] = useState<string>('Banco Popular Dominicano');
   const [advanceReference, setAdvanceReference] = useState<string>('BPD-TRF-992144');
 
+  // Commercial Discount & Margin Guard (Sprint 8 Task #77)
+  const [commercialDiscountPercent, setCommercialDiscountPercent] = useState<number>(0);
+  const [isMarginGuardModalOpen, setIsMarginGuardModalOpen] = useState<boolean>(false);
+  const [marginOverrideApproved, setMarginOverrideApproved] = useState<{
+    authorizedBy: string;
+    justification: string;
+  } | null>(null);
+  const [pendingActionType, setPendingActionType] = useState<'save_only' | 'export_pdf' | 'share_whatsapp' | null>(null);
+
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const selectedMachine = MACHINES_DATA.find((m) => m.id === selectedMachineId) || MACHINES_DATA[0];
 
-  // Price calculations
+  // Price calculations & Dealer CIF Margin Guard
   const baseMachinePrice = selectedMachine.basePriceUsd || 89500;
+  const dealerCifCostUsd = Math.round(baseMachinePrice * 0.80); // CIF Caucedo base cost benchmark (80%)
+
+  const commercialDiscountUsd = Math.round((baseMachinePrice * commercialDiscountPercent) / 100);
+  const discountedMachinePrice = baseMachinePrice - commercialDiscountUsd;
+
+  // Margin calculation against dealer CIF
+  const grossProfitUsd = discountedMachinePrice - dealerCifCostUsd;
+  const grossMarginPercent = (grossProfitUsd / discountedMachinePrice) * 100;
+  const isMarginCritical = grossMarginPercent < 12.0;
+
   const kitPrice = includeMaintenanceKit ? 850 : 0;
   const warrantyPrice = includeExtendedWarranty ? 2400 : 0;
   
-  const subtotalBeforeTradeIn = baseMachinePrice + kitPrice + warrantyPrice;
+  const subtotalBeforeTradeIn = discountedMachinePrice + kitPrice + warrantyPrice;
   const tradeInDeduction = enableTradeIn ? tradeInAppraisalUsd : 0;
   
   // Tax calculation on net equipment investment
@@ -96,6 +119,14 @@ export const CreateMachineQuoteModal: React.FC<CreateMachineQuoteModalProps> = (
 
   const handleSaveAndExport = async (actionType: 'save_only' | 'export_pdf' | 'share_whatsapp') => {
     if (!currentUser) return;
+
+    // Sprint 8 Task #77: Margin Guard check before quotation emission
+    if (isMarginCritical && !marginOverrideApproved) {
+      setPendingActionType(actionType);
+      setIsMarginGuardModalOpen(true);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -574,6 +605,99 @@ export const CreateMachineQuoteModal: React.FC<CreateMachineQuoteModalProps> = (
             </div>
           </div>
 
+          {/* Section 6: Commercial Discount & Minimum Margin Guard (Sprint 8 Task #77) */}
+          <div className="space-y-3 p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800">
+            <div className="flex items-center justify-between">
+              <label className="text-[10px] font-bold uppercase text-zinc-300 flex items-center gap-1.5 tracking-wider">
+                <ShieldAlert className="w-3.5 h-3.5 text-amber-400" />
+                <span>6. Descuento Comercial & Margen Bruto Distribuidor (Task #77)</span>
+              </label>
+
+              {marginOverrideApproved ? (
+                <span className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-[2px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+                  <Check className="w-3 h-3" />
+                  <span>Autorizado por Gerencia</span>
+                </span>
+              ) : isMarginCritical ? (
+                <span className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-[2px] bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse flex items-center gap-1">
+                  <AlertCircle className="w-3 h-3" />
+                  <span>Requiere PIN Gerencial (&lt;12%)</span>
+                </span>
+              ) : (
+                <span className="text-[9px] font-bold uppercase px-2 py-0.5 rounded-[2px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  Margen Conforme
+                </span>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+              <div className="space-y-1">
+                <label className="text-[10px] text-zinc-400 uppercase font-bold block">Descuento Comercial Aplicado</label>
+                <select
+                  value={commercialDiscountPercent}
+                  onChange={(e) => {
+                    setCommercialDiscountPercent(Number(e.target.value));
+                    setMarginOverrideApproved(null); // Reset approval if discount changes
+                  }}
+                  className="w-full px-2.5 py-1.5 rounded-[2px] bg-zinc-900 border border-zinc-800 text-white font-bold"
+                >
+                  <option value={0}>0% - Precio de Lista Oficial</option>
+                  <option value={3}>3% - Descuento Contratista Frecuente</option>
+                  <option value={5}>5% - Descuento Comercial Estándar</option>
+                  <option value={8}>8% - Descuento Flota (2+ Unidades)</option>
+                  <option value={10}>10% - Descuento Licitación Estratégica</option>
+                  <option value={12}>12% - Descuento Límite Autorizado</option>
+                  <option value={15}>15% - Descuento Agresivo (Margen &lt; 12%)</option>
+                  <option value={18}>18% - Descuento Máximo Excepcional</option>
+                </select>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[10px] text-zinc-400 uppercase font-bold block">Costo Base CIF Distribuidor</label>
+                <div className="px-2.5 py-1.5 rounded-[2px] bg-zinc-900 border border-zinc-800 text-zinc-300 font-mono text-xs flex items-center justify-between">
+                  <span>Caucedo/Haina:</span>
+                  <strong className="text-white">US$ {dealerCifCostUsd.toLocaleString()}</strong>
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[10px] text-zinc-400 uppercase font-bold block">Margen Bruto de Venta</label>
+                <div className={`px-2.5 py-1.5 rounded-[2px] border font-mono text-xs flex items-center justify-between font-bold ${
+                  isMarginCritical 
+                    ? 'bg-rose-500/10 border-rose-500/40 text-rose-300' 
+                    : grossMarginPercent < 15 
+                      ? 'bg-amber-400/10 border-amber-400/30 text-amber-400' 
+                      : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
+                }`}>
+                  <span>{grossMarginPercent.toFixed(1)}% Margen</span>
+                  <span>US$ {grossProfitUsd.toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+
+            {isMarginCritical && (
+              <div className="p-2.5 rounded-[2px] bg-rose-950/30 border border-rose-500/30 flex items-center justify-between gap-2 text-xs">
+                <div className="text-[11px] text-rose-300">
+                  {marginOverrideApproved ? (
+                    <span><strong>Excepción Autorizada:</strong> {marginOverrideApproved.authorizedBy} ({marginOverrideApproved.justification})</span>
+                  ) : (
+                    <span><strong>Bloqueo Activo:</strong> El margen ({grossMarginPercent.toFixed(1)}%) es inferior al 12.0% mínimo requerido por política de TMD.</span>
+                  )}
+                </div>
+
+                {!marginOverrideApproved && (
+                  <button
+                    type="button"
+                    onClick={() => setIsMarginGuardModalOpen(true)}
+                    className="px-3 py-1 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-[2px] text-[10px] uppercase tracking-wider transition-colors cursor-pointer shrink-0"
+                  >
+                    Ingresar PIN Gerencial
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+
           {/* Pricing Summary Deck */}
           <div className="p-4 rounded-[2px] bg-zinc-950 text-white border border-zinc-800 space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -582,6 +706,12 @@ export const CreateMachineQuoteModal: React.FC<CreateMachineQuoteModalProps> = (
                   <span className="uppercase text-[10px]">Precio Base Equipo:</span>
                   <strong className="text-white font-mono">US$ {baseMachinePrice.toLocaleString()}</strong>
                 </div>
+                {commercialDiscountUsd > 0 && (
+                  <div className="flex justify-between text-emerald-400 font-bold">
+                    <span className="uppercase text-[10px]">Desc. Comercial ({commercialDiscountPercent}%):</span>
+                    <strong className="font-mono">-US$ {commercialDiscountUsd.toLocaleString()}</strong>
+                  </div>
+                )}
                 {includeMaintenanceKit && (
                   <div className="flex justify-between">
                     <span className="uppercase text-[10px]">Kit Mantenimiento 500h:</span>
@@ -676,6 +806,28 @@ export const CreateMachineQuoteModal: React.FC<CreateMachineQuoteModalProps> = (
           </div>
         </div>
       </div>
+
+      {/* Sprint 8 Task #77: Margin Guard Validator Modal */}
+      <MarginGuardValidatorModal
+        isOpen={isMarginGuardModalOpen}
+        onClose={() => setIsMarginGuardModalOpen(false)}
+        onAuthorize={(by, justification) => {
+          setMarginOverrideApproved({ authorizedBy: by, justification });
+          setIsMarginGuardModalOpen(false);
+          if (pendingActionType) {
+            const nextAction = pendingActionType;
+            setPendingActionType(null);
+            setTimeout(() => {
+              handleSaveAndExport(nextAction);
+            }, 100);
+          }
+        }}
+        machineModel={selectedMachine.name}
+        listPriceUsd={baseMachinePrice}
+        offeredPriceUsd={discountedMachinePrice}
+        dealerCifCostUsd={dealerCifCostUsd}
+        calculatedMarginPercent={grossMarginPercent}
+      />
     </div>,
     document.body
   );

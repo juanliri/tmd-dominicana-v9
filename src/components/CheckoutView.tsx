@@ -48,6 +48,7 @@ import { DgiiTaxWithholdingBreakdown, DgiiTaxRegime } from './calculator/DgiiTax
 import { CardnetAzulPaymentModal, CardPaymentResult } from './checkout/CardnetAzulPaymentModal';
 import { QuoteExpirationAlertModal } from './quotes/QuoteExpirationAlertModal';
 import { TradeInValuationModal } from './machinery/TradeInValuationModal';
+import { SmartAttachmentsUpsell } from './checkout/SmartAttachmentsUpsell';
 
 interface CheckoutViewProps {
   onNavigate: (route: string) => void;
@@ -1065,6 +1066,9 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                     </div>
                   </div>
                 )}
+
+                {/* Sprint 8 Task #73: Smart Attachments & Accessories Upsell */}
+                <SmartAttachmentsUpsell />
 
                 {/* Continue button */}
                 <div className="pt-4 flex justify-end">
@@ -2189,14 +2193,14 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
 
       {/* Task #68: Used Machinery Trade-In Appraisal Modal */}
       <TradeInValuationModal
-        isOpen={isTradeInOpen}
-        onClose={() => setIsTradeInOpen(false)}
+        isOpen={isTradeInModalOpen}
+        onClose={() => setIsTradeInModalOpen(false)}
         targetMachineName={machineQuotes.length > 0 ? machineQuotes[0].machine.name : 'Repuestos / Maquinaria TMD'}
         targetMachinePriceUsd={totalUsd}
         exchangeRate={exchangeRate}
         onApplyTradeInCredit={(creditUsd, summary) => {
           setTradeInCredit({ creditUsd, summary });
-          setIsTradeInOpen(false);
+          setIsTradeInModalOpen(false);
         }}
       />
 

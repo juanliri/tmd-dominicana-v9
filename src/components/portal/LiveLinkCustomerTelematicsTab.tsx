@@ -32,12 +32,15 @@ import {
   Calendar,
   PhoneCall,
   Navigation,
-  FileText
+  FileText,
+  TrendingDown
 } from 'lucide-react';
 import { LiveLinkUnit, LiveLinkTelemetrySummary, LiveLinkFaultCode, UserProfile } from '../../types';
 import { fetchLiveLinkFleet, fetchLiveLinkSummary, sendLiveLinkCommand } from '../../services/livelinkService';
 import { createFullbayOrderFromLiveLink } from '../../services/fullbayService';
 import { downloadTelematicsReportPDF } from '../../utils/pdfGenerator';
+import { RoutePlaybackModal } from '../telematics/RoutePlaybackModal';
+import { IdleTimeAnalyticsModal } from '../telematics/IdleTimeAnalyticsModal';
 
 interface LiveLinkCustomerTelematicsTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -72,6 +75,10 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
   const [geofenceName, setGeofenceName] = useState<string>('');
   const [geofenceAlertSpeed, setGeofenceAlertSpeed] = useState<number>(30);
   const [geofenceSaveSuccess, setGeofenceSaveSuccess] = useState<boolean>(false);
+
+  // Sprint 8 Task #49 & #50 Modals State
+  const [showRoutePlaybackModal, setShowRoutePlaybackModal] = useState<boolean>(false);
+  const [showIdleModal, setShowIdleModal] = useState<boolean>(false);
 
   const loadData = async () => {
     try {
@@ -487,6 +494,16 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
 
                   <button
                     type="button"
+                    onClick={() => setShowRoutePlaybackModal(true)}
+                    className="px-2.5 py-1.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-amber-400 border border-amber-400/40 font-bold font-display uppercase tracking-wider text-[11px] flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+                    title="Reproducir Historial Satelital de Rutas (7 Días)"
+                  >
+                    <Navigation className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Playback GPS (7D)</span>
+                  </button>
+
+                  <button
+                    type="button"
                     onClick={() => downloadTelematicsReportPDF(selectedUnit)}
                     className="px-2.5 py-1.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider text-[11px] flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
                     title="Exportar Reporte Oficial PDF de Telemetría CAN-Bus"
@@ -823,7 +840,39 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                         {(selectedUnit.horometerHours * 0.22).toFixed(1)} h
                       </div>
                       <p className="text-[11px] text-amber-400 font-mono font-bold mt-1">22% en Espera</p>
+                      <button
+                        type="button"
+                        onClick={() => setShowIdleModal(true)}
+                        className="mt-2 text-[10px] font-bold text-amber-400 hover:text-amber-300 hover:underline flex items-center justify-center gap-1 uppercase tracking-wider cursor-pointer mx-auto"
+                      >
+                        <span>Auditoría de Desperdicio</span>
+                        <ChevronRight className="w-3 h-3" />
+                      </button>
                     </div>
+                  </div>
+
+                  {/* Quick Trigger Banner for Idle Fuel Waste (Sprint 8 Task #50) */}
+                  <div className="p-3.5 rounded-[3px] bg-gradient-to-r from-amber-950/30 via-zinc-950 to-zinc-950 border border-amber-400/30 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-[2px] bg-amber-400 text-black shrink-0">
+                        <TrendingDown className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h5 className="text-xs font-bold text-white uppercase tracking-wider font-display">
+                          Control de Desperdicio Diésel & Emisiones por Ralentí
+                        </h5>
+                        <p className="text-[11px] text-zinc-400 font-sans">
+                          Calcule el impacto financiero en pesos dominicanos (RD$) y desgaste de intervalos PM-250h.
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowIdleModal(true)}
+                      className="px-3 py-1.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black text-xs font-bold font-display uppercase tracking-wider transition-colors cursor-pointer shrink-0 shadow-sm"
+                    >
+                      Abrir Calculador de Ralentí
+                    </button>
                   </div>
 
                   {/* Scheduled Service Countdown Bar */}
@@ -1130,6 +1179,20 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
         </div>,
         document.body
       )}
+
+      {/* Route Playback 7-Day GPS Modal (Sprint 8 Task #49) */}
+      <RoutePlaybackModal
+        isOpen={showRoutePlaybackModal}
+        onClose={() => setShowRoutePlaybackModal(false)}
+        unit={selectedUnit}
+      />
+
+      {/* Idle Time & Fuel Waste Analytics Modal (Sprint 8 Task #50) */}
+      <IdleTimeAnalyticsModal
+        isOpen={showIdleModal}
+        onClose={() => setShowIdleModal(false)}
+        unit={selectedUnit}
+      />
 
     </div>
   );
