@@ -31,7 +31,9 @@ import {
   Crosshair,
   ClipboardList,
   FileStack,
-  Fuel
+  Fuel,
+  FlaskConical,
+  Mountain
 } from 'lucide-react';
 import { Machine, MachineCustomizationOption } from '../../types';
 import { useCart } from '../../context/CartContext';
@@ -53,6 +55,11 @@ import { MachineFluidsGuideModal } from '../fluids/MachineFluidsGuideModal';
 import { GatePassModal } from '../logistics/GatePassModal';
 import { OemVsAftermarketMatrix } from '../parts/OemVsAftermarketMatrix';
 import { TenderDossierExporterModal } from '../catalog/TenderDossierExporterModal';
+import { GroundPressureCalculatorModal } from '../calculator/GroundPressureCalculatorModal';
+import { DominicanSoilBucketSelector } from './DominicanSoilBucketSelector';
+import { OilSpectrometryModal } from '../fluids/OilSpectrometryModal';
+import { WorkshopBaysSchedulerModal } from '../workshop/WorkshopBaysSchedulerModal';
+import { TestDriveBookingModal } from '../media/TestDriveBookingModal';
 
 interface MachineDetailStudioModalProps {
   machine: Machine | null;
@@ -180,6 +187,10 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   const [isFluidsOpen, setIsFluidsOpen] = useState<boolean>(false);
   const [isGatePassOpen, setIsGatePassOpen] = useState<boolean>(false);
   const [isDossierOpen, setIsDossierOpen] = useState<boolean>(false);
+  const [isGroundPressureOpen, setIsGroundPressureOpen] = useState<boolean>(false);
+  const [isSpectrometryOpen, setIsSpectrometryOpen] = useState<boolean>(false);
+  const [isWorkshopBaysOpen, setIsWorkshopBaysOpen] = useState<boolean>(false);
+  const [isTestDriveModalOpen, setIsTestDriveModalOpen] = useState<boolean>(false);
 
   // Accordion visibility states for secondary technical details (compacts mobile & desktop viewports)
   const [isExtendedSpecsExpanded, setIsExtendedSpecsExpanded] = useState<boolean>(true);
@@ -331,6 +342,17 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
             >
               <FileStack className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Dossier Licitación</span>
+            </button>
+
+            {/* Ground Bearing Pressure Simulator Button (Task #4) */}
+            <button
+              type="button"
+              onClick={() => setIsGroundPressureOpen(true)}
+              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
+              title="Calcular presión sobre el suelo (kg/cm² y PSI) y transitabilidad según ancho de zapatas"
+            >
+              <Gauge className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Presión Suelo</span>
             </button>
 
             {onOpen360 && (
@@ -769,6 +791,9 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
           {/* TAB 2: OEM ATTACHMENTS & CONFIGURATOR */}
           {activeTab === 'attachments' && (
             <div className="space-y-3 animate-in fade-in duration-150">
+              {/* Task #8: Dominican Soil Bucket Selector */}
+              <DominicanSoilBucketSelector machine={machine} />
+
               <div className="p-3 rounded-[2px] bg-amber-400/10 border border-amber-400/30 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <Wrench className="w-4 h-4 text-amber-400 shrink-0" />
@@ -961,6 +986,50 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                   </div>
                   <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-emerald-400 transition-colors" />
                 </button>
+
+                {/* Task #86: Oil Spectrometry Modal Button */}
+                <button
+                  type="button"
+                  onClick={() => setIsSpectrometryOpen(true)}
+                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-400/40 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-[2px] bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
+                      <FlaskConical className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase text-white group-hover:text-amber-400 block transition-colors">
+                        Análisis Espectrométrico S.O.S.
+                      </span>
+                      <span className="text-[10px] text-zinc-400 font-sans">
+                        PPM metales de desgaste (Fe, Cu, Al, Si)
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 transition-colors" />
+                </button>
+
+                {/* Task #87: Workshop Bays Scheduler Button */}
+                <button
+                  type="button"
+                  onClick={() => setIsWorkshopBaysOpen(true)}
+                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-400/40 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-[2px] bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300 shrink-0">
+                      <Wrench className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase text-white group-hover:text-amber-400 block transition-colors">
+                        Bahías de Taller Km 22 (6)
+                      </span>
+                      <span className="text-[10px] text-zinc-400 font-sans">
+                        Cronograma en vivo y disponibilidad
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 transition-colors" />
+                </button>
               </div>
 
               {/* Matriz Comparativa OEM vs Aftermarket (Task #23) */}
@@ -989,26 +1058,13 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                 <button
                   type="button"
                   onClick={() => {
-                    triggerHaptic('success');
-                    setTestDriveBooked(true);
+                    triggerHaptic('mechanicalClick');
+                    setIsTestDriveModalOpen(true);
                   }}
-                  className={`py-2 px-4 rounded-[2px] text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer shrink-0 ${
-                    testDriveBooked
-                      ? 'bg-emerald-600 text-white'
-                      : 'bg-amber-400 text-black hover:bg-amber-300'
-                  }`}
+                  className="py-2 px-4 rounded-[2px] text-xs font-bold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer shrink-0 bg-amber-400 text-black hover:bg-amber-300 shadow-xs"
                 >
-                  {testDriveBooked ? (
-                    <>
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                      <span>¡Demostración Agendada!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Calendar className="w-3.5 h-3.5" />
-                      <span>Agendar Test Drive en Patio</span>
-                    </>
-                  )}
+                  <Calendar className="w-3.5 h-3.5" />
+                  <span>Agendar Test Drive en Patio</span>
                 </button>
               </div>
 
@@ -1192,6 +1248,34 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
         isOpen={isDossierOpen}
         onClose={() => setIsDossierOpen(false)}
         initialSelectedMachineIds={[machine.id]}
+      />
+
+      {/* Task #4: Ground Bearing Pressure Geotechnical Simulator */}
+      <GroundPressureCalculatorModal
+        machine={machine}
+        isOpen={isGroundPressureOpen}
+        onClose={() => setIsGroundPressureOpen(false)}
+      />
+
+      {/* Task #86: Oil Spectrometry S.O.S. Modal */}
+      <OilSpectrometryModal
+        machine={machine}
+        isOpen={isSpectrometryOpen}
+        onClose={() => setIsSpectrometryOpen(false)}
+      />
+
+      {/* Task #87: Workshop Bays Scheduler Modal */}
+      <WorkshopBaysSchedulerModal
+        isOpen={isWorkshopBaysOpen}
+        onClose={() => setIsWorkshopBaysOpen(false)}
+        preselectedMachineName={machine.name}
+      />
+
+      {/* Task #91: Real Field Test Drive Booking Modal */}
+      <TestDriveBookingModal
+        isOpen={isTestDriveModalOpen}
+        onClose={() => setIsTestDriveModalOpen(false)}
+        preselectedMachine={machine}
       />
     </div>,
     document.body
