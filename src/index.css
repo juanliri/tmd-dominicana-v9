@@ -199,20 +199,28 @@ html:not(.dark) .min-h-screen {
 html:not(.dark) :where(
   .bg-zinc-950,
   .bg-zinc-900,
-  .bg-zinc-900\/95,
-  .bg-zinc-900\/90,
-  .bg-zinc-900\/80,
-  .bg-zinc-950\/90,
-  .bg-zinc-950\/95,
+  .bg-zinc-850,
   .bg-black,
+  [class*="bg-zinc-950"],
+  [class*="bg-zinc-900"],
+  [class*="bg-zinc-850"],
+  [class*="bg-black/"],
   [class*="bg-[#0c0c1"],
   [class*="bg-[#0a0a1"],
   [class*="bg-[#07070"],
   [class*="bg-[#11111"],
   [class*="bg-[#14141"],
   [class*="bg-[#15151"],
-  [class*="bg-[#09090"]
-):not(.dark-preserve):not(.dark-preserve *) {
+  [class*="bg-[#09090"],
+  [class*="bg-[#05050"],
+  [class*="bg-[#06060"],
+  [class*="bg-[#03030"],
+  [class*="bg-[#0e0e1"],
+  [class*="bg-[#18182"],
+  [class*="bg-[#1c1c2"],
+  [class*="bg-[#20202"],
+  [class*="bg-[#2b261a]"]
+):not(.dark-preserve):not(.dark-preserve *):not([class*="bg-amber"]):not([class*="bg-yellow"]):not([class*="bg-emerald"]):not([class*="bg-red"]):not([class*="bg-blue"]):not([class*="bg-cyan"]):not([class*="bg-green"]) {
   background-color: #ffffff !important;
   border-color: #e2e8f0 !important;
   color: #1e293b !important;
@@ -221,15 +229,14 @@ html:not(.dark) :where(
 
 /* 2. Insets & Sub-panels: Slate-100 surfaces */
 html:not(.dark) :where(
-  .bg-zinc-900\/50,
   .bg-zinc-800,
-  [class*="bg-[#0e0e1"],
-  [class*="bg-[#18182"],
+  .bg-zinc-700,
+  [class*="bg-zinc-800"],
+  [class*="bg-zinc-700"],
   [class*="bg-slate-100\/10"],
-  [class*="bg-white\/\[0\.04\]"],
-  [class*="bg-white\/\[0\.05\]"],
-  [class*="bg-white\/\[0\.06\]"]
-):not(.dark-preserve):not(.dark-preserve *) {
+  [class*="bg-white\/\[0\.0"],
+  [class*="bg-white\/\[0\.1"]
+):not(.dark-preserve):not(.dark-preserve *):not([class*="bg-amber"]):not([class*="bg-yellow"]):not([class*="bg-emerald"]):not([class*="bg-red"]):not([class*="bg-blue"]):not([class*="bg-cyan"]) {
   background-color: #f1f5f9 !important;
   border-color: #e2e8f0 !important;
   color: #334155 !important;
@@ -251,7 +258,7 @@ html:not(.dark) :where(
   .text-white,
   .text-zinc-100,
   .text-zinc-200
-):not(.dark-preserve):not(.dark-preserve *) {
+):not(.dark-preserve):not(.dark-preserve *):not([class*="text-amber"]):not([class*="text-yellow"]):not([class*="text-emerald"]):not([class*="text-red"]):not(button.tmd-shimmer-btn *):not(.bg-amber-400 *) {
   color: #0f172a !important;
 }
 
@@ -260,7 +267,7 @@ html:not(.dark) :where(
   p,
   .text-zinc-300,
   .text-zinc-400
-):not(.dark-preserve):not(.dark-preserve *):not([class*="text-amber"]):not([class*="text-emerald"]):not([class*="text-cyan"]):not([class*="text-red"]) {
+):not(.dark-preserve):not(.dark-preserve *):not([class*="text-amber"]):not([class*="text-emerald"]):not([class*="text-cyan"]):not([class*="text-red"]):not([class*="text-yellow"]):not(button.tmd-shimmer-btn *):not(.bg-amber-400 *) {
   color: #334155 !important;
 }
 
@@ -282,15 +289,11 @@ html:not(.dark) :where(input, select, textarea):not(.dark-preserve *)::placehold
 
 /* 7. Borders */
 html:not(.dark) :where(
-  .border-zinc-800,
-  .border-zinc-800\/80,
-  .border-zinc-700,
-  .border-white\/\[0\.08\],
-  .border-white\/\[0\.06\],
-  .border-white\/\[0\.1\],
-  .border-white\/\[0\.12\],
-  .border-white\/10
-):not(.dark-preserve):not(.dark-preserve *) {
+  [class*="border-zinc-8"],
+  [class*="border-zinc-7"],
+  [class*="border-zinc-9"],
+  [class*="border-white\/"]
+):not(.dark-preserve):not(.dark-preserve *):not([class*="border-amber"]):not([class*="border-yellow"]):not([class*="border-emerald"]) {
   border-color: #e2e8f0 !important;
 }
 

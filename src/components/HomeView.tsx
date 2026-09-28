@@ -323,7 +323,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
         {/* Soft atmospheric ambient aura bridging header and hero */}
         <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-4/5 h-28 bg-amber-500/15 dark:bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
 
-        <section id="top-hero-section" className="relative overflow-hidden rounded-[6px] bg-zinc-950 text-white border border-zinc-800/80 dark:border-white/[0.08] shadow-2xl dark-preserve">
+        <section id="top-hero-section" className="relative overflow-hidden rounded-[6px] bg-white dark:bg-zinc-950 text-slate-900 dark:text-white border border-slate-200 dark:border-white/[0.08] shadow-xl">
         {/* Background Image with optimized loading & balanced cinematic illumination (Clear & Vivid) */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
@@ -340,9 +340,9 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
             className="w-full h-full object-cover object-center opacity-65 sm:opacity-75 scale-102 filter brightness-105 contrast-110 transition-all duration-700 ease-out"
           />
           {/* Subtle luminous industrial vignette - machinery is bright, clear & visible */}
-          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/92 via-zinc-950/55 to-zinc-950/25" />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(245,158,11,0.22),rgba(0,0,0,0))] pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/20 dark:from-zinc-950/92 dark:via-zinc-950/55 dark:to-zinc-950/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/40 to-transparent dark:from-zinc-950 dark:via-zinc-950/30 dark:to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(245,158,11,0.15),rgba(0,0,0,0))] dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-10%,rgba(245,158,11,0.22),rgba(0,0,0,0))] pointer-events-none" />
         </div>
 
         <motion.div
@@ -355,18 +355,18 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
           <div className="lg:col-span-7 space-y-4 sm:space-y-5">
             {/* Live Operational Status Badges with Dynamic Typing Showcase */}
             <motion.div variants={heroFadeInUpItem} className="flex flex-wrap items-center gap-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-[5px] bg-zinc-900/95 border border-amber-500/40 text-zinc-100 text-[11px] sm:text-xs font-black tracking-wider uppercase font-mono shadow-md backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-[5px] bg-white/95 dark:bg-zinc-900/95 border border-amber-500/50 text-slate-900 dark:text-zinc-100 text-[11px] sm:text-xs font-black tracking-wider uppercase font-mono shadow-md backdrop-blur-md">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400" />
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-500 dark:bg-amber-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500 dark:bg-amber-400" />
                 </span>
-                <span className="bg-gradient-to-r from-amber-400 via-amber-200 to-amber-400 bg-clip-text text-transparent font-bold">
+                <span className="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 dark:from-amber-400 dark:via-amber-200 dark:to-amber-400 bg-clip-text text-transparent font-bold">
                   {typewriterText}
                 </span>
-                <span className="inline-block w-1.5 h-3.5 bg-amber-400 animate-pulse ml-0.5 rounded-[1px]" />
+                <span className="inline-block w-1.5 h-3.5 bg-amber-500 dark:bg-amber-400 animate-pulse ml-0.5 rounded-[1px]" />
               </div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[5px] bg-zinc-900/95 border border-zinc-700/80 text-zinc-200 text-[11px] sm:text-xs font-bold tracking-wider uppercase font-mono shadow-md">
-                <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[5px] bg-white/95 dark:bg-zinc-900/95 border border-slate-300 dark:border-zinc-700/80 text-slate-700 dark:text-zinc-200 text-[11px] sm:text-xs font-bold tracking-wider uppercase font-mono shadow-md">
+                <ShieldCheck className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                 <span>GARANTÍA OFICIAL 2 AÑOS / 2,000 HRS</span>
               </div>
             </motion.div>
@@ -374,10 +374,10 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
             {/* Monumental Heavy Industrial Typography: Luxury Gold Gradient Title with High-Contrast Presence */}
             <motion.h1 
               variants={heroFadeInUpItem} 
-              className="text-3xl sm:text-5xl md:text-6xl lg:text-[3.95rem] font-black font-display tracking-tight text-white uppercase leading-[0.96] drop-shadow-xl"
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-[3.95rem] font-black font-display tracking-tight text-slate-900 dark:text-white uppercase leading-[0.96] drop-shadow-sm dark:drop-shadow-xl"
             >
-              <span className="block text-white">TECNOMAQUINARIAS DIESEL</span>{' '}
-              <span className="inline-block bg-gradient-to-r from-amber-400 via-yellow-200 via-amber-300 to-amber-500 bg-clip-text text-transparent font-black drop-shadow-[0_4px_16px_rgba(245,158,11,0.4)]">
+              <span className="block text-slate-900 dark:text-white">TECNOMAQUINARIAS DIESEL</span>{' '}
+              <span className="inline-block bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 dark:from-amber-400 dark:via-yellow-200 dark:via-amber-300 dark:to-amber-500 bg-clip-text text-transparent font-black drop-shadow-[0_2px_10px_rgba(217,119,6,0.3)] dark:drop-shadow-[0_4px_16px_rgba(245,158,11,0.4)]">
                 DOMINICANA
               </span>
             </motion.h1>
@@ -385,32 +385,32 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
             {/* Body Typography: High-Contrast Technical Overview */}
             <motion.p 
               variants={heroFadeInUpItem} 
-              className="text-xs sm:text-sm md:text-base text-zinc-200 max-w-2xl font-normal leading-relaxed tracking-[0.01em] drop-shadow-sm"
+              className="text-xs sm:text-sm md:text-base text-slate-700 dark:text-zinc-200 max-w-2xl font-normal leading-relaxed tracking-[0.01em]"
             >
-              Distribuidor oficial autorizado de <strong className="text-amber-400 font-bold uppercase">JCB, LiuGong, LS Tractor y Ammann</strong> en República Dominicana. Maquinaria pesada certificada, servicio de taller móvil en obra 24/7 y almacén central de repuestos genuinos en el Km 22, Autopista Duarte.
+              Distribuidor oficial autorizado de <strong className="text-amber-600 dark:text-amber-400 font-bold uppercase">JCB, LiuGong, LS Tractor y Ammann</strong> en República Dominicana. Maquinaria pesada certificada, servicio de taller móvil en obra 24/7 y almacén central de repuestos genuinos en el Km 22, Autopista Duarte.
             </motion.p>
 
             {/* Quick Live Filter Search Input with 5px Precision Corners */}
             <motion.div variants={heroFadeInUpItem} className="max-w-xl">
               <div className="relative flex items-center group">
-                <Search className="absolute left-3.5 w-4 h-4 text-zinc-400 group-focus-within:text-amber-400 transition-colors" />
+                <Search className="absolute left-3.5 w-4 h-4 text-slate-400 dark:text-zinc-400 group-focus-within:text-amber-500 dark:group-focus-within:text-amber-400 transition-colors" />
                 <input
                   type="text"
                   value={quickSearchQuery}
                   onChange={(e) => setQuickSearchQuery(e.target.value)}
                   placeholder="BUSCAR MODELO (EJ. 3CX, 922E, 540) O CATEGORÍA..."
-                  className="w-full pl-10 pr-20 py-3 bg-zinc-900/95 border border-zinc-700/80 hover:border-zinc-600 rounded-[5px] text-xs sm:text-sm text-zinc-100 placeholder-zinc-500 focus:outline-hidden focus:border-amber-500 focus:ring-2 focus:ring-amber-500/25 transition-all shadow-inner uppercase font-mono tracking-wide"
+                  className="w-full pl-10 pr-20 py-3 bg-white/95 dark:bg-zinc-900/95 border border-slate-300 dark:border-zinc-700/80 hover:border-slate-400 dark:hover:border-zinc-600 rounded-[5px] text-xs sm:text-sm text-slate-900 dark:text-zinc-100 placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-hidden focus:border-amber-500 focus:ring-2 focus:ring-amber-500/25 transition-all shadow-inner uppercase font-mono tracking-wide"
                 />
                 {quickSearchQuery ? (
                   <button
                     type="button"
                     onClick={() => setQuickSearchQuery('')}
-                    className="absolute right-3 p-1 text-zinc-400 hover:text-white cursor-pointer"
+                    className="absolute right-3 p-1 text-slate-400 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white cursor-pointer"
                   >
                     <X className="w-4 h-4" />
                   </button>
                 ) : (
-                  <span className="absolute right-3 px-2 py-0.5 rounded-[3px] bg-zinc-800 border border-zinc-700 text-[10px] text-amber-400 font-mono font-bold hidden sm:inline tracking-wider uppercase">
+                  <span className="absolute right-3 px-2 py-0.5 rounded-[3px] bg-slate-100 dark:bg-zinc-800 border border-slate-300 dark:border-zinc-700 text-[10px] text-amber-600 dark:text-amber-400 font-mono font-bold hidden sm:inline tracking-wider uppercase">
                     EN VIVO
                   </span>
                 )}
@@ -433,9 +433,9 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onNavigate('#/checkout')}
-                className="tmd-shimmer-btn inline-flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-b from-[#181820] via-[#0d0d12] to-[#040407] hover:from-[#242430] hover:via-[#14141c] hover:to-[#08080c] text-white font-bold uppercase tracking-wider rounded-[5px] border border-white/[0.14] hover:border-[#d99b26]/60 shadow-[0_4px_18px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.18)] transition-all text-xs sm:text-sm cursor-pointer"
+                className="tmd-shimmer-btn inline-flex items-center justify-center gap-2 px-4 py-3 bg-slate-900 hover:bg-slate-800 text-white dark:bg-gradient-to-b dark:from-[#181820] dark:via-[#0d0d12] dark:to-[#040407] dark:hover:from-[#242430] dark:hover:via-[#14141c] dark:hover:to-[#08080c] font-bold uppercase tracking-wider rounded-[5px] border border-slate-700 dark:border-white/[0.14] hover:border-amber-500/60 shadow-md transition-all text-xs sm:text-sm cursor-pointer"
               >
-                <FileSpreadsheet className="w-4 h-4 text-[#e0a22a]" />
+                <FileSpreadsheet className="w-4 h-4 text-amber-400 dark:text-[#e0a22a]" />
                 <span>EMITIR PROFORMA NCF</span>
               </motion.button>
 
@@ -443,32 +443,32 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onNavigate('#/financing')}
-                className="hidden sm:inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white font-bold uppercase tracking-wider rounded-[5px] border border-zinc-800 hover:border-zinc-700 text-xs transition-colors cursor-pointer"
+                className="hidden sm:inline-flex items-center justify-center gap-1.5 px-4 py-3 bg-white/90 hover:bg-slate-100 text-slate-700 hover:text-slate-900 dark:bg-zinc-900/80 dark:hover:bg-zinc-800 dark:text-zinc-300 dark:hover:text-white font-bold uppercase tracking-wider rounded-[5px] border border-slate-300 hover:border-slate-400 dark:border-zinc-800 dark:hover:border-zinc-700 text-xs transition-colors cursor-pointer"
               >
-                <Scale className="w-3.5 h-3.5 text-amber-400" />
+                <Scale className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                 <span>FINANCIAMIENTO</span>
               </motion.button>
             </motion.div>
 
             {/* Key Trust Stats Bar with Chiselled Numbers & Dark Mode Hierarchy */}
-            <motion.div variants={heroFadeInUpItem} className="grid grid-cols-3 gap-2 sm:gap-6 pt-4 border-t border-zinc-800/80 text-center sm:text-left">
+            <motion.div variants={heroFadeInUpItem} className="grid grid-cols-3 gap-2 sm:gap-6 pt-4 border-t border-slate-200 dark:border-zinc-800/80 text-center sm:text-left">
               <div>
-                <span className="block text-xl sm:text-2xl lg:text-3xl font-black font-display tracking-tight text-white">
-                  <AnimatedMetric value={24} /><span className="text-amber-400 font-display">+ AÑOS</span>
+                <span className="block text-xl sm:text-2xl lg:text-3xl font-black font-display tracking-tight text-slate-900 dark:text-white">
+                  <AnimatedMetric value={24} /><span className="text-amber-600 dark:text-amber-400 font-display">+ AÑOS</span>
                 </span>
-                <span className="text-[10px] sm:text-xs text-zinc-400 font-bold uppercase tracking-wider">EN REP. DOMINICANA</span>
+                <span className="text-[10px] sm:text-xs text-slate-500 dark:text-zinc-400 font-bold uppercase tracking-wider">EN REP. DOMINICANA</span>
               </div>
               <div>
-                <span className="block text-xl sm:text-2xl lg:text-3xl font-black font-display tracking-tight text-white">
+                <span className="block text-xl sm:text-2xl lg:text-3xl font-black font-display tracking-tight text-slate-900 dark:text-white">
                   KM <AnimatedMetric value={22} />
                 </span>
-                <span className="text-[10px] sm:text-xs text-zinc-400 font-bold uppercase tracking-wider">AUTOPISTA DUARTE</span>
+                <span className="text-[10px] sm:text-xs text-slate-500 dark:text-zinc-400 font-bold uppercase tracking-wider">AUTOPISTA DUARTE</span>
               </div>
               <div>
-                <span className="block text-xl sm:text-2xl lg:text-3xl font-black font-display tracking-tight text-white">
-                  <AnimatedMetric value={24} /><span className="text-amber-400 font-display">/7</span>
+                <span className="block text-xl sm:text-2xl lg:text-3xl font-black font-display tracking-tight text-slate-900 dark:text-white">
+                  <AnimatedMetric value={24} /><span className="text-amber-600 dark:text-amber-400 font-display">/7</span>
                 </span>
-                <span className="text-[10px] sm:text-xs text-zinc-400 font-bold uppercase tracking-wider">TALLER MÓVIL EN OBRA</span>
+                <span className="text-[10px] sm:text-xs text-slate-500 dark:text-zinc-400 font-bold uppercase tracking-wider">TALLER MÓVIL EN OBRA</span>
               </div>
             </motion.div>
           </div>
@@ -478,19 +478,19 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
             variants={heroFadeInUpItem} 
             onMouseEnter={() => setIsHeroAutoPlaying(false)}
             onMouseLeave={() => setIsHeroAutoPlaying(true)}
-            className="lg:col-span-5 bg-gradient-to-b from-[#15151c]/95 via-[#0c0c10]/98 to-[#030305] rounded-[6px] border border-white/[0.12] hover:border-[#d99b26]/50 p-4 sm:p-5 lg:p-6 space-y-4 shadow-[0_16px_45px_rgba(0,0,0,0.9),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-md transition-all relative group/card overflow-hidden"
+            className="lg:col-span-5 bg-white/95 dark:bg-gradient-to-b dark:from-[#15151c]/95 dark:via-[#0c0c10]/98 dark:to-[#030305] rounded-[6px] border border-slate-200 dark:border-white/[0.12] hover:border-amber-500/50 p-4 sm:p-5 lg:p-6 space-y-4 shadow-xl dark:shadow-[0_16px_45px_rgba(0,0,0,0.9),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-md transition-all relative group/card overflow-hidden"
           >
             {/* Top Gloss Sheen Reflection */}
-            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/[0.06] to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-slate-100/40 dark:from-white/[0.06] to-transparent pointer-events-none" />
 
             {/* Auto Switcher Header & Model Tabs with Linear Progress Bar */}
-            <div className="space-y-2 pb-3 border-b border-white/[0.08] relative z-10">
+            <div className="space-y-2 pb-3 border-b border-slate-200 dark:border-white/[0.08] relative z-10">
               <div className="flex items-center justify-between gap-1">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] uppercase font-black tracking-wider text-zinc-300 font-display">
+                  <span className="text-[10px] uppercase font-black tracking-wider text-slate-700 dark:text-zinc-300 font-display">
                     EQUIPOS EN PATIO
                   </span>
-                  <span className={`w-1.5 h-1.5 rounded-full ${isHeroAutoPlaying ? 'bg-[#e0a22a] animate-pulse shadow-[0_0_8px_rgba(224,162,42,0.8)]' : 'bg-zinc-600'}`} title={isHeroAutoPlaying ? 'Auto-rotación activa (5s)' : 'Pausado'} />
+                  <span className={`w-1.5 h-1.5 rounded-full ${isHeroAutoPlaying ? 'bg-amber-500 dark:bg-[#e0a22a] animate-pulse shadow-[0_0_8px_rgba(224,162,42,0.8)]' : 'bg-slate-400 dark:bg-zinc-600'}`} title={isHeroAutoPlaying ? 'Auto-rotación activa (5s)' : 'Pausado'} />
                 </div>
                 
                 <div className="flex gap-1.5">
@@ -504,8 +504,8 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                       }}
                       className={`relative overflow-hidden px-3 py-1 rounded-[4px] text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
                         heroMachineIndex === idx
-                          ? 'bg-gradient-to-b from-[#202028] to-[#0e0e13] text-[#e0a22a] border border-[#d99b26]/70 shadow-[0_2px_8px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.15)]'
-                          : 'bg-[#060608]/90 text-zinc-400 hover:text-white hover:bg-[#14141a] border border-white/[0.06]'
+                          ? 'bg-amber-500 text-slate-950 font-bold border border-amber-600 shadow-sm dark:bg-gradient-to-b dark:from-[#202028] dark:to-[#0e0e13] dark:text-[#e0a22a] dark:border-[#d99b26]/70 dark:shadow-[0_2px_8px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.15)]'
+                          : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200 border border-slate-200 dark:bg-[#060608]/90 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-[#14141a] dark:border-white/[0.06]'
                       }`}
                     >
                       <span>{m.modelCode}</span>
@@ -515,7 +515,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                           initial={{ scaleX: 0 }}
                           animate={{ scaleX: 1 }}
                           transition={{ duration: 5, ease: 'linear' }}
-                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#e0a22a] origin-left"
+                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-600 dark:bg-[#e0a22a] origin-left"
                         />
                       )}
                     </button>
@@ -535,15 +535,15 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 className="space-y-4 relative z-10"
               >
                 {/* Bigger Photo Showcase (Taller Aspect Ratio & Precision Industrial Viewfinder Layout) */}
-                <div className="relative aspect-[16/10] min-h-[260px] sm:min-h-[300px] lg:min-h-[320px] rounded-[5px] overflow-hidden bg-[#030305] border border-white/[0.08] group/photo shadow-2xl transition-colors hover:border-[#d99b26]/50">
+                <div className="relative aspect-[16/10] min-h-[260px] sm:min-h-[300px] lg:min-h-[320px] rounded-[5px] overflow-hidden bg-slate-900 dark:bg-[#030305] border border-slate-200 dark:border-white/[0.08] group/photo shadow-2xl transition-colors hover:border-amber-500/50">
                   {/* Subtle Ambient Radial Gold Glow Behind Machinery */}
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(217,155,38,0.14)_0%,rgba(0,0,0,0)_70%)] pointer-events-none" />
 
                   {/* CAD Telemetry Viewfinder Corner Alignment Brackets */}
-                  <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-[#d99b26]/70 pointer-events-none z-20 transition-all group-hover/photo:border-[#e0a22a] group-hover/photo:w-4 group-hover/photo:h-4" />
-                  <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-[#d99b26]/70 pointer-events-none z-20 transition-all group-hover/photo:border-[#e0a22a] group-hover/photo:w-4 group-hover/photo:h-4" />
-                  <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-[#d99b26]/70 pointer-events-none z-20 transition-all group-hover/photo:border-[#e0a22a] group-hover/photo:w-4 group-hover/photo:h-4" />
-                  <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-[#d99b26]/70 pointer-events-none z-20 transition-all group-hover/photo:border-[#e0a22a] group-hover/photo:w-4 group-hover/photo:h-4" />
+                  <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-amber-500 dark:border-[#d99b26]/70 pointer-events-none z-20 transition-all group-hover/photo:border-amber-400 group-hover/photo:w-4 group-hover/photo:h-4" />
+                  <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-amber-500 dark:border-[#d99b26]/70 pointer-events-none z-20 transition-all group-hover/photo:border-amber-400 group-hover/photo:w-4 group-hover/photo:h-4" />
+                  <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-amber-500 dark:border-[#d99b26]/70 pointer-events-none z-20 transition-all group-hover/photo:border-amber-400 group-hover/photo:w-4 group-hover/photo:h-4" />
+                  <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-amber-500 dark:border-[#d99b26]/70 pointer-events-none z-20 transition-all group-hover/photo:border-amber-400 group-hover/photo:w-4 group-hover/photo:h-4" />
 
                   {/* High-Resolution Machinery Image - Bright, Vibrant, High Definition */}
                   <img
@@ -598,9 +598,9 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                         setActive360Tab('360');
                         setActive360Machine(activeHeroMachine);
                       }}
-                      className="ml-auto px-3.5 py-1.5 rounded-[4px] bg-gradient-to-b from-[#1c1c24] to-[#08080c] hover:from-[#262632] hover:to-[#0e0e14] text-[#e0a22a] text-xs font-mono font-black uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-xl hover:shadow-[0_4px_16px_rgba(217,155,38,0.2)] hover:scale-105 active:scale-95 cursor-pointer border border-white/[0.12] hover:border-[#d99b26]/70"
+                      className="ml-auto px-3.5 py-1.5 rounded-[4px] bg-slate-900/90 dark:bg-gradient-to-b dark:from-[#1c1c24] dark:to-[#08080c] hover:bg-slate-800 text-amber-400 dark:text-[#e0a22a] text-xs font-mono font-black uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-xl hover:scale-105 active:scale-95 cursor-pointer border border-amber-500/50 dark:border-white/[0.12]"
                     >
-                      <RotateCw className="w-3.5 h-3.5 animate-spin-slow text-[#e0a22a]" />
+                      <RotateCw className="w-3.5 h-3.5 animate-spin-slow text-amber-400 dark:text-[#e0a22a]" />
                       <span>GIRO 360°</span>
                     </button>
                   </div>
@@ -610,34 +610,34 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 <div className="space-y-3">
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <h3 className="text-base sm:text-lg font-black font-display text-zinc-100 uppercase tracking-tight">
+                      <h3 className="text-base sm:text-lg font-black font-display text-slate-900 dark:text-zinc-100 uppercase tracking-tight">
                         {activeHeroMachine.name}
                       </h3>
-                      <span className="text-xs font-mono text-[#e0a22a] font-bold uppercase tracking-wider">
+                      <span className="text-xs font-mono text-amber-600 dark:text-[#e0a22a] font-bold uppercase tracking-wider">
                         {activeHeroMachine.category}
                       </span>
                     </div>
                     <div className="text-right">
-                      <span className="text-[10px] text-zinc-400 block uppercase tracking-wider font-bold">INVERSIÓN ESTIMADA</span>
-                      <span className="text-sm sm:text-base font-black text-white font-mono tracking-tight">
+                      <span className="text-[10px] text-slate-500 dark:text-zinc-400 block uppercase tracking-wider font-bold">INVERSIÓN ESTIMADA</span>
+                      <span className="text-sm sm:text-base font-black text-slate-900 dark:text-white font-mono tracking-tight">
                         US$ {activeHeroMachine.basePriceUsd.toLocaleString()}
                       </span>
                     </div>
                   </div>
 
                   {/* 3-Column CAD Spec Badges (ALL CAPS & 5px Precision Corners) */}
-                  <div className="grid grid-cols-3 gap-2 text-center text-xs py-2.5 px-3 rounded-[5px] bg-gradient-to-b from-[#0a0a0e] to-[#040406] border border-white/[0.08] shadow-inner">
+                  <div className="grid grid-cols-3 gap-2 text-center text-xs py-2.5 px-3 rounded-[5px] bg-slate-100 dark:bg-gradient-to-b dark:from-[#0a0a0e] dark:to-[#040406] border border-slate-200 dark:border-white/[0.08] shadow-inner">
                     <div>
-                      <span className="text-[10px] text-zinc-400 block font-bold uppercase tracking-wider">POTENCIA</span>
-                      <span className="font-black text-[#e0a22a] font-mono text-xs sm:text-sm">{activeHeroMachine.powerHp} HP</span>
+                      <span className="text-[10px] text-slate-500 dark:text-zinc-400 block font-bold uppercase tracking-wider">POTENCIA</span>
+                      <span className="font-black text-amber-600 dark:text-[#e0a22a] font-mono text-xs sm:text-sm">{activeHeroMachine.powerHp} HP</span>
                     </div>
                     <div>
-                      <span className="text-[10px] text-zinc-400 block font-bold uppercase tracking-wider">PESO OP.</span>
-                      <span className="font-black text-zinc-200 font-mono text-xs sm:text-sm">{(activeHeroMachine.operatingWeightKg / 1000).toFixed(1)}T</span>
+                      <span className="text-[10px] text-slate-500 dark:text-zinc-400 block font-bold uppercase tracking-wider">PESO OP.</span>
+                      <span className="font-black text-slate-800 dark:text-zinc-200 font-mono text-xs sm:text-sm">{(activeHeroMachine.operatingWeightKg / 1000).toFixed(1)}T</span>
                     </div>
                     <div>
-                      <span className="text-[10px] text-zinc-400 block font-bold uppercase tracking-wider">MOTOR DIESEL</span>
-                      <span className="font-black text-zinc-200 truncate block text-xs">{activeHeroMachine.engine}</span>
+                      <span className="text-[10px] text-slate-500 dark:text-zinc-400 block font-bold uppercase tracking-wider">MOTOR DIESEL</span>
+                      <span className="font-black text-slate-800 dark:text-zinc-200 truncate block text-xs">{activeHeroMachine.engine}</span>
                     </div>
                   </div>
 
@@ -661,7 +661,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                         onSelectMachine(activeHeroMachine.id);
                         onNavigate('#/machinery');
                       }}
-                      className="px-4 py-2.5 bg-gradient-to-b from-[#181820] to-[#07070a] hover:from-[#22222c] hover:to-[#0f0f14] text-zinc-200 hover:text-white font-bold uppercase tracking-wider rounded-[5px] text-xs transition-all cursor-pointer border border-white/[0.1] hover:border-white/[0.2] shadow-sm"
+                      className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-800 hover:text-slate-950 dark:bg-gradient-to-b dark:from-[#181820] dark:to-[#07070a] dark:hover:from-[#22222c] dark:hover:to-[#0f0f14] dark:text-zinc-200 dark:hover:text-white font-bold uppercase tracking-wider rounded-[5px] text-xs transition-all cursor-pointer border border-slate-300 dark:border-white/[0.1] shadow-sm"
                     >
                       FICHA
                     </button>
