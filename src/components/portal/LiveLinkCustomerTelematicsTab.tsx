@@ -34,7 +34,8 @@ import {
   Navigation,
   FileText,
   TrendingDown,
-  Droplet
+  Droplet,
+  ShieldAlert
 } from 'lucide-react';
 import { LiveLinkUnit, LiveLinkTelemetrySummary, LiveLinkFaultCode, UserProfile } from '../../types';
 import { fetchLiveLinkFleet, fetchLiveLinkSummary, sendLiveLinkCommand } from '../../services/livelinkService';
@@ -50,6 +51,7 @@ import { CarbonFootprintAuditModal } from '../sustainability/CarbonFootprintAudi
 import { HydraulicPressureMonitorModal } from '../telematics/HydraulicPressureMonitorModal';
 import { RemoteImmobilizerModal } from '../telematics/RemoteImmobilizerModal';
 import { DefFluidMonitorModal } from '../telematics/DefFluidMonitorModal';
+import { ImpactGForceMonitorModal } from '../telematics/ImpactGForceMonitorModal';
 import { Leaf } from 'lucide-react';
 
 interface LiveLinkCustomerTelematicsTabProps {
@@ -98,6 +100,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
   const [showHydraulicModal, setShowHydraulicModal] = useState<boolean>(false);
   const [showImmobilizerModal, setShowImmobilizerModal] = useState<boolean>(false);
   const [showDefModal, setShowDefModal] = useState<boolean>(false);
+  const [showImpactModal, setShowImpactModal] = useState<boolean>(false);
 
   const loadData = async () => {
     try {
@@ -561,6 +564,17 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                   >
                     <Droplet className="w-3.5 h-3.5 text-cyan-400" />
                     <span>DEF / Urea</span>
+                  </button>
+
+                  {/* Task #59: Impact & Rollover G-Force Monitor Trigger */}
+                  <button
+                    type="button"
+                    onClick={() => setShowImpactModal(true)}
+                    className="px-2.5 py-1.5 rounded-[2px] bg-amber-950/60 hover:bg-amber-900/80 text-amber-400 border border-amber-500/40 font-bold font-display uppercase tracking-wider text-[11px] flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+                    title="Acelerómetro 3-Ejes: Detección de Choques, Vuelcos y Caja Negra J1939"
+                  >
+                    <ShieldAlert className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Impactos & Vuelco</span>
                   </button>
 
                   <button
@@ -1284,6 +1298,14 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
       <DefFluidMonitorModal
         isOpen={showDefModal}
         onClose={() => setShowDefModal(false)}
+        machineName={selectedUnit?.name}
+        machineSerial={selectedUnit?.serialNumber}
+      />
+
+      {/* Task #59: Impact & Rollover G-Force Black Box Modal */}
+      <ImpactGForceMonitorModal
+        isOpen={showImpactModal}
+        onClose={() => setShowImpactModal(false)}
         machineName={selectedUnit?.name}
         machineSerial={selectedUnit?.serialNumber}
       />

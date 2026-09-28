@@ -17,7 +17,8 @@ import {
   ShieldAlert,
   Bell,
   Database,
-  Wrench
+  Wrench,
+  Kanban
 } from 'lucide-react';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../lib/firebase';
@@ -40,6 +41,8 @@ import { FullbayShopManager } from './shop/FullbayShopManager';
 import { AdminIntegrationsHealthView } from './admin/AdminIntegrationsHealthView';
 import { MonthlyBusinessConfigModal } from './admin/MonthlyBusinessConfigModal';
 import { Dgii606_607ExporterModal } from './accounting/Dgii606_607ExporterModal';
+import { SalesKanbanPipelineModal } from './commercial/SalesKanbanPipelineModal';
+import { TechnicianLaborHoursModal } from './workshop/TechnicianLaborHoursModal';
 import { LayoutGrid, Sparkles, Flame, ShieldCheck as ShieldCheckIcon, TrendingUp, Calendar as CalendarIcon, Activity as ActivityIcon, Settings } from 'lucide-react';
 
 interface AdminDashboardViewProps {
@@ -61,6 +64,8 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
   const [isBulkManagerOpen, setIsBulkManagerOpen] = useState(false);
   const [isMonthlyConfigOpen, setIsMonthlyConfigOpen] = useState(false);
   const [isDgiiExporterOpen, setIsDgiiExporterOpen] = useState(false);
+  const [isKanbanOpen, setIsKanbanOpen] = useState(false);
+  const [isLaborHoursOpen, setIsLaborHoursOpen] = useState(false);
   const [highlightItemId, setHighlightItemId] = useState<string | null>(null);
 
   // Firestore Real-Time Listeners for quotes, machines, and parts
@@ -363,6 +368,28 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
               >
                 <FileText className="w-3.5 h-3.5 text-emerald-400" />
                 <span className="hidden lg:inline">DGII 606/607</span>
+              </button>
+
+              {/* Task #71: Sales Kanban Pipeline Trigger */}
+              <button
+                type="button"
+                onClick={() => setIsKanbanOpen(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-amber-400/40 text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                title="Embudo de Ventas Kanban & CRM Comercial"
+              >
+                <Kanban className="w-3.5 h-3.5" />
+                <span className="hidden lg:inline">Pipeline CRM</span>
+              </button>
+
+              {/* Task #89: Technician Labor Hours Trigger */}
+              <button
+                type="button"
+                onClick={() => setIsLaborHoursOpen(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-cyan-500/40 text-cyan-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                title="Control de Horas Hombre, Productividad & Bonos de Taller"
+              >
+                <Clock className="w-3.5 h-3.5" />
+                <span className="hidden lg:inline">Horas Taller</span>
               </button>
 
               {/* Firestore Bulk Manager Trigger Button */}
@@ -847,6 +874,18 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
       <Dgii606_607ExporterModal
         isOpen={isDgiiExporterOpen}
         onClose={() => setIsDgiiExporterOpen(false)}
+      />
+
+      {/* Task #71: Sales Kanban Pipeline CRM Modal */}
+      <SalesKanbanPipelineModal
+        isOpen={isKanbanOpen}
+        onClose={() => setIsKanbanOpen(false)}
+      />
+
+      {/* Task #89: Technician Labor Hours & Productivity Modal */}
+      <TechnicianLaborHoursModal
+        isOpen={isLaborHoursOpen}
+        onClose={() => setIsLaborHoursOpen(false)}
       />
     </div>
   );

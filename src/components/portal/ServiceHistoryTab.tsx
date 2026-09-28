@@ -32,7 +32,8 @@ import {
   Hash,
   ShoppingBag,
   Scale,
-  Droplets
+  Droplets,
+  Award
 } from 'lucide-react';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../../lib/firebase';
@@ -58,6 +59,7 @@ import { ServiceDetailModal } from './service/ServiceDetailModal';
 import { OemWarrantyClaimModal } from '../workshop/OemWarrantyClaimModal';
 import { CalibratedToolInventoryModal } from '../workshop/CalibratedToolInventoryModal';
 import { UsedOilDisposalModal } from '../eco/UsedOilDisposalModal';
+import { PostServiceCsatModal } from './PostServiceCsatModal';
 
 interface ServiceHistoryTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -94,6 +96,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
   const [showWarrantyModal, setShowWarrantyModal] = useState<boolean>(false);
   const [showCalibratedToolsModal, setShowCalibratedToolsModal] = useState<boolean>(false);
   const [showUsedOilModal, setShowUsedOilModal] = useState<boolean>(false);
+  const [showCsatModal, setShowCsatModal] = useState<boolean>(false);
   const [newUnitId, setNewUnitId] = useState<string>('');
   const [newBrand, setNewBrand] = useState<string>('LiuGong');
   const [newModel, setNewModel] = useState<string>('');
@@ -450,6 +453,16 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           >
             <Droplets className="w-4 h-4 text-emerald-400" />
             <span>Aceites Usados / Eco</span>
+          </button>
+
+          {/* Task #100: Automated Post-Service CSAT & NPS Survey Modal Trigger */}
+          <button
+            onClick={() => setShowCsatModal(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-amber-400/40 text-amber-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
+            title="Encuesta de Satisfacción Post-Servicio Técnico (CSAT & NPS)"
+          >
+            <Award className="w-4 h-4 text-amber-400" />
+            <span>Encuesta CSAT</span>
           </button>
 
           <button
@@ -1271,6 +1284,12 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
       <UsedOilDisposalModal
         isOpen={showUsedOilModal}
         onClose={() => setShowUsedOilModal(false)}
+      />
+
+      {/* Task #100: Automated CSAT & NPS Survey Modal */}
+      <PostServiceCsatModal
+        isOpen={showCsatModal}
+        onClose={() => setShowCsatModal(false)}
       />
     </div>
   );

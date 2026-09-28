@@ -50,6 +50,7 @@ import { QuoteExpirationAlertModal } from './quotes/QuoteExpirationAlertModal';
 import { TradeInValuationModal } from './machinery/TradeInValuationModal';
 import { SmartAttachmentsUpsell } from './checkout/SmartAttachmentsUpsell';
 import { DigitalSignaturePad } from './common/DigitalSignaturePad';
+import { DgiiElectronicInvoiceQrModal } from './accounting/DgiiElectronicInvoiceQrModal';
 
 interface CheckoutViewProps {
   onNavigate: (route: string) => void;
@@ -100,6 +101,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
   const [isTradeInModalOpen, setIsTradeInModalOpen] = useState(false);
   const [cardPaymentData, setCardPaymentData] = useState<CardPaymentResult | null>(null);
   const [tradeInCredit, setTradeInCredit] = useState<{ creditUsd: number; summary: string } | null>(null);
+  const [isDgiiQrOpen, setIsDgiiQrOpen] = useState(false);
 
   // Formal digital signature & technical approval (Step 4)
   const [authorizedSigner, setAuthorizedSigner] = useState('');
@@ -571,6 +573,17 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
               <Phone className="w-4 h-4" />
               <span>ENVIAR PROFORMA POR WHATSAPP</span>
             </a>
+
+            {/* Task #62: DGII Electronic Invoice e-CF QR Code Trigger */}
+            <button
+              type="button"
+              onClick={() => setIsDgiiQrOpen(true)}
+              className="inline-flex items-center justify-center gap-2 py-3 px-5 bg-zinc-900 hover:bg-zinc-850 text-amber-400 border border-amber-400/40 font-black uppercase tracking-wider rounded-[3px] text-xs transition-colors shadow-lg cursor-pointer"
+              title="Verificar Timbre Fiscal Electrónico y Código QR Oficial Ley 32-23"
+            >
+              <FileText className="w-4 h-4" />
+              <span>TIMBRE QR DGII</span>
+            </button>
 
             <button
               onClick={() => {
@@ -2236,6 +2249,18 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
         machineOrItemsSummary={cart.length > 0 ? `${cart.length} Repuestos en Canasta` : (machineQuotes[0]?.machine.name || 'Maquinaria de Flota')}
         totalUsd={Math.max(0, (subtotalUsd - discountUsd) + itbisUsd + (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd) - (tradeInCredit ? tradeInCredit.creditUsd : 0))}
         exchangeRate={exchangeRate}
+      />
+
+      {/* Task #62: DGII Electronic Invoice e-CF QR Stamp Modal */}
+      <DgiiElectronicInvoiceQrModal
+        isOpen={isDgiiQrOpen}
+        onClose={() => setIsDgiiQrOpen(false)}
+        orderNumber={completedOrder?.orderId || 'PRO-2026-8812'}
+        eNcf={customer.ncfType === 'B01_CREDITO_FISCAL' ? 'E31000004921' : 'E32000001094'}
+        rncBuyer={customer.rncOrCedula || '1-01-02412-2'}
+        buyerName={customer.companyName || customer.fullName || 'Cliente TMD'}
+        totalDop={completedOrder?.totalDop || totalDop}
+        totalUsd={completedOrder?.totalUsd || totalUsd}
       />
     </div>
   );
