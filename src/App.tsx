@@ -16,6 +16,7 @@ import { ServicesView } from './components/ServicesView';
 import { AboutView } from './components/AboutView';
 import { CheckoutView } from './components/CheckoutView';
 import { QuickSearchModal } from './components/QuickSearchModal';
+import { GlobalCommandPaletteModal } from './components/common/GlobalCommandPaletteModal';
 import { MachineComparisonModal } from './components/MachineComparisonModal';
 import { ComparisonFloatingBar } from './components/ComparisonFloatingBar';
 import { Footer } from './components/Footer';
@@ -94,6 +95,7 @@ function AppContent() {
   const [selectedPartId, setSelectedPartId] = useState<string | null>(initialUrlState.partId);
   const [selectedFullbayOrderId, setSelectedFullbayOrderId] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isTourOpen, setIsTourOpen] = useState(false);
   const [isQrScannerOpen, setIsQrScannerOpen] = useState(false);
 
@@ -256,7 +258,7 @@ function AppContent() {
       // Search and QR scanner can be triggered anywhere
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
-        setIsSearchOpen((prev) => !prev);
+        setIsCommandPaletteOpen((prev) => !prev);
         return;
       }
       if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === 'q') {
@@ -424,6 +426,14 @@ function AppContent() {
         onSelectMachine={handleSelectMachine}
         onSelectPart={handleSelectPart}
         onOpenQrScanner={() => setIsQrScannerOpen(true)}
+      />
+
+      {/* Task #1: Global Power User Command Palette Modal */}
+      <GlobalCommandPaletteModal
+        isOpen={isCommandPaletteOpen}
+        onClose={() => setIsCommandPaletteOpen(false)}
+        onNavigate={navigateTo}
+        onSelectMachine={handleSelectMachine}
       />
 
       {/* Industrial QR Code Scanner Modal for Staff & Yard Operations */}

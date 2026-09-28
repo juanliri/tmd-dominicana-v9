@@ -155,3 +155,19 @@ Esta matriz contiene **100 recomendaciones de grado de ingeniería y dirección 
 98. **Solicitud de Repuestos de Emergencia Vía Foto por WhatsApp:** Herramienta interna de OCR que reconoce el número de parte grabado en una pieza de metal oxidada a partir de una foto enviada por un mecánico en campo.
 99. **Sincronización de Inventario entre Almacén Central Km 22 y Camionetas Móviles:** Control del stock de repuestos rápidos (mangueras, fusibles, correas) que lleva cada camioneta 4x4 en sus rutas por el país.
 100. **Encuesta de Satisfacción Post-Servicio Automatizada:** Envío automático de una encuesta de 3 preguntas vía SMS/WhatsApp tras la entrega de una orden de taller para evaluar la calidad del servicio técnico.
+
+---
+
+### ESTADO DE IMPLEMENTACIÓN Y SEGUIMIENTO POR SPRINTS
+- **Sprint 9 (45%):** Tareas #17, #45, #54, #81, #92 completadas y desplegadas.
+- **Sprint 10 (50%):** Tareas #6, #43, #51, #83, #96 completadas y desplegadas.
+- **Sprint 11 (55%):** Tareas #18, #24, #53, #64, #95 completadas y desplegadas.
+- **Sprint 12 (60%):** Tareas #14, #44, #68, #75, #97 completadas y desplegadas.
+- **Sprint 13 (65%):** Tareas #59, #62, #71, #89, #100 completadas y desplegadas.
+- **Sprint 14 (70%):** Tareas #8, #66, #72, #84, #88 completadas y desplegadas.
+- **Sprint 15 (75%):** Tareas #1, #2, #58, #78, #94 completadas y desplegadas:
+  - Task #1: `GlobalCommandPaletteModal.tsx` con atajo omnidireccional `Ctrl+K`, búsqueda unificada de máquinas/piezas/comandos.
+  - Task #2: `SunlightQuarryModeToggle.tsx` con modo solar polar de alto contraste para visibilidad extrema bajo el sol caribeño.
+  - Task #58: `PasskeyBiometricAuthModal.tsx` con WebAuthn FIDO2 / Face ID / Touch ID / Windows Hello para contratistas VIP.
+  - Task #78: `WhatsAppShortLinkModal.tsx` con generador de URLs cortas (`tmd.com.do/q/84920`) y vista previa para juntas directivas.
+  - Task #94: `CabinQrManualViewerModal.tsx` con visor de manual oficial en español, tabla de lubricación y fusibles por QR de cabina.

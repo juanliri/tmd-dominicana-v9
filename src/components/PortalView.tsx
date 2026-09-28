@@ -40,6 +40,7 @@ import { CreateMachineQuoteModal } from './portal/CreateMachineQuoteModal';
 import { ClientDashboard, ClientPortalTab } from './portal/ClientDashboard';
 import { StaffCommandCenter, StaffPortalTab } from './portal/StaffCommandCenter';
 import { StaffBiometricAuthModal } from './auth/StaffBiometricAuthModal';
+import { PasskeyBiometricAuthModal } from './auth/PasskeyBiometricAuthModal';
 import { EnterprisePortalLogin } from './portal/EnterprisePortalLogin';
 import { PortalShell } from './portal/layout/PortalShell';
 import { AdminDashboardView } from './AdminDashboardView';
@@ -119,6 +120,7 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
   const [exportingQuote, setExportingQuote] = useState<PortalQuote | null>(null);
   const [showCreateQuoteModal, setShowCreateQuoteModal] = useState<boolean>(false);
   const [showBiometricModal, setShowBiometricModal] = useState<boolean>(false);
+  const [showPasskeyModal, setShowPasskeyModal] = useState<boolean>(false);
   const [biometricModalMode, setBiometricModalMode] = useState<'login' | 'manage'>('login');
 
   // Mappers between PortalShell tabs and submodule tabs
@@ -590,6 +592,15 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
         isOpen={showBiometricModal}
         onClose={() => setShowBiometricModal(false)}
         mode={biometricModalMode}
+      />
+
+      {/* Task #58: Passkey Biometric WebAuthn Modal */}
+      <PasskeyBiometricAuthModal
+        isOpen={showPasskeyModal}
+        onClose={() => setShowPasskeyModal(false)}
+        onAuthenticateSuccess={(profile) => {
+          signInAsRole('client');
+        }}
       />
     </PortalShell>
   );

@@ -79,6 +79,8 @@ import { QuoteExpirationAlertModal } from '../quotes/QuoteExpirationAlertModal';
 import { MachineSocialFlyerModal } from './MachineSocialFlyerModal';
 import { TcoComparisonCalculatorModal } from '../finance/TcoComparisonCalculatorModal';
 import { PreDeliveryInspectionPdiModal } from '../workshop/PreDeliveryInspectionPdiModal';
+import { WhatsAppShortLinkModal } from '../quotes/WhatsAppShortLinkModal';
+import { CabinQrManualViewerModal } from '../manuals/CabinQrManualViewerModal';
 
 interface MachineDetailStudioModalProps {
   machine: Machine | null;
@@ -219,6 +221,8 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   const [isSocialFlyerOpen, setIsSocialFlyerOpen] = useState<boolean>(false);
   const [isTcoModalOpen, setIsTcoModalOpen] = useState<boolean>(false);
   const [isPdiModalOpen, setIsPdiModalOpen] = useState<boolean>(false);
+  const [isShortLinkOpen, setIsShortLinkOpen] = useState<boolean>(false);
+  const [isCabinManualOpen, setIsCabinManualOpen] = useState<boolean>(false);
   const [tradeInCredit, setTradeInCredit] = useState<{ creditUsd: number; summary: string } | null>(null);
 
   // Accordion visibility states for secondary technical details (compacts mobile & desktop viewports)
@@ -415,6 +419,28 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
             >
               <ClipboardCheck className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Auditoría PDI</span>
+            </button>
+
+            {/* Task #78: Short WhatsApp Quote Link Trigger */}
+            <button
+              type="button"
+              onClick={() => setIsShortLinkOpen(true)}
+              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-emerald-500 hover:text-black text-emerald-400 border border-emerald-500/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
+              title="Generar enlace corto (tmd.com.do/q/...) para compartir cotización ejecutiva por WhatsApp"
+            >
+              <Link className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Enlace WA</span>
+            </button>
+
+            {/* Task #94: Cabin QR Digital Operator Manual Trigger */}
+            <button
+              type="button"
+              onClick={() => setIsCabinManualOpen(true)}
+              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
+              title="Manual Digital de Operación & Mantenimiento QR para Cabina"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Manual Cabina</span>
             </button>
 
             {onOpen360 && (
@@ -1582,6 +1608,23 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
         onClose={() => setIsPdiModalOpen(false)}
         machineName={machine.name}
         machineSerial={machine.modelCode || `TMD-${machine.brand.toUpperCase()}-2026`}
+      />
+
+      {/* Task #78: WhatsApp Executive Short Link Modal */}
+      <WhatsAppShortLinkModal
+        isOpen={isShortLinkOpen}
+        onClose={() => setIsShortLinkOpen(false)}
+        machineOrQuoteName={machine.name}
+        totalUsd={totalInvestmentUsd}
+        quoteId={`TMD-${machine.modelCode || machine.id.toUpperCase()}`}
+      />
+
+      {/* Task #94: Cabin QR Digital Operator Manual Modal */}
+      <CabinQrManualViewerModal
+        isOpen={isCabinManualOpen}
+        onClose={() => setIsCabinManualOpen(false)}
+        machineName={machine.name}
+        machineSerial={machine.modelCode || `LG-${machine.brand.toUpperCase()}-2026`}
       />
     </div>,
     document.body
