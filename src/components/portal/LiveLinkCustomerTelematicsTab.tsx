@@ -44,6 +44,9 @@ import { IdleTimeAnalyticsModal } from '../telematics/IdleTimeAnalyticsModal';
 import { FuelTheftProtectionModal } from '../telematics/FuelTheftProtectionModal';
 import { BatteryHealthModal } from '../telematics/BatteryHealthModal';
 import { FieldServiceDispatchRadarModal } from '../emergency/FieldServiceDispatchRadarModal';
+import { GeofenceManagerModal } from '../telematics/GeofenceManagerModal';
+import { CarbonFootprintAuditModal } from '../sustainability/CarbonFootprintAuditModal';
+import { Leaf } from 'lucide-react';
 
 interface LiveLinkCustomerTelematicsTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -87,6 +90,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
   const [showFuelTheftModal, setShowFuelTheftModal] = useState<boolean>(false);
   const [showBatteryModal, setShowBatteryModal] = useState<boolean>(false);
   const [showDispatchRadarModal, setShowDispatchRadarModal] = useState<boolean>(false);
+  const [showCarbonModal, setShowCarbonModal] = useState<boolean>(false);
 
   const loadData = async () => {
     try {
@@ -522,6 +526,16 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
 
                   <button
                     type="button"
+                    onClick={() => setShowGeofenceModal(true)}
+                    className="px-2.5 py-1.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-emerald-400 border border-emerald-500/40 font-bold font-display uppercase tracking-wider text-[11px] flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+                    title="Monitorear Geocercas Poligonales Dinámicas de Obra/Cantera"
+                  >
+                    <Compass className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Geocercas</span>
+                  </button>
+
+                  <button
+                    type="button"
                     onClick={() => downloadTelematicsReportPDF(selectedUnit)}
                     className="px-2.5 py-1.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider text-[11px] flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
                     title="Exportar Reporte Oficial PDF de Telemetría CAN-Bus"
@@ -917,6 +931,30 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
                     </button>
                   </div>
 
+                  {/* Sprint 10 Task #96: ISO 14001 Carbon Footprint & Green Efficiency Banner */}
+                  <div className="p-3.5 rounded-[3px] bg-gradient-to-r from-emerald-950/30 via-zinc-950 to-zinc-950 border border-emerald-500/30 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-[2px] bg-emerald-500 text-black shrink-0">
+                        <Leaf className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h5 className="text-xs font-bold text-white uppercase tracking-wider font-display">
+                          Auditoría de Huella de Carbono & Certificado Verde ISO 14001
+                        </h5>
+                        <p className="text-[11px] text-zinc-400 font-sans">
+                          Cálculo oficial de toneladas de CO2 evitadas y retorno financiero conforme al GHG Protocol EPA.
+                        </p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowCarbonModal(true)}
+                      className="px-3 py-1.5 rounded-[2px] bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-black font-display uppercase tracking-wider transition-colors cursor-pointer shrink-0 shadow-sm"
+                    >
+                      Auditoría CO2 / ISO 14001
+                    </button>
+                  </div>
+
                   {/* Scheduled Service Countdown Bar */}
                   <div className="p-5 rounded-[3px] bg-zinc-950 border border-zinc-800 space-y-3">
                     <div className="flex items-center justify-between">
@@ -1126,101 +1164,11 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
 
       </div>
 
-      {/* Geofence Configuration Modal */}
-      {showGeofenceModal && selectedUnit && typeof document !== 'undefined' && createPortal(
-        <div className="fixed inset-0 z-[99999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-zinc-900 border border-zinc-800 rounded-[5px] max-w-lg w-full p-6 space-y-5 shadow-2xl animate-in zoom-in-95 duration-150">
-            <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-amber-400" />
-                <h3 className="text-base font-black text-white font-display uppercase tracking-tight">
-                  Configurar Geocerca Satelital
-                </h3>
-              </div>
-              <button
-                type="button"
-                onClick={() => setShowGeofenceModal(false)}
-                className="p-1 rounded-[2px] text-zinc-400 hover:text-white cursor-pointer"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-xs font-bold text-zinc-300 mb-1 font-display uppercase tracking-wider">
-                  Nombre del Proyecto / Obra / Cantera
-                </label>
-                <input
-                  type="text"
-                  value={geofenceName}
-                  onChange={e => setGeofenceName(e.target.value)}
-                  placeholder="Ej. Cantera Baní - Tramo Sur"
-                  className="w-full px-3 py-2 rounded-[2px] bg-zinc-950 border border-zinc-800 text-xs font-sans text-white focus:outline-none focus:border-amber-400"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-zinc-300 mb-1 font-display uppercase tracking-wider">
-                  Radio del Perímetro ({geofenceRadius} metros)
-                </label>
-                <input
-                  type="range"
-                  min="200"
-                  max="5000"
-                  step="100"
-                  value={geofenceRadius}
-                  onChange={e => setGeofenceRadius(Number(e.target.value))}
-                  className="w-full accent-amber-400 cursor-pointer"
-                />
-                <div className="flex justify-between text-[11px] text-zinc-500 font-mono">
-                  <span>200m (Puntual)</span>
-                  <span>1,500m (Cantera)</span>
-                  <span>5,000m (Vial)</span>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-zinc-300 mb-1 font-display uppercase tracking-wider">
-                  Alerta por Exceso de Velocidad ({geofenceAlertSpeed} km/h)
-                </label>
-                <input
-                  type="range"
-                  min="15"
-                  max="60"
-                  step="5"
-                  value={geofenceAlertSpeed}
-                  onChange={e => setGeofenceAlertSpeed(Number(e.target.value))}
-                  className="w-full accent-amber-400 cursor-pointer"
-                />
-              </div>
-
-              <div className="p-3 rounded-[3px] bg-amber-400/10 border border-amber-400/20 text-[11px] text-amber-300 font-sans">
-                Al salir del polígono, LiveLink™ enviará automáticamente una notificación SMS/WhatsApp al maestro de obra y al supervisor de patio.
-              </div>
-            </div>
-
-            <div className="flex items-center justify-end gap-3 pt-3 border-t border-zinc-800">
-              <button
-                type="button"
-                onClick={() => setShowGeofenceModal(false)}
-                className="px-4 py-2 rounded-[2px] text-xs font-display uppercase tracking-wider font-bold text-zinc-400 hover:bg-zinc-800 hover:text-white border border-zinc-800 cursor-pointer"
-              >
-                Cancelar
-              </button>
-              <button
-                type="button"
-                onClick={handleSaveGeofence}
-                disabled={geofenceSaveSuccess}
-                className="px-5 py-2 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black font-display uppercase tracking-wider font-bold text-xs transition-all shadow cursor-pointer"
-              >
-                {geofenceSaveSuccess ? 'Guardando...' : 'Guardar Geocerca'}
-              </button>
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
+      {/* Task #43: Dynamic Polygonal Geofence Manager Modal */}
+      <GeofenceManagerModal
+        isOpen={showGeofenceModal}
+        onClose={() => setShowGeofenceModal(false)}
+      />
 
       {/* Route Playback 7-Day GPS Modal (Sprint 8 Task #49) */}
       <RoutePlaybackModal
@@ -1255,6 +1203,12 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
         isOpen={showDispatchRadarModal}
         onClose={() => setShowDispatchRadarModal(false)}
         targetUnit={selectedUnit}
+      />
+
+      {/* Task #96: ISO 14001 Carbon Footprint Audit Modal */}
+      <CarbonFootprintAuditModal
+        isOpen={showCarbonModal}
+        onClose={() => setShowCarbonModal(false)}
       />
 
     </div>

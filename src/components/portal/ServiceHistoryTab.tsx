@@ -53,6 +53,7 @@ import { WorkshopLiveTimeline } from './WorkshopLiveTimeline';
 import { fetchFullbayActiveRepairOrders } from '../../services/fullbayConnectMockService';
 import { FullbayActiveRepairOrder } from '../../types';
 import { ServiceDetailModal } from './service/ServiceDetailModal';
+import { OemWarrantyClaimModal } from '../workshop/OemWarrantyClaimModal';
 
 interface ServiceHistoryTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -86,6 +87,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
   
   // Register machine modal
   const [showAddMachineModal, setShowAddMachineModal] = useState<boolean>(false);
+  const [showWarrantyModal, setShowWarrantyModal] = useState<boolean>(false);
   const [newUnitId, setNewUnitId] = useState<string>('');
   const [newBrand, setNewBrand] = useState<string>('LiuGong');
   const [newModel, setNewModel] = useState<string>('');
@@ -413,6 +415,15 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           >
             <Plus className="w-4 h-4 text-amber-400" />
             <span>Registrar Equipo</span>
+          </button>
+
+          <button
+            onClick={() => setShowWarrantyModal(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
+            title="Radicar Reclamo de Garantía de Fábrica LiuGong / JCB"
+          >
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <span>Garantías OEM</span>
           </button>
 
           <button
@@ -1217,6 +1228,12 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           </div>
         </div>
       )}
+
+      {/* Task #83: OEM Warranty Claim Forge Modal (LiuGong & JCB) */}
+      <OemWarrantyClaimModal
+        isOpen={showWarrantyModal}
+        onClose={() => setShowWarrantyModal(false)}
+      />
     </div>
   );
 };

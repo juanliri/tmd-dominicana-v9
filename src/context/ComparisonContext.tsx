@@ -19,7 +19,7 @@ interface ComparisonContextType {
 const ComparisonContext = createContext<ComparisonContextType | undefined>(undefined);
 
 const STORAGE_KEY = 'tmd-comparison-machines';
-const MAX_MACHINES = 3;
+const MAX_MACHINES = 4;
 
 export const ComparisonProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [selectedMachineIds, setSelectedMachineIds] = useState<string[]>(() => {

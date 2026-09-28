@@ -48,6 +48,7 @@ import { IndustrialMegaMenu, IndustrialSegmentKey } from './header/IndustrialMeg
 import { MobileTabletIndustrialMenu } from './header/MobileTabletIndustrialMenu';
 import { TMDLogo } from './common/BrandLogos';
 import { NetworkPingBadge } from './common/NetworkPingBadge';
+import { BcrdCurrencyRatesModal } from './finance/BcrdCurrencyRatesModal';
 
 interface HeaderProps {
   currentRoute: string;
@@ -85,6 +86,7 @@ export const Header: React.FC<HeaderProps> = ({
   const [activeSegment, setActiveSegment] = useState<IndustrialSegmentKey>('construction');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState<IndustrialSegmentKey | null>('construction');
+  const [isBcrdModalOpen, setIsBcrdModalOpen] = useState<boolean>(false);
 
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const headerRef = useRef<HTMLElement | null>(null);
@@ -568,14 +570,13 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
 
             <button
-              onClick={refreshExchangeRate}
-              disabled={isSyncingRate}
-              title={`Tasa en vivo: 1 USD = RD$ ${exchangeRate.toFixed(2)} (${exchangeRateData.source}). Click para actualizar.`}
-              className="hidden xl:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[2px] bg-zinc-900 border border-zinc-800 text-[9px] text-zinc-400 hover:text-amber-400 hover:border-amber-400/40 transition-all cursor-pointer"
+              onClick={() => setIsBcrdModalOpen(true)}
+              title={`Tasa Oficial Banco Central (BCRD): 1 USD = RD$ ${exchangeRate.toFixed(2)}. Click para abrir monitor de divisas y simulador bancario.`}
+              className="hidden xl:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[2px] bg-zinc-900 border border-zinc-800 hover:border-amber-400 text-[9px] text-zinc-300 hover:text-amber-400 transition-all cursor-pointer font-mono"
             >
-              <span className={`w-1 h-1 rounded-full ${exchangeRateData.isLive ? 'bg-emerald-400' : 'bg-amber-400'}`} />
-              <span>RD$ {exchangeRate.toFixed(2)}</span>
-              <RefreshCw className={`w-2.5 h-2.5 ${isSyncingRate ? 'animate-spin text-amber-400' : 'text-zinc-500'}`} />
+              <span className={`w-1.5 h-1.5 rounded-full ${exchangeRateData.isLive ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+              <span className="font-bold">BCRD: RD$ {exchangeRate.toFixed(2)}</span>
+              <Building2 className="w-2.5 h-2.5 text-amber-400" />
             </button>
 
             {/* Live Network Latency & Connectivity Badge (Task #9) */}
@@ -992,6 +993,12 @@ export const Header: React.FC<HeaderProps> = ({
           </>
         )}
       </AnimatePresence>
+
+      {/* Task #51: Official BCRD Currency Rates & Bank Spread Simulator Modal */}
+      <BcrdCurrencyRatesModal
+        isOpen={isBcrdModalOpen}
+        onClose={() => setIsBcrdModalOpen(false)}
+      />
     </header>
   );
 };

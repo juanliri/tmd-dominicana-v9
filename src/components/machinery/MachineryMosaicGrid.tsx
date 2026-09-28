@@ -120,6 +120,11 @@ export const MachineCard = React.memo<MachineCardProps>(({
     >
       <motion.div
         variants={cardVariants}
+        draggable={true}
+        onDragStart={(e) => {
+          e.dataTransfer.setData('text/plain', machine.id);
+          e.dataTransfer.setData('machine-id', machine.id);
+        }}
         style={{
           transform: isHovered 
             ? `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(1.012, 1.012, 1.012)` 
@@ -127,7 +132,7 @@ export const MachineCard = React.memo<MachineCardProps>(({
           transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1)',
           transformStyle: 'preserve-3d',
         }}
-        className="relative bg-zinc-950 rounded-[5px] border border-zinc-800 hover:border-amber-400/70 hover:shadow-2xl hover:shadow-amber-500/10 transition-colors duration-300 flex flex-col justify-between group overflow-hidden machinery-3d-tilt"
+        className="relative bg-zinc-950 rounded-[5px] border border-zinc-800 hover:border-amber-400/70 hover:shadow-2xl hover:shadow-amber-500/10 transition-colors duration-300 flex flex-col justify-between group overflow-hidden machinery-3d-tilt cursor-grab active:cursor-grabbing"
       >
         {/* Metallic Sheen Glare Reflection */}
         {isHovered && (
