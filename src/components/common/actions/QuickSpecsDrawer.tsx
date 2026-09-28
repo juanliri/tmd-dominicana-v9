@@ -103,7 +103,7 @@ export const QuickSpecsDrawer: React.FC<QuickSpecsDrawerProps> = ({
                 {/* Image Showcase */}
                 <div className="relative aspect-video rounded-[4px] overflow-hidden bg-zinc-900 border border-zinc-800">
                   <img
-                    src={(item as any).imageUrl || (item as any).images?.[0] || 'https://images.unsplash.com/photo-1579829366248-204fe8413f31?auto=format&fit=crop&w=800&q=80'}
+                    src={(item as any).imageUrl || (item as any).images?.[0] || '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg'}
                     alt={item.name}
                     className="w-full h-full object-cover"
                   />

@@ -70,7 +70,7 @@ export const IndustrialCard3DFlip: React.FC<IndustrialCard3DFlipProps> = ({
             {/* Image */}
             <div className="w-full h-36 bg-zinc-950 rounded-[3px] overflow-hidden mb-3 relative border border-zinc-850 flex items-center justify-center p-2">
               <img 
-                src={part.image || 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80'} 
+                src={part.image || '/assets/machinery/brand_new_genuine_yellow_and_black.jpg'} 
                 alt={part.name}
                 className="max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
               />

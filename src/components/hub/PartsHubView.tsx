@@ -39,7 +39,7 @@ const PARTS_CATEGORIES = [
     name: 'Filtros & Mantenimiento Preventivo',
     subtitle: 'Aceite, combustible, aire primario/secundario y kits de 500h/1000h',
     badge: 'Alta Rotación',
-    image: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80',
+    image: '/assets/machinery/clean_new_jcb_oem_diesel_fuel.jpg',
     count: '1,420+ ítems',
     route: '#/parts?category=Filtros',
     accent: 'from-amber-500/20 to-transparent'
@@ -49,7 +49,7 @@ const PARTS_CATEGORIES = [
     name: 'Tren de Rodaje & Orugas',
     subtitle: 'Zapatas, cadenas, rodillos inferiores/superiores y ruedas guía',
     badge: 'Servicio Pesado',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+    image: '/assets/machinery/macro_view_of_steel_tracked_undercarriage.jpg',
     count: '890+ ítems',
     route: '#/parts?category=Tren%20de%20Rodaje',
     accent: 'from-blue-500/20 to-transparent'
@@ -59,7 +59,7 @@ const PARTS_CATEGORIES = [
     name: 'Sistemas Hidráulicos & Sellos',
     subtitle: 'Bombas principales, cilindros, distribuidores y kits de empaques OEM',
     badge: 'Presión Crítica',
-    image: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80',
+    image: '/assets/machinery/automated_hydraulic_testing_bench_with_heavy.jpg',
     count: '650+ ítems',
     route: '#/parts?category=Hidráulica',
     accent: 'from-emerald-500/20 to-transparent'
@@ -69,7 +69,7 @@ const PARTS_CATEGORIES = [
     name: 'Motor Diésel & Inyección',
     subtitle: 'Inyectores Common Rail, turbocompresores, camisas, pistones y culatas',
     badge: 'Garantía 1 Año',
-    image: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=800&q=80',
+    image: '/assets/machinery/cleanroom_high_pressure_diesel_fuel_injection.jpg',
     count: '1,100+ ítems',
     route: '#/parts?category=Motor',
     accent: 'from-red-500/20 to-transparent'
@@ -79,7 +79,7 @@ const PARTS_CATEGORIES = [
     name: 'Herramientas de Corte & GET',
     subtitle: 'Puntas de cucharón, cuchillas cantoneras, adaptadores y pernos de alta resistencia',
     badge: 'Acero Tratado',
-    image: 'https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=800&q=80',
+    image: '/assets/machinery/JCB_Contractor_breakers.jpg',
     count: '430+ ítems',
     route: '#/parts?category=Desgaste',
     accent: 'from-orange-500/20 to-transparent'
@@ -89,7 +89,7 @@ const PARTS_CATEGORIES = [
     name: 'Sistema Eléctrico, Módulos & Sensores',
     subtitle: 'ECM/ECU, alternadores, motores de arranque, pantallas y sensores de presión',
     badge: 'Diagnóstico CAD',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+    image: '/assets/machinery/technical_close_up_of_digital_hydraulic.jpg',
     count: '580+ ítems',
     route: '#/parts?category=Eléctrico',
     accent: 'from-purple-500/20 to-transparent'

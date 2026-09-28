@@ -155,8 +155,12 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
               <button
                 key={tab.id}
                 onClick={() => {
-                  setActiveTab(tab.id);
-                  setExpandedSubcategory(null);
+                  if (tab.id === 'heavy_machinery') handleActionNavigate('#/machinery-hub');
+                  else if (tab.id === 'contractor_deploy') handleActionNavigate('#/rental-hub');
+                  else if (tab.id === 'parts_service') handleActionNavigate('#/parts-hub');
+                  else if (tab.id === 'gov_bids') handleActionNavigate('#/services-hub');
+                  else if (tab.id === 'brands') handleActionNavigate('#/brands-directory');
+                  else handleActionNavigate('#/machinery-hub');
                 }}
                 className={`relative flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all shrink-0 select-none cursor-pointer ${
                   isCurrent
@@ -181,12 +185,12 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
         <button
           type="button"
           onClick={() => {
-            if (activeTab === 'heavy_machinery') handleActionNavigate('#/machinery');
-            else if (activeTab === 'contractor_deploy') handleActionNavigate('#/rental');
-            else if (activeTab === 'parts_service') handleActionNavigate('#/parts');
-            else if (activeTab === 'gov_bids') handleActionNavigate('#/tech-docs');
-            else if (activeTab === 'brands') handleActionNavigate('#/machinery');
-            else handleActionNavigate('#/machinery');
+            if (activeTab === 'heavy_machinery') handleActionNavigate('#/machinery-hub');
+            else if (activeTab === 'contractor_deploy') handleActionNavigate('#/rental-hub');
+            else if (activeTab === 'parts_service') handleActionNavigate('#/parts-hub');
+            else if (activeTab === 'gov_bids') handleActionNavigate('#/services-hub');
+            else if (activeTab === 'brands') handleActionNavigate('#/brands-directory');
+            else handleActionNavigate('#/machinery-hub');
           }}
           className="w-full flex items-center justify-between bg-zinc-100/70 dark:bg-zinc-900/60 hover:bg-amber-500/10 dark:hover:bg-zinc-800/80 p-3 rounded-2xl border border-zinc-200/60 dark:border-zinc-800/60 hover:border-amber-500/40 transition-all cursor-pointer group text-left"
         >

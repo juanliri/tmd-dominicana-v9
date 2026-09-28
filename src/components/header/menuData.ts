@@ -109,7 +109,7 @@ export const TAB_CONFIGS: MainTabConfig[] = [
           name: 'LiuGong 856T Heavy 5T',
           brand: 'LiuGong',
           category: 'Pala Cargadora 215 HP',
-          image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80',
+          image: SHOWROOM_MARKETING_ASSETS.liugong.banner,
           spec: 'Cummins 215 HP • Transmisión ZF • Balde 3.0 m³',
           priceUsd: 118000,
           route: '#/machinery/liugong-856t'
@@ -266,7 +266,7 @@ export const TAB_CONFIGS: MainTabConfig[] = [
           name: 'Motoniveladora LiuGong 4180D',
           brand: 'LiuGong',
           category: 'Caminos Vecinales',
-          image: 'https://images.unsplash.com/photo-1508873696983-2df5293cb32b?auto=format&fit=crop&w=800&q=80',
+          image: SHOWROOM_MARKETING_ASSETS.showroomBanner,
           spec: 'Cummins 180 HP • Vertedera 13ft • Giro 360°',
           priceUsd: 135000,
           route: '#/machinery/liugong-4180d'

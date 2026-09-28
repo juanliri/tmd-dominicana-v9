@@ -36,7 +36,7 @@ const MAIN_SERVICE_PILLARS = [
     id: 'taller-central',
     title: 'Taller Central de Alta Capacidad (Km 22)',
     subtitle: '8 bahías de servicio pesado, banco de prueba de cilindros hidráulicos y puente grúa de 25 toneladas',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+    image: '/assets/machinery/high_tech_heavy_machinery_overhaul_workshop.jpg',
     route: '#/service',
     actionText: 'Agendar Bahía',
     badge: 'Sede Duarte'
@@ -45,7 +45,7 @@ const MAIN_SERVICE_PILLARS = [
     id: 'sos-movil',
     title: 'Taller Móvil SOS 24/7 en Obra',
     subtitle: 'Flota 4x4 equipada con planta eléctrica, compresor de aire, lubricación rápida y kit de mangueras hidráulicas',
-    image: 'https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80',
+    image: '/images/video_ch4_taller.jpg',
     route: '#/emergency-dispatch',
     actionText: 'Despacho de Emergencia',
     badge: 'Nivel Nacional'
@@ -54,7 +54,7 @@ const MAIN_SERVICE_PILLARS = [
     id: 'laboratorio-diesel',
     title: 'Laboratorio de Inyección Diésel & Aceites',
     subtitle: 'Calibración Common Rail, prueba de inyectores piezoeléctricos y análisis espectrométrico de fluidos SOS',
-    image: 'https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=800&q=80',
+    image: '/assets/machinery/certified_diesel_injection_common_rail_testing.jpg',
     route: '#/oil-lab',
     actionText: 'Solicitar Análisis',
     badge: 'Norma ISO 4406'
@@ -63,7 +63,7 @@ const MAIN_SERVICE_PILLARS = [
     id: 'livelink-telemetria',
     title: 'Centro Satelital LiveLink™ Fleet',
     subtitle: 'Monitoreo remoto de códigos de falla DTC en tiempo real, horómetros, geocercas y alertas de seguridad',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+    image: '/images/tmd_portal_telematics.jpg',
     route: '#/livelink',
     actionText: 'Acceso a Telemetría',
     badge: 'JCB & LiuGong'

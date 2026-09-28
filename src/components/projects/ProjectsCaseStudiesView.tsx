@@ -25,7 +25,7 @@ const PROJECTS_DATA = [
     equipmentUsed: ['6x Excavadoras LiuGong 922E', '4x Retroexcavadoras JCB 3CX', '3x Rodillos Ammann ASC110'],
     summary: 'Apertura de rasante, movimiento masivo de tierras y compactación de terraplén en tiempo récord con disponibilidad de flota del 98.4%.',
     stats: { earthMoved: '450,000 m³', uptime: '98.4%', hoursOperated: '12,800 hrs' },
-    image: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=1200&q=80',
+    image: '/assets/machinery/fleet_of_yellow_earthmoving_excavators_lined.jpg',
     tag: 'Infraestructura Vial'
   },
   {
@@ -35,7 +35,7 @@ const PROJECTS_DATA = [
     equipmentUsed: ['5x Manipuladores Telescópicos JCB 540-170', '2x Mini-Excavadoras JCB 8035', '4x Generadores Diésel Cummins'],
     summary: 'Montaje de estructuras verticales, izaje seguro de materiales a 17 metros y adecuación de áreas de piscinas con cero incidentes de seguridad.',
     stats: { heightsReached: '17.0 m', uptime: '99.1%', hoursOperated: '8,400 hrs' },
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80',
+    image: '/assets/machinery/jcb_loadall_531_70_telescopic_handler.jpg',
     tag: 'Turismo & Construcción Vertical'
   },
   {
@@ -45,7 +45,7 @@ const PROJECTS_DATA = [
     equipmentUsed: ['4x Excavadoras Pesadas LiuGong 936E (36T)', '2x Palas Cargadoras LiuGong 856H', 'Flota de Camiones Articulados'],
     summary: 'Rendimiento severo en extracción de caliza y áridos para las obras del nuevo polo turístico de Pedernales con asistencia de taller móvil SOS permanente.',
     stats: { tonsMoved: '850,000 Ton', uptime: '97.8%', hoursOperated: '16,200 hrs' },
-    image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80',
+    image: '/assets/machinery/heavy_22_ton_liugong_922e_tracked.jpg',
     tag: 'Minería & Canteras'
   },
   {
@@ -55,7 +55,7 @@ const PROJECTS_DATA = [
     equipmentUsed: ['8x Tractores Agrícolas LS Tractor Plus 90', '3x Retroexcavadoras JCB 3CX Eco'],
     summary: 'Adecuación de compuertas hidráulicas, preparación de tierras arroceras y mantenimiento preventivo con kit de filtros Donaldson OEM en finca.',
     stats: { hectaresPrepped: '3,200 Ha', uptime: '99.5%', hoursOperated: '6,100 hrs' },
-    image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1200&q=80',
+    image: '/assets/machinery/heavy_blue_agricultural_tractor_ls_mt7.jpg',
     tag: 'Agroindustria & Riego'
   }
 ];

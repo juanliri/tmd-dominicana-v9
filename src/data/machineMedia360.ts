@@ -86,15 +86,15 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
     dronePreviewAvailable: true,
     soundType: 'backhoe',
     frames: [
-      { angle: 0, label: 'Frente Directo (0°)', compassBearing: 'N', image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 30, label: 'Ángulo Delantero Derecho (30°)', compassBearing: 'NNE', image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 60, label: 'Tres Cuartos Delantero (60°)', compassBearing: 'ENE', image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 90, label: 'Costado Derecho Completo (90°)', compassBearing: 'E', image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 135, label: 'Posterior Derecho & Brazo Extensible (135°)', compassBearing: 'SE', image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 180, label: 'Posterior Directo & Estabilizadores (180°)', compassBearing: 'S', image: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 225, label: 'Posterior Izquierdo (225°)', compassBearing: 'SW', image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 270, label: 'Costado Izquierdo Cabina & Motor (270°)', compassBearing: 'W', image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 315, label: 'Tres Cuartos Frontal Izquierdo (315°)', compassBearing: 'NW', image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80' },
+      { angle: 0, label: 'Frente Directo (0°)', compassBearing: 'N', image: '/assets/machinery/classic_robust_yellow_jcb_3cx_backhoe.jpg' },
+      { angle: 30, label: 'Ángulo Delantero Derecho (30°)', compassBearing: 'NNE', image: '/assets/machinery/modern_jcb_3cx_eco_backhoe_excavator.jpg' },
+      { angle: 60, label: 'Tres Cuartos Delantero (60°)', compassBearing: 'ENE', image: '/assets/machinery/rugged_jcb_3cx_eco_backhoe_loader.jpg' },
+      { angle: 90, label: 'Costado Derecho Completo (90°)', compassBearing: 'E', image: '/assets/machinery/heavy_duty_yellow_jcb_3cx_eco.jpg' },
+      { angle: 135, label: 'Posterior Derecho & Brazo Extensible (135°)', compassBearing: 'SE', image: '/assets/machinery/jcb_3cx_eco_compact_front_loader.jpg' },
+      { angle: 180, label: 'Posterior Directo & Estabilizadores (180°)', compassBearing: 'S', image: '/assets/machinery/rugged_yellow_jcb_3cx_eco_4x4.jpg' },
+      { angle: 225, label: 'Posterior Izquierdo (225°)', compassBearing: 'SW', image: '/assets/machinery/JCB_3CX.jpg' },
+      { angle: 270, label: 'Costado Izquierdo Cabina & Motor (270°)', compassBearing: 'W', image: '/assets/machinery/JCB_3CX-14.jpg' },
+      { angle: 315, label: 'Tres Cuartos Frontal Izquierdo (315°)', compassBearing: 'NW', image: '/assets/machinery/classic_robust_yellow_jcb_3cx_backhoe.jpg' },
     ],
     videos: [
       {
@@ -103,7 +103,7 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         category: 'exterior',
         duration: '1:45',
         resolution: '4K Ultra HD',
-        thumbnail: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=800&q=80',
+        thumbnail: '/assets/machinery/classic_robust_yellow_jcb_3cx_backhoe.jpg',
         videoUrl: '/videos/tmd-patio-km22.mp4',
         description: 'Recorrido perimetral detallado mostrando el chasis reforzado de una pieza, balde frontal 6 en 1 y brazo de excavación con extensión Extradig.',
         highlightPoints: ['Estructura monobloque soldada', 'Líneas hidráulicas auxiliares', 'Protección de cilindros']
@@ -114,7 +114,7 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         category: 'cabina',
         duration: '2:15',
         resolution: '1080p 60fps',
-        thumbnail: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+        thumbnail: '/assets/machinery/modern_jcb_3cx_eco_backhoe_excavator.jpg',
         videoUrl: '/videos/tmd-patio-km22.mp4',
         description: 'Visibilidad panorámica de 360°, aire acondicionado tropicalizado de alta capacidad y mandos joystick servoasistidos con ergonomía automotriz.',
         highlightPoints: ['A/C Tropicalizado para calor dominicano', 'Asiento con suspensión neumática', 'Display digital multifunción']
@@ -125,7 +125,7 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         category: 'trabajo',
         duration: '2:40',
         resolution: '4K 60fps',
-        thumbnail: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80',
+        thumbnail: '/assets/machinery/heavy_duty_yellow_jcb_3cx_eco.jpg',
         videoUrl: '/videos/tmd-patio-km22.mp4',
         description: 'Demostración de fuerza de desprendimiento de 6,227 kgf y ciclo rápido de carga en cantera de Santo Domingo Oeste.',
         highlightPoints: ['Fuerza de arranque excepcional', 'Tracción 4x4 Powershift', 'Bloqueo diferencial proporcional']
@@ -136,8 +136,8 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         id: 'jcb-g1',
         title: 'Conjunto Frontal & Balde Cargador 1.0 m³',
         category: 'Exterior',
-        image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1000&q=80',
-        zoomImage: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=2000&q=90',
+        image: '/assets/machinery/classic_robust_yellow_jcb_3cx_backhoe.jpg',
+        zoomImage: '/assets/machinery/classic_robust_yellow_jcb_3cx_backhoe.jpg',
         caption: 'Cilindros de paralelismo automático y cuchilla de desgaste Hardox 450 para movimiento ágil de áridos.',
         technicalDetail: 'Capacidad colmada de 1,000 L, altura de descarga a 2.74 m sobre camiones volteo de 16-24 m³.'
       },
@@ -145,8 +145,8 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         id: 'jcb-g2',
         title: 'Interior de Cabina Presurizada ROPS/FOPS',
         category: 'Cabina',
-        image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80',
-        zoomImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=2000&q=90',
+        image: '/assets/machinery/modern_jcb_3cx_eco_backhoe_excavator.jpg',
+        zoomImage: '/assets/machinery/modern_jcb_3cx_eco_backhoe_excavator.jpg',
         caption: 'Nivel sonoro interior reducido a 74 dBA con climatizador reforzado y filtro de partículas de carbón.',
         technicalDetail: 'Asiento giratorio 180° para cambio instantáneo entre mando frontal y posterior.'
       },
@@ -154,8 +154,8 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         id: 'jcb-g3',
         title: 'Compartimento Motor JCB EcoMAX 4.4L',
         category: 'Motor',
-        image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=80',
-        zoomImage: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=2000&q=90',
+        image: '/assets/machinery/heavy_duty_yellow_jcb_3cx_eco.jpg',
+        zoomImage: '/assets/machinery/heavy_duty_yellow_jcb_3cx_eco.jpg',
         caption: 'Motor turbo intercooler sin filtro de partículas DPF, altamente tolerante al diésel comercial dominicano.',
         technicalDetail: 'Par motor de 400 Nm a solo 1,200 RPM, optimizando hasta 16% de ahorro de combustible.'
       },
@@ -163,8 +163,8 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         id: 'jcb-g4',
         title: 'Brazo Extensible Extradig & Zanjado',
         category: 'Implementos',
-        image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1000&q=80',
-        zoomImage: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=2000&q=90',
+        image: '/assets/machinery/rugged_jcb_3cx_eco_backhoe_loader.jpg',
+        zoomImage: '/assets/machinery/rugged_jcb_3cx_eco_backhoe_loader.jpg',
         caption: 'Brazo curvo de fundición de acero con extensión telescópica de 1.2 metros adicionales.',
         technicalDetail: 'Profundidad máxima de 5.46 metros ideal para zanjas de drenaje pluvial y acueductos.'
       }
@@ -251,15 +251,15 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
     dronePreviewAvailable: true,
     soundType: 'excavator',
     frames: [
-      { angle: 0, label: 'Frente Directo Chasis & Balde (0°)', compassBearing: 'N', image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 30, label: 'Perspectiva Oruga Derecha & Pluma (30°)', compassBearing: 'NNE', image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 60, label: 'Costado Derecho 3/4 (60°)', compassBearing: 'ENE', image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 90, label: 'Lateral Derecho & Compartimento de Bombas (90°)', compassBearing: 'E', image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 135, label: 'Tres Cuartos Posterior & Contrapeso (135°)', compassBearing: 'SE', image: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 180, label: 'Posterior Directo & Radiadores (180°)', compassBearing: 'S', image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 225, label: 'Posterior Izquierdo & Cabina (225°)', compassBearing: 'SW', image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 270, label: 'Lateral Izquierdo Completo con Oruga 600mm (270°)', compassBearing: 'W', image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 315, label: 'Tres Cuartos Frontal Izquierdo (315°)', compassBearing: 'NW', image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80' },
+      { angle: 0, label: 'Frente Directo Chasis & Balde (0°)', compassBearing: 'N', image: '/assets/machinery/LiuGong_922E_Excavator_Official_Photo.jpg' },
+      { angle: 30, label: 'Perspectiva Oruga Derecha & Pluma (30°)', compassBearing: 'NNE', image: '/assets/machinery/heavy_22_ton_liugong_922e_tracked.jpg' },
+      { angle: 60, label: 'Costado Derecho 3/4 (60°)', compassBearing: 'ENE', image: '/assets/machinery/heavy_liugong_922e_hd_22_ton.jpg' },
+      { angle: 90, label: 'Lateral Derecho & Compartimento de Bombas (90°)', compassBearing: 'E', image: '/assets/machinery/liugong_922e_hd_heavy_duty_hydraulic.jpg' },
+      { angle: 135, label: 'Tres Cuartos Posterior & Contrapeso (135°)', compassBearing: 'SE', image: '/assets/machinery/liugong_922e_heavy_hydraulic_excavator_with.jpg' },
+      { angle: 180, label: 'Posterior Directo & Radiadores (180°)', compassBearing: 'S', image: '/assets/machinery/LiuGong_922E_Long_Reach_Official_Photo.jpg' },
+      { angle: 225, label: 'Posterior Izquierdo & Cabina (225°)', compassBearing: 'SW', image: '/assets/machinery/heavy_22_ton_liugong_922e_tracked.jpg' },
+      { angle: 270, label: 'Lateral Izquierdo Completo con Oruga 600mm (270°)', compassBearing: 'W', image: '/assets/machinery/LiuGong_922E_Excavator_Official_Photo.jpg' },
+      { angle: 315, label: 'Tres Cuartos Frontal Izquierdo (315°)', compassBearing: 'NW', image: '/assets/machinery/heavy_liugong_922e_hd_22_ton.jpg' },
     ],
     videos: [
       {
@@ -268,7 +268,7 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         category: 'exterior',
         duration: '2:10',
         resolution: '4K Ultra HD',
-        thumbnail: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80',
+        thumbnail: '/assets/machinery/LiuGong_922E_Excavator_Official_Photo.jpg',
         videoUrl: '/videos/tmd-patio-km22.mp4',
         description: 'Inspección de las zapatas de oruga de 600 mm con triple garra, guías de oruga de longitud completa y bastidor en X sellado.',
         highlightPoints: ['Bastidor en X soldado por robot', 'Guías de oruga para roca', 'Chapa de desgaste inferior de 6 mm']
@@ -279,7 +279,7 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         category: 'cabina',
         duration: '1:50',
         resolution: '1080p 60fps',
-        thumbnail: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+        thumbnail: '/assets/machinery/heavy_22_ton_liugong_922e_tracked.jpg',
         videoUrl: '/videos/tmd-patio-km22.mp4',
         description: 'Pantalla LCD multifunción a color de 7 pulgadas con 6 modos de trabajo (Power, Economy, Fine, Lifting, Breaker, Attachment).',
         highlightPoints: ['Pantalla digital con diagnóstico de fallas', 'A/C de 6,000 Frigorías', 'Cámara de reversa gran angular']
@@ -290,7 +290,7 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         category: 'trabajo',
         duration: '3:05',
         resolution: '4K 60fps',
-        thumbnail: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80',
+        thumbnail: '/assets/machinery/liugong_922e_hd_heavy_duty_hydraulic.jpg',
         videoUrl: '/videos/tmd-patio-km22.mp4',
         description: 'Rendimiento en ciclo de carga de 11.2 segundos y fuerza en balde de 152.5 kN operando con balde para roca de 1.2 m³.',
         highlightPoints: ['Fuerza de desprendimiento 152.5 kN', 'Bomba Kawasaki 2 x 224 L/min', 'Sistema hidráulico regenerativo']
@@ -301,8 +301,8 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         id: 'lg922-g1',
         title: 'Pluma y Balancín Reforzados con Placas Internas',
         category: 'Implementos',
-        image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1000&q=80',
-        zoomImage: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=2000&q=90',
+        image: '/assets/machinery/heavy_liugong_922e_hd_22_ton.jpg',
+        zoomImage: '/assets/machinery/heavy_liugong_922e_hd_22_ton.jpg',
         caption: 'Fundiciones macizas en pie de pluma y cabeza de balancín para soportar esfuerzos severos de torsión.',
         technicalDetail: 'Pluma estándar de 5.71 m y balancín HD de 2.91 m con tubería para martillo instalada de fábrica.'
       },
@@ -310,8 +310,8 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         id: 'lg922-g2',
         title: 'Compartimento Hidráulico Kawasaki Japonés',
         category: 'Hidráulica',
-        image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=80',
-        zoomImage: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=2000&q=90',
+        image: '/assets/machinery/LiuGong_922E_Excavator_Official_Photo.jpg',
+        zoomImage: '/assets/machinery/LiuGong_922E_Excavator_Official_Photo.jpg',
         caption: 'Bomba doble de pistones axiales Kawasaki K3V112DTP de caudal variable y válvula de control principal Kawasaki.',
         technicalDetail: 'Flujo total de 448 L/min a 34.3 MPa (37.3 MPa con Power Boost activado).'
       },
@@ -319,8 +319,8 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         id: 'lg922-g3',
         title: 'Motor Cummins QSB6.7 Turbo Tier 3',
         category: 'Motor',
-        image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1000&q=80',
-        zoomImage: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=2000&q=90',
+        image: '/assets/machinery/heavy_22_ton_liugong_922e_tracked.jpg',
+        zoomImage: '/assets/machinery/heavy_22_ton_liugong_922e_tracked.jpg',
         caption: '6 cilindros con turbocompresor Holset y sistema de filtrado de combustible Fleetguard de 3 etapas.',
         technicalDetail: 'Potencia neta de 161 HP (120 kW) a 2,000 RPM con 708 Nm de torque a 1,500 RPM.'
       },
@@ -328,8 +328,8 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         id: 'lg922-g4',
         title: 'Tren de Rodaje HD con Rodillos Sellados de por Vida',
         category: 'Tren de Rodaje',
-        image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1000&q=80',
-        zoomImage: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=2000&q=90',
+        image: '/assets/machinery/technical_photography_of_excavator_undercarriage_track.jpg',
+        zoomImage: '/assets/machinery/technical_photography_of_excavator_undercarriage_track.jpg',
         caption: '49 zapatas por lado de triple garra en acero forjado con tratamiento térmico profundo.',
         technicalDetail: 'Presión sobre el suelo reducida a 47 kPa para óptima flotación en terrenos fangosos o taludes.'
       }
@@ -417,14 +417,14 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
     dronePreviewAvailable: false,
     soundType: 'tractor',
     frames: [
-      { angle: 0, label: 'Frente Directo Capó & Eje Delantero (0°)', compassBearing: 'N', image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 45, label: 'Perspectiva Frontal Derecha (45°)', compassBearing: 'NE', image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 90, label: 'Costado Derecho Depósito & Neumático R38 (90°)', compassBearing: 'E', image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 135, label: 'Tres Cuartos Trasero & Enganche de 3 Puntos (135°)', compassBearing: 'SE', image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 180, label: 'Posterior Directo TDF & Válvulas Remotas (180°)', compassBearing: 'S', image: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 225, label: 'Tres Cuartos Posterior Izquierdo (225°)', compassBearing: 'SW', image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 270, label: 'Costado Izquierdo Cabina Panorámica (270°)', compassBearing: 'W', image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 315, label: 'Tres Cuartos Frontal Izquierdo (315°)', compassBearing: 'NW', image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1200&q=80' },
+      { angle: 0, label: 'Frente Directo Capó & Eje Delantero (0°)', compassBearing: 'N', image: '/assets/machinery/heavy_blue_agricultural_tractor_ls_mt7.jpg' },
+      { angle: 45, label: 'Perspectiva Frontal Derecha (45°)', compassBearing: 'NE', image: '/assets/machinery/high_horsepower_blue_ls_tractor_mt7.jpg' },
+      { angle: 90, label: 'Costado Derecho Depósito & Neumático R38 (90°)', compassBearing: 'E', image: '/assets/machinery/rugged_blue_heavy_ls_tractor_mt7.jpg' },
+      { angle: 135, label: 'Tres Cuartos Trasero & Enganche de 3 Puntos (135°)', compassBearing: 'SE', image: '/assets/machinery/ls_tractor_mt7_agricultural_heavy_tractor.jpg' },
+      { angle: 180, label: 'Posterior Directo TDF & Válvulas Remotas (180°)', compassBearing: 'S', image: '/assets/machinery/modern_high_performance_farm_tractor_with.jpg' },
+      { angle: 225, label: 'Tres Cuartos Posterior Izquierdo (225°)', compassBearing: 'SW', image: '/assets/machinery/rugged_utility_farm_tractor_with_heavy.jpg' },
+      { angle: 270, label: 'Costado Izquierdo Cabina Panorámica (270°)', compassBearing: 'W', image: '/assets/machinery/heavy_blue_agricultural_tractor_ls_mt7.jpg' },
+      { angle: 315, label: 'Tres Cuartos Frontal Izquierdo (315°)', compassBearing: 'NW', image: '/assets/machinery/high_horsepower_blue_ls_tractor_mt7.jpg' },
     ],
     videos: [
       {
@@ -433,7 +433,7 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         category: 'exterior',
         duration: '1:35',
         resolution: '1080p Full HD',
-        thumbnail: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=800&q=80',
+        thumbnail: '/assets/machinery/heavy_blue_agricultural_tractor_ls_mt7.jpg',
         videoUrl: '/videos/tmd-patio-km22.mp4',
         description: 'Eje delantero cónico sellado para trabajo en fangales de arroz y suelos anegados sin riesgo de filtración de agua.',
         highlightPoints: ['Eje delantero estanco para arrozal', 'Radio de giro de 40° con freno', 'Contrapesos delanteros de 400 kg']
@@ -444,7 +444,7 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         category: 'cabina',
         duration: '2:00',
         resolution: '1080p 60fps',
-        thumbnail: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
+        thumbnail: '/assets/machinery/rugged_blue_heavy_ls_tractor_mt7.jpg',
         videoUrl: '/videos/tmd-patio-km22.mp4',
         description: 'Visibilidad panorámica con vidrios curvados, aislamiento térmico para sol caribeño e inversor de marcha al volante.',
         highlightPoints: ['20 marchas hacia adelante x 20 hacia atrás con Creeper', 'Asiento ergonómico con apoyabrazos', 'Radio Bluetooth']
@@ -455,8 +455,8 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         id: 'ls-g1',
         title: 'Toma de Fuerza (TDF) & Enganche Categoría II',
         category: 'Implementos',
-        image: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1000&q=80',
-        zoomImage: 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=2000&q=90',
+        image: '/assets/machinery/ls_tractor_mt7_agricultural_heavy_tractor.jpg',
+        zoomImage: '/assets/machinery/ls_tractor_mt7_agricultural_heavy_tractor.jpg',
         caption: 'TDF electrohidráulica independiente de 3 velocidades (540 / 750 / 1000 RPM) y levante de 3,800 kg.',
         technicalDetail: '3 pares de válvulas remotas traseras para operar rastras pesadas, sembradoras y remolques basculantes.'
       },
@@ -464,8 +464,8 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         id: 'ls-g2',
         title: 'Motor Iveco FPT Turbo Intercooler 105 HP',
         category: 'Motor',
-        image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=80',
-        zoomImage: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=2000&q=90',
+        image: '/assets/machinery/high_horsepower_blue_ls_tractor_mt7.jpg',
+        zoomImage: '/assets/machinery/high_horsepower_blue_ls_tractor_mt7.jpg',
         caption: 'Motor de 4 cilindros con altísimo torque a bajas revoluciones para arrastre continuo.',
         technicalDetail: 'Consumo optimizado de hasta 18% menos diésel en labores de preparación de suelos.'
       }
@@ -525,14 +525,14 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
     dronePreviewAvailable: true,
     soundType: 'loader',
     frames: [
-      { angle: 0, label: 'Frente Directo Balde 3.2 m³ (0°)', compassBearing: 'N', image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 45, label: 'Perspectiva Delantera Derecha (45°)', compassBearing: 'NE', image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 90, label: 'Costado Derecho & Articulación Central (90°)', compassBearing: 'E', image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 135, label: 'Tres Cuartos Posterior & Radiador (135°)', compassBearing: 'SE', image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 180, label: 'Posterior Directo & Capó Basculante (180°)', compassBearing: 'S', image: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 225, label: 'Tres Cuartos Posterior Izquierdo (225°)', compassBearing: 'SW', image: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 270, label: 'Costado Izquierdo Cabina Panorámica (270°)', compassBearing: 'W', image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 315, label: 'Tres Cuartos Frontal Izquierdo (315°)', compassBearing: 'NW', image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80' },
+      { angle: 0, label: 'Frente Directo Balde 3.2 m³ (0°)', compassBearing: 'N', image: '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg' },
+      { angle: 45, label: 'Perspectiva Delantera Derecha (45°)', compassBearing: 'NE', image: '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg' },
+      { angle: 90, label: 'Costado Derecho & Articulación Central (90°)', compassBearing: 'E', image: '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg' },
+      { angle: 135, label: 'Tres Cuartos Posterior & Radiador (135°)', compassBearing: 'SE', image: '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg' },
+      { angle: 180, label: 'Posterior Directo & Capó Basculante (180°)', compassBearing: 'S', image: '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg' },
+      { angle: 225, label: 'Tres Cuartos Posterior Izquierdo (225°)', compassBearing: 'SW', image: '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg' },
+      { angle: 270, label: 'Costado Izquierdo Cabina Panorámica (270°)', compassBearing: 'W', image: '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg' },
+      { angle: 315, label: 'Tres Cuartos Frontal Izquierdo (315°)', compassBearing: 'NW', image: '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg' },
     ],
     videos: [
       {
@@ -541,7 +541,7 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         category: 'exterior',
         duration: '1:55',
         resolution: '4K Ultra HD',
-        thumbnail: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=800&q=80',
+        thumbnail: '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg',
         videoUrl: '/videos/tmd-patio-km22.mp4',
         description: 'Geometría de elevación en Z para fuerza de desprendimiento de 162 kN y llenado óptimo de tolvas y camiones de 30 m³.',
         highlightPoints: ['Fuerza de desprendimiento 162 kN', 'Transmisión ZF automática', 'Balde para agregados 3.2 m³']
@@ -552,8 +552,8 @@ export const MACHINES_360_DATA: Record<string, Machine360Package> = {
         id: 'clg856-g1',
         title: 'Balde de Alta Capacidad 3.2 m³ con Cuchilla Atornillable',
         category: 'Implementos',
-        image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1000&q=80',
-        zoomImage: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=2000&q=90',
+        image: '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg',
+        zoomImage: '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg',
         caption: 'Carga útil de 5,000 kg para despacho rápido de grava, arena lavada y clinker.',
         technicalDetail: 'Tiempo de ciclo total (levantar, descargar, bajar) de solo 9.8 segundos.'
       }
@@ -602,7 +602,7 @@ export function getMachine360Package(machineId: string, fallbackMachine?: { name
   // Generate generic dynamic 360 package for remaining catalog machines
   const name = fallbackMachine?.name || 'Maquinaria Pesada TMD';
   const brand = fallbackMachine?.brand || 'LiuGong';
-  const img = fallbackMachine?.image || 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80';
+  const img = fallbackMachine?.image || '/assets/machinery/LiuGong_922E_Excavator_Official_Photo.jpg';
 
   return {
     machineId,
@@ -614,10 +614,10 @@ export function getMachine360Package(machineId: string, fallbackMachine?: { name
     soundType: 'excavator',
     frames: [
       { angle: 0, label: 'Vista Frontal (0°)', compassBearing: 'N', image: img },
-      { angle: 45, label: 'Ángulo Frontal Derecho (45°)', compassBearing: 'NE', image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 90, label: 'Costado Derecho (90°)', compassBearing: 'E', image: 'https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 180, label: 'Vista Posterior (180°)', compassBearing: 'S', image: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=1200&q=80' },
-      { angle: 270, label: 'Costado Izquierdo (270°)', compassBearing: 'W', image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80' },
+      { angle: 45, label: 'Ángulo Frontal Derecho (45°)', compassBearing: 'NE', image: '/assets/machinery/heavy_22_ton_liugong_922e_tracked.jpg' },
+      { angle: 90, label: 'Costado Derecho (90°)', compassBearing: 'E', image: '/assets/machinery/heavy_liugong_922e_hd_22_ton.jpg' },
+      { angle: 180, label: 'Vista Posterior (180°)', compassBearing: 'S', image: '/assets/machinery/LiuGong_922E_Long_Reach_Official_Photo.jpg' },
+      { angle: 270, label: 'Costado Izquierdo (270°)', compassBearing: 'W', image: '/assets/machinery/liugong_922e_heavy_hydraulic_excavator_with.jpg' },
     ],
     videos: [
       {

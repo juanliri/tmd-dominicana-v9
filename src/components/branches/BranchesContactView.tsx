@@ -15,6 +15,9 @@ import {
   Car,
   Wrench
 } from 'lucide-react';
+import tmdEntranceImg from '../../assets/images/tmd_sede_central_entrance_km22.jpg';
+import tmdPosterImg from '../../assets/images/patio_km22_video_poster_1789964094212.jpg';
+import tmdDealershipImg from '../../assets/images/tmd_dealership_bg_1790439101712.jpg';
 
 interface BranchesContactViewProps {
   onNavigate: (route: string) => void;
@@ -61,7 +64,7 @@ const BRANCHES: Branch[] = [
       'Laboratorio Certificado de Análisis de Aceites y Fluidos',
       'Base de Despacho Central para Camionetas Móviles SOS'
     ],
-    image: 'https://images.unsplash.com/photo-1541888946425-d0fbb18086f6?auto=format&fit=crop&w=1200&q=80',
+    image: tmdEntranceImg,
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30278.43!2d-70.02!3d18.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDMzJzAwLjAiTiA3MMKwMDEnMDAuMCJX!5e0!3m2!1ses!2sdo!4v1600000000000',
     wazeUrl: 'https://waze.com/ul?q=Autopista+Duarte+Km+22+Tecnomaquinarias+Diesel',
     googleMapsUrl: 'https://maps.google.com/?q=Autopista+Duarte+Km+22+Tecnomaquinarias+Diesel+Dominicana',
@@ -85,7 +88,7 @@ const BRANCHES: Branch[] = [
       'Bahías de Mantenimiento Preventivo Rápido',
       'Atención Directa a Minas de Áridos y Obras en Puerto Plata / La Vega'
     ],
-    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80',
+    image: tmdPosterImg,
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60156.4!2d-70.7!3d19.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDI3JzAwLjAiTiA3MMKwNDInMDAuMCJX!5e0!3m2!1ses!2sdo!4v1600000000000',
     wazeUrl: 'https://waze.com/ul?q=Santiago+Circunvalacion+Norte+Tecnomaquinarias',
     googleMapsUrl: 'https://maps.google.com/?q=Circunvalacion+Norte+Santiago+Tecnomaquinarias+Diesel',
@@ -109,7 +112,7 @@ const BRANCHES: Branch[] = [
       'Servicio Técnico SOS para Generadores Diésel y Torres de Luz',
       'Despacho Exprés de Aceites Hidráulicos y Elementos Filtrantes'
     ],
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80',
+    image: tmdDealershipImg,
     mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60156.4!2d-68.4!3d18.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDM2JzAwLjAiTiA2OMKwMjQnMDAuMCJX!5e0!3m2!1ses!2sdo!4v1600000000000',
     wazeUrl: 'https://waze.com/ul?q=Bavaro+Boulevard+Turistico+Tecnomaquinarias',
     googleMapsUrl: 'https://maps.google.com/?q=Boulevard+Turistico+del+Este+Veron+Tecnomaquinarias',

@@ -135,36 +135,36 @@ function resolveMachineImageUrl(item: any, brand: string, category: string): str
 
   if (b.includes('liugong')) {
     if (c.includes('cargador') || c.includes('loader')) {
-      return 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80';
+      return '/assets/machinery/LiuGong_856H_Wheel_Loader_Official_Photo.jpg';
     }
     if (c.includes('motoniveladora') || c.includes('grader')) {
-      return 'https://images.unsplash.com/photo-1508873696983-2df5293cb32b?auto=format&fit=crop&w=800&q=80';
+      return '/assets/machinery/LiuGong_922E_Excavator_Official_Photo.jpg';
     }
     if (c.includes('bulldozer') || c.includes('topador')) {
-      return 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80';
+      return '/assets/machinery/heavy_liugong_922e_hd_22_ton.jpg';
     }
-    return 'https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=800&q=80';
+    return '/assets/machinery/LiuGong_922E_Long_Reach_Official_Photo.jpg';
   }
 
   if (b.includes('kubota')) {
     if (c.includes('mini') || c.includes('excavador')) {
-      return 'https://images.unsplash.com/photo-1580901368919-7738efb0f87e?auto=format&fit=crop&w=800&q=80';
+      return '/assets/machinery/Kubota_Main-Category-Excavators-2048x1152.jpg';
     }
     if (c.includes('ctl') || c.includes('cargador')) {
-      return 'https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=80';
+      return '/assets/machinery/Kubota_Main-Category-Utility-Tractor-Implements.jpg';
     }
-    return 'https://images.unsplash.com/photo-1530267981375-f0de937f5f13?auto=format&fit=crop&w=800&q=80';
+    return '/assets/machinery/Kubota_Industry-construction-1360x765.jpg';
   }
 
   if (b.includes('ls tractor')) {
-    return 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80';
+    return '/assets/machinery/heavy_blue_agricultural_tractor_ls_mt7.jpg';
   }
 
   if (b.includes('yanmar')) {
     if (c.includes('cosechadora') || c.includes('harvester')) {
-      return 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=80';
+      return '/assets/machinery/rugged_utility_farm_tractor_with_heavy.jpg';
     }
-    return 'https://images.unsplash.com/photo-1530267981375-f0de937f5f13?auto=format&fit=crop&w=800&q=80';
+    return '/assets/machinery/modern_high_performance_farm_tractor_with.jpg';
   }
 
   if (c.includes('manipulador') || c.includes('loadall')) {

@@ -22,7 +22,7 @@ export const IN_HOUSE_PARTS_CATALOG: Part[] = [
     compatibleModels: ['JCB 3CX', 'LiuGong 922E', 'Cummins QSB6.7', 'Perkins 1104D'],
     priceUsd: 28.50,
     stockQty: 85,
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/machinery/clean_new_jcb_oem_diesel_fuel.jpg',
     description: 'Filtro de flujo pleno Donaldson Synteq con micraje de alta retención para proteger cojinetes de biela y bancada en motores diésel de trabajo continuo.',
     isOem: true,
     deliveryTimeHours: 12
@@ -37,7 +37,7 @@ export const IN_HOUSE_PARTS_CATALOG: Part[] = [
     compatibleModels: ['Cummins QSB6.7', 'Cummins QSL9', 'LiuGong 922E', 'LiuGong CLG856H'],
     priceUsd: 46.00,
     stockQty: 60,
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/machinery/brand_new_genuine_yellow_and_black.jpg',
     description: 'Separador de agua primario con vaso transparente y sensor de drenaje. Vital para proteger bombas de inyección Common-Rail en RD.',
     isOem: true,
     deliveryTimeHours: 12
@@ -52,7 +52,7 @@ export const IN_HOUSE_PARTS_CATALOG: Part[] = [
     compatibleModels: ['LiuGong 922E', 'JCB 220X', 'Caterpillar 320D', 'Komatsu PC200'],
     priceUsd: 34.00,
     stockQty: 180,
-    image: 'https://images.unsplash.com/photo-1508873696983-2df5293cb32b?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/machinery/JCB_Ripper_tooth.jpg',
     description: 'Diente forjado en acero aleado al cromo-molibdeno tratado térmicamente (500 HB) para máxima penetración en roca y agregados.',
     isOem: true,
     deliveryTimeHours: 12
@@ -67,7 +67,7 @@ export const IN_HOUSE_PARTS_CATALOG: Part[] = [
     compatibleModels: ['JCB 3CX Eco', 'JCB 3CX Super', 'JCB 4CX'],
     priceUsd: 95.00,
     stockQty: 30,
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/machinery/close_up_industrial_macro_photo_of.jpg',
     description: 'Juego de sellos originales de poliuretano de alta presión con anillos de respaldo de teflón y sellos limpiadores de vástago.',
     isOem: true,
     deliveryTimeHours: 24
@@ -82,7 +82,7 @@ export const IN_HOUSE_PARTS_CATALOG: Part[] = [
     compatibleModels: ['LiuGong 922E', 'LiuGong 920E', 'LiuGong 925E'],
     priceUsd: 145.00,
     stockQty: 40,
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80',
+    image: '/assets/machinery/technical_photography_of_excavator_undercarriage_track.jpg',
     description: 'Rodillo forjado endurecido por inducción con sellos flotantes Duo-Cone libres de mantenimiento de por vida.',
     isOem: true,
     deliveryTimeHours: 24

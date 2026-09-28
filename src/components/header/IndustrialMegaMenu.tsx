@@ -120,8 +120,12 @@ export const IndustrialMegaMenu: React.FC<IndustrialMegaMenuProps> = ({
 
   const handleTabClick = (tabId: MegaMenuTabId) => {
     if (tabHoverTimeoutRef.current) clearTimeout(tabHoverTimeoutRef.current);
-    setActiveTab(tabId);
-    if (onSelectSegment) onSelectSegment(tabId);
+    if (tabId === 'heavy_machinery') handleActionNavigate('#/machinery-hub');
+    else if (tabId === 'contractor_deploy') handleActionNavigate('#/rental-hub');
+    else if (tabId === 'parts_service') handleActionNavigate('#/parts-hub');
+    else if (tabId === 'gov_bids') handleActionNavigate('#/services-hub');
+    else if (tabId === 'brands') handleActionNavigate('#/brands-directory');
+    else handleActionNavigate('#/machinery-hub');
   };
 
   const currentTabConfig = TAB_CONFIGS.find(t => t.id === activeTab) || TAB_CONFIGS[0];

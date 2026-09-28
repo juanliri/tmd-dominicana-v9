@@ -737,11 +737,11 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => {
               handleCloseMegaMenuImmediately();
               handleCloseServicesDropdownImmediately();
-              handleNav('#/machinery');
+              handleNav('#/machinery-hub');
             }}
             aria-expanded={megaMenuOpen && (activeSegment === 'heavy_machinery' || activeSegment === 'construction')}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-              currentRoute === '#/machinery'
+              currentRoute === '#/machinery' || currentRoute === '#/machinery-hub'
                 ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
                 : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
@@ -760,11 +760,11 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => {
               handleCloseMegaMenuImmediately();
               handleCloseServicesDropdownImmediately();
-              handleNav('#/rental');
+              handleNav('#/rental-hub');
             }}
             aria-expanded={megaMenuOpen && (activeSegment === 'contractor_deploy' || activeSegment === 'contractors')}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-              currentRoute === '#/rental'
+              currentRoute === '#/rental' || currentRoute === '#/rental-hub'
                 ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
                 : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
@@ -783,11 +783,11 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => {
               handleCloseMegaMenuImmediately();
               handleCloseServicesDropdownImmediately();
-              handleNav('#/parts');
+              handleNav('#/parts-hub');
             }}
             aria-expanded={megaMenuOpen && (activeSegment === 'parts' || activeSegment === 'parts_service')}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-              currentRoute === '#/parts'
+              currentRoute === '#/parts' || currentRoute === '#/parts-hub'
                 ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
                 : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
@@ -798,22 +798,20 @@ export const Header: React.FC<HeaderProps> = ({
             }`} />
           </motion.button>
 
-          {/* 5. MÁS SERVICIOS ▾ (Grouped Corporate & Ancillary Corridors Dropdown) */}
+          {/* 5. SERVICIOS ▾ */}
           <div className="relative">
             <motion.button
               whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
               whileTap={{ scale: 0.97 }}
               onMouseEnter={handleOpenServicesDropdown}
               onClick={() => {
-                if (servicesDropdownOpen) {
-                  handleCloseServicesDropdownImmediately();
-                } else {
-                  handleOpenServicesDropdown();
-                }
+                handleCloseMegaMenuImmediately();
+                handleCloseServicesDropdownImmediately();
+                handleNav('#/services-hub');
               }}
               aria-expanded={servicesDropdownOpen}
               className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-                servicesDropdownOpen || ['#/service', '#/tech-docs', '#/about', '#/trade-in', '#/emergency-dispatch', '#/oil-lab', '#/livelink'].includes(currentRoute)
+                servicesDropdownOpen || currentRoute === '#/services-hub' || ['#/service', '#/tech-docs', '#/about', '#/trade-in', '#/emergency-dispatch', '#/oil-lab', '#/livelink'].includes(currentRoute)
                   ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
                   : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
               }`}

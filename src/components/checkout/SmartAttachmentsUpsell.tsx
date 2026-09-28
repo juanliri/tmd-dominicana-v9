@@ -37,7 +37,7 @@ const RECOMMENDED_ATTACHMENTS: OptionalAttachment[] = [
     priceUsd: 6850,
     weightKg: 850,
     specs: 'Flujo 90-120 L/min • Presión 150-170 bar • Cincel 100mm',
-    image: 'https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?auto=format&fit=crop&w=400&q=80'
+    image: '/assets/machinery/JCB_Contractor_breakers.jpg'
   },
   {
     id: 'att_quick_coupler_20t',
@@ -48,7 +48,7 @@ const RECOMMENDED_ATTACHMENTS: OptionalAttachment[] = [
     priceUsd: 2450,
     weightKg: 280,
     specs: 'Válvula de retención de seguridad • Cambio de balde en 15s',
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80'
+    image: '/assets/machinery/JCB_Raptor_Tiltrotator.jpg'
   },
   {
     id: 'att_trench_bucket_450',
@@ -59,7 +59,7 @@ const RECOMMENDED_ATTACHMENTS: OptionalAttachment[] = [
     priceUsd: 1280,
     weightKg: 310,
     specs: 'Acero Hardox 450 • 3 Dientes tipo tigre • Capacidad 0.28 m³',
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80'
+    image: '/assets/machinery/JCB_Tapered_ditching_bucket.jpg'
   },
   {
     id: 'att_ditch_clean_1500',
@@ -70,7 +70,7 @@ const RECOMMENDED_ATTACHMENTS: OptionalAttachment[] = [
     priceUsd: 2150,
     weightKg: 490,
     specs: 'Inclinación hidráulica ±45° • Cuchilla reversible apernada',
-    image: 'https://images.unsplash.com/photo-1541888946425-d0fbb1861593?auto=format&fit=crop&w=400&q=80'
+    image: '/assets/machinery/JCB_Tilting_grading_bucket.jpg'
   },
   {
     id: 'att_pm_filter_combo_500h',
@@ -81,7 +81,7 @@ const RECOMMENDED_ATTACHMENTS: OptionalAttachment[] = [
     priceUsd: 385,
     weightKg: 18,
     specs: 'Filtro aceite + 2 Combustible Donaldson + Primario aire',
-    image: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=400&q=80'
+    image: '/assets/machinery/clean_new_jcb_oem_diesel_fuel.jpg'
   }
 ];
 

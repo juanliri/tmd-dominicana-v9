@@ -38,7 +38,7 @@ const SHOP_BY_CATEGORY = [
     id: 'excavadoras',
     title: 'Excavadoras & Retroexcavadoras',
     subtitle: 'JCB 3CX, 4CX, JS220 y LiuGong 922E',
-    image: 'https://www.jcb.com/globalassets/digizuite/66001-a_bhl_3cx_pro_1/Img_800x800',
+    image: SHOWROOM_MARKETING_ASSETS.jcb.banner,
     count: '12 modelos',
     route: '#/machinery?category=Retroexcavadoras',
     accent: 'from-amber-500/20 to-transparent'
@@ -47,7 +47,7 @@ const SHOP_BY_CATEGORY = [
     id: 'cargadores',
     title: 'Palas Cargadoras & Minería',
     subtitle: 'LiuGong 856T, 835T y Kubota SVL97-2',
-    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80',
+    image: SHOWROOM_MARKETING_ASSETS.liugong.banner,
     count: '8 modelos',
     route: '#/machinery?category=Cargadores',
     accent: 'from-emerald-500/20 to-transparent'
@@ -65,7 +65,7 @@ const SHOP_BY_CATEGORY = [
     id: 'telescopicos',
     title: 'Manipuladores Telescópicos',
     subtitle: 'JCB 540-170 Loadall 17m y 510-56',
-    image: 'https://www.jcb.com/globalassets/digizuite/64829-a_thl_510_56_t4f_5/Img_800x800',
+    image: '/assets/machinery/JCB_510-56.jpg',
     count: '4 modelos',
     route: '#/machinery?category=Manipuladores',
     accent: 'from-indigo-500/20 to-transparent'
@@ -74,7 +74,7 @@ const SHOP_BY_CATEGORY = [
     id: 'motoniveladoras',
     title: 'Motoniveladoras Viales',
     subtitle: 'LiuGong 4180D MOPC y 4156M',
-    image: 'https://images.unsplash.com/photo-1508873696983-2df5293cb32b?auto=format&fit=crop&w=800&q=80',
+    image: SHOWROOM_MARKETING_ASSETS.showroomBanner,
     count: '3 modelos',
     route: '#/machinery?category=Motoniveladoras',
     accent: 'from-orange-500/20 to-transparent'

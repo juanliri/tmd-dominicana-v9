@@ -104,7 +104,7 @@ export const WhatsappPartOcrScannerModal: React.FC<WhatsappPartOcrScannerModalPr
 
     // Simulated image thumbnail based on detected part
     const sample = SAMPLE_OCR_DETECTIONS[sampleIndex];
-    setSelectedImage(`https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80`);
+    setSelectedImage('/assets/machinery/macro_photography_of_a_disassembled_diesel.jpg');
 
     setTimeout(() => {
       setIsScanning(false);

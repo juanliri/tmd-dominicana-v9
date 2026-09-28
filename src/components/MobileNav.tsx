@@ -29,8 +29,8 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentRoute, onNavigate }
 
   const items = [
     { label: 'INICIO', route: '#/home', icon: Home },
-    { label: 'EQUIPOS', route: '#/machinery', icon: HardHat },
-    { label: 'REPUESTOS', route: '#/parts', icon: Cog },
+    { label: 'EQUIPOS', route: '#/machinery-hub', icon: HardHat },
+    { label: 'REPUESTOS', route: '#/parts-hub', icon: Cog },
     { 
       label: isAdmin ? 'ADMIN' : isStaff ? 'OFICINA' : 'PORTAL', 
       route: '#/portal', 
