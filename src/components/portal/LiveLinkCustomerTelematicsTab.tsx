@@ -53,7 +53,10 @@ import { RemoteImmobilizerModal } from '../telematics/RemoteImmobilizerModal';
 import { DefFluidLevelModal } from '../telematics/DefFluidLevelModal';
 import { ImpactGForceMonitorModal } from '../telematics/ImpactGForceMonitorModal';
 import { TmdProMemberPointsModal } from '../loyalty/TmdProMemberPointsModal';
-import { Leaf, Award } from 'lucide-react';
+import { TmdPublicApiKeysModal } from '../api/TmdPublicApiKeysModal';
+import { DtcAlertNotificationRulesModal } from '../telematics/DtcAlertNotificationRulesModal';
+import { PredictiveMaintenanceScheduleModal } from '../telematics/PredictiveMaintenanceScheduleModal';
+import { Leaf, Award, Key } from 'lucide-react';
 
 interface LiveLinkCustomerTelematicsTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -103,6 +106,9 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
   const [showDefModal, setShowDefModal] = useState<boolean>(false);
   const [showImpactModal, setShowImpactModal] = useState<boolean>(false);
   const [showPointsModal, setShowPointsModal] = useState<boolean>(false);
+  const [showApiKeysModal, setShowApiKeysModal] = useState<boolean>(false);
+  const [showDtcAlertRulesModal, setShowDtcAlertRulesModal] = useState<boolean>(false);
+  const [showPredictivePmModal, setShowPredictivePmModal] = useState<boolean>(false);
 
   const loadData = async () => {
     try {
@@ -271,6 +277,39 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
             >
               <Award className="w-3.5 h-3.5" />
               <span>Club Pro-Member</span>
+            </button>
+
+            {/* Task #48: Predictive Maintenance Schedule Modal */}
+            <button
+              type="button"
+              onClick={() => setShowPredictivePmModal(true)}
+              className="px-4 py-2.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-amber-400 border border-amber-400/40 font-display uppercase tracking-wider font-bold text-xs flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
+              title="Mantenimiento preventivo predictivo basado en horómetros CAN-bus"
+            >
+              <Wrench className="w-3.5 h-3.5" />
+              <span>Mantenimiento J1939</span>
+            </button>
+
+            {/* Task #46: DTC Alert Push & SMS Rules Modal */}
+            <button
+              type="button"
+              onClick={() => setShowDtcAlertRulesModal(true)}
+              className="px-4 py-2.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-red-400 border border-red-500/40 font-display uppercase tracking-wider font-bold text-xs flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
+              title="Reglas de alertas Push, SMS y WhatsApp ante códigos de falla críticos"
+            >
+              <Bell className="w-3.5 h-3.5" />
+              <span>Alertas DTC</span>
+            </button>
+
+            {/* Task #55: Corporate REST API & Webhooks Modal */}
+            <button
+              type="button"
+              onClick={() => setShowApiKeysModal(true)}
+              className="px-4 py-2.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 font-display uppercase tracking-wider font-bold text-xs flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
+              title="Claves de API REST y Webhooks para ERPs corporativos (Malespín, Estrella)"
+            >
+              <Key className="w-3.5 h-3.5 text-amber-400" />
+              <span>API Clientes ERP</span>
             </button>
 
             <button
@@ -1340,6 +1379,28 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
         onClose={() => setShowPointsModal(false)}
         contractorName={userProfile?.companyName || 'Constructora Dominicana S.R.L.'}
         rnc={userProfile?.rnc || '1-01-02412-2'}
+      />
+
+      {/* Task #55: Corporate REST API & Webhooks Modal */}
+      <TmdPublicApiKeysModal
+        isOpen={showApiKeysModal}
+        onClose={() => setShowApiKeysModal(false)}
+      />
+
+      {/* Task #46: DTC Alert Push & SMS Rules Modal */}
+      <DtcAlertNotificationRulesModal
+        isOpen={showDtcAlertRulesModal}
+        onClose={() => setShowDtcAlertRulesModal(false)}
+        machineSerial={selectedUnit?.serialNumber}
+      />
+
+      {/* Task #48: Predictive Maintenance Schedule Modal */}
+      <PredictiveMaintenanceScheduleModal
+        isOpen={showPredictivePmModal}
+        onClose={() => setShowPredictivePmModal(false)}
+        machineSerial={selectedUnit?.serialNumber}
+        currentHours={selectedUnit?.operatingHours}
+        onBookService={onOpenServiceTab}
       />
 
     </div>

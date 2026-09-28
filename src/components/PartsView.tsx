@@ -57,6 +57,7 @@ import { RemanExchangeCatalogModal } from './reman/RemanExchangeCatalogModal';
 import { CriticalStockReorderModal } from './parts/CriticalStockReorderModal';
 import { MobileTruckInventoryModal } from './parts/MobileTruckInventoryModal';
 import { PartQuickViewModal } from './parts/PartQuickViewModal';
+import { WhatsappPartOcrScannerModal } from './parts/WhatsappPartOcrScannerModal';
 import { TextHighlight } from './common/TextHighlight';
 import { downloadProductQrCode } from '../utils/qrExporter';
 
@@ -229,6 +230,7 @@ export const PartsView = React.memo<PartsViewProps>(({
   const [isMobileTruckOpen, setIsMobileTruckOpen] = useState<boolean>(false);
   const [isExportPdfOpen, setIsExportPdfOpen] = useState<boolean>(false);
   const [quickViewPart, setQuickViewPart] = useState<Part | null>(null);
+  const [isOcrScannerOpen, setIsOcrScannerOpen] = useState<boolean>(false);
 
 
 
@@ -534,6 +536,17 @@ export const PartsView = React.memo<PartsViewProps>(({
             >
               <Package className="w-3.5 h-3.5 text-amber-400" />
               <span>REORDEN STOCK</span>
+            </button>
+
+            {/* Task #98: Solicitud de Repuestos Vía Foto por WhatsApp con OCR */}
+            <button
+              type="button"
+              onClick={() => setIsOcrScannerOpen(true)}
+              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border-emerald-500/30 shadow-xs"
+              title="Escanear foto de pieza grabada u oxidada con IA OCR y consultar por WhatsApp Mostrador"
+            >
+              <Eye className="w-3.5 h-3.5 text-emerald-400" />
+              <span>FOTO-OCR WHATSAPP</span>
             </button>
 
             {/* Task #99: Mobile Service Truck Inventory Sync */}
@@ -1347,6 +1360,13 @@ export const PartsView = React.memo<PartsViewProps>(({
         isOpen={Boolean(quickViewPart)}
         onClose={() => setQuickViewPart(null)}
         onAddToCart={(p) => addToCart(p)}
+      />
+
+      {/* Task #98: WhatsApp Part Photo OCR Scanner Modal */}
+      <WhatsappPartOcrScannerModal
+        isOpen={isOcrScannerOpen}
+        onClose={() => setIsOcrScannerOpen(false)}
+        onSelectPart={(p) => setSearchTerm(p)}
       />
     </div>
   );

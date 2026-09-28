@@ -67,6 +67,8 @@ import { TiresBatteriesWarrantyModal } from '../workshop/TiresBatteriesWarrantyM
 import { WorkshopEquipmentIntakeModal } from '../workshop/WorkshopEquipmentIntakeModal';
 import { FluidSpectrometrySosModal } from '../workshop/FluidSpectrometrySosModal';
 import { WorkshopBayPlannerModal } from '../workshop/WorkshopBayPlannerModal';
+import { OperatorCertificationPortalModal } from '../training/OperatorCertificationPortalModal';
+import { BatteryWarrantyTraceabilityModal } from '../parts/BatteryWarrantyTraceabilityModal';
 
 interface ServiceHistoryTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -109,6 +111,8 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
   const [showIntakeModal, setShowIntakeModal] = useState<boolean>(false);
   const [showSpectrometryModal, setShowSpectrometryModal] = useState<boolean>(false);
   const [showBayPlannerModal, setShowBayPlannerModal] = useState<boolean>(false);
+  const [showOperatorCertModal, setShowOperatorCertModal] = useState<boolean>(false);
+  const [showBatteryWarrantyModal, setShowBatteryWarrantyModal] = useState<boolean>(false);
   const [newUnitId, setNewUnitId] = useState<string>('');
   const [newBrand, setNewBrand] = useState<string>('LiuGong');
   const [newModel, setNewModel] = useState<string>('');
@@ -495,6 +499,26 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           >
             <ShieldCheck className="w-4 h-4 text-amber-400" />
             <span>Garantías Gomas/Baterías</span>
+          </button>
+
+          {/* Task #78: Operator Certification & Accredited Cards */}
+          <button
+            onClick={() => setShowOperatorCertModal(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-amber-500/30 text-amber-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
+            title="Carnet Oficial y Acreditación de Operadores de Maquinaria TMD Academy"
+          >
+            <Award className="w-4 h-4 text-amber-400" />
+            <span>Operadores TMD</span>
+          </button>
+
+          {/* Task #98: Battery & Inverter Batch Traceability & Warranty */}
+          <button
+            onClick={() => setShowBatteryWarrantyModal(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-emerald-500/30 text-emerald-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
+            title="Trazabilidad por Lote y Conductancia CCA de Baterías e Inversores"
+          >
+            <Activity className="w-4 h-4 text-emerald-400" />
+            <span>Lotes Baterías/CCA</span>
           </button>
 
           {/* Task #82: Equipment Intake & 4-Photo Reception Modal Trigger */}
@@ -1388,6 +1412,20 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
       <WorkshopBayPlannerModal
         isOpen={showBayPlannerModal}
         onClose={() => setShowBayPlannerModal(false)}
+      />
+
+      {/* Task #78: Operator Certification & Accredited Cards Modal */}
+      <OperatorCertificationPortalModal
+        isOpen={showOperatorCertModal}
+        onClose={() => setShowOperatorCertModal(false)}
+        contractorName={userProfile?.companyName || 'Constructora Dominicana S.R.L.'}
+      />
+
+      {/* Task #98: Battery & Inverter Batch Traceability & Warranty Modal */}
+      <BatteryWarrantyTraceabilityModal
+        isOpen={showBatteryWarrantyModal}
+        onClose={() => setShowBatteryWarrantyModal(false)}
+        machineSerial={selectedMachineForDetail?.serialNumber}
       />
     </div>
   );
