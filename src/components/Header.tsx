@@ -46,6 +46,7 @@ import { useNotifications } from '../context/NotificationContext';
 import { useOfflineSync } from '../context/OfflineSyncContext';
 import { IndustrialMegaMenu, IndustrialSegmentKey } from './header/IndustrialMegaMenu';
 import { MobileTabletIndustrialMenu } from './header/MobileTabletIndustrialMenu';
+import { ServicesDropdown } from './header/ServicesDropdown';
 import { TMDLogo } from './common/BrandLogos';
 import { NetworkPingBadge } from './common/NetworkPingBadge';
 import { BcrdCurrencyRatesModal } from './finance/BcrdCurrencyRatesModal';
@@ -82,6 +83,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [isMenuPinned, setIsMenuPinned] = useState(false);
   const [activeSegment, setActiveSegment] = useState<IndustrialSegmentKey>('construction');
   const [isScrolled, setIsScrolled] = useState(false);
@@ -89,6 +91,7 @@ export const Header: React.FC<HeaderProps> = ({
   const [isBcrdModalOpen, setIsBcrdModalOpen] = useState<boolean>(false);
 
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const servicesDropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const headerRef = useRef<HTMLElement | null>(null);
 
   const totalBadges = totalCartCount + totalQuotesCount;
@@ -109,8 +112,13 @@ export const Header: React.FC<HeaderProps> = ({
           clearTimeout(closeTimeoutRef.current);
           closeTimeoutRef.current = null;
         }
+        if (servicesDropdownTimeoutRef.current) {
+          clearTimeout(servicesDropdownTimeoutRef.current);
+          servicesDropdownTimeoutRef.current = null;
+        }
         setIsMenuPinned(false);
         setMegaMenuOpen(false);
+        setServicesDropdownOpen(false);
         setMobileMenuOpen(false);
       }
     };
@@ -120,8 +128,13 @@ export const Header: React.FC<HeaderProps> = ({
           clearTimeout(closeTimeoutRef.current);
           closeTimeoutRef.current = null;
         }
+        if (servicesDropdownTimeoutRef.current) {
+          clearTimeout(servicesDropdownTimeoutRef.current);
+          servicesDropdownTimeoutRef.current = null;
+        }
         setIsMenuPinned(false);
         setMegaMenuOpen(false);
+        setServicesDropdownOpen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -137,6 +150,7 @@ export const Header: React.FC<HeaderProps> = ({
       clearTimeout(closeTimeoutRef.current);
       closeTimeoutRef.current = null;
     }
+    handleCloseServicesDropdownImmediately();
     setActiveSegment(segment);
     setMegaMenuOpen(true);
   };
@@ -178,8 +192,47 @@ export const Header: React.FC<HeaderProps> = ({
     }
   };
 
+  // Services Dropdown Handlers
+  const handleOpenServicesDropdown = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    if (servicesDropdownTimeoutRef.current) {
+      clearTimeout(servicesDropdownTimeoutRef.current);
+      servicesDropdownTimeoutRef.current = null;
+    }
+    setMegaMenuOpen(false);
+    setServicesDropdownOpen(true);
+  };
+
+  const handleScheduleServicesDropdownClose = () => {
+    if (servicesDropdownTimeoutRef.current) {
+      clearTimeout(servicesDropdownTimeoutRef.current);
+    }
+    servicesDropdownTimeoutRef.current = setTimeout(() => {
+      setServicesDropdownOpen(false);
+    }, 250);
+  };
+
+  const handleCancelServicesDropdownClose = () => {
+    if (servicesDropdownTimeoutRef.current) {
+      clearTimeout(servicesDropdownTimeoutRef.current);
+      servicesDropdownTimeoutRef.current = null;
+    }
+  };
+
+  const handleCloseServicesDropdownImmediately = () => {
+    if (servicesDropdownTimeoutRef.current) {
+      clearTimeout(servicesDropdownTimeoutRef.current);
+      servicesDropdownTimeoutRef.current = null;
+    }
+    setServicesDropdownOpen(false);
+  };
+
   const handleNav = (route: string) => {
     handleForceCloseMegaMenu();
+    handleCloseServicesDropdownImmediately();
     setMobileMenuOpen(false);
     onNavigate(route);
   };
@@ -522,30 +575,58 @@ export const Header: React.FC<HeaderProps> = ({
           ? 'bg-white/95 dark:bg-[#06060a]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/[0.08] shadow-lg shadow-black/5 dark:shadow-black/50' 
           : 'bg-white/90 dark:bg-[#0a0a10]/90 backdrop-blur-xl border-b border-slate-200/60 dark:border-white/[0.06]'
       }`}
-      onMouseLeave={handleScheduleMegaMenuClose}
+      onMouseLeave={() => {
+        handleScheduleMegaMenuClose();
+        handleScheduleServicesDropdownClose();
+      }}
     >
       {/* Sleek Top Micro-Bar (On top of menu bar) */}
       <div 
-        onMouseEnter={handleCloseMegaMenuImmediately}
-        className="bg-slate-100/95 dark:bg-[#050508]/95 backdrop-blur-md text-slate-600 dark:text-zinc-400 text-[11px] py-1.5 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-slate-200/80 dark:border-white/[0.06] hidden sm:flex items-center justify-between"
+        onMouseEnter={() => {
+          handleCloseMegaMenuImmediately();
+          handleCloseServicesDropdownImmediately();
+        }}
+        className="bg-slate-100/95 dark:bg-[#050508]/95 backdrop-blur-md text-slate-600 dark:text-zinc-400 text-[11px] py-1.5 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-slate-200/80 dark:border-white/[0.06] hidden sm:flex items-center justify-between gap-3"
       >
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 shrink-0">
           <span className="flex items-center gap-1.5 text-slate-800 dark:text-zinc-200 font-bold uppercase tracking-wider text-[10px]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)] animate-pulse" />
             <span className="text-amber-600 dark:text-brand-gold">DISTRIBUIDOR OFICIAL</span> REPÚBLICA DOMINICANA
           </span>
-          <span className="text-slate-300 dark:text-zinc-700 hidden md:inline">•</span>
-          <span className="hidden md:inline text-[10px] uppercase font-bold text-slate-500 dark:text-zinc-400 tracking-wider">SEDE CENTRAL KM 22, AUTOPISTA DUARTE</span>
+          <span className="text-slate-300 dark:text-zinc-700 hidden 2xl:inline">•</span>
+          <span className="hidden 2xl:inline text-[10px] uppercase font-bold text-slate-500 dark:text-zinc-400 tracking-wider">
+            SEDE CENTRAL KM 22, AUTOPISTA DUARTE
+          </span>
         </div>
 
-        <div className="flex items-center gap-3">
+        {/* Center: Search Bar Trigger Moved to Top Micro-Bar */}
+        {onOpenSearch && (
+          <div className="hidden lg:flex items-center flex-1 max-w-xs xl:max-w-md mx-3">
+            <button
+              onClick={onOpenSearch}
+              aria-label="Buscar en catálogo, repuestos y fichas"
+              className="w-full flex items-center justify-between px-3 py-1 rounded-[4px] bg-white dark:bg-[#0c0d12] border border-slate-200 dark:border-white/[0.08] hover:border-amber-400 dark:hover:border-brand-gold-dark/50 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer shadow-2xs group"
+              title="Buscar catálogo, repuestos o fichas técnicas (⌘K o Ctrl+K)"
+            >
+              <span className="flex items-center gap-2 text-[11px] font-medium">
+                <Search className="w-3.5 h-3.5 text-amber-500 dark:text-brand-gold group-hover:scale-110 transition-transform" />
+                <span className="truncate">Buscar maquinaria, repuestos o fichas...</span>
+              </span>
+              <kbd className="inline-flex items-center px-1.5 py-0.5 rounded-[2px] text-[9px] font-mono font-bold bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-400 border border-slate-200 dark:border-zinc-700 shrink-0">
+                ⌘K
+              </kbd>
+            </button>
+          </div>
+        )}
+
+        <div className="flex items-center gap-3 shrink-0">
           {/* Emergencias 24/7 Hotline */}
           <a
             href="tel:18095601234"
             className="flex items-center gap-1.5 text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold transition-colors font-medium text-[10px] uppercase tracking-wider"
           >
             <Phone className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
-            <span className="hidden lg:inline text-slate-500 dark:text-zinc-400">EMERGENCIAS 24/7: </span>
+            <span className="hidden xl:inline text-slate-500 dark:text-zinc-400">EMERGENCIAS 24/7: </span>
             <strong className="text-slate-900 dark:text-white font-mono font-bold">+1 (809) 560-1234</strong>
           </a>
 
@@ -654,21 +735,27 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Brand Logo */}
         <button
           onClick={() => handleNav('#/home')}
-          onMouseEnter={handleCloseMegaMenuImmediately}
+          onMouseEnter={() => {
+            handleCloseMegaMenuImmediately();
+            handleCloseServicesDropdownImmediately();
+          }}
           className="flex items-center gap-3 text-left group focus:outline-none cursor-pointer shrink-0"
         >
           <TMDLogo variant="responsive" className="h-8 sm:h-10 group-hover:scale-103 transition-transform" />
         </button>
 
-        {/* Primary Desktop Navigation Links: Icon-Free, Short, Bold ALL CAPS */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 font-display">
-          {/* INICIO */}
+        {/* Primary Desktop Navigation Links: Streamlined 6-Corridor Architecture */}
+        <nav className="hidden lg:flex items-center gap-1 xl:gap-2 font-display">
+          {/* 1. INICIO */}
           <motion.button
             whileTap={{ scale: 0.97 }}
             onClick={() => handleNav('#/home')}
-            onMouseEnter={handleCloseMegaMenuImmediately}
+            onMouseEnter={() => {
+              handleCloseMegaMenuImmediately();
+              handleCloseServicesDropdownImmediately();
+            }}
             className={`px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-              currentRoute === '#/home' && !megaMenuOpen
+              currentRoute === '#/home' && !megaMenuOpen && !servicesDropdownOpen
                 ? 'text-slate-900 dark:text-white bg-slate-200 dark:bg-zinc-800/90 border border-slate-300 dark:border-zinc-700 shadow-xs'
                 : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
             }`}
@@ -676,13 +763,14 @@ export const Header: React.FC<HeaderProps> = ({
             INICIO
           </motion.button>
 
-          {/* Trigger 1: MAQUINARIA */}
+          {/* 2. MAQUINARIA ▾ */}
           <motion.button
             whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
             whileTap={{ scale: 0.97 }}
             onMouseEnter={() => handleOpenMegaMenu('heavy_machinery')}
             onClick={() => {
               handleCloseMegaMenuImmediately();
+              handleCloseServicesDropdownImmediately();
               handleNav('#/machinery');
             }}
             aria-expanded={megaMenuOpen && (activeSegment === 'heavy_machinery' || activeSegment === 'construction')}
@@ -698,13 +786,14 @@ export const Header: React.FC<HeaderProps> = ({
             }`} />
           </motion.button>
 
-          {/* Trigger 2: RENTA */}
+          {/* 3. RENTA ▾ */}
           <motion.button
             whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
             whileTap={{ scale: 0.97 }}
             onMouseEnter={() => handleOpenMegaMenu('contractor_deploy')}
             onClick={() => {
               handleCloseMegaMenuImmediately();
+              handleCloseServicesDropdownImmediately();
               handleNav('#/rental');
             }}
             aria-expanded={megaMenuOpen && (activeSegment === 'contractor_deploy' || activeSegment === 'contractors')}
@@ -720,13 +809,14 @@ export const Header: React.FC<HeaderProps> = ({
             }`} />
           </motion.button>
 
-          {/* Trigger 3: REPUESTOS */}
+          {/* 4. REPUESTOS ▾ */}
           <motion.button
             whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
             whileTap={{ scale: 0.97 }}
             onMouseEnter={() => handleOpenMegaMenu('parts')}
             onClick={() => {
               handleCloseMegaMenuImmediately();
+              handleCloseServicesDropdownImmediately();
               handleNav('#/parts');
             }}
             aria-expanded={megaMenuOpen && (activeSegment === 'parts' || activeSegment === 'parts_service')}
@@ -742,72 +832,53 @@ export const Header: React.FC<HeaderProps> = ({
             }`} />
           </motion.button>
 
-          {/* Trigger 4: SERVICIOS */}
-          <motion.button
-            whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
-            whileTap={{ scale: 0.97 }}
-            onMouseEnter={handleCloseMegaMenuImmediately}
-            onClick={() => {
-              handleCloseMegaMenuImmediately();
-              handleNav('#/service');
-            }}
-            className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-              currentRoute === '#/service'
-                ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
-                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
-            }`}
-          >
-            <span>SERVICIOS</span>
-          </motion.button>
+          {/* 5. MÁS SERVICIOS ▾ (Grouped Corporate & Ancillary Corridors Dropdown) */}
+          <div className="relative">
+            <motion.button
+              whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
+              whileTap={{ scale: 0.97 }}
+              onMouseEnter={handleOpenServicesDropdown}
+              onClick={() => {
+                if (servicesDropdownOpen) {
+                  handleCloseServicesDropdownImmediately();
+                } else {
+                  handleOpenServicesDropdown();
+                }
+              }}
+              aria-expanded={servicesDropdownOpen}
+              className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
+                servicesDropdownOpen || ['#/service', '#/tech-docs', '#/about', '#/trade-in', '#/emergency-dispatch', '#/oil-lab', '#/livelink'].includes(currentRoute)
+                  ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
+                  : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
+              }`}
+            >
+              <span>MÁS SERVICIOS</span>
+              <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
+                servicesDropdownOpen ? 'rotate-180 text-amber-500 dark:text-amber-400' : 'text-slate-400 dark:text-zinc-400'
+              }`} />
+            </motion.button>
 
-          {/* Trigger 5: LICITACIONES */}
-          <motion.button
-            whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
-            whileTap={{ scale: 0.97 }}
-            onMouseEnter={() => handleOpenMegaMenu('gov_bids')}
-            onClick={() => {
-              handleCloseMegaMenuImmediately();
-              handleNav('#/tech-docs');
-            }}
-            aria-expanded={megaMenuOpen && (activeSegment === 'gov_bids' || activeSegment === 'government')}
-            className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-              currentRoute === '#/tech-docs'
-                ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
-                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
-            }`}
-          >
-            <span>LICITACIONES</span>
-            <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${
-              megaMenuOpen && (activeSegment === 'gov_bids' || activeSegment === 'government') ? 'rotate-180 text-amber-500 dark:text-amber-400' : 'text-slate-400 dark:text-zinc-400'
-            }`} />
-          </motion.button>
+            <ServicesDropdown
+              isOpen={servicesDropdownOpen}
+              onClose={handleCloseServicesDropdownImmediately}
+              onNavigate={handleNav}
+              onMouseEnter={handleCancelServicesDropdownClose}
+              onMouseLeave={handleScheduleServicesDropdownClose}
+            />
+          </div>
 
-          {/* Trigger 6: NOSOTROS */}
-          <motion.button
-            whileHover={{ y: -1, transition: { type: 'spring', stiffness: 500, damping: 25 } }}
-            whileTap={{ scale: 0.97 }}
-            onMouseEnter={handleCloseMegaMenuImmediately}
-            onClick={() => {
-              handleCloseMegaMenuImmediately();
-              handleNav('#/about');
-            }}
-            className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-              currentRoute === '#/about'
-                ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
-                : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
-            }`}
-          >
-            <span>NOSOTROS</span>
-          </motion.button>
-
-          {/* PORTAL */}
+          {/* 6. PORTAL */}
           <motion.button
             whileTap={{ scale: 0.97 }}
             onClick={() => {
               handleCloseMegaMenuImmediately();
+              handleCloseServicesDropdownImmediately();
               handleNav('#/portal');
             }}
-            onMouseEnter={handleCloseMegaMenuImmediately}
+            onMouseEnter={() => {
+              handleCloseMegaMenuImmediately();
+              handleCloseServicesDropdownImmediately();
+            }}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
               currentRoute === '#/portal'
                 ? 'text-slate-900 dark:text-white bg-slate-200 dark:bg-zinc-800/90 border border-slate-300 dark:border-zinc-700'
@@ -823,21 +894,21 @@ export const Header: React.FC<HeaderProps> = ({
           </motion.button>
         </nav>
 
-        {/* Right Action Icons & Controls (Streamlined: Theme & Notifications moved to top bar) */}
+        {/* Right Action Icons & Controls */}
         <div className="flex items-center gap-2 sm:gap-2.5">
-          {/* Quick Omnibox Search Button */}
+          {/* Quick Omnibox Search Button on Mobile & Tablets (Shown when top bar search is hidden on < lg) */}
           {onOpenSearch && (
             <button
               onClick={onOpenSearch}
-              onMouseEnter={handleCloseMegaMenuImmediately}
+              onMouseEnter={() => {
+                handleCloseMegaMenuImmediately();
+                handleCloseServicesDropdownImmediately();
+              }}
               aria-label="Buscar en catálogo"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#09090f] border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:border-amber-400 dark:hover:border-brand-gold-dark/50 transition-colors cursor-pointer"
+              className="lg:hidden p-2 rounded-lg bg-slate-100 dark:bg-[#09090f] border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold transition-colors cursor-pointer"
+              title="Buscar (⌘K)"
             >
-              <Search className="w-3.5 h-3.5 text-amber-600 dark:text-brand-gold" />
-              <span className="hidden xl:inline text-xs font-black uppercase tracking-wider text-slate-500 dark:text-zinc-400">BUSCAR...</span>
-              <kbd className="hidden sm:inline-flex px-1.5 py-0.5 rounded-[2px] text-[10px] font-mono font-black bg-white dark:bg-[#14141c] text-amber-700 dark:text-brand-gold border border-slate-200 dark:border-white/[0.08]">
-                ⌘K
-              </kbd>
+              <Search className="w-4 h-4 text-amber-500 dark:text-brand-gold" />
             </button>
           )}
 
@@ -845,7 +916,10 @@ export const Header: React.FC<HeaderProps> = ({
           {onOpenQrScanner && (
             <button
               onClick={onOpenQrScanner}
-              onMouseEnter={handleCloseMegaMenuImmediately}
+              onMouseEnter={() => {
+                handleCloseMegaMenuImmediately();
+                handleCloseServicesDropdownImmediately();
+              }}
               aria-label="Escanear código QR de maquinaria o repuesto"
               className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#09090f] border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold hover:border-amber-400 dark:hover:border-brand-gold-dark/50 transition-colors cursor-pointer group"
               title="Escanear Código QR Industrial (Ctrl+Shift+Q)"
@@ -858,7 +932,10 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Cart / Cotización Button */}
           <button
             onClick={() => handleNav('#/checkout')}
-            onMouseEnter={handleCloseMegaMenuImmediately}
+            onMouseEnter={() => {
+              handleCloseMegaMenuImmediately();
+              handleCloseServicesDropdownImmediately();
+            }}
             aria-label="Ver cotización y carrito"
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg font-black uppercase tracking-wider text-xs transition-all cursor-pointer border ${
               totalBadges > 0
@@ -881,7 +958,10 @@ export const Header: React.FC<HeaderProps> = ({
           {isAdmin && (
             <button
               onClick={() => handleNav('#/admin-dashboard')}
-              onMouseEnter={handleCloseMegaMenuImmediately}
+              onMouseEnter={() => {
+                handleCloseMegaMenuImmediately();
+                handleCloseServicesDropdownImmediately();
+              }}
               className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all border border-slate-200 dark:border-white/[0.08] bg-slate-100 dark:bg-[#09090f] hover:bg-slate-200 dark:hover:bg-[#14141c] text-amber-700 dark:text-brand-gold cursor-pointer"
               title="Panel Administrativo"
             >
@@ -894,7 +974,10 @@ export const Header: React.FC<HeaderProps> = ({
           {isStaff && !isAdmin && (
             <button
               onClick={() => handleNav('#/portal')}
-              onMouseEnter={handleCloseMegaMenuImmediately}
+              onMouseEnter={() => {
+                handleCloseMegaMenuImmediately();
+                handleCloseServicesDropdownImmediately();
+              }}
               className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all border border-amber-300 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-950/30 hover:bg-amber-100 dark:hover:bg-amber-900/30 text-amber-800 dark:text-amber-400 cursor-pointer"
               title="Consola de Oficina & Ventas"
             >
