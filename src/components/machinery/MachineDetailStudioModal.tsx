@@ -60,6 +60,11 @@ import { DominicanSoilBucketSelector } from './DominicanSoilBucketSelector';
 import { OilSpectrometryModal } from '../fluids/OilSpectrometryModal';
 import { WorkshopBaysSchedulerModal } from '../workshop/WorkshopBaysSchedulerModal';
 import { TestDriveBookingModal } from '../media/TestDriveBookingModal';
+import { PmaPackageSelectorModal } from '../pma/PmaPackageSelectorModal';
+import { WorkshopCheckInModal } from '../workshop/WorkshopCheckInModal';
+import { WarehouseBinLabelModal } from '../common/WarehouseBinLabelModal';
+import { RemanExchangeCatalogModal } from '../reman/RemanExchangeCatalogModal';
+import { DgiiTaxWithholdingBreakdown } from '../calculator/DgiiTaxWithholdingBreakdown';
 
 interface MachineDetailStudioModalProps {
   machine: Machine | null;
@@ -191,6 +196,10 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   const [isSpectrometryOpen, setIsSpectrometryOpen] = useState<boolean>(false);
   const [isWorkshopBaysOpen, setIsWorkshopBaysOpen] = useState<boolean>(false);
   const [isTestDriveModalOpen, setIsTestDriveModalOpen] = useState<boolean>(false);
+  const [isPmaPackageOpen, setIsPmaPackageOpen] = useState<boolean>(false);
+  const [isWorkshopCheckInOpen, setIsWorkshopCheckInOpen] = useState<boolean>(false);
+  const [isBinLabelOpen, setIsBinLabelOpen] = useState<boolean>(false);
+  const [isRemanCatalogOpen, setIsRemanCatalogOpen] = useState<boolean>(false);
 
   // Accordion visibility states for secondary technical details (compacts mobile & desktop viewports)
   const [isExtendedSpecsExpanded, setIsExtendedSpecsExpanded] = useState<boolean>(true);
@@ -859,6 +868,14 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                 totalInvestmentUsd={totalInvestmentUsd}
                 onOpenDetailedProforma={handleDownloadBankProformaPdf}
               />
+
+              {/* Task #70: Desglose Tributario DGII & Retenciones en Maquinaria */}
+              <div className="pt-2">
+                <DgiiTaxWithholdingBreakdown
+                  subtotalUsd={totalInvestmentUsd}
+                  currency={currency}
+                />
+              </div>
             </div>
           )}
 
@@ -1029,6 +1046,94 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                     </div>
                   </div>
                   <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 transition-colors" />
+                </button>
+
+                {/* Task #76: PMA Maintenance Packages Modal Button */}
+                <button
+                  type="button"
+                  onClick={() => setIsPmaPackageOpen(true)}
+                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group bg-gradient-to-r from-amber-500/5 to-transparent"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-[2px] bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
+                      <ShieldCheck className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase text-amber-400 block transition-colors">
+                        Pólizas PMA (1k, 2k, 3k Horas)
+                      </span>
+                      <span className="text-[10px] text-zinc-400 font-sans">
+                        Filtros OEM + Mano obra + Financiamiento banco
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-amber-400 group-hover:translate-x-0.5 transition-transform" />
+                </button>
+
+                {/* Task #82: Workshop Expert Check-In Modal Button */}
+                <button
+                  type="button"
+                  onClick={() => setIsWorkshopCheckInOpen(true)}
+                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-400/40 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-[2px] bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300 shrink-0">
+                      <Camera className="w-4 h-4 text-amber-400" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase text-white group-hover:text-amber-400 block transition-colors">
+                        Recepción Pericial en Taller (4 Caras)
+                      </span>
+                      <span className="text-[10px] text-zinc-400 font-sans">
+                        Acta fotográfica, horómetro y nivel de diésel
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 transition-colors" />
+                </button>
+
+                {/* Task #85: Warehouse Shelf Bin Label Button */}
+                <button
+                  type="button"
+                  onClick={() => setIsBinLabelOpen(true)}
+                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-400/40 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-[2px] bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300 shrink-0">
+                      <Tag className="w-4 h-4 text-amber-400" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase text-white group-hover:text-amber-400 block transition-colors">
+                        Rótulo de Almacén (100x50mm)
+                      </span>
+                      <span className="text-[10px] text-zinc-400 font-sans">
+                        Etiqueta Zebra ZPL / Avery para racks Km 22
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 transition-colors" />
+                </button>
+
+                {/* Task #90: Reman Component Exchange Button */}
+                <button
+                  type="button"
+                  onClick={() => setIsRemanCatalogOpen(true)}
+                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-emerald-500/40 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-[2px] bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                      <RotateCcw className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase text-white group-hover:text-emerald-400 block transition-colors">
+                        Componentes TMD Reman (-45%)
+                      </span>
+                      <span className="text-[10px] text-zinc-400 font-sans">
+                        Core Exchange, bancos dyno y 12m garantía
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-emerald-400 transition-colors" />
                 </button>
               </div>
 
@@ -1276,6 +1381,35 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
         isOpen={isTestDriveModalOpen}
         onClose={() => setIsTestDriveModalOpen(false)}
         preselectedMachine={machine}
+      />
+
+      {/* Task #76: PMA Maintenance Packages Modal */}
+      <PmaPackageSelectorModal
+        isOpen={isPmaPackageOpen}
+        onClose={() => setIsPmaPackageOpen(false)}
+        machine={machine}
+      />
+
+      {/* Task #82: Workshop Expert Check-In & Perimeter Inspection Modal */}
+      <WorkshopCheckInModal
+        isOpen={isWorkshopCheckInOpen}
+        onClose={() => setIsWorkshopCheckInOpen(false)}
+        machine={machine}
+      />
+
+      {/* Task #85: Warehouse Shelf Bin Label Generator (Zebra / Avery 100x50mm) */}
+      <WarehouseBinLabelModal
+        isOpen={isBinLabelOpen}
+        onClose={() => setIsBinLabelOpen(false)}
+        item={machine}
+        itemType="machine"
+      />
+
+      {/* Task #90: Reman Heavy Components & Core Exchange Modal */}
+      <RemanExchangeCatalogModal
+        isOpen={isRemanCatalogOpen}
+        onClose={() => setIsRemanCatalogOpen(false)}
+        onNavigate={onNavigate}
       />
     </div>,
     document.body

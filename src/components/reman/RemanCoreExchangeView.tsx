@@ -10,12 +10,15 @@ import {
   Sparkles, 
   Activity, 
   Layers, 
-  Download,
-  AlertCircle
+  Download, 
+  AlertCircle,
+  Phone,
+  Truck
 } from 'lucide-react';
 import { REMAN_COMPONENTS } from '../../data/remanData';
 import { RemanComponent } from '../../types';
 import { useCart } from '../../context/CartContext';
+import { triggerHaptic } from '../../utils/haptics';
 
 interface RemanCoreExchangeViewProps {
   onNavigate?: (route: string) => void;
@@ -26,12 +29,13 @@ export const RemanCoreExchangeView: React.FC<RemanCoreExchangeViewProps> = ({ on
   const [componentsList] = useState<RemanComponent[]>(REMAN_COMPONENTS);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [activeCoreComp, setActiveCoreComp] = useState<RemanComponent | null>(null);
 
   const categories = [
     { key: 'all', label: 'Todos los Componentes' },
     { key: 'Motores Diésel', label: 'Motores Diésel' },
     { key: 'Bombas Hidráulicas', label: 'Bombas Hidráulicas' },
+    { key: 'Motores de Giro', label: 'Motores de Giro' },
+    { key: 'Mandos Finales', label: 'Mandos Finales' },
     { key: 'Transmisiones', label: 'Transmisiones' },
     { key: 'Turbocargadores', label: 'Turbocargadores' }
   ];
@@ -48,6 +52,7 @@ export const RemanCoreExchangeView: React.FC<RemanCoreExchangeViewProps> = ({ on
   });
 
   const handleOrderReman = (comp: RemanComponent) => {
+    triggerHaptic('success');
     addToCart({
       id: comp.id,
       name: `${comp.name} (Reman Oficial + Core Exchange)`,
@@ -66,76 +71,101 @@ export const RemanCoreExchangeView: React.FC<RemanCoreExchangeViewProps> = ({ on
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors pb-24">
+    <div className="min-h-screen bg-zinc-950 text-white transition-colors pb-24 font-mono">
       {/* Top Banner */}
-      <div className="bg-gradient-to-b from-zinc-900 via-zinc-900 to-zinc-950 text-white border-b border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider mb-4">
+      <div className="bg-zinc-950 text-white border-b border-zinc-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <div className="max-w-3xl space-y-3">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[2px] bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-black uppercase tracking-wider">
               <RotateCcw className="w-3.5 h-3.5" />
-              <span>Programa Reman & Crédito por Casco Usado (Core Exchange)</span>
+              <span>PROGRAMA TMD REMAN & CRÉDITO POR CASCO USADO (CORE EXCHANGE)</span>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-4">
-              Componentes <span className="text-amber-500">Remanufacturados en Banco Dyno</span>
+            <h1 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight uppercase font-display">
+              COMPONENTES <span className="text-amber-400">REMANUFACTURADOS EN BANCO DYNO</span>
             </h1>
-            <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
-              Ahorre hasta un 45% respecto a un componente nuevo sin comprometer la confiabilidad. Motores JCB Dieselmax y Cummins, bombas Kawasaki y transmisiones Carraro reconstruidas a tolerancia cero horas con 12 meses de garantía oficial.
+            <p className="text-xs sm:text-sm text-zinc-400 uppercase leading-relaxed font-sans">
+              Ahorre hasta un 45% respecto a un componente nuevo sin comprometer la confiabilidad. Motores JCB Dieselmax y Cummins, bombas Kawasaki, motores de giro Rexroth y transmisiones Carraro reconstruidas a tolerancia cero horas con 12 meses de garantía oficial.
             </p>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 space-y-6">
         
         {/* Core Exchange How it works callout */}
-        <div className="bg-white dark:bg-zinc-900 rounded-3xl p-6 sm:p-8 shadow-xl border border-zinc-200 dark:border-zinc-800 mb-10">
-          <div className="text-xs font-black uppercase tracking-wider text-amber-500 mb-2">
-            ¿Cómo Funciona el Retorno de Casco (Core Exchange)?
+        <div className="bg-zinc-900 rounded-[5px] p-5 sm:p-6 shadow-xl border border-zinc-800 space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="text-xs font-black uppercase tracking-wider text-amber-400">
+              ¿CÓMO OPERA EL SISTEMA DE RETORNO DE CASCO (CORE EXCHANGE)?
+            </div>
+            <span className="text-[10px] text-zinc-400 uppercase">TALLER SEDE KM 22 DUARTE</span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-            <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-100 dark:border-zinc-800">
-              <div className="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-500 flex items-center justify-center font-black text-sm mb-3">1</div>
-              <h4 className="font-extrabold text-zinc-900 dark:text-white text-sm mb-1">Adquiere la Unidad Reman</h4>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">Despacho inmediato de stock en Km 22 Duarte para minimizar el tiempo de máquina parada.</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-1">
+            <div className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800 space-y-1">
+              <div className="w-6 h-6 rounded-[2px] bg-amber-400/20 text-amber-400 flex items-center justify-center font-black text-xs mb-1">
+                1
+              </div>
+              <h4 className="font-black text-white text-xs uppercase">
+                Adquiere la Unidad Reman
+              </h4>
+              <p className="text-[11px] text-zinc-400 font-sans leading-relaxed">
+                Despacho inmediato de stock certificado en Km 22 Duarte para minimizar el tiempo de máquina parada.
+              </p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-100 dark:border-zinc-800">
-              <div className="w-8 h-8 rounded-xl bg-blue-500/20 text-blue-500 flex items-center justify-center font-black text-sm mb-3">2</div>
-              <h4 className="font-extrabold text-zinc-900 dark:text-white text-sm mb-1">Entrega tu Casco Dañado</h4>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">Envía el motor o bomba averiada a nuestros talleres para inspección de integridad estructural.</p>
+            <div className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800 space-y-1">
+              <div className="w-6 h-6 rounded-[2px] bg-amber-400/20 text-amber-400 flex items-center justify-center font-black text-xs mb-1">
+                2
+              </div>
+              <h4 className="font-black text-white text-xs uppercase">
+                Entrega tu Casco Dañado
+              </h4>
+              <p className="text-[11px] text-zinc-400 font-sans leading-relaxed">
+                Envía el motor o bomba averiada a nuestros talleres para inspección de integridad estructural en 48 horas.
+              </p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-100 dark:border-zinc-800">
-              <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-500 flex items-center justify-center font-black text-sm mb-3">3</div>
-              <h4 className="font-extrabold text-zinc-900 dark:text-white text-sm mb-1">Reembolso / Crédito Inmediato</h4>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">Acreditamos automáticamente el valor del casco (Core Credit) en tu factura o cuenta corriente.</p>
+            <div className="p-3.5 rounded-[3px] bg-zinc-950 border border-zinc-800 space-y-1">
+              <div className="w-6 h-6 rounded-[2px] bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black text-xs mb-1">
+                3
+              </div>
+              <h4 className="font-black text-white text-xs uppercase">
+                Acreditación Inmediata
+              </h4>
+              <p className="text-[11px] text-zinc-400 font-sans leading-relaxed">
+                Acreditamos automáticamente el valor del casco (Core Credit) en tu factura oficial o cuenta corriente.
+              </p>
             </div>
           </div>
         </div>
 
         {/* Filter & Search Bar */}
-        <div className="bg-white dark:bg-zinc-900 rounded-2xl p-4 shadow-md border border-zinc-200 dark:border-zinc-800 mb-8 space-y-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="relative w-full sm:w-96">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400" />
+        <div className="bg-zinc-900 rounded-[5px] p-4 shadow-md border border-zinc-800 space-y-3">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div className="relative w-full sm:w-80">
+              <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
               <input
                 type="text"
-                placeholder="Buscar componente por SKU, Motor o Máquina (ej. Dieselmax, K3V112)..."
+                placeholder="BUSCAR POR SKU, MOTOR O MÁQUINA..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-3 py-2.5 text-xs rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full pl-8 pr-3 py-2 text-xs rounded-[2px] bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-500 uppercase focus:border-amber-400 focus:outline-none"
               />
             </div>
 
-            <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto scrollbar-none">
+            <div className="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto scrollbar-none pb-1 sm:pb-0">
               {categories.map(c => (
                 <button
                   key={c.key}
-                  onClick={() => setSelectedCategory(c.key)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  onClick={() => {
+                    triggerHaptic('selection');
+                    setSelectedCategory(c.key);
+                  }}
+                  className={`px-3 py-1.5 rounded-[2px] text-[10px] font-bold uppercase transition-all cursor-pointer whitespace-nowrap ${
                     selectedCategory === c.key
-                      ? 'bg-amber-500 text-black font-black'
-                      : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+                      ? 'bg-amber-400 text-black font-black'
+                      : 'bg-zinc-950 text-zinc-400 hover:text-white border border-zinc-800'
                   }`}
                 >
                   {c.label}
@@ -146,55 +176,55 @@ export const RemanCoreExchangeView: React.FC<RemanCoreExchangeViewProps> = ({ on
         </div>
 
         {/* Reman Components Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredComponents.map(comp => (
             <div
               key={comp.id}
-              className="bg-white dark:bg-zinc-900 rounded-3xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-md hover:shadow-xl transition-all flex flex-col justify-between"
+              className="bg-zinc-900 rounded-[5px] p-5 border border-zinc-800 shadow-md hover:border-zinc-700 transition-all flex flex-col justify-between space-y-4"
             >
               <div>
-                <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="flex items-start justify-between gap-2 mb-2">
                   <div>
-                    <span className="text-[10px] font-black uppercase text-amber-500 tracking-wider">
+                    <span className="text-[10px] font-black uppercase text-amber-400 tracking-wider">
                       {comp.brand} • {comp.category}
                     </span>
-                    <h3 className="text-base font-extrabold text-zinc-900 dark:text-white leading-snug">
+                    <h3 className="text-sm font-black uppercase text-white font-display leading-snug mt-0.5">
                       {comp.name}
                     </h3>
                   </div>
-                  <span className="px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 font-mono text-[10px] font-bold shrink-0">
+                  <span className="px-2 py-0.5 rounded-[2px] bg-zinc-950 border border-zinc-800 text-zinc-400 font-mono text-[10px] font-bold shrink-0">
                     {comp.sku}
                   </span>
                 </div>
 
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                <p className="text-[11px] text-zinc-400 font-sans leading-relaxed mb-3">
                   {comp.description}
                 </p>
 
-                <div className="space-y-2 py-3 px-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800 text-xs mb-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-zinc-500">Precio Bruto Reman:</span>
-                    <strong className="text-zinc-800 dark:text-zinc-200">{formatPrice(comp.priceRemanUsd)}</strong>
+                <div className="space-y-1.5 py-2.5 px-3 rounded-[3px] bg-zinc-950 border border-zinc-800/80 text-xs mb-3 font-mono">
+                  <div className="flex items-center justify-between text-zinc-400 text-[11px]">
+                    <span className="uppercase">PRECIO BRUTO REMAN:</span>
+                    <strong className="text-zinc-200">{formatPrice(comp.priceRemanUsd)}</strong>
                   </div>
-                  <div className="flex items-center justify-between text-emerald-600 dark:text-emerald-400">
-                    <span className="font-semibold">Crédito Retorno de Casco:</span>
+                  <div className="flex items-center justify-between text-emerald-400 text-[11px]">
+                    <span className="uppercase font-semibold">(-) CRÉDITO POR CASCO:</span>
                     <strong className="font-black">-{formatPrice(comp.coreCreditUsd)}</strong>
                   </div>
-                  <div className="pt-2 border-t border-zinc-200 dark:border-zinc-700 flex items-center justify-between text-sm">
-                    <span className="font-bold text-zinc-900 dark:text-white">Precio Neto con Casco:</span>
-                    <strong className="text-amber-500 font-black text-base">{formatPrice(comp.netPriceUsd)}</strong>
+                  <div className="pt-1.5 border-t border-zinc-800 flex items-center justify-between text-xs font-black">
+                    <span className="uppercase text-amber-400">NETO CON CASCO:</span>
+                    <strong className="text-amber-400 font-black text-sm">{formatPrice(comp.netPriceUsd)}</strong>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 text-[10px] font-bold border border-emerald-500/20 flex items-center gap-1">
+                <div className="flex flex-wrap gap-1.5">
+                  <span className="px-2 py-0.5 rounded-[2px] bg-emerald-500/10 text-emerald-400 text-[9px] font-bold border border-emerald-500/20 flex items-center gap-1">
                     <Activity className="w-3 h-3" />
                     <span>Dyno Test OK</span>
                   </span>
-                  <span className="px-2 py-0.5 rounded bg-blue-500/10 text-blue-500 text-[10px] font-bold border border-blue-500/20">
+                  <span className="px-2 py-0.5 rounded-[2px] bg-amber-400/10 text-amber-400 text-[9px] font-bold border border-amber-400/20">
                     {comp.warrantyMonths} Meses Garantía
                   </span>
-                  <span className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 text-[10px] font-bold">
+                  <span className="px-2 py-0.5 rounded-[2px] bg-zinc-950 border border-zinc-800 text-zinc-400 text-[9px] font-bold">
                     Stock: {comp.stockQty} u.
                   </span>
                 </div>
@@ -204,10 +234,10 @@ export const RemanCoreExchangeView: React.FC<RemanCoreExchangeViewProps> = ({ on
                 <button
                   type="button"
                   onClick={() => handleOrderReman(comp)}
-                  className="w-full py-2.5 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-black uppercase tracking-wider transition-all shadow-sm cursor-pointer flex items-center justify-center gap-1.5"
+                  className="w-full py-2.5 px-4 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black text-xs font-black uppercase tracking-wider transition-all shadow-sm cursor-pointer flex items-center justify-center gap-1.5"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
-                  <span>Ordenar con Crédito Casco</span>
+                  <span>ORDENAR CON CRÉDITO CASCO</span>
                 </button>
               </div>
             </div>

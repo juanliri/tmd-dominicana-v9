@@ -31,7 +31,9 @@ import {
   Wrench,
   Sliders,
   Download,
-  Printer
+  Printer,
+  RotateCcw,
+  Tag
 } from 'lucide-react';
 import { PARTS_DATA } from '../data/parts';
 import { Part, AssemblyType } from '../types';
@@ -49,6 +51,8 @@ import { LastScannedBadge } from './common/LastScannedBadge';
 import { RecentlyVerifiedBadge } from './common/RecentlyVerifiedBadge';
 import { InventoryAuditTrail } from './common/InventoryAuditTrail';
 import { InventoryLabelPdfModal } from './common/InventoryLabelPdfModal';
+import { WarehouseBinLabelModal } from './common/WarehouseBinLabelModal';
+import { RemanExchangeCatalogModal } from './reman/RemanExchangeCatalogModal';
 import { downloadProductQrCode } from '../utils/qrExporter';
 
 interface PartsViewProps {
@@ -203,6 +207,8 @@ export const PartsView = React.memo<PartsViewProps>(({
   const [isSyncingStock, setIsSyncingStock] = useState<boolean>(false);
   const [qrModalPart, setQrModalPart] = useState<Part | null>(null);
   const [labelPdfPart, setLabelPdfPart] = useState<Part | null>(null);
+  const [binLabelPart, setBinLabelPart] = useState<Part | null>(null);
+  const [isRemanModalOpen, setIsRemanModalOpen] = useState<boolean>(false);
   const [isExportPdfOpen, setIsExportPdfOpen] = useState<boolean>(false);
 
 
@@ -487,6 +493,32 @@ export const PartsView = React.memo<PartsViewProps>(({
             >
               <FileDown className="w-3.5 h-3.5 text-amber-400" />
               <span>EXPORTAR PDF</span>
+            </button>
+
+            {/* Task #90: TMD Reman Heavy Component Core Exchange */}
+            <button
+              type="button"
+              onClick={() => setIsRemanModalOpen(true)}
+              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border-emerald-500/30 shadow-xs"
+              title="Programa Core Exchange con componentes remanufacturados y 12m garantía"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>REMAN (-45%)</span>
+            </button>
+
+            {/* Task #85: Warehouse Shelf Bin Label Generator (Zebra / Avery 100x50mm) */}
+            <button
+              type="button"
+              onClick={() => {
+                if (filteredAndSortedParts.length > 0) {
+                  setBinLabelPart(filteredAndSortedParts[0]);
+                }
+              }}
+              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border-zinc-800 shadow-xs"
+              title="Generar rótulos autoadhesivos Zebra/Avery 100x50mm para racks de almacén"
+            >
+              <Tag className="w-3.5 h-3.5 text-amber-400" />
+              <span>RÓTULOS ZEBRA</span>
             </button>
 
             <button
@@ -1237,7 +1269,22 @@ export const PartsView = React.memo<PartsViewProps>(({
         parts={filteredAndSortedParts}
       />
 
+      {/* Task #85: Warehouse Shelf Bin Label Generator (Zebra / Avery 100x50mm) */}
+      {binLabelPart && (
+        <WarehouseBinLabelModal
+          isOpen={true}
+          onClose={() => setBinLabelPart(null)}
+          item={binLabelPart}
+          itemType="part"
+        />
+      )}
 
+      {/* Task #90: Reman Heavy Components & Core Exchange Modal */}
+      <RemanExchangeCatalogModal
+        isOpen={isRemanModalOpen}
+        onClose={() => setIsRemanModalOpen(false)}
+        onNavigate={onNavigate}
+      />
     </div>
   );
 });

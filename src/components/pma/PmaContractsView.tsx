@@ -16,6 +16,7 @@ import {
 import { PMA_PLAN_TIERS } from '../../data/pmaData';
 import { PmaPlanTier } from '../../types';
 import { useCart } from '../../context/CartContext';
+import { PmaPackageSelectorModal } from './PmaPackageSelectorModal';
 
 interface PmaContractsViewProps {
   onNavigate?: (route: string) => void;
@@ -25,6 +26,7 @@ export const PmaContractsView: React.FC<PmaContractsViewProps> = ({ onNavigate }
   const { formatPrice } = useCart();
   const [plans] = useState<PmaPlanTier[]>(PMA_PLAN_TIERS);
   const [selectedPlan, setSelectedPlan] = useState<PmaPlanTier | null>(null);
+  const [isPackageSelectorOpen, setIsPackageSelectorOpen] = useState<boolean>(false);
   const [fleetSize, setFleetSize] = useState<number>(3);
   const [annualHoursPerMachine, setAnnualHoursPerMachine] = useState<number>(2000);
   const [quoteSuccess, setQuoteSuccess] = useState<boolean>(false);
@@ -55,6 +57,16 @@ export const PmaContractsView: React.FC<PmaContractsViewProps> = ({ onNavigate }
             <p className="text-xs sm:text-sm text-zinc-400 uppercase leading-relaxed">
               Proteja su inversión fijando un costo predecible por hora trabajada. Kits de filtros originales despachados automáticamente, técnicos certificados en su obra y telemetría predictiva LiveLink™ 24/7.
             </p>
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => setIsPackageSelectorOpen(true)}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-[3px] bg-amber-400 hover:bg-amber-300 text-black font-black uppercase text-xs transition-colors cursor-pointer shadow-md"
+              >
+                <Clock className="w-4 h-4" />
+                <span>CONFIGURAR PAQUETE DE HORAS (1,000H, 2,000H, 3,000H) CON LEASING</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -282,6 +294,12 @@ export const PmaContractsView: React.FC<PmaContractsViewProps> = ({ onNavigate }
         </div>,
         document.body
       )}
+
+      {/* Task #76: Configurable 1000h, 2000h, 3000h PMA Package Selector Modal */}
+      <PmaPackageSelectorModal
+        isOpen={isPackageSelectorOpen}
+        onClose={() => setIsPackageSelectorOpen(false)}
+      />
     </div>
   );
 };

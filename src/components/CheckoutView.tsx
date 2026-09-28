@@ -41,6 +41,7 @@ import { triggerRfqCrmInquiryLogging } from '../services/crmService';
 import { createFullbayCounterSale } from '../lib/fullbayService';
 import { PortalQuote } from '../types';
 import { verifyDgiiTaxId, DOMINICAN_RNC_REGISTRY } from '../services/dgiiRncService';
+import { DgiiTaxWithholdingBreakdown, DgiiTaxRegime } from './calculator/DgiiTaxWithholdingBreakdown';
 
 interface CheckoutViewProps {
   onNavigate: (route: string) => void;
@@ -87,6 +88,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
 
   // Toggle for optional Dominican fiscal tax invoice (RNC / DGII B01)
   const [needsFiscalInvoice, setNeedsFiscalInvoice] = useState(false);
+  const [taxRegime, setTaxRegime] = useState<DgiiTaxRegime>('REGULAR');
 
   // Mobile order summary accordion toggle
   const [isMobileSummaryOpen, setIsMobileSummaryOpen] = useState(false);
@@ -1420,6 +1422,28 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                             </button>
                           ))}
                         </div>
+
+                        {/* Task #70: Desglose Transparente de ITBIS y Retenciones Tributarias DGII */}
+                        <div className="pt-3 border-t border-zinc-800">
+                          <DgiiTaxWithholdingBreakdown
+                            subtotalUsd={subtotalUsd - discountUsd}
+                            exchangeRate={exchangeRate}
+                            currency={currency}
+                            selectedRegime={taxRegime}
+                            onRegimeChange={(regime) => {
+                              setTaxRegime(regime);
+                              if (regime === 'ESTADO_B15') {
+                                setCustomer((prev) => ({ ...prev, ncfType: 'B15_GUBERNAMENTAL' }));
+                              } else if (regime === 'ZONA_FRANCA_B14') {
+                                setCustomer((prev) => ({ ...prev, ncfType: 'B14_REGIMEN_ESPECIAL' }));
+                              } else if (regime === 'GRAN_CONTRIBUYENTE' || regime === 'REGULAR') {
+                                if (customer.ncfType === 'B02_CONSUMIDOR_FINAL' || customer.ncfType === 'B15_GUBERNAMENTAL' || customer.ncfType === 'B14_REGIMEN_ESPECIAL') {
+                                  setCustomer((prev) => ({ ...prev, ncfType: 'B01_CREDITO_FISCAL' }));
+                                }
+                              }
+                            }}
+                          />
+                        </div>
                       </div>
                     );
                   })()}
@@ -1676,6 +1700,36 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                     <span>ENVÍO:</span>
                     <span className="text-white">{customer.deliveryMethod === 'pickup_km22' ? 'GRATIS' : formatPrice(shippingUsd)}</span>
                   </div>
+
+                  {needsFiscalInvoice && taxRegime === 'ESTADO_B15' && (
+                    <div className="pt-2 border-t border-zinc-800/80 space-y-1 text-red-400 text-[11px]">
+                      <div className="flex justify-between uppercase">
+                        <span>(-) RETENCIÓN 100% ITBIS:</span>
+                        <span>-{formatPrice(itbisUsd)}</span>
+                      </div>
+                      <div className="flex justify-between uppercase">
+                        <span>(-) RETENCIÓN 5% ISR ESTADO:</span>
+                        <span>-{formatPrice((subtotalUsd - discountUsd) * 0.05)}</span>
+                      </div>
+                      <div className="flex justify-between uppercase text-emerald-400 font-bold pt-1 border-t border-zinc-800/60">
+                        <span>NETO A DESEMBOLSAR:</span>
+                        <span>{formatPrice((subtotalUsd - discountUsd) * 0.95 + (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd))}</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {needsFiscalInvoice && taxRegime === 'GRAN_CONTRIBUYENTE' && (
+                    <div className="pt-2 border-t border-zinc-800/80 space-y-1 text-red-400 text-[11px]">
+                      <div className="flex justify-between uppercase">
+                        <span>(-) RETENCIÓN 30% ITBIS (NORMA 02-05):</span>
+                        <span>-{formatPrice(itbisUsd * 0.30)}</span>
+                      </div>
+                      <div className="flex justify-between uppercase text-emerald-400 font-bold pt-1 border-t border-zinc-800/60">
+                        <span>NETO A DESEMBOLSAR:</span>
+                        <span>{formatPrice((subtotalUsd - discountUsd) + (itbisUsd * 0.70) + (customer.deliveryMethod === 'pickup_km22' ? 0 : shippingUsd))}</span>
+                      </div>
+                    </div>
+                  )}
                   <div className="pt-2 border-t border-zinc-800 flex justify-between items-baseline">
                     <span className="font-black text-xs text-white uppercase">TOTAL GENERAL:</span>
                     <div className="text-right">
