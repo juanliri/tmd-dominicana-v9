@@ -42,7 +42,8 @@ import {
   Compass,
   Award,
   Radio,
-  Download
+  Download,
+  FileStack
 } from 'lucide-react';
 import { MACHINES_DATA } from '../data/catalog';
 import { Machine } from '../types';
@@ -58,6 +59,7 @@ import { MachineQuickCalculatorModal } from './MachineQuickCalculatorModal';
 import { Machine360Modal } from './Machine360Modal';
 import { ProductQrCodeModal } from './ProductQrCodeModal';
 import { ExportCatalogPdfModal } from './ExportCatalogPdfModal';
+import { TenderDossierExporterModal } from './catalog/TenderDossierExporterModal';
 import { MachineCustomizerModal } from './MachineCustomizerModal';
 import { TestDriveBookingModal } from './media/TestDriveBookingModal';
 import { DominicanOperationalVideos } from './media/DominicanOperationalVideos';
@@ -352,6 +354,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
 
   // Export PDF Modal State
   const [isExportPdfOpen, setIsExportPdfOpen] = useState<boolean>(false);
+  const [isTenderDossierOpen, setIsTenderDossierOpen] = useState<boolean>(false);
 
   // Field Test Drive Demo Modal State
   const [isTestDriveOpen, setIsTestDriveOpen] = useState<boolean>(false);
@@ -1004,6 +1007,17 @@ export const MachineryView = React.memo<MachineryViewProps>(({
             >
               <Calculator className="w-3.5 h-3.5 text-amber-400" />
               <span className="hidden sm:inline">LEASING</span>
+            </button>
+
+            {/* Public Tenders Dossier Exporter (Task #74) */}
+            <button
+              type="button"
+              onClick={() => setIsTenderDossierOpen(true)}
+              className="px-2.5 py-1 rounded-[3px] text-xs font-black uppercase tracking-wider transition-all border flex items-center gap-1.5 cursor-pointer bg-zinc-900 text-amber-400 border-amber-400/40 hover:bg-amber-400 hover:text-black shadow-xs"
+              title="Generar Dossier Técnico consolidado para Licitaciones Públicas del Estado Dominicano (MOPC/INAPA/CPB)"
+            >
+              <FileStack className="w-3.5 h-3.5" />
+              <span className="hidden lg:inline">DOSSIER LICITACIÓN</span>
             </button>
 
             {/* Sorting Select */}
@@ -1691,6 +1705,13 @@ export const MachineryView = React.memo<MachineryViewProps>(({
         activeCategory={selectedCategory}
         activeBrand={selectedBrand}
         machines={filteredAndSortedMachines}
+      />
+
+      {/* Public Tenders Dossier Exporter (Task #74) */}
+      <TenderDossierExporterModal
+        isOpen={isTenderDossierOpen}
+        onClose={() => setIsTenderDossierOpen(false)}
+        initialSelectedMachineIds={filteredAndSortedMachines.slice(0, 4).map(m => m.id)}
       />
 
       {/* Test Drive Booking Modal */}

@@ -28,7 +28,10 @@ import {
   Download,
   Printer,
   BookOpen,
-  Crosshair
+  Crosshair,
+  ClipboardList,
+  FileStack,
+  Fuel
 } from 'lucide-react';
 import { Machine, MachineCustomizationOption } from '../../types';
 import { useCart } from '../../context/CartContext';
@@ -45,6 +48,11 @@ import { getMachinePdfUrls } from '../../data/machinePdfsData';
 import { CinematicZoomViewer } from '../common/CinematicZoomViewer';
 import { LowboyFreightCalculator } from '../calculator/LowboyFreightCalculator';
 import { AvailabilityBadge } from '../common/AvailabilityBadge';
+import { PdiInspectionModal } from '../inspection/PdiInspectionModal';
+import { MachineFluidsGuideModal } from '../fluids/MachineFluidsGuideModal';
+import { GatePassModal } from '../logistics/GatePassModal';
+import { OemVsAftermarketMatrix } from '../parts/OemVsAftermarketMatrix';
+import { TenderDossierExporterModal } from '../catalog/TenderDossierExporterModal';
 
 interface MachineDetailStudioModalProps {
   machine: Machine | null;
@@ -168,6 +176,10 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   const [isLabelPdfModalOpen, setIsLabelPdfModalOpen] = useState<boolean>(false);
   const [isSalesInquiryModalOpen, setIsSalesInquiryModalOpen] = useState<boolean>(false);
   const [isZoomOpen, setIsZoomOpen] = useState<boolean>(false);
+  const [isPdiOpen, setIsPdiOpen] = useState<boolean>(false);
+  const [isFluidsOpen, setIsFluidsOpen] = useState<boolean>(false);
+  const [isGatePassOpen, setIsGatePassOpen] = useState<boolean>(false);
+  const [isDossierOpen, setIsDossierOpen] = useState<boolean>(false);
 
   // Accordion visibility states for secondary technical details (compacts mobile & desktop viewports)
   const [isExtendedSpecsExpanded, setIsExtendedSpecsExpanded] = useState<boolean>(true);
@@ -308,6 +320,17 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
             >
               <Crosshair className="w-3.5 h-3.5" />
               <span>Zoom Inspección</span>
+            </button>
+
+            {/* Public Tenders Dossier Exporter (Task #74) */}
+            <button
+              type="button"
+              onClick={() => setIsDossierOpen(true)}
+              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
+              title="Generar Dossier Técnico consolidado para Licitaciones Públicas del Estado Dominicano"
+            >
+              <FileStack className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Dossier Licitación</span>
             </button>
 
             {onOpen360 && (
@@ -894,6 +917,54 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                   </div>
                 )}
               </div>
+
+              {/* Quick Actions: Fluids Guide (Task #6) & PDI Inspection (Task #16) */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => setIsFluidsOpen(true)}
+                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-400/40 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-[2px] bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
+                      <Fuel className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase text-white group-hover:text-amber-400 block transition-colors">
+                        Guía de Capacidades & Fluidos
+                      </span>
+                      <span className="text-[10px] text-zinc-400 font-sans">
+                        Litros y galones de aceite, hidráulico y refrigerante
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 transition-colors" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setIsPdiOpen(true)}
+                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-emerald-500/40 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-7 h-7 rounded-[2px] bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                      <ClipboardList className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold uppercase text-white group-hover:text-emerald-400 block transition-colors">
+                        Checklist Pre-Entrega PDI (85 Pts)
+                      </span>
+                      <span className="text-[10px] text-zinc-400 font-sans">
+                        Inspección técnica certificada de taller Km 22
+                      </span>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-emerald-400 transition-colors" />
+                </button>
+              </div>
+
+              {/* Matriz Comparativa OEM vs Aftermarket (Task #23) */}
+              <OemVsAftermarketMatrix className="mt-2" />
             </div>
           )}
 
@@ -938,6 +1009,29 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                       <span>Agendar Test Drive en Patio</span>
                     </>
                   )}
+                </button>
+              </div>
+
+              {/* Gate Pass Security Pass Card (Task #84) */}
+              <div className="p-3.5 rounded-[2px] bg-zinc-950 border border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <QrCode className="w-4 h-4 text-amber-400" />
+                    <h5 className="text-xs font-bold uppercase tracking-wider text-white">
+                      Pase de Puerta Digital con QR (Salida de Garita Km 22)
+                    </h5>
+                  </div>
+                  <p className="text-xs text-zinc-400 font-sans mt-0.5">
+                    Genera el ticket de autorización de salida con código QR escaneable por el oficial de seguridad en el portón del Km 22.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsGatePassOpen(true)}
+                  className="py-2 px-3 rounded-[2px] bg-zinc-900 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/50 text-xs font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
+                >
+                  <QrCode className="w-3.5 h-3.5" />
+                  <span>Emitir Pase Garita</span>
                 </button>
               </div>
             </div>
@@ -1070,6 +1164,34 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
         title={machine.name}
         subtitle={machine.modelCode}
         category={machine.category}
+      />
+
+      {/* Task #16 / #88: PDI Inspection Modal */}
+      <PdiInspectionModal
+        machine={machine}
+        isOpen={isPdiOpen}
+        onClose={() => setIsPdiOpen(false)}
+      />
+
+      {/* Task #6: Fluids and Capacities Guide */}
+      <MachineFluidsGuideModal
+        machine={machine}
+        isOpen={isFluidsOpen}
+        onClose={() => setIsFluidsOpen(false)}
+      />
+
+      {/* Task #84: Gate Pass Security Pass Modal */}
+      <GatePassModal
+        machine={machine}
+        isOpen={isGatePassOpen}
+        onClose={() => setIsGatePassOpen(false)}
+      />
+
+      {/* Task #74: Public Tenders Dossier Exporter */}
+      <TenderDossierExporterModal
+        isOpen={isDossierOpen}
+        onClose={() => setIsDossierOpen(false)}
+        initialSelectedMachineIds={[machine.id]}
       />
     </div>,
     document.body
