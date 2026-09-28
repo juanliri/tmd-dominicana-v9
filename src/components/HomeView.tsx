@@ -323,7 +323,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
         {/* Soft atmospheric ambient aura bridging header and hero */}
         <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-4/5 h-28 bg-amber-500/15 dark:bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
 
-        <section id="top-hero-section" className="relative overflow-hidden rounded-[6px] bg-zinc-950 text-white border border-zinc-800/80 dark:border-white/[0.08] shadow-2xl">
+        <section id="top-hero-section" className="relative overflow-hidden rounded-[6px] bg-zinc-950 text-white border border-zinc-800/80 dark:border-white/[0.08] shadow-2xl dark-preserve">
         {/* Background Image with optimized loading & balanced cinematic illumination (Clear & Vivid) */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
