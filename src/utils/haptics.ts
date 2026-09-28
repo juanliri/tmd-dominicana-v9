@@ -1,50 +1,48 @@
 /**
- * TMD Dominicana - Mobile Tactile Haptic Feedback Engine (Sprint 3 - Task #3)
- * Provides calibrated micro-vibrations for field tablets & mobile phones
- * during PIN pad input, cart actions, checkout verification, and emergency dispatch.
+ * Haptic Feedback and Micro-Interaction Utility (Task #3)
+ * Provides physical haptic vibration feedback for mobile and supported touch devices
+ * during PIN inputs, quote confirmations, telematics switches, and action buttons.
  */
 
-export type HapticType = 'light' | 'medium' | 'heavy' | 'success' | 'warning' | 'error' | 'selection';
+export type HapticFeedbackType = 
+  | 'light' 
+  | 'medium' 
+  | 'heavy' 
+  | 'selection' 
+  | 'success' 
+  | 'warning' 
+  | 'error';
 
-export const triggerHaptic = (type: HapticType = 'light'): void => {
-  if (typeof window === 'undefined' || typeof navigator === 'undefined') return;
+export const triggerHaptic = (type: HapticFeedbackType = 'light'): void => {
+  if (typeof window === 'undefined' || !('navigator' in window)) return;
 
   try {
-    if (typeof navigator.vibrate !== 'function') return;
-
-    switch (type) {
-      case 'selection':
-      case 'light':
-        // Crisp 12ms click for keypad numbers and tabs
-        navigator.vibrate(12);
-        break;
-
-      case 'medium':
-        // 28ms firm tap for action buttons
-        navigator.vibrate(28);
-        break;
-
-      case 'heavy':
-        // 50ms solid pulse for critical operations
-        navigator.vibrate(50);
-        break;
-
-      case 'success':
-        // Double positive pulse
-        navigator.vibrate([15, 35, 25]);
-        break;
-
-      case 'warning':
-        // Double alert pulse
-        navigator.vibrate([35, 40, 35]);
-        break;
-
-      case 'error':
-        // Triple error rejection buzz
-        navigator.vibrate([50, 35, 50, 35, 60]);
-        break;
+    if ('vibrate' in navigator) {
+      switch (type) {
+        case 'selection':
+        case 'light':
+          navigator.vibrate(12);
+          break;
+        case 'medium':
+          navigator.vibrate(28);
+          break;
+        case 'heavy':
+          navigator.vibrate(50);
+          break;
+        case 'success':
+          navigator.vibrate([15, 60, 25]);
+          break;
+        case 'warning':
+          navigator.vibrate([30, 80, 30]);
+          break;
+        case 'error':
+          navigator.vibrate([50, 50, 50, 50, 70]);
+          break;
+        default:
+          navigator.vibrate(15);
+      }
     }
-  } catch {
-    // Silent fallback if vibration permissions or hardware are not present
+  } catch (err) {
+    // Ignore unsupported browser / platform permissions silently
   }
 };

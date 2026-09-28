@@ -167,12 +167,14 @@ Esta matriz contiene **100 recomendaciones de grado de ingeniería y dirección 
 - **Sprint 14 (70%):** Tareas #8, #66, #72, #84, #88 completadas y desplegadas.
 - **Sprint 15 (75%):** Tareas #1, #2, #58, #78, #94 completadas y desplegadas (Commit `f1bce7d`).
 - **Sprint 16 (80% — Hito 80 de 100 Tareas):** Tareas #16, #50, #60, #77, #93 completadas y desplegadas (Commit `de30ad9`).
-- **Sprint 17 (85% — Hito 85 de 100 Tareas):** Tareas #79, #80, #82, #86, #87 completadas y desplegadas:
-  - Task #79: `CustomerCallLogCrmModal.tsx` con bitácora CRM para llamadas de seguimiento comercial, visitas al patio Km 22, compromisos y exportación formal para asesores de venta.
-  - Task #80: `MonthlyExecutiveReportModal.tsx` con informe ejecutivo mensual para Dirección General y Junta Directiva, consolidando ventas de equipos, mostrador de repuestos, horas de taller y rentabilidad.
-  - Task #82: `WorkshopEquipmentIntakeModal.tsx` con acta pericial y recepción fotográfica 4 vistas (frontal, laterales, trasera), chequeo de daños preexistentes y firma de transportista al entrar al taller Km 22.
-  - Task #86: `FluidSpectrometrySosModal.tsx` con laboratorio de espectrometría S.O.S. y tribología predictiva (Cu, Fe, Si, Cr, Pb), control de viscosidad 15W-40, dilución por combustible y certificado oficial.
-  - Task #87: `WorkshopBayPlannerModal.tsx` con planificador visual de bahías de trabajo (Bahías 1 a 6) en taller central Km 22, mecánico líder, orden de trabajo, % de avance y fecha de entrega.
+- **Sprint 17 (85% — Hito 85 de 100 Tareas):** Tareas #79, #80, #82, #86, #87 completadas y desplegadas.
+- **Sprint 18 (90% — Hito 90 de 100 Tareas):** Tareas #4, #12, #69, #70, #91 completadas y desplegadas:
+  - Task #4: `Machine3DExplodedViewModal.tsx` con visor interactivo de despiece mecánico y capas desmontables en 3D (chasis, motor Cummins, bomba hidráulica Rexroth, brazo de excavación, contrapeso).
+  - Task #12: `RentalFleetAvailabilityModal.tsx` con disponibilidad en tiempo real de flota para alquiler, tarifa diaria/semanal/mensual, horómetro y reserva inmediata.
+  - Task #69: `TmdProMemberPointsModal.tsx` con programa de lealtad TMD Pro-Member Club, acumulación de puntos por compras de repuestos y horas de taller, niveles de contratista (Plata, Oro, Titanio) y canje por vouchers.
+  - Task #70: `CustomerCreditEvaluationModal.tsx` con matriz de evaluación de riesgo crediticio para contratistas (score 0-100, buró TransUnion/DataCrédito, referencias bancarias, NCF y línea aprobada en USD).
+  - Task #91: `MachineTestDriveModal.tsx` con agenda de citas y test drive con operadores certificados en el circuito de pruebas y terraplén de demostración del Patio Central Km 22.
+
 
 
 

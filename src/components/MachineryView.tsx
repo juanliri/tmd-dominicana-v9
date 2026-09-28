@@ -72,6 +72,9 @@ import { IndustrialSectionDivider } from './common/IndustrialSectionDivider';
 import { MachineryFacetFilterDrawer, FacetFilterState } from './machinery/MachineryFacetFilterDrawer';
 import { ShowroomKioskModeModal } from './showroom/ShowroomKioskModeModal';
 import { LowboyFreightCalculatorModal } from './logistics/LowboyFreightCalculatorModal';
+import { MachineExplodedViewModal } from './machinery/MachineExplodedViewModal';
+import { MachineTestDriveModal } from './machinery/MachineTestDriveModal';
+import { triggerHaptic } from '../utils/haptics';
 import { USD_TO_DOP_RATE } from '../data/catalog';
 import jcbBannerImg from '../assets/images/jcb_machinery_banner_1789963695284.jpg';
 import { motion, AnimatePresence, type Variants } from 'motion/react';
@@ -380,6 +383,8 @@ export const MachineryView = React.memo<MachineryViewProps>(({
   // Machine 360 & Advanced Video/Gallery Modal State
   const [active360Machine, setActive360Machine] = useState<Machine | null>(null);
   const [active360Tab, setActive360Tab] = useState<'360' | 'video' | 'gallery' | 'dimensions'>('360');
+  const [isExplodedViewOpen, setIsExplodedViewOpen] = useState(false);
+  const [isPatioDemoOpen, setIsPatioDemoOpen] = useState(false);
 
 
   // Simulated initial fetch
@@ -782,6 +787,32 @@ export const MachineryView = React.memo<MachineryViewProps>(({
               >
                 <RefreshCw className={`w-3 h-3 text-amber-400 ${isSyncing ? 'animate-spin' : ''}`} />
                 <span>{isSyncing ? 'Sincronizando...' : 'Stock en Vivo'}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  triggerHaptic('medium');
+                  setIsExplodedViewOpen(true);
+                }}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[3px] bg-black/70 hover:bg-zinc-800 text-zinc-300 font-mono text-[11px] font-bold uppercase border border-white/[0.1] backdrop-blur-md transition-all cursor-pointer"
+                title="Visor de planos y capas mecánicas desmontables 3D"
+              >
+                <Layers className="w-3 h-3 text-amber-400" />
+                <span>Despiece 3D</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  triggerHaptic('medium');
+                  setIsPatioDemoOpen(true);
+                }}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[3px] bg-black/70 hover:bg-zinc-800 text-zinc-300 font-mono text-[11px] font-bold uppercase border border-amber-400/40 text-amber-400 backdrop-blur-md transition-all cursor-pointer"
+                title="Reserva de prueba y demostración real en patio Km 22"
+              >
+                <HardHat className="w-3 h-3 text-amber-400" />
+                <span>Test Drive</span>
               </button>
 
               <button
@@ -1847,6 +1878,22 @@ export const MachineryView = React.memo<MachineryViewProps>(({
         onClose={() => setIsLowboyOpen(false)}
         machineName={filteredAndSortedMachines[0]?.name || 'LiuGong 922E HD'}
         machineWeightTon={filteredAndSortedMachines[0]?.operatingWeightKg ? Math.round(filteredAndSortedMachines[0].operatingWeightKg / 1000) : 22}
+      />
+
+      {/* Task #7: Machine Exploded View & 3D Mechanical Layers Modal */}
+      <MachineExplodedViewModal
+        isOpen={isExplodedViewOpen}
+        onClose={() => setIsExplodedViewOpen(false)}
+        machineName={activeModalMachine?.name || MACHINES_DATA[0]?.name}
+        machineModel={activeModalMachine?.modelCode || MACHINES_DATA[0]?.modelCode}
+      />
+
+      {/* Task #91: Machine Real Field Test Drive Booking Modal */}
+      <MachineTestDriveModal
+        isOpen={isPatioDemoOpen}
+        onClose={() => setIsPatioDemoOpen(false)}
+        defaultMachineName={activeModalMachine?.name || MACHINES_DATA[0]?.name}
+        defaultBrand={activeModalMachine?.brand || MACHINES_DATA[0]?.brand}
       />
 
     </motion.div>

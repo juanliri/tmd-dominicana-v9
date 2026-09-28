@@ -52,7 +52,8 @@ import { HydraulicPressureMonitorModal } from '../telematics/HydraulicPressureMo
 import { RemoteImmobilizerModal } from '../telematics/RemoteImmobilizerModal';
 import { DefFluidLevelModal } from '../telematics/DefFluidLevelModal';
 import { ImpactGForceMonitorModal } from '../telematics/ImpactGForceMonitorModal';
-import { Leaf } from 'lucide-react';
+import { TmdProMemberPointsModal } from '../loyalty/TmdProMemberPointsModal';
+import { Leaf, Award } from 'lucide-react';
 
 interface LiveLinkCustomerTelematicsTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -101,6 +102,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
   const [showImmobilizerModal, setShowImmobilizerModal] = useState<boolean>(false);
   const [showDefModal, setShowDefModal] = useState<boolean>(false);
   const [showImpactModal, setShowImpactModal] = useState<boolean>(false);
+  const [showPointsModal, setShowPointsModal] = useState<boolean>(false);
 
   const loadData = async () => {
     try {
@@ -260,6 +262,15 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
             >
               <RefreshCw className={`w-3.5 h-3.5 text-amber-400 ${refreshing ? 'animate-spin' : ''}`} />
               <span>{refreshing ? 'Sincronizando CAN Bus...' : 'Actualizar Señal'}</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowPointsModal(true)}
+              className="px-4 py-2.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black font-display uppercase tracking-wider font-bold text-xs flex items-center gap-2 transition-all shadow-md active:scale-95 cursor-pointer"
+            >
+              <Award className="w-3.5 h-3.5" />
+              <span>Club Pro-Member</span>
             </button>
 
             <button
@@ -1321,6 +1332,14 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
         onClose={() => setShowImpactModal(false)}
         machineName={selectedUnit?.name}
         machineSerial={selectedUnit?.serialNumber}
+      />
+
+      {/* Task #69: TMD Pro-Member Rewards & Points Modal */}
+      <TmdProMemberPointsModal
+        isOpen={showPointsModal}
+        onClose={() => setShowPointsModal(false)}
+        contractorName={userProfile?.companyName || 'Constructora Dominicana S.R.L.'}
+        rnc={userProfile?.rnc || '1-01-02412-2'}
       />
 
     </div>
