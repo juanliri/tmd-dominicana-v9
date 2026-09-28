@@ -34,7 +34,8 @@ import {
   Scale,
   Droplets,
   Award,
-  ClipboardCheck
+  ClipboardCheck,
+  Camera
 } from 'lucide-react';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../../lib/firebase';
@@ -63,6 +64,9 @@ import { UsedOilDisposalModal } from '../eco/UsedOilDisposalModal';
 import { PostServiceCsatModal } from './PostServiceCsatModal';
 import { PreDeliveryInspectionPdiModal } from '../workshop/PreDeliveryInspectionPdiModal';
 import { TiresBatteriesWarrantyModal } from '../workshop/TiresBatteriesWarrantyModal';
+import { WorkshopEquipmentIntakeModal } from '../workshop/WorkshopEquipmentIntakeModal';
+import { FluidSpectrometrySosModal } from '../workshop/FluidSpectrometrySosModal';
+import { WorkshopBayPlannerModal } from '../workshop/WorkshopBayPlannerModal';
 
 interface ServiceHistoryTabProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -102,6 +106,9 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
   const [showCsatModal, setShowCsatModal] = useState<boolean>(false);
   const [showPdiModal, setShowPdiModal] = useState<boolean>(false);
   const [showTiresBatteriesModal, setShowTiresBatteriesModal] = useState<boolean>(false);
+  const [showIntakeModal, setShowIntakeModal] = useState<boolean>(false);
+  const [showSpectrometryModal, setShowSpectrometryModal] = useState<boolean>(false);
+  const [showBayPlannerModal, setShowBayPlannerModal] = useState<boolean>(false);
   const [newUnitId, setNewUnitId] = useState<string>('');
   const [newBrand, setNewBrand] = useState<string>('LiuGong');
   const [newModel, setNewModel] = useState<string>('');
@@ -488,6 +495,36 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           >
             <ShieldCheck className="w-4 h-4 text-amber-400" />
             <span>Garantías Gomas/Baterías</span>
+          </button>
+
+          {/* Task #82: Equipment Intake & 4-Photo Reception Modal Trigger */}
+          <button
+            onClick={() => setShowIntakeModal(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-sky-400/40 text-sky-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
+            title="Módulo de Recepción e Inspección Fotográfica 4 Vistas al Entrar al Taller"
+          >
+            <Camera className="w-4 h-4 text-sky-400" />
+            <span>Recepción Taller</span>
+          </button>
+
+          {/* Task #86: S.O.S. Fluid Spectrometry Modal Trigger */}
+          <button
+            onClick={() => setShowSpectrometryModal(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-amber-400/40 text-amber-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
+            title="Laboratorio de Espectrometría S.O.S. y Desgaste de Metales (Cu, Fe, Si)"
+          >
+            <Droplets className="w-4 h-4 text-amber-400" />
+            <span>Lab S.O.S.</span>
+          </button>
+
+          {/* Task #87: Central Workshop Bay Planner Trigger */}
+          <button
+            onClick={() => setShowBayPlannerModal(true)}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-emerald-500/40 text-emerald-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
+            title="Planificador de Bahías 1 a 6 de Taller Central Km 22"
+          >
+            <Layers className="w-4 h-4 text-emerald-400" />
+            <span>Bahías Km 22</span>
           </button>
 
           <button
@@ -1329,6 +1366,28 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
         onClose={() => setShowTiresBatteriesModal(false)}
         machineName={selectedMachineForDetail ? `${selectedMachineForDetail.brand} ${selectedMachineForDetail.model}` : undefined}
         machineSerial={selectedMachineForDetail?.serialNumber}
+      />
+
+      {/* Task #82: Equipment Intake & 4-Photo Reception Modal */}
+      <WorkshopEquipmentIntakeModal
+        isOpen={showIntakeModal}
+        onClose={() => setShowIntakeModal(false)}
+        defaultMachineName={selectedMachineForDetail ? `${selectedMachineForDetail.brand} ${selectedMachineForDetail.model}` : undefined}
+        defaultSerial={selectedMachineForDetail?.serialNumber}
+      />
+
+      {/* Task #86: S.O.S. Fluid Spectrometry Modal */}
+      <FluidSpectrometrySosModal
+        isOpen={showSpectrometryModal}
+        onClose={() => setShowSpectrometryModal(false)}
+        machineName={selectedMachineForDetail ? `${selectedMachineForDetail.brand} ${selectedMachineForDetail.model}` : undefined}
+        machineSerial={selectedMachineForDetail?.serialNumber}
+      />
+
+      {/* Task #87: Central Workshop Bay Planner Modal */}
+      <WorkshopBayPlannerModal
+        isOpen={showBayPlannerModal}
+        onClose={() => setShowBayPlannerModal(false)}
       />
     </div>
   );

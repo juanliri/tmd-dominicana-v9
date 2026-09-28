@@ -44,7 +44,9 @@ import { Dgii606_607ExporterModal } from './accounting/Dgii606_607ExporterModal'
 import { SalesKanbanPipelineModal } from './commercial/SalesKanbanPipelineModal';
 import { TechnicianLaborHoursModal } from './workshop/TechnicianLaborHoursModal';
 import { PatioGatePassModal } from './security/PatioGatePassModal';
-import { LayoutGrid, Sparkles, Flame, ShieldCheck as ShieldCheckIcon, TrendingUp, Calendar as CalendarIcon, Activity as ActivityIcon, Settings } from 'lucide-react';
+import { CustomerCallLogCrmModal } from './crm/CustomerCallLogCrmModal';
+import { MonthlyExecutiveReportModal } from './admin/MonthlyExecutiveReportModal';
+import { LayoutGrid, Sparkles, Flame, ShieldCheck as ShieldCheckIcon, TrendingUp, Calendar as CalendarIcon, Activity as ActivityIcon, Settings, PhoneCall } from 'lucide-react';
 
 interface AdminDashboardViewProps {
   onNavigate: (route: string) => void;
@@ -68,6 +70,8 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
   const [isKanbanOpen, setIsKanbanOpen] = useState(false);
   const [isLaborHoursOpen, setIsLaborHoursOpen] = useState(false);
   const [isGatePassOpen, setIsGatePassOpen] = useState(false);
+  const [isCallLogOpen, setIsCallLogOpen] = useState(false);
+  const [isExecutiveReportOpen, setIsExecutiveReportOpen] = useState(false);
   const [highlightItemId, setHighlightItemId] = useState<string | null>(null);
 
   // Firestore Real-Time Listeners for quotes, machines, and parts
@@ -403,6 +407,28 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
               >
                 <Shield className="w-3.5 h-3.5" />
                 <span className="hidden lg:inline">Pase Garita</span>
+              </button>
+
+              {/* Task #79: Customer Call Log CRM Trigger */}
+              <button
+                type="button"
+                onClick={() => setIsCallLogOpen(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-sky-400/40 text-sky-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                title="Bitácora CRM de Llamadas y Visitas al Patio Km 22"
+              >
+                <PhoneCall className="w-3.5 h-3.5" />
+                <span className="hidden lg:inline">Bitácora CRM</span>
+              </button>
+
+              {/* Task #80: Monthly Executive Report Trigger */}
+              <button
+                type="button"
+                onClick={() => setIsExecutiveReportOpen(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-amber-400/40 text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                title="Informe Ejecutivo Mensual Automatizado para Dirección General"
+              >
+                <TrendingUp className="w-3.5 h-3.5" />
+                <span className="hidden lg:inline">Reporte CFO</span>
               </button>
 
               {/* Firestore Bulk Manager Trigger Button */}
@@ -905,6 +931,18 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
       <PatioGatePassModal
         isOpen={isGatePassOpen}
         onClose={() => setIsGatePassOpen(false)}
+      />
+
+      {/* Task #79: Customer Call Log CRM Modal */}
+      <CustomerCallLogCrmModal
+        isOpen={isCallLogOpen}
+        onClose={() => setIsCallLogOpen(false)}
+      />
+
+      {/* Task #80: Monthly Executive Report Modal */}
+      <MonthlyExecutiveReportModal
+        isOpen={isExecutiveReportOpen}
+        onClose={() => setIsExecutiveReportOpen(false)}
       />
     </div>
   );

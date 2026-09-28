@@ -166,11 +166,13 @@ Esta matriz contiene **100 recomendaciones de grado de ingeniería y dirección 
 - **Sprint 13 (65%):** Tareas #59, #62, #71, #89, #100 completadas y desplegadas.
 - **Sprint 14 (70%):** Tareas #8, #66, #72, #84, #88 completadas y desplegadas.
 - **Sprint 15 (75%):** Tareas #1, #2, #58, #78, #94 completadas y desplegadas (Commit `f1bce7d`).
-- **Sprint 16 (80% — Hito 80 de 100 Tareas):** Tareas #16, #50, #60, #77, #93 completadas y desplegadas:
-  - Task #16: `PartQuickViewModal.tsx` con visor de especificaciones OEM, compatibilidad de chasis, disponibilidad en anaqueles Km 22 y botón de compra directa sin recargar página.
-  - Task #50: `IdleTimeProductivityModal.tsx` con análisis satelital J1939 de horas en ralentí vs horas productivas de excavación, cálculo de desperdicio de diésel (US$/RD$) y recomendaciones de apagado automático de motor.
-  - Task #60: `DefFluidLevelModal.tsx` con telemetría de urea sintética ISO 22241 (SPN 1761), termómetro de tanque y prevención de degradación de potencia (Anti-Derate Fase 1/2) en motores Tier 4 Final.
-  - Task #77: `MinimumMarginGuardModal.tsx` con bloqueo comercial para cotizaciones con margen bruto menor al 12.0%, cálculo de utilidad sobre costo fábrica y autorización mediante PIN de Gerencia General.
-  - Task #93: `TiresBatteriesWarrantyModal.tsx` con registro de acumuladores 24V y neumáticos OTR (DOT), horómetros iniciales, cálculo de meses/horas restantes y generador de dossier de reclamo ante fabricantes.
+- **Sprint 16 (80% — Hito 80 de 100 Tareas):** Tareas #16, #50, #60, #77, #93 completadas y desplegadas (Commit `de30ad9`).
+- **Sprint 17 (85% — Hito 85 de 100 Tareas):** Tareas #79, #80, #82, #86, #87 completadas y desplegadas:
+  - Task #79: `CustomerCallLogCrmModal.tsx` con bitácora CRM para llamadas de seguimiento comercial, visitas al patio Km 22, compromisos y exportación formal para asesores de venta.
+  - Task #80: `MonthlyExecutiveReportModal.tsx` con informe ejecutivo mensual para Dirección General y Junta Directiva, consolidando ventas de equipos, mostrador de repuestos, horas de taller y rentabilidad.
+  - Task #82: `WorkshopEquipmentIntakeModal.tsx` con acta pericial y recepción fotográfica 4 vistas (frontal, laterales, trasera), chequeo de daños preexistentes y firma de transportista al entrar al taller Km 22.
+  - Task #86: `FluidSpectrometrySosModal.tsx` con laboratorio de espectrometría S.O.S. y tribología predictiva (Cu, Fe, Si, Cr, Pb), control de viscosidad 15W-40, dilución por combustible y certificado oficial.
+  - Task #87: `WorkshopBayPlannerModal.tsx` con planificador visual de bahías de trabajo (Bahías 1 a 6) en taller central Km 22, mecánico líder, orden de trabajo, % de avance y fecha de entrega.
+
 
 
