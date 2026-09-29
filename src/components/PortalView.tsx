@@ -44,6 +44,7 @@ import { PasskeyBiometricAuthModal } from './auth/PasskeyBiometricAuthModal';
 import { EnterprisePortalLogin } from './portal/EnterprisePortalLogin';
 import { PortalShell } from './portal/layout/PortalShell';
 import { AdminDashboardView } from './AdminDashboardView';
+import { ProtectedRoute } from './auth/ProtectedRoute';
 import { 
   INITIAL_PORTAL_QUOTES, 
   INITIAL_PORTAL_WORK_ORDERS, 
@@ -373,9 +374,11 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
       quotesCount={quotes.length}
       ordersCount={workOrders.length}
     >
-      {/* Dynamic Sub-route & Workspace Router */}
-      {isAdmin && (subRoute === 'admin' || ['patio', 'metrics', 'audit'].includes(activePortalTab)) ? (
-        <AdminDashboardView onNavigate={onNavigate} />
+      {/* Dynamic Sub-route & Workspace Router with strict role gating */}
+      {(subRoute === 'admin' || ['patio', 'metrics', 'audit'].includes(activePortalTab)) ? (
+        <ProtectedRoute requiredRole="admin" onNavigate={onNavigate} fallbackRoute="#/portal">
+          <AdminDashboardView onNavigate={onNavigate} />
+        </ProtectedRoute>
       ) : (isStaff || isAdmin) ? (
         <StaffCommandCenter
           currentUser={currentUser}

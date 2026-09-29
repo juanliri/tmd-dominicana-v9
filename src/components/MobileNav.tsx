@@ -61,12 +61,12 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentRoute, onNavigate }
               <div className="relative flex items-center justify-center">
                 <Icon className={`w-4.5 h-4.5 transition-transform duration-200 ${isActive ? 'scale-110 stroke-[2.5] text-[#e0a22a]' : 'stroke-[1.8]'}`} />
                 {Boolean(item.badge && item.badge > 0) && (
-                  <span className="absolute -top-1.5 -right-2.5 min-w-[16px] h-[16px] px-0.5 bg-[#d99b26] text-black text-[9px] font-black rounded-[2px] flex items-center justify-center border border-black shadow-xs">
+                  <span className="absolute -top-1.5 -right-2.5 min-w-[16px] h-[16px] px-1 bg-[#d99b26] text-black text-[10px] font-black rounded-[2px] flex items-center justify-center border border-black shadow-xs">
                     {item.badge}
                   </span>
                 )}
               </div>
-              <span className="text-[8px] font-black uppercase tracking-wider mt-1 line-clamp-1">
+              <span className="text-[10px] font-black uppercase tracking-wider mt-1 line-clamp-1">
                 {item.label}
               </span>
               {isActive && (

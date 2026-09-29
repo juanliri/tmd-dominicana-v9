@@ -109,12 +109,12 @@ export const PartCard = React.memo<PartCardProps>(({
                 {part.brand}
               </span>
               {part.isOem && (
-                <span className="bg-zinc-900 px-1.5 py-0.5 rounded-[3px] text-[8px] font-bold text-zinc-300 border border-zinc-700 uppercase">
+                <span className="bg-zinc-900 px-1.5 py-0.5 rounded-[3px] text-[10px] font-bold text-zinc-200 border border-zinc-700 uppercase">
                   OEM GEN
                 </span>
               )}
               {config.isAssemblyHero && (
-                <span className="hidden sm:inline-flex items-center gap-1 bg-amber-500 text-black px-2 py-0.5 rounded-[3px] text-[8px] font-black uppercase">
+                <span className="hidden sm:inline-flex items-center gap-1 bg-amber-500 text-black px-2 py-0.5 rounded-[3px] text-[10px] font-black uppercase">
                   <Layers className="w-2.5 h-2.5" />
                   <span>ENSAMBLE</span>
                 </span>
@@ -136,7 +136,7 @@ export const PartCard = React.memo<PartCardProps>(({
 
             {/* Category Pill */}
             <div className="absolute top-2 right-2 z-10 font-mono">
-              <span className="bg-zinc-950/90 px-2 py-0.5 rounded-[3px] text-[9px] font-bold text-zinc-300 border border-zinc-700 uppercase">
+              <span className="bg-zinc-950/90 px-2 py-0.5 rounded-[3px] text-[10px] font-bold text-zinc-300 border border-zinc-700 uppercase">
                 {part.category}
               </span>
             </div>
@@ -144,12 +144,12 @@ export const PartCard = React.memo<PartCardProps>(({
             {/* Availability Tag */}
             <div className="absolute bottom-2 left-2 z-10 font-mono">
               {inStock ? (
-                <span className="bg-zinc-950/90 px-2 py-0.5 rounded-[3px] text-[8px] font-bold text-emerald-400 border border-zinc-700 flex items-center gap-1 uppercase">
+                <span className="bg-zinc-950/90 px-2 py-0.5 rounded-[3px] text-[10px] font-bold text-emerald-400 border border-zinc-700 flex items-center gap-1 uppercase">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   <span>EN STOCK KM 22 ({part.stockQty} U)</span>
                 </span>
               ) : (
-                <span className="bg-zinc-950/90 px-2 py-0.5 rounded-[3px] text-[8px] font-bold text-zinc-400 border border-zinc-700 flex items-center gap-1 uppercase">
+                <span className="bg-zinc-950/90 px-2 py-0.5 rounded-[3px] text-[10px] font-bold text-zinc-300 border border-zinc-700 flex items-center gap-1 uppercase">
                   <Clock className="w-2.5 h-2.5 text-amber-400" />
                   <span>IMPORTACIÓN {part.deliveryTimeHours}H</span>
                 </span>
@@ -214,7 +214,7 @@ export const PartCard = React.memo<PartCardProps>(({
             {/* Price & Fiscal Breakdown Strip */}
             <div className="pt-2 border-t border-zinc-800 flex items-end justify-between gap-2 font-mono">
               <div>
-                <div className="flex items-center gap-1 text-[8px] text-zinc-400 font-bold uppercase">
+                <div className="flex items-center gap-1 text-[10px] text-zinc-300 font-bold uppercase">
                   <span>PRECIO NETO:</span>
                   <span className="text-white font-bold">{formatPrice(priceNet)}</span>
                 </div>
@@ -263,7 +263,7 @@ export const PartCard = React.memo<PartCardProps>(({
             {/* Top Back Header */}
             <div className="flex items-center justify-between border-b border-zinc-800 pb-2 mb-2 font-mono">
               <div>
-                <span className="text-[8px] text-amber-400 font-bold block uppercase">FICHA TÉCNICA REVERSO</span>
+                <span className="text-[10px] text-amber-400 font-bold block uppercase">FICHA TÉCNICA REVERSO</span>
                 <div className="flex items-center gap-1.5">
                   <span className="text-[11px] font-black text-white tracking-wider uppercase">{part.partNumber}</span>
                   <RecentlyVerifiedBadge
@@ -277,7 +277,7 @@ export const PartCard = React.memo<PartCardProps>(({
               <button
                 type="button"
                 onClick={() => setIsFlipped(false)}
-                className="px-2 py-0.5 bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-black rounded-[3px] text-[9px] font-black font-mono uppercase flex items-center gap-1 transition-all cursor-pointer"
+                className="px-2 py-0.5 bg-amber-500/20 hover:bg-amber-500 text-amber-300 hover:text-black rounded-[3px] text-[10px] font-black font-mono uppercase flex items-center gap-1 transition-all cursor-pointer"
               >
                 <RotateCw className="w-3 h-3" />
                 <span>FRONTAL</span>
@@ -294,11 +294,11 @@ export const PartCard = React.memo<PartCardProps>(({
               {/* Engines Compatibility */}
               {part.engineCompatibilities && part.engineCompatibilities.length > 0 && (
                 <div className="bg-zinc-900/80 p-2 rounded-[4px] border border-zinc-800">
-                  <div className="flex items-center gap-1 text-[8px] font-bold text-amber-400 uppercase mb-1">
+                  <div className="flex items-center gap-1 text-[10px] font-bold text-amber-400 uppercase mb-1">
                     <Cpu className="w-2.5 h-2.5" />
                     <span>MOTORES COMPATIBLES:</span>
                   </div>
-                  <div className="text-[9px] text-zinc-300 leading-tight">
+                  <div className="text-[10px] text-zinc-200 leading-tight">
                     {part.engineCompatibilities.join(' • ')}
                   </div>
                 </div>
@@ -306,13 +306,13 @@ export const PartCard = React.memo<PartCardProps>(({
 
               {/* Machine Compatibility */}
               <div className="bg-zinc-900/80 p-2 rounded-[4px] border border-zinc-800">
-                <div className="flex items-center gap-1 text-[8px] font-bold text-amber-400 uppercase mb-1">
+                <div className="flex items-center gap-1 text-[10px] font-bold text-amber-400 uppercase mb-1">
                   <Wrench className="w-2.5 h-2.5" />
                   <span>EQUIPOS Y MODELOS APLICABLES:</span>
                 </div>
                 <div className="flex flex-wrap gap-1">
                   {part.compatibleModels.map((mod, i) => (
-                    <span key={i} className="bg-zinc-800 text-zinc-200 px-1.5 py-0.5 rounded text-[8px] font-bold">
+                    <span key={i} className="bg-zinc-800 text-zinc-200 px-1.5 py-0.5 rounded text-[10px] font-bold">
                       {mod}
                     </span>
                   ))}
@@ -322,13 +322,13 @@ export const PartCard = React.memo<PartCardProps>(({
               {/* Cross References (Códigos OEM Equivalentes) */}
               {part.crossReferences && part.crossReferences.length > 0 && (
                 <div className="bg-zinc-900/80 p-2 rounded-[4px] border border-zinc-800">
-                  <div className="flex items-center gap-1 text-[8px] font-bold text-emerald-400 uppercase mb-1">
+                  <div className="flex items-center gap-1 text-[10px] font-bold text-emerald-400 uppercase mb-1">
                     <Layers className="w-2.5 h-2.5" />
                     <span>REFERENCIAS CRUZADAS (CROSS-REF):</span>
                   </div>
                   <div className="flex flex-wrap gap-1">
                     {part.crossReferences.slice(0, 4).map((ref, idx) => (
-                      <span key={idx} className="bg-zinc-800/90 text-amber-300 border border-zinc-700 px-1.5 py-0.5 rounded text-[8px]">
+                      <span key={idx} className="bg-zinc-800/90 text-amber-300 border border-zinc-700 px-1.5 py-0.5 rounded text-[10px]">
                         {ref}
                       </span>
                     ))}
@@ -337,7 +337,7 @@ export const PartCard = React.memo<PartCardProps>(({
               )}
 
               {/* Warehouse Stock Location */}
-              <div className="flex items-center gap-1 text-[8px] text-zinc-400 pt-1">
+              <div className="flex items-center gap-1 text-[10px] text-zinc-300 pt-1">
                 <MapPin className="w-2.5 h-2.5 text-amber-400 shrink-0" />
                 <span className="truncate">{part.warehouseLocation || 'Almacén Central Km 22 Autopista Duarte, Santo Domingo'}</span>
               </div>

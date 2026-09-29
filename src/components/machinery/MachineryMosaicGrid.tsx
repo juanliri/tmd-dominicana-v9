@@ -268,13 +268,13 @@ export const MachineCard = React.memo<MachineCardProps>(({
           {/* Technical Specs Tags Strip */}
           <div className="grid grid-cols-2 gap-2 mb-3 font-mono">
             <div className="bg-zinc-900/90 p-2 rounded-[4px] text-center border border-zinc-800">
-              <span className="block text-[8px] text-zinc-500 uppercase font-black tracking-wider">POTENCIA</span>
+              <span className="block text-[10px] text-zinc-400 dark:text-zinc-300 uppercase font-black tracking-wider">POTENCIA</span>
               <span className="text-xs font-black text-white">
                 {machine.powerHp} HP
               </span>
             </div>
             <div className="bg-zinc-900/90 p-2 rounded-[4px] text-center border border-zinc-800">
-              <span className="block text-[8px] text-zinc-500 uppercase font-black tracking-wider">PESO OPERATIVO</span>
+              <span className="block text-[10px] text-zinc-400 dark:text-zinc-300 uppercase font-black tracking-wider">PESO OPERATIVO</span>
               <span className="text-xs font-black text-white">
                 {machine.operatingWeightKg.toLocaleString()} KG
               </span>
@@ -284,14 +284,14 @@ export const MachineCard = React.memo<MachineCardProps>(({
           {/* Investment & Leasing Strip */}
           <div className="py-2.5 px-3 rounded-[4px] bg-zinc-900/95 border border-zinc-800 mb-3 flex items-center justify-between">
             <div>
-              <span className="text-[9px] text-zinc-400 font-mono uppercase font-bold block">INVERSIÓN DESDE</span>
+              <span className="text-[10px] text-zinc-400 dark:text-zinc-300 font-mono uppercase font-bold block">INVERSIÓN DESDE</span>
               <span className="font-extrabold text-sm sm:text-base text-white font-mono">
                 {formatEquiposPrice(machine.basePriceUsd)}
               </span>
             </div>
             {showMonthlyLeasing && (
               <div className="text-right">
-                <span className="text-[8px] text-zinc-400 font-mono font-bold uppercase tracking-wider block">LEASING RD</span>
+                <span className="text-[10px] text-zinc-400 dark:text-zinc-300 font-mono font-bold uppercase tracking-wider block">LEASING RD</span>
                 <span className="text-[11px] font-black font-mono text-amber-400 bg-zinc-950 border border-zinc-800 px-2 py-0.5 rounded-[4px] inline-block">
                   {getMonthlyLeasingEstimate(machine.basePriceUsd)}
                 </span>

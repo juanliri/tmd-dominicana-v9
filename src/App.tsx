@@ -219,6 +219,17 @@ function AppContent() {
             onOpenQrScanner={() => setIsQrScannerOpen(true)}
           />
         );
+      case 'ops':
+      case 'staff':
+        return (
+          <ProtectedRoute requiredRole="staff" onNavigate={navigateTo}>
+            <PortalView
+              onNavigate={navigateTo}
+              onOpenQrScanner={() => setIsQrScannerOpen(true)}
+            />
+          </ProtectedRoute>
+        );
+      case 'admin':
       case 'admin-dashboard':
         return (
           <ProtectedRoute requiredRole="admin" onNavigate={navigateTo}>

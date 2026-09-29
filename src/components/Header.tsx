@@ -265,7 +265,7 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
             <div className="hidden lg:flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-zinc-400 pl-2 border-l border-slate-200 dark:border-zinc-800">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Firestore En Vivo</span>
+              <span>Supabase Cloud · Vercel Edge</span>
             </div>
           </div>
 

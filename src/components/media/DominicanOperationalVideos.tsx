@@ -164,6 +164,7 @@ export const DominicanOperationalVideos = React.memo<Props>(({ onScheduleTestDri
           <img
             src={selectedVideo.thumbnailUrl}
             alt={selectedVideo.title}
+            onError={(e) => { (e.currentTarget as HTMLImageElement).src = patioPosterImg; }}
             className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
@@ -261,7 +262,12 @@ export const DominicanOperationalVideos = React.memo<Props>(({ onScheduleTestDri
             }`}
           >
             <div className="relative w-14 h-10 rounded-[2px] overflow-hidden shrink-0 bg-black">
-              <img src={vid.thumbnailUrl} alt={vid.title} className="w-full h-full object-cover opacity-80" />
+              <img 
+                src={vid.thumbnailUrl} 
+                alt={vid.title} 
+                onError={(e) => { (e.currentTarget as HTMLImageElement).src = patioPosterImg; }}
+                className="w-full h-full object-cover opacity-80" 
+              />
               <Play className="w-3.5 h-3.5 text-white absolute inset-0 m-auto" />
             </div>
             <div className="min-w-0">
