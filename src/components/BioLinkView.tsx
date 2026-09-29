@@ -609,6 +609,11 @@ END:VCARD`;
         {/* PROFILE SECTION OVER VIDEO TRANSITION */}
         <div className="px-4.5 pt-3 pb-4 flex flex-col items-center text-center relative z-20 bg-[#0c0c0e]">
           
+          {/* SEMANTIC ACCESSIBLE TITLE */}
+          <h1 className="text-base sm:text-lg font-black text-white uppercase tracking-wider font-display mb-1.5">
+            TECNOMAQUINARIAS DIESEL DOMINICANA
+          </h1>
+
           {/* VERIFIED DISTRIBUTOR BADGE */}
           <div className="mb-3.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black border border-amber-500/50 text-[9.5px] font-bold text-amber-400 tracking-wider font-mono shadow-sm">
             <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
