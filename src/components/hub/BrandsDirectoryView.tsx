@@ -25,7 +25,7 @@ export const BrandsDirectoryView: React.FC<BrandsDirectoryProps> = ({ onNavigate
     : OFFICIAL_BRANDS.filter(b => b.category.toLowerCase().includes(selectedFilter.toLowerCase()) || b.country.toLowerCase().includes(selectedFilter.toLowerCase()));
 
   return (
-    <div className="w-full min-h-screen bg-slate-50 dark:bg-[#06060a] text-slate-900 dark:text-white transition-colors duration-300">
+    <div className="w-full min-h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-white transition-colors duration-300">
       
       {/* 1. BREADCRUMBS */}
       <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-3 border-b border-slate-200/80 dark:border-white/[0.06] text-xs font-semibold text-slate-500 dark:text-zinc-400 flex items-center gap-2">
@@ -57,7 +57,7 @@ export const BrandsDirectoryView: React.FC<BrandsDirectoryProps> = ({ onNavigate
       </div>
 
       {/* 3. FILTER CHIPS */}
-      <div className="border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#0a0a12] sticky top-14 sm:top-16 z-20">
+      <div className="border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#0c0c10] sticky top-14 sm:top-16 z-20">
         <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-3 flex items-center gap-2 overflow-x-auto no-scrollbar">
           {[
             { id: 'all', label: 'Todas las Marcas (10)' },
@@ -87,7 +87,7 @@ export const BrandsDirectoryView: React.FC<BrandsDirectoryProps> = ({ onNavigate
           {filteredBrands.map((brand) => (
             <div
               key={brand.id}
-              className="rounded-2xl bg-white dark:bg-[#0c0d14] border border-slate-200/80 dark:border-white/[0.08] hover:border-amber-400 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              className="rounded-2xl bg-white dark:bg-[#0c0c10] border border-slate-200/80 dark:border-white/[0.08] hover:border-amber-400 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
             >
               <div className="p-6">
                 <div className="flex items-center justify-between gap-3 mb-4">

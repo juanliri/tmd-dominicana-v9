@@ -159,7 +159,7 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({
             }}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-[740px] max-w-[94vw] bg-white/98 dark:bg-[#0c0d14]/98 backdrop-blur-2xl rounded-2xl border border-slate-200/90 dark:border-white/[0.09] shadow-2xl shadow-black/10 dark:shadow-black/70 z-50 overflow-hidden text-left"
+            className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-[740px] max-w-[94vw] bg-white/98 dark:bg-[#0c0c10]/98 backdrop-blur-2xl rounded-2xl border border-slate-200/90 dark:border-white/[0.09] shadow-2xl shadow-black/10 dark:shadow-black/70 z-50 overflow-hidden text-left"
           >
             {/* Main 2-Column Content */}
             <div className="p-5 grid grid-cols-1 md:grid-cols-2 gap-5 divide-y md:divide-y-0 md:divide-x divide-slate-100 dark:divide-white/[0.06]">
@@ -261,7 +261,7 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({
             </div>
 
             {/* Bottom Quick-Access Strip (Zero Capabilities Lost!) */}
-            <div className="px-5 py-3 bg-slate-50 dark:bg-[#07080d] border-t border-slate-200/80 dark:border-white/[0.06] flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="px-5 py-3 bg-slate-50 dark:bg-zinc-950 border-t border-slate-200/80 dark:border-white/[0.06] flex flex-wrap items-center justify-between gap-3 text-xs">
               {/* Specialist Tools Pill Group */}
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-[10px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-wider">

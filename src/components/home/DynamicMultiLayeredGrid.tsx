@@ -141,7 +141,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
 
           {/* Category Tabs & Navigation Arrows */}
           <div className="flex items-center gap-2 shrink-0">
-            <div className="flex items-center gap-1 bg-slate-100 dark:bg-[#09090e] p-1 rounded-lg border border-slate-200 dark:border-white/[0.06] overflow-x-auto scrollbar-none font-mono">
+            <div className="flex items-center gap-1 bg-slate-100 dark:bg-zinc-950 p-1 rounded-lg border border-slate-200 dark:border-white/[0.06] overflow-x-auto scrollbar-none font-mono">
               <button
                 type="button"
                 onClick={() => setSelectedBrandCategory('all')}
@@ -193,7 +193,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
               <button
                 type="button"
                 onClick={() => scrollBrands('left')}
-                className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#0e0e16] dark:hover:bg-[#181824] text-slate-700 dark:text-zinc-300 border border-slate-300 dark:border-white/[0.08] transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#0c0c10] dark:hover:bg-[#1c1c24] text-slate-700 dark:text-zinc-300 border border-slate-300 dark:border-white/[0.08] transition-colors cursor-pointer"
                 title="Desplazar marcas a la izquierda"
                 aria-label="Desplazar a la izquierda"
               >
@@ -202,7 +202,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
               <button
                 type="button"
                 onClick={() => scrollBrands('right')}
-                className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#0e0e16] dark:hover:bg-[#181824] text-slate-700 dark:text-zinc-300 border border-slate-300 dark:border-white/[0.08] transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#0c0c10] dark:hover:bg-[#1c1c24] text-slate-700 dark:text-zinc-300 border border-slate-300 dark:border-white/[0.08] transition-colors cursor-pointer"
                 title="Desplazar marcas a la derecha"
                 aria-label="Desplazar a la derecha"
               >
@@ -233,11 +233,11 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
 
                 {/* Top Row: Vector Logo + Country Origin Flag */}
                 <div className="flex items-center justify-between gap-2 pt-1">
-                  <div className="h-7 px-2 rounded-[3px] bg-slate-50 dark:bg-[#07070b] border border-slate-200 dark:border-white/[0.08] flex items-center justify-center shrink-0">
+                  <div className="h-7 px-2 rounded-[3px] bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] flex items-center justify-center shrink-0">
                     <BrandLogo brandId={brand.id} className="h-4 max-w-[65px]" />
                   </div>
 
-                  <span className="px-1.5 py-0.5 rounded-[3px] text-[9px] font-mono font-bold bg-slate-100 dark:bg-[#0a0a10] text-slate-700 dark:text-zinc-400 border border-slate-200 dark:border-white/[0.06] shrink-0">
+                  <span className="px-1.5 py-0.5 rounded-[3px] text-[9px] font-mono font-bold bg-slate-100 dark:bg-[#0c0c10] text-slate-700 dark:text-zinc-400 border border-slate-200 dark:border-white/[0.06] shrink-0">
                     {meta.flag}
                   </span>
                 </div>
@@ -296,7 +296,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
               <button
                 type="button"
                 onClick={() => setActiveTestimonialIdx((prev) => (prev > 0 ? prev - 1 : CONTRACTOR_TESTIMONIALS.length - 1))}
-                className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#0e0e16] dark:hover:bg-[#181824] text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/[0.08] transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#0c0c10] dark:hover:bg-[#1c1c24] text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/[0.08] transition-colors cursor-pointer"
                 title="Caso anterior"
                 aria-label="Caso anterior"
               >
@@ -305,7 +305,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
               <button
                 type="button"
                 onClick={() => setActiveTestimonialIdx((prev) => (prev < CONTRACTOR_TESTIMONIALS.length - 1 ? prev + 1 : 0))}
-                className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#0e0e16] dark:hover:bg-[#181824] text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/[0.08] transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#0c0c10] dark:hover:bg-[#1c1c24] text-slate-700 dark:text-zinc-300 border border-slate-200 dark:border-white/[0.08] transition-colors cursor-pointer"
                 title="Caso siguiente"
                 aria-label="Caso siguiente"
               >
@@ -315,7 +315,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
           </div>
 
           {/* Active Case Study Bento Container */}
-          <div className="p-4 sm:p-5 rounded-lg bg-slate-50 dark:bg-[#09090f] border border-slate-200 dark:border-white/[0.06] space-y-3.5 relative">
+          <div className="p-4 sm:p-5 rounded-lg bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.06] space-y-3.5 relative">
             
             {/* Contractor Profile Bar */}
             <div className="flex flex-wrap items-center justify-between gap-2.5">
@@ -402,7 +402,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
                   className={`px-2.5 py-1 rounded-[4px] text-[10px] font-bold uppercase transition-all cursor-pointer whitespace-nowrap ${
                     activeTestimonialIdx === idx
                       ? 'bg-amber-500 text-slate-950 font-black shadow-xs'
-                      : 'bg-slate-100 hover:bg-slate-200 dark:bg-[#09090e] text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/[0.06]'
+                      : 'bg-slate-100 hover:bg-slate-200 dark:bg-zinc-950 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/[0.06]'
                   }`}
                 >
                   {item.company.split(' ')[0]} ({item.city})
@@ -436,7 +436,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
                 placeholder="Buscar dudas..."
                 value={faqSearchQuery}
                 onChange={(e) => setFaqSearchQuery(e.target.value)}
-                className="w-full pl-8 pr-7 py-1.5 rounded-lg bg-slate-50 dark:bg-[#09090e] border border-slate-200 dark:border-white/[0.08] text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-amber-500"
+                className="w-full pl-8 pr-7 py-1.5 rounded-lg bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-amber-500"
               />
               {faqSearchQuery && (
                 <button
@@ -482,7 +482,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
                   key={faq.id || idx}
                   className={`rounded-lg transition-all border ${
                     isOpen
-                      ? 'bg-slate-50 dark:bg-[#0b0b12] border-amber-400/80 dark:border-[#d99b26]/60 shadow-xs'
+                      ? 'bg-slate-50 dark:bg-[#0c0c10] border-amber-400/80 dark:border-[#d99b26]/60 shadow-xs'
                       : 'bg-white dark:bg-gradient-to-b dark:from-[#13131c] dark:via-[#0b0b10] dark:to-[#040407] border-slate-200 dark:border-white/[0.08] hover:border-slate-300 dark:hover:border-white/[0.15]'
                   }`}
                 >

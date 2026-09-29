@@ -136,7 +136,7 @@ export const AboveFoldConversionDeck: React.FC<AboveFoldConversionDeckProps> = (
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-[4px] bg-gradient-to-b from-[#1a1a24] to-[#08080c] border border-white/[0.12] text-[#e0a22a] flex items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.14)]">
                 <Scale className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
               </div>
-              <span className="px-2.5 py-0.5 sm:py-1 rounded-[3px] bg-[#14141e]/90 text-[#e0a22a] border border-[#d99b26]/40 text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">
+              <span className="px-2.5 py-0.5 sm:py-1 rounded-[3px] bg-[#14141c]/90 text-[#e0a22a] border border-[#d99b26]/40 text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">
                 0% INICIAL • 24H
               </span>
             </div>
@@ -152,7 +152,7 @@ export const AboveFoldConversionDeck: React.FC<AboveFoldConversionDeckProps> = (
             </div>
 
             {/* Quick Teaser Calculator */}
-            <div className="bg-[#07070b] rounded-[4px] p-2.5 sm:p-3 border border-white/[0.08] space-y-1 sm:space-y-1.5">
+            <div className="bg-zinc-950 rounded-[4px] p-2.5 sm:p-3 border border-white/[0.08] space-y-1 sm:space-y-1.5">
               <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider">
                 <span className="text-zinc-400">CUOTA EST. ({selectedTermMonths}M):</span>
                 <span className="font-mono font-black text-[#e0a22a] text-xs sm:text-sm">
@@ -196,7 +196,7 @@ export const AboveFoldConversionDeck: React.FC<AboveFoldConversionDeckProps> = (
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-[4px] bg-gradient-to-b from-[#1a1a24] to-[#08080c] border border-white/[0.12] text-[#e0a22a] flex items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.14)]">
                 <ShoppingBag className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
               </div>
-              <span className="px-2.5 py-0.5 sm:py-1 rounded-[3px] bg-[#14141e]/90 text-zinc-200 border border-white/[0.12] text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">
+              <span className="px-2.5 py-0.5 sm:py-1 rounded-[3px] bg-[#14141c]/90 text-zinc-200 border border-white/[0.12] text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider">
                 SHOWROOM KM 22
               </span>
             </div>

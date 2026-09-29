@@ -195,7 +195,13 @@ html:not(.dark) .min-h-screen {
   color: var(--text-body) !important;
 }
 
-/* 1. Surfaces: Transform hardcoded dark containers into clean white executive cards */
+/* 1. Surfaces: Transform dark containers into clean white executive cards
+   Consolidated Elevation Map:
+     Level 0: bg-zinc-950         (~#09090b — Canvas)
+     Level 1: bg-[#0c0c10]       (Card surface)
+     Level 2: bg-[#14141c]       (Elevated panels)
+     Level 3: bg-[#1c1c24]       (Overlay/modal)
+*/
 html:not(.dark) :where(
   .bg-zinc-950,
   .bg-zinc-900,
@@ -205,20 +211,9 @@ html:not(.dark) :where(
   [class*="bg-zinc-900"],
   [class*="bg-zinc-850"],
   [class*="bg-black/"],
-  [class*="bg-[#0c0c1"],
-  [class*="bg-[#0a0a1"],
-  [class*="bg-[#07070"],
-  [class*="bg-[#11111"],
-  [class*="bg-[#14141"],
-  [class*="bg-[#15151"],
-  [class*="bg-[#09090"],
-  [class*="bg-[#05050"],
-  [class*="bg-[#06060"],
-  [class*="bg-[#03030"],
-  [class*="bg-[#0e0e1"],
-  [class*="bg-[#18182"],
-  [class*="bg-[#1c1c2"],
-  [class*="bg-[#20202"],
+  [class*="bg-[#0c0c10]"],
+  [class*="bg-[#14141c]"],
+  [class*="bg-[#1c1c24]"],
   [class*="bg-[#2b261a]"]
 ):not(.dark-preserve):not(.dark-preserve *):not([class*="bg-amber"]):not([class*="bg-yellow"]):not([class*="bg-emerald"]):not([class*="bg-red"]):not([class*="bg-blue"]):not([class*="bg-cyan"]):not([class*="bg-green"]) {
   background-color: #ffffff !important;
@@ -226,6 +221,7 @@ html:not(.dark) :where(
   color: #1e293b !important;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
 }
+
 
 /* 2. Insets & Sub-panels: Slate-100 surfaces */
 html:not(.dark) :where(

@@ -53,13 +53,13 @@ export const LiveMarquee: React.FC<LiveMarqueeProps> = ({ onNavigate }) => {
 
   return (
     <div 
-      className="relative w-full border-y border-zinc-200 dark:border-white/[0.08] bg-zinc-50/90 dark:bg-[#0a0a10]/95 backdrop-blur-md overflow-hidden transition-colors"
+      className="relative w-full border-y border-zinc-200 dark:border-white/[0.08] bg-zinc-50/90 dark:bg-[#0c0c10]/95 backdrop-blur-md overflow-hidden transition-colors"
       role="region"
       aria-label="Actualizaciones en vivo de maquinaria y servicios"
     >
       <div className="flex items-center">
         {/* Left static Live Badge */}
-        <div className="shrink-0 z-10 flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#0c0c14] text-white shadow-md border-r border-white/[0.08]">
+        <div className="shrink-0 z-10 flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#0c0c10] text-white shadow-md border-r border-white/[0.08]">
           <div className="relative flex items-center justify-center">
             <span className="w-2 h-2 rounded-full bg-[#d99b26] animate-ping absolute" />
             <span className="w-2 h-2 rounded-full bg-[#e0a22a]" />

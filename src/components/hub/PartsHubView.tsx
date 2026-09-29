@@ -109,7 +109,7 @@ export const PartsHubView: React.FC<PartsHubProps> = ({ onNavigate, onOpenVinMod
   };
 
   return (
-    <div className="w-full min-h-screen bg-slate-50 dark:bg-[#06060a] text-slate-900 dark:text-white transition-colors duration-300">
+    <div className="w-full min-h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-white transition-colors duration-300">
       
       {/* 1. BREADCRUMBS & TOP CONTEXT */}
       <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-3 border-b border-slate-200/80 dark:border-white/[0.06] text-xs font-semibold text-slate-500 dark:text-zinc-400 flex items-center gap-2">
@@ -185,7 +185,7 @@ export const PartsHubView: React.FC<PartsHubProps> = ({ onNavigate, onOpenVinMod
       </div>
 
       {/* 3. QUICK STATS STRIP */}
-      <div className="border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#0a0a12]">
+      <div className="border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#0c0c10]">
         <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
           {PARTS_HERO_STATS.map((stat, idx) => {
             const Icon = stat.icon;
@@ -233,7 +233,7 @@ export const PartsHubView: React.FC<PartsHubProps> = ({ onNavigate, onOpenVinMod
             <div
               key={cat.id}
               onClick={() => onNavigate(cat.route)}
-              className="group rounded-2xl bg-white dark:bg-[#0c0d14] border border-slate-200/80 dark:border-white/[0.08] hover:border-amber-400 dark:hover:border-amber-400/60 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between"
+              className="group rounded-2xl bg-white dark:bg-[#0c0c10] border border-slate-200/80 dark:border-white/[0.08] hover:border-amber-400 dark:hover:border-amber-400/60 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between"
             >
               <div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-zinc-800">
                 <img
@@ -277,7 +277,7 @@ export const PartsHubView: React.FC<PartsHubProps> = ({ onNavigate, onOpenVinMod
       </div>
 
       {/* 5. BRAND DIRECTORY SELECTOR */}
-      <div className="border-t border-slate-200/80 dark:border-white/[0.06] bg-slate-100/60 dark:bg-[#08080f] py-12">
+      <div className="border-t border-slate-200/80 dark:border-white/[0.06] bg-slate-100/60 dark:bg-zinc-950 py-12">
         <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
           <div className="text-center max-w-2xl mx-auto mb-8">
             <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400">

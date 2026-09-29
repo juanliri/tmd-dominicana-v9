@@ -64,8 +64,8 @@ export const FleetAcquisitionFilterBar = React.memo<FleetAcquisitionFilterBarPro
               onClick={() => onChangeCondition(tab.id)}
               className={`p-2.5 sm:p-3 rounded-[2px] text-left transition-all flex flex-col justify-between gap-1.5 cursor-pointer select-none border ${
                 isActive
-                  ? 'bg-[#181826] text-white border-[#d99b26]/80 shadow-md ring-1 ring-[#d99b26]/30'
-                  : 'bg-[#08080d]/60 text-zinc-300 hover:text-white hover:bg-[#12121c] border-white/[0.06]'
+                  ? 'bg-[#1c1c24] text-white border-[#d99b26]/80 shadow-md ring-1 ring-[#d99b26]/30'
+                  : 'bg-zinc-950/60 text-zinc-300 hover:text-white hover:bg-[#14141c] border-white/[0.06]'
               }`}
             >
               <div className="flex items-center justify-between gap-1">

@@ -572,8 +572,8 @@ export const Header: React.FC<HeaderProps> = ({
       ref={headerRef}
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 dark:bg-[#06060a]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/[0.08] shadow-lg shadow-black/5 dark:shadow-black/50' 
-          : 'bg-white/90 dark:bg-[#0a0a10]/90 backdrop-blur-xl border-b border-slate-200/60 dark:border-white/[0.06]'
+          ? 'bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/[0.08] shadow-lg shadow-black/5 dark:shadow-black/50' 
+          : 'bg-white/90 dark:bg-[#0c0c10]/90 backdrop-blur-xl border-b border-slate-200/60 dark:border-white/[0.06]'
       }`}
       onMouseLeave={() => {
         handleScheduleMegaMenuClose();
@@ -586,7 +586,7 @@ export const Header: React.FC<HeaderProps> = ({
           handleCloseMegaMenuImmediately();
           handleCloseServicesDropdownImmediately();
         }}
-        className="bg-slate-100/95 dark:bg-[#050508]/95 backdrop-blur-md text-slate-600 dark:text-zinc-400 text-[11px] py-1.5 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-slate-200/80 dark:border-white/[0.06] hidden sm:flex items-center justify-between gap-3"
+        className="bg-slate-100/95 dark:bg-zinc-950/95 backdrop-blur-md text-slate-600 dark:text-zinc-400 text-[11px] py-1.5 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-slate-200/80 dark:border-white/[0.06] hidden sm:flex items-center justify-between gap-3"
       >
         {/* Zone 1: Distributor Identity */}
         <div className="flex items-center gap-3 shrink-0">
@@ -606,7 +606,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={onOpenSearch}
               aria-label="Buscar en catálogo, repuestos y fichas"
-              className="w-full flex items-center justify-between px-3 py-1 rounded-[4px] bg-white dark:bg-[#0c0d12] border border-slate-200 dark:border-white/[0.08] hover:border-amber-400 dark:hover:border-brand-gold-dark/50 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer shadow-2xs group"
+              className="w-full flex items-center justify-between px-3 py-1 rounded-[4px] bg-white dark:bg-[#0c0c10] border border-slate-200 dark:border-white/[0.08] hover:border-amber-400 dark:hover:border-brand-gold-dark/50 text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer shadow-2xs group"
               title="Buscar catálogo, repuestos o fichas técnicas (⌘K o Ctrl+K)"
             >
               <span className="flex items-center gap-2 text-[11px] font-medium">
@@ -635,12 +635,12 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Currency Switcher + Rate */}
           <div className="flex items-center gap-1.5 font-mono">
-            <div className="flex items-center gap-0.5 bg-white dark:bg-[#09090e] rounded-[3px] p-0.5 border border-slate-200 dark:border-white/[0.08]">
+            <div className="flex items-center gap-0.5 bg-white dark:bg-zinc-950 rounded-[3px] p-0.5 border border-slate-200 dark:border-white/[0.08]">
               <button
                 onClick={() => setCurrency('USD')}
                 className={`px-1.5 py-0.5 rounded-[2px] text-[10px] font-black uppercase transition-colors cursor-pointer ${
                   currency === 'USD' 
-                    ? 'bg-amber-100 dark:bg-[#181824] text-amber-700 dark:text-brand-gold border border-amber-300 dark:border-brand-gold-dark/50 shadow-xs' 
+                    ? 'bg-amber-100 dark:bg-[#1c1c24] text-amber-700 dark:text-brand-gold border border-amber-300 dark:border-brand-gold-dark/50 shadow-xs' 
                     : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
@@ -650,7 +650,7 @@ export const Header: React.FC<HeaderProps> = ({
                 onClick={() => setCurrency('DOP')}
                 className={`px-1.5 py-0.5 rounded-[2px] text-[10px] font-black uppercase transition-colors cursor-pointer ${
                   currency === 'DOP' 
-                    ? 'bg-amber-100 dark:bg-[#181824] text-amber-700 dark:text-brand-gold border border-amber-300 dark:border-brand-gold-dark/50 shadow-xs' 
+                    ? 'bg-amber-100 dark:bg-[#1c1c24] text-amber-700 dark:text-brand-gold border border-amber-300 dark:border-brand-gold-dark/50 shadow-xs' 
                     : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
                 }`}
               >
@@ -675,7 +675,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={toggleTheme}
             aria-label="Alternar tema claro/oscuro"
             title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
-            className="flex items-center gap-1 px-1.5 py-0.5 rounded-[3px] text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-[#12121c] transition-colors cursor-pointer border border-slate-200 dark:border-white/[0.08] text-[10px] font-black uppercase"
+            className="flex items-center gap-1 px-1.5 py-0.5 rounded-[3px] text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-[#14141c] transition-colors cursor-pointer border border-slate-200 dark:border-white/[0.08] text-[10px] font-black uppercase"
           >
             {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-brand-gold" /> : <Moon className="w-3.5 h-3.5 text-slate-700" />}
           </button>
@@ -688,7 +688,7 @@ export const Header: React.FC<HeaderProps> = ({
             className={`flex items-center gap-1 px-1.5 py-0.5 rounded-[3px] text-[10px] font-black uppercase transition-all cursor-pointer border ${
               isCanteraMode
                 ? 'bg-amber-400 text-black border-amber-300 shadow-[0_0_8px_rgba(251,191,36,0.6)]'
-                : 'text-slate-500 dark:text-zinc-400 hover:text-slate-800 dark:hover:text-zinc-200 border-slate-200 dark:border-white/[0.08] hover:bg-slate-200/60 dark:hover:bg-[#12121c]'
+                : 'text-slate-500 dark:text-zinc-400 hover:text-slate-800 dark:hover:text-zinc-200 border-slate-200 dark:border-white/[0.08] hover:bg-slate-200/60 dark:hover:bg-[#14141c]'
             }`}
           >
             <Mountain className={`w-3 h-3 ${isCanteraMode ? 'text-black' : 'text-amber-500 dark:text-amber-400'}`} />
@@ -869,7 +869,7 @@ export const Header: React.FC<HeaderProps> = ({
             }}
             aria-label="Ver notificaciones"
             title="Notificaciones"
-            className="relative p-2 rounded-lg bg-slate-100 dark:bg-[#09090f] border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold transition-colors cursor-pointer"
+            className="relative p-2 rounded-lg bg-slate-100 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold transition-colors cursor-pointer"
           >
             <Bell className="w-4 h-4" />
             {unreadCount > 0 && (
@@ -886,7 +886,7 @@ export const Header: React.FC<HeaderProps> = ({
                 handleCloseServicesDropdownImmediately();
               }}
               aria-label="Buscar en catálogo"
-              className="lg:hidden p-2 rounded-lg bg-slate-100 dark:bg-[#09090f] border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold transition-colors cursor-pointer"
+              className="lg:hidden p-2 rounded-lg bg-slate-100 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold transition-colors cursor-pointer"
               title="Buscar (⌘K)"
             >
               <Search className="w-4 h-4 text-amber-500 dark:text-brand-gold" />
@@ -902,7 +902,7 @@ export const Header: React.FC<HeaderProps> = ({
                 handleCloseServicesDropdownImmediately();
               }}
               aria-label="Escanear código QR de maquinaria o repuesto"
-              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#09090f] border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold hover:border-amber-400 dark:hover:border-brand-gold-dark/50 transition-colors cursor-pointer group"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-brand-gold hover:border-amber-400 dark:hover:border-brand-gold-dark/50 transition-colors cursor-pointer group"
               title="Escanear Código QR Industrial (Ctrl+Shift+Q)"
             >
               <QrCode className="w-3.5 h-3.5 text-amber-600 dark:text-brand-gold group-hover:scale-110 transition-transform" />
@@ -921,7 +921,7 @@ export const Header: React.FC<HeaderProps> = ({
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg font-black uppercase tracking-wider text-xs transition-all cursor-pointer border ${
               totalBadges > 0
                 ? 'bg-amber-400 hover:bg-amber-500 text-black border-amber-500 shadow-sm'
-                : 'bg-slate-100 hover:bg-slate-200 dark:bg-[#09090f] dark:hover:bg-[#14141c] text-slate-800 dark:text-zinc-200 border-slate-200 dark:border-white/[0.08]'
+                : 'bg-slate-100 hover:bg-slate-200 dark:bg-zinc-950 dark:hover:bg-[#14141c] text-slate-800 dark:text-zinc-200 border-slate-200 dark:border-white/[0.08]'
             }`}
           >
             <ShoppingCart className="w-3.5 h-3.5 text-inherit" />
@@ -943,7 +943,7 @@ export const Header: React.FC<HeaderProps> = ({
                 handleCloseMegaMenuImmediately();
                 handleCloseServicesDropdownImmediately();
               }}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all border border-slate-200 dark:border-white/[0.08] bg-slate-100 dark:bg-[#09090f] hover:bg-slate-200 dark:hover:bg-[#14141c] text-amber-700 dark:text-brand-gold cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all border border-slate-200 dark:border-white/[0.08] bg-slate-100 dark:bg-zinc-950 hover:bg-slate-200 dark:hover:bg-[#14141c] text-amber-700 dark:text-brand-gold cursor-pointer"
               title="Panel Administrativo"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
@@ -971,7 +971,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Abrir menú"
-            className="lg:hidden p-2 rounded-lg text-slate-700 dark:text-zinc-200 bg-slate-100 dark:bg-[#09090f] border border-slate-200 dark:border-white/[0.08] hover:bg-slate-200 dark:hover:bg-[#14141c] transition-colors cursor-pointer"
+            className="lg:hidden p-2 rounded-lg text-slate-700 dark:text-zinc-200 bg-slate-100 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] hover:bg-slate-200 dark:hover:bg-[#14141c] transition-colors cursor-pointer"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>

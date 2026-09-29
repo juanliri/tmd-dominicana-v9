@@ -94,7 +94,7 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
   const totalBadges = totalCartCount + totalQuotesCount;
 
   return (
-    <div className="w-full flex flex-col max-h-[86vh] sm:max-h-[82vh] overflow-hidden bg-white/98 dark:bg-[#0c0d10]/98 backdrop-blur-2xl text-zinc-900 dark:text-white">
+    <div className="w-full flex flex-col max-h-[86vh] sm:max-h-[82vh] overflow-hidden bg-white/98 dark:bg-[#0c0c10]/98 backdrop-blur-2xl text-zinc-900 dark:text-white">
       {/* 1. TOP MOBILE/TABLET TOOLBAR & SEARCH */}
       <div className="p-3.5 sm:p-4 border-b border-zinc-200/80 dark:border-white/[0.08] space-y-3 bg-zinc-50/70 dark:bg-zinc-900/50">
         {/* Mobile Brand Banner */}

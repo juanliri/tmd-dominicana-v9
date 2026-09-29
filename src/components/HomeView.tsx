@@ -505,7 +505,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                       className={`relative overflow-hidden px-3 py-1 rounded-[4px] text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer ${
                         heroMachineIndex === idx
                           ? 'bg-amber-500 text-slate-950 font-bold border border-amber-600 shadow-sm dark:bg-gradient-to-b dark:from-[#202028] dark:to-[#0e0e13] dark:text-[#e0a22a] dark:border-[#d99b26]/70 dark:shadow-[0_2px_8px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.15)]'
-                          : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200 border border-slate-200 dark:bg-[#060608]/90 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-[#14141a] dark:border-white/[0.06]'
+                          : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200 border border-slate-200 dark:bg-zinc-950/90 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-[#14141c] dark:border-white/[0.06]'
                       }`}
                     >
                       <span>{m.modelCode}</span>
@@ -535,7 +535,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 className="space-y-4 relative z-10"
               >
                 {/* Bigger Photo Showcase (Taller Aspect Ratio & Precision Industrial Viewfinder Layout) */}
-                <div className="relative aspect-[16/10] min-h-[260px] sm:min-h-[300px] lg:min-h-[320px] rounded-[5px] overflow-hidden bg-slate-900 dark:bg-[#030305] border border-slate-200 dark:border-white/[0.08] group/photo shadow-2xl transition-colors hover:border-amber-500/50">
+                <div className="relative aspect-[16/10] min-h-[260px] sm:min-h-[300px] lg:min-h-[320px] rounded-[5px] overflow-hidden bg-slate-900 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] group/photo shadow-2xl transition-colors hover:border-amber-500/50">
                   {/* Subtle Ambient Radial Gold Glow Behind Machinery */}
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(217,155,38,0.14)_0%,rgba(0,0,0,0)_70%)] pointer-events-none" />
 
@@ -568,13 +568,13 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                   {/* Top Floating Telemetry & Availability Bar */}
                   <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between gap-2 z-20 pointer-events-auto">
                     {/* Brand & Model Official Badge */}
-                    <div className="bg-[#050508]/95 backdrop-blur-md px-2.5 py-1 rounded-[4px] text-[11px] font-black text-[#e0a22a] border border-[#d99b26]/40 tracking-wider uppercase font-display shadow-lg flex items-center gap-1.5">
+                    <div className="bg-zinc-950/95 backdrop-blur-md px-2.5 py-1 rounded-[4px] text-[11px] font-black text-[#e0a22a] border border-[#d99b26]/40 tracking-wider uppercase font-display shadow-lg flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#e0a22a]" />
                       <span>{activeHeroMachine.brand} • {activeHeroMachine.modelCode}</span>
                     </div>
 
                     {/* Live Patio Stock Badge (3-Color Deep Industrial Finish) */}
-                    <div className="bg-[#050508]/95 backdrop-blur-md px-2.5 py-1 rounded-[4px] text-[10px] font-black text-zinc-200 border border-white/[0.1] tracking-wider uppercase font-mono shadow-lg flex items-center gap-1.5">
+                    <div className="bg-zinc-950/95 backdrop-blur-md px-2.5 py-1 rounded-[4px] text-[10px] font-black text-zinc-200 border border-white/[0.1] tracking-wider uppercase font-mono shadow-lg flex items-center gap-1.5">
                       <span className="relative flex h-1.5 w-1.5">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#e0a22a] opacity-75" />
                         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#e0a22a]" />
@@ -586,7 +586,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                   {/* Bottom Telematics & Interactive 360 Action Bar */}
                   <div className="absolute bottom-2.5 inset-x-2.5 flex items-center justify-between gap-2 z-20 pointer-events-auto">
                     {/* Telematics Status Pill */}
-                    <div className="hidden sm:inline-flex items-center gap-1.5 bg-[#050508]/90 backdrop-blur-md px-2 py-1 rounded-[4px] text-[10px] font-bold text-zinc-300 border border-white/10 font-mono tracking-wider uppercase">
+                    <div className="hidden sm:inline-flex items-center gap-1.5 bg-zinc-950/90 backdrop-blur-md px-2 py-1 rounded-[4px] text-[10px] font-bold text-zinc-300 border border-white/10 font-mono tracking-wider uppercase">
                       <Radio className="w-3 h-3 text-[#e0a22a] animate-pulse" />
                       <span>LIVELINK™ GPS ACTIVO</span>
                     </div>
@@ -699,7 +699,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
 
       {/* 1.5 LIVE UPDATES MARQUEE: Streamlined Real-Time Ticker */}
       <div className="w-full px-3 sm:px-6 lg:px-8 xl:px-12 max-w-[1780px] mx-auto -mt-3 sm:-mt-6 relative z-20">
-        <div className="rounded-[6px] overflow-hidden shadow-md border border-slate-200 dark:border-white/[0.08] bg-white/90 dark:bg-[#07070b]/90 backdrop-blur-md">
+        <div className="rounded-[6px] overflow-hidden shadow-md border border-slate-200 dark:border-white/[0.08] bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md">
           <LiveMarquee onNavigate={onNavigate} />
         </div>
       </div>
@@ -713,7 +713,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
 
       {/* MINIMAL FLOATING ANCHOR CAPSULE DOCK (Minimal Icons & Smooth Scrolling Animation) */}
       <div className="sticky top-14 sm:top-16 z-30 w-full px-3 max-w-fit mx-auto py-1 pointer-events-none">
-        <div className="pointer-events-auto relative flex items-center gap-1 sm:gap-1.5 px-2 py-1 rounded-full bg-white/95 dark:bg-[#0a0a10]/95 backdrop-blur-xl border border-slate-200 dark:border-white/[0.12] shadow-lg dark:shadow-[0_10px_35px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.15)] overflow-hidden">
+        <div className="pointer-events-auto relative flex items-center gap-1 sm:gap-1.5 px-2 py-1 rounded-full bg-white/95 dark:bg-[#0c0c10]/95 backdrop-blur-xl border border-slate-200 dark:border-white/[0.12] shadow-lg dark:shadow-[0_10px_35px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.15)] overflow-hidden">
           {/* Animated Dynamic Scroll Progress Indicator along the base */}
           <div className="absolute bottom-0 inset-x-0 h-[2px] bg-slate-200 dark:bg-white/[0.05] pointer-events-none">
             <div 
@@ -761,7 +761,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 </div>
 
                 {/* Minimal Micro Tooltip on Hover */}
-                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-[4px] bg-slate-900/90 dark:bg-[#0c0c14] border border-slate-700 dark:border-white/[0.12] text-[10px] font-mono font-bold text-white dark:text-zinc-200 uppercase tracking-wider whitespace-nowrap shadow-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
+                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-[4px] bg-slate-900/90 dark:bg-[#0c0c10] border border-slate-700 dark:border-white/[0.12] text-[10px] font-mono font-bold text-white dark:text-zinc-200 uppercase tracking-wider whitespace-nowrap shadow-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
                   {item.label}
                 </span>
               </button>
@@ -779,7 +779,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
             aria-label="Volver arriba"
           >
             <ChevronUp className="w-3.5 h-3.5" />
-            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-[4px] bg-slate-900/90 dark:bg-[#0c0c14] border border-slate-700 dark:border-white/[0.12] text-[10px] font-mono font-bold text-white dark:text-zinc-200 uppercase tracking-wider whitespace-nowrap shadow-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
+            <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-[4px] bg-slate-900/90 dark:bg-[#0c0c10] border border-slate-700 dark:border-white/[0.12] text-[10px] font-mono font-bold text-white dark:text-zinc-200 uppercase tracking-wider whitespace-nowrap shadow-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
               Arriba
             </span>
           </button>
@@ -795,7 +795,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
               <span className="text-xs font-black font-display uppercase tracking-wider text-[#e0a22a]">
                 Catálogo de Flota con Precios Transparentes
               </span>
-              <span className="text-[10px] px-2 py-0.5 rounded-[4px] bg-[#0c0c14] text-zinc-300 border border-white/[0.08] font-mono font-bold uppercase">
+              <span className="text-[10px] px-2 py-0.5 rounded-[4px] bg-[#0c0c10] text-zinc-300 border border-white/[0.08] font-mono font-bold uppercase">
                 {filteredMachines.length} EN PATIO
               </span>
               {selectedBrand !== 'Todas' && (
@@ -828,7 +828,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 className={`px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all shrink-0 cursor-pointer border ${
                   selectedCategory === cat
                     ? 'bg-[#d99b26] text-black border-[#e0a22a] shadow-xs'
-                    : 'bg-[#0a0a10] text-zinc-400 hover:text-white hover:bg-[#12121c] border-white/[0.06]'
+                    : 'bg-[#0c0c10] text-zinc-400 hover:text-white hover:bg-[#14141c] border-white/[0.06]'
                 }`}
               >
                 {cat.toUpperCase()}
@@ -839,13 +839,13 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
           {/* Right Controls: View mode switcher, carousel navigation, and full fleet link */}
           <div className="flex items-center justify-between md:justify-end gap-2 shrink-0 border-t md:border-t-0 pt-2 md:pt-0 border-white/[0.06]">
             {/* View Mode Switcher */}
-            <div className="flex items-center gap-1 bg-[#0a0a10] p-0.5 rounded-lg border border-white/[0.06] text-xs">
+            <div className="flex items-center gap-1 bg-[#0c0c10] p-0.5 rounded-lg border border-white/[0.06] text-xs">
               <button
                 type="button"
                 onClick={() => setDesktopFleetViewMode('carousel')}
                 className={`px-2 py-1 rounded-md font-black uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer text-[11px] ${
                   desktopFleetViewMode === 'carousel'
-                    ? 'bg-[#181824] text-[#e0a22a] border border-[#d99b26]/50 shadow-xs'
+                    ? 'bg-[#1c1c24] text-[#e0a22a] border border-[#d99b26]/50 shadow-xs'
                     : 'text-zinc-400 hover:text-white'
                 }`}
                 title="Vista Carrusel Panorámico"
@@ -858,7 +858,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 onClick={() => setDesktopFleetViewMode('grid')}
                 className={`px-2 py-1 rounded-md font-black uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer text-[11px] ${
                   desktopFleetViewMode === 'grid'
-                    ? 'bg-[#181824] text-[#e0a22a] border border-[#d99b26]/50 shadow-xs'
+                    ? 'bg-[#1c1c24] text-[#e0a22a] border border-[#d99b26]/50 shadow-xs'
                     : 'text-zinc-400 hover:text-white'
                 }`}
                 title="Vista Cuadrícula Completa"
@@ -874,7 +874,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                   id="fleet-carousel-prev-btn"
                   type="button"
                   onClick={() => scrollCarousel('left')}
-                  className="p-1.5 rounded-md bg-[#0a0a10] hover:bg-[#181824] text-zinc-300 transition-colors cursor-pointer border border-white/[0.08]"
+                  className="p-1.5 rounded-md bg-[#0c0c10] hover:bg-[#1c1c24] text-zinc-300 transition-colors cursor-pointer border border-white/[0.08]"
                   title="Anterior"
                   aria-label="Desplazar carrusel de maquinaria hacia la izquierda"
                 >
@@ -884,7 +884,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                   id="fleet-carousel-next-btn"
                   type="button"
                   onClick={() => scrollCarousel('right')}
-                  className="p-1.5 rounded-md bg-[#0a0a10] hover:bg-[#181824] text-zinc-300 transition-colors cursor-pointer border border-white/[0.08]"
+                  className="p-1.5 rounded-md bg-[#0c0c10] hover:bg-[#1c1c24] text-zinc-300 transition-colors cursor-pointer border border-white/[0.08]"
                   title="Siguiente"
                   aria-label="Desplazar carrusel de maquinaria hacia la derecha"
                 >
@@ -937,7 +937,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 } bg-gradient-to-b from-[#14141c] via-[#0c0c12] to-[#040407] rounded-xl border border-white/[0.08] hover:border-[#d99b26]/50 overflow-hidden hover:shadow-xl hover:shadow-black/50 transition-all flex flex-col justify-between group`}
               >
                 {/* Narrow aspect image with micro-badges */}
-                <div className="relative aspect-[4/3] bg-[#08080d] overflow-hidden">
+                <div className="relative aspect-[4/3] bg-zinc-950 overflow-hidden">
                   <img
                     src={machine.image}
                     alt={machine.name}
@@ -951,7 +951,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                     }}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-1.5 left-1.5 bg-[#08080d]/90 px-1.5 py-0.5 rounded-[3px] text-[9px] sm:text-[10px] font-black text-[#e0a22a] border border-white/[0.08] font-mono uppercase">
+                  <div className="absolute top-1.5 left-1.5 bg-zinc-950/90 px-1.5 py-0.5 rounded-[3px] text-[9px] sm:text-[10px] font-black text-[#e0a22a] border border-white/[0.08] font-mono uppercase">
                     {machine.brand}
                   </div>
                   <div className="absolute top-1.5 right-1.5 flex items-center gap-1">
@@ -964,7 +964,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                       className={`backdrop-blur-xs p-1 rounded-[3px] text-[9px] font-bold transition-all shadow cursor-pointer ${
                         isComparing(machine.id)
                           ? 'bg-[#d99b26] text-black border border-[#e0a22a]'
-                          : 'bg-[#08080d]/90 text-zinc-300 hover:text-[#e0a22a] border border-white/[0.08]'
+                          : 'bg-zinc-950/90 text-zinc-300 hover:text-[#e0a22a] border border-white/[0.08]'
                       }`}
                       title={isComparing(machine.id) ? 'Quitar de comparativa' : 'Agregar a comparativa'}
                       aria-label={`Comparar ${machine.name}`}
@@ -980,7 +980,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                       setActive360Tab('360');
                       setActive360Machine(machine);
                     }}
-                    className="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded-[3px] bg-[#08080d]/90 hover:bg-[#181824] text-[#e0a22a] text-[9px] sm:text-[10px] font-mono font-bold uppercase transition-all flex items-center gap-1 border border-white/[0.08] hover:border-[#d99b26]/50 cursor-pointer shadow-xs"
+                    className="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded-[3px] bg-zinc-950/90 hover:bg-[#1c1c24] text-[#e0a22a] text-[9px] sm:text-[10px] font-mono font-bold uppercase transition-all flex items-center gap-1 border border-white/[0.08] hover:border-[#d99b26]/50 cursor-pointer shadow-xs"
                     title="Girar en 360°"
                   >
                     <RotateCw className="w-2.5 h-2.5 sm:w-3 sm:h-3 animate-spin-slow" />
@@ -1001,14 +1001,14 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                     </div>
 
                     {/* Single-row specs */}
-                    <div className="flex items-center gap-1 py-1 px-1.5 rounded-md bg-[#09090f] border border-white/[0.06] text-[9px] sm:text-[11px] font-mono font-bold text-zinc-300 mb-2 truncate">
+                    <div className="flex items-center gap-1 py-1 px-1.5 rounded-md bg-zinc-950 border border-white/[0.06] text-[9px] sm:text-[11px] font-mono font-bold text-zinc-300 mb-2 truncate">
                       <span className="text-[#e0a22a]">{machine.powerHp} HP</span>
                       <span className="text-zinc-600">•</span>
                       <span>{(machine.operatingWeightKg / 1000).toFixed(1)}T</span>
                     </div>
 
                     {/* Clear Showroom Price & Estimated Monthly Leasing */}
-                    <div className="flex items-baseline justify-between py-1 px-1.5 rounded-md bg-[#09090f]/95 border border-white/[0.06] mb-2 font-mono">
+                    <div className="flex items-baseline justify-between py-1 px-1.5 rounded-md bg-zinc-950/95 border border-white/[0.06] mb-2 font-mono">
                       <div>
                         <span className="text-[10px] text-zinc-500 block uppercase font-bold">PRECIO DIRECTO</span>
                         <span className="text-xs sm:text-sm font-black text-white font-mono">
@@ -1035,7 +1035,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                     <button
                       type="button"
                       onClick={() => setPreviewMachine(machine)}
-                      className="flex-1 py-1 px-1 rounded-md bg-[#0d0d14] hover:bg-[#181824] text-zinc-300 hover:text-white text-[10px] font-black uppercase tracking-wider transition-colors text-center cursor-pointer border border-white/[0.08]"
+                      className="flex-1 py-1 px-1 rounded-md bg-[#0c0c10] hover:bg-[#1c1c24] text-zinc-300 hover:text-white text-[10px] font-black uppercase tracking-wider transition-colors text-center cursor-pointer border border-white/[0.08]"
                     >
                       FICHA
                     </button>

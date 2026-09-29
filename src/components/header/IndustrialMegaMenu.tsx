@@ -188,7 +188,7 @@ export const IndustrialMegaMenu: React.FC<IndustrialMegaMenuProps> = ({
               title={isPinned ? 'Desfijar menú (cierre automático)' : 'Fijar menú para navegación continua'}
               className={`flex items-center gap-1 px-2 py-1 rounded-[3px] text-[10px] font-black uppercase tracking-wider transition-colors cursor-pointer border ${
                 isPinned
-                  ? 'bg-amber-100 dark:bg-[#181824] text-amber-700 dark:text-[#e0a22a] border-amber-300 dark:border-[#e0a22a]/50'
+                  ? 'bg-amber-100 dark:bg-[#1c1c24] text-amber-700 dark:text-[#e0a22a] border-amber-300 dark:border-[#e0a22a]/50'
                   : 'text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white border-slate-200 dark:border-white/[0.08] hover:bg-slate-100 dark:hover:bg-zinc-800'
               }`}
             >

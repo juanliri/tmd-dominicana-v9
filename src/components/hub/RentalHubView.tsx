@@ -95,7 +95,7 @@ const RENTAL_FLEET_CATEGORIES = [
 
 export const RentalHubView: React.FC<RentalHubProps> = ({ onNavigate }) => {
   return (
-    <div className="w-full min-h-screen bg-slate-50 dark:bg-[#06060a] text-slate-900 dark:text-white transition-colors duration-300">
+    <div className="w-full min-h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-white transition-colors duration-300">
       
       {/* 1. BREADCRUMBS */}
       <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-3 border-b border-slate-200/80 dark:border-white/[0.06] text-xs font-semibold text-slate-500 dark:text-zinc-400 flex items-center gap-2">
@@ -146,7 +146,7 @@ export const RentalHubView: React.FC<RentalHubProps> = ({ onNavigate }) => {
       </div>
 
       {/* 3. HERO STATS */}
-      <div className="border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#0a0a12]">
+      <div className="border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#0c0c10]">
         <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
           {RENTAL_HERO_STATS.map((stat, idx) => {
             const Icon = stat.icon;
@@ -193,7 +193,7 @@ export const RentalHubView: React.FC<RentalHubProps> = ({ onNavigate }) => {
           {RENTAL_FLEET_CATEGORIES.map((item) => (
             <div
               key={item.id}
-              className="rounded-2xl bg-white dark:bg-[#0c0d14] border border-slate-200/80 dark:border-white/[0.08] overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              className="rounded-2xl bg-white dark:bg-[#0c0c10] border border-slate-200/80 dark:border-white/[0.08] overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
             >
               <div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-zinc-800">
                 <img
@@ -250,7 +250,7 @@ export const RentalHubView: React.FC<RentalHubProps> = ({ onNavigate }) => {
       </div>
 
       {/* 5. VALUE PROPOSITION: POR QUÉ RENTAR CON TMD */}
-      <div className="border-t border-slate-200/80 dark:border-white/[0.06] bg-slate-100/60 dark:bg-[#08080f] py-12">
+      <div className="border-t border-slate-200/80 dark:border-white/[0.06] bg-slate-100/60 dark:bg-zinc-950 py-12">
         <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400">

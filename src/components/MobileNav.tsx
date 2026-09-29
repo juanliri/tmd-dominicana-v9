@@ -42,7 +42,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentRoute, onNavigate }
   return (
     <nav 
       aria-label="Navegación Móvil Principal"
-      className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#07070c]/95 backdrop-blur-xl border-t border-white/[0.08] pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_32px_rgba(0,0,0,0.8)] font-display"
+      className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-zinc-950/95 backdrop-blur-xl border-t border-white/[0.08] pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_32px_rgba(0,0,0,0.8)] font-display"
     >
       <div className="grid grid-cols-5 h-14 items-center px-2 max-w-md mx-auto">
         {items.map((item) => {

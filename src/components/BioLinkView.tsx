@@ -538,7 +538,7 @@ END:VCARD`;
       {/* ========================================================================= */}
       {/* HIGH-DENSITY SOLID OBSIDIAN SMARTPHONE CONTAINER                          */}
       {/* ========================================================================= */}
-      <div className="w-full max-w-[430px] rounded-[28px] overflow-hidden bg-[#0c0c0e] border border-amber-500/30 shadow-[0_20px_60px_rgba(0,0,0,0.95)] relative z-10 flex flex-col">
+      <div className="w-full max-w-[430px] rounded-[28px] overflow-hidden bg-[#0c0c10] border border-amber-500/30 shadow-[0_20px_60px_rgba(0,0,0,0.95)] relative z-10 flex flex-col">
         
         {/* TALL PORTRAIT ACTION VIDEO HEADER */}
         <div className="w-full h-[320px] sm:h-[350px] relative overflow-hidden bg-black border-b border-white/10">
@@ -607,7 +607,7 @@ END:VCARD`;
         </div>
 
         {/* PROFILE SECTION OVER VIDEO TRANSITION */}
-        <div className="px-4.5 pt-3 pb-4 flex flex-col items-center text-center relative z-20 bg-[#0c0c0e]">
+        <div className="px-4.5 pt-3 pb-4 flex flex-col items-center text-center relative z-20 bg-[#0c0c10]">
           
           {/* SEMANTIC ACCESSIBLE TITLE */}
           <h1 className="text-base sm:text-lg font-black text-white uppercase tracking-wider font-display mb-1.5">
@@ -712,7 +712,7 @@ END:VCARD`;
                   }}
                   whileTap={{ scale: 0.96 }}
                   onClick={item.onClick}
-                  className="hover-tilt-card p-3 rounded-[16px] bg-[#141416] hover:bg-[#1a1a1e] border border-white/10 hover:border-amber-400 transition-all flex flex-col justify-between cursor-pointer group text-left shadow-sm min-h-[96px] relative overflow-hidden"
+                  className="hover-tilt-card p-3 rounded-[16px] bg-[#14141c] hover:bg-[#1c1c24] border border-white/10 hover:border-amber-400 transition-all flex flex-col justify-between cursor-pointer group text-left shadow-sm min-h-[96px] relative overflow-hidden"
                 >
                   {/* Top Bar: Icon with Halo + Mini Badge */}
                   <div className="flex items-center justify-between w-full mb-2">
@@ -751,7 +751,7 @@ END:VCARD`;
           <div className="w-full grid grid-cols-2 gap-2 mt-3 pt-2.5 border-t border-white/10">
             <button
               onClick={handleDownloadVCard}
-              className="py-2.5 px-3 rounded-[12px] bg-[#141416] hover:bg-[#1c1c20] border border-white/10 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+              className="py-2.5 px-3 rounded-[12px] bg-[#14141c] hover:bg-[#1c1c24] border border-white/10 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
             >
               <Download className="w-3.5 h-3.5 text-amber-400" />
               <span>Guardar VCard</span>
@@ -777,7 +777,7 @@ END:VCARD`;
       {/* ========================================================================= */}
       {/* DESKTOP FLOATING "VIEW ON MOBILE" QR CODE WIDGET                         */}
       {/* ========================================================================= */}
-      <div className="hidden lg:flex fixed bottom-6 right-6 z-50 flex-col items-center bg-[#0c0c0e] p-3 rounded-[16px] border border-amber-500/40 shadow-2xl">
+      <div className="hidden lg:flex fixed bottom-6 right-6 z-50 flex-col items-center bg-[#0c0c10] p-3 rounded-[16px] border border-amber-500/40 shadow-2xl">
         <span className="text-[10px] font-bold text-zinc-200 mb-1.5 font-mono">View on mobile</span>
         <div className="p-1.5 bg-white rounded-[8px] shadow-md">
           <img 
@@ -793,7 +793,7 @@ END:VCARD`;
       {/* ==================================================== */}
       {showCatalogModal && typeof document !== 'undefined' && createPortal(
         <div className="fixed inset-0 z-[99999] bg-black/90 flex items-center justify-center p-3 font-mono">
-          <div className="bg-[#0c0c0e] border border-amber-500/40 rounded-[24px] p-5 max-w-md w-full shadow-2xl relative max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95">
+          <div className="bg-[#0c0c10] border border-amber-500/40 rounded-[24px] p-5 max-w-md w-full shadow-2xl relative max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95">
             <button
               onClick={() => {
                 playTactileSound('click');
@@ -827,7 +827,7 @@ END:VCARD`;
                     <div className={`w-full h-full relative transition-transform duration-500 [transform-style:preserve-3d] ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}>
                       
                       {/* FRONT */}
-                      <div className="absolute inset-0 [backface-visibility:hidden] bg-[#141416] border border-white/10 hover:border-amber-400 rounded-[14px] p-2.5 flex flex-col justify-between shadow-lg">
+                      <div className="absolute inset-0 [backface-visibility:hidden] bg-[#14141c] border border-white/10 hover:border-amber-400 rounded-[14px] p-2.5 flex flex-col justify-between shadow-lg">
                         <div className="relative w-full h-24 rounded-[8px] overflow-hidden bg-black flex items-center justify-center p-1">
                           <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
                           <span className="absolute bottom-1 right-1 px-1.5 py-0.5 bg-amber-400 text-black font-bold text-[10px] rounded flex items-center gap-0.5">
@@ -887,7 +887,7 @@ END:VCARD`;
       {/* ==================================================== */}
       {showInquiryModal && typeof document !== 'undefined' && createPortal(
         <div className="fixed inset-0 z-[99999] bg-black/90 flex items-center justify-center p-3 font-mono">
-          <div className="bg-[#0c0c0e] border border-amber-500/40 rounded-[24px] p-5 max-w-sm w-full shadow-2xl relative animate-in fade-in zoom-in-95">
+          <div className="bg-[#0c0c10] border border-amber-500/40 rounded-[24px] p-5 max-w-sm w-full shadow-2xl relative animate-in fade-in zoom-in-95">
             <button
               onClick={() => {
                 playTactileSound('click');
@@ -973,7 +973,7 @@ END:VCARD`;
       {/* ==================================================== */}
       {showCalcModal && typeof document !== 'undefined' && createPortal(
         <div className="fixed inset-0 z-[99999] bg-black/90 flex items-center justify-center p-3 font-mono">
-          <div className="bg-[#0c0c0e] border border-amber-500/40 rounded-[24px] p-5 max-w-sm w-full shadow-2xl relative animate-in fade-in zoom-in-95">
+          <div className="bg-[#0c0c10] border border-amber-500/40 rounded-[24px] p-5 max-w-sm w-full shadow-2xl relative animate-in fade-in zoom-in-95">
             <button
               onClick={() => {
                 playTactileSound('click');
@@ -1105,7 +1105,7 @@ END:VCARD`;
       {/* ==================================================== */}
       {showVideoModal && typeof document !== 'undefined' && createPortal(
         <div className="fixed inset-0 z-[99999] bg-black/95 flex items-center justify-center p-3 font-mono">
-          <div className="bg-[#0c0c0e] border border-amber-500/40 rounded-[24px] p-4 sm:p-5 max-w-lg w-full shadow-2xl relative max-h-[92vh] overflow-y-auto animate-in fade-in zoom-in-95">
+          <div className="bg-[#0c0c10] border border-amber-500/40 rounded-[24px] p-4 sm:p-5 max-w-lg w-full shadow-2xl relative max-h-[92vh] overflow-y-auto animate-in fade-in zoom-in-95">
             <button
               onClick={() => {
                 playTactileSound('click');
@@ -1193,7 +1193,7 @@ END:VCARD`;
       {/* ==================================================== */}
       {showCareerModal && typeof document !== 'undefined' && createPortal(
         <div className="fixed inset-0 z-[99999] bg-black/90 flex items-center justify-center p-3 font-mono">
-          <div className="bg-[#0c0c0e] border border-amber-500/40 rounded-[24px] p-5 max-w-sm w-full shadow-2xl relative animate-in fade-in zoom-in-95">
+          <div className="bg-[#0c0c10] border border-amber-500/40 rounded-[24px] p-5 max-w-sm w-full shadow-2xl relative animate-in fade-in zoom-in-95">
             <button
               onClick={() => {
                 playTactileSound('click');
