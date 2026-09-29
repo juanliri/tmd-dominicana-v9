@@ -294,8 +294,8 @@ export const PinPadInput: React.FC<PinPadInputProps> = ({
                   isFilled
                     ? 'bg-amber-400 text-black shadow-[0_0_15px_rgba(251,191,36,0.4)]'
                     : isCurrent
-                      ? 'bg-slate-100 dark:bg-zinc-900 border-2 border-amber-500 dark:border-amber-400 text-amber-600 dark:text-amber-400 animate-pulse'
-                      : 'bg-slate-100 dark:bg-zinc-900/80 border border-slate-300 dark:border-white/15 text-slate-400 dark:text-zinc-600'
+                      ? 'bg-zinc-100 dark:bg-zinc-900 border-2 border-amber-500 dark:border-amber-400 text-amber-600 dark:text-amber-400 animate-pulse'
+                      : 'bg-zinc-100 dark:bg-zinc-900/80 border border-zinc-300 dark:border-white/15 text-zinc-400 dark:text-zinc-600'
                 }`}
               >
                 {isFilled ? '●' : '-'}
@@ -312,7 +312,7 @@ export const PinPadInput: React.FC<PinPadInputProps> = ({
               type="button"
               disabled={lockoutState.isLocked || isVerifying || loading}
               onClick={() => handleDigitPress(digit)}
-              className="h-9 rounded bg-slate-100 dark:bg-zinc-900 hover:bg-slate-200 dark:hover:bg-zinc-800 active:bg-amber-400 active:text-black border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white font-mono font-bold text-sm transition-all cursor-pointer touch-manipulation disabled:opacity-40"
+              className="h-9 rounded bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 active:bg-amber-400 active:text-black border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white font-mono font-bold text-sm transition-all cursor-pointer touch-manipulation disabled:opacity-40"
             >
               {digit}
             </button>
@@ -321,7 +321,7 @@ export const PinPadInput: React.FC<PinPadInputProps> = ({
             type="button"
             disabled={lockoutState.isLocked || isVerifying || loading}
             onClick={handleClearPin}
-            className="h-9 rounded bg-slate-200 dark:bg-zinc-950 hover:bg-slate-300 dark:hover:bg-zinc-800 active:scale-95 border border-slate-300 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white font-mono text-[9px] font-bold uppercase transition-all cursor-pointer touch-manipulation disabled:opacity-40"
+            className="h-9 rounded bg-zinc-200 dark:bg-zinc-950 hover:bg-zinc-300 dark:hover:bg-zinc-800 active:scale-95 border border-zinc-300 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white font-mono text-[9px] font-bold uppercase transition-all cursor-pointer touch-manipulation disabled:opacity-40"
             title="Borrar todo"
           >
             BORRAR
@@ -330,7 +330,7 @@ export const PinPadInput: React.FC<PinPadInputProps> = ({
             type="button"
             disabled={lockoutState.isLocked || isVerifying || loading}
             onClick={() => handleDigitPress('0')}
-            className="h-9 rounded bg-slate-100 dark:bg-zinc-900 hover:bg-slate-200 dark:hover:bg-zinc-800 active:bg-amber-400 active:text-black border border-slate-300 dark:border-white/10 text-slate-900 dark:text-white font-mono font-bold text-sm transition-all cursor-pointer touch-manipulation disabled:opacity-40"
+            className="h-9 rounded bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 active:bg-amber-400 active:text-black border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white font-mono font-bold text-sm transition-all cursor-pointer touch-manipulation disabled:opacity-40"
           >
             0
           </button>
@@ -338,7 +338,7 @@ export const PinPadInput: React.FC<PinPadInputProps> = ({
             type="button"
             disabled={lockoutState.isLocked || isVerifying || loading}
             onClick={handleDeleteDigit}
-            className="h-9 rounded bg-slate-200 dark:bg-zinc-950 hover:bg-slate-300 dark:hover:bg-zinc-800 active:scale-95 border border-slate-300 dark:border-zinc-800 text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer touch-manipulation disabled:opacity-40"
+            className="h-9 rounded bg-zinc-200 dark:bg-zinc-950 hover:bg-zinc-300 dark:hover:bg-zinc-800 active:scale-95 border border-zinc-300 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white flex items-center justify-center transition-all cursor-pointer touch-manipulation disabled:opacity-40"
             title="Retroceso"
           >
             <Delete className="w-4 h-4" />

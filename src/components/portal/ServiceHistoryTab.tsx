@@ -808,7 +808,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                         </div>
                         <h4 
                           onClick={() => setSelectedMachineFilter(isSelected ? 'all' : machine.unitId)}
-                          className="font-extrabold text-xs text-white line-clamp-1 cursor-pointer font-display uppercase tracking-tight"
+                          className="font-bold text-xs text-white line-clamp-1 cursor-pointer font-display uppercase tracking-tight"
                         >
                           {machine.model}
                         </h4>
@@ -1016,7 +1016,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
             <Wrench className="w-7 h-7" />
           </div>
           <div className="max-w-md mx-auto space-y-1">
-            <h4 className="font-extrabold text-base text-white font-display uppercase tracking-tight">
+            <h4 className="font-bold text-base text-white font-display uppercase tracking-tight">
               No hay registros de servicio encontrados
             </h4>
             <p className="text-xs text-zinc-400 leading-relaxed font-sans">
@@ -1055,7 +1055,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-800">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-extrabold text-sm sm:text-base text-white font-mono">
+                      <span className="font-bold text-sm sm:text-base text-white font-mono">
                         {record.orderNumber}
                       </span>
                       <button
@@ -1178,7 +1178,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                                 {part.partNumber}
                               </span>
                               <div className="min-w-0">
-                                <span className="font-extrabold text-[11px] text-white truncate block">
+                                <span className="font-bold text-[11px] text-white truncate block">
                                   {part.name}
                                 </span>
                                 <span className="text-[10px] text-zinc-500 font-sans">

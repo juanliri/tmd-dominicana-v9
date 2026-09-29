@@ -69,7 +69,7 @@ export const ProTierCard: React.FC<ProTierCardProps> = ({
               <span>TMD Pro-Member</span>
             </span>
 
-            <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-[2px] text-[10px] font-extrabold uppercase tracking-wider border ${tierInfo.badgeBorder} ${tierInfo.textColor} bg-zinc-900/80 font-mono`}>
+            <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-[2px] text-[10px] font-bold uppercase tracking-wider border ${tierInfo.badgeBorder} ${tierInfo.textColor} bg-zinc-900/80 font-mono`}>
               <Sparkles className="w-3 h-3" />
               <span>Nivel {tierInfo.tier}</span>
             </span>

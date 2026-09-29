@@ -246,7 +246,7 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
   };
 
   return (
-    <div className="space-y-4 animate-in fade-in duration-300 font-mono">
+    <div className="space-y-4 animate-in fade-in duration-300 font-sans">
       {/* COMMERCIAL CONTRACTOR ACCOUNT BAR (ENTERPRISE STANDARD) */}
       <div className="p-3.5 sm:p-4 rounded-[5px] bg-zinc-900 text-white border border-zinc-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
         <div className="flex items-center gap-3 relative z-10">
@@ -326,7 +326,7 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
             <button
               type="button"
               onClick={onOpenCreateQuote}
-              className="px-3 py-1.5 rounded-[3px] bg-amber-400 hover:bg-amber-300 text-black font-black text-xs transition-colors flex items-center gap-1.5 shadow-sm uppercase cursor-pointer"
+              className="px-3.5 py-2 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-[0.98] uppercase cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>+ PROFORMA</span>
@@ -335,7 +335,7 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
             <button
               type="button"
               onClick={onSignOut}
-              className="p-1.5 rounded-[3px] bg-zinc-800 hover:bg-red-950/40 text-zinc-300 hover:text-red-400 border border-zinc-700 transition-colors cursor-pointer"
+              className="p-2 rounded bg-zinc-800 hover:bg-red-950/40 text-zinc-300 hover:text-red-400 border border-zinc-700 transition-colors cursor-pointer"
               title="Cerrar Sesión"
             >
               <LogOut className="w-3.5 h-3.5" />

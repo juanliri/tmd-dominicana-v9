@@ -282,7 +282,7 @@ export const SessionManager: React.FC<SessionManagerProps> = ({ onSessionExpired
               <span className="text-xs text-zinc-400 uppercase tracking-widest block">
                 Tiempo Restante
               </span>
-              <div className="text-4xl font-extrabold text-amber-400 tracking-wider">
+              <div className="text-4xl font-black font-mono text-amber-400 tracking-wider">
                 {formatCountdown(remainingSeconds)}
               </div>
               <p className="text-xs text-zinc-400">

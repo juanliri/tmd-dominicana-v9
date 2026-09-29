@@ -16,7 +16,7 @@ export const ProRewardsCatalog: React.FC<ProRewardsCatalogProps> = ({
   onRedeemReward
 }) => {
   return (
-    <div className="space-y-4 font-mono">
+    <div className="space-y-4 font-sans">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <h3 className="text-lg font-black font-display uppercase tracking-tight text-white flex items-center gap-2">
@@ -48,13 +48,13 @@ export const ProRewardsCatalog: React.FC<ProRewardsCatalogProps> = ({
                     {reward.pointsCost} Puntos
                   </span>
                   {reward.badge && (
-                    <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-[2px] bg-zinc-800 text-zinc-300">
+                    <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded-[2px] bg-zinc-800 text-zinc-300">
                       {reward.badge}
                     </span>
                   )}
                 </div>
 
-                <h4 className="font-extrabold font-display uppercase tracking-tight text-sm text-white">
+                <h4 className="font-bold font-display uppercase tracking-tight text-sm text-white">
                   {reward.title}
                 </h4>
 

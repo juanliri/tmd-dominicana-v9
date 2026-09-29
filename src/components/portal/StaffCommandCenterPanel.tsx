@@ -81,7 +81,7 @@ export const StaffCommandCenterPanel: React.FC<StaffCommandCenterPanelProps> = (
   };
 
   return (
-    <div className="space-y-4 animate-in fade-in duration-300 font-mono">
+    <div className="space-y-4 animate-in fade-in duration-300 font-sans">
       {/* EXECUTIVE COMMAND BANNER */}
       <div className="relative overflow-hidden rounded-[5px] bg-zinc-900 border border-zinc-800 p-5 md:p-6 shadow-xl text-white">
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">

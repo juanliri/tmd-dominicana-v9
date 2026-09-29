@@ -186,7 +186,7 @@ export const DispatchQueue: React.FC<DispatchQueueProps> = ({
   const authorizedCount = bays.filter(b => b.gatePassAuthorized).length;
 
   return (
-    <div className="space-y-4 font-mono text-xs">
+    <div className="space-y-4 font-sans text-xs">
       {/* 1. DISPATCH STATS HEADER */}
       <div className="p-4 sm:p-5 rounded-[5px] bg-zinc-900 border border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xl">
         <div className="flex items-center gap-3">

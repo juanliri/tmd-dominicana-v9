@@ -119,7 +119,7 @@ export const WorkshopLiveTimeline: React.FC<WorkshopLiveTimelineProps> = ({
   };
 
   return (
-    <div className="bg-zinc-900 rounded-[5px] border border-zinc-800 p-4 sm:p-6 shadow-sm space-y-5 font-mono">
+    <div className="bg-zinc-900 rounded-[5px] border border-zinc-800 p-4 sm:p-6 shadow-sm space-y-5 font-sans">
       
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-800">

@@ -89,7 +89,7 @@ export const InvoiceManager: React.FC<InvoiceManagerProps> = ({
   const totalReceivableUsd = Math.max(0, totalBilledUsd - totalAdvancesCollectedUsd);
 
   return (
-    <div className="space-y-4 font-mono text-xs">
+    <div className="space-y-4 font-sans text-xs">
       {/* 1. FINANCIAL SUMMARY KPI CARDS */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
         <div className="p-3.5 rounded-[3px] bg-zinc-900 border border-zinc-800 shadow-xs">

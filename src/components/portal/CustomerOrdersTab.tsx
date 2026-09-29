@@ -357,7 +357,7 @@ export const CustomerOrdersTab: React.FC<CustomerOrdersTabProps> = ({
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-zinc-800">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-extrabold text-sm sm:text-base text-white font-mono">
+                      <span className="font-bold text-sm sm:text-base text-white font-mono">
                         {order.orderNumber}
                       </span>
                       <button

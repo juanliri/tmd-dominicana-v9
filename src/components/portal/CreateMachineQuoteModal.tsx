@@ -769,7 +769,7 @@ export const CreateMachineQuoteModal: React.FC<CreateMachineQuoteModalProps> = (
           <button
             type="button"
             onClick={onClose}
-            className="px-3.5 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold rounded-[2px] text-xs uppercase transition-colors cursor-pointer"
+            className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold rounded text-xs uppercase transition-all active:scale-[0.98] cursor-pointer"
           >
             Cancelar
           </button>
@@ -779,7 +779,7 @@ export const CreateMachineQuoteModal: React.FC<CreateMachineQuoteModalProps> = (
               type="button"
               onClick={() => handleSaveAndExport('share_whatsapp')}
               disabled={isSubmitting}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-[2px] text-xs uppercase transition-colors cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded text-xs uppercase transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
             >
               <MessageSquare className="w-4 h-4" />
               <span>Enviar por WhatsApp</span>
@@ -789,7 +789,7 @@ export const CreateMachineQuoteModal: React.FC<CreateMachineQuoteModalProps> = (
               type="button"
               onClick={() => handleSaveAndExport('save_only')}
               disabled={isSubmitting}
-              className="px-3 py-1.5 bg-zinc-900 border border-zinc-800 text-zinc-300 hover:bg-zinc-800 font-bold rounded-[2px] text-xs uppercase transition-colors cursor-pointer disabled:opacity-50"
+              className="px-4 py-2 bg-zinc-900 border border-zinc-700 hover:border-zinc-500 text-zinc-200 hover:bg-zinc-800 font-bold rounded text-xs uppercase transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
             >
               Guardar Proforma
             </button>
@@ -798,9 +798,9 @@ export const CreateMachineQuoteModal: React.FC<CreateMachineQuoteModalProps> = (
               type="button"
               onClick={() => handleSaveAndExport('export_pdf')}
               disabled={isSubmitting}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-black font-bold rounded-[2px] text-xs uppercase transition-all shadow-xs cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400 hover:bg-amber-300 text-black font-bold rounded text-xs uppercase transition-all shadow-sm active:scale-[0.98] cursor-pointer disabled:opacity-50"
             >
-              <FileDown className="w-3.5 h-3.5" />
+              <FileDown className="w-4 h-4" />
               <span>{isSubmitting ? 'Procesando...' : 'Descargar PDF Formal'}</span>
             </button>
           </div>

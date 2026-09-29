@@ -8,7 +8,7 @@ interface ProPointsLedgerProps {
 
 export const ProPointsLedger: React.FC<ProPointsLedgerProps> = ({ ledger }) => {
   return (
-    <div className="space-y-3 font-mono">
+    <div className="space-y-3 font-sans">
       <h4 className="font-black font-display uppercase tracking-tight text-sm text-white flex items-center gap-2">
         <Clock className="w-4 h-4 text-amber-400" />
         <span>Historial y Libro de Puntos Pro</span>

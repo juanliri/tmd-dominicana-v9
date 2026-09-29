@@ -117,7 +117,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
 
             <div className="p-4 rounded-[3px] bg-amber-500/10 border border-amber-500/20 space-y-1 text-xs">
               <span className="text-[10px] font-black uppercase text-amber-400 font-display">Próximo Mantenimiento Sugerido</span>
-              <p className="text-white font-extrabold text-sm font-mono">
+              <p className="text-white font-bold text-sm font-mono">
                 {order.nextServiceDueHours ? `${order.nextServiceDueHours.toLocaleString()} Horas` : '+250 hrs / 90 días'}
               </p>
               <p className="text-[11px] text-zinc-300 font-sans">
@@ -160,7 +160,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <FileText className="w-4 h-4 text-amber-400" />
-                <span className="font-extrabold text-xs uppercase font-display tracking-wider">Aprobación Digital Fullbay Connect</span>
+                <span className="font-bold text-xs uppercase font-display tracking-wider">Aprobación Digital Fullbay Connect</span>
               </div>
               <span className="px-2 py-0.5 rounded-[2px] text-[10px] font-bold bg-amber-400/20 text-amber-400 border border-amber-400/40 uppercase font-mono">
                 {order.status === 'requested' || order.status === 'scheduled' ? 'Pendiente Aprobación' : 'Aprobado'}

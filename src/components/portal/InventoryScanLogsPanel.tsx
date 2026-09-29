@@ -134,7 +134,7 @@ export const InventoryScanLogsPanel: React.FC<InventoryScanLogsPanelProps> = ({
   };
 
   return (
-    <div className="space-y-4 font-mono">
+    <div className="space-y-4 font-sans">
       {/* Header Bar */}
       <div className="p-4 rounded-[4px] bg-zinc-900 border border-zinc-800 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-md">
         <div className="flex items-center gap-3">

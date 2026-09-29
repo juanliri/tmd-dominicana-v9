@@ -42,7 +42,7 @@ export const ProRoiCalculator: React.FC<ProRoiCalculatorProps> = ({
   const roiPercent = Math.round((totalAnnualSavingsUsd / (annualPartsSpend || 1)) * 100);
 
   return (
-    <div className="space-y-6 animate-fadeIn font-mono">
+    <div className="space-y-6 animate-fadeIn font-sans">
       {/* Header Description */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>

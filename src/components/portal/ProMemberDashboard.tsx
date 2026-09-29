@@ -385,7 +385,7 @@ export const ProMemberDashboard: React.FC<ProMemberDashboardProps> = ({
                       )}
                     </div>
 
-                    <h4 className="font-extrabold font-display uppercase tracking-tight text-sm text-white">
+                    <h4 className="font-bold font-display uppercase tracking-tight text-sm text-white">
                       {disc.category}
                     </h4>
 
@@ -469,7 +469,7 @@ export const ProMemberDashboard: React.FC<ProMemberDashboardProps> = ({
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <h5 className="font-extrabold font-display uppercase tracking-tight text-xs text-white">
+                <h5 className="font-bold font-display uppercase tracking-tight text-xs text-white">
                   Garantía de Fábrica OEM TMD
                 </h5>
                 <p className="text-[11px] text-zinc-400 font-sans">
@@ -628,7 +628,7 @@ export const ProMemberDashboard: React.FC<ProMemberDashboardProps> = ({
                       {order.orderNumber}
                     </span>
 
-                    <span className="px-2.5 py-1 rounded-[2px] text-xs font-extrabold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1 font-mono">
+                    <span className="px-2.5 py-1 rounded-[2px] text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1 font-mono">
                       <CheckCircle2 className="w-3 h-3" />
                       <span>{order.status === 'completed' ? 'Completado' : 'En Curso'}</span>
                     </span>
