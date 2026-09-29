@@ -87,7 +87,7 @@ export const TAB_CONFIGS: MainTabConfig[] = [
           name: 'JCB 3CX Eco 4x4 (2026)',
           brand: 'JCB',
           category: 'Retroexcavadora',
-          image: 'https://www.jcb.com/globalassets/digizuite/66001-a_bhl_3cx_pro_1/Img_800x800',
+          image: '/assets/machinery/heavy_duty_yellow_jcb_3cx_eco.jpg',
           spec: 'Motor 109 HP EcoMAX • Balde 1.1 m³',
           priceUsd: 65000,
           route: '#/machinery/jcb-3cx-eco'
@@ -131,7 +131,7 @@ export const TAB_CONFIGS: MainTabConfig[] = [
           name: 'JCB 540-170 Loadall 17m',
           brand: 'JCB',
           category: 'Manipulador Telescópico',
-          image: 'https://www.jcb.com/globalassets/digizuite/64829-a_thl_510_56_t4f_5/Img_800x800',
+          image: '/assets/machinery/jcb_loadall_531_70_telescopic_handler.jpg',
           spec: 'Alcance 16.7 m • Carga 4,000 kg • 4x4',
           priceUsd: 115000,
           route: '#/machinery/jcb-540-170-loadall'
@@ -178,7 +178,7 @@ export const TAB_CONFIGS: MainTabConfig[] = [
           name: 'Renta Retroexcavadoras & Rodillos',
           brand: 'TMD Rental Fleet',
           category: 'Por Día / Semana / Mes',
-          image: 'https://www.jcb.com/globalassets/digizuite/66001-a_bhl_3cx_pro_1/Img_800x800',
+          image: '/assets/machinery/classic_robust_yellow_jcb_3cx_backhoe.jpg',
           spec: 'Flota revisada con operador calificado o sin chofer',
           route: '#/rental'
         },

@@ -113,9 +113,9 @@ export function showBrowserNotification(title: string, body: string, actionUrl: 
     try {
       const notification = new Notification(title, {
         body,
-        icon: '/favicon.ico',
+        icon: '/assets/logos/tmd_icon_mark.png',
         tag: 'tmd_alert_' + Date.now(),
-        badge: '/favicon.ico',
+        badge: '/assets/logos/tmd_icon_mark.png',
       });
 
       notification.onclick = () => {

@@ -378,7 +378,7 @@ END:VCARD`;
       name: 'Martillo Hidráulico JCB Hammer Master 380',
       category: 'Demolición para Retroexcavadoras 3CX / 4CX',
       priceUsd: 8900,
-      image: 'https://www.jcb.com/globalassets/digizuite/31568-5138732453/Img_800x800',
+      image: '/assets/machinery/JCB_Site_breakers.jpg',
       specs: ['Caudal Óptimo: 70-100 L/min', 'Energía de Impacto: 1,250 Joules', 'Incluye 2 Picas y Kit N2']
     },
     {
@@ -386,7 +386,7 @@ END:VCARD`;
       name: 'Cucharón de Roca Reforzada Hardox® 450',
       category: 'Excavadoras 20T - 25T (1.2 m³)',
       priceUsd: 4500,
-      image: 'https://www.jcb.com/globalassets/digizuite/46389-7722749410/Img_800x800',
+      image: '/assets/machinery/JCB_Heavy_duty_bucket.jpg',
       specs: ['Acero Hardox® 450 Anti-desgaste', 'Dientes Escarificadores Tipo Garra', 'Pasadores Forjados Grado 8']
     }
   ];

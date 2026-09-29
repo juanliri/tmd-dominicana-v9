@@ -168,14 +168,14 @@ function resolveMachineImageUrl(item: any, brand: string, category: string): str
   }
 
   if (c.includes('manipulador') || c.includes('loadall')) {
-    return 'https://www.jcb.com/globalassets/digizuite/64829-a_thl_510_56_t4f_5/Img_800x800';
+    return '/assets/machinery/jcb_loadall_531_70_telescopic_handler.jpg';
   }
 
   if (c.includes('mini') && c.includes('cargador')) {
-    return 'https://www.jcb.com/globalassets/digizuite/28726-4148326809/Img_800x800';
+    return '/assets/machinery/JCB_250.jpg';
   }
 
-  return 'https://www.jcb.com/globalassets/digizuite/66001-a_bhl_3cx_pro_1/Img_800x800';
+  return '/assets/machinery/heavy_duty_yellow_jcb_3cx_eco.jpg';
 }
 
 // Helper to normalize any incoming item from CDN window objects into a Machine

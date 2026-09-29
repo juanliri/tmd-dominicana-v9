@@ -36,7 +36,7 @@ const RENTAL_FLEET_CATEGORIES = [
     name: 'Retroexcavadoras 4x4',
     subtitle: 'JCB 3CX Pro y 4CX con martillo hidráulico opcional',
     specs: '74 - 109 HP · Profundidad 4.24m - 5.88m',
-    image: 'https://www.jcb.com/globalassets/digizuite/66001-a_bhl_3cx_pro_1/Img_800x800',
+    image: '/assets/machinery/heavy_duty_yellow_jcb_3cx_eco.jpg',
     rateDay: 'US$ 380',
     rateMonth: 'US$ 6,800',
     route: '#/rental?category=Retroexcavadoras'
@@ -76,7 +76,7 @@ const RENTAL_FLEET_CATEGORIES = [
     name: 'Manipuladores Telescópicos (Telehandlers)',
     subtitle: 'JCB 540-170 Loadall alcance 17 metros',
     specs: 'Alcance 16.7m · Capacidad 4,000 kg · Estabilizadores',
-    image: 'https://www.jcb.com/globalassets/digizuite/64829-a_thl_510_56_t4f_5/Img_800x800',
+    image: '/assets/machinery/jcb_loadall_531_70_telescopic_handler.jpg',
     rateDay: 'US$ 480',
     rateMonth: 'US$ 8,200',
     route: '#/rental?category=Telescopicos'
