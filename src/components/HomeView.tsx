@@ -1429,7 +1429,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
               {/* Right Column (7 cols): Financials, CAD Specs, Trust Badges, Action Buttons */}
               <div className="md:col-span-7 space-y-3.5">
                 {/* Price & Monthly Leasing Overview */}
-                <div className="flex items-center justify-between p-3 rounded-[5px] bg-slate-50 dark:bg-zinc-850/80 border border-slate-200 dark:border-zinc-800">
+                <div className="flex items-center justify-between p-3 rounded-[5px] bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
                   <div>
                     <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-zinc-400 font-bold block">INVERSIÓN ESTIMADA</span>
                     <span className="text-lg sm:text-xl font-black text-slate-900 dark:text-white font-mono">
@@ -1446,15 +1446,15 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
 
                 {/* 4-Cell CAD Spec Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  <div className="p-2 rounded-[4px] bg-slate-50 dark:bg-zinc-800/60 border border-slate-200 dark:border-zinc-700/60 text-center">
+                  <div className="p-2 rounded-[4px] bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700 text-center">
                     <span className="text-[9px] uppercase font-bold text-slate-500 dark:text-zinc-400 block font-mono">POTENCIA</span>
                     <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white font-mono">{previewMachine.powerHp} HP</span>
                   </div>
-                  <div className="p-2 rounded-[4px] bg-slate-50 dark:bg-zinc-800/60 border border-slate-200 dark:border-zinc-700/60 text-center">
+                  <div className="p-2 rounded-[4px] bg-zinc-100 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700/60 text-center">
                     <span className="text-[9px] uppercase font-bold text-slate-500 dark:text-zinc-400 block font-mono">PESO OPERATIVO</span>
                     <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white font-mono">{(previewMachine.operatingWeightKg / 1000).toFixed(1)} T</span>
                   </div>
-                  <div className="p-2 rounded-[4px] bg-slate-50 dark:bg-zinc-800/60 border border-slate-200 dark:border-zinc-700/60 text-center col-span-2">
+                  <div className="p-2 rounded-[4px] bg-zinc-100 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700/60 text-center col-span-2">
                     <span className="text-[9px] uppercase font-bold text-slate-500 dark:text-zinc-400 block font-mono">MOTORIZACIÓN</span>
                     <span className="text-xs font-black text-slate-900 dark:text-white truncate block">{previewMachine.engine}</span>
                   </div>
