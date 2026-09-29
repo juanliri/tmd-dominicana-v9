@@ -1371,160 +1371,161 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
 
       {/* QUICK SPEC MODAL (Responsive Mobile Bottom-Sheet or Centered Dialog) */}
       {previewMachine && createPortal(
-        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in" onClick={() => setPreviewMachine(null)}>
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 max-w-lg w-full p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-start justify-between">
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5 bg-black/85 backdrop-blur-md animate-in fade-in" onClick={() => setPreviewMachine(null)}>
+          <div className="bg-white dark:bg-zinc-900 rounded-[6px] border border-slate-200 dark:border-zinc-800 max-w-4xl w-full p-4 sm:p-6 shadow-2xl space-y-4 font-sans" onClick={(e) => e.stopPropagation()}>
+            {/* Top Modal Header */}
+            <div className="flex items-start justify-between border-b border-slate-200 dark:border-zinc-800 pb-3">
               <div>
-                <span className="text-xs font-bold text-amber-500 uppercase tracking-wider block">
-                  {previewMachine.brand} • Mod. {previewMachine.modelCode}
-                </span>
-                <h3 className="text-xl font-black text-zinc-900 dark:text-white">
+                <div className="flex items-center gap-2 mb-1 flex-wrap">
+                  <span className="px-2 py-0.5 rounded-[3px] bg-amber-500 text-black text-[10px] font-black uppercase tracking-wider font-mono shadow-xs">
+                    {previewMachine.brand} • MOD. {previewMachine.modelCode}
+                  </span>
+                  <span className="px-2 py-0.5 rounded-[3px] bg-slate-100 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 text-[10px] font-bold uppercase font-mono border border-slate-200 dark:border-zinc-700">
+                    EN PATIO KM 22
+                  </span>
+                  <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold uppercase">
+                    • DISPONIBLE PARA ENTREGA INMEDIATA
+                  </span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white uppercase font-display tracking-tight">
                   {previewMachine.name}
                 </h3>
               </div>
               <button
+                type="button"
                 onClick={() => setPreviewMachine(null)}
-                className="p-1 rounded-full text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                className="p-1.5 rounded-[4px] text-slate-400 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 cursor-pointer transition-colors"
+                aria-label="Cerrar vista rápida"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="aspect-video rounded-2xl overflow-hidden bg-zinc-800">
-              <img
-                src={previewMachine.image}
-                alt={previewMachine.name}
-                onError={(e) => {
-                  const target = e.currentTarget;
-                  if (!target.src.includes('tmd_coming_soon')) {
-                    target.src = '/images/tmd_coming_soon.jpg';
-                  }
-                }}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed">
-              {previewMachine.description}
-            </p>
-
-            {/* Interactive Accordion for Secondary Specs */}
-            <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden text-xs">
-              {/* Tab 1: Especificaciones Base */}
-              <button
-                type="button"
-                onClick={() => setPreviewAccordionSection(previewAccordionSection === 'specs' ? 'engine' : 'specs')}
-                className="w-full flex items-center justify-between p-2.5 bg-zinc-50 dark:bg-zinc-800/80 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-left font-bold text-zinc-900 dark:text-white transition-colors cursor-pointer"
-              >
-                <span className="flex items-center gap-1.5">
-                  <Cog className="w-3.5 h-3.5 text-amber-500" />
-                  <span>Potencia & Capacidad Operativa</span>
-                </span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${previewAccordionSection === 'specs' ? 'rotate-180' : ''}`} />
-              </button>
-              {previewAccordionSection === 'specs' && (
-                <div className="p-3 bg-white dark:bg-zinc-900 grid grid-cols-2 gap-2 text-xs border-t border-zinc-200 dark:border-zinc-800 animate-in fade-in">
-                  <div className="p-2 rounded-xl bg-zinc-50 dark:bg-zinc-800">
-                    <span className="text-zinc-400 block text-[10px]">Potencia Nominal</span>
-                    <span className="font-bold text-zinc-900 dark:text-white">{previewMachine.powerHp} HP</span>
-                  </div>
-                  <div className="p-2 rounded-xl bg-zinc-50 dark:bg-zinc-800">
-                    <span className="text-zinc-400 block text-[10px]">Peso Operacional</span>
-                    <span className="font-bold text-zinc-900 dark:text-white">{previewMachine.operatingWeightKg.toLocaleString()} kg</span>
-                  </div>
-                  <div className="p-2 rounded-xl bg-zinc-50 dark:bg-zinc-800">
-                    <span className="text-zinc-400 block text-[10px]">Motorización</span>
-                    <span className="font-bold text-zinc-900 dark:text-white">{previewMachine.engine}</span>
-                  </div>
-                  <div className="p-2 rounded-xl bg-zinc-50 dark:bg-zinc-800">
-                    <span className="text-zinc-400 block text-[10px]">Inversión Referencial</span>
-                    <span className="font-bold text-amber-500">US$ {previewMachine.basePriceUsd.toLocaleString()}</span>
+            {/* 2-Column Responsive Body: Zero Vertical Scroll Required */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
+              {/* Left Column (5 cols): Machine Photo + Availability Badges */}
+              <div className="md:col-span-5 space-y-3">
+                <div className="relative aspect-[16/10] rounded-[5px] overflow-hidden bg-slate-900 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 shadow-md group">
+                  <img
+                    src={previewMachine.image}
+                    alt={previewMachine.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (!target.src.includes('tmd_coming_soon')) {
+                        target.src = '/images/tmd_coming_soon.jpg';
+                      }
+                    }}
+                  />
+                  <div className="absolute top-2 left-2 px-2 py-0.5 rounded-[3px] bg-zinc-950/90 text-amber-400 border border-amber-400/40 text-[10px] font-mono font-bold uppercase backdrop-blur-xs">
+                    GARANTÍA 2 AÑOS / 2,000 H
                   </div>
                 </div>
-              )}
+                <p className="text-xs text-slate-600 dark:text-zinc-300 leading-relaxed font-sans line-clamp-3">
+                  {previewMachine.description}
+                </p>
+              </div>
 
-              {/* Tab 2: Cobertura, Financiamiento y Garantía */}
-              <button
-                type="button"
-                onClick={() => setPreviewAccordionSection(previewAccordionSection === 'warranty' ? 'specs' : 'warranty')}
-                className="w-full flex items-center justify-between p-2.5 bg-zinc-50 dark:bg-zinc-800/80 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-left font-bold text-zinc-900 dark:text-white transition-colors cursor-pointer border-t border-zinc-200 dark:border-zinc-800"
-              >
-                <span className="flex items-center gap-1.5">
-                  <Award className="w-3.5 h-3.5 text-amber-500" />
-                  <span>Garantía Oficial & Opciones de Pago DGII</span>
-                </span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${previewAccordionSection === 'warranty' ? 'rotate-180' : ''}`} />
-              </button>
-              {previewAccordionSection === 'warranty' && (
-                <div className="p-3 bg-white dark:bg-zinc-900 space-y-2 text-xs border-t border-zinc-200 dark:border-zinc-800 animate-in fade-in">
-                  <div className="flex items-center justify-between py-1 border-b border-zinc-100 dark:border-zinc-800">
-                    <span className="text-zinc-500">Garantía de Fábrica:</span>
-                    <span className="font-bold text-zinc-900 dark:text-white">2 Años / 2,000 Horas</span>
+              {/* Right Column (7 cols): Financials, CAD Specs, Trust Badges, Action Buttons */}
+              <div className="md:col-span-7 space-y-3.5">
+                {/* Price & Monthly Leasing Overview */}
+                <div className="flex items-center justify-between p-3 rounded-[5px] bg-slate-50 dark:bg-zinc-850/80 border border-slate-200 dark:border-zinc-800">
+                  <div>
+                    <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-zinc-400 font-bold block">INVERSIÓN ESTIMADA</span>
+                    <span className="text-lg sm:text-xl font-black text-slate-900 dark:text-white font-mono">
+                      US$ {previewMachine.basePriceUsd.toLocaleString()}
+                    </span>
                   </div>
-                  <div className="flex items-center justify-between py-1 border-b border-zinc-100 dark:border-zinc-800">
-                    <span className="text-zinc-500">Comprobante Fiscal:</span>
-                    <span className="font-bold text-amber-500">Factura B01 con ITBIS transparentado</span>
-                  </div>
-                  <div className="flex items-center justify-between py-1">
-                    <span className="text-zinc-500">Leasing Bancario RD:</span>
-                    <span className="font-bold text-emerald-500">Aprobación en 24h (BHD, Popular, Banreservas)</span>
+                  <div className="text-right">
+                    <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-zinc-400 font-bold block">LEASING ESTIMADO RD</span>
+                    <span className="text-xs sm:text-sm font-black text-amber-600 dark:text-amber-400 font-mono">
+                      ~US$ {Math.round(previewMachine.basePriceUsd * 0.016).toLocaleString()}/mes
+                    </span>
                   </div>
                 </div>
-              )}
-            </div>
 
-            <div className="flex flex-col sm:flex-row gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => {
-                  const target = previewMachine;
-                  setPreviewMachine(null);
-                  setActive360Tab('360');
-                  setActive360Machine(target);
-                }}
-                className="py-3 px-4 bg-zinc-900 dark:bg-zinc-800 hover:bg-zinc-800 text-amber-400 rounded-xl text-xs font-black transition-colors cursor-pointer text-center flex items-center justify-center gap-1.5 border border-amber-500/30"
-              >
-                <RotateCw className="w-3.5 h-3.5 text-amber-500" />
-                <span>Giro 360°</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  toggleMachineCompare(previewMachine.id);
-                  setPreviewMachine(null);
-                  openComparison();
-                }}
-                className={`py-3 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border ${
-                  isComparing(previewMachine.id)
-                    ? 'bg-amber-500/15 border-amber-500 text-amber-600 dark:text-amber-400'
-                    : 'bg-zinc-100 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white'
-                }`}
-              >
-                <Scale className="w-4 h-4" />
-                <span>{isComparing(previewMachine.id) ? 'En Comparativa' : 'Comparar'}</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  const target = previewMachine;
-                  setPreviewMachine(null);
-                  setEstimateMachine(target);
-                }}
-                className="flex-1 py-3 bg-amber-500 hover:bg-amber-400 text-black rounded-xl text-xs font-black shadow-md transition-all cursor-pointer flex items-center justify-center gap-1.5"
-              >
-                <span>Solicitar Estimado</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  onSelectMachine(previewMachine.id);
-                  setPreviewMachine(null);
-                  onNavigate('#/machinery');
-                }}
-                className="py-3 px-4 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white rounded-xl text-xs font-bold transition-colors cursor-pointer text-center"
-              >
-                Ficha Completa
-              </button>
+                {/* 4-Cell CAD Spec Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <div className="p-2 rounded-[4px] bg-slate-50 dark:bg-zinc-800/60 border border-slate-200 dark:border-zinc-700/60 text-center">
+                    <span className="text-[9px] uppercase font-bold text-slate-500 dark:text-zinc-400 block font-mono">POTENCIA</span>
+                    <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white font-mono">{previewMachine.powerHp} HP</span>
+                  </div>
+                  <div className="p-2 rounded-[4px] bg-slate-50 dark:bg-zinc-800/60 border border-slate-200 dark:border-zinc-700/60 text-center">
+                    <span className="text-[9px] uppercase font-bold text-slate-500 dark:text-zinc-400 block font-mono">PESO OPERATIVO</span>
+                    <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white font-mono">{(previewMachine.operatingWeightKg / 1000).toFixed(1)} T</span>
+                  </div>
+                  <div className="p-2 rounded-[4px] bg-slate-50 dark:bg-zinc-800/60 border border-slate-200 dark:border-zinc-700/60 text-center col-span-2">
+                    <span className="text-[9px] uppercase font-bold text-slate-500 dark:text-zinc-400 block font-mono">MOTORIZACIÓN</span>
+                    <span className="text-xs font-black text-slate-900 dark:text-white truncate block">{previewMachine.engine}</span>
+                  </div>
+                </div>
+
+                {/* Fiscal & Financing Badges */}
+                <div className="grid grid-cols-2 gap-2 text-[11px] font-sans">
+                  <div className="flex items-center gap-1.5 text-slate-700 dark:text-zinc-300">
+                    <ShieldCheck className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                    <span>Factura NCF B01 Fiscal</span>
+                  </div>
+                  <div className="flex items-center gap-1.5 text-slate-700 dark:text-zinc-300">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                    <span>Leasing Bancario 24h</span>
+                  </div>
+                </div>
+
+                {/* 4 Standardized Action Buttons (5-Star Design System) */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-slate-200 dark:border-zinc-800">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const target = previewMachine;
+                      setPreviewMachine(null);
+                      setActive360Tab('360');
+                      setActive360Machine(target);
+                    }}
+                    className="py-2.5 px-3 bg-zinc-900 dark:bg-zinc-800 hover:bg-zinc-800 text-amber-400 rounded-[4px] text-xs font-black transition-all flex items-center justify-center gap-1.5 border border-amber-500/30 cursor-pointer active:scale-[0.98]"
+                  >
+                    <RotateCw className="w-3.5 h-3.5" />
+                    <span>Giro 360°</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      toggleMachineCompare(previewMachine.id);
+                      setPreviewMachine(null);
+                      openComparison();
+                    }}
+                    className="py-2.5 px-3 rounded-[4px] text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer border border-slate-300 dark:border-zinc-700 text-slate-900 dark:text-white hover:bg-slate-100 dark:hover:bg-zinc-800 active:scale-[0.98]"
+                  >
+                    <Scale className="w-3.5 h-3.5" />
+                    <span>{isComparing(previewMachine.id) ? 'En Comparativa' : 'Comparar'}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const target = previewMachine;
+                      setPreviewMachine(null);
+                      setEstimateMachine(target);
+                    }}
+                    className="py-2.5 px-3 bg-amber-400 hover:bg-amber-300 text-black rounded-[4px] text-xs font-black shadow-md transition-all cursor-pointer flex items-center justify-center gap-1.5 active:scale-[0.98]"
+                  >
+                    <span>Solicitar Estimado</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onSelectMachine(previewMachine.id);
+                      setPreviewMachine(null);
+                      onNavigate('#/machinery');
+                    }}
+                    className="py-2.5 px-3 bg-slate-900 hover:bg-slate-800 text-white dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-[4px] text-xs font-black uppercase tracking-wider transition-all cursor-pointer text-center active:scale-[0.98] border border-slate-700 dark:border-zinc-700"
+                  >
+                    Ficha Completa →
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>,
