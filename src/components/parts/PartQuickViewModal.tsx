@@ -15,23 +15,29 @@ import {
 } from 'lucide-react';
 import { Part } from '../../types';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
+import { useCart } from '../../context/CartContext';
 
 interface PartQuickViewModalProps {
   part: Part | null;
   isOpen: boolean;
   onClose: () => void;
   onAddToCart?: (part: Part) => void;
+  onNavigate?: (route: string) => void;
 }
 
 export const PartQuickViewModal: React.FC<PartQuickViewModalProps> = ({
   part,
   isOpen,
   onClose,
-  onAddToCart
+  onAddToCart,
+  onNavigate
 }) => {
+  const { exchangeRate } = useCart();
+  const currentRate = exchangeRate || USD_TO_DOP_RATE;
+
   if (!isOpen || !part) return null;
 
-  const priceDop = (part.priceUsd * USD_TO_DOP_RATE).toLocaleString('es-DO', { maximumFractionDigits: 2 });
+  const priceDop = (part.priceUsd * currentRate).toLocaleString('es-DO', { maximumFractionDigits: 2 });
   const itbisUsd = (part.priceUsd * 0.18).toFixed(2);
   const totalWithItbisUsd = (part.priceUsd * 1.18).toFixed(2);
 
@@ -154,6 +160,19 @@ export const PartQuickViewModal: React.FC<PartQuickViewModalProps> = ({
                   <Phone className="w-3.5 h-3.5 text-emerald-400" />
                   <span>Consultar por WhatsApp</span>
                 </a>
+
+                {onNavigate && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClose();
+                      onNavigate(`#/parts/${part.id}`);
+                    }}
+                    className="w-full py-1.5 px-3 rounded-[2px] bg-slate-900 hover:bg-slate-800 border border-amber-500/40 text-amber-400 font-bold uppercase text-[11px] flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-[0.98]"
+                  >
+                    <span>Ver Ficha Completa →</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>

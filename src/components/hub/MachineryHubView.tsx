@@ -104,18 +104,21 @@ export const MachineryHubView: React.FC<CategoryHubProps> = ({ onNavigate }) => 
     <div className="min-h-screen bg-white dark:bg-zinc-950 text-slate-900 dark:text-white">
       
       {/* ═══════════════════════════════════════════════════════ */}
-      {/* 1. HERO BANNER */}
+      {/* 1. HERO BANNER - 4K ULTRA-PHOTOREALISTIC CINEMATIC */}
       {/* ═══════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${SHOWROOM_MARKETING_ASSETS.jcb.banner})` }}
+      <section className="relative overflow-hidden min-h-[480px] lg:min-h-[560px] flex items-center">
+        {/* 4K Cinematic Dealership Background */}
+        <img
+          src="/assets/images/tmd_machinery_hub_4k_cinematic.jpg"
+          alt="TMD Dominicana Showroom Central Km 22"
+          className="absolute inset-0 w-full h-full object-cover object-right md:object-center opacity-85"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+        {/* Layered Obsidian Vignettes for High Contrast Readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/75 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-black/30" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-16 sm:py-20 lg:py-28">
+        <div className="relative z-10 w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-16 sm:py-20 lg:py-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -123,28 +126,28 @@ export const MachineryHubView: React.FC<CategoryHubProps> = ({ onNavigate }) => 
             className="max-w-2xl"
           >
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-400 text-black">
-                Catálogo 2026
+              <span className="px-2.5 py-1 rounded-[3px] text-[10px] font-black uppercase tracking-wider bg-amber-400 text-black shadow-md font-mono">
+                Catálogo Oficial 2026
               </span>
-              <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block mr-1 animate-pulse" />
-                Stock en Patio Km 22
+              <span className="px-2.5 py-1 rounded-[3px] text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 backdrop-blur-xs font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block mr-1.5 animate-pulse" />
+                Patio Km 22 Autopista Duarte
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-[1.1] tracking-tight font-display">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-[1.08] tracking-tight font-display uppercase">
               Maquinaria Pesada
               <span className="block text-amber-400 mt-1">Certificada en RD</span>
             </h1>
 
-            <p className="mt-4 text-base sm:text-lg text-zinc-300 leading-relaxed max-w-xl font-sans">
-              Distribuidor oficial de <strong className="text-white">JCB, LiuGong, Ammann, LS Tractor y Kubota</strong> con garantía directa de fábrica, telemetría satelital y servicio técnico local.
+            <p className="mt-4 text-sm sm:text-base text-zinc-300 leading-relaxed max-w-xl font-sans">
+              Distribuidor oficial autorizado de <strong className="text-white">JCB, LiuGong, Ammann, LS Tractor y Kubota</strong> con garantía directa de fábrica, telemetría satelital en vivo y despacho inmediato a toda la República Dominicana.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mt-8">
               <button
                 onClick={() => onNavigate('#/machinery')}
-                className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-amber-400 hover:bg-amber-300 text-black text-sm font-black uppercase tracking-wider transition-all shadow-lg shadow-amber-400/20 cursor-pointer"
+                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-[4px] bg-amber-400 hover:bg-amber-300 text-black text-xs font-black uppercase tracking-wider transition-all shadow-lg shadow-amber-400/20 cursor-pointer active:scale-[0.98]"
               >
                 <span>Ver Catálogo Completo</span>
                 <ArrowRight className="w-4 h-4" />
@@ -153,10 +156,10 @@ export const MachineryHubView: React.FC<CategoryHubProps> = ({ onNavigate }) => 
                 href="https://wa.me/18095601234?text=Hola%20TMD,%20me%20interesa%20cotizar%20maquinaria%20pesada"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-bold border border-white/20 transition-all cursor-pointer backdrop-blur-sm"
+                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-[4px] bg-zinc-900/90 hover:bg-zinc-800 text-white text-xs font-bold border border-white/[0.1] transition-all cursor-pointer backdrop-blur-md active:scale-[0.98]"
               >
                 <Phone className="w-4 h-4 text-emerald-400" />
-                <span>Cotizar con Don Eduardo</span>
+                <span>Cotizar con Asesor Técnico</span>
               </a>
             </div>
           </motion.div>

@@ -35,7 +35,8 @@ export const PriceEstimateModal: React.FC<PriceEstimateModalProps> = ({
   onClose,
   onNavigate
 }) => {
-  const { formatPrice, currency, addMachineToQuote } = useCart();
+  const { formatPrice, currency, addMachineToQuote, exchangeRate } = useCart();
+  const currentRate = exchangeRate || USD_TO_DOP_RATE;
 
   // Interactive Estimate Customization States
   const [acquisitionType, setAcquisitionType] = useState<'cash' | 'leasing' | 'rent_to_own'>('leasing');
@@ -78,7 +79,7 @@ export const PriceEstimateModal: React.FC<PriceEstimateModalProps> = ({
       (Math.pow(1 + monthlyInterestRate, leaseTermMonths) - 1)
     : 0;
 
-  const monthlyLeaseEstimateDop = monthlyLeaseEstimateUsd * USD_TO_DOP_RATE;
+  const monthlyLeaseEstimateDop = monthlyLeaseEstimateUsd * currentRate;
 
   const handleSendToSales = (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,7 +97,7 @@ export const PriceEstimateModal: React.FC<PriceEstimateModalProps> = ({
   const getWhatsAppEstimateMessage = () => {
     let msg = `*SOLICITUD DE ESTIMADO DE PRECIO - TMD DOMINICANA*\n`;
     msg += `*Equipo:* ${machine.name} (${machine.brand} - Mod. ${machine.modelCode})\n`;
-    msg += `*Inversión Ref:* US$ ${totalEstimateUsd.toLocaleString()} (Aprox RD$ ${(totalEstimateUsd * USD_TO_DOP_RATE).toLocaleString('es-DO', { maximumFractionDigits: 0 })})\n`;
+    msg += `*Inversión Ref:* US$ ${totalEstimateUsd.toLocaleString()} (Aprox RD$ ${(totalEstimateUsd * currentRate).toLocaleString('es-DO', { maximumFractionDigits: 0 })})\n`;
     msg += `*Modalidad:* ${acquisitionType === 'leasing' ? `Leasing Bancario (${downPaymentPercent}% Inicial, ${leaseTermMonths} meses)` : acquisitionType === 'cash' ? 'Compra Directa' : 'Renta con Opción a Compra'}\n`;
     if (acquisitionType === 'leasing') {
       msg += `*Cuota Estimada Mensual:* ~US$ ${monthlyLeaseEstimateUsd.toFixed(0)} / mes\n`;
@@ -369,7 +370,7 @@ export const PriceEstimateModal: React.FC<PriceEstimateModalProps> = ({
                     <div className="grid grid-cols-3 gap-1.5 font-display text-[10px]">
                       <a
                         href={`https://wa.me/18095601234?text=${encodeURIComponent(
-                          `Hola TMD Dominicana, deseo PRE-CALIFICAR con BANCO POPULAR para el equipo ${machine.name} (${machine.modelCode}). Inversión: US$ ${totalEstimateUsd.toLocaleString()} (~RD$ ${(totalEstimateUsd * USD_TO_DOP_RATE).toLocaleString('es-DO')}), Inicial: ${downPaymentPercent}%, Plazo: ${leaseTermMonths} meses. Cuota estimada: ~RD$ ${monthlyLeaseEstimateDop.toLocaleString('es-DO')}/mes.`
+                          `Hola TMD Dominicana, deseo PRE-CALIFICAR con BANCO POPULAR para el equipo ${machine.name} (${machine.modelCode}). Inversión: US$ ${totalEstimateUsd.toLocaleString()} (~RD$ ${(totalEstimateUsd * currentRate).toLocaleString('es-DO')}), Inicial: ${downPaymentPercent}%, Plazo: ${leaseTermMonths} meses. Cuota estimada: ~RD$ ${monthlyLeaseEstimateDop.toLocaleString('es-DO')}/mes.`
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -379,7 +380,7 @@ export const PriceEstimateModal: React.FC<PriceEstimateModalProps> = ({
                       </a>
                       <a
                         href={`https://wa.me/18095601234?text=${encodeURIComponent(
-                          `Hola TMD Dominicana, deseo PRE-CALIFICAR con BANCO BHD para el equipo ${machine.name} (${machine.modelCode}). Inversión: US$ ${totalEstimateUsd.toLocaleString()} (~RD$ ${(totalEstimateUsd * USD_TO_DOP_RATE).toLocaleString('es-DO')}), Inicial: ${downPaymentPercent}%, Plazo: ${leaseTermMonths} meses. Cuota estimada: ~RD$ ${monthlyLeaseEstimateDop.toLocaleString('es-DO')}/mes.`
+                          `Hola TMD Dominicana, deseo PRE-CALIFICAR con BANCO BHD para el equipo ${machine.name} (${machine.modelCode}). Inversión: US$ ${totalEstimateUsd.toLocaleString()} (~RD$ ${(totalEstimateUsd * currentRate).toLocaleString('es-DO')}), Inicial: ${downPaymentPercent}%, Plazo: ${leaseTermMonths} meses. Cuota estimada: ~RD$ ${monthlyLeaseEstimateDop.toLocaleString('es-DO')}/mes.`
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -389,7 +390,7 @@ export const PriceEstimateModal: React.FC<PriceEstimateModalProps> = ({
                       </a>
                       <a
                         href={`https://wa.me/18095601234?text=${encodeURIComponent(
-                          `Hola TMD Dominicana, deseo PRE-CALIFICAR con BANRESERVAS para el equipo ${machine.name} (${machine.modelCode}). Inversión: US$ ${totalEstimateUsd.toLocaleString()} (~RD$ ${(totalEstimateUsd * USD_TO_DOP_RATE).toLocaleString('es-DO')}), Inicial: ${downPaymentPercent}%, Plazo: ${leaseTermMonths} meses. Cuota estimada: ~RD$ ${monthlyLeaseEstimateDop.toLocaleString('es-DO')}/mes.`
+                          `Hola TMD Dominicana, deseo PRE-CALIFICAR con BANRESERVAS para el equipo ${machine.name} (${machine.modelCode}). Inversión: US$ ${totalEstimateUsd.toLocaleString()} (~RD$ ${(totalEstimateUsd * currentRate).toLocaleString('es-DO')}), Inicial: ${downPaymentPercent}%, Plazo: ${leaseTermMonths} meses. Cuota estimada: ~RD$ ${monthlyLeaseEstimateDop.toLocaleString('es-DO')}/mes.`
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"

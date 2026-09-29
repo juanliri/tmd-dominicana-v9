@@ -1387,9 +1387,9 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
       {/* QUICK SPEC MODAL (Responsive Mobile Bottom-Sheet or Centered Dialog) */}
       {previewMachine && createPortal(
         <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5 bg-black/85 backdrop-blur-md animate-in fade-in" onClick={() => setPreviewMachine(null)}>
-          <div className="bg-white dark:bg-zinc-900 rounded-[6px] border border-slate-200 dark:border-zinc-800 max-w-4xl w-full p-4 sm:p-6 shadow-2xl space-y-4 font-sans" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white dark:bg-zinc-950/95 dark:backdrop-blur-2xl rounded-[5px] border border-slate-200 dark:border-white/[0.08] max-w-5xl w-full p-5 sm:p-7 shadow-2xl space-y-5 font-sans relative overflow-hidden" onClick={(e) => e.stopPropagation()}>
             {/* Top Modal Header */}
-            <div className="flex items-start justify-between border-b border-slate-200 dark:border-zinc-800 pb-3">
+            <div className="flex items-start justify-between border-b border-slate-200 dark:border-white/[0.08] pb-4">
               <div>
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
                   <span className="px-2 py-0.5 rounded-[3px] bg-amber-500 text-black text-[10px] font-black uppercase tracking-wider font-mono shadow-xs">
@@ -1420,7 +1420,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
               {/* Left Column (5 cols): Machine Photo + Availability Badges */}
               <div className="md:col-span-5 space-y-3">
-                <div className="relative aspect-[16/10] rounded-[5px] overflow-hidden bg-slate-900 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 shadow-md group">
+                <div className="relative aspect-[16/10] rounded-[5px] overflow-hidden bg-slate-900 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] shadow-md group">
                   <img
                     src={previewMachine.image}
                     alt={previewMachine.name}
@@ -1444,7 +1444,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
               {/* Right Column (7 cols): Financials, CAD Specs, Trust Badges, Action Buttons */}
               <div className="md:col-span-7 space-y-3.5">
                 {/* Price & Monthly Leasing Overview */}
-                <div className="flex items-center justify-between p-3 rounded-[5px] bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
+                <div className="flex items-center justify-between p-3.5 rounded-[5px] bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08]">
                   <div>
                     <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-zinc-400 font-bold block">INVERSIÓN ESTIMADA</span>
                     <span className="text-lg sm:text-xl font-black text-slate-900 dark:text-white font-mono">
@@ -1461,15 +1461,15 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
 
                 {/* 4-Cell CAD Spec Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                  <div className="p-2 rounded-[4px] bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700 text-center">
+                  <div className="p-2.5 rounded-[4px] bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] text-center">
                     <span className="text-[9px] uppercase font-bold text-slate-500 dark:text-zinc-400 block font-mono">POTENCIA</span>
                     <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white font-mono">{previewMachine.powerHp} HP</span>
                   </div>
-                  <div className="p-2 rounded-[4px] bg-zinc-100 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700/60 text-center">
+                  <div className="p-2.5 rounded-[4px] bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] text-center">
                     <span className="text-[9px] uppercase font-bold text-slate-500 dark:text-zinc-400 block font-mono">PESO OPERATIVO</span>
                     <span className="text-xs sm:text-sm font-black text-slate-900 dark:text-white font-mono">{(previewMachine.operatingWeightKg / 1000).toFixed(1)} T</span>
                   </div>
-                  <div className="p-2 rounded-[4px] bg-zinc-100 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700/60 text-center col-span-2">
+                  <div className="p-2.5 rounded-[4px] bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] text-center col-span-2">
                     <span className="text-[9px] uppercase font-bold text-slate-500 dark:text-zinc-400 block font-mono">MOTORIZACIÓN</span>
                     <span className="text-xs font-black text-slate-900 dark:text-white truncate block">{previewMachine.engine}</span>
                   </div>

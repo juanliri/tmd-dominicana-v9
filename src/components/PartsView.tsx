@@ -58,6 +58,7 @@ import { CriticalStockReorderModal } from './parts/CriticalStockReorderModal';
 import { MobileTruckInventoryModal } from './parts/MobileTruckInventoryModal';
 import { PartQuickViewModal } from './parts/PartQuickViewModal';
 import { WhatsappPartOcrScannerModal } from './parts/WhatsappPartOcrScannerModal';
+import { PartDetailFlagshipView } from './parts/PartDetailFlagshipView';
 import { TextHighlight } from './common/TextHighlight';
 import { downloadProductQrCode } from '../utils/qrExporter';
 
@@ -296,12 +297,19 @@ export const PartsView = React.memo<PartsViewProps>(({
   // Update active part detail if selectedPartId is passed/updated via URL or search
   useEffect(() => {
     if (selectedPartId) {
-      const found = getUnifiedStoreParts().find((p) => p.id === selectedPartId);
+      const found = getUnifiedStoreParts().find(
+        (p) => p.id.toLowerCase() === selectedPartId.toLowerCase()
+      );
       if (found) {
         setActivePartDetail(found);
       }
     }
   }, [selectedPartId]);
+
+  const handleOpenPartSpecs = useCallback((part: Part) => {
+    setActivePartDetail(part);
+    onNavigate(`#/parts/${part.id}`);
+  }, [onNavigate]);
 
   const handleCategorySelect = useCallback((category: string) => {
     if (category === selectedCategory) return;
@@ -466,6 +474,23 @@ export const PartsView = React.memo<PartsViewProps>(({
   }, []);
 
   const hasActiveFilters = selectedCategory !== 'Todos' || selectedBrand !== 'Todas' || availabilityFilter !== 'all' || selectedAssemblyId !== null || searchTerm !== '';
+
+  // 0. Dedicated Flagship Product Detail Page (PDP) for OEM Spare Parts
+  if (selectedPartId && activePartDetail) {
+    return (
+      <PartDetailFlagshipView
+        part={activePartDetail}
+        onNavigate={onNavigate}
+        onBackToCatalog={() => {
+          setActivePartDetail(null);
+          if (onClearSelectedPart) onClearSelectedPart();
+          onNavigate('#/parts');
+        }}
+        onOpenQr={(p) => setQrModalPart(p)}
+        onOpenLabelPdf={(p) => setLabelPdfPart(p)}
+      />
+    );
+  }
 
   return (
     <div ref={partsTopRef} className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 sm:py-8">
@@ -991,7 +1016,7 @@ export const PartsView = React.memo<PartsViewProps>(({
                       key={part.id}
                       part={part}
                       formatPrice={formatPrice}
-                      setActivePartDetail={setActivePartDetail}
+                      setActivePartDetail={handleOpenPartSpecs}
                       setQrModalPart={setQrModalPart}
                       addToCart={addToCart}
                       searchTerm={searchTerm}
@@ -1007,7 +1032,7 @@ export const PartsView = React.memo<PartsViewProps>(({
             parts={displayedParts}
             layoutMode={viewMode === 'grid' ? 'uniform' : 'mosaic'}
             formatPrice={formatPrice}
-            setActivePartDetail={setActivePartDetail}
+            setActivePartDetail={handleOpenPartSpecs}
             setQrModalPart={setQrModalPart}
             addToCart={addToCart}
             searchTerm={searchTerm}
@@ -1275,6 +1300,16 @@ export const PartsView = React.memo<PartsViewProps>(({
                 >
                   <ShoppingCart className="w-4 h-4 text-amber-400" />
                   <span>AÑADIR</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleOpenPartSpecs(activePartDetail);
+                  }}
+                  className="px-3 py-2 rounded-[3px] bg-slate-800 hover:bg-slate-700 text-amber-400 font-black uppercase tracking-wider text-xs transition-colors cursor-pointer border border-amber-500/30 flex items-center gap-1.5"
+                  title="Abrir Ficha Técnica Completa"
+                >
+                  <span>FICHA COMPLETA →</span>
                 </button>
                 <button
                   id="part-detail-request-quote-btn"

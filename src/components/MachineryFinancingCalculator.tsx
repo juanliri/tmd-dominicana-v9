@@ -72,7 +72,8 @@ export const MachineryFinancingCalculator = React.memo<MachineryFinancingCalcula
   onOpenDetailedEstimate,
   className = ''
 }) => {
-  const { formatPrice } = useCart();
+  const { formatPrice, exchangeRate } = useCart();
+  const currentRate = exchangeRate || USD_TO_DOP_RATE;
 
   // Baseline price default if no specific machine is passed or selected
   const defaultPriceUsd = machine ? machine.basePriceUsd : 85000;
@@ -112,7 +113,7 @@ export const MachineryFinancingCalculator = React.memo<MachineryFinancingCalcula
       return {
         ...b,
         monthlyUsd,
-        monthlyDop: monthlyUsd * USD_TO_DOP_RATE,
+        monthlyDop: monthlyUsd * currentRate,
         interestUsd,
         totalCostUsd: downPaymentAmountUsd + totalPaidUsd
       };
@@ -411,7 +412,7 @@ export const MachineryFinancingCalculator = React.memo<MachineryFinancingCalcula
               <span>Tasas oficiales actualizadas 2026 bajo convenio TMD Dominicana con Banco Popular, BHD y Banreservas.</span>
             </span>
             <span className="font-mono text-zinc-500 uppercase text-[10px]">
-              TASA BCRD: 1 USD = {USD_TO_DOP_RATE} DOP
+              TASA BCRD: 1 USD = {currentRate.toFixed(2)} DOP
             </span>
           </div>
         </div>
@@ -463,7 +464,7 @@ export const MachineryFinancingCalculator = React.memo<MachineryFinancingCalcula
                 <span className="text-xs font-black text-amber-400 font-mono">
                   US$ {effectivePriceUsd.toLocaleString()} 
                   <span className="text-[10px] text-zinc-500 ml-1">
-                    (~RD$ {(effectivePriceUsd * USD_TO_DOP_RATE).toLocaleString('es-DO', { maximumFractionDigits: 0 })})
+                    (~RD$ {(effectivePriceUsd * currentRate).toLocaleString('es-DO', { maximumFractionDigits: 0 })})
                   </span>
                 </span>
               </div>
@@ -627,7 +628,7 @@ export const MachineryFinancingCalculator = React.memo<MachineryFinancingCalcula
                   <span className="text-xs font-normal text-zinc-400 uppercase">/ MES</span>
                 </div>
                 <div className="text-[11px] font-bold text-amber-400 mt-1 font-mono">
-                  ≈ RD$ {Math.round(estimatedMonthlyPaymentUsd * USD_TO_DOP_RATE).toLocaleString('es-DO')} / MES
+                  ≈ RD$ {Math.round(estimatedMonthlyPaymentUsd * currentRate).toLocaleString('es-DO')} / MES
                 </div>
               </div>
 
@@ -686,7 +687,7 @@ export const MachineryFinancingCalculator = React.memo<MachineryFinancingCalcula
               ) : (
                 <a
                   href={`https://wa.me/18095601234?text=${encodeURIComponent(
-                    `Hola TMD Dominicana, solicito asesoría de financiamiento/leasing para maquinaria. Entidad: ${selectedBank.name} (${selectedBank.rate}%). Valor Equipo: US$ ${effectivePriceUsd.toLocaleString()}, Inicial: ${downPaymentPercent}% (US$ ${Math.round(downPaymentAmountUsd).toLocaleString()}), Plazo: ${loanDurationMonths} meses. Cuota estimada: ~US$ ${Math.round(estimatedMonthlyPaymentUsd).toLocaleString()}/mes (~RD$ ${Math.round(estimatedMonthlyPaymentUsd * USD_TO_DOP_RATE).toLocaleString()}/mes).`
+                    `Hola TMD Dominicana, solicito asesoría de financiamiento/leasing para maquinaria. Entidad: ${selectedBank.name} (${selectedBank.rate}%). Valor Equipo: US$ ${effectivePriceUsd.toLocaleString()}, Inicial: ${downPaymentPercent}% (US$ ${Math.round(downPaymentAmountUsd).toLocaleString()}), Plazo: ${loanDurationMonths} meses. Cuota estimada: ~US$ ${Math.round(estimatedMonthlyPaymentUsd).toLocaleString()}/mes (~RD$ ${Math.round(estimatedMonthlyPaymentUsd * currentRate).toLocaleString()}/mes).`
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"

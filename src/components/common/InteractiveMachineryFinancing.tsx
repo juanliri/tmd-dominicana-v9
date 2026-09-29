@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { Machine } from '../../types';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
+import { useCart } from '../../context/CartContext';
 
 export interface DominicanBankPartner {
   id: 'popular' | 'bhd' | 'banreservas' | 'tmd_direct';
@@ -101,6 +102,8 @@ export const InteractiveMachineryFinancing: React.FC<InteractiveMachineryFinanci
   onOpenDetailedProforma,
   className = ''
 }) => {
+  const { exchangeRate } = useCart();
+  const currentRate = exchangeRate || USD_TO_DOP_RATE;
   const basePrice = totalInvestmentUsd || machine.basePriceUsd;
 
   // Selected parameters
@@ -119,17 +122,17 @@ export const InteractiveMachineryFinancing: React.FC<InteractiveMachineryFinanci
 
   // Calculations in USD and DOP (Dominican Pesos)
   const downPaymentUsd = (basePrice * downPaymentPercent) / 100;
-  const downPaymentDop = Math.round(downPaymentUsd * USD_TO_DOP_RATE);
+  const downPaymentDop = Math.round(downPaymentUsd * currentRate);
 
   const financedAmountUsd = Math.max(0, basePrice - downPaymentUsd);
-  const financedAmountDop = Math.round(financedAmountUsd * USD_TO_DOP_RATE);
+  const financedAmountDop = Math.round(financedAmountUsd * currentRate);
 
   const monthlyRate = (selectedBank.annualRate / 100) / 12;
   const monthlyPaymentUsd = financedAmountUsd > 0 && monthlyRate > 0 && termMonths > 0
     ? (financedAmountUsd * monthlyRate * Math.pow(1 + monthlyRate, termMonths)) / (Math.pow(1 + monthlyRate, termMonths) - 1)
     : 0;
 
-  const monthlyPaymentDop = Math.round(monthlyPaymentUsd * USD_TO_DOP_RATE);
+  const monthlyPaymentDop = Math.round(monthlyPaymentUsd * currentRate);
   const totalFinancingPaidUsd = monthlyPaymentUsd * termMonths;
   const totalInterestUsd = Math.max(0, totalFinancingPaidUsd - financedAmountUsd);
 
@@ -152,7 +155,7 @@ export const InteractiveMachineryFinancing: React.FC<InteractiveMachineryFinanci
       `• *Entidad:* ${activePrequalModal?.name} (${activePrequalModal?.annualRate}%%25 APR)%0A` +
       `• *Equipo:* ${encodeURIComponent(machine.name)} (${encodeURIComponent(machine.brand)})%0A` +
       `• *Código / Modelo:* ${encodeURIComponent(machine.modelCode)}%0A` +
-      `• *Valor Total:* US$ ${basePrice.toLocaleString()} (~RD$ ${(basePrice * USD_TO_DOP_RATE).toLocaleString('es-DO')})%0A` +
+      `• *Valor Total:* US$ ${basePrice.toLocaleString()} (~RD$ ${(basePrice * currentRate).toLocaleString('es-DO')})%0A` +
       `• *Inicial:* ${downPaymentPercent}%%25 (US$ ${Math.round(downPaymentUsd).toLocaleString()} / RD$ ${downPaymentDop.toLocaleString('es-DO')})%0A` +
       `• *Plazo:* ${termMonths} meses (${termMonths / 12} años)%0A` +
       `• *Cuota Estimada:* *RD$ ${monthlyPaymentDop.toLocaleString('es-DO')}/mes* (~US$ ${Math.round(monthlyPaymentUsd).toLocaleString()}/mes)%0A%0A` +
@@ -431,7 +434,7 @@ export const InteractiveMachineryFinancing: React.FC<InteractiveMachineryFinanci
               </div>
               <div className="flex justify-between text-zinc-400">
                 <span>Valor Total:</span>
-                <span className="font-bold text-white">RD$ {(basePrice * USD_TO_DOP_RATE).toLocaleString('es-DO')}</span>
+                <span className="font-bold text-white">RD$ {(basePrice * currentRate).toLocaleString('es-DO')}</span>
               </div>
               <div className="flex justify-between text-zinc-400">
                 <span>Inicial ({downPaymentPercent}%):</span>
