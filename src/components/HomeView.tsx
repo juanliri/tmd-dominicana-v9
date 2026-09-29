@@ -535,7 +535,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                 className="space-y-4 relative z-10"
               >
                 {/* Bigger Photo Showcase (Taller Aspect Ratio & Precision Industrial Viewfinder Layout) */}
-                <div className="relative aspect-[16/10] min-h-[260px] sm:min-h-[300px] lg:min-h-[320px] rounded-[5px] overflow-hidden bg-slate-900 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] group/photo shadow-2xl transition-colors hover:border-amber-500/50">
+                <div className="relative aspect-[16/10] w-full max-h-[360px] rounded-[5px] overflow-hidden bg-slate-900 dark:bg-zinc-950 border border-slate-200 dark:border-white/[0.08] group/photo shadow-2xl transition-colors hover:border-amber-500/50">
                   {/* Subtle Ambient Radial Gold Glow Behind Machinery */}
                   <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(217,155,38,0.14)_0%,rgba(0,0,0,0)_70%)] pointer-events-none" />
 
@@ -555,7 +555,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                         target.src = '/images/tmd_coming_soon.jpg';
                       }
                     }}
-                    className="w-full h-full object-cover group-hover/photo:scale-106 filter brightness-105 contrast-110 group-hover/photo:contrast-120 transition-all duration-700 ease-out"
+                    className="w-full h-full object-cover object-center group-hover/photo:scale-105 filter brightness-105 contrast-110 group-hover/photo:contrast-115 transition-all duration-700 ease-out"
                   />
 
                   {/* Balanced Vignette Gradients for Text Legibility without dimming the machine */}

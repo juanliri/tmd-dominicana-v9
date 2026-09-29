@@ -41,7 +41,8 @@ import {
   ClipboardCheck,
   Camera,
   Tag,
-  RotateCcw
+  RotateCcw,
+  Link
 } from 'lucide-react';
 import { triggerHaptic } from '../../utils/haptics';
 import { Machine, MachineCustomizationOption } from '../../types';
@@ -334,12 +335,12 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
 
   return createPortal(
     <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-4xl bg-zinc-900 rounded-[5px] shadow-2xl border border-zinc-800 overflow-hidden flex flex-col max-h-[92vh] font-mono">
+      <div className="w-full max-w-[1680px] h-full max-h-[96vh] bg-zinc-950 rounded-[6px] shadow-2xl border border-zinc-800 overflow-hidden flex flex-col font-sans">
         
         {/* ============================================================ */}
         {/* TOP HERO MEDIA BAR                                          */}
         {/* ============================================================ */}
-        <div className="relative h-56 sm:h-64 bg-zinc-950 shrink-0 overflow-hidden">
+        <div className="relative h-64 sm:h-72 lg:h-80 bg-zinc-950 shrink-0 overflow-hidden">
           <img
             src={machine.image}
             alt={machine.name}

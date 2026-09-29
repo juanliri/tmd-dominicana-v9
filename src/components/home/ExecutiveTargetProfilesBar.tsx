@@ -36,7 +36,7 @@ export const ExecutiveTargetProfilesBar: React.FC<ExecutiveTargetProfilesBarProp
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   },
 }) => {
-  const [activeTab, setActiveTab] = useState<'contractors' | 'sell' | 'government' | 'engineers'>('sell');
+  const [activeTab, setActiveTab] = useState<'contractors' | 'sell' | 'government' | 'engineers'>('contractors');
 
   return (
     <section id="executive-commercial-profiles" className="w-full px-3 sm:px-6 lg:px-8 xl:px-12 max-w-[1780px] mx-auto font-display">

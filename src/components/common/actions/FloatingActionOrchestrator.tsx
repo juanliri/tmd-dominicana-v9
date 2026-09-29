@@ -53,13 +53,13 @@ export const FloatingActionOrchestrator: React.FC<FloatingActionOrchestratorProp
   }
 
   // Dynamic bottom offset calculation to avoid mobile navigation overlap
-  const bottomOffsetClass = 'bottom-20 sm:bottom-6';
+  const bottomOffsetClass = 'bottom-36 sm:bottom-22';
 
   return (
     <>
       {/* 24/7 Emergency Quick Action Popover */}
       {isSosOpen && (
-        <div className="fixed bottom-36 sm:bottom-20 right-4 sm:right-6 z-50 w-80 sm:w-88 bg-zinc-950 text-white rounded-[5px] border border-red-500/50 shadow-2xl p-4 font-mono animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-52 sm:bottom-36 right-4 sm:right-6 z-50 w-80 sm:w-88 bg-zinc-950 text-white rounded-[5px] border border-red-500/50 shadow-2xl p-4 font-mono animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="h-1 w-full bg-gradient-to-r from-red-600 via-amber-500 to-red-600 absolute top-0 left-0 right-0 rounded-t-[5px]" />
           
           <div className="flex items-start justify-between gap-2 pt-1 pb-2 border-b border-zinc-800">

@@ -572,8 +572,8 @@ export const Header: React.FC<HeaderProps> = ({
       ref={headerRef}
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/[0.08] shadow-lg shadow-black/5 dark:shadow-black/50' 
-          : 'bg-white/90 dark:bg-[#0c0c10]/90 backdrop-blur-xl border-b border-slate-200/60 dark:border-white/[0.06]'
+          ? 'bg-white/80 dark:bg-zinc-950/80 backdrop-blur-2xl border-b border-slate-200/60 dark:border-white/[0.08] shadow-lg shadow-black/5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.5)]' 
+          : 'bg-white/70 dark:bg-zinc-950/70 backdrop-blur-xl border-b border-slate-200/50 dark:border-white/[0.06] shadow-xs'
       }`}
       onMouseLeave={() => {
         handleScheduleMegaMenuClose();
@@ -586,7 +586,7 @@ export const Header: React.FC<HeaderProps> = ({
           handleCloseMegaMenuImmediately();
           handleCloseServicesDropdownImmediately();
         }}
-        className="bg-slate-100/95 dark:bg-zinc-950/95 backdrop-blur-md text-slate-600 dark:text-zinc-400 text-[11px] py-1.5 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-slate-200/80 dark:border-white/[0.06] hidden sm:flex items-center justify-between gap-3"
+        className="bg-slate-100/80 dark:bg-zinc-950/75 backdrop-blur-md text-slate-600 dark:text-zinc-400 text-[11px] py-1.5 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-slate-200/50 dark:border-white/[0.05] hidden sm:flex items-center justify-between gap-3"
       >
         {/* Zone 1: Distributor Identity */}
         <div className="flex items-center gap-3 shrink-0">
