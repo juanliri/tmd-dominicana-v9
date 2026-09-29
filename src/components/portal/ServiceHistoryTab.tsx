@@ -1027,14 +1027,14 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <button
               onClick={handleSeedDemoRecords}
-              className="px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider rounded-[2px] text-xs shadow-sm transition-all cursor-pointer flex items-center gap-1.5"
+              className="px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider rounded text-xs shadow-sm transition-all active:scale-[0.98] cursor-pointer flex items-center gap-1.5"
             >
               <Sparkles className="w-4 h-4" />
               <span>Cargar Bitácora Técnica de Demostración</span>
             </button>
             <button
               onClick={() => onNavigate('#/service')}
-              className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer flex items-center gap-1.5 border border-zinc-700"
+              className="px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-bold font-display uppercase tracking-wider rounded text-xs transition-all active:scale-[0.98] cursor-pointer flex items-center gap-1.5 border border-zinc-700"
             >
               <Wrench className="w-4 h-4 text-amber-400" />
               <span>Agendar Mantenimiento Preventivo</span>
@@ -1107,14 +1107,14 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setSelectedRecord(record)}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-colors cursor-pointer border border-zinc-700"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-bold font-display uppercase tracking-wider rounded text-xs transition-all active:scale-[0.98] cursor-pointer border border-zinc-700"
                     >
                       <Eye className="w-3.5 h-3.5" />
                       <span>Ver Ficha Técnica</span>
                     </button>
                     <button
                       onClick={() => onNavigate('#/service')}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-400/20 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-400/10 hover:bg-amber-400/20 text-amber-400 border border-amber-400/30 font-bold font-display uppercase tracking-wider rounded text-xs transition-all active:scale-[0.98] cursor-pointer"
                     >
                       <Wrench className="w-3.5 h-3.5" />
                       <span className="hidden sm:inline">Repetir / Nuevo Servicio</span>

@@ -171,7 +171,7 @@ export const PortalBottomBar: React.FC<PortalBottomBarProps> = ({
                     setIsDrawerOpen(false);
                     onOpenCreateQuote();
                   }}
-                  className="flex items-center justify-center gap-2 p-2.5 rounded-[2px] bg-amber-500 text-zinc-950 font-bold text-xs shadow-md shadow-amber-500/20 cursor-pointer"
+                  className="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs uppercase tracking-wider shadow-sm active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <PlusCircle className="w-4 h-4" />
                   <span>+ Cotización</span>
@@ -185,7 +185,7 @@ export const PortalBottomBar: React.FC<PortalBottomBarProps> = ({
                     setIsDrawerOpen(false);
                     onOpenNewOrderModal();
                   }}
-                  className="flex items-center justify-center gap-2 p-2.5 rounded-[2px] bg-zinc-900 border border-zinc-700 text-white font-bold text-xs cursor-pointer"
+                  className="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-white font-semibold text-xs active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <Wrench className="w-4 h-4 text-amber-400" />
                   <span>+ Taller</span>
@@ -199,7 +199,7 @@ export const PortalBottomBar: React.FC<PortalBottomBarProps> = ({
                     setIsDrawerOpen(false);
                     onOpenQrScanner();
                   }}
-                  className="col-span-2 flex items-center justify-center gap-2 p-2.5 rounded-[2px] bg-zinc-900 border border-cyan-500/40 text-cyan-400 font-bold text-xs cursor-pointer"
+                  className="col-span-2 flex items-center justify-center gap-2 px-3.5 py-2.5 rounded bg-cyan-950/40 hover:bg-cyan-900/40 border border-cyan-500/40 text-cyan-400 font-semibold text-xs active:scale-[0.98] transition-all cursor-pointer"
                 >
                   <QrCode className="w-4 h-4" />
                   <span>Escanear Código QR Industrial</span>

@@ -294,7 +294,7 @@ export const SessionManager: React.FC<SessionManagerProps> = ({ onSessionExpired
               <button
                 type="button"
                 onClick={handleForceExpire}
-                className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-[2px] border border-zinc-700 bg-zinc-900 hover:bg-zinc-800 text-xs font-semibold text-zinc-300 hover:text-white transition-colors cursor-pointer"
+                className="flex items-center justify-center gap-2 px-4 py-2.5 rounded border border-zinc-700 hover:border-zinc-500 bg-zinc-900 hover:bg-zinc-800 text-xs font-semibold text-zinc-300 hover:text-white active:scale-[0.98] transition-all cursor-pointer"
               >
                 <LogOut className="w-4 h-4" />
                 Cerrar Sesión
@@ -303,7 +303,7 @@ export const SessionManager: React.FC<SessionManagerProps> = ({ onSessionExpired
                 type="button"
                 onClick={handleExtendSession}
                 disabled={isExtending}
-                className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-[2px] bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-bold transition-all shadow-md shadow-amber-500/20 cursor-pointer disabled:opacity-50"
+                className="flex items-center justify-center gap-2 px-4 py-2.5 rounded bg-amber-400 hover:bg-amber-300 text-black text-xs font-bold uppercase tracking-wider transition-all shadow-sm active:scale-[0.98] cursor-pointer disabled:opacity-50"
               >
                 {isExtending ? (
                   <RefreshCw className="w-4 h-4 animate-spin" />

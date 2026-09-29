@@ -64,7 +64,7 @@ export const ProTierCard: React.FC<ProTierCardProps> = ({
         {/* Card Left: Identity & Badges */}
         <div className="space-y-4 max-w-xl">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] text-[10px] font-black uppercase tracking-wider bg-amber-500 text-black shadow-md font-mono">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[2px] text-[10px] font-black uppercase tracking-wider bg-amber-400 text-black shadow-sm font-mono">
               <Crown className="w-3.5 h-3.5" />
               <span>TMD Pro-Member</span>
             </span>
@@ -171,7 +171,7 @@ export const ProTierCard: React.FC<ProTierCardProps> = ({
             className={`w-full py-2.5 px-4 rounded-[2px] text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer uppercase ${
               isProMemberDiscountActive
                 ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                : 'bg-amber-500 hover:bg-amber-400 text-black shadow-md shadow-amber-500/20'
+                : 'bg-amber-400 hover:bg-amber-300 text-black shadow-sm active:scale-[0.98]'
             }`}
           >
             {isProMemberDiscountActive ? (
