@@ -222,10 +222,10 @@ export const ContractorTestimonials: React.FC<ContractorTestimonialsProps> = ({
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="px-1.5 py-0.5 rounded-[3px] bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[9px] font-black uppercase">
+                  <span className="px-1.5 py-0.5 rounded-[3px] bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] font-black uppercase">
                     {item.sector}
                   </span>
-                  <span className="text-[10px] text-zinc-400 flex items-center gap-1 uppercase">
+                  <span className="text-[10px] text-zinc-400 flex items-center gap-1 uppercase font-bold">
                     <MapPin className="w-3 h-3 text-amber-400" />
                     <span>{item.province}</span>
                   </span>
@@ -238,7 +238,7 @@ export const ContractorTestimonials: React.FC<ContractorTestimonialsProps> = ({
                 {item.highlightMetric && (
                   <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] bg-zinc-900 border border-zinc-800 text-amber-400 text-[10px] font-bold font-mono mb-2 uppercase">
                     <span>{item.highlightMetric.value}</span>
-                    <span className="text-zinc-500 text-[9px]">• {item.highlightMetric.label}</span>
+                    <span className="text-zinc-400 text-[10px] font-bold">• {item.highlightMetric.label}</span>
                   </div>
                 )}
 

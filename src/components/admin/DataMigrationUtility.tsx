@@ -142,7 +142,7 @@ export const DataMigrationUtility: React.FC<DataMigrationUtilityProps> = ({
             <div className="flex items-center gap-2">
               <span className="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-400 text-[10px] font-black uppercase tracking-wider border border-amber-500/30 flex items-center gap-1.5">
                 <Sparkles className="w-3 h-3 text-amber-400" />
-                Motor de Migración Masiva Firestore
+                Motor de Sincronización Supabase Cloud
               </span>
               <span className="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-bold border border-emerald-500/30 flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
@@ -151,10 +151,10 @@ export const DataMigrationUtility: React.FC<DataMigrationUtilityProps> = ({
             </div>
 
             <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-              Migración de Objetos Globales a Firestore
+              Sincronización de Catálogo a Supabase Cloud & Vercel Edge
             </h3>
             <p className="text-xs text-zinc-400 leading-relaxed">
-              Itera sobre los objetos de catálogo expuestos en <code className="bg-black/60 px-1.5 py-0.5 rounded text-amber-400 font-mono text-[11px]">window</code> por los scripts de CDN Vercel (como <code className="text-zinc-200 font-mono">tmd_jcb_catalog_data.js</code>, LiuGong, Kubota, Ammann, Repuestos OEM) y realiza una carga masiva atómica (<code className="text-amber-400 font-mono">writeBatch</code>) hacia la base de datos Firestore.
+              Itera sobre los objetos de catálogo expuestos en <code className="bg-black/60 px-1.5 py-0.5 rounded text-amber-400 font-mono text-[11px]">window</code> por los módulos Vercel Edge (JCB, LiuGong, Kubota, Ammann, Repuestos OEM) y realiza la sincronización cloud hacia la infraestructura Supabase con respaldo local inmediato.
             </p>
           </div>
 
@@ -289,7 +289,7 @@ export const DataMigrationUtility: React.FC<DataMigrationUtilityProps> = ({
               
               <div>
                 <span className="font-black text-white block sm:inline mr-2">
-                  {progress.status === 'completed' ? '¡Migración Masiva Exitosa!' : progress.status === 'migrating' ? 'Ejecutando Carga en Firestore...' : 'Estado de Operación'}
+                  {progress.status === 'completed' ? '¡Sincronización Cloud Exitosa!' : progress.status === 'migrating' ? 'Ejecutando Sincronización en Supabase Cloud...' : 'Estado de Operación'}
                 </span>
                 <span className="text-zinc-400 text-[11px]">{progress.message}</span>
               </div>

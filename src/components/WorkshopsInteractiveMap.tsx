@@ -537,7 +537,7 @@ export const WorkshopsInteractiveMap: React.FC<WorkshopsInteractiveMapProps> = (
                   >
                     {/* Main Hub Badge */}
                     {ws.isMainHub && (
-                      <span className="absolute top-2.5 right-2.5 py-0.5 px-1.5 bg-amber-400 text-black text-[9px] font-bold uppercase rounded-[2px] tracking-wider">
+                      <span className="absolute top-2.5 right-2.5 py-0.5 px-1.5 bg-amber-400 text-black text-[10px] font-bold uppercase rounded-[2px] tracking-wider">
                         Sede Máster
                       </span>
                     )}
@@ -745,7 +745,7 @@ export const WorkshopsInteractiveMap: React.FC<WorkshopsInteractiveMapProps> = (
                       alt="Entrada Sede Central Km 22" 
                       className="w-full h-full object-cover"
                     />
-                    <span className="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded-[1px] bg-black/80 text-[8px] font-bold text-amber-400 uppercase">
+                    <span className="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded-[1px] bg-black/85 text-[10px] font-bold text-amber-400 uppercase">
                       Fachada &amp; Acceso
                     </span>
                   </div>
@@ -755,7 +755,7 @@ export const WorkshopsInteractiveMap: React.FC<WorkshopsInteractiveMapProps> = (
                       alt="Patio de Pruebas Km 22" 
                       className="w-full h-full object-cover"
                     />
-                    <span className="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded-[1px] bg-black/80 text-[8px] font-bold text-emerald-400 uppercase">
+                    <span className="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded-[1px] bg-black/85 text-[10px] font-bold text-emerald-400 uppercase">
                       Patio 15,000+ m²
                     </span>
                   </div>

@@ -92,10 +92,15 @@ export const AdminCrmFunnelView: React.FC<AdminCrmFunnelViewProps> = ({
     return `$${amountUsd.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
   };
 
-  // Real-time listener for all CRM subcollection inquiries
+  // Real-time listener for all CRM subcollection inquiries (with safety fallback timeout)
   useEffect(() => {
     setLoading(true);
+    const safetyTimer = setTimeout(() => {
+      setLoading(false);
+    }, 400);
+
     const unsubscribe = subscribeToAllCrmInquiries((items) => {
+      clearTimeout(safetyTimer);
       // If there are existing quotes without subcollection inquiries yet, synthesize baseline mapping
       if (items.length === 0 && quotes.length > 0) {
         const synthesized: CrmInquiry[] = quotes.map((q) => {

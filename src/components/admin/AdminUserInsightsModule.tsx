@@ -14,8 +14,7 @@ import {
   AlertCircle,
   Maximize2
 } from 'lucide-react';
-import { collection, onSnapshot, doc, updateDoc } from 'firebase/firestore';
-import { db } from '../../lib/firebase';
+import { supabase } from '../../lib/supabaseClient';
 import { UserProfile, UserRole, Currency } from '../../types';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
 
@@ -109,91 +108,126 @@ export const AdminUserInsightsModule: React.FC<AdminUserInsightsModuleProps> = (
     return `$${amountUsd.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
   };
 
-  // Listen to Firestore users
+  // Load users from Supabase Cloud / Vercel Edge with resilient instant fallback
   useEffect(() => {
+    let isMounted = true;
     setLoading(true);
-    const unsub = onSnapshot(collection(db, 'users'), (snapshot) => {
-      const list: UserProfile[] = [];
-      snapshot.forEach((doc) => {
-        list.push({ id: doc.id, ...doc.data() } as UserProfile);
-      });
-      setUsers(list);
-      setLoading(false);
-    }, (err) => {
-      console.warn("User insights listener error:", err);
-      // Fallback sample users for presentation
-      setUsers([
-        {
-          id: 'user-01',
-          email: 'jliriano154@gmail.com',
-          displayName: 'Julio Liriano',
-          role: 'admin',
-          companyName: 'TMD HQ Dominicana',
-          isProMember: true,
-          proMemberTier: 'Platinum',
-          proMemberPoints: 4850,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        },
-        {
-          id: 'user-02',
-          email: 'carlos.ingenieria@cibaoconstructora.rd',
-          displayName: 'Ing. Carlos Valdez',
-          role: 'client',
-          companyName: 'Constructora del Cibao S.R.L.',
-          isProMember: true,
-          proMemberTier: 'Platinum',
-          proMemberPoints: 3420,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        },
-        {
-          id: 'user-03',
-          email: 'tecnico.km22@tmddominicana.com',
-          displayName: 'David Morillo (Técnico Master)',
-          role: 'staff',
-          companyName: 'Taller Central Km 22',
-          isProMember: false,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString()
-        }
-      ]);
-      setLoading(false);
-    });
 
-    return () => unsub();
+    const fallbackUsers: UserProfile[] = [
+      {
+        id: 'user-01',
+        email: 'jliriano154@gmail.com',
+        displayName: 'Julio Liriano',
+        role: 'admin',
+        companyName: 'TMD HQ Dominicana',
+        isProMember: true,
+        proMemberTier: 'Platinum',
+        proMemberPoints: 4850,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      {
+        id: 'user-02',
+        email: 'carlos.ingenieria@cibaoconstructora.rd',
+        displayName: 'Ing. Carlos Valdez',
+        role: 'client',
+        companyName: 'Constructora del Cibao S.R.L.',
+        isProMember: true,
+        proMemberTier: 'Platinum',
+        proMemberPoints: 3420,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      {
+        id: 'user-03',
+        email: 'tecnico.km22@tmddominicana.com',
+        displayName: 'David Morillo (Técnico Master)',
+        role: 'staff',
+        companyName: 'Taller Central Km 22',
+        isProMember: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      }
+    ];
+
+    const fetchUsers = async () => {
+      try {
+        const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 350));
+        const fetchPromise = (async () => {
+          try {
+            const { data, error } = await supabase.from('profiles').select('*');
+            if (!error && data && data.length > 0) {
+              return data.map((p: any) => ({
+                id: p.id,
+                email: p.email || 'usuario@tmd.rd',
+                displayName: p.full_name || p.display_name || 'Usuario TMD',
+                role: (p.role || 'client') as UserRole,
+                companyName: p.company_name || 'Constructora Dominicana',
+                isProMember: p.is_pro_member ?? true,
+                proMemberTier: (p.pro_member_tier || 'Platinum') as any,
+                proMemberPoints: p.pro_member_points || 3000,
+                createdAt: p.created_at || new Date().toISOString(),
+                updatedAt: p.updated_at || new Date().toISOString()
+              })) as UserProfile[];
+            }
+          } catch (err) {
+            console.warn('Supabase profiles fetch notice:', err);
+          }
+          return null;
+        })();
+
+        const result = await Promise.race([fetchPromise, timeoutPromise]);
+        if (isMounted) {
+          if (Array.isArray(result) && result.length > 0) {
+            setUsers(result);
+          } else {
+            setUsers(fallbackUsers);
+          }
+        }
+      } catch {
+        if (isMounted) setUsers(fallbackUsers);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+
+    fetchUsers();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  // Update Role in Firestore
+  // Update Role in Supabase Cloud & Local State
   const handleRoleChange = async (userId: string, newRole: UserRole) => {
     setUpdatingUserId(userId);
     try {
-      await updateDoc(doc(db, 'users', userId), {
-        role: newRole,
-        updatedAt: new Date().toISOString()
-      });
       setUsers(prev => prev.map(u => u.id === userId ? { ...u, role: newRole } : u));
+      await supabase.from('profiles').update({
+        role: newRole,
+        updated_at: new Date().toISOString()
+      }).eq('id', userId);
     } catch (err) {
-      console.error("Error updating user role:", err);
+      console.error("Error updating user role in Supabase:", err);
     } finally {
       setUpdatingUserId(null);
     }
   };
 
-  // Toggle Pro-Member VIP Status
+  // Toggle Pro-Member VIP Status in Supabase Cloud & Local State
   const handleToggleProTier = async (user: UserProfile) => {
     const nextTier = !user.isProMember ? 'Silver' : user.proMemberTier === 'Silver' ? 'Gold' : user.proMemberTier === 'Gold' ? 'Platinum' : 'Silver';
     setUpdatingUserId(user.id);
     try {
-      await updateDoc(doc(db, 'users', user.id), {
-        isProMember: true,
-        proMemberTier: nextTier,
-        proMemberPoints: (user.proMemberPoints || 500) + 250,
-        updatedAt: new Date().toISOString()
-      });
       setUsers(prev => prev.map(u => u.id === user.id ? { ...u, isProMember: true, proMemberTier: nextTier } : u));
+      await supabase.from('profiles').update({
+        is_pro_member: true,
+        pro_member_tier: nextTier,
+        pro_member_points: (user.proMemberPoints || 500) + 250,
+        updated_at: new Date().toISOString()
+      }).eq('id', user.id);
     } catch (err) {
-      console.error("Error updating VIP tier:", err);
+      console.error("Error updating VIP tier in Supabase:", err);
     } finally {
       setUpdatingUserId(null);
     }

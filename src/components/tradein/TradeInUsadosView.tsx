@@ -199,19 +199,19 @@ export const TradeInUsadosView: React.FC<TradeInUsadosViewProps> = ({ onNavigate
                       alt={m.title} 
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-[3px] bg-black/85 backdrop-blur-xs text-amber-400 text-[9px] font-black uppercase border border-amber-500/30 flex items-center gap-1 font-mono">
+                    <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded-[3px] bg-black/85 backdrop-blur-xs text-amber-400 text-[10px] font-black uppercase border border-amber-500/30 flex items-center gap-1 font-mono">
                       <ShieldCheck className="w-3 h-3 text-amber-400" />
                       <span>SCORE: {m.certifiedInspectionScore}/100</span>
                     </div>
 
-                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-[3px] bg-emerald-500 text-black text-[9px] font-black uppercase font-mono">
+                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-[3px] bg-emerald-500 text-black text-[10px] font-black uppercase font-mono">
                       {m.warrantyMonths}M GARANTÍA
                     </div>
                   </div>
 
                   <div className="p-4 space-y-2.5">
                     <div className="flex items-center justify-between text-xs text-zinc-400">
-                      <span className="font-bold text-amber-400 uppercase text-[9px]">
+                      <span className="font-bold text-amber-400 uppercase text-[10px]">
                         {m.brand} • {m.year}
                       </span>
                       <span className="font-mono text-[10px]">
@@ -225,11 +225,11 @@ export const TradeInUsadosView: React.FC<TradeInUsadosViewProps> = ({ onNavigate
 
                     <div className="grid grid-cols-2 gap-2 p-2 rounded-[3px] bg-zinc-950 border border-zinc-800 text-[10px] text-zinc-400">
                       <div>
-                        <span className="text-[8px] text-zinc-500 uppercase block font-bold">UBICACIÓN:</span>
+                        <span className="text-[10px] text-zinc-400 uppercase block font-bold">UBICACIÓN:</span>
                         <strong className="text-zinc-200 truncate block uppercase">{m.location}</strong>
                       </div>
                       <div>
-                        <span className="text-[8px] text-zinc-500 uppercase block font-bold">RODAJE:</span>
+                        <span className="text-[10px] text-zinc-400 uppercase block font-bold">RODAJE:</span>
                         <strong className="text-emerald-400 uppercase">{m.undercarriageConditionPercent}% VIDA ÚTIL</strong>
                       </div>
                     </div>
@@ -247,7 +247,7 @@ export const TradeInUsadosView: React.FC<TradeInUsadosViewProps> = ({ onNavigate
 
                 <div className="p-4 pt-0 border-t border-zinc-800/80 flex items-center justify-between mt-auto">
                   <div>
-                    <span className="text-[9px] text-zinc-500 block uppercase font-bold">PRECIO CERTIFICADO:</span>
+                    <span className="text-[10px] text-zinc-400 block uppercase font-bold">PRECIO CERTIFICADO:</span>
                     <div className="text-lg font-black text-amber-400 font-mono">
                       {formatPrice(m.priceUsd)}
                     </div>

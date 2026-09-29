@@ -277,7 +277,7 @@ export const HighDemandPartsSection = React.memo<HighDemandPartsSectionProps>(({
                   {/* Top Badges */}
                   <div>
                     <div className="flex items-center justify-between gap-1.5 mb-2">
-                      <span className="px-1.5 py-0.5 rounded-[2px] bg-zinc-950 text-amber-400 border border-zinc-800 text-[9px] font-mono font-black uppercase tracking-wider">
+                      <span className="px-1.5 py-0.5 rounded-[2px] bg-zinc-950 text-amber-400 border border-zinc-800 text-[10px] font-mono font-black uppercase tracking-wider">
                         {part.category}
                       </span>
 
@@ -291,7 +291,7 @@ export const HighDemandPartsSection = React.memo<HighDemandPartsSectionProps>(({
                         {isCopied ? (
                           <>
                             <Check className="w-2.5 h-2.5 text-emerald-400" />
-                            <span className="text-emerald-400 text-[9px] uppercase">COPIADO</span>
+                            <span className="text-emerald-400 text-[10px] uppercase font-bold">COPIADO</span>
                           </>
                         ) : (
                           <>
@@ -313,7 +313,7 @@ export const HighDemandPartsSection = React.memo<HighDemandPartsSectionProps>(({
                       />
                       
                       {/* Stock Level Tag */}
-                      <div className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-[2px] bg-zinc-950/90 border border-zinc-800 text-[9px] font-mono font-bold text-emerald-400 flex items-center gap-1 uppercase">
+                      <div className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-[2px] bg-zinc-950/90 border border-zinc-800 text-[10px] font-mono font-bold text-emerald-400 flex items-center gap-1 uppercase">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                         <span>{part.stockQty} UNID. KM 22</span>
                       </div>
@@ -335,7 +335,7 @@ export const HighDemandPartsSection = React.memo<HighDemandPartsSectionProps>(({
                       <div className="text-xs sm:text-sm font-black text-white leading-tight">
                         {formatPrice(part.priceUsd)}
                       </div>
-                      <div className="text-[8px] text-zinc-500 uppercase font-bold">
+                      <div className="text-[10px] text-zinc-400 font-bold uppercase">
                         + ITBIS FISCAL
                       </div>
                     </div>
