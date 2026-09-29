@@ -830,18 +830,18 @@ END:VCARD`;
                       <div className="absolute inset-0 [backface-visibility:hidden] bg-[#141416] border border-white/10 hover:border-amber-400 rounded-[14px] p-2.5 flex flex-col justify-between shadow-lg">
                         <div className="relative w-full h-24 rounded-[8px] overflow-hidden bg-black flex items-center justify-center p-1">
                           <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
-                          <span className="absolute bottom-1 right-1 px-1.5 py-0.5 bg-amber-400 text-black font-bold text-[7px] rounded flex items-center gap-0.5">
+                          <span className="absolute bottom-1 right-1 px-1.5 py-0.5 bg-amber-400 text-black font-bold text-[10px] rounded flex items-center gap-0.5">
                             <RotateCw className="w-2 h-2" />
                             <span>Ficha 3D</span>
                           </span>
                         </div>
                         <div>
                           <h4 className="text-xs font-bold text-white truncate">{item.name}</h4>
-                          <p className="text-[9px] text-zinc-400">{item.power || item.category || item.partNumber}</p>
+                          <p className="text-[10px] text-zinc-400">{item.power || item.category || item.partNumber}</p>
                         </div>
                         <div className="flex items-center justify-between pt-1 border-t border-white/10 text-[10px]">
                           <span className="font-bold text-amber-400">US$ {item.priceUsd.toLocaleString()}</span>
-                          <span className="text-[7px] text-emerald-400 font-bold uppercase">STOCK KM 22</span>
+                          <span className="text-[10px] text-emerald-400 font-bold uppercase">STOCK KM 22</span>
                         </div>
                       </div>
 
@@ -849,12 +849,12 @@ END:VCARD`;
                       <div className="absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden] bg-black border border-amber-400 rounded-[14px] p-3 flex flex-col justify-between shadow-xl">
                         <div>
                           <div className="flex items-center justify-between mb-1">
-                            <span className="text-[9px] font-bold text-amber-400 uppercase">{item.name}</span>
-                            <span className="text-[7px] text-zinc-400">↺ Girar</span>
+                            <span className="text-[10px] font-bold text-amber-400 uppercase">{item.name}</span>
+                            <span className="text-[10px] text-zinc-400">↺ Girar</span>
                           </div>
                           <div className="space-y-1 my-1">
                             {item.specs.map((sp: string, i: number) => (
-                              <div key={i} className="text-[8px] text-zinc-300 flex items-center gap-1">
+                              <div key={i} className="text-[10px] text-zinc-300 flex items-center gap-1">
                                 <Check className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
                                 <span className="truncate">{sp}</span>
                               </div>
@@ -1005,7 +1005,7 @@ END:VCARD`;
                     playTactileSound('click');
                     setSelectedBank(b.id as any);
                   }}
-                  className={`p-1 rounded-[6px] text-center border text-[8px] font-bold uppercase transition-all cursor-pointer ${
+                  className={`p-1.5 rounded-[6px] text-center border text-[10px] font-bold uppercase transition-all cursor-pointer ${
                     selectedBank === b.id
                       ? 'bg-amber-400 text-black border-amber-400'
                       : 'bg-black text-zinc-400 border-white/10'

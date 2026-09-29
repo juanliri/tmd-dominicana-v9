@@ -1083,7 +1083,7 @@ export const ProductQrScannerModal: React.FC<ProductQrScannerModalProps> = ({
                         />
                         <div className="min-w-0">
                           <div className="flex items-center gap-1.5 flex-wrap">
-                            <span className="px-1 py-0.2 rounded-[2px] text-[8px] font-black uppercase bg-amber-400 text-black">
+                            <span className="px-1.5 py-0.5 rounded-[2px] text-[10px] font-black uppercase bg-amber-400 text-black">
                               {scan.brand}
                             </span>
                             <span className="text-[10px] text-zinc-400 font-mono">

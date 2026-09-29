@@ -845,7 +845,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                   alt={MACHINES_DATA[0].name} 
                   className="w-full h-full object-cover" 
                 />
-                <span className="absolute bottom-1 left-1 px-1.5 py-0.2 rounded-[2px] text-[8px] font-mono font-black bg-amber-500 text-black uppercase">
+                <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded-[2px] text-[10px] font-mono font-black bg-amber-500 text-black uppercase">
                   DESTACADO
                 </span>
               </div>
@@ -854,7 +854,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                   <span className="text-[10px] font-mono font-bold text-amber-400 uppercase">
                     {MACHINES_DATA[0].brand} • MOD. {MACHINES_DATA[0].modelCode}
                   </span>
-                  <span className="text-[9px] px-1.5 py-0.2 rounded-[2px] bg-emerald-500/20 text-emerald-400 font-mono font-bold">
+                  <span className="text-[10px] px-1.5 py-0.5 rounded-[2px] bg-emerald-500/20 text-emerald-400 font-mono font-bold">
                     STOCK EN KM 22
                   </span>
                 </div>

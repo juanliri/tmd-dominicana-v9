@@ -1010,20 +1010,20 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                     {/* Clear Showroom Price & Estimated Monthly Leasing */}
                     <div className="flex items-baseline justify-between py-1 px-1.5 rounded-md bg-[#09090f]/95 border border-white/[0.06] mb-2 font-mono">
                       <div>
-                        <span className="text-[8px] text-zinc-500 block uppercase font-bold">PRECIO DIRECTO</span>
+                        <span className="text-[10px] text-zinc-500 block uppercase font-bold">PRECIO DIRECTO</span>
                         <span className="text-xs sm:text-sm font-black text-white font-mono">
                           US$ {machine.basePriceUsd.toLocaleString()}
                         </span>
-                        <span className="text-[8px] text-zinc-500 block font-mono">
+                        <span className="text-[10px] text-zinc-500 block font-mono">
                           ≈ RD$ {Math.round(machine.basePriceUsd * USD_TO_DOP_RATE).toLocaleString()}
                         </span>
                       </div>
                       <div className="text-right">
-                        <span className="text-[8px] text-zinc-400 font-bold uppercase block">LEASING RD</span>
+                        <span className="text-[10px] text-zinc-400 font-bold uppercase block">LEASING RD</span>
                         <span className="text-[10px] font-mono font-bold text-[#e0a22a]">
                           ~US$ {Math.round(machine.basePriceUsd / 60).toLocaleString()}/M
                         </span>
-                        <span className="text-[8px] text-zinc-400 font-bold uppercase block">
+                        <span className="text-[10px] text-zinc-400 font-bold uppercase block">
                           0% INICIAL
                         </span>
                       </div>
@@ -1259,7 +1259,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
             }}
             className="tmd-luxury-card p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-amber-500/30 hover:border-amber-500 shadow-xs transition-all cursor-pointer flex flex-col justify-between relative overflow-hidden group"
           >
-            <span className="absolute top-1.5 right-1.5 px-1.5 py-0.2 rounded bg-amber-500 text-zinc-950 text-[8px] font-black uppercase">
+            <span className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded bg-amber-500 text-zinc-950 text-[10px] font-black uppercase">
               {currentUser ? 'Live' : 'Portal'}
             </span>
             <div>
@@ -1292,7 +1292,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
             }}
             className="tmd-luxury-card p-3 sm:p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-amber-500/30 hover:border-amber-500 shadow-xs transition-all cursor-pointer flex flex-col justify-between relative overflow-hidden group"
           >
-            <span className="absolute top-1.5 right-1.5 px-1.5 py-0.2 rounded bg-amber-500 text-zinc-950 text-[8px] font-black uppercase">
+            <span className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded bg-amber-500 text-zinc-950 text-[10px] font-black uppercase">
               {currentUser ? 'Fullbay' : 'Taller'}
             </span>
             <div>
