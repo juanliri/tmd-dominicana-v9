@@ -52,33 +52,37 @@ interface BcrdCurrencyRatesModalProps {
 }
 
 export const BcrdCurrencyRatesModal: React.FC<BcrdCurrencyRatesModalProps> = ({ isOpen, onClose }) => {
-  const { currency, setCurrency } = useCart();
+  const { currency, setCurrency, exchangeRate, exchangeRateData, refreshExchangeRate, isSyncingRate } = useCart();
   const [activeTab, setActiveTab] = useState<'bcrd' | 'banks' | 'simulator'>('bcrd');
   const [simUsdAmount, setSimUsdAmount] = useState<number>(128000);
   const [selectedBank, setSelectedBank] = useState<BankRate>(COMMERCIAL_BANKS[0]);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-  const [syncTimestamp, setSyncTimestamp] = useState<string>('Hoy, 09:15 AM (Boletín Diario No. 188-26)');
+  const [syncTimestamp, setSyncTimestamp] = useState<string>(() => {
+    return `Sincronizado: ${new Date(exchangeRateData.lastUpdated || Date.now()).toLocaleTimeString('es-DO', { hour: '2-digit', minute: '2-digit' })} • ${exchangeRateData.source}`;
+  });
 
   if (!isOpen || typeof document === 'undefined') return null;
 
-  const officialBcrdBuy = 60.18;
-  const officialBcrdSell = 60.48;
-  const officialBcrdRef = 60.35;
-  const officialEurBuy = 64.92;
-  const officialEurSell = 65.40;
+  const officialBcrdRef = exchangeRateData.bcrdReference || exchangeRate || 60.50;
+  const officialBcrdBuy = Number((officialBcrdRef * 0.995).toFixed(2));
+  const officialBcrdSell = Number((officialBcrdRef * 1.005).toFixed(2));
+  const officialEurBuy = Number((officialBcrdRef * 1.078).toFixed(2));
+  const officialEurSell = Number((officialBcrdRef * 1.089).toFixed(2));
 
-  const handleRefreshFeed = () => {
+  const handleRefreshFeed = async () => {
     setIsRefreshing(true);
-    setTimeout(() => {
+    try {
+      await refreshExchangeRate();
+      setSyncTimestamp(`Actualizado: ${new Date().toLocaleTimeString('es-DO', { hour: '2-digit', minute: '2-digit' })} • API Live`);
+    } finally {
       setIsRefreshing(false);
-      setSyncTimestamp(`Actualizado: ${new Date().toLocaleTimeString('es-DO', { hour: '2-digit', minute: '2-digit' })} • BCRD API Live`);
-    }, 600);
+    }
   };
 
   const handleExportExchangeCertificate = () => {
     let report = `========================================================================\n`;
     report += `TMD DOMINICANA - CONSTANCIA TÉCNICA DE TIPO DE CAMBIO OFICIAL (BCRD)\n`;
-    report += `Generado: ${new Date().toLocaleString('es-DO')} | Base Oficial: Banco Central RD\n`;
+    report += `Generado: ${new Date().toLocaleString('es-DO')} | Base Oficial: ${exchangeRateData.source}\n`;
     report += `========================================================================\n\n`;
     report += `TASAS OFICIALES REGISTRADAS:\n`;
     report += `• Dólar Estadounidense (USD) Compra: RD$ ${officialBcrdBuy.toFixed(2)}\n`;
@@ -109,7 +113,12 @@ export const BcrdCurrencyRatesModal: React.FC<BcrdCurrencyRatesModalProps> = ({ 
 
   return createPortal(
     <div className="fixed inset-0 z-[99999] flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200">
-      <div className="bg-zinc-950 rounded-[5px] border border-zinc-800 max-w-4xl w-full p-4 sm:p-6 shadow-2xl space-y-4 my-auto max-h-[94vh] flex flex-col overflow-hidden font-mono text-zinc-100">
+      <div className="relative bg-zinc-950/95 backdrop-blur-2xl rounded-[6px] border border-white/[0.08] max-w-4xl w-full p-4 sm:p-6 shadow-2xl space-y-4 my-auto max-h-[94vh] flex flex-col overflow-hidden font-mono text-zinc-100">
+        {/* CAD Corner Accents */}
+        <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-amber-400/50 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-amber-400/50 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-amber-400/50 pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-amber-400/50 pointer-events-none" />
         
         {/* Header Bar */}
         <div className="flex items-center justify-between pb-3 border-b border-zinc-800 shrink-0">

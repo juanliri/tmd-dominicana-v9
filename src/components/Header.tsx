@@ -660,10 +660,10 @@ export const Header: React.FC<HeaderProps> = ({
 
             <button
               onClick={() => setIsBcrdModalOpen(true)}
-              title={`Tasa Oficial Banco Central (BCRD): 1 USD = RD$ ${exchangeRate.toFixed(2)}`}
-              className="hidden xl:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[2px] bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 hover:border-amber-400 text-[9px] text-slate-600 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 transition-all cursor-pointer font-mono"
+              title={`Tasa Oficial Banco Central (BCRD): 1 USD = RD$ ${exchangeRate.toFixed(2)} (${exchangeRateData.source}). Clic para ver tasas y banca múltiple.`}
+              className="hidden sm:inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] bg-slate-100 hover:bg-slate-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-slate-300 dark:border-white/[0.08] hover:border-amber-400 text-[10px] text-slate-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 transition-all cursor-pointer font-mono active:scale-[0.98]"
             >
-              <span className={`w-1.5 h-1.5 rounded-full ${exchangeRateData.isLive ? 'bg-emerald-400' : 'bg-amber-400'}`} />
+              <span className={`w-1.5 h-1.5 rounded-full ${exchangeRateData.isLive ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}`} />
               <span className="font-bold">RD$ {exchangeRate.toFixed(2)}</span>
             </button>
           </div>

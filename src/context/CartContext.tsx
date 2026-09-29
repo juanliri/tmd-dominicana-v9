@@ -55,7 +55,25 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currency, setCurrency] = useState<Currency>('USD');
+  const [currency, setCurrencyState] = useState<Currency>(() => {
+    try {
+      const saved = localStorage.getItem('tmd-currency');
+      if (saved === 'DOP' || saved === 'USD') return saved;
+    } catch {
+      // ignore
+    }
+    return 'USD';
+  });
+
+  const setCurrency = (c: Currency) => {
+    setCurrencyState(c);
+    try {
+      localStorage.setItem('tmd-currency', c);
+    } catch {
+      // ignore
+    }
+  };
+
   const [exchangeRateData, setExchangeRateData] = useState<ExchangeRateData>(getExchangeRateData);
   const [isSyncingRate, setIsSyncingRate] = useState<boolean>(false);
 

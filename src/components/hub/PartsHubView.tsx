@@ -123,13 +123,14 @@ export const PartsHubView: React.FC<PartsHubProps> = ({ onNavigate, onOpenVinMod
       {/* 2. HERO MARKETING BANNER WITH 4K LOGISTICS WAREHOUSE BACKGROUND */}
       <div className="relative overflow-hidden bg-zinc-950 text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-white/10">
         {/* 4K Background Imagery with Ambient Dimming & Specular Gold Glow */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center filter brightness-75 scale-105 transition-transform duration-1000"
-          style={{ backgroundImage: `url('/assets/images/portal_bg_machinery_1790441100418.jpg')` }}
+        <img
+          src="/assets/images/portal_bg_machinery_1790441100418.jpg"
+          alt="TMD Dominicana Centro de Repuestos Genuinos & Filtros OEM"
+          className="absolute inset-0 w-full h-full object-cover object-right md:object-center opacity-85"
         />
         {/* Layered Vignettes for Perfect Text Contrast */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/50" />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/75 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-black/30" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,158,11,0.18)_0%,transparent_60%)] pointer-events-none" />
 
         <div className="max-w-[1780px] mx-auto relative z-10">

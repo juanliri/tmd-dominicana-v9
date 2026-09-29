@@ -188,7 +188,7 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   onOpen360,
   onOpenQr
 }) => {
-  const { addMachineToQuote, formatPrice, currency } = useCart();
+  const { addMachineToQuote, formatPrice, currency, exchangeRate } = useCart();
   const [activeTab, setActiveTab] = useState<DetailTab>('specs');
   const [selectedAttachmentIds, setSelectedAttachmentIds] = useState<string[]>([]);
   
@@ -265,7 +265,7 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   // Formatting helpers
   const formatMoney = (usdAmount: number) => {
     if (currency === 'DOP') {
-      const dop = Math.round(usdAmount * USD_TO_DOP_RATE);
+      const dop = Math.round(usdAmount * exchangeRate);
       return `RD$ ${dop.toLocaleString('es-DO')}`;
     }
     return `$${usdAmount.toLocaleString('en-US')} USD`;
@@ -335,7 +335,12 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
 
   return createPortal(
     <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="w-full max-w-[1680px] h-full max-h-[96vh] bg-zinc-950 rounded-[6px] shadow-2xl border border-zinc-800 overflow-hidden flex flex-col font-sans">
+      <div className="relative w-full max-w-[1680px] h-full max-h-[96vh] bg-zinc-950/95 backdrop-blur-2xl rounded-[6px] shadow-2xl border border-white/[0.08] overflow-hidden flex flex-col font-sans">
+        {/* CAD Corner Accents */}
+        <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-amber-400/50 pointer-events-none z-50" />
+        <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-amber-400/50 pointer-events-none z-50" />
+        <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-amber-400/50 pointer-events-none z-50" />
+        <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-amber-400/50 pointer-events-none z-50" />
         
         {/* ============================================================ */}
         {/* TOP HERO MEDIA BAR                                          */}

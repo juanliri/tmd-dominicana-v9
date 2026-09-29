@@ -283,7 +283,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
   selectedMachineId,
   onClearSelectedMachine
 }) => {
-  const { addMachineToQuote, formatPrice, currency, setCurrency } = useCart();
+  const { addMachineToQuote, formatPrice, currency, setCurrency, exchangeRate } = useCart();
   const { 
     toggleMachineCompare, 
     isComparing, 
@@ -416,11 +416,11 @@ export const MachineryView = React.memo<MachineryViewProps>(({
 
   const formatEquiposPrice = useCallback((usdPrice: number) => {
     if (currency === 'DOP') {
-      const dop = Math.round(usdPrice * USD_TO_DOP_RATE);
+      const dop = Math.round(usdPrice * exchangeRate);
       return `RD$ ${dop.toLocaleString('es-DO')}`;
     }
     return `$${usdPrice.toLocaleString('en-US')} USD`;
-  }, [currency]);
+  }, [currency, exchangeRate]);
 
   const getMonthlyLeasingEstimate = useCallback((usdPrice: number) => {
     const financed = usdPrice * 0.8;
@@ -428,10 +428,10 @@ export const MachineryView = React.memo<MachineryViewProps>(({
     const months = 60;
     const payment = (financed * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
     if (currency === 'DOP') {
-      return `RD$ ${Math.round(payment * USD_TO_DOP_RATE).toLocaleString('es-DO')}/mes`;
+      return `RD$ ${Math.round(payment * exchangeRate).toLocaleString('es-DO')}/mes`;
     }
     return `$${Math.round(payment).toLocaleString('en-US')}/mes`;
-  }, [currency]);
+  }, [currency, exchangeRate]);
 
   // Master Unified Store Dataset
   const allStoreMachines = useMemo(() => {
@@ -441,7 +441,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
   // Technical Specs Modal
   const [activeModalMachine, setActiveModalMachine] = useState<Machine | null>(() => {
     if (selectedMachineId) {
-      return getUnifiedStoreMachinery().find((m) => m.id === selectedMachineId) || null;
+      return getUnifiedStoreMachinery().find((m) => m.id.toLowerCase() === selectedMachineId.toLowerCase()) || null;
     }
     return null;
   });
@@ -452,7 +452,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
   // Update active modal machine when selectedMachineId is passed/updated via URL or search
   useEffect(() => {
     if (selectedMachineId) {
-      const found = getUnifiedStoreMachinery().find((m) => m.id === selectedMachineId);
+      const found = getUnifiedStoreMachinery().find((m) => m.id.toLowerCase() === selectedMachineId.toLowerCase());
       if (found) {
         setActiveModalMachine(found);
       }
