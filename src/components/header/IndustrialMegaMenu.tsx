@@ -142,7 +142,7 @@ export const IndustrialMegaMenu: React.FC<IndustrialMegaMenuProps> = ({
   const ActiveTabIcon = currentTabConfig.icon;
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 py-4 font-display">
+    <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-4 font-display">
       {/* 1. TOP HEADER & NAVIGATION BAR */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200/80 dark:border-white/[0.08] pb-3 mb-3 gap-3">
         <div className="flex items-center gap-3 min-w-0">

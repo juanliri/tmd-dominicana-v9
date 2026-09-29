@@ -367,7 +367,7 @@ export const ROUTE_REGISTRY: Record<string, RouteDefinition> = {
     id: 'admin-dashboard',
     canonicalPath: '#/admin-dashboard',
     title: 'Admin HQ & Gestión Operativa',
-    subtitle: 'Control de inventario Firestore, cotizaciones DGII y usuarios',
+    subtitle: 'Control de inventario Supabase Cloud, cotizaciones DGII y usuarios',
     category: 'admin',
     aliases: ['#/admin', '#/hq', '#/dashboard-admin'],
     requiredRole: 'admin',
@@ -375,7 +375,7 @@ export const ROUTE_REGISTRY: Record<string, RouteDefinition> = {
       { label: 'Inicio', path: '#/home' },
       { label: 'Admin HQ', path: '#/admin-dashboard' }
     ],
-    searchKeywords: ['admin', 'hq', 'gestion', 'inventario', 'usuarios', 'panel', 'firestore']
+    searchKeywords: ['admin', 'hq', 'gestion', 'inventario', 'usuarios', 'panel', 'supabase', 'vercel']
   },
   ABOUT: {
     id: 'about',

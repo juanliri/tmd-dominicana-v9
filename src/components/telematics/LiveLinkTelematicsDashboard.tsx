@@ -141,7 +141,7 @@ export const LiveLinkTelematicsDashboard: React.FC<Props> = ({ onOpenFullbayWork
   });
 
   return (
-    <div id="livelink-telematics-root" className="w-full max-w-7xl mx-auto px-4 py-8 space-y-6">
+    <div id="livelink-telematics-root" className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-8 space-y-6">
       {/* Header Banner */}
       <div className="bg-zinc-950 border border-zinc-800 rounded-[5px] p-6 shadow-xl relative overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">

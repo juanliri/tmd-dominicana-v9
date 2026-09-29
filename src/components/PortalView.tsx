@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { 
-  collection, 
-  query, 
-  where, 
-  onSnapshot, 
-  addDoc, 
-  updateDoc, 
-  doc 
-} from 'firebase/firestore';
-import { 
   Shield, 
   LogIn, 
   Building, 
@@ -32,7 +23,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { db, handleFirestoreError, OperationType } from '../lib/firebase';
+import { supabase } from '../lib/supabaseClient';
 import { PortalQuote, ServiceWorkOrder, UserProfile, UserRole } from '../types';
 import { saveServiceOrderToLocalStorage } from '../services/serviceHistoryService';
 import { QuotePdfExportModal } from './portal/QuotePdfExportModal';
@@ -178,93 +169,135 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
     description: ''
   });
 
-  // Real-time listener for Quotes
+  // Resilient Supabase Cloud & Vercel Edge Data Sync with Realtime channel
   useEffect(() => {
     if (!currentUser) {
       setQuotes([]);
-      return;
-    }
-
-    const quotesColRef = collection(db, 'quotes');
-    const q = (isStaff || isAdmin)
-      ? query(quotesColRef) 
-      : query(quotesColRef, where('clientId', '==', currentUser.uid));
-
-    const unsubscribe = onSnapshot(
-      q,
-      (snapshot) => {
-        const fetched: PortalQuote[] = [];
-        snapshot.forEach((docSnap) => {
-          fetched.push({ id: docSnap.id, ...docSnap.data() } as PortalQuote);
-        });
-        fetched.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        setQuotes(fetched.length > 0 ? fetched : INITIAL_PORTAL_QUOTES);
-      },
-      (error) => {
-        console.warn('Firestore quotes listener notice (using seed fallback):', error);
-        setQuotes(INITIAL_PORTAL_QUOTES);
-      }
-    );
-
-    return () => unsubscribe();
-  }, [currentUser, isStaff, isAdmin]);
-
-  // Real-time listener for Work Orders
-  useEffect(() => {
-    if (!currentUser) {
       setWorkOrders(INITIAL_PORTAL_WORK_ORDERS);
-      return;
-    }
-
-    const ordersColRef = collection(db, 'work_orders');
-    const q = (isStaff || isAdmin)
-      ? query(ordersColRef) 
-      : query(ordersColRef, where('clientId', '==', currentUser.uid));
-
-    const unsubscribe = onSnapshot(
-      q,
-      (snapshot) => {
-        const fetched: ServiceWorkOrder[] = [];
-        snapshot.forEach((docSnap) => {
-          fetched.push({ id: docSnap.id, ...docSnap.data() } as ServiceWorkOrder);
-        });
-        fetched.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        setWorkOrders(fetched.length > 0 ? fetched : INITIAL_PORTAL_WORK_ORDERS);
-      },
-      (error) => {
-        console.warn('Firestore work_orders listener notice (using seed fallback):', error);
-        setWorkOrders(INITIAL_PORTAL_WORK_ORDERS);
-      }
-    );
-
-    return () => unsubscribe();
-  }, [currentUser, isStaff, isAdmin]);
-
-  // Fetch all users for Admin
-  useEffect(() => {
-    if (!currentUser || !isAdmin) {
       setAllUsers(INITIAL_PORTAL_USERS);
       return;
     }
 
-    const usersColRef = collection(db, 'users');
-    const unsubscribe = onSnapshot(
-      usersColRef,
-      (snapshot) => {
-        const fetched: UserProfile[] = [];
-        snapshot.forEach((docSnap) => {
-          fetched.push({ id: docSnap.id, ...docSnap.data() } as UserProfile);
-        });
-        setAllUsers(fetched.length > 0 ? fetched : INITIAL_PORTAL_USERS);
-      },
-      (error) => {
-        console.warn('Firestore users listener notice (using seed fallback):', error);
-        setAllUsers(INITIAL_PORTAL_USERS);
-      }
-    );
+    let isMounted = true;
 
-    return () => unsubscribe();
-  }, [currentUser, isAdmin]);
+    const syncPortalData = async () => {
+      // 1. Sync Quotes from Supabase
+      try {
+        let quotesQuery = supabase
+          .from('quotes')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!isStaff && !isAdmin) {
+          quotesQuery = quotesQuery.eq('user_id', currentUser.uid);
+        }
+
+        const { data, error } = await quotesQuery;
+        if (!error && data && data.length > 0) {
+          const mappedQuotes: PortalQuote[] = data.map((q: any) => ({
+            id: q.id,
+            quoteNumber: q.quote_number || `QT-2026-${q.id.substring(0, 4)}`,
+            clientId: q.user_id || currentUser.uid,
+            clientEmail: q.customer_email || currentUser.email || 'ventas@constructoratavares.rd',
+            clientName: q.customer_name || userProfile?.displayName || 'Cliente Corporativo TMD',
+            companyName: q.company || userProfile?.companyName || 'Constructora Nacional',
+            rnc: q.customer_rnc || '1-01-85732-1',
+            phone: q.customer_phone || '+1 (809) 560-1234',
+            status: q.status || 'submitted',
+            currency: q.currency || 'USD',
+            subtotal: Number(q.subtotal || 0),
+            itbis: Number(q.itbis_amount || 0),
+            total: Number(q.total_amount || 0),
+            itemsCount: Array.isArray(q.items) ? q.items.length : 1,
+            itemsSummary: q.items_summary || (Array.isArray(q.items) && q.items[0]?.name) || 'Equipos de Alto Rendimiento',
+            notes: q.notes,
+            createdAt: q.created_at || new Date().toISOString(),
+            updatedAt: q.updated_at || new Date().toISOString()
+          }));
+          if (isMounted) setQuotes(mappedQuotes);
+        } else {
+          if (isMounted) setQuotes(INITIAL_PORTAL_QUOTES);
+        }
+      } catch (e) {
+        if (isMounted) setQuotes(INITIAL_PORTAL_QUOTES);
+      }
+
+      // 2. Sync Work Orders from Supabase or LocalStorage
+      try {
+        let ordersQuery = supabase
+          .from('work_orders')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!isStaff && !isAdmin) {
+          ordersQuery = ordersQuery.eq('client_id', currentUser.uid);
+        }
+
+        const { data, error } = await ordersQuery;
+        if (!error && data && data.length > 0) {
+          const mappedOrders: ServiceWorkOrder[] = data.map((o: any) => ({
+            id: o.id,
+            orderNumber: o.order_number || `OT-${o.id.substring(0, 4)}`,
+            clientId: o.client_id || currentUser.uid,
+            clientName: o.client_name || userProfile?.displayName || 'Cliente TMD',
+            companyName: o.company_name || 'Constructora',
+            machineModel: o.machine_model || 'JCB 3CX Eco',
+            machineSerial: o.machine_serial || 'VIN-PENDING',
+            serviceType: o.service_type || 'preventive_500h',
+            priority: o.priority || 'routine',
+            location: o.location || 'Km 22 Autopista Duarte',
+            description: o.description || '',
+            status: o.status || 'requested',
+            createdAt: o.created_at || new Date().toISOString(),
+            updatedAt: o.updated_at || new Date().toISOString()
+          }));
+          if (isMounted) setWorkOrders(mappedOrders);
+        } else {
+          if (isMounted) setWorkOrders(INITIAL_PORTAL_WORK_ORDERS);
+        }
+      } catch (e) {
+        if (isMounted) setWorkOrders(INITIAL_PORTAL_WORK_ORDERS);
+      }
+
+      // 3. Sync Users / Profiles for Admin
+      if (isAdmin) {
+        try {
+          const { data, error } = await supabase.from('profiles').select('*');
+          if (!error && data && data.length > 0) {
+            const mappedUsers: UserProfile[] = data.map((p: any) => ({
+              uid: p.id,
+              email: p.email || '',
+              displayName: p.full_name || p.display_name || 'Usuario TMD',
+              role: p.role || 'client',
+              companyName: p.company_name || 'Constructora',
+              phone: p.phone || '',
+              createdAt: p.created_at || new Date().toISOString()
+            }));
+            if (isMounted) setAllUsers(mappedUsers);
+          } else {
+            if (isMounted) setAllUsers(INITIAL_PORTAL_USERS);
+          }
+        } catch (e) {
+          if (isMounted) setAllUsers(INITIAL_PORTAL_USERS);
+        }
+      }
+    };
+
+    syncPortalData();
+
+    // Supabase Realtime channel
+    const channel = supabase
+      .channel('portal-live-updates')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'quotes' }, () => syncPortalData())
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'work_orders' }, () => syncPortalData())
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, () => syncPortalData())
+      .subscribe();
+
+    return () => {
+      isMounted = false;
+      supabase.removeChannel(channel);
+    };
+  }, [currentUser, isStaff, isAdmin]);
 
   // Handle Work Order Submission
   const handleCreateWorkOrder = async (e: React.FormEvent) => {
@@ -274,7 +307,8 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
 
     try {
       const orderNum = `OT-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
-      const newOrder: Omit<ServiceWorkOrder, 'id'> = {
+      const newOrder: ServiceWorkOrder = {
+        id: `wo-${Date.now()}`,
         orderNumber: orderNum,
         clientId: currentUser.uid,
         clientName: userProfile?.displayName || currentUser.displayName || 'Cliente TMD',
@@ -290,8 +324,32 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
         updatedAt: new Date().toISOString()
       };
 
-      const docRef = await addDoc(collection(db, 'work_orders'), newOrder);
-      saveServiceOrderToLocalStorage({ id: docRef.id, ...newOrder } as ServiceWorkOrder);
+      // Optimistic update
+      setWorkOrders(prev => [newOrder, ...prev]);
+      saveServiceOrderToLocalStorage(newOrder);
+
+      // Persist to Supabase
+      try {
+        await supabase.from('work_orders').insert([{
+          id: newOrder.id,
+          order_number: newOrder.orderNumber,
+          client_id: newOrder.clientId,
+          client_name: newOrder.clientName,
+          company_name: newOrder.companyName,
+          machine_model: newOrder.machineModel,
+          machine_serial: newOrder.machineSerial,
+          service_type: newOrder.serviceType,
+          priority: newOrder.priority,
+          location: newOrder.location,
+          description: newOrder.description,
+          status: newOrder.status,
+          created_at: newOrder.createdAt,
+          updated_at: newOrder.updatedAt
+        }]);
+      } catch (err) {
+        console.warn('Supabase work_order insert notice:', err);
+      }
+
       setShowNewOrderModal(false);
       setOrderForm({
         machineModel: 'JCB 3CX Eco Backhoe Loader',
@@ -303,7 +361,6 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
       });
     } catch (err) {
       console.error('Error creating work order:', err);
-      handleFirestoreError(err, OperationType.CREATE, 'work_orders');
     } finally {
       setIsSubmittingOrder(false);
     }
@@ -311,26 +368,20 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
 
   // Status updates for Staff / Admin
   const handleUpdateOrderStatus = async (orderId: string, status: ServiceWorkOrder['status']) => {
+    setWorkOrders(prev => prev.map(o => o.id === orderId ? { ...o, status, updatedAt: new Date().toISOString() } : o));
     try {
-      const orderDoc = doc(db, 'work_orders', orderId);
-      await updateDoc(orderDoc, {
-        status,
-        updatedAt: new Date().toISOString()
-      });
+      await supabase.from('work_orders').update({ status, updated_at: new Date().toISOString() }).eq('id', orderId);
     } catch (err) {
-      handleFirestoreError(err, OperationType.UPDATE, `work_orders/${orderId}`);
+      console.warn('Supabase work_order status update notice:', err);
     }
   };
 
   const handleUpdateQuoteStatus = async (quoteId: string, status: PortalQuote['status']) => {
+    setQuotes(prev => prev.map(q => q.id === quoteId ? { ...q, status, updatedAt: new Date().toISOString() } : q));
     try {
-      const quoteDoc = doc(db, 'quotes', quoteId);
-      await updateDoc(quoteDoc, {
-        status,
-        updatedAt: new Date().toISOString()
-      });
+      await supabase.from('quotes').update({ status, updated_at: new Date().toISOString() }).eq('id', quoteId);
     } catch (err) {
-      handleFirestoreError(err, OperationType.UPDATE, `quotes/${quoteId}`);
+      console.warn('Supabase quote status update notice:', err);
     }
   };
 
@@ -379,35 +430,37 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
         <ProtectedRoute requiredRole="admin" onNavigate={onNavigate} fallbackRoute="#/portal">
           <AdminDashboardView onNavigate={onNavigate} />
         </ProtectedRoute>
-      ) : (isStaff || isAdmin) ? (
-        <StaffCommandCenter
-          currentUser={currentUser}
-          userProfile={userProfile}
-          role={role}
-          isAdmin={isAdmin}
-          isStaff={isStaff}
-          simulatedRole={simulatedRole}
-          setSimulatedRole={setSimulatedRole}
-          quotes={quotes}
-          workOrders={workOrders}
-          allUsers={allUsers}
-          currency={currency}
-          onNavigate={onNavigate}
-          onOpenCreateQuote={() => setShowCreateQuoteModal(true)}
-          onOpenNewOrderModal={() => setShowNewOrderModal(true)}
-          onExportQuotePdf={(q) => setExportingQuote(q)}
-          onUpdateOrderStatus={handleUpdateOrderStatus}
-          onUpdateQuoteStatus={handleUpdateQuoteStatus}
-          onUpdateUserRole={updateUserRole}
-          onUpdateProfileDetails={updateProfileDetails}
-          onSignOut={signOut}
-          addToCart={addToCart}
-          onOpenQrScanner={onOpenQrScanner}
-          activeTab={mapShellTabToStaffTab(activePortalTab)}
-          onTabChange={(tab) => {
-            // Internal tab sync
-          }}
-        />
+      ) : (subRoute === 'ops' || ['command', 'workflow', 'inventory', 'users'].includes(activePortalTab) || isStaff || isAdmin) ? (
+        <ProtectedRoute requiredRole="staff" onNavigate={onNavigate} fallbackRoute="#/portal">
+          <StaffCommandCenter
+            currentUser={currentUser}
+            userProfile={userProfile}
+            role={role}
+            isAdmin={isAdmin}
+            isStaff={isStaff}
+            simulatedRole={simulatedRole}
+            setSimulatedRole={setSimulatedRole}
+            quotes={quotes}
+            workOrders={workOrders}
+            allUsers={allUsers}
+            currency={currency}
+            onNavigate={onNavigate}
+            onOpenCreateQuote={() => setShowCreateQuoteModal(true)}
+            onOpenNewOrderModal={() => setShowNewOrderModal(true)}
+            onExportQuotePdf={(q) => setExportingQuote(q)}
+            onUpdateOrderStatus={handleUpdateOrderStatus}
+            onUpdateQuoteStatus={handleUpdateQuoteStatus}
+            onUpdateUserRole={updateUserRole}
+            onUpdateProfileDetails={updateProfileDetails}
+            onSignOut={signOut}
+            addToCart={addToCart}
+            onOpenQrScanner={onOpenQrScanner}
+            activeTab={mapShellTabToStaffTab(activePortalTab)}
+            onTabChange={(tab) => {
+              // Internal tab sync
+            }}
+          />
+        </ProtectedRoute>
       ) : (
         <ClientDashboard
           currentUser={currentUser}

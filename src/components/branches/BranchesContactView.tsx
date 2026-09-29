@@ -144,7 +144,7 @@ export const BranchesContactView: React.FC<BranchesContactViewProps> = ({ onNavi
       {/* 1. Header with Live Status Banner */}
       <div className="bg-zinc-900 border-b border-zinc-800 text-white relative">
         <div className="absolute top-0 left-0 right-0 h-1 bg-amber-400" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14 font-display">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-14 font-display">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[3px] bg-amber-400/10 border border-amber-400/30 text-amber-400 type-badge mb-3">
               <MapPin className="w-3.5 h-3.5" />
@@ -160,7 +160,7 @@ export const BranchesContactView: React.FC<BranchesContactViewProps> = ({ onNavi
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-5 space-y-6">
+      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 -mt-5 space-y-6">
         {/* 2. Fast Branch Navigation Selector */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {BRANCHES.map((branch) => {

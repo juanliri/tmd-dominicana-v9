@@ -62,7 +62,7 @@ const PROJECTS_DATA = [
 
 export const ProjectsCaseStudiesView: React.FC<ProjectsCaseStudiesViewProps> = ({ onNavigate }) => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8 font-mono">
+    <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 sm:py-8 space-y-6 sm:space-y-8 font-mono">
       {/* 1. Hero Header */}
       <div className="text-center max-w-3xl mx-auto space-y-2.5">
         <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-[3px] bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] font-black uppercase tracking-wider">

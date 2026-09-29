@@ -115,7 +115,7 @@ export const MachineryHubView: React.FC<CategoryHubProps> = ({ onNavigate }) => 
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16 sm:py-20 lg:py-28">
+        <div className="relative z-10 w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-16 sm:py-20 lg:py-28">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -167,7 +167,7 @@ export const MachineryHubView: React.FC<CategoryHubProps> = ({ onNavigate }) => 
       {/* 2. QUICK STATS BAR */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section className="bg-slate-50 dark:bg-zinc-900/50 border-y border-slate-200 dark:border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-4">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {HERO_STATS.map((stat, idx) => {
               const StatIcon = stat.icon;
@@ -196,7 +196,7 @@ export const MachineryHubView: React.FC<CategoryHubProps> = ({ onNavigate }) => 
       {/* ═══════════════════════════════════════════════════════ */}
       {/* 3. SHOP BY CATEGORY — PHOTO GRID */}
       {/* ═══════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12 lg:py-16">
+      <section className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 lg:py-16">
         <div className="flex items-center justify-between mb-8">
           <div>
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight font-display">
@@ -264,7 +264,7 @@ export const MachineryHubView: React.FC<CategoryHubProps> = ({ onNavigate }) => 
       {/* 4. SHOP BY USE CASE */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section className="bg-slate-50 dark:bg-zinc-900/30 border-y border-slate-200 dark:border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12 lg:py-16">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 lg:py-16">
           <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-8 font-display">
             Equipos por Sector
           </h2>
@@ -304,7 +304,7 @@ export const MachineryHubView: React.FC<CategoryHubProps> = ({ onNavigate }) => 
       {/* ═══════════════════════════════════════════════════════ */}
       {/* 5. OFFICIAL BRANDS CAROUSEL */}
       {/* ═══════════════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12 lg:py-16">
+      <section className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 lg:py-16">
         <div className="flex items-center justify-between mb-8">
           <div>
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight font-display">
@@ -350,7 +350,7 @@ export const MachineryHubView: React.FC<CategoryHubProps> = ({ onNavigate }) => 
       {/* 6. TRUST SIGNALS & SLA BADGES */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section className="bg-zinc-950 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-12 lg:py-16">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 lg:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
               <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight mb-4 font-display">
@@ -404,7 +404,7 @@ export const MachineryHubView: React.FC<CategoryHubProps> = ({ onNavigate }) => 
       {/* 7. FINAL CTA BANNER */}
       {/* ═══════════════════════════════════════════════════════ */}
       <section className="bg-amber-400">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="text-xl sm:text-2xl font-black text-black uppercase tracking-tight font-display">
               ¿Listo para cotizar?

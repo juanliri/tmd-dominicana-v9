@@ -101,7 +101,7 @@ export const TechnicalDocsView: React.FC<TechnicalDocsViewProps> = ({ onNavigate
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-zinc-950/40" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-9 relative z-10 space-y-5">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 sm:py-9 relative z-10 space-y-5">
           {onNavigate && (
             <UniversalBreadcrumbs currentRoute="#/tech-docs" onNavigate={onNavigate} />
           )}
@@ -175,7 +175,7 @@ export const TechnicalDocsView: React.FC<TechnicalDocsViewProps> = ({ onNavigate
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 mt-6">
         {/* Search & Brand Filter */}
         <div className="bg-zinc-950 rounded-[5px] p-3.5 border border-zinc-800 space-y-3 mb-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">

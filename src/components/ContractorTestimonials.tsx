@@ -159,7 +159,7 @@ export const ContractorTestimonials: React.FC<ContractorTestimonialsProps> = ({
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-4 font-mono" id="testimonios-contratistas">
+    <section className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-2 sm:py-4 font-mono" id="testimonios-contratistas">
       <div className="bg-zinc-900 rounded-[5px] border border-zinc-800 p-4 sm:p-5 shadow-xl">
         
         {/* Compact Header with Stats & Navigation Controls */}

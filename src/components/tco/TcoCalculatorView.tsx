@@ -107,7 +107,7 @@ export const TcoCalculatorView: React.FC<TcoCalculatorViewProps> = ({ onNavigate
       {/* Hero Header */}
       <div className="bg-zinc-900 border-b border-zinc-800 text-white relative">
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-14">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[2px] bg-amber-400/10 border border-amber-400/30 text-amber-400 text-[11px] font-mono uppercase tracking-wider mb-3">
               <Calculator className="w-3.5 h-3.5" />
@@ -123,7 +123,7 @@ export const TcoCalculatorView: React.FC<TcoCalculatorViewProps> = ({ onNavigate
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-5">
+      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 -mt-5">
         
         {/* Main Grid: Parameter Controls & Output Dashboard */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

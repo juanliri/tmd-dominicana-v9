@@ -45,7 +45,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onNavigate, onOpenEstima
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-4 font-mono" id="faq-section">
+    <section className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-2 sm:py-4 font-mono" id="faq-section">
       <div className="bg-zinc-900 rounded-[5px] border border-zinc-800 p-4 sm:p-5 shadow-xl">
         
         {/* Compact Header */}

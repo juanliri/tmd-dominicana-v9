@@ -103,7 +103,7 @@ export const TcoCalculatorView: React.FC<TcoCalculatorViewProps> = ({ onNavigate
     <div className="min-h-screen bg-zinc-950 text-zinc-100 transition-colors pb-20 font-mono">
       {/* Top Banner - Compact Commercial Standard */}
       <div className="bg-zinc-950 text-white border-b border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-4 sm:py-6 space-y-4">
           {onNavigate && (
             <UniversalBreadcrumbs currentRoute="#/tco" onNavigate={onNavigate} />
           )}
@@ -137,7 +137,7 @@ export const TcoCalculatorView: React.FC<TcoCalculatorViewProps> = ({ onNavigate
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 space-y-6">
+      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 mt-6 space-y-6">
         
         {/* Parameters Grid */}
         <div className="bg-zinc-900 rounded-[5px] p-5 shadow-xl border border-zinc-800 space-y-4">

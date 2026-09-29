@@ -26,7 +26,7 @@ export const OfficialWarrantyView: React.FC<OfficialWarrantyViewProps> = ({ onNa
       {/* 1. Hero Header */}
       <div className="bg-zinc-900 border-b border-zinc-800 text-white relative">
         <div className="absolute top-0 left-0 right-0 h-1 bg-amber-400" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 md:py-14">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[2px] bg-amber-400/10 border border-amber-400/30 text-amber-400 font-mono text-[11px] uppercase tracking-wider mb-3">
               <Award className="w-3.5 h-3.5" />
@@ -42,7 +42,7 @@ export const OfficialWarrantyView: React.FC<OfficialWarrantyViewProps> = ({ onNa
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-5 space-y-8">
+      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 -mt-5 space-y-8">
         {/* 2. Brand Warranty Highlights */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div className="p-5 rounded-[5px] bg-zinc-900 text-white border border-zinc-800 shadow-2xl space-y-4 relative overflow-hidden">

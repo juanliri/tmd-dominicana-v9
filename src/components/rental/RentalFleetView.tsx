@@ -141,7 +141,7 @@ export const RentalFleetView: React.FC<RentalFleetViewProps> = ({ onNavigate }) 
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-zinc-950/40" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-9 relative z-10 space-y-5">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 sm:py-9 relative z-10 space-y-5">
           <UniversalBreadcrumbs currentRoute="#/rental" onNavigate={onNavigate} />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -259,7 +259,7 @@ export const RentalFleetView: React.FC<RentalFleetViewProps> = ({ onNavigate }) 
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6">
+      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 mt-4 sm:mt-6">
         {/* Category Filters & Quick Search Bar */}
         <div className="bg-zinc-950 rounded-[5px] p-3.5 shadow-sm border border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-3 mb-6 font-mono">
           <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none w-full sm:w-auto pb-1 sm:pb-0">

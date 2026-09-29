@@ -144,7 +144,7 @@ export const FullbayShopManager: React.FC<Props> = ({ initialSelectedOrderId, on
   });
 
   return (
-    <div id="fullbay-shop-root" className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <div id="fullbay-shop-root" className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-8 space-y-6">
       
       {/* Header Banner */}
       <div className="bg-zinc-950 border border-zinc-800 rounded-[5px] p-6 sm:p-7 shadow-xl relative overflow-hidden">

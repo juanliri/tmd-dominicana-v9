@@ -185,7 +185,7 @@ export const PortalShell: React.FC<PortalShellProps> = ({
             </div>
 
             {/* Main Content Area */}
-            <main className="flex-1 px-4 sm:px-6 lg:px-8 py-5 pb-24 md:pb-12 max-w-7xl w-full mx-auto space-y-6">
+            <main className="flex-1 px-4 sm:px-6 lg:px-10 xl:px-12 py-5 pb-24 md:pb-12 w-full max-w-[1780px] mx-auto space-y-6">
               {children}
             </main>
 

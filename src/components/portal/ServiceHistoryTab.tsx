@@ -201,9 +201,16 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
     }
 
     setLoading(true);
+    const safetyTimeout = setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+
     const local = getLocalServiceHistory().filter(
       (o) => o.clientId === currentUser.uid || o.clientId === 'guest'
     );
+    if (local.length > 0) {
+      setServiceRecords(local);
+    }
 
     const workOrdersCol = collection(db, 'work_orders');
     const q = isStaff || isAdmin
@@ -213,6 +220,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
     const unsubscribe = onSnapshot(
       q,
       (snapshot) => {
+        clearTimeout(safetyTimeout);
         const fetched: ServiceWorkOrder[] = [];
         snapshot.forEach((docSnap) => {
           fetched.push({ id: docSnap.id, ...docSnap.data() } as ServiceWorkOrder);
@@ -230,6 +238,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
         setLoading(false);
       },
       (error) => {
+        clearTimeout(safetyTimeout);
         console.warn('Firestore work_orders read notice (using local cache fallback):', error);
         setServiceRecords(local);
         setLoading(false);
@@ -243,7 +252,10 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
       }
     }).catch((e) => console.warn('Fullbay active repair orders notice:', e));
 
-    return () => unsubscribe();
+    return () => {
+      clearTimeout(safetyTimeout);
+      unsubscribe();
+    };
   }, [currentUser, isStaff, isAdmin]);
 
   // Seed demo service history records

@@ -1112,7 +1112,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
       </section>
 
       {/* 4.5 INSTALACIONES & PATIO DE DEMOSTRACIONES KM 22 */}
-      <section id="official-company-video" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 scroll-mt-24 space-y-4">
+      <section id="official-company-video" className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-4 scroll-mt-24 space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-zinc-800 pb-3">
           <div>
             <div className="flex items-center gap-2 mb-1.5 flex-wrap">

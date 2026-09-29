@@ -468,7 +468,7 @@ export const PartsView = React.memo<PartsViewProps>(({
   const hasActiveFilters = selectedCategory !== 'Todos' || selectedBrand !== 'Todas' || availabilityFilter !== 'all' || selectedAssemblyId !== null || searchTerm !== '';
 
   return (
-    <div ref={partsTopRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <div ref={partsTopRef} className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 sm:py-8">
       {/* Header Banner - Synced with Home Luxury Industrial Style */}
       <div className="mb-6 bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-[5px] p-6 sm:p-8 text-slate-900 dark:text-white shadow-sm dark:shadow-xl relative overflow-hidden font-display">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">

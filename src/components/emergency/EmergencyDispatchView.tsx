@@ -76,7 +76,7 @@ export const EmergencyDispatchView: React.FC<EmergencyDispatchViewProps> = ({ on
       {/* Top Banner */}
       <div className="bg-zinc-900 border-b border-zinc-800 text-white relative">
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-600 via-amber-500 to-rose-600" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 space-y-4">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 md:py-8 space-y-4">
           {onNavigate && (
             <UniversalBreadcrumbs currentRoute="#/emergency" onNavigate={onNavigate} />
           )}
@@ -95,7 +95,7 @@ export const EmergencyDispatchView: React.FC<EmergencyDispatchViewProps> = ({ on
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-5">
+      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 -mt-5">
         
         {/* Urgent Hotline Strip */}
         <div className="bg-zinc-900 rounded-[5px] p-5 sm:p-6 text-white border border-rose-500/40 shadow-2xl mb-8 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">

@@ -155,7 +155,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
   }, [activeBrandFilter]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-10 font-display">
+    <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 sm:py-8 space-y-10 font-display">
       {/* 1. UNIFIED EXECUTIVE HERO & IDENTITY BENTO (Compact & Unified) */}
       <section className="space-y-4">
         {/* Main Bento Header Card */}

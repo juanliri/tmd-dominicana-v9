@@ -89,7 +89,7 @@ export const FinancingLeasingView: React.FC<FinancingLeasingViewProps> = ({ onNa
   const totalMonthlyPayment = Math.round(monthlyBasePayment + estimatedInsuranceMonthly);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 text-white font-mono">
+    <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 sm:py-8 space-y-6 text-white font-mono">
       {/* Universal Breadcrumbs */}
       <UniversalBreadcrumbs currentRoute="#/financing" onNavigate={onNavigate} />
 

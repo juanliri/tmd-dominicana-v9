@@ -81,7 +81,7 @@ export const OfflinePartsDocsManager: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 space-y-6">
+      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pt-6 space-y-6">
         {/* Top Banner with Real-Time Connectivity & Synchronization State */}
         <div className="p-5 sm:p-7 rounded-[5px] bg-zinc-900 text-white border border-zinc-800 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-1 bg-amber-400" />

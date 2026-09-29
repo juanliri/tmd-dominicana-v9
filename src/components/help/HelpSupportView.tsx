@@ -135,7 +135,7 @@ export const HelpSupportView: React.FC<HelpSupportViewProps> = ({ onNavigate }) 
     <div className="min-h-screen bg-zinc-950 text-zinc-100 pb-20 font-mono">
       {/* 1. HERO BANNER */}
       <section className="bg-zinc-950 text-white border-b border-zinc-800 pt-8 pb-10 sm:pt-10 sm:pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 relative z-10">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-[3px] bg-amber-500/10 text-amber-400 text-[10px] font-black uppercase tracking-wider mb-3 border border-amber-500/30">
               <LifeBuoy className="w-3.5 h-3.5 text-amber-400" />
@@ -202,7 +202,7 @@ export const HelpSupportView: React.FC<HelpSupportViewProps> = ({ onNavigate }) 
 
       {/* 2. SUB-NAVIGATION TABS */}
       <div className="sticky top-14 sm:top-16 z-30 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800 shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
           <div className="flex items-center gap-1.5 overflow-x-auto py-2.5 scrollbar-none">
             {[
               { id: 'overview', label: 'VISIÓN GENERAL & SEDES' },
@@ -228,7 +228,7 @@ export const HelpSupportView: React.FC<HelpSupportViewProps> = ({ onNavigate }) 
       </div>
 
       {/* 3. TAB CONTENT */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <main className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pt-6">
         
         {/* TAB 1: OVERVIEW & LOCATIONS */}
         {activeTab === 'overview' && (

@@ -725,7 +725,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
       variants={machineryContainerVariants}
       initial="hidden"
       animate="visible"
-      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8"
+      className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 sm:py-8"
     >
       {/* 1. TIER-1 DEPARTMENT LANDING HUB HERO (Apple/Tesla Grade) */}
       <motion.div variants={machineryFadeInItem} className="mb-6 rounded-[5px] overflow-hidden border border-zinc-800 bg-zinc-950 relative shadow-2xl">

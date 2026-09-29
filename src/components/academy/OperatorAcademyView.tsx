@@ -70,7 +70,7 @@ export const OperatorAcademyView: React.FC<OperatorAcademyViewProps> = ({ onNavi
     <div className="min-h-screen bg-zinc-950 text-zinc-100 transition-colors pb-24 font-mono">
       {/* Top Banner */}
       <div className="bg-zinc-950 text-white border-b border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-8 sm:py-10">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[3px] bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[11px] font-mono font-bold uppercase tracking-wider mb-2.5">
               <GraduationCap className="w-3.5 h-3.5" />
@@ -86,7 +86,7 @@ export const OperatorAcademyView: React.FC<OperatorAcademyViewProps> = ({ onNavi
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 mt-6">
         
         {/* Verification Engine Box */}
         <div className="bg-zinc-950 rounded-[5px] p-4 sm:p-6 border border-zinc-800 mb-8">

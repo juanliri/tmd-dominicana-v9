@@ -56,7 +56,7 @@ export const TradeInUsadosView: React.FC<TradeInUsadosViewProps> = ({ onNavigate
     <div className="min-h-screen bg-zinc-950 text-zinc-100 transition-colors pb-20 font-mono">
       {/* Top Banner */}
       <div className="bg-zinc-950 text-white border-b border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 sm:py-8">
           <div className="max-w-3xl space-y-2">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[3px] bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-black uppercase tracking-wider">
               <Award className="w-3.5 h-3.5 text-amber-400" />
@@ -72,7 +72,7 @@ export const TradeInUsadosView: React.FC<TradeInUsadosViewProps> = ({ onNavigate
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 space-y-6">
+      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 mt-6 space-y-6">
         
         {/* Trade-In Estimator Box */}
         <div className="bg-zinc-900 rounded-[5px] p-5 sm:p-6 shadow-xl border border-zinc-800">

@@ -74,7 +74,7 @@ export const RemanCoreExchangeView: React.FC<RemanCoreExchangeViewProps> = ({ on
     <div className="min-h-screen bg-zinc-950 text-white transition-colors pb-24 font-mono">
       {/* Top Banner */}
       <div className="bg-zinc-950 text-white border-b border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-8 sm:py-12">
           <div className="max-w-3xl space-y-3">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[2px] bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-black uppercase tracking-wider">
               <RotateCcw className="w-3.5 h-3.5" />
@@ -90,7 +90,7 @@ export const RemanCoreExchangeView: React.FC<RemanCoreExchangeViewProps> = ({ on
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 space-y-6">
+      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 mt-6 space-y-6">
         
         {/* Core Exchange How it works callout */}
         <div className="bg-zinc-900 rounded-[5px] p-5 sm:p-6 shadow-xl border border-zinc-800 space-y-3">

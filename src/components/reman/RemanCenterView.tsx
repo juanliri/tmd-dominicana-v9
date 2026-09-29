@@ -82,7 +82,7 @@ export const RemanCenterView: React.FC<RemanCenterViewProps> = ({ onNavigate }) 
 
       {/* Top Banner */}
       <div className="bg-zinc-950 text-white border-b border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-8 sm:py-10">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[3px] bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[11px] font-mono font-bold uppercase tracking-wider mb-2.5">
               <RotateCcw className="w-3.5 h-3.5" />
@@ -98,7 +98,7 @@ export const RemanCenterView: React.FC<RemanCenterViewProps> = ({ onNavigate }) 
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 mt-6">
         {/* Core Return Toggle Banner */}
         <div className="bg-zinc-950 rounded-[5px] p-4 border border-zinc-800 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
