@@ -120,20 +120,29 @@ export const PartsHubView: React.FC<PartsHubProps> = ({ onNavigate, onOpenVinMod
         <span className="text-slate-900 dark:text-white font-bold">Centro de Repuestos Genuinos & Filtros OEM</span>
       </div>
 
-      {/* 2. HERO MARKETING BANNER */}
-      <div className="relative overflow-hidden bg-gradient-to-b from-slate-900 via-zinc-900 to-black text-white py-14 sm:py-20 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-white/10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/15 via-transparent to-transparent pointer-events-none" />
+      {/* 2. HERO MARKETING BANNER WITH 4K LOGISTICS WAREHOUSE BACKGROUND */}
+      <div className="relative overflow-hidden bg-zinc-950 text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-white/10">
+        {/* 4K Background Imagery with Ambient Dimming & Specular Gold Glow */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center filter brightness-75 scale-105 transition-transform duration-1000"
+          style={{ backgroundImage: `url('/assets/images/portal_bg_machinery_1790441100418.jpg')` }}
+        />
+        {/* Layered Vignettes for Perfect Text Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,158,11,0.18)_0%,transparent_60%)] pointer-events-none" />
+
         <div className="max-w-[1780px] mx-auto relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-400 text-xs font-black uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/20 backdrop-blur-md border border-amber-400/40 text-amber-400 text-xs font-black uppercase tracking-wider mb-4 shadow-lg shadow-amber-500/10">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Inventario Certificado Km 22 Autopista Duarte</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight font-display">
               Repuestos Genuinos OEM <br />
               <span className="text-amber-400">Despacho Inmediato en RD</span>
             </h1>
-            <p className="mt-4 text-sm sm:text-base text-zinc-300 leading-relaxed font-normal">
+            <p className="mt-4 text-sm sm:text-base text-zinc-200 leading-relaxed font-normal max-w-2xl font-sans">
               Más de 35,000 referencias directas de fábrica para JCB, LiuGong, Ammann, Kubota y Yanmar. 
               Despiece técnico por número de parte o chasis VIN con factura fiscal válida para DGII.
             </p>

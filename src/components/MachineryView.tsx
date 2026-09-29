@@ -66,6 +66,7 @@ import { TestDriveBookingModal } from './media/TestDriveBookingModal';
 import { DominicanOperationalVideos } from './media/DominicanOperationalVideos';
 import { FleetAcquisitionFilterBar, FleetConditionFilter } from './machinery/FleetAcquisitionFilterBar';
 import { MachineDetailStudioModal } from './machinery/MachineDetailStudioModal';
+import { MachineDetailFlagshipView } from './machinery/MachineDetailFlagshipView';
 import { MachineryMosaicGrid, MosaicLayoutMode } from './machinery/MachineryMosaicGrid';
 import { PublicLiveLinkSimulatorModal } from './telematics/PublicLiveLinkSimulatorModal';
 import { IndustrialSectionDivider } from './common/IndustrialSectionDivider';
@@ -686,7 +687,8 @@ export const MachineryView = React.memo<MachineryViewProps>(({
 
   const handleOpenSpecs = useCallback((machine: Machine) => {
     setActiveModalMachine(machine);
-  }, []);
+    onNavigate(`#/machinery/${machine.id}`);
+  }, [onNavigate]);
 
   const handleCloseSpecs = useCallback(() => {
     setActiveModalMachine(null);
@@ -718,6 +720,27 @@ export const MachineryView = React.memo<MachineryViewProps>(({
     powerFilter !== 'all' || 
     onlyInStock || 
     searchTerm !== '';
+
+  // 0. FLAGSHIP DEDICATED PRODUCT DETAIL PAGE (PDP) - Diamond Standard Full Screen View
+  if (selectedMachineId && activeModalMachine) {
+    return (
+      <MachineDetailFlagshipView
+        machine={activeModalMachine}
+        onNavigate={onNavigate}
+        onBackToCatalog={() => {
+          handleCloseSpecs();
+          onNavigate('#/machinery');
+        }}
+        onOpen360={(m) => {
+          setActive360Machine(m);
+        }}
+        onOpenTestDrive={(m) => {
+          setTestDriveMachine(m);
+          setIsTestDriveOpen(true);
+        }}
+      />
+    );
+  }
 
   return (
     <motion.div 

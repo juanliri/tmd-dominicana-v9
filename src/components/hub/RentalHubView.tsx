@@ -106,27 +106,37 @@ export const RentalHubView: React.FC<RentalHubProps> = ({ onNavigate }) => {
         <span className="text-slate-900 dark:text-white font-bold">División de Renta & Operaciones en Obra</span>
       </div>
 
-      {/* 2. HERO BANNER */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-zinc-950 via-slate-900 to-black text-white py-14 sm:py-20 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-white/10">
+      {/* 2. HERO BANNER WITH 4K CINEMATIC MACHINERY BACKGROUND */}
+      <div className="relative overflow-hidden bg-zinc-950 text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-white/10">
+        {/* 4K Background Imagery with Ambient Dimming & Specular Gold Glow */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center filter brightness-90 scale-105 transition-transform duration-1000"
+          style={{ backgroundImage: `url(${SHOWROOM_MARKETING_ASSETS.jcb.banner})` }}
+        />
+        {/* Layered Vignettes for Perfect Text Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,158,11,0.18)_0%,transparent_60%)] pointer-events-none" />
+
         <div className="max-w-[1780px] mx-auto relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-400 text-xs font-black uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/20 backdrop-blur-md border border-amber-400/40 text-amber-400 text-xs font-black uppercase tracking-wider mb-4 shadow-lg shadow-amber-500/10">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Flota Pesada 2026 Homologada con Telemetría</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight font-display">
               Renta de Maquinaria Pesada <br />
               <span className="text-amber-400">Flexibilidad Diaria, Semanal o Mensual</span>
             </h1>
-            <p className="mt-4 text-sm sm:text-base text-zinc-300 leading-relaxed font-normal">
+            <p className="mt-4 text-sm sm:text-base text-zinc-200 leading-relaxed font-normal max-w-2xl">
               Flota moderna y mantenida con rigor OEM en Patio Km 22. Despacho nacional inmediato con o sin operador 
               certificado. Mantenimiento preventivo en obra y telemetría satelital en vivo incluida en cada contrato.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-4 font-sans">
               <button
                 onClick={() => onNavigate('#/rental')}
-                className="px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-black text-xs uppercase tracking-wider transition-all shadow-lg shadow-amber-400/25 flex items-center gap-2 cursor-pointer"
+                className="px-6 py-3.5 rounded-[5px] bg-amber-400 hover:bg-amber-300 text-black font-black text-xs uppercase tracking-wider transition-all shadow-lg shadow-amber-400/25 flex items-center gap-2 cursor-pointer active:scale-[0.98]"
               >
                 <span>Ver Flota de Renta Disponible</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -135,7 +145,7 @@ export const RentalHubView: React.FC<RentalHubProps> = ({ onNavigate }) => {
                 href="https://wa.me/18095601234?text=Hola%20TMD,%20deseo%20cotizar%20la%20renta%20de%20un%20equipo%20para%20obra"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2"
+                className="px-6 py-3.5 rounded-[5px] bg-zinc-950/80 hover:bg-zinc-900 backdrop-blur-md border border-white/20 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 active:scale-[0.98]"
               >
                 <Phone className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Cotización Express WhatsApp</span>

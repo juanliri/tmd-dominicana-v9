@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence, type Variants } from 'motion/react';
 import { 
@@ -96,7 +96,22 @@ interface HomeViewProps {
 export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine }) => {
   const { currentUser, isClient, isStaff, isAdmin, signInWithGoogle } = useAuth();
   const [authPromptFeature, setAuthPromptFeature] = useState<{ title: string; route: string; description: string } | null>(null);
-  const { addMachineToQuote, addToCart, formatPrice, currency } = useCart();
+  const { addMachineToQuote, addToCart, formatPrice, currency, exchangeRate } = useCart();
+
+  const formatMachineryPrice = useCallback((usd: number) => {
+    if (currency === 'DOP') {
+      return `RD$ ${Math.round(usd * exchangeRate).toLocaleString('es-DO')}`;
+    }
+    return `US$ ${usd.toLocaleString('en-US')}`;
+  }, [currency, exchangeRate]);
+
+  const formatLeasingEstimate = useCallback((usd: number) => {
+    const monthlyUsd = Math.round(usd * 0.016);
+    if (currency === 'DOP') {
+      return `RD$ ${Math.round(monthlyUsd * exchangeRate).toLocaleString('es-DO')}/mes`;
+    }
+    return `US$ ${monthlyUsd.toLocaleString('en-US')}/mes`;
+  }, [currency, exchangeRate]);
   const { 
     toggleMachineCompare, 
     isComparing, 
@@ -618,9 +633,9 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                       </span>
                     </div>
                     <div className="text-right">
-                      <span className="text-[10px] text-slate-500 dark:text-zinc-400 block uppercase tracking-wider font-bold">INVERSIÓN ESTIMADA</span>
+                      <span className="text-[10px] text-slate-500 dark:text-zinc-400 block uppercase tracking-wider font-bold">INVERSIÓN ESTIMADA ({currency})</span>
                       <span className="text-sm sm:text-base font-black text-slate-900 dark:text-white font-mono tracking-tight">
-                        US$ {activeHeroMachine.basePriceUsd.toLocaleString()}
+                        {formatMachineryPrice(activeHeroMachine.basePriceUsd)}
                       </span>
                     </div>
                   </div>
@@ -1012,7 +1027,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                       <div>
                         <span className="text-[10px] text-zinc-500 block uppercase font-bold">PRECIO DIRECTO</span>
                         <span className="text-xs sm:text-sm font-black text-white font-mono">
-                          US$ {machine.basePriceUsd.toLocaleString()}
+                          {formatMachineryPrice(machine.basePriceUsd)}
                         </span>
                         <span className="text-[10px] text-zinc-500 block font-mono">
                           ≈ RD$ {Math.round(machine.basePriceUsd * USD_TO_DOP_RATE).toLocaleString()}
@@ -1021,7 +1036,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                       <div className="text-right">
                         <span className="text-[10px] text-zinc-400 font-bold uppercase block">LEASING RD</span>
                         <span className="text-[10px] font-mono font-bold text-[#e0a22a]">
-                          ~US$ {Math.round(machine.basePriceUsd / 60).toLocaleString()}/M
+                          {formatLeasingEstimate(machine.basePriceUsd)}
                         </span>
                         <span className="text-[10px] text-zinc-400 font-bold uppercase block">
                           0% INICIAL
@@ -1433,13 +1448,13 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                   <div>
                     <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-zinc-400 font-bold block">INVERSIÓN ESTIMADA</span>
                     <span className="text-lg sm:text-xl font-black text-slate-900 dark:text-white font-mono">
-                      US$ {previewMachine.basePriceUsd.toLocaleString()}
+                      {formatMachineryPrice(previewMachine.basePriceUsd)}
                     </span>
                   </div>
                   <div className="text-right">
                     <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-zinc-400 font-bold block">LEASING ESTIMADO RD</span>
                     <span className="text-xs sm:text-sm font-black text-amber-600 dark:text-amber-400 font-mono">
-                      ~US$ {Math.round(previewMachine.basePriceUsd * 0.016).toLocaleString()}/mes
+                      {formatLeasingEstimate(previewMachine.basePriceUsd)}
                     </span>
                   </div>
                 </div>
@@ -1518,7 +1533,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
                     onClick={() => {
                       onSelectMachine(previewMachine.id);
                       setPreviewMachine(null);
-                      onNavigate('#/machinery');
+                      onNavigate(`#/machinery/${previewMachine.id}`);
                     }}
                     className="py-2.5 px-3 bg-slate-900 hover:bg-slate-800 text-white dark:bg-zinc-800 dark:hover:bg-zinc-700 rounded-[4px] text-xs font-black uppercase tracking-wider transition-all cursor-pointer text-center active:scale-[0.98] border border-slate-700 dark:border-zinc-700"
                   >
