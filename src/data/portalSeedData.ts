@@ -189,11 +189,11 @@ export const INITIAL_PORTAL_USERS: UserProfile[] = [
     updatedAt: new Date().toISOString()
   },
   {
-    id: 'admin-todobuild-master',
-    email: 'todobuildgroup@gmail.com',
-    displayName: 'TMD Central Admin & Tech Support',
+    id: 'admin-tmd-master',
+    email: 'admin@tmd.com.do',
+    displayName: 'TMD Central Admin & Soporte Operativo',
     role: 'ADMIN',
-    companyName: 'TMD Dominicana / TodoBuild',
+    companyName: 'TMD Dominicana (Tecnomaquinarias Diesel S.R.L.)',
     phone: '+1 (809) 560-1234',
     rnc: '1-30-44912-8',
     isProMember: true,

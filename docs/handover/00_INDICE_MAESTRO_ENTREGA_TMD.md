@@ -38,6 +38,6 @@ I:\_Dev_Builds_\2026\CLIENT_DELIVERY_PACKAGE\TMD_ENTERPRISE_HANDOVER_DOSSIER\
 ## 3. CONTACTO TÉCNICO Y MESA DE ASISTENCIA
 
 Para soporte técnico de segundo nivel, consultoría de arquitectura o ampliaciones del sistema:
-- **Desarrollador Principal & Arquitecto de Software:** TODOBUILD GROUP INC. / JUAN LIRIANO
+- **Desarrollador Principal & Arquitecto de Software:** JUAN LIRIANO / ARQUITECTURA DE SOFTWARE E INGENIERÍA DIGITAL
 - **Mesa de Soporte Tecnológico:** `soporte@tmd.rd` / `juanliri@gmail.com`
 - **Sede Central:** Autopista Duarte Km 22, Santo Domingo Oeste, República Dominicana

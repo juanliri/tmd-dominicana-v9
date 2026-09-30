@@ -6,10 +6,10 @@
 
 ## 1. RESUMEN EJECUTIVO DEL MODELO LEGAL
 
-El objetivo de esta estructura legal es **satisfacer al 100% la tranquilidad del cliente (TMD)** al entregarles copia completa del código fuente funcional para despliegue y auditoría interna, **mientras proteges irrevocablemente la titularidad de los derechos de autor (Copyright)**, el motor base, la arquitectura telemática LiveLink™, el generador de secuencias fiscales DGII y los componentes reutilizables desarrollados por **TODOBUILD GROUP INC. / JUAN LIRIANO**.
+El objetivo de esta estructura legal es **satisfacer al 100% la tranquilidad del cliente (TMD)** al entregarles copia completa del código fuente funcional para despliegue y auditoría interna, **mientras proteges irrevocablemente la titularidad de los derechos de autor (Copyright)**, el motor base, la arquitectura telemática LiveLink™, el generador de secuencias fiscales DGII y los componentes reutilizables desarrollados por **JUAN LIRIANO / ARQUITECTURA DE SOFTWARE E INGENIERÍA DIGITAL**.
 
 ### Las Dos Partes:
-- **LICENCIANTE (Desarrollador / Propietario del Software):** TODOBUILD GROUP INC. / JUAN LIRIANO.
+- **LICENCIANTE (Desarrollador / Propietario del Software):** JUAN LIRIANO / ARQUITECTURA DE SOFTWARE E INGENIERÍA DIGITAL.
 - **LICENCIATARIO (Cliente Empresarial):** TECNOMAQUINARIAS DIESEL DOMINICANA S.R.L. (TMD Dominicana), RNC 1-31-89024-5.
 
 ---
@@ -75,7 +75,7 @@ Para aplicar este principio en la práctica:
      ```typescript
      /**
       * TMD Dominicana Enterprise Platform - v9.0
-      * Proprietary Engine Copyright (c) 2026 TODOBUILD GROUP INC. / JUAN LIRIANO.
+      * Proprietary Engine Copyright (c) 2026 JUAN LIRIANO.
       * Licensed exclusively to TECNOMAQUINARIAS DIESEL DOMINICANA S.R.L. under Perpetual Enterprise License Agreement.
       * Unauthorized redistribution, resale, or sublicensing is strictly prohibited under Dominican Law 65-00.
       */

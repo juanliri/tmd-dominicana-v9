@@ -52,7 +52,7 @@ export const PIN_ACCOUNTS: Record<string, PinAccount> = {
     badgeColor: 'purple',
     name: 'Juan Liriano',
     email: 'mrjliriano@gmail.com',
-    companyName: 'TMD Dominicana / TodoBuild Group',
+    companyName: 'TMD Dominicana (Tecnomaquinarias Diesel S.R.L.)',
     rnc: '1-31-88492-1',
     phone: '+1 (829) 555-0100',
     uid: 'admin-juan-liriano',

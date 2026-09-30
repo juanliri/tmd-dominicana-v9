@@ -71,8 +71,7 @@ const BOOTSTRAP_ADMIN_EMAILS = [
   'mrjliriano@gmail.com',
   'jliriano154@gmail.com',
   'jayhlituh@gmail.com',
-  'todobuildgroup@gmail.com',
-  'juan@todobuild.us',
+  'admin@tmd.com.do',
   'perlacustodio9@gmail.com'
 ];
 

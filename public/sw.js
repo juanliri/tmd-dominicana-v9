@@ -21,16 +21,16 @@ const APP_SHELL_ASSETS = [
   '/pwa-maskable-512x512.png',
   'https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700;1,800&family=JetBrains+Mono:wght@400;500;600;700;800&family=Oswald:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap',
   'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
-  'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_multibrand_registry.js',
-  'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_jcb_catalog_data.js',
-  'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_liugong_catalog_data.js',
-  'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_kubota_catalog_data.js',
-  'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_ls_tractor_catalog_data.js',
-  'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_yanmar_catalog_data.js',
-  'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_ammann_catalog_data.js',
-  'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_imer_catalog_data.js',
-  'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_afex_catalog_data.js',
-  'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_yomel_orsi_celli_data.js'
+  'https://tmd-dominicana-v9.vercel.app/assets/tmd_multibrand_registry.js',
+  'https://tmd-dominicana-v9.vercel.app/assets/tmd_jcb_catalog_data.js',
+  'https://tmd-dominicana-v9.vercel.app/assets/tmd_liugong_catalog_data.js',
+  'https://tmd-dominicana-v9.vercel.app/assets/tmd_kubota_catalog_data.js',
+  'https://tmd-dominicana-v9.vercel.app/assets/tmd_ls_tractor_catalog_data.js',
+  'https://tmd-dominicana-v9.vercel.app/assets/tmd_yanmar_catalog_data.js',
+  'https://tmd-dominicana-v9.vercel.app/assets/tmd_ammann_catalog_data.js',
+  'https://tmd-dominicana-v9.vercel.app/assets/tmd_imer_catalog_data.js',
+  'https://tmd-dominicana-v9.vercel.app/assets/tmd_afex_catalog_data.js',
+  'https://tmd-dominicana-v9.vercel.app/assets/tmd_yomel_orsi_celli_data.js'
 ];
 
 // Service Worker Installation
@@ -205,7 +205,7 @@ self.addEventListener('fetch', (event) => {
     url.hostname.includes('fonts.googleapis.com') ||
     url.hostname.includes('fonts.gstatic.com') ||
     url.hostname.includes('unpkg.com') ||
-    url.hostname.includes('tmd-dominicana-2026-todobuild-apps.vercel.app')
+    url.hostname.includes('tmd-dominicana-v9.vercel.app')
   ) {
     event.respondWith(
       caches.match(request).then((cachedResponse) => {

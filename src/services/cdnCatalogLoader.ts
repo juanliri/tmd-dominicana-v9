@@ -20,7 +20,7 @@ export const TMD_CDN_MODULES: CdnScriptModule[] = [
   {
     id: 'multibrand_registry',
     name: 'TMD Multibrand Registry Engine',
-    url: 'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_multibrand_registry.js',
+    url: 'https://tmd-dominicana-v9.vercel.app/assets/tmd_multibrand_registry.js',
     globalKey: 'TMD_BRAND_REGISTRY',
     alternateKeys: ['TMD_MULTIBRAND_REGISTRY', 'TMD_REGISTRY', 'tmdMultibrandRegistry'],
     brand: 'All',
@@ -29,7 +29,7 @@ export const TMD_CDN_MODULES: CdnScriptModule[] = [
   {
     id: 'jcb_catalog',
     name: 'JCB Heavy Machinery & Attachments (106 items)',
-    url: 'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_jcb_catalog_data.js',
+    url: 'https://tmd-dominicana-v9.vercel.app/assets/tmd_jcb_catalog_data.js',
     globalKey: 'TMD_JCB_CATALOG',
     alternateKeys: ['TMD_JCB_DATA', 'tmdJcbCatalog', 'JCB_CATALOG_DATA'],
     brand: 'JCB',
@@ -39,7 +39,7 @@ export const TMD_CDN_MODULES: CdnScriptModule[] = [
   {
     id: 'liugong_catalog',
     name: 'LiuGong Heavy Excavators & Loaders',
-    url: 'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_liugong_catalog_data.js',
+    url: 'https://tmd-dominicana-v9.vercel.app/assets/tmd_liugong_catalog_data.js',
     globalKey: 'TMD_LIUGONG_CATALOG',
     alternateKeys: ['TMD_LIUGONG_DATA', 'tmdLiugongCatalog', 'LIUGONG_CATALOG_DATA'],
     brand: 'LiuGong',
@@ -49,7 +49,7 @@ export const TMD_CDN_MODULES: CdnScriptModule[] = [
   {
     id: 'kubota_catalog',
     name: 'Kubota Agricultural & Construction (58 items)',
-    url: 'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_kubota_catalog_data.js',
+    url: 'https://tmd-dominicana-v9.vercel.app/assets/tmd_kubota_catalog_data.js',
     globalKey: 'TMD_KUBOTA_CATALOG',
     alternateKeys: ['TMD_KUBOTA_DATA', 'tmdKubotaCatalog', 'KUBOTA_CATALOG_DATA'],
     brand: 'Kubota',
@@ -59,7 +59,7 @@ export const TMD_CDN_MODULES: CdnScriptModule[] = [
   {
     id: 'ls_tractor_catalog',
     name: 'LS Tractor Korea & USA (24 items)',
-    url: 'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_ls_tractor_catalog_data.js',
+    url: 'https://tmd-dominicana-v9.vercel.app/assets/tmd_ls_tractor_catalog_data.js',
     globalKey: 'TMD_LSTRACTOR_CATALOG',
     alternateKeys: ['TMD_LS_TRACTOR_CATALOG', 'tmdLsTractorCatalog', 'LS_TRACTOR_CATALOG_DATA'],
     brand: 'LS Tractor',
@@ -69,7 +69,7 @@ export const TMD_CDN_MODULES: CdnScriptModule[] = [
   {
     id: 'yanmar_catalog',
     name: 'Yanmar Tractors & Rice Harvesters (28 items)',
-    url: 'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_yanmar_catalog_data.js',
+    url: 'https://tmd-dominicana-v9.vercel.app/assets/tmd_yanmar_catalog_data.js',
     globalKey: 'TMD_YANMAR_CATALOG',
     alternateKeys: ['TMD_YANMAR_DATA', 'tmdYanmarCatalog', 'YANMAR_CATALOG_DATA'],
     brand: 'Yanmar',
@@ -79,7 +79,7 @@ export const TMD_CDN_MODULES: CdnScriptModule[] = [
   {
     id: 'ammann_catalog',
     name: 'Ammann Compaction & Rollers (38 items)',
-    url: 'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_ammann_catalog_data.js',
+    url: 'https://tmd-dominicana-v9.vercel.app/assets/tmd_ammann_catalog_data.js',
     globalKey: 'TMD_AMMANN_CATALOG',
     alternateKeys: ['TMD_AMMANN_DATA', 'tmdAmmannCatalog', 'AMMANN_CATALOG_DATA'],
     brand: 'Ammann',
@@ -89,7 +89,7 @@ export const TMD_CDN_MODULES: CdnScriptModule[] = [
   {
     id: 'imer_catalog',
     name: 'IMER Group Concrete Machinery & Mixers',
-    url: 'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_imer_catalog_data.js',
+    url: 'https://tmd-dominicana-v9.vercel.app/assets/tmd_imer_catalog_data.js',
     globalKey: 'TMD_IMER_CATALOG',
     alternateKeys: ['TMD_IMER_DATA', 'tmdImerCatalog', 'IMER_CATALOG_DATA'],
     brand: 'IMER',
@@ -99,7 +99,7 @@ export const TMD_CDN_MODULES: CdnScriptModule[] = [
   {
     id: 'afex_catalog',
     name: 'AFEX Fire Suppression Heavy Systems',
-    url: 'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_afex_catalog_data.js',
+    url: 'https://tmd-dominicana-v9.vercel.app/assets/tmd_afex_catalog_data.js',
     globalKey: 'TMD_AFEX_CATALOG',
     alternateKeys: ['TMD_AFEX_DATA', 'tmdAfexCatalog', 'AFEX_CATALOG_DATA'],
     brand: 'AFEX',
@@ -109,7 +109,7 @@ export const TMD_CDN_MODULES: CdnScriptModule[] = [
   {
     id: 'yomel_orsi_celli_data',
     name: 'Yomel, Orsi & Celli Agricultural Implements',
-    url: 'https://tmd-dominicana-2026-todobuild-apps.vercel.app/assets/tmd_yomel_orsi_celli_data.js',
+    url: 'https://tmd-dominicana-v9.vercel.app/assets/tmd_yomel_orsi_celli_data.js',
     globalKey: 'TMD_IMPLEMENTS_CATALOG',
     alternateKeys: ['TMD_YOMEL_ORSI_CELLI_DATA', 'TMD_AGRICULTURAL_IMPLEMENTS', 'tmdYomelOrsiCelliData'],
     brand: 'Yomel / Orsi / Celli',

@@ -325,7 +325,7 @@ export const EnterprisePortalLogin: React.FC<EnterprisePortalLoginProps> = ({
       return;
     }
 
-    if (lowerEmail.includes('admin') || lowerEmail.includes('jliriano') || lowerEmail.includes('juan') || lowerEmail.includes('todobuild')) {
+    if (lowerEmail.includes('admin') || lowerEmail.includes('jliriano') || lowerEmail.includes('juan') || lowerEmail.includes('gerencia')) {
       await handleQuickRoleLogin('admin');
       return;
     } else if (lowerEmail.includes('staff') || lowerEmail.includes('tecnico') || lowerEmail.includes('taller') || lowerEmail.includes('mendoza')) {
