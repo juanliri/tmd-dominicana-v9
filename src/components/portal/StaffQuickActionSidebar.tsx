@@ -63,10 +63,10 @@ export const StaffQuickActionSidebar: React.FC<StaffQuickActionSidebarProps> = (
     <>
       <aside
         className={`transition-all duration-300 ease-in-out shrink-0 font-mono ${
-          isCollapsed ? 'w-12' : 'w-64'
+          isCollapsed ? 'w-12' : 'w-full xl:w-64'
         }`}
       >
-        <div className="sticky top-20 bg-zinc-900 rounded-[5px] border border-zinc-800 shadow-xl overflow-hidden p-3 space-y-3">
+        <div className="xl:sticky xl:top-20 bg-zinc-900 rounded-[5px] border border-zinc-800 shadow-xl overflow-hidden p-3 space-y-3">
           {/* Header */}
           <div className="flex items-center justify-between pb-2.5 border-b border-zinc-800">
             {!isCollapsed && (

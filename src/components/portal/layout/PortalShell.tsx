@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { 
   Building2, 
   Menu, 
+  X,
   Search, 
   Radio, 
   ExternalLink, 
@@ -95,6 +96,49 @@ export const PortalShell: React.FC<PortalShellProps> = ({
   return (
     <SessionManager onSessionExpired={onSignOut}>
       <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col font-sans antialiased selection:bg-amber-500/30 selection:text-amber-700 dark:selection:text-amber-200">
+        
+        {/* Mobile Slide-Over Drawer */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 z-50 flex" role="dialog" aria-modal="true">
+            <div 
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 shadow-2xl z-10 animate-in slide-in-from-left duration-200">
+              <div className="absolute top-3 right-3 z-20">
+                <button
+                  type="button"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="p-1.5 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-500 hover:text-zinc-900 dark:hover:text-white cursor-pointer"
+                  title="Cerrar Menú"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto pt-2">
+                <PortalSidebar
+                  activeTab={activeTab}
+                  onSelectTab={(tabId) => {
+                    onSelectTab(tabId);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  userProfile={userProfile}
+                  currentRole={currentPortalRole}
+                  simulatedRole={simulatedRole}
+                  onSetSimulatedRole={onSetSimulatedRole}
+                  onOpenCreateQuote={onOpenCreateQuote}
+                  onOpenNewOrderModal={onOpenNewOrderModal}
+                  onOpenQrScanner={onOpenQrScanner}
+                  onSignOut={onSignOut}
+                  isCollapsed={false}
+                  quotesCount={quotesCount}
+                  ordersCount={ordersCount}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="flex flex-1 relative overflow-hidden">
           {/* Desktop & Tablet Sidebar */}
           <div className="hidden md:flex shrink-0">

@@ -407,7 +407,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
         
         {/* Left Column: Units List & Multi-Filters */}
-        <aside className="lg:col-span-4 sticky top-24 self-start space-y-4 max-h-[calc(100vh-7.5rem)] overflow-y-auto scrollbar-thin pr-1">
+        <aside className="lg:col-span-4 lg:sticky lg:top-24 self-start space-y-4 max-h-[460px] lg:max-h-[calc(100vh-7.5rem)] overflow-y-auto scrollbar-thin pr-1">
           <div className="bg-zinc-900 border border-zinc-800 rounded-[5px] p-5 shadow-sm space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
