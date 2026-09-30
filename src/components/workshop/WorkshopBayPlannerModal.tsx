@@ -84,7 +84,6 @@ export const WorkshopBayPlannerModal: React.FC<WorkshopBayPlannerModalProps> = (
       bayName: 'Bahía 4 (Electrónica & ECM)',
       specialty: 'Calibración J1939 CAN-Bus y Sensores DEF Tier 4F',
       status: 'available',
-      specialty: 'Disponible para Diagnóstico Inmediato',
       leadMechanic: 'Ing. David Rosario (Mecatrónica)'
     },
     {
@@ -105,7 +104,6 @@ export const WorkshopBayPlannerModal: React.FC<WorkshopBayPlannerModalProps> = (
       bayName: 'Bahía 6 (Soldadura & Mecanizado)',
       specialty: 'Reconstrucción de Cucharas, Baldes HD y Barrenado',
       status: 'available',
-      specialty: 'Disponible para Trabajos de Torno y Soldadura MIG/TIG',
       leadMechanic: 'Maestro Soldador Santiago Cruz'
     }
   ]);

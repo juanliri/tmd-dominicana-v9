@@ -30,7 +30,7 @@ import { db, handleFirestoreError, OperationType } from '../../lib/firebase';
 import { triggerRfqCrmInquiryLogging } from '../../services/crmService';
 import { getQuoteWhatsAppUrl } from '../../utils/whatsappMessaging';
 import { MarginGuardValidatorModal } from '../commercial/MarginGuardValidatorModal';
-import { supabase } from '../../lib/supabaseClient';
+import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
 
 interface CreateMachineQuoteModalProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -198,32 +198,34 @@ export const CreateMachineQuoteModal: React.FC<CreateMachineQuoteModalProps> = (
 
       let quoteId = `QT-2026-${Date.now().toString().slice(-6)}`;
 
-      // 1. Persist to Supabase Database
-      try {
-        const { data: supaData, error: supaErr } = await supabase.from('quotes').insert([{
-          quote_number: quoteNum,
-          user_id: currentUser.uid,
-          customer_name: clientName,
-          customer_email: clientEmail,
-          company: companyName,
-          customer_rnc: rnc,
-          customer_phone: phone,
-          status: 'submitted',
-          currency: 'USD',
-          subtotal: netSubtotal,
-          itbis_amount: itbis,
-          total_amount: total,
-          items_summary: summaryItems.join(' + '),
-          notes: notes,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }]).select();
+      // 1. Persist to Supabase Database if configured
+      if (isSupabaseConfigured) {
+        try {
+          const { data: supaData, error: supaErr } = await supabase.from('quotes').insert([{
+            quote_number: quoteNum,
+            user_id: currentUser.uid,
+            customer_name: clientName,
+            customer_email: clientEmail,
+            company: companyName,
+            customer_rnc: rnc,
+            customer_phone: phone,
+            status: 'submitted',
+            currency: 'USD',
+            subtotal: netSubtotal,
+            itbis_amount: itbis,
+            total_amount: total,
+            items_summary: summaryItems.join(' + '),
+            notes: notes,
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          }]).select();
 
-        if (!supaErr && supaData && supaData[0]?.id) {
-          quoteId = supaData[0].id;
+          if (!supaErr && supaData && supaData[0]?.id) {
+            quoteId = supaData[0].id;
+          }
+        } catch (err) {
+          console.warn('Supabase quote insert notice (resilient mode active):', err);
         }
-      } catch (err) {
-        console.warn('Supabase quote insert notice (resilient mode active):', err);
       }
 
       // 2. Persist to Firestore (non-blocking for high resilience)

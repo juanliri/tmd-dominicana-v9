@@ -121,9 +121,11 @@ export const MachineCard = React.memo<MachineCardProps>(({
       <motion.div
         variants={cardVariants}
         draggable={true}
-        onDragStart={(e) => {
-          e.dataTransfer.setData('text/plain', machine.id);
-          e.dataTransfer.setData('machine-id', machine.id);
+        onDragStart={(e: any) => {
+          if (e && 'dataTransfer' in e && e.dataTransfer) {
+            e.dataTransfer.setData('text/plain', machine.id);
+            e.dataTransfer.setData('machine-id', machine.id);
+          }
         }}
         style={{
           transform: isHovered 

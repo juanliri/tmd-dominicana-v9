@@ -20,7 +20,6 @@ import {
   Wrench,
   Kanban
 } from 'lucide-react';
-import { supabase } from '../lib/supabaseClient';
 import { getUnifiedStoreMachinery, getUnifiedStoreParts } from '../services/cdnCatalogLoader';
 import { INITIAL_PORTAL_QUOTES } from '../data/portalSeedData';
 import { useAuth } from '../context/AuthContext';

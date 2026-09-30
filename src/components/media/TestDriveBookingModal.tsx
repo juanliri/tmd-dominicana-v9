@@ -42,15 +42,17 @@ interface TestDriveBookingModalProps {
   isOpen: boolean;
   onClose: () => void;
   preselectedMachine?: Machine | null;
+  machineName?: string;
 }
 
 export const TestDriveBookingModal: React.FC<TestDriveBookingModalProps> = ({
   isOpen,
   onClose,
-  preselectedMachine
+  preselectedMachine,
+  machineName
 }) => {
   const [selectedMachineId, setSelectedMachineId] = useState<string>(
-    preselectedMachine?.id || MACHINES_DATA[0]?.id || ''
+    preselectedMachine?.id || MACHINES_DATA.find(m => machineName && m.name.toLowerCase().includes(machineName.toLowerCase()))?.id || MACHINES_DATA[0]?.id || ''
   );
 
   // Tomorrow as default date

@@ -1822,7 +1822,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
 
                     <button
                       type="button"
-                      onClick={() => setIsTradeInOpen(true)}
+                      onClick={() => setIsTradeInModalOpen(true)}
                       className="w-full sm:w-auto px-4 py-2 rounded-[2px] bg-zinc-950 hover:bg-zinc-850 text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-colors shrink-0 cursor-pointer flex items-center justify-center gap-1.5"
                     >
                       <Repeat className="w-3.5 h-3.5" />
@@ -2272,12 +2272,12 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
       <DgiiElectronicInvoiceQrModal
         isOpen={isDgiiQrOpen}
         onClose={() => setIsDgiiQrOpen(false)}
-        orderNumber={completedOrder?.orderId || 'PRO-2026-8812'}
+        orderNumber={'PRO-2026-8812'}
         eNcf={customer.ncfType === 'B01_CREDITO_FISCAL' ? 'E31000004921' : 'E32000001094'}
         rncBuyer={customer.rncOrCedula || '1-01-02412-2'}
         buyerName={customer.companyName || customer.fullName || 'Cliente TMD'}
-        totalDop={completedOrder?.totalDop || totalDop}
-        totalUsd={completedOrder?.totalUsd || totalUsd}
+        totalDop={totalDop}
+        totalUsd={totalUsd}
       />
 
       {/* Task #66: Lowboy Heavy Equipment Freight Calculator Modal */}
@@ -2292,8 +2292,8 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
       <PatioGatePassModal
         isOpen={isGatePassModalOpen}
         onClose={() => setIsGatePassModalOpen(false)}
-        orderNumber={completedOrder?.orderId || 'ORD-2026-8812'}
-        itemSummary={completedOrder?.items && completedOrder.items.length > 0 ? `${completedOrder.items.length} Repuestos OEM` : (machineQuotes[0]?.machine.name || 'Equipo LiuGong')}
+        orderNumber={'ORD-2026-8812'}
+        itemSummary={cart.length > 0 ? `${cart.length} Repuestos OEM` : (machineQuotes[0]?.machine.name || 'Equipo LiuGong')}
         recipientName={customer.fullName || 'Cliente TMD'}
         recipientCedula={customer.rncOrCedula || '001-0000000-0'}
       />

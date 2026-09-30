@@ -156,6 +156,8 @@ export const PmaPackageSelectorModal: React.FC<PmaPackageSelectorModalProps> = (
         image: '/images/tmd_coming_soon.jpg',
         stockQty: 10,
         isOem: true,
+        compatibleModels: [machineModel],
+        deliveryTimeHours: 24,
         description: `Contrato de mantenimiento preventivo de ${selectedHours} horas con ${currentPkg.visits} servicios en obra.`
       });
       showToast(`Póliza PMA ${selectedHours}H agregada al carrito oficial (-${currentPkg.discountPercent}% descuento).`);

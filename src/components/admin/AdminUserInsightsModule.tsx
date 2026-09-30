@@ -14,7 +14,7 @@ import {
   AlertCircle,
   Maximize2
 } from 'lucide-react';
-import { supabase } from '../../lib/supabaseClient';
+import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
 import { UserProfile, UserRole, Currency } from '../../types';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
 
@@ -151,6 +151,13 @@ export const AdminUserInsightsModule: React.FC<AdminUserInsightsModuleProps> = (
     ];
 
     const fetchUsers = async () => {
+      if (!isSupabaseConfigured) {
+        if (isMounted) {
+          setUsers(fallbackUsers);
+          setLoading(false);
+        }
+        return;
+      }
       try {
         const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 350));
         const fetchPromise = (async () => {

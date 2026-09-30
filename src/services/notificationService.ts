@@ -284,7 +284,11 @@ export async function sendMaintenanceReminderNotification(
       createdAt: new Date().toISOString()
     };
 
-    await setDoc(notifRef, payload, { merge: true });
+    try {
+      await setDoc(notifRef, payload, { merge: true });
+    } catch (firebaseErr) {
+      console.warn('Firestore notification sync notice (delivering in-app locally):', firebaseErr);
+    }
 
     // Also notify via browser and sound
     showBrowserNotification(title, body, '#/portal');
@@ -292,7 +296,7 @@ export async function sendMaintenanceReminderNotification(
 
     return payload;
   } catch (error) {
-    console.error('Error al emitir recordatorio de mantenimiento:', error);
+    console.warn('Error al emitir recordatorio de mantenimiento:', error);
     return null;
   }
 }

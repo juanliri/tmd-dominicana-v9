@@ -110,14 +110,12 @@ export const SmartAttachmentsUpsell: React.FC<SmartAttachmentsUpsellProps> = ({
       partNumber: att.partNumber,
       brand: 'OEM Heavy Duty',
       category: 'Implementos & Baldes',
-      subcategory: att.category === 'hydraulic' ? 'Martillos' : att.category === 'bucket' ? 'Cucharas' : 'Filtros',
       priceUsd: att.priceUsd,
-      stock: 5,
-      weightKg: att.weightKg,
-      inStock: true,
-      featured: true,
+      stockQty: 5,
       image: att.image,
-      compatibility: [att.compatibility],
+      compatibleModels: [att.compatibility],
+      isOem: true,
+      deliveryTimeHours: 24,
       description: `${att.name} compatible con ${att.compatibility}. Especificaciones técnicas: ${att.specs}.`
     });
 

@@ -135,11 +135,13 @@ export type PaymentMethod = 'transfer' | 'card' | 'credit_line' | 'cash_pickup';
 
 export type DeliveryMethod = 'pickup_km22' | 'nationwide_metropac' | 'express_jobsite';
 
+export type DominicanNcfType = 'B01_CREDITO_FISCAL' | 'B02_CONSUMIDOR_FINAL' | 'B14_REGIMEN_ESPECIAL' | 'B15_GUBERNAMENTAL' | string;
+
 export interface CustomerDetails {
   fullName: string;
   companyName?: string;
   rncOrCedula?: string;
-  ncfType: 'B01_CREDITO_FISCAL' | 'B02_CONSUMIDOR_FINAL';
+  ncfType: DominicanNcfType;
   phone: string;
   email?: string;
   city: string;
@@ -155,7 +157,7 @@ export interface SavedCustomerProfile {
   fullName: string;
   companyName?: string;
   rncOrCedula?: string;
-  ncfType?: 'B01_CREDITO_FISCAL' | 'B02_CONSUMIDOR_FINAL';
+  ncfType?: DominicanNcfType;
   phone: string;
   email?: string;
   city?: string;
@@ -750,6 +752,12 @@ export interface LiveLinkUnit {
     address: string;
     province: string;
   };
+  lastKnownLocation?: {
+    lat: number;
+    lng: number;
+    address: string;
+    province: string;
+  };
   status: 'running' | 'idle' | 'stopped' | 'offline';
   horometerHours: number;
   operatingHours?: number;
@@ -1063,8 +1071,8 @@ export interface RemanComponent {
   id: string;
   sku: string;
   name: string;
-  category: 'Motores Diésel' | 'Bombas Hidráulicas' | 'Transmisiones' | 'Turbocargadores' | 'Cilindros Hidráulicos';
-  brand: 'JCB' | 'Cummins' | 'Kawasaki' | 'Carraro' | 'Holset' | 'ZF';
+  category: 'Motores Diésel' | 'Bombas Hidráulicas' | 'Transmisiones' | 'Turbocargadores' | 'Cilindros Hidráulicos' | 'Motores de Giro' | 'Mandos Finales' | string;
+  brand: 'JCB' | 'Cummins' | 'Kawasaki' | 'Carraro' | 'Holset' | 'ZF' | 'Rexroth' | 'Nabtesco' | string;
   compatibleMachines: string[];
   priceRemanUsd: number;
   coreCreditUsd: number; // Reembolso por entrega de casco usado

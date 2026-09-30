@@ -24,9 +24,9 @@ import {
 } from 'lucide-react';
 import { OFFICIAL_BRANDS, BrandInfo } from '../../data/brandsData';
 import { BrandLogo } from '../common/BrandLogos';
-import { CONTRACTOR_TESTIMONIALS, ContractorTestimonial } from '../../data/testimonials';
+import { CONTRACTOR_TESTIMONIALS } from '../../data/testimonials';
 import { FAQ_DATA, FAQItem } from '../../data/faq';
-import { Machine } from '../../types';
+import { Machine, ContractorTestimonial } from '../../types';
 
 interface DynamicMultiLayeredGridProps {
   onNavigate: (route: string) => void;
@@ -321,7 +321,7 @@ export const DynamicMultiLayeredGrid: React.FC<DynamicMultiLayeredGridProps> = (
             <div className="flex flex-wrap items-center justify-between gap-2.5">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-[5px] bg-amber-500/15 border border-amber-500/30 flex items-center justify-center font-display font-black text-amber-700 dark:text-amber-400 text-sm shadow-xs">
-                  {currentTestimonial.author.split(' ').map(n => n[0]).slice(0, 2).join('')}
+                  {currentTestimonial.author.split(' ').map((n: string) => n[0]).slice(0, 2).join('')}
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">

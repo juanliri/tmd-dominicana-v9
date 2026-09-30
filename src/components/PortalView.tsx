@@ -23,7 +23,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { supabase } from '../lib/supabaseClient';
+import { supabase, isSupabaseConfigured } from '../lib/supabaseClient';
 import { PortalQuote, ServiceWorkOrder, UserProfile, UserRole } from '../types';
 import { saveServiceOrderToLocalStorage } from '../services/serviceHistoryService';
 import { QuotePdfExportModal } from './portal/QuotePdfExportModal';
@@ -210,6 +210,21 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
 
     let isMounted = true;
 
+    // Fast-path: if Supabase is not configured, load local storage & seed data immediately with 0 latency and no network error spam
+    if (!isSupabaseConfigured) {
+      const stored = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('tmd_portal_quotes') || '[]') : [];
+      if (stored.length > 0) {
+        setQuotes([...stored, ...INITIAL_PORTAL_QUOTES.filter(iq => !stored.some((sq: any) => sq.id === iq.id))]);
+      } else {
+        setQuotes(INITIAL_PORTAL_QUOTES);
+      }
+      setWorkOrders(INITIAL_PORTAL_WORK_ORDERS);
+      setAllUsers(INITIAL_PORTAL_USERS);
+      return () => {
+        isMounted = false;
+      };
+    }
+
     const syncPortalData = async () => {
       // 1. Sync Quotes from Supabase
       try {
@@ -307,13 +322,15 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
           const { data, error } = await supabase.from('profiles').select('*');
           if (!error && data && data.length > 0) {
             const mappedUsers: UserProfile[] = data.map((p: any) => ({
+              id: p.id,
               uid: p.id,
               email: p.email || '',
               displayName: p.full_name || p.display_name || 'Usuario TMD',
               role: p.role || 'client',
               companyName: p.company_name || 'Constructora',
               phone: p.phone || '',
-              createdAt: p.created_at || new Date().toISOString()
+              createdAt: p.created_at || new Date().toISOString(),
+              updatedAt: p.updated_at || p.created_at || new Date().toISOString()
             }));
             if (isMounted) setAllUsers(mappedUsers);
           } else {
@@ -370,26 +387,28 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
       setWorkOrders(prev => [newOrder, ...prev]);
       saveServiceOrderToLocalStorage(newOrder);
 
-      // Persist to Supabase
-      try {
-        await supabase.from('work_orders').insert([{
-          id: newOrder.id,
-          order_number: newOrder.orderNumber,
-          client_id: newOrder.clientId,
-          client_name: newOrder.clientName,
-          company_name: newOrder.companyName,
-          machine_model: newOrder.machineModel,
-          machine_serial: newOrder.machineSerial,
-          service_type: newOrder.serviceType,
-          priority: newOrder.priority,
-          location: newOrder.location,
-          description: newOrder.description,
-          status: newOrder.status,
-          created_at: newOrder.createdAt,
-          updated_at: newOrder.updatedAt
-        }]);
-      } catch (err) {
-        console.warn('Supabase work_order insert notice:', err);
+      // Persist to Supabase if configured
+      if (isSupabaseConfigured) {
+        try {
+          await supabase.from('work_orders').insert([{
+            id: newOrder.id,
+            order_number: newOrder.orderNumber,
+            client_id: newOrder.clientId,
+            client_name: newOrder.clientName,
+            company_name: newOrder.companyName,
+            machine_model: newOrder.machineModel,
+            machine_serial: newOrder.machineSerial,
+            service_type: newOrder.serviceType,
+            priority: newOrder.priority,
+            location: newOrder.location,
+            description: newOrder.description,
+            status: newOrder.status,
+            created_at: newOrder.createdAt,
+            updated_at: newOrder.updatedAt
+          }]);
+        } catch (err) {
+          console.warn('Supabase work_order insert notice:', err);
+        }
       }
 
       setShowNewOrderModal(false);
@@ -411,19 +430,31 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
   // Status updates for Staff / Admin
   const handleUpdateOrderStatus = async (orderId: string, status: ServiceWorkOrder['status']) => {
     setWorkOrders(prev => prev.map(o => o.id === orderId ? { ...o, status, updatedAt: new Date().toISOString() } : o));
-    try {
-      await supabase.from('work_orders').update({ status, updated_at: new Date().toISOString() }).eq('id', orderId);
-    } catch (err) {
-      console.warn('Supabase work_order status update notice:', err);
+    if (isSupabaseConfigured) {
+      try {
+        await supabase.from('work_orders').update({ status, updated_at: new Date().toISOString() }).eq('id', orderId);
+      } catch (err) {
+        console.warn('Supabase work_order status update notice:', err);
+      }
     }
   };
 
   const handleUpdateQuoteStatus = async (quoteId: string, status: PortalQuote['status']) => {
-    setQuotes(prev => prev.map(q => q.id === quoteId ? { ...q, status, updatedAt: new Date().toISOString() } : q));
-    try {
-      await supabase.from('quotes').update({ status, updated_at: new Date().toISOString() }).eq('id', quoteId);
-    } catch (err) {
-      console.warn('Supabase quote status update notice:', err);
+    setQuotes(prev => {
+      const updated = prev.map(q => q.id === quoteId ? { ...q, status, updatedAt: new Date().toISOString() } : q);
+      try {
+        localStorage.setItem('tmd_portal_quotes', JSON.stringify(updated));
+      } catch (e) {
+        // ignore
+      }
+      return updated;
+    });
+    if (isSupabaseConfigured) {
+      try {
+        await supabase.from('quotes').update({ status, updated_at: new Date().toISOString() }).eq('id', quoteId);
+      } catch (err) {
+        console.warn('Supabase quote status update notice:', err);
+      }
     }
   };
 

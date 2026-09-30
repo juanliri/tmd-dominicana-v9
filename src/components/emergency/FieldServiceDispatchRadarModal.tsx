@@ -173,7 +173,7 @@ export const FieldServiceDispatchRadarModal: React.FC<FieldServiceDispatchRadarM
                     {targetUnit.model} ({targetUnit.serialNumber})
                   </strong>
                   <span className="text-zinc-400 text-[11px] block mt-0.5">
-                    Ubicación satelital: {targetUnit.lastKnownLocation || 'Cantera Nizao, San Cristóbal'}
+                    Ubicación satelital: {targetUnit.location ? `${targetUnit.location.address}, ${targetUnit.location.province}` : 'Cantera Nizao, San Cristóbal'}
                   </span>
                 </div>
               </div>

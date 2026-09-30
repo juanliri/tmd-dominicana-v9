@@ -76,6 +76,7 @@ interface PartTableRowProps {
   formatPrice: (usdPrice: number) => string;
   setActivePartDetail: (part: Part) => void;
   setQrModalPart: (part: Part) => void;
+  setQuickViewPart?: (part: Part) => void;
   addToCart: (part: Part) => void;
   searchTerm?: string;
 }
@@ -85,6 +86,7 @@ const PartTableRow = React.memo<PartTableRowProps>(({
   formatPrice,
   setActivePartDetail,
   setQrModalPart,
+  setQuickViewPart,
   addToCart,
   searchTerm
 }) => {
@@ -1085,6 +1087,7 @@ export const PartsView = React.memo<PartsViewProps>(({
                       formatPrice={formatPrice}
                       setActivePartDetail={handleOpenPartSpecs}
                       setQrModalPart={setQrModalPart}
+                      setQuickViewPart={setQuickViewPart}
                       addToCart={addToCart}
                       searchTerm={searchTerm}
                     />
