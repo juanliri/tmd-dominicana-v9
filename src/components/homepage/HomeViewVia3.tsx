@@ -375,7 +375,7 @@ export const HomeViewVia3: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
 
         {/* Live Marquee of Brands at Bottom of Hero */}
         <div className="relative z-10 border-t border-zinc-900 bg-zinc-950/80 backdrop-blur-md pt-2">
-          <LiveMarquee />
+          <LiveMarquee onNavigate={onNavigate} />
         </div>
       </section>
 
@@ -899,7 +899,7 @@ export const HomeViewVia3: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
             setEstimateMachine(null);
           }}
           machine={estimateMachine || activeHeroMachine}
-          onProceedToQuote={(data) => {
+          onProceedToQuote={(data?: any) => {
             setIsTradeInModalOpen(false);
             setEstimateMachine(null);
             onNavigate('quote');

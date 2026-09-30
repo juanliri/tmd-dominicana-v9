@@ -653,14 +653,14 @@ export const downloadWorkOrderPDF = (order: ServiceWorkOrder, filename?: string)
 
   // Parts & Services Table
   const parts = order.installedParts || [];
-  const rows = parts.length > 0 
+  const rows: string[][] = parts.length > 0 
     ? parts.map((part, idx) => [
         String(idx + 1).padStart(2, '0'),
-        part.partName,
+        part.partName || part.name || 'Repuesto OEM TMD',
         part.partNumber || 'OEM-GENUINE',
-        String(part.quantity),
-        part.status.toUpperCase(),
-        `US$ ${(part.totalCostUsd || part.unitCostUsd * part.quantity).toFixed(2)}`
+        String(part.quantity || 1),
+        (part.status || 'INSTALADO').toUpperCase(),
+        `US$ ${((part.totalCostUsd ?? (part.unitCostUsd ? part.unitCostUsd * (part.quantity || 1) : 0)) || (part.totalPriceUsd ?? 0)).toFixed(2)}`
       ])
     : [
         ['01', order.serviceType ? order.serviceType.replace(/_/g, ' ').toUpperCase() : 'SERVICIO TÉCNICO ESPECIALIZADO', 'LABOR-01', '1', 'INSTALADO', `US$ ${(order.totalLaborCostUsd || 450).toFixed(2)}`],

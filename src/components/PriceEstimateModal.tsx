@@ -27,13 +27,15 @@ interface PriceEstimateModalProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigate?: (route: string) => void;
+  onProceedToQuote?: (data?: any) => void;
 }
 
 export const PriceEstimateModal: React.FC<PriceEstimateModalProps> = ({
   machine,
   isOpen,
   onClose,
-  onNavigate
+  onNavigate,
+  onProceedToQuote
 }) => {
   const { formatPrice, currency, addMachineToQuote, exchangeRate } = useCart();
   const currentRate = exchangeRate || USD_TO_DOP_RATE;

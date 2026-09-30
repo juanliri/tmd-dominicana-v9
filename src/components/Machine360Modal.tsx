@@ -11,7 +11,8 @@ interface Machine360ModalProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigate?: (route: string) => void;
-  initialTab?: '360' | 'video' | 'gallery' | 'dimensions';
+  initialTab?: '360' | 'video' | 'gallery' | 'dimensions' | string;
+  activeTab?: string;
 }
 
 export const Machine360Modal: React.FC<Machine360ModalProps> = ({
@@ -19,7 +20,8 @@ export const Machine360Modal: React.FC<Machine360ModalProps> = ({
   isOpen,
   onClose,
   onNavigate,
-  initialTab = '360'
+  initialTab = '360',
+  activeTab
 }) => {
   const [estimateMachine, setEstimateMachine] = useState<Machine | null>(null);
   const [calcMachine, setCalcMachine] = useState<Machine | null>(null);
@@ -44,7 +46,7 @@ export const Machine360Modal: React.FC<Machine360ModalProps> = ({
           <div className="flex-1 overflow-y-auto">
             <Machine360Viewer
               machine={machine}
-              initialTab={initialTab}
+              initialTab={((activeTab || initialTab) as '360' | 'video' | 'gallery' | 'dimensions')}
               onNavigate={(route) => {
                 onClose();
                 if (onNavigate) onNavigate(route);

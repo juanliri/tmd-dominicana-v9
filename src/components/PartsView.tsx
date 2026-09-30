@@ -156,7 +156,7 @@ const PartTableRow = React.memo<PartTableRowProps>(({
           </button>
           <button
             type="button"
-            onClick={() => setQuickViewPart(part)}
+            onClick={() => setQuickViewPart?.(part)}
             className="px-2 py-1.5 rounded-[3px] bg-zinc-900 hover:bg-amber-400 hover:text-black text-amber-400 border border-zinc-800 text-[10px] font-black uppercase tracking-wider cursor-pointer transition-colors flex items-center gap-1"
             title="Vista Rápida OEM sin salir del catálogo"
           >

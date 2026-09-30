@@ -25,6 +25,7 @@ import { INITIAL_PORTAL_QUOTES } from '../data/portalSeedData';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { PortalQuote, InventoryMachine, InventoryPart, InventoryAlert } from '../types';
+import { supabase } from '../lib/supabaseClient';
 import { AdminMetricsTab } from './admin/AdminMetricsTab';
 import { AdminQuotesTab } from './admin/AdminQuotesTab';
 import { AdminMachineryTab } from './admin/AdminMachineryTab';
@@ -143,14 +144,15 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
                 category: m.category,
                 modelCode: m.model_code || m.sku || m.id,
                 serialNumber: m.serial_number || `VIN-${m.id.toUpperCase()}`,
-                priceUsd: Number(m.price_usd || 0),
+                year: Number(m.year || 2024),
+                basePriceUsd: Number(m.base_price_usd || m.price_usd || 0),
                 inStock: m.in_stock ?? true,
                 stockQty: m.stock_qty ?? 1,
                 minStockAlert: m.min_stock_alert ?? 1,
                 location: m.location || 'Patio Km 22, Autopista Duarte',
                 image: m.primary_image_url || m.image || '/assets/machinery/heavy_22_ton_liugong_922e_tracked.jpg',
-                specs: m.specs || {},
-                status: m.status || 'available'
+                status: (m.status || 'available') as any,
+                updatedAt: m.updated_at || new Date().toISOString()
               }));
             }
           } catch (e) {
@@ -164,17 +166,17 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
               name: m.name,
               brand: m.brand,
               category: m.category,
-              modelCode: m.model,
+              modelCode: m.modelCode || m.id,
               serialNumber: `VIN-${m.id.toUpperCase()}-2026`,
-              priceUsd: m.priceUsd,
-              priceDop: m.priceDop,
+              year: m.year || 2024,
+              basePriceUsd: m.basePriceUsd || 0,
               inStock: m.inStock,
-              stockQty: m.stockQty ?? 4,
+              stockQty: 4,
               minStockAlert: 1,
               location: 'Patio Km 22, Autopista Duarte',
-              image: m.primaryImage,
-              specs: m.specs || {},
-              status: 'available'
+              image: m.image,
+              status: 'available' as const,
+              updatedAt: new Date().toISOString()
             }));
           }
           if (isMounted) setMachines(fetchedMachines);
@@ -191,12 +193,13 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
                 brand: p.brand,
                 category: p.category,
                 priceUsd: Number(p.price_usd || 0),
-                inStock: p.in_stock ?? true,
                 stockQty: p.stock_qty ?? 6,
                 minStockAlert: p.min_stock_alert ?? 2,
-                location: p.location || 'Almacén Central Km 22',
+                locationBin: p.location || p.location_bin || 'Almacén Central Km 22',
                 image: p.image_url || p.image || '/assets/machinery/brand_new_genuine_yellow_and_black.jpg',
-                compatibleModels: p.compatible_models || []
+                isOem: p.is_oem ?? true,
+                compatibleModels: p.compatible_models || [],
+                updatedAt: p.updated_at || new Date().toISOString()
               }));
             }
           } catch (e) {
@@ -212,13 +215,13 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
               brand: p.brand,
               category: p.category,
               priceUsd: p.priceUsd,
-              priceDop: p.priceDop,
-              inStock: p.inStock,
               stockQty: p.stockQty ?? 8,
               minStockAlert: 2,
-              location: 'Almacén Central Km 22',
+              locationBin: 'Almacén Central Km 22',
               image: p.image,
-              compatibleModels: p.compatibleMachines || []
+              isOem: p.isOem ?? true,
+              compatibleModels: p.compatibleModels || [],
+              updatedAt: new Date().toISOString()
             }));
           }
           if (isMounted) setParts(fetchedParts);
