@@ -260,7 +260,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
               </h1>
 
               <p className="text-sm sm:text-base type-body-lead text-slate-600 dark:text-zinc-300 max-w-2xl">
-                12 bahías de servicio diésel pesado, bancos de prueba de bombas hidráulicas hasta 350 bar, técnicos homologados de fábrica y despacho de unidades móviles 4x4 a canteras y obras.
+                18 bahías de servicio diésel pesado, bancos de prueba de bombas hidráulicas hasta 350 bar, técnicos homologados de fábrica y despacho de unidades móviles 4x4 a canteras y obras.
               </p>
 
               {/* Call to Actions & Emergency Numbers */}
@@ -303,7 +303,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
 
               <div className="grid grid-cols-2 gap-2">
                 <div className="p-2.5 rounded-[3px] bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 shadow-xs">
-                  <span className="text-base font-black text-amber-600 dark:text-amber-400 block">12 BAHÍAS</span>
+                  <span className="text-base font-black text-amber-600 dark:text-amber-400 block">18 BAHÍAS</span>
                   <span className="text-[10px] text-slate-500 dark:text-zinc-400 block uppercase">LÍNEAS HD</span>
                 </div>
                 <div className="p-2.5 rounded-[3px] bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 shadow-xs">
@@ -339,7 +339,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigate }) => {
                 FULLBAY SHOP MANAGEMENT
               </h3>
               <p className="text-xs text-slate-500 dark:text-zinc-400 font-sans">
-                Monitoreo en vivo de 12 bahías, diagnósticos, órdenes abiertas y mecánicos asignados.
+                Monitoreo en vivo de 18 bahías, diagnósticos, órdenes abiertas y mecánicos asignados.
               </p>
             </div>
             <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 mt-3 flex items-center gap-1 group-hover:translate-x-1 transition-transform">

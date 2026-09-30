@@ -14,11 +14,12 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentRoute, onNavigate }
   const { isAdmin, isStaff } = useAuth();
   const totalItems = totalCartCount + totalQuotesCount;
 
-  // Contextual check: Hide bottom nav in focused checkout or specialized workspaces/admin consoles
+  // Contextual check: Hide bottom nav in focused checkout, authenticated portal (which has its own PortalBottomBar), or specialized workspaces/admin consoles
   const isContextualWorkspaceOrAdmin = [
     '#/checkout',
     '#/admin',
     '#/admin-dashboard',
+    '#/portal',
     '#/fullbay',
     '#/livelink'
   ].includes(currentRoute);
@@ -29,8 +30,8 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentRoute, onNavigate }
 
   const items = [
     { label: 'INICIO', route: '#/home', icon: Home },
-    { label: 'EQUIPOS', route: '#/machinery-hub', icon: HardHat },
-    { label: 'REPUESTOS', route: '#/parts-hub', icon: Cog },
+    { label: 'EQUIPOS', route: '#/machinery', icon: HardHat },
+    { label: 'REPUESTOS', route: '#/parts', icon: Cog },
     { 
       label: isAdmin ? 'ADMIN' : isStaff ? 'OFICINA' : 'PORTAL', 
       route: '#/portal', 

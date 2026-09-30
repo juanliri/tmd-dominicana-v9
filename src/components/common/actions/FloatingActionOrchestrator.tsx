@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useComparison } from '../../../context/ComparisonContext';
 import { triggerHaptic } from '../../../utils/haptics';
+import { useScrollDirection } from '../../../hooks/useScrollDirection';
 
 interface FloatingActionOrchestratorProps {
   currentRoute: string;
@@ -26,11 +27,19 @@ export const FloatingActionOrchestrator: React.FC<FloatingActionOrchestratorProp
   onOpenChatbot,
   isChatbotOpen = false
 }) => {
+  const { isScrollingDown } = useScrollDirection();
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isSosOpen, setIsSosOpen] = useState(false);
   const { selectedMachineIds, openComparison } = useComparison();
 
-  const isCheckoutOrAdmin = ['#/checkout', '#/admin', '#/admin-dashboard'].includes(currentRoute);
+  const isExcludedRoute = [
+    '#/checkout', 
+    '#/admin', 
+    '#/admin-dashboard',
+    '#/portal',
+    '#/fullbay',
+    '#/livelink'
+  ].includes(currentRoute);
   const isEmergencyRoute = currentRoute === '#/emergency';
   const hasActiveComparison = selectedMachineIds.length > 0;
 
@@ -48,18 +57,15 @@ export const FloatingActionOrchestrator: React.FC<FloatingActionOrchestratorProp
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  if (isCheckoutOrAdmin) {
+  if (isExcludedRoute) {
     return null;
   }
-
-  // Dynamic bottom offset calculation to avoid mobile navigation overlap
-  const bottomOffsetClass = 'bottom-36 sm:bottom-22';
 
   return (
     <>
       {/* 24/7 Emergency Quick Action Popover */}
       {isSosOpen && (
-        <div className="fixed bottom-52 sm:bottom-36 right-4 sm:right-6 z-50 w-80 sm:w-88 bg-zinc-950 text-white rounded-[5px] border border-red-500/50 shadow-2xl p-4 font-mono animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="fixed bottom-36 sm:bottom-36 left-4 right-4 sm:left-auto sm:right-6 z-50 sm:w-88 bg-zinc-950 text-white rounded-[5px] border border-red-500/50 shadow-2xl p-4 font-mono animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="h-1 w-full bg-gradient-to-r from-red-600 via-amber-500 to-red-600 absolute top-0 left-0 right-0 rounded-t-[5px]" />
           
           <div className="flex items-start justify-between gap-2 pt-1 pb-2 border-b border-zinc-800">
@@ -138,19 +144,13 @@ export const FloatingActionOrchestrator: React.FC<FloatingActionOrchestratorProp
       )}
 
       {/* Floating Action Buttons Container */}
-      <div className={`fixed right-4 sm:right-6 ${bottomOffsetClass} z-40 flex flex-col items-end gap-2.5 font-mono pointer-events-none`}>
-        {/* Scroll to Top Button */}
-        {showScrollTop && (
-          <button
-            type="button"
-            onClick={scrollToTop}
-            className="p-2.5 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700 shadow-xl backdrop-blur-md transition-all cursor-pointer pointer-events-auto active:scale-95 animate-in fade-in slide-in-from-bottom-2 duration-150"
-            aria-label="Volver arriba"
-          >
-            <ChevronUp className="w-4 h-4" />
-          </button>
-        )}
-
+      <div 
+        className={`fixed left-4 sm:left-auto sm:right-6 bottom-20 sm:bottom-22 z-40 flex sm:flex-col items-start sm:items-end gap-2 sm:gap-2.5 font-mono pointer-events-none transition-all duration-300 ease-in-out ${
+          isScrollingDown && !isSosOpen
+            ? 'translate-y-28 opacity-0 pointer-events-none'
+            : 'translate-y-0 opacity-100'
+        }`}
+      >
         {/* Floating 24/7 SOS Emergency Button (Only when not on #/emergency) */}
         {!isEmergencyRoute && (
           <button
@@ -159,7 +159,7 @@ export const FloatingActionOrchestrator: React.FC<FloatingActionOrchestratorProp
               triggerHaptic('heavy');
               setIsSosOpen(!isSosOpen);
             }}
-            className="flex items-center gap-2 py-2 px-3 rounded-full bg-red-600 hover:bg-red-500 text-white font-black text-xs border border-red-400/50 shadow-xl shadow-red-600/30 transition-all cursor-pointer pointer-events-auto active:scale-95 animate-in fade-in slide-in-from-bottom-2 duration-200"
+            className="flex items-center gap-1.5 sm:gap-2 py-2 px-3 rounded-full bg-red-600 hover:bg-red-500 text-white font-black text-xs border border-red-400/50 shadow-xl shadow-red-600/30 transition-all cursor-pointer pointer-events-auto active:scale-95 animate-in fade-in slide-in-from-bottom-2 duration-200"
             title="Llamada de Emergencia 24/7 para averías en obra"
           >
             <span className="relative flex h-2 w-2">
@@ -183,6 +183,18 @@ export const FloatingActionOrchestrator: React.FC<FloatingActionOrchestratorProp
           >
             <Scale className="w-4 h-4 shrink-0" />
             <span>Comparar ({selectedMachineIds.length})</span>
+          </button>
+        )}
+
+        {/* Scroll to Top Button */}
+        {showScrollTop && (
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="p-2 sm:p-2.5 rounded-full bg-zinc-900/90 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700 shadow-xl backdrop-blur-md transition-all cursor-pointer pointer-events-auto active:scale-95 animate-in fade-in slide-in-from-bottom-2 duration-150"
+            aria-label="Volver arriba"
+          >
+            <ChevronUp className="w-4 h-4" />
           </button>
         )}
       </div>

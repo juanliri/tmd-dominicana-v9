@@ -378,7 +378,7 @@ export const TAB_CONFIGS: MainTabConfig[] = [
           brand: 'Cummins / Perkins / JCB',
           category: 'Reconstrucción Certificada',
           image: SHOWROOM_MARKETING_ASSETS.liugong.banner,
-          spec: '12 bahías de servicio pesado y banco de dinamómetro',
+          spec: '18 bahías de servicio pesado y banco de dinamómetro',
           route: '#/service'
         },
         quickLinks: [
@@ -411,7 +411,7 @@ export const TAB_CONFIGS: MainTabConfig[] = [
     ],
     highlight: {
       title: 'Taller Central & Stock Local',
-      desc: '+35,000 números de parte en inventario físico en Patio Km 22 y 12 bahías de diagnóstico y reparación para equipos pesados.',
+      desc: '+35,000 números de parte en inventario físico en Patio Km 22 y 18 bahías de diagnóstico y reparación para equipos pesados.',
       bannerImg: SHOWROOM_MARKETING_ASSETS.afex.banner,
       ctaLabel: 'Buscar Repuestos OEM',
       ctaRoute: '#/parts',

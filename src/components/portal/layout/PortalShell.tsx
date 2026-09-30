@@ -139,18 +139,8 @@ export const PortalShell: React.FC<PortalShellProps> = ({
                 </div>
               </div>
 
-              {/* Top Actions: Public Showroom Return + Theme Toggle + Quick Contact */}
+              {/* Top Actions: Public Showroom Return + Quick Contact */}
               <div className="flex items-center gap-2">
-                {/* Theme Toggle Button */}
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  aria-label="Alternar tema claro/oscuro"
-                  title={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
-                  className="p-1.5 rounded bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors cursor-pointer"
-                >
-                  {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-zinc-700" />}
-                </button>
 
                 <button
                   type="button"

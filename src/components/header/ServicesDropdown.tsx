@@ -42,9 +42,9 @@ const TECHNICAL_SERVICES: ServiceMenuItem[] = [
   {
     id: 'central-workshop',
     title: 'Taller Central Km 22 & Overhaul',
-    subtitle: '12 bahías de servicio pesado, banco dinamómetro y motores diésel',
+    subtitle: '18 bahías de servicio pesado, bancos de prueba 350 bar y motores diésel',
     route: '#/service',
-    badge: '12 Bahías',
+    badge: '18 Bahías',
     icon: Wrench,
     iconBg: 'bg-amber-500/10 dark:bg-amber-500/15',
     iconColor: 'text-amber-600 dark:text-amber-400'

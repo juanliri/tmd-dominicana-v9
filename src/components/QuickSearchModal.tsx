@@ -1360,7 +1360,7 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
               </span>
             )}
           </div>
-          <div className="flex items-center gap-2 text-[9px] font-mono text-zinc-500 overflow-x-auto max-w-full">
+          <div className="hidden sm:flex items-center gap-2 text-[9px] font-mono text-zinc-500 overflow-x-auto max-w-full">
             <span className="text-zinc-400 font-bold uppercase hidden md:inline">Atajos Globales:</span>
             <span className="inline-flex items-center gap-1">
               <kbd className="px-1 py-0.2 rounded-[2px] bg-zinc-900 border border-zinc-800 text-amber-400">Ctrl+M</kbd>

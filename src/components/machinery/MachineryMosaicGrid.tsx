@@ -308,7 +308,7 @@ export const MachineCard = React.memo<MachineCardProps>(({
             className="flex-1 py-2.5 px-3 bg-amber-500 hover:bg-amber-400 active:scale-[0.99] text-black font-black rounded-[4px] text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
             title="Ver especificaciones técnicas completas, rotulado PDF, 360° y cotización"
           >
-            <span>VER FICHA TÉCNICA</span>
+            <span>VER FICHA<span className="hidden sm:inline"> TÉCNICA</span></span>
             <ChevronRight className="w-3.5 h-3.5 stroke-[2.5]" />
           </button>
 

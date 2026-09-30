@@ -776,7 +776,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
             </h1>
 
             <p className="text-xs sm:text-sm text-zinc-300 font-sans max-w-2xl leading-relaxed">
-              Distribuidor oficial exclusivo JCB y LiuGong en República Dominicana. Más de 39 modelos pesados 0 Horas con garantía de fábrica, leasing comercial pre-aprobado en 24h y respaldo técnico de 12 bahías en Autopista Duarte.
+              Distribuidor oficial exclusivo JCB y LiuGong en República Dominicana. Más de 39 modelos pesados 0 Horas con garantía de fábrica, leasing comercial pre-aprobado en 24h y respaldo técnico de 18 bahías en Autopista Duarte.
             </p>
 
             {/* Quick Trust Pillars & Utility Actions */}
@@ -897,7 +897,7 @@ export const MachineryView = React.memo<MachineryViewProps>(({
                   {formatEquiposPrice(MACHINES_DATA[0].basePriceUsd)}
                 </span>
                 <span className="text-[10px] text-emerald-400 font-bold block">
-                  Leasing {getMonthlyLeasingEstimate(MACHINES_DATA[0].basePriceUsd)}/mes
+                  Leasing {getMonthlyLeasingEstimate(MACHINES_DATA[0].basePriceUsd)}
                 </span>
               </div>
 

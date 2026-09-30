@@ -478,11 +478,11 @@ function AppContent() {
       {/* Floating Active Comparison Dock (Rendered contextually on catalog views) */}
       {isComparisonEligible && <ComparisonFloatingBar />}
 
-      {/* Floating 24/7 Gemini Chatbot & Support Dock (Public and Portal only; hidden in Admin, Checkout and Bio view) */}
-      {!isAdminView && !isCheckoutView && !isBioView && <ChatbotWidget onNavigate={navigateTo} />}
+      {/* Floating 24/7 Gemini Chatbot & Support Dock (Public Showroom only; suppressed in Portal, Workspaces, Admin, Checkout and Bio) */}
+      {isPublicShowroom && <ChatbotWidget onNavigate={navigateTo} />}
 
-      {/* Floating Action Layer Orchestrator (Coordinates Scroll-to-Top and Mobile Stacking) */}
-      {!isBioView && (
+      {/* Floating Action Layer Orchestrator (Public Showroom only; suppressed in Portal, Workspaces, Admin, Checkout and Bio) */}
+      {isPublicShowroom && (
         <FloatingActionOrchestrator
           currentRoute={currentRoute}
           onNavigate={navigateTo}

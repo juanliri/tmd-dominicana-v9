@@ -750,16 +750,18 @@ export const ProductQrScannerModal: React.FC<ProductQrScannerModalProps> = ({
         <div className="p-4 sm:p-5 overflow-y-auto space-y-4">
           {/* STAFF METADATA SELECTOR BAR (Shows when authenticated as staff or admin) */}
           {currentUser && (isStaff || isAdmin || userProfile?.role === 'staff' || userProfile?.role === 'admin') && (
-            <div className="p-2.5 rounded-[3px] bg-zinc-950 border border-amber-400/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <span className="text-[10px] text-zinc-400 font-bold uppercase">
-                  Zona Patio / Almacén:
-                </span>
+            <div className="p-2.5 rounded-[3px] bg-zinc-950 border border-amber-400/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs max-w-full overflow-hidden">
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-1.5 sm:gap-2 min-w-0 max-w-full">
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span className="text-[10px] text-zinc-400 font-bold uppercase">
+                    Zona Patio / Almacén:
+                  </span>
+                </div>
                 <select
                   value={selectedYardZone}
                   onChange={(e) => setSelectedYardZone(e.target.value)}
-                  className="bg-zinc-900 border border-zinc-700 rounded-[2px] text-amber-400 font-bold text-[11px] px-2 py-0.5 focus:outline-hidden focus:border-amber-400"
+                  className="bg-zinc-900 border border-zinc-700 rounded-[2px] text-amber-400 font-bold text-[11px] px-2 py-0.5 focus:outline-hidden focus:border-amber-400 max-w-full truncate"
                 >
                   {KNOWN_YARD_ZONES.map((zone) => (
                     <option key={zone} value={zone} className="bg-zinc-900 text-white">
