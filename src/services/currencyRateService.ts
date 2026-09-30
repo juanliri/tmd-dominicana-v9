@@ -4,9 +4,9 @@
  * local fallback caching with TTL, and reactive broadcast updates.
  */
 
-export const BASELINE_USD_TO_DOP_RATE = 60.50;
+export const BASELINE_USD_TO_DOP_RATE = 58.50;
 const STORAGE_KEY = 'tmd_dop_exchange_rate_data';
-const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour TTL
+const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes TTL for fresh rates
 
 export interface ExchangeRateData {
   rate: number;
@@ -129,8 +129,8 @@ export async function syncLiveExchangeRate(forceRefresh: boolean = false): Promi
       const json = await res.json();
       const rawDop = json?.rates?.DOP;
       if (typeof rawDop === 'number' && rawDop >= 45 && rawDop <= 85) {
-        // Dominican commercial bank sell rate aligns with BCRD official reference (interbank + retail spread)
-        const commercialRate = Number(Math.max(BASELINE_USD_TO_DOP_RATE, rawDop * 1.017).toFixed(2));
+        // Dominican commercial bank reference rate (live interbank + nominal commercial spread)
+        const commercialRate = Number((rawDop * 1.008).toFixed(2));
         currentRateData = {
           rate: commercialRate,
           lastUpdated: new Date().toISOString(),
@@ -153,10 +153,10 @@ export async function syncLiveExchangeRate(forceRefresh: boolean = false): Promi
 
   // Graceful fallback: Official BCRD commercial rate baseline
   currentRateData = {
-    rate: BASELINE_USD_TO_DOP_RATE,
+    rate: currentRateData.rate || BASELINE_USD_TO_DOP_RATE,
     lastUpdated: new Date().toISOString(),
-    source: 'Official TMD Baseline',
-    isLive: false
+    source: currentRateData.isLive ? 'Cached Sync' : 'Official TMD Baseline',
+    isLive: currentRateData.isLive
   };
   notifyListeners();
   return currentRateData;

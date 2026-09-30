@@ -147,7 +147,7 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
         </div>
 
         {/* Horizontal Navigation Segment Tabs (Matches Desktop Navigation) */}
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 -mx-1 px-1">
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 -mx-1 px-1 font-mono">
           {TAB_CONFIGS.map(tab => {
             const TabIcon = tab.icon;
             const isCurrent = activeTab === tab.id;
@@ -155,23 +155,23 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
               <button
                 key={tab.id}
                 onClick={() => {
-                  if (tab.id === 'heavy_machinery') handleActionNavigate('#/machinery-hub');
-                  else if (tab.id === 'contractor_deploy') handleActionNavigate('#/rental-hub');
-                  else if (tab.id === 'parts_service') handleActionNavigate('#/parts-hub');
-                  else if (tab.id === 'gov_bids') handleActionNavigate('#/services-hub');
+                  if (tab.id === 'heavy_machinery') handleActionNavigate('#/machinery');
+                  else if (tab.id === 'contractor_deploy') handleActionNavigate('#/rental');
+                  else if (tab.id === 'parts_service') handleActionNavigate('#/parts');
+                  else if (tab.id === 'gov_bids') handleActionNavigate('#/service');
                   else if (tab.id === 'brands') handleActionNavigate('#/brands-directory');
-                  else handleActionNavigate('#/machinery-hub');
+                  else handleActionNavigate('#/machinery');
                 }}
-                className={`relative flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all shrink-0 select-none cursor-pointer ${
+                className={`relative flex items-center gap-1.5 px-3 py-2 rounded-[4px] text-xs font-bold whitespace-nowrap transition-all shrink-0 select-none cursor-pointer uppercase ${
                   isCurrent
-                    ? 'text-black bg-amber-500 shadow-sm shadow-amber-500/20'
+                    ? 'text-black bg-amber-400 shadow-sm shadow-amber-400/20'
                     : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white bg-white dark:bg-zinc-800/80 border border-zinc-200/70 dark:border-zinc-700/60'
                 }`}
               >
                 <TabIcon className={`w-3.5 h-3.5 ${isCurrent ? 'text-black' : 'text-amber-500'}`} />
                 <span>{tab.shortLabel || tab.label}</span>
                 {tab.id === 'heavy_machinery' && (
-                  <span className={`w-1.5 h-1.5 rounded-full ${isCurrent ? 'bg-black' : 'bg-amber-500 animate-pulse'}`} />
+                  <span className={`w-1.5 h-1.5 rounded-full ${isCurrent ? 'bg-black' : 'bg-amber-400 animate-pulse'}`} />
                 )}
               </button>
             );
@@ -185,30 +185,30 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
         <button
           type="button"
           onClick={() => {
-            if (activeTab === 'heavy_machinery') handleActionNavigate('#/machinery-hub');
-            else if (activeTab === 'contractor_deploy') handleActionNavigate('#/rental-hub');
-            else if (activeTab === 'parts_service') handleActionNavigate('#/parts-hub');
-            else if (activeTab === 'gov_bids') handleActionNavigate('#/services-hub');
+            if (activeTab === 'heavy_machinery') handleActionNavigate('#/machinery');
+            else if (activeTab === 'contractor_deploy') handleActionNavigate('#/rental');
+            else if (activeTab === 'parts_service') handleActionNavigate('#/parts');
+            else if (activeTab === 'gov_bids') handleActionNavigate('#/service');
             else if (activeTab === 'brands') handleActionNavigate('#/brands-directory');
-            else handleActionNavigate('#/machinery-hub');
+            else handleActionNavigate('#/machinery');
           }}
-          className="w-full flex items-center justify-between bg-zinc-100/70 dark:bg-zinc-900/60 hover:bg-amber-500/10 dark:hover:bg-zinc-800/80 p-3 rounded-2xl border border-zinc-200/60 dark:border-zinc-800/60 hover:border-amber-500/40 transition-all cursor-pointer group text-left"
+          className="w-full flex items-center justify-between bg-zinc-100/70 dark:bg-zinc-900/60 hover:bg-amber-500/10 dark:hover:bg-zinc-800/80 p-3 rounded-[6px] border border-zinc-200/60 dark:border-zinc-800/60 hover:border-amber-500/40 transition-all cursor-pointer group text-left"
         >
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <div className="w-8 h-8 rounded-[4px] bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform border border-amber-500/20">
               <ActiveIcon className="w-4 h-4" />
             </div>
             <div className="min-w-0">
-              <h3 className="text-xs font-black text-zinc-900 dark:text-white truncate group-hover:text-amber-500 transition-colors">
+              <h3 className="text-xs font-black text-zinc-900 dark:text-white truncate group-hover:text-amber-500 transition-colors uppercase font-display">
                 {currentTabConfig.label}
               </h3>
-              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 truncate">
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 truncate font-sans">
                 {currentTabConfig.headline}
               </p>
             </div>
           </div>
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl text-[10px] font-black bg-amber-500 text-black shadow-xs shrink-0 group-hover:bg-amber-400">
-            <span>Abrir Landing</span>
+          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[3px] text-[10px] font-black bg-amber-400 text-black shadow-xs shrink-0 group-hover:bg-amber-300 font-mono uppercase">
+            <span>Ver Catálogo</span>
             <ChevronRight className="w-3 h-3 stroke-[2.5]" />
           </span>
         </button>
