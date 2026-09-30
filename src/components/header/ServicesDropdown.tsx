@@ -159,10 +159,13 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({
             }}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
-            className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 w-[740px] max-w-[94vw] bg-white/98 dark:bg-[#0c0c10]/98 backdrop-blur-2xl rounded-2xl border border-slate-200/90 dark:border-white/[0.09] shadow-2xl shadow-black/10 dark:shadow-black/70 z-50 overflow-hidden text-left"
+            className="absolute top-[calc(100%+8px)] right-0 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 lg:right-0 lg:left-auto lg:translate-x-0 w-[680px] max-w-[calc(100vw-32px)] bg-zinc-950/98 text-white backdrop-blur-2xl rounded-[6px] border border-white/[0.12] shadow-[0_20px_60px_rgba(0,0,0,0.85)] z-50 overflow-hidden text-left"
           >
+            {/* Top Amber CAD Accent Hairline */}
+            <div className="h-[2px] w-full bg-gradient-to-r from-amber-500 via-[#d99b26] to-transparent" />
+
             {/* Main 2-Column Content */}
-            <div className="p-5 grid grid-cols-1 md:grid-cols-2 gap-5 divide-y md:divide-y-0 md:divide-x divide-slate-100 dark:divide-white/[0.06]">
+            <div className="p-4 sm:p-5 grid grid-cols-1 md:grid-cols-2 gap-4 divide-y md:divide-y-0 md:divide-x divide-zinc-800/80">
               {/* Column 1: Soporte Técnico & Taller */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between px-1 pb-1">
@@ -187,21 +190,21 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({
                         key={item.id}
                         type="button"
                         onClick={() => handleItemClick(item.route)}
-                        className="w-full flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-100/80 dark:hover:bg-white/[0.05] transition-all text-left group cursor-pointer border border-transparent hover:border-slate-200/60 dark:hover:border-white/[0.06]"
+                        className="w-full flex items-start gap-3 p-2.5 rounded-[4px] hover:bg-white/[0.06] transition-all text-left group cursor-pointer border border-transparent hover:border-amber-400/40"
                       >
-                        <div className={`w-8 h-8 rounded-lg ${item.iconBg} ${item.iconColor} flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-105 transition-transform`}>
+                        <div className={`w-8 h-8 rounded-[3px] ${item.iconBg} ${item.iconColor} flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-105 transition-transform`}>
                           <Icon className="w-4 h-4" />
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-1.5">
-                            <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors truncate">
+                            <span className="text-xs font-black text-white group-hover:text-amber-400 transition-colors truncate uppercase font-display">
                               {item.title}
                             </span>
-                            <span className="text-[9px] font-semibold px-1.5 py-0.2 rounded bg-slate-100 dark:bg-zinc-800/80 text-slate-600 dark:text-zinc-400 shrink-0">
+                            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-[2px] bg-zinc-900 text-zinc-300 border border-white/[0.08] shrink-0 uppercase">
                               {item.badge}
                             </span>
                           </div>
-                          <p className="text-[11px] text-slate-500 dark:text-zinc-400 line-clamp-1 mt-0.5 leading-snug">
+                          <p className="text-[11px] text-zinc-400 line-clamp-1 mt-0.5 leading-snug font-sans">
                             {item.subtitle}
                           </p>
                         </div>
@@ -212,17 +215,17 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({
               </div>
 
               {/* Column 2: Licitaciones & Corporativo */}
-              <div className="space-y-3 pt-4 md:pt-0 md:pl-5">
+              <div className="space-y-3 pt-4 md:pt-0 md:pl-4">
                 <div className="flex items-center justify-between px-1 pb-1">
                   <div className="flex items-center gap-2">
-                    <span className="p-1 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                    <span className="p-1 rounded-md bg-indigo-500/10 text-indigo-400">
                       <Landmark className="w-3.5 h-3.5" />
                     </span>
-                    <span className="text-[11px] font-black uppercase tracking-wider text-slate-800 dark:text-zinc-200 font-display">
+                    <span className="text-[11px] font-black uppercase tracking-wider text-zinc-200 font-display">
                       Licitaciones & Empresa
                     </span>
                   </div>
-                  <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-400 border border-indigo-300 dark:border-indigo-500/20">
+                  <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-indigo-950/40 text-indigo-400 border border-indigo-500/20">
                     DGII / MOPC
                   </span>
                 </div>
@@ -235,21 +238,21 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({
                         key={item.id}
                         type="button"
                         onClick={() => handleItemClick(item.route)}
-                        className="w-full flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-100/80 dark:hover:bg-white/[0.05] transition-all text-left group cursor-pointer border border-transparent hover:border-slate-200/60 dark:hover:border-white/[0.06]"
+                        className="w-full flex items-start gap-3 p-2.5 rounded-[4px] hover:bg-white/[0.06] transition-all text-left group cursor-pointer border border-transparent hover:border-amber-400/40"
                       >
-                        <div className={`w-8 h-8 rounded-lg ${item.iconBg} ${item.iconColor} flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-105 transition-transform`}>
+                        <div className={`w-8 h-8 rounded-[3px] ${item.iconBg} ${item.iconColor} flex items-center justify-center shrink-0 mt-0.5 group-hover:scale-105 transition-transform`}>
                           <Icon className="w-4 h-4" />
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center justify-between gap-1.5">
-                            <span className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors truncate">
+                            <span className="text-xs font-black text-white group-hover:text-amber-400 transition-colors truncate uppercase font-display">
                               {item.title}
                             </span>
-                            <span className="text-[9px] font-semibold px-1.5 py-0.2 rounded bg-slate-100 dark:bg-zinc-800/80 text-slate-600 dark:text-zinc-400 shrink-0">
+                            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-[2px] bg-zinc-900 text-zinc-300 border border-white/[0.08] shrink-0 uppercase">
                               {item.badge}
                             </span>
                           </div>
-                          <p className="text-[11px] text-slate-500 dark:text-zinc-400 line-clamp-1 mt-0.5 leading-snug">
+                          <p className="text-[11px] text-zinc-400 line-clamp-1 mt-0.5 leading-snug font-sans">
                             {item.subtitle}
                           </p>
                         </div>
@@ -261,40 +264,37 @@ export const ServicesDropdown: React.FC<ServicesDropdownProps> = ({
             </div>
 
             {/* Bottom Quick-Access Strip (Zero Capabilities Lost!) */}
-            <div className="px-5 py-3 bg-slate-50 dark:bg-zinc-950 border-t border-slate-200/80 dark:border-white/[0.06] flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="px-5 py-3 bg-zinc-950 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-3 text-xs">
               {/* Specialist Tools Pill Group */}
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[10px] font-bold text-slate-400 dark:text-zinc-500 uppercase tracking-wider">
+              <div className="flex items-center gap-2 flex-wrap font-mono">
+                <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider">
                   Herramientas:
                 </span>
                 <button
                   type="button"
                   onClick={() => handleItemClick('#/tco')}
-                  className="px-2 py-0.5 rounded text-[11px] font-semibold text-slate-600 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-200/60 dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
+                  className="px-2 py-0.5 rounded-[3px] text-[10px] font-bold text-zinc-300 hover:text-amber-400 hover:bg-white/[0.06] transition-colors cursor-pointer uppercase border border-white/[0.06]"
                 >
                   Calculadora TCO
                 </button>
-                <span className="text-slate-300 dark:text-zinc-700">•</span>
                 <button
                   type="button"
                   onClick={() => handleItemClick('#/pma-contracts')}
-                  className="px-2 py-0.5 rounded text-[11px] font-semibold text-slate-600 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-200/60 dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
+                  className="px-2 py-0.5 rounded-[3px] text-[10px] font-bold text-zinc-300 hover:text-amber-400 hover:bg-white/[0.06] transition-colors cursor-pointer uppercase border border-white/[0.06]"
                 >
                   Contratos PMA
                 </button>
-                <span className="text-slate-300 dark:text-zinc-700">•</span>
                 <button
                   type="button"
                   onClick={() => handleItemClick('#/academy')}
-                  className="px-2 py-0.5 rounded text-[11px] font-semibold text-slate-600 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-200/60 dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
+                  className="px-2 py-0.5 rounded-[3px] text-[10px] font-bold text-zinc-300 hover:text-amber-400 hover:bg-white/[0.06] transition-colors cursor-pointer uppercase border border-white/[0.06]"
                 >
                   Academia
                 </button>
-                <span className="text-slate-300 dark:text-zinc-700">•</span>
                 <button
                   type="button"
                   onClick={() => handleItemClick('#/reman')}
-                  className="px-2 py-0.5 rounded text-[11px] font-semibold text-slate-600 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-200/60 dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
+                  className="px-2 py-0.5 rounded-[3px] text-[10px] font-bold text-zinc-300 hover:text-amber-400 hover:bg-white/[0.06] transition-colors cursor-pointer uppercase border border-white/[0.06]"
                 >
                   Centro Reman
                 </button>

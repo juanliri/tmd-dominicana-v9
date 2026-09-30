@@ -495,123 +495,190 @@ export const PartsView = React.memo<PartsViewProps>(({
   return (
     <div ref={partsTopRef} className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 sm:py-8">
       {/* Header Banner - Synced with Home Luxury Industrial Style */}
-      <div className="mb-6 bg-white dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 rounded-[5px] p-6 sm:p-8 text-slate-900 dark:text-white shadow-sm dark:shadow-xl relative overflow-hidden font-display">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-[3px] bg-amber-500/10 dark:bg-zinc-900 border border-amber-500/30 dark:border-zinc-800 text-amber-700 dark:text-amber-400 type-badge">
+      <div className="mb-6 rounded-[6px] border border-slate-200 dark:border-white/[0.1] bg-white dark:bg-zinc-950 relative overflow-hidden shadow-2xl text-slate-900 dark:text-white font-display">
+        {/* 4K Background Imagery with Ambient Dimming & Specular Gold Glow */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <img
+            src="/assets/images/portal_bg_machinery_1790441100418.jpg"
+            alt="Almacén Central de Repuestos OEM TMD Dominicana Km 22"
+            className="w-full h-full object-cover object-right md:object-center brightness-90 dark:brightness-75 scale-102 filter contrast-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/40 dark:from-zinc-950/96 dark:via-zinc-950/85 dark:to-zinc-950/45" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent dark:from-zinc-950 dark:via-transparent to-black/30" />
+          <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+        </div>
+
+        <div className="relative z-10 p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Left Column: Heading, Context & Live Search */}
+          <div className="lg:col-span-7 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-[4px] bg-white/90 dark:bg-zinc-900/90 border border-amber-500/40 text-amber-700 dark:text-amber-400 text-xs font-mono font-bold uppercase tracking-wider backdrop-blur-md shadow-xs">
               <Cog className="w-3.5 h-3.5 text-amber-500" />
               <span>CENTRO DE DISTRIBUCIÓN OEM • KM 22 AUTOPISTA DUARTE</span>
             </div>
-            <h1 className="text-2xl sm:text-4xl type-section-title text-slate-900 dark:text-white">
-              REPUESTOS GENUINOS & <span className="text-amber-500">FILTRACIÓN CERTIFICADA</span>
+
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-slate-900 dark:text-white leading-[1.05]">
+              REPUESTOS GENUINOS &amp;{' '}
+              <span className="bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 dark:from-amber-400 dark:via-yellow-300 dark:to-amber-500 bg-clip-text text-transparent">
+                FILTRACIÓN CERTIFICADA
+              </span>
             </h1>
-            <p className="text-xs sm:text-sm type-body text-slate-600 dark:text-zinc-400 max-w-2xl leading-relaxed font-sans">
+
+            <p className="text-xs sm:text-sm text-slate-700 dark:text-zinc-300 max-w-2xl leading-relaxed font-sans">
               Más de 40,000 números de parte en inventario físico para JCB, Donaldson, Fleetguard, LiuGong, Ammann y Cummins con despacho express en 24h a toda República Dominicana.
             </p>
 
             {/* Quick Brand Badges */}
-            <div className="flex flex-wrap gap-2 pt-1 type-badge">
-              <span className="bg-slate-100 dark:bg-zinc-900 px-2.5 py-1 rounded-[3px] text-amber-600 dark:text-amber-400 border border-slate-200 dark:border-zinc-800">JCB GENUINE</span>
-              <span className="bg-slate-100 dark:bg-zinc-900 px-2.5 py-1 rounded-[3px] text-slate-800 dark:text-white border border-slate-200 dark:border-zinc-800">DONALDSON BLUE®</span>
-              <span className="bg-slate-100 dark:bg-zinc-900 px-2.5 py-1 rounded-[3px] text-amber-600 dark:text-amber-400 border border-slate-200 dark:border-zinc-800">FLEETGUARD CUMMINS</span>
-              <span className="bg-slate-100 dark:bg-zinc-900 px-2.5 py-1 rounded-[3px] text-slate-800 dark:text-white border border-slate-200 dark:border-zinc-800">LIUGONG OEM</span>
-              <span className="bg-slate-100 dark:bg-zinc-900 px-2.5 py-1 rounded-[3px] text-slate-600 dark:text-zinc-300 border border-slate-200 dark:border-zinc-800">COMPROBANTE NCF B01</span>
+            <div className="flex flex-wrap gap-2 pt-1 font-mono text-[10px]">
+              <span className="bg-white/85 dark:bg-zinc-900/90 px-2.5 py-1 rounded-[3px] font-bold text-amber-700 dark:text-amber-400 border border-amber-500/30 backdrop-blur-xs">JCB GENUINE</span>
+              <span className="bg-white/85 dark:bg-zinc-900/90 px-2.5 py-1 rounded-[3px] font-bold text-slate-900 dark:text-white border border-slate-300 dark:border-white/[0.1] backdrop-blur-xs">DONALDSON BLUE®</span>
+              <span className="bg-white/85 dark:bg-zinc-900/90 px-2.5 py-1 rounded-[3px] font-bold text-amber-700 dark:text-amber-400 border border-amber-500/30 backdrop-blur-xs">FLEETGUARD CUMMINS</span>
+              <span className="bg-white/85 dark:bg-zinc-900/90 px-2.5 py-1 rounded-[3px] font-bold text-slate-900 dark:text-white border border-slate-300 dark:border-white/[0.1] backdrop-blur-xs">LIUGONG OEM</span>
+              <span className="bg-white/85 dark:bg-zinc-900/90 px-2.5 py-1 rounded-[3px] font-bold text-slate-700 dark:text-zinc-300 border border-slate-300 dark:border-white/[0.1] backdrop-blur-xs">NCF B01 / B15</span>
+            </div>
+
+            {/* Live Search Input Field directly in hero */}
+            <div className="pt-1 max-w-xl">
+              <div className="relative flex items-center">
+                <Search className="w-4 h-4 absolute left-3.5 text-slate-400 dark:text-zinc-400" />
+                <input
+                  type="text"
+                  placeholder="BUSCAR POR NÚMERO DE PARTE (EJ. 320/04133), FILTRO O MODELO..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-24 py-2.5 rounded-[4px] bg-white/95 dark:bg-zinc-900/95 border border-slate-300 dark:border-white/[0.12] text-xs font-mono uppercase tracking-wider text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-zinc-500 focus:outline-hidden focus:border-amber-500 shadow-md backdrop-blur-md"
+                />
+                <span className="absolute right-3 text-[10px] font-mono text-amber-600 dark:text-amber-400 font-bold uppercase bg-amber-500/10 px-2 py-0.5 rounded-[2px]">
+                  EN STOCK
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* Header Actions */}
-          <div className="flex items-center gap-2 shrink-0 flex-wrap font-display">
-            <button
-              type="button"
-              onClick={handleRefreshStock}
-              disabled={isSyncingStock}
-              title="Sincronizar inventario en tiempo real del Almacén Km 22"
-              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-slate-100 dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 border-slate-300 dark:border-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-800 shadow-xs"
-            >
-              <RefreshCw className={`w-3.5 h-3.5 text-amber-500 ${isSyncingStock ? 'animate-spin' : ''}`} />
-              <span>{isSyncingStock ? 'SINCRONIZANDO...' : 'ACTUALIZAR STOCK'}</span>
-            </button>
+          {/* Right Column: High-Density Warehouse & Tactical Action Console */}
+          <div className="lg:col-span-5 rounded-[5px] bg-white/90 dark:bg-zinc-950/95 border border-slate-300 dark:border-white/[0.12] p-4 sm:p-5 shadow-2xl relative overflow-hidden backdrop-blur-xl space-y-3.5">
+            {/* Corner CAD Brackets */}
+            <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-amber-500 pointer-events-none z-20" />
+            <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-amber-500 pointer-events-none z-20" />
+            <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-amber-500 pointer-events-none z-20" />
+            <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-amber-500 pointer-events-none z-20" />
 
-            <button
-              type="button"
-              onClick={() => setIsExportPdfOpen(true)}
-              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-slate-100 dark:bg-zinc-900 hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-200 border-slate-300 dark:border-zinc-800 shadow-xs"
-            >
-              <FileDown className="w-3.5 h-3.5 text-amber-500" />
-              <span>EXPORTAR PDF</span>
-            </button>
+            {/* Warehouse Status Header */}
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/[0.08] pb-2.5">
+              <div>
+                <span className="text-[10px] font-mono font-black uppercase text-amber-600 dark:text-amber-400 tracking-wider block">
+                  DESPACHO NACIONAL KM 22
+                </span>
+                <span className="text-xs font-black uppercase text-slate-900 dark:text-white">
+                  Consola de Operaciones &amp; Stock
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-[3px] bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-mono font-bold uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>EN LÍNEA</span>
+              </div>
+            </div>
 
-            {/* Task #90: TMD Reman Heavy Component Core Exchange */}
-            <button
-              type="button"
-              onClick={() => setIsRemanModalOpen(true)}
-              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border-emerald-500/30 shadow-xs"
-              title="Programa Core Exchange con componentes remanufacturados y 12m garantía"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>REMAN (-45%)</span>
-            </button>
+            {/* Quick Metrics Bar */}
+            <div className="grid grid-cols-2 gap-2 text-center font-mono py-1.5 px-2 rounded-[4px] bg-slate-100 dark:bg-zinc-900/80 border border-slate-200 dark:border-white/[0.06] text-[11px]">
+              <div>
+                <span className="text-[9px] text-slate-500 dark:text-zinc-400 block uppercase font-bold">DESPACHO METRO</span>
+                <span className="font-black text-slate-900 dark:text-white">&lt; 4 HORAS</span>
+              </div>
+              <div>
+                <span className="text-[9px] text-slate-500 dark:text-zinc-400 block uppercase font-bold">GARANTÍA OEM</span>
+                <span className="font-black text-amber-600 dark:text-amber-400">12 MESES</span>
+              </div>
+            </div>
 
-            {/* Sprint 9 Task #92: Automated Reorder Points & Critical Stock Management */}
-            <button
-              type="button"
-              onClick={() => setIsCriticalStockOpen(true)}
-              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-amber-400/10 hover:bg-amber-400/20 text-amber-400 border-amber-400/30 shadow-xs"
-              title="Monitoreo de Puntos de Reorden y Generador de Órdenes de Compra (PO)"
-            >
-              <Package className="w-3.5 h-3.5 text-amber-400" />
-              <span>REORDEN STOCK</span>
-            </button>
+            {/* Clean 4x2 Tactical Tools Grid */}
+            <div className="grid grid-cols-2 gap-2 font-display pt-1">
+              <button
+                type="button"
+                onClick={handleRefreshStock}
+                disabled={isSyncingStock}
+                title="Sincronizar inventario en tiempo real del Almacén Km 22"
+                className="p-2 rounded-[3px] text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer border bg-slate-100 dark:bg-zinc-900 text-slate-800 dark:text-zinc-200 border-slate-300 dark:border-zinc-800 hover:bg-slate-200 dark:hover:bg-zinc-800 shadow-xs"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 text-amber-500 ${isSyncingStock ? 'animate-spin' : ''}`} />
+                <span>{isSyncingStock ? 'SINCRONIZANDO...' : 'ACTUALIZAR STOCK'}</span>
+              </button>
 
-            {/* Task #98: Solicitud de Repuestos Vía Foto por WhatsApp con OCR */}
-            <button
-              type="button"
-              onClick={() => setIsOcrScannerOpen(true)}
-              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border-emerald-500/30 shadow-xs"
-              title="Escanear foto de pieza grabada u oxidada con IA OCR y consultar por WhatsApp Mostrador"
-            >
-              <Eye className="w-3.5 h-3.5 text-emerald-400" />
-              <span>FOTO-OCR WHATSAPP</span>
-            </button>
+              <button
+                type="button"
+                onClick={() => setIsExportPdfOpen(true)}
+                className="p-2 rounded-[3px] text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer border bg-slate-100 dark:bg-zinc-900 hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-200 border-slate-300 dark:border-zinc-800 shadow-xs"
+              >
+                <FileDown className="w-3.5 h-3.5 text-amber-500" />
+                <span>EXPORTAR PDF</span>
+              </button>
 
-            {/* Task #99: Mobile Service Truck Inventory Sync */}
-            <button
-              type="button"
-              onClick={() => setIsMobileTruckOpen(true)}
-              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border-zinc-800 shadow-xs"
-              title="Control de inventario en camionetas móviles 4x4 y sincronización con almacén Km 22"
-            >
-              <Truck className="w-3.5 h-3.5 text-amber-400" />
-              <span>STOCK CAMIONETAS 4X4</span>
-            </button>
+              <button
+                type="button"
+                onClick={() => setIsRemanModalOpen(true)}
+                className="p-2 rounded-[3px] text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer border bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border-emerald-500/30 shadow-xs"
+                title="Programa Core Exchange con componentes remanufacturados y 12m garantía"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>REMAN (-45%)</span>
+              </button>
 
-            {/* Task #85: Warehouse Shelf Bin Label Generator (Zebra / Avery 100x50mm) */}
-            <button
-              type="button"
-              onClick={() => {
-                if (filteredAndSortedParts.length > 0) {
-                  setBinLabelPart(filteredAndSortedParts[0]);
-                }
-              }}
-              className="px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer border bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border-zinc-800 shadow-xs"
-              title="Generar rótulos autoadhesivos Zebra/Avery 100x50mm para racks de almacén"
-            >
-              <Tag className="w-3.5 h-3.5 text-amber-400" />
-              <span>RÓTULOS ZEBRA</span>
-            </button>
+              <button
+                type="button"
+                onClick={() => setIsCriticalStockOpen(true)}
+                className="p-2 rounded-[3px] text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer border bg-amber-400/10 hover:bg-amber-400/20 text-amber-400 border-amber-400/30 shadow-xs"
+                title="Monitoreo de Puntos de Reorden y Generador de Órdenes de Compra (PO)"
+              >
+                <Package className="w-3.5 h-3.5 text-amber-400" />
+                <span>REORDEN STOCK</span>
+              </button>
 
-            <button
-              type="button"
-              onClick={() => setShowSchematic(!showSchematic)}
-              className={`px-3 py-2 rounded-[3px] text-[11px] font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer shadow-xs ${
-                showSchematic
-                  ? 'bg-zinc-800 text-amber-400 border border-amber-500/80 shadow-md'
-                  : 'bg-amber-500 hover:bg-amber-400 text-black'
-              }`}
-            >
-              <Crosshair className="w-3.5 h-3.5" />
-              <span>{showSchematic ? 'OCULTAR ESQUEMA' : 'ESQUEMA INTERACTIVO'}</span>
-            </button>
+              <button
+                type="button"
+                onClick={() => setIsOcrScannerOpen(true)}
+                className="p-2 rounded-[3px] text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer border bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border-emerald-500/30 shadow-xs"
+                title="Escanear foto de pieza grabada u oxidada con IA OCR y consultar por WhatsApp Mostrador"
+              >
+                <Eye className="w-3.5 h-3.5 text-emerald-400" />
+                <span>FOTO-OCR WHATSAPP</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsMobileTruckOpen(true)}
+                className="p-2 rounded-[3px] text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer border bg-slate-100 dark:bg-zinc-900 hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-200 border-slate-300 dark:border-zinc-800 shadow-xs"
+                title="Control de inventario en camionetas móviles 4x4 y sincronización con almacén Km 22"
+              >
+                <Truck className="w-3.5 h-3.5 text-amber-400" />
+                <span>STOCK MÓVIL 4X4</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  if (filteredAndSortedParts.length > 0) {
+                    setBinLabelPart(filteredAndSortedParts[0]);
+                  }
+                }}
+                className="p-2 rounded-[3px] text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer border bg-slate-100 dark:bg-zinc-900 hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-200 border-slate-300 dark:border-zinc-800 shadow-xs"
+                title="Generar rótulos autoadhesivos Zebra/Avery 100x50mm para racks de almacén"
+              >
+                <Tag className="w-3.5 h-3.5 text-amber-400" />
+                <span>RÓTULOS ZEBRA</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setShowSchematic(!showSchematic)}
+                className={`p-2 rounded-[3px] text-[10px] font-black uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-xs ${
+                  showSchematic
+                    ? 'bg-zinc-800 text-amber-400 border border-amber-500/80 shadow-md'
+                    : 'bg-amber-500 hover:bg-amber-400 text-black'
+                }`}
+              >
+                <Crosshair className="w-3.5 h-3.5" />
+                <span>{showSchematic ? 'OCULTAR ESQUEMA' : 'ESQUEMA INTERACTIVO'}</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
