@@ -23,7 +23,8 @@ import {
   ExternalLink,
   ChevronDown,
   QrCode,
-  Mountain
+  Mountain,
+  Wrench
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { TMDLogo } from '../common/BrandLogos';
@@ -495,24 +496,24 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
             <span className="text-[9px] text-zinc-400 font-mono">11 Especialidades</span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 font-mono">
             <button
               onClick={() => handleActionNavigate('#/service')}
-              className="p-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-500 transition-colors flex items-center justify-between cursor-pointer"
+              className="p-2 rounded-[4px] bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-400 transition-colors flex items-center justify-between cursor-pointer"
             >
               <div className="min-w-0">
-                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate">Taller Central</span>
-                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">12 Bahías & Overhaul</span>
+                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate uppercase font-display">Taller Central</span>
+                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">18 Bahías 350 Bar</span>
               </div>
               <ChevronRight className="w-3 h-3 text-zinc-400 shrink-0" />
             </button>
 
             <button
               onClick={() => handleActionNavigate('#/emergency-dispatch')}
-              className="p-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-left hover:border-rose-500 transition-colors flex items-center justify-between cursor-pointer"
+              className="p-2 rounded-[4px] bg-rose-500/10 border border-rose-500/30 text-left hover:border-rose-500 transition-colors flex items-center justify-between cursor-pointer"
             >
               <div className="min-w-0">
-                <span className="text-xs font-bold text-rose-700 dark:text-rose-400 block truncate">SOS 24/7 en Obra</span>
+                <span className="text-xs font-bold text-rose-700 dark:text-rose-400 block truncate uppercase font-display">SOS 24/7 en Obra</span>
                 <span className="text-[9px] text-rose-600/70 dark:text-rose-400/70 block truncate">Taller Móvil 4x4</span>
               </div>
               <ChevronRight className="w-3 h-3 text-rose-400 shrink-0" />
@@ -520,32 +521,32 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
 
             <button
               onClick={() => handleActionNavigate('#/oil-lab')}
-              className="p-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-500 transition-colors flex items-center justify-between cursor-pointer"
+              className="p-2 rounded-[4px] bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-400 transition-colors flex items-center justify-between cursor-pointer"
             >
               <div className="min-w-0">
-                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate">Lab de Aceites</span>
-                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">Espectrometría S.O.S.</span>
+                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate uppercase font-display">Lab de Aceites</span>
+                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">ISO 4406 S.O.S.</span>
               </div>
               <ChevronRight className="w-3 h-3 text-zinc-400 shrink-0" />
             </button>
 
             <button
               onClick={() => handleActionNavigate('#/livelink')}
-              className="p-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-500 transition-colors flex items-center justify-between cursor-pointer"
+              className="p-2 rounded-[4px] bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-400 transition-colors flex items-center justify-between cursor-pointer"
             >
               <div className="min-w-0">
-                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate">JCB LiveLink™</span>
-                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">GPS & Horómetros</span>
+                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate uppercase font-display">JCB LiveLink™</span>
+                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">GPS & Telemetría</span>
               </div>
               <ChevronRight className="w-3 h-3 text-zinc-400 shrink-0" />
             </button>
 
             <button
               onClick={() => handleActionNavigate('#/trade-in')}
-              className="p-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-500 transition-colors flex items-center justify-between cursor-pointer"
+              className="p-2 rounded-[4px] bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-400 transition-colors flex items-center justify-between cursor-pointer"
             >
               <div className="min-w-0">
-                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate">Trade-In Usados</span>
+                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate uppercase font-display">Trade-In Usados</span>
                 <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">Avalúo en 24h</span>
               </div>
               <ChevronRight className="w-3 h-3 text-zinc-400 shrink-0" />
@@ -553,11 +554,11 @@ export const MobileTabletIndustrialMenu: React.FC<MobileTabletIndustrialMenuProp
 
             <button
               onClick={() => handleActionNavigate('#/about')}
-              className="p-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-500 transition-colors flex items-center justify-between cursor-pointer"
+              className="p-2 rounded-[4px] bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-left hover:border-amber-400 transition-colors flex items-center justify-between cursor-pointer"
             >
               <div className="min-w-0">
-                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate">Sobre TMD</span>
-                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">Directiva & Historia</span>
+                <span className="text-xs font-bold text-zinc-900 dark:text-white block truncate uppercase font-display">Sobre TMD</span>
+                <span className="text-[9px] text-zinc-500 dark:text-zinc-400 block truncate">Directiva & Sede</span>
               </div>
               <ChevronRight className="w-3 h-3 text-zinc-400 shrink-0" />
             </button>
