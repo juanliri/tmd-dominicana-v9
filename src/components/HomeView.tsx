@@ -133,6 +133,43 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onSelectMachine 
 
   return (
     <div className="relative">
+      {/* Top Laboratory Bar for 1-click instant comparison */}
+      <div className="sticky top-0 z-40 bg-zinc-950/95 border-b border-amber-500/40 backdrop-blur-xl px-4 py-2.5 shadow-xl">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            <span className="font-mono text-amber-400 font-bold tracking-wider uppercase">
+              MODO COMPARATIVO TMD
+            </span>
+            <span className="text-zinc-600 hidden sm:inline">|</span>
+            <span className="text-zinc-400 hidden sm:inline text-[11px]">
+              Compara las 4 opciones de Homepage en vivo:
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-0.5">
+            {[
+              { id: 'via3', label: '💎 Vía 3: Híbrida (Recomendada)' },
+              { id: 'via2', label: '👑 Vía 2: Flagship Dealership' },
+              { id: 'via1', label: '⚡ Vía 1: Cockpit B2B' },
+              { id: 'original', label: '🏛️ Original: V9 Clásica' }
+            ].map((v) => (
+              <button
+                key={v.id}
+                onClick={() => handleSelectVariant(v.id as HomepageVariant)}
+                className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all whitespace-nowrap cursor-pointer ${
+                  currentVariant === v.id
+                    ? 'bg-amber-500 text-zinc-950 shadow-md shadow-amber-500/30 font-black'
+                    : 'bg-zinc-900 text-zinc-400 hover:text-white border border-zinc-800 hover:border-zinc-700'
+                }`}
+              >
+                {v.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <HomepageErrorBoundary fallbackVariant={() => handleSelectVariant('via2')}>
         {/* Dynamic View Rendering based on user preference */}
         {currentVariant === 'via2' && (

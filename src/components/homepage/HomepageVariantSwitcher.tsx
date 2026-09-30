@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Layers, Check, Sparkles, ChevronUp, ChevronDown, X, Info } from 'lucide-react';
 import { triggerHaptic } from '../../utils/haptics';
 
@@ -14,6 +15,11 @@ export const HomepageVariantSwitcher: React.FC<HomepageVariantSwitcherProps> = (
   onSelectVariant,
 }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(true);
+  const [mounted, setMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const variantsList: {
     id: HomepageVariant;
@@ -57,8 +63,10 @@ export const HomepageVariantSwitcher: React.FC<HomepageVariantSwitcherProps> = (
     },
   ];
 
-  return (
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-xl px-4 pointer-events-none">
+  if (!mounted) return null;
+
+  return createPortal(
+    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[99999] w-full max-w-xl px-4 pointer-events-none">
       <div className="pointer-events-auto bg-zinc-950/95 text-white rounded-2xl border border-amber-500/50 shadow-[0_12px_40px_rgba(0,0,0,0.85)] backdrop-blur-xl overflow-hidden transition-all duration-300">
         
         {/* Header Bar */}
@@ -140,6 +148,7 @@ export const HomepageVariantSwitcher: React.FC<HomepageVariantSwitcherProps> = (
         )}
 
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
