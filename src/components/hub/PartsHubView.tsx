@@ -196,19 +196,19 @@ export const PartsHubView: React.FC<PartsHubProps> = ({ onNavigate, onOpenVinMod
 
       {/* 3. QUICK STATS STRIP */}
       <div className="border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#0c0c10]">
-        <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-5 grid grid-cols-2 lg:grid-cols-4 gap-3">
           {PARTS_HERO_STATS.map((stat, idx) => {
             const Icon = stat.icon;
             return (
-              <div key={idx} className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-zinc-900/60 border border-slate-200/60 dark:border-white/[0.04]">
-                <div className="p-2.5 rounded-lg bg-amber-400/10 text-amber-600 dark:text-amber-400 shrink-0">
+              <div key={idx} className="flex items-center gap-3 p-3.5 rounded-[4px] bg-slate-50 dark:bg-zinc-900/80 border border-slate-200/80 dark:border-zinc-800">
+                <div className="p-2.5 rounded-[4px] bg-amber-400/10 text-amber-600 dark:text-amber-400 shrink-0 border border-amber-500/20">
                   <Icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-lg font-black text-slate-900 dark:text-white leading-none">
+                  <div className="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-none font-mono">
                     {stat.value}
                   </div>
-                  <div className="text-xs font-semibold text-slate-500 dark:text-zinc-400 mt-0.5">
+                  <div className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 mt-1 uppercase tracking-wider">
                     {stat.label}
                   </div>
                 </div>
@@ -222,44 +222,44 @@ export const PartsHubView: React.FC<PartsHubProps> = ({ onNavigate, onOpenVinMod
       <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 block mb-1">
+            <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 block mb-1 font-mono">
               Catálogo de Mantenimiento & Desgaste
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black uppercase text-slate-900 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl font-black uppercase text-slate-900 dark:text-white font-display">
               Explorar por Categoría de Repuesto
             </h2>
           </div>
           <button
             onClick={() => onNavigate('#/parts')}
-            className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 hover:underline cursor-pointer"
+            className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 hover:underline cursor-pointer font-mono"
           >
             <span>Ver Catálogo Completo (35K+ Ítems)</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {PARTS_CATEGORIES.map((cat) => (
             <div
               key={cat.id}
               onClick={() => onNavigate(cat.route)}
-              className="group rounded-2xl bg-white dark:bg-[#0c0c10] border border-slate-200/80 dark:border-white/[0.08] hover:border-amber-400 dark:hover:border-amber-400/60 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between"
+              className="group rounded-[6px] bg-white dark:bg-zinc-900/90 border border-slate-200/90 dark:border-zinc-800 hover:border-amber-400 dark:hover:border-amber-500/50 overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col justify-between"
             >
-              <div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-zinc-800">
+              <div className="relative h-48 overflow-hidden bg-zinc-950">
                 <img
                   src={cat.image}
                   alt={cat.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t ${cat.accent} via-black/40 to-transparent`} />
                 <div className="absolute top-3 left-3">
-                  <span className="px-2 py-0.5 rounded-[4px] bg-black/70 backdrop-blur-md border border-white/20 text-[10px] font-black uppercase tracking-wider text-white">
+                  <span className="px-2 py-0.5 rounded-[3px] bg-black/70 backdrop-blur-xs border border-white/20 text-[10px] font-mono font-black uppercase tracking-wider text-white">
                     {cat.badge}
                   </span>
                 </div>
                 <div className="absolute bottom-3 right-3">
-                  <span className="px-2 py-0.5 rounded-[4px] bg-amber-400 text-black text-[10px] font-black uppercase">
+                  <span className="px-2 py-0.5 rounded-[3px] bg-amber-400 text-black text-[10px] font-mono font-black uppercase">
                     {cat.count}
                   </span>
                 </div>
@@ -267,16 +267,16 @@ export const PartsHubView: React.FC<PartsHubProps> = ({ onNavigate, onOpenVinMod
 
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-base font-black text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                  <h3 className="text-base font-black text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors font-display uppercase tracking-wide">
                     {cat.name}
                   </h3>
                   <p className="mt-1.5 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-medium">
                     {cat.subtitle}
                   </p>
                 </div>
-                <div className="mt-4 pt-4 border-t border-slate-100 dark:border-white/[0.06] flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-700 dark:text-zinc-300">Consultar modelos</span>
-                  <div className="p-1.5 rounded-lg bg-slate-100 dark:bg-zinc-800 group-hover:bg-amber-400 group-hover:text-black transition-all">
+                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-zinc-800 flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold text-slate-700 dark:text-zinc-300">Consultar modelos</span>
+                  <div className="p-1.5 rounded-[3px] bg-slate-100 dark:bg-zinc-800 group-hover:bg-amber-400 group-hover:text-black transition-all">
                     <ChevronRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
@@ -306,17 +306,17 @@ export const PartsHubView: React.FC<PartsHubProps> = ({ onNavigate, onOpenVinMod
               <button
                 key={brand.id}
                 onClick={() => onNavigate(`#/parts?brand=${brand.id}`)}
-                className="p-4 rounded-xl bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-white/[0.06] hover:border-amber-400 text-left transition-all group cursor-pointer shadow-2xs"
+                className="p-4 rounded-[4px] bg-white dark:bg-zinc-900 border border-slate-200/90 dark:border-zinc-800 hover:border-amber-400 text-left transition-all group cursor-pointer shadow-2xs"
               >
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-black text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400">
+                  <span className="text-xs font-black text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 font-display uppercase">
                     {brand.name}
                   </span>
                   <span className="text-[9px] font-mono font-bold text-slate-400 dark:text-zinc-500">
                     {brand.country}
                   </span>
                 </div>
-                <div className="text-[10px] text-slate-500 dark:text-zinc-400 line-clamp-1">
+                <div className="text-[10px] text-slate-500 dark:text-zinc-400 line-clamp-1 font-sans">
                   {brand.category}
                 </div>
               </button>
@@ -326,13 +326,13 @@ export const PartsHubView: React.FC<PartsHubProps> = ({ onNavigate, onOpenVinMod
       </div>
 
       {/* 6. BOTTOM TRUST & CTA BANNER */}
-      <div className="bg-gradient-to-r from-amber-500 to-amber-600 text-black py-10 px-4 sm:px-6 lg:px-10 xl:px-12">
+      <div className="bg-amber-400 border-t border-amber-500 text-black py-10 px-4 sm:px-6 lg:px-10 xl:px-12">
         <div className="max-w-[1780px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight">
+            <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight font-display">
               ¿Requieres Asistencia Técnica para Identificar tu Repuesto?
             </h3>
-            <p className="text-xs sm:text-sm text-black/80 font-medium mt-1">
+            <p className="text-xs sm:text-sm text-black/80 font-medium mt-1 font-sans">
               Envía la foto de la placa de tu máquina o el número de serie por WhatsApp a nuestros ingenieros en Km 22.
             </p>
           </div>
@@ -341,13 +341,13 @@ export const PartsHubView: React.FC<PartsHubProps> = ({ onNavigate, onOpenVinMod
               href="https://wa.me/18095601234?text=Hola%20TMD,%20tengo%20foto%20de%20la%20placa%20de%20mi%20maquina%20para%20un%20repuesto"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl bg-black hover:bg-zinc-800 text-white font-black text-xs uppercase tracking-wider transition-all cursor-pointer shadow-lg"
+              className="px-6 py-3.5 rounded-[4px] bg-black hover:bg-zinc-900 text-white font-black text-xs uppercase tracking-wider transition-all cursor-pointer shadow-lg font-mono"
             >
               Contactar Asesor de Repuestos
             </a>
             <button
               onClick={() => onNavigate('#/parts')}
-              className="px-6 py-3 rounded-xl bg-white/20 hover:bg-white/30 text-black font-black text-xs uppercase tracking-wider transition-all cursor-pointer"
+              className="px-6 py-3.5 rounded-[4px] bg-black/10 hover:bg-black/20 text-black font-black text-xs uppercase tracking-wider transition-all cursor-pointer font-mono border border-black/20"
             >
               Ver Catálogo Online
             </button>

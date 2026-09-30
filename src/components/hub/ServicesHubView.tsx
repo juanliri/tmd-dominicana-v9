@@ -15,7 +15,9 @@ import {
   GraduationCap, 
   RotateCcw,
   CheckCircle2,
-  Calendar
+  Calendar,
+  Layers,
+  Cpu
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -25,87 +27,97 @@ interface ServicesHubProps {
 }
 
 const SERVICES_HERO_STATS = [
-  { value: '8 Bahías', label: 'Taller Central Km 22', icon: Wrench },
-  { value: '2 Horas', label: 'Respuesta SOS en Obra', icon: Clock },
-  { value: 'Bosch / Delphi', label: 'Laboratorio de Inyección', icon: FlaskConical },
-  { value: '24/7 Satélite', label: 'Telemetría LiveLink™', icon: Radio },
+  { value: '18 BAHÍAS', label: 'Taller Central Km 22 (350 Bar)', icon: Wrench },
+  { value: '< 2 HORAS', label: 'Despacho Móvil SOS en Obra', icon: Clock },
+  { value: 'BOSCH / DELPHI', label: 'Laboratorio de Inyección & Aceites', icon: FlaskConical },
+  { value: 'LIVELINK™ 24/7', label: 'Telemetría Satelital IoT', icon: Radio },
 ];
 
 const MAIN_SERVICE_PILLARS = [
   {
     id: 'taller-central',
     title: 'Taller Central de Alta Capacidad (Km 22)',
-    subtitle: '8 bahías de servicio pesado, banco de prueba de cilindros hidráulicos y puente grúa de 25 toneladas',
+    subtitle: '18 bahías industriales de servicio pesado, banco de prueba dinamométrico de 350 Bar y puente grúa de 25 toneladas para overhauls completos.',
     image: '/assets/machinery/high_tech_heavy_machinery_overhaul_workshop.jpg',
     route: '#/service',
-    actionText: 'Agendar Bahía',
-    badge: 'Sede Duarte'
+    actionText: 'Agendar Bahía en Taller',
+    badge: '18 BAHÍAS · 350 BAR',
+    specs: ['Banco Hidráulico 350 Bar', 'Puente Grúa 25T', 'Torno & Soldadura Pesada']
   },
   {
     id: 'sos-movil',
     title: 'Taller Móvil SOS 24/7 en Obra',
-    subtitle: 'Flota 4x4 equipada con planta eléctrica, compresor de aire, lubricación rápida y kit de mangueras hidráulicas',
+    subtitle: 'Flota 4x4 de respuesta inmediata equipada con generador autónomo, compresor de alta presión, lubricación neumática y prensado de mangueras in situ.',
     image: '/images/video_ch4_taller.jpg',
     route: '#/emergency-dispatch',
-    actionText: 'Despacho de Emergencia',
-    badge: 'Nivel Nacional'
+    actionText: 'Solicitar Despacho Urgente',
+    badge: 'COBERTURA NACIONAL',
+    specs: ['Llegada < 2h en Corredor Central', 'Prensa Parker 4 Mallas', 'Técnicos Certificados']
   },
   {
     id: 'laboratorio-diesel',
-    title: 'Laboratorio de Inyección Diésel & Aceites',
-    subtitle: 'Calibración Common Rail, prueba de inyectores piezoeléctricos y análisis espectrométrico de fluidos SOS',
+    title: 'Laboratorio de Inyección Diésel & Análisis Tribológico',
+    subtitle: 'Banco computarizado de calibración Common Rail Bosch/Delphi, limpieza ultrasónica y espectrometría ICP de fluidos bajo norma ISO 4406.',
     image: '/assets/machinery/certified_diesel_injection_common_rail_testing.jpg',
     route: '#/oil-lab',
-    actionText: 'Solicitar Análisis',
-    badge: 'Norma ISO 4406'
+    actionText: 'Solicitar Análisis de Aceite',
+    badge: 'NORMA ISO 4406',
+    specs: ['Espectrometría ICP en 24h', 'Calibración Common Rail', 'Prevención Preventiva']
   },
   {
     id: 'livelink-telemetria',
-    title: 'Centro Satelital LiveLink™ Fleet',
-    subtitle: 'Monitoreo remoto de códigos de falla DTC en tiempo real, horómetros, geocercas y alertas de seguridad',
+    title: 'Centro de Telemetría Satelital LiveLink™',
+    subtitle: 'Monitoreo de telemetría IoT en vivo, diagnóstico remoto de códigos DTC, horómetros satelitales, geocercas activas y consumo de combustible.',
     image: '/images/tmd_portal_telematics.jpg',
     route: '#/livelink',
-    actionText: 'Acceso a Telemetría',
-    badge: 'JCB & LiuGong'
+    actionText: 'Acceso a Consola Satelital',
+    badge: 'IoT SATELITAL 24/7',
+    specs: ['Alertas de Falla DTC', 'Geocercas Satelitales', 'Reportes Automáticos']
   }
 ];
 
 const SPECIALIZED_PROGRAMS = [
   {
     title: 'Contratos Preventivos PMA',
-    desc: 'Planes de mantenimiento programado por horas de motor para maximizar el valor de reventa.',
+    desc: 'Planes de mantenimiento programado por horómetro (250h, 500h, 1000h) con repuestos 100% genuinos.',
     icon: ShieldCheck,
-    route: '#/pma-contracts'
+    route: '#/pma-contracts',
+    badge: 'GARANTÍA TOTAL'
   },
   {
     title: 'Calculadora de Costo Total (TCO)',
-    desc: 'Simule costo por hora de operación, depreciación y consumo de diésel.',
+    desc: 'Simulación financiera de costo por hora operativa, consumo de combustible y valor residual.',
     icon: Calculator,
-    route: '#/tco'
+    route: '#/tco',
+    badge: 'ANÁLISIS FINANCIERO'
   },
   {
     title: 'Evaluador de Trade-In',
-    desc: 'Tasación técnica de su maquinaria usada como abono a equipo nuevo 2026.',
+    desc: 'Tasación técnica transparente de su flota usada como abono directo para renovación 2026.',
     icon: RotateCcw,
-    route: '#/trade-in'
+    route: '#/trade-in',
+    badge: 'VALUACIÓN 24H'
   },
   {
     title: 'Academia de Operadores',
-    desc: 'Certificación técnica de conductores y operadores de excavadora en Km 22.',
+    desc: 'Capacitación técnica y certificación de operadores de maquinaria pesada en nuestro circuito de Km 22.',
     icon: GraduationCap,
-    route: '#/academy'
+    route: '#/academy',
+    badge: 'CERTIFICACIÓN'
   },
   {
-    title: 'Programa Remanufactura OEM',
-    desc: 'Motores y bombas reconstruidos con garantía oficial de fábrica al 60% del costo nuevo.',
+    title: 'Remanufactura OEM Certificada',
+    desc: 'Componentes mayores reconstruidos con tolerancias originales y 1 año de garantía al 60% del costo.',
     icon: Wrench,
-    route: '#/reman'
+    route: '#/reman',
+    badge: 'AHORRO 40%'
   },
   {
-    title: 'Fichas Técnicas & Catálogos CAD',
-    desc: 'Biblioteca técnica descargable en PDF con curvas de carga y diagramas hidráulicos.',
+    title: 'Bóveda Técnica & Diagramas CAD',
+    desc: 'Descarga inmediata de manuales de taller, fichas de homologación MOPC y esquemas hidráulicos.',
     icon: FileText,
-    route: '#/tech-docs'
+    route: '#/tech-docs',
+    badge: 'DOCUMENTACIÓN'
   }
 ];
 
@@ -113,48 +125,62 @@ export const ServicesHubView: React.FC<ServicesHubProps> = ({ onNavigate, onOpen
   return (
     <div className="w-full min-h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-white transition-colors duration-300">
       
-      {/* 1. BREADCRUMBS */}
-      <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-3 border-b border-slate-200/80 dark:border-white/[0.06] text-xs font-semibold text-slate-500 dark:text-zinc-400 flex items-center gap-2">
-        <button onClick={() => onNavigate('#/home')} className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors cursor-pointer">
-          Inicio
-        </button>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-zinc-600" />
-        <span className="text-slate-900 dark:text-white font-bold">Centro de Servicios Técnicos & Postventa</span>
+      {/* 1. BREADCRUMBS & CAD RETICLE BAR */}
+      <div className="border-b border-slate-200/80 dark:border-white/[0.06] bg-slate-100/70 dark:bg-zinc-900/60 backdrop-blur-md">
+        <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-2.5 flex items-center justify-between text-xs">
+          <div className="flex items-center gap-2 font-mono text-[11px] text-slate-500 dark:text-zinc-400">
+            <button onClick={() => onNavigate('#/home')} className="hover:text-amber-500 dark:hover:text-amber-400 transition-colors cursor-pointer">
+              INICIO
+            </button>
+            <ChevronRight className="w-3 h-3 text-slate-400 dark:text-zinc-600" />
+            <span className="text-slate-900 dark:text-white font-bold uppercase tracking-wider">
+              CENTRO DE SERVICIOS TÉCNICOS & POSTVENTA (KM 22)
+            </span>
+          </div>
+
+          <div className="hidden md:flex items-center gap-4 font-mono text-[10px] text-zinc-400">
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              18 BAHÍAS ACTIVAS
+            </span>
+            <span className="text-zinc-600">|</span>
+            <span>GPS: 18.5631° N, 70.0442° W</span>
+          </div>
+        </div>
       </div>
 
-      {/* 2. HERO BANNER WITH 4K DEALERSHIP & WORKSHOP BAYS BACKGROUND */}
-      <div className="relative overflow-hidden bg-zinc-950 text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-white/10">
-        {/* 4K Background Imagery with Ambient Dimming & Specular Gold Glow */}
+      {/* 2. HERO BANNER - 4K DEALERSHIP & WORKSHOP BAYS */}
+      <section className="relative overflow-hidden bg-zinc-950 text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-10 xl:px-12 border-b border-white/10">
         <img
           src="/assets/images/tmd_dealership_bg_1790439101712.jpg"
-          alt="TMD Dominicana Centro de Servicios Técnicos & Postventa"
-          className="absolute inset-0 w-full h-full object-cover object-right md:object-center opacity-85"
+          alt="TMD Dominicana Centro de Servicios Técnicos Km 22"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-85"
         />
-        {/* Layered Vignettes for Perfect Text Contrast */}
-        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/75 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-black/30" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(245,158,11,0.18)_0%,transparent_60%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-zinc-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-black/30" />
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-[1780px] mx-auto relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/20 backdrop-blur-md border border-amber-400/40 text-amber-400 text-xs font-black uppercase tracking-wider mb-4 shadow-lg shadow-amber-500/10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[4px] bg-amber-400/20 backdrop-blur-md border border-amber-400/40 text-amber-400 text-xs font-black uppercase tracking-wider mb-4 shadow-lg shadow-amber-500/10 font-mono">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Soporte Técnico de Nivel OEM en República Dominicana</span>
+              <span>Infraestructura Certificada de Nivel OEM en RD</span>
             </div>
+            
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight text-white leading-tight font-display">
               Ingeniería de Servicio <br />
-              <span className="text-amber-400">& Mantenimiento en Patio y Obra</span>
+              <span className="text-amber-400">& Soporte en Patio y Obra</span>
             </h1>
+            
             <p className="mt-4 text-sm sm:text-base text-zinc-200 leading-relaxed font-normal max-w-2xl font-sans">
-              Infraestructura certificada en Km 22 Autopista Duarte con 8 bahías industriales, unidades móviles de 
-              rescate en carretera, banco de prueba diésel y monitoreo satelital en vivo para que su proyecto nunca se detenga.
+              Infraestructura central en Km 22 Autopista Duarte con <strong className="text-white">18 bahías industriales de 350 Bar</strong>, unidades móviles de rescate en carretera 4x4, laboratorio de inyección computarizado y telemetría satelital en vivo para garantizar cero tiempo muerto en sus frentes de trabajo.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-3">
               {onOpenBayBooking ? (
                 <button
                   onClick={onOpenBayBooking}
-                  className="px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-black text-xs uppercase tracking-wider transition-all shadow-lg shadow-amber-400/25 flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-3.5 rounded-[4px] bg-amber-400 hover:bg-amber-300 text-black font-black text-xs uppercase tracking-wider transition-all shadow-lg shadow-amber-400/20 flex items-center gap-2 cursor-pointer active:scale-[0.98]"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>Reservar Bahía en Taller</span>
@@ -162,39 +188,51 @@ export const ServicesHubView: React.FC<ServicesHubProps> = ({ onNavigate, onOpen
               ) : (
                 <button
                   onClick={() => onNavigate('#/service')}
-                  className="px-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-black font-black text-xs uppercase tracking-wider transition-all shadow-lg shadow-amber-400/25 flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-3.5 rounded-[4px] bg-amber-400 hover:bg-amber-300 text-black font-black text-xs uppercase tracking-wider transition-all shadow-lg shadow-amber-400/20 flex items-center gap-2 cursor-pointer active:scale-[0.98]"
                 >
                   <Wrench className="w-4 h-4" />
-                  <span>Conocer Nuestro Taller</span>
+                  <span>Conocer Taller Central Km 22</span>
                 </button>
               )}
+              
+              <button
+                onClick={() => onNavigate('#/emergency-dispatch')}
+                className="px-6 py-3.5 rounded-[4px] bg-zinc-900/90 hover:bg-zinc-800 text-white font-bold text-xs uppercase tracking-wider border border-white/20 transition-all flex items-center gap-2 cursor-pointer backdrop-blur-md active:scale-[0.98]"
+              >
+                <Truck className="w-4 h-4 text-amber-400" />
+                <span>Despacho SOS Móvil 24/7</span>
+              </button>
+
               <a
                 href="tel:18095601234"
-                className="px-6 py-3.5 rounded-xl bg-red-600/30 hover:bg-red-600/40 border border-red-500/50 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2"
+                className="px-5 py-3.5 rounded-[4px] bg-red-600/30 hover:bg-red-600/50 border border-red-500/50 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2"
               >
                 <Phone className="w-4 h-4 text-red-400" />
-                <span>Línea SOS Emergencias (809) 560-1234</span>
+                <span>Emergencias: (809) 560-1234</span>
               </a>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* 3. HERO STATS */}
-      <div className="border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#0c0c10]">
-        <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* 3. HERO STATS (CAD MONOSPACE CONSOLE) */}
+      <section className="border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#0c0c10]">
+        <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-4 grid grid-cols-2 lg:grid-cols-4 gap-3">
           {SERVICES_HERO_STATS.map((stat, idx) => {
             const Icon = stat.icon;
             return (
-              <div key={idx} className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-zinc-900/60 border border-slate-200/60 dark:border-white/[0.04]">
-                <div className="p-2.5 rounded-lg bg-amber-400/10 text-amber-600 dark:text-amber-400 shrink-0">
+              <div 
+                key={idx} 
+                className="flex items-center gap-3 p-3.5 rounded-[4px] bg-slate-50 dark:bg-zinc-900/80 border border-slate-200/80 dark:border-zinc-800 transition-colors"
+              >
+                <div className="p-2.5 rounded-[4px] bg-amber-400/10 text-amber-600 dark:text-amber-400 shrink-0 border border-amber-500/20">
                   <Icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-lg font-black text-slate-900 dark:text-white leading-none">
+                  <div className="text-base sm:text-lg font-black text-slate-900 dark:text-white font-mono tracking-tight">
                     {stat.value}
                   </div>
-                  <div className="text-xs font-semibold text-slate-500 dark:text-zinc-400 mt-0.5">
+                  <div className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-wider">
                     {stat.label}
                   </div>
                 </div>
@@ -202,54 +240,82 @@ export const ServicesHubView: React.FC<ServicesHubProps> = ({ onNavigate, onOpen
             );
           })}
         </div>
-      </div>
+      </section>
 
-      {/* 4. MAIN 4 PILLARS */}
-      <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12">
-        <div className="mb-8">
-          <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 block mb-1">
-            Pilares Operativos
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-black uppercase text-slate-900 dark:text-white">
-            Infraestructura Técnica de Respaldo
-          </h2>
+      {/* 4. MAIN 4 PILLARS (CAD INDUSTRIAL HIGH-DENSITY CARDS) */}
+      <section className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12 lg:py-16">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="w-2 h-2 rounded-full bg-amber-400" />
+              <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 font-mono">
+                Pilares Operativos Homologados
+              </span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black uppercase text-slate-900 dark:text-white font-display">
+              Infraestructura Técnica de Respaldo
+            </h2>
+          </div>
+          <button
+            onClick={() => onNavigate('#/service')}
+            className="flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline uppercase tracking-wider font-mono cursor-pointer"
+          >
+            <span>Ver Ficha Técnica Completa de Taller</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {MAIN_SERVICE_PILLARS.map((pillar) => (
             <div
               key={pillar.id}
-              className="rounded-2xl bg-white dark:bg-[#0c0c10] border border-slate-200/80 dark:border-white/[0.08] overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              className="rounded-[6px] bg-white dark:bg-zinc-900/90 border border-slate-200/90 dark:border-zinc-800 overflow-hidden shadow-sm hover:border-amber-400 dark:hover:border-amber-500/50 transition-all duration-300 flex flex-col justify-between group"
             >
-              <div className="relative h-56 overflow-hidden bg-slate-100 dark:bg-zinc-800">
+              <div className="relative h-60 overflow-hidden bg-zinc-950">
                 <img
                   src={pillar.image}
                   alt={pillar.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+                
                 <div className="absolute top-3 left-3">
-                  <span className="px-2.5 py-1 rounded-[4px] bg-black/70 backdrop-blur-md border border-white/20 text-[10px] font-black uppercase tracking-wider text-amber-400">
+                  <span className="px-2.5 py-1 rounded-[3px] bg-zinc-950/80 backdrop-blur-md border border-amber-400/40 text-[10px] font-mono font-black uppercase tracking-wider text-amber-400">
                     {pillar.badge}
                   </span>
                 </div>
+
                 <div className="absolute bottom-3 left-4 right-4">
-                  <h3 className="text-lg font-black text-white leading-tight">
+                  <h3 className="text-lg font-black text-white leading-tight font-display uppercase tracking-wide">
                     {pillar.title}
                   </h3>
                 </div>
               </div>
 
               <div className="p-6 flex-1 flex flex-col justify-between">
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed font-medium">
-                  {pillar.subtitle}
-                </p>
+                <div>
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-300 leading-relaxed font-medium">
+                    {pillar.subtitle}
+                  </p>
 
-                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-white/[0.06] flex items-center justify-between">
+                  {/* Micro Specs List */}
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {pillar.specs.map((spec, sIdx) => (
+                      <span 
+                        key={sIdx}
+                        className="px-2 py-1 rounded-[3px] bg-slate-100 dark:bg-zinc-800/90 border border-slate-200 dark:border-zinc-700 text-[10px] font-mono font-bold text-slate-700 dark:text-zinc-300 uppercase"
+                      >
+                        {spec}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-slate-100 dark:border-zinc-800 flex items-center justify-between">
                   <button
                     onClick={() => onNavigate(pillar.route)}
-                    className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 hover:underline cursor-pointer"
+                    className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 hover:text-amber-500 transition-colors cursor-pointer font-mono"
                   >
                     <span>{pillar.actionText}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -258,25 +324,25 @@ export const ServicesHubView: React.FC<ServicesHubProps> = ({ onNavigate, onOpen
                     href="https://wa.me/18095601234?text=Hola%20TMD,%20solicito%20asistencia%20técnica"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-semibold text-slate-500 hover:text-emerald-500 transition-colors"
+                    className="text-xs font-bold text-slate-500 hover:text-emerald-500 transition-colors font-mono"
                   >
-                    WhatsApp Soporte →
+                    WhatsApp Asesor →
                   </a>
                 </div>
               </div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* 5. SPECIALIZED PROGRAMS GRID */}
-      <div className="border-t border-slate-200/80 dark:border-white/[0.06] bg-slate-100/60 dark:bg-zinc-950 py-12">
+      {/* 5. SPECIALIZED PROGRAMS GRID (CAD CONSOLE) */}
+      <section className="border-t border-slate-200/80 dark:border-white/[0.06] bg-slate-100/60 dark:bg-zinc-950 py-12 lg:py-16">
         <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
           <div className="mb-8">
-            <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 block mb-1">
-              Soluciones Especializadas
+            <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 block mb-1 font-mono">
+              Soluciones Especializadas & Respaldo
             </span>
-            <h3 className="text-xl sm:text-2xl font-black uppercase text-slate-900 dark:text-white">
+            <h3 className="text-xl sm:text-2xl font-black uppercase text-slate-900 dark:text-white font-display">
               Herramientas y Programas de Flota
             </h3>
           </div>
@@ -288,25 +354,37 @@ export const ServicesHubView: React.FC<ServicesHubProps> = ({ onNavigate, onOpen
                 <div
                   key={idx}
                   onClick={() => onNavigate(prog.route)}
-                  className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-white/[0.06] hover:border-amber-400 text-left transition-all group cursor-pointer shadow-2xs flex items-start gap-4"
+                  className="p-5 rounded-[4px] bg-white dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800 hover:border-amber-400 dark:hover:border-amber-500/50 text-left transition-all group cursor-pointer shadow-xs flex flex-col justify-between"
                 >
-                  <div className="p-3 rounded-xl bg-amber-400/10 text-amber-600 dark:text-amber-400 shrink-0 group-hover:scale-110 transition-transform">
-                    <Icon className="w-5 h-5" />
+                  <div className="flex items-start gap-3.5">
+                    <div className="p-2.5 rounded-[4px] bg-amber-400/10 text-amber-600 dark:text-amber-400 shrink-0 border border-amber-500/20 group-hover:scale-105 transition-transform">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-[2px] bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-400 uppercase">
+                          {prog.badge}
+                        </span>
+                      </div>
+                      <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors font-display">
+                        {prog.title}
+                      </h4>
+                      <p className="mt-1.5 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-medium">
+                        {prog.desc}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
-                      {prog.title}
-                    </h4>
-                    <p className="mt-1 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-medium">
-                      {prog.desc}
-                    </p>
+
+                  <div className="mt-4 pt-3 border-t border-slate-100 dark:border-zinc-800/80 flex items-center justify-between text-[11px] font-mono font-bold text-amber-600 dark:text-amber-400 group-hover:underline">
+                    <span>EXPLORAR HERRAMIENTA</span>
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               );
             })}
           </div>
         </div>
-      </div>
+      </section>
 
     </div>
   );

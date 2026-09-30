@@ -737,7 +737,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => {
               handleCloseMegaMenuImmediately();
               handleCloseServicesDropdownImmediately();
-              handleNav('#/machinery-hub');
+              handleNav('#/machinery');
             }}
             aria-expanded={megaMenuOpen && (activeSegment === 'heavy_machinery' || activeSegment === 'construction')}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
@@ -760,7 +760,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => {
               handleCloseMegaMenuImmediately();
               handleCloseServicesDropdownImmediately();
-              handleNav('#/rental-hub');
+              handleNav('#/rental');
             }}
             aria-expanded={megaMenuOpen && (activeSegment === 'contractor_deploy' || activeSegment === 'contractors')}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
@@ -783,7 +783,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => {
               handleCloseMegaMenuImmediately();
               handleCloseServicesDropdownImmediately();
-              handleNav('#/parts-hub');
+              handleNav('#/parts');
             }}
             aria-expanded={megaMenuOpen && (activeSegment === 'parts' || activeSegment === 'parts_service')}
             className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
@@ -807,11 +807,11 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => {
                 handleCloseMegaMenuImmediately();
                 handleCloseServicesDropdownImmediately();
-                handleNav('#/services-hub');
+                handleNav('#/service');
               }}
               aria-expanded={servicesDropdownOpen}
               className={`flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-[5px] text-xs font-black tracking-wider uppercase transition-all cursor-pointer ${
-                servicesDropdownOpen || currentRoute === '#/services-hub' || ['#/service', '#/tech-docs', '#/about', '#/trade-in', '#/emergency-dispatch', '#/oil-lab', '#/livelink'].includes(currentRoute)
+                servicesDropdownOpen || currentRoute === '#/service' || currentRoute === '#/services-hub' || ['#/tech-docs', '#/about', '#/trade-in', '#/emergency-dispatch', '#/oil-lab', '#/livelink'].includes(currentRoute)
                   ? 'text-amber-800 dark:text-amber-400 bg-amber-50 dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/50 shadow-inner'
                   : 'text-slate-700 dark:text-zinc-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800/60'
               }`}

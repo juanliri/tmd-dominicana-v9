@@ -156,21 +156,21 @@ export const RentalHubView: React.FC<RentalHubProps> = ({ onNavigate }) => {
         </div>
       </div>
 
-      {/* 3. HERO STATS */}
+      {/* 3. HERO STATS (CAD CONSOLE) */}
       <div className="border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#0c0c10]">
-        <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-5 grid grid-cols-2 lg:grid-cols-4 gap-3">
           {RENTAL_HERO_STATS.map((stat, idx) => {
             const Icon = stat.icon;
             return (
-              <div key={idx} className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-zinc-900/60 border border-slate-200/60 dark:border-white/[0.04]">
-                <div className="p-2.5 rounded-lg bg-amber-400/10 text-amber-600 dark:text-amber-400 shrink-0">
+              <div key={idx} className="flex items-center gap-3 p-3.5 rounded-[4px] bg-slate-50 dark:bg-zinc-900/80 border border-slate-200/80 dark:border-zinc-800">
+                <div className="p-2.5 rounded-[4px] bg-amber-400/10 text-amber-600 dark:text-amber-400 shrink-0 border border-amber-500/20">
                   <Icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-lg font-black text-slate-900 dark:text-white leading-none">
+                  <div className="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-none font-mono">
                     {stat.value}
                   </div>
-                  <div className="text-xs font-semibold text-slate-500 dark:text-zinc-400 mt-0.5">
+                  <div className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 mt-1 uppercase tracking-wider">
                     {stat.label}
                   </div>
                 </div>
@@ -180,45 +180,45 @@ export const RentalHubView: React.FC<RentalHubProps> = ({ onNavigate }) => {
         </div>
       </div>
 
-      {/* 4. RENTAL FLEET MATRIX */}
+      {/* 4. RENTAL FLEET MATRIX (CAD INDUSTRIAL GRID) */}
       <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-12">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 block mb-1">
+            <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 block mb-1 font-mono">
               Tarifario Orientativo & Modelos
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black uppercase text-slate-900 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl font-black uppercase text-slate-900 dark:text-white font-display">
               Equipos de Renta Más Solicitados
             </h2>
           </div>
           <button
             onClick={() => onNavigate('#/rental')}
-            className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 hover:underline cursor-pointer"
+            className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 hover:underline cursor-pointer font-mono"
           >
             <span>Ver Toda la Flota de Renta</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {RENTAL_FLEET_CATEGORIES.map((item) => (
             <div
               key={item.id}
-              className="rounded-2xl bg-white dark:bg-[#0c0c10] border border-slate-200/80 dark:border-white/[0.08] overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              className="rounded-[6px] bg-white dark:bg-zinc-900/90 border border-slate-200/90 dark:border-zinc-800 hover:border-amber-400 dark:hover:border-amber-500/50 overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group cursor-pointer"
             >
-              <div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-zinc-800">
+              <div className="relative h-48 overflow-hidden bg-zinc-950">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white">
-                  <span className="text-xs font-mono font-bold bg-amber-400 text-black px-2 py-0.5 rounded-[4px]">
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white font-mono">
+                  <span className="text-xs font-bold bg-amber-400 text-black px-2 py-0.5 rounded-[3px]">
                     Día: {item.rateDay}
                   </span>
-                  <span className="text-xs font-mono font-bold bg-black/70 backdrop-blur-md border border-white/20 px-2 py-0.5 rounded-[4px]">
+                  <span className="text-xs font-bold bg-zinc-950/80 backdrop-blur-xs border border-white/20 px-2 py-0.5 rounded-[3px]">
                     Mes: {item.rateMonth}
                   </span>
                 </div>
@@ -226,21 +226,21 @@ export const RentalHubView: React.FC<RentalHubProps> = ({ onNavigate }) => {
 
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-base font-black text-slate-900 dark:text-white">
+                  <h3 className="text-base font-black text-slate-900 dark:text-white font-display uppercase tracking-wide">
                     {item.name}
                   </h3>
                   <p className="mt-1 text-xs text-slate-500 dark:text-zinc-400 font-medium">
                     {item.subtitle}
                   </p>
-                  <div className="mt-3 p-2 rounded-lg bg-slate-50 dark:bg-zinc-900/60 border border-slate-200/60 dark:border-white/[0.04] text-[11px] font-mono text-slate-600 dark:text-zinc-300">
+                  <div className="mt-3 p-2 rounded-[3px] bg-slate-50 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700 text-[11px] font-mono text-slate-700 dark:text-zinc-300">
                     {item.specs}
                   </div>
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-slate-100 dark:border-white/[0.06] flex items-center gap-2">
+                <div className="mt-4 pt-3 border-t border-slate-100 dark:border-zinc-800 flex items-center gap-2">
                   <button
                     onClick={() => onNavigate(item.route)}
-                    className="flex-1 py-2 px-3 rounded-xl bg-slate-100 dark:bg-zinc-800 hover:bg-amber-400 hover:text-black text-slate-800 dark:text-zinc-200 text-xs font-bold transition-all text-center cursor-pointer"
+                    className="flex-1 py-2 px-3 rounded-[4px] bg-slate-100 dark:bg-zinc-800 hover:bg-amber-400 hover:text-black text-slate-800 dark:text-zinc-200 text-xs font-bold transition-all text-center cursor-pointer font-mono"
                   >
                     Detalles & Disponibilidad
                   </button>
@@ -248,7 +248,7 @@ export const RentalHubView: React.FC<RentalHubProps> = ({ onNavigate }) => {
                     href={`https://wa.me/18095601234?text=Deseo%20reservar%20renta%20de%20${encodeURIComponent(item.name)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition-colors"
+                    className="p-2 rounded-[4px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 transition-colors border border-emerald-500/20"
                     title="Reservar por WhatsApp"
                   >
                     <Phone className="w-4 h-4" />
@@ -260,56 +260,56 @@ export const RentalHubView: React.FC<RentalHubProps> = ({ onNavigate }) => {
         </div>
       </div>
 
-      {/* 5. VALUE PROPOSITION: POR QUÉ RENTAR CON TMD */}
+      {/* 5. VALUE PROPOSITION: POR QUÉ RENTAR CON TMD (CAD TILES) */}
       <div className="border-t border-slate-200/80 dark:border-white/[0.06] bg-slate-100/60 dark:bg-zinc-950 py-12">
         <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400">
+          <div className="mb-8">
+            <span className="text-xs font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 block mb-1 font-mono">
               Garantía Operativa TMD
             </span>
-            <h3 className="text-xl sm:text-2xl font-black uppercase text-slate-900 dark:text-white mt-1">
+            <h3 className="text-xl sm:text-2xl font-black uppercase text-slate-900 dark:text-white font-display">
               El Estándar de Alquiler Más Riguroso de RD
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-white/[0.06]">
-              <div className="w-10 h-10 rounded-xl bg-amber-400/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="p-5 rounded-[4px] bg-white dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800">
+              <div className="w-10 h-10 rounded-[4px] bg-amber-400/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 flex items-center justify-center mb-4">
                 <Truck className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-black uppercase text-slate-900 dark:text-white">Cero Tiempos Muertos</h4>
-              <p className="mt-2 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
-                Si un equipo presenta una falla no atribuible a mala operación, nuestro taller móvil acude en menos de 2 horas o sustituimos la unidad.
+              <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white font-display">Cero Tiempos Muertos</h4>
+              <p className="mt-2 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-sans">
+                Si un equipo presenta una falla técnica, nuestro taller móvil acude en menos de 2 horas o sustituimos la unidad de inmediato.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-white/[0.06]">
-              <div className="w-10 h-10 rounded-xl bg-amber-400/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4">
+            <div className="p-5 rounded-[4px] bg-white dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800">
+              <div className="w-10 h-10 rounded-[4px] bg-amber-400/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 flex items-center justify-center mb-4">
                 <FileCheck className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-black uppercase text-slate-900 dark:text-white">Contratos Flexibles</h4>
-              <p className="mt-2 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
-                Tarifas decrecientes por volumen mensual o semestral con facturación con Comprobante Fiscal B01 para deducción tributaria.
+              <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white font-display">Contratos Homologados</h4>
+              <p className="mt-2 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-sans">
+                Tarifas decrecientes por volumen mensual o semestral con facturación fiscal NCF B01/B15 para deducción tributaria.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-white/[0.06]">
-              <div className="w-10 h-10 rounded-xl bg-amber-400/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4">
+            <div className="p-5 rounded-[4px] bg-white dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800">
+              <div className="w-10 h-10 rounded-[4px] bg-amber-400/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 flex items-center justify-center mb-4">
                 <Users className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-black uppercase text-slate-900 dark:text-white">Operadores Calificados</h4>
-              <p className="mt-2 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
-                Personal certificado con carnet de seguridad industrial y experiencia en minería, carreteras y proyectos de infraestructura.
+              <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white font-display">Operadores Certificados</h4>
+              <p className="mt-2 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-sans">
+                Personal técnico con carnet de seguridad industrial y experiencia comprobada en minería, carreteras y urbanizaciones.
               </p>
             </div>
 
-            <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-slate-200/80 dark:border-white/[0.06]">
-              <div className="w-10 h-10 rounded-xl bg-amber-400/10 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4">
+            <div className="p-5 rounded-[4px] bg-white dark:bg-zinc-900/80 border border-slate-200/90 dark:border-zinc-800">
+              <div className="w-10 h-10 rounded-[4px] bg-amber-400/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 flex items-center justify-center mb-4">
                 <Compass className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-black uppercase text-slate-900 dark:text-white">Telemetría LiveLink™</h4>
-              <p className="mt-2 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed">
-                Acceso a portal web para monitorear horómetro real, consumo de diésel y ubicación satelital de cada máquina alquilada.
+              <h4 className="text-xs font-black uppercase text-slate-900 dark:text-white font-display">Telemetría LiveLink™</h4>
+              <p className="mt-2 text-xs text-slate-500 dark:text-zinc-400 leading-relaxed font-sans">
+                Acceso en vivo a horómetros satelitales, consumo real de diésel y ubicación GPS de cada máquina en alquiler.
               </p>
             </div>
           </div>
