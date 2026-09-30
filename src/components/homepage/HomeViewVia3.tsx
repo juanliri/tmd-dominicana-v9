@@ -84,6 +84,18 @@ export const HomeViewVia3: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
     return `US$ ${monthlyUsd.toLocaleString('en-US')}/mes`;
   }, [currency, exchangeRate]);
 
+  const getMachineImg = useCallback((m?: Machine | null): string => {
+    if (!m) return '/assets/machinery/jcb_3cx_thumb.jpg';
+    if (m.image) return m.image;
+    if (Array.isArray((m as any).images) && (m as any).images[0]) return (m as any).images[0];
+    return '/assets/machinery/jcb_3cx_thumb.jpg';
+  }, []);
+
+  const getMachineCost = useCallback((m?: Machine | null): number => {
+    if (!m) return 0;
+    return m.basePriceUsd || (m as any).priceUsd || 0;
+  }, []);
+
   // Auto-rotating Hero machine
   const [heroMachineIndex, setHeroMachineIndex] = useState<number>(0);
   const [isHeroAutoPlaying, setIsHeroAutoPlaying] = useState<boolean>(true);
@@ -296,8 +308,8 @@ export const HomeViewVia3: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
               {/* Machine Photo */}
               <div className="relative h-56 sm:h-64 flex items-center justify-center p-2 group">
                 <img 
-                  src={activeHeroMachine.images[0] || '/assets/machinery/jcb_3cx_thumb.jpg'} 
-                  alt={activeHeroMachine.name}
+                  src={getMachineImg(activeHeroMachine)} 
+                  alt={activeHeroMachine?.name || 'Maquinaria TMD'}
                   className="max-h-full max-w-full object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-500"
                 />
                 <button
@@ -315,10 +327,10 @@ export const HomeViewVia3: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
               <div className="space-y-3 pt-2">
                 <div>
                   <h3 className="text-xl font-bold font-condensed text-white tracking-tight">
-                    {activeHeroMachine.name}
+                    {activeHeroMachine?.name}
                   </h3>
                   <p className="text-xs text-zinc-400 font-sans line-clamp-1">
-                    {activeHeroMachine.description}
+                    {activeHeroMachine?.description}
                   </p>
                 </div>
 
@@ -326,13 +338,13 @@ export const HomeViewVia3: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
                   <div>
                     <span className="text-[10px] font-mono text-zinc-500 block uppercase">PRECIO DIRECTO CON NCF</span>
                     <span className="text-xl sm:text-2xl font-black font-condensed text-amber-400">
-                      {formatMachineryPrice(activeHeroMachine.priceUsd)}
+                      {formatMachineryPrice(getMachineCost(activeHeroMachine))}
                     </span>
                   </div>
                   <div className="text-right">
                     <span className="text-[10px] font-mono text-zinc-500 block uppercase">LEASING ESTIMADO</span>
                     <span className="text-sm font-bold font-mono text-zinc-300">
-                      {formatLeasingEstimate(activeHeroMachine.priceUsd)}
+                      {formatLeasingEstimate(getMachineCost(activeHeroMachine))}
                     </span>
                   </div>
                 </div>
@@ -461,7 +473,7 @@ export const HomeViewVia3: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
                     className="relative h-44 flex items-center justify-center cursor-pointer p-2 overflow-hidden"
                   >
                     <img 
-                      src={machine.images[0] || '/assets/machinery/jcb_3cx_thumb.jpg'} 
+                      src={getMachineImg(machine)} 
                       alt={machine.name}
                       className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
                     />
@@ -483,13 +495,13 @@ export const HomeViewVia3: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
                     <div>
                       <span className="text-[10px] font-mono text-slate-400 dark:text-zinc-500 block uppercase">PRECIO NCF</span>
                       <span className="text-lg font-black font-condensed text-amber-500">
-                        {formatMachineryPrice(machine.priceUsd)}
+                        {formatMachineryPrice(getMachineCost(machine))}
                       </span>
                     </div>
                     <div className="text-right">
                       <span className="text-[10px] font-mono text-slate-400 dark:text-zinc-500 block uppercase">LEASING</span>
                       <span className="text-xs font-bold font-mono text-slate-700 dark:text-zinc-300">
-                        {formatLeasingEstimate(machine.priceUsd)}
+                        {formatLeasingEstimate(getMachineCost(machine))}
                       </span>
                     </div>
                   </div>
@@ -537,7 +549,7 @@ export const HomeViewVia3: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
                       className="relative h-44 flex items-center justify-center cursor-pointer p-2 overflow-hidden"
                     >
                       <img 
-                        src={machine.images[0] || '/assets/machinery/jcb_3cx_thumb.jpg'} 
+                        src={getMachineImg(machine)} 
                         alt={machine.name}
                         className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300"
                       />
@@ -556,13 +568,13 @@ export const HomeViewVia3: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
                       <div>
                         <span className="text-[10px] font-mono text-slate-400 dark:text-zinc-500 block uppercase">PRECIO NCF</span>
                         <span className="text-lg font-black font-condensed text-amber-500">
-                          {formatMachineryPrice(machine.priceUsd)}
+                          {formatMachineryPrice(getMachineCost(machine))}
                         </span>
                       </div>
                       <div className="text-right">
                         <span className="text-[10px] font-mono text-slate-400 dark:text-zinc-500 block uppercase">LEASING</span>
                         <span className="text-xs font-bold font-mono text-slate-700 dark:text-zinc-300">
-                          {formatLeasingEstimate(machine.priceUsd)}
+                          {formatLeasingEstimate(getMachineCost(machine))}
                         </span>
                       </div>
                     </div>

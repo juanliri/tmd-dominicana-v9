@@ -57,6 +57,18 @@ export const HomeViewVia1: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
     return `US$ ${monthlyUsd.toLocaleString('en-US')}/mes`;
   }, [currency, exchangeRate]);
 
+  const getMachineImg = useCallback((m?: Machine | null): string => {
+    if (!m) return '/assets/machinery/jcb_3cx_thumb.jpg';
+    if (m.image) return m.image;
+    if (Array.isArray((m as any).images) && (m as any).images[0]) return (m as any).images[0];
+    return '/assets/machinery/jcb_3cx_thumb.jpg';
+  }, []);
+
+  const getMachineCost = useCallback((m?: Machine | null): number => {
+    if (!m) return 0;
+    return m.basePriceUsd || (m as any).priceUsd || 0;
+  }, []);
+
   // Cockpit filters
   const [selectedBrand, setSelectedBrand] = useState<string>('Todas');
   const [selectedCategory, setSelectedCategory] = useState<string>('Todos');
@@ -257,7 +269,7 @@ export const HomeViewVia1: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
                   className="h-36 flex items-center justify-center p-2 cursor-pointer group"
                 >
                   <img 
-                    src={m.images[0] || '/assets/machinery/jcb_3cx_thumb.jpg'} 
+                    src={getMachineImg(m)} 
                     alt={m.name}
                     className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-200"
                   />
@@ -295,7 +307,7 @@ export const HomeViewVia1: React.FC<HomeViewProps> = ({ onNavigate, onSelectMach
                 <div>
                   <span className="text-[10px] font-mono text-slate-400 dark:text-zinc-500 block uppercase">PRECIO NCF</span>
                   <span className="text-base font-black font-condensed text-amber-500">
-                    {formatMachineryPrice(m.priceUsd)}
+                    {formatMachineryPrice(getMachineCost(m))}
                   </span>
                 </div>
 
