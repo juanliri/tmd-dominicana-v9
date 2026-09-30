@@ -121,7 +121,7 @@ export const MachineDetailFlagshipView: React.FC<MachineDetailFlagshipViewProps>
         machine,
         downPaymentPercent: financingDownPaymentPercent,
         loanTermMonths: financingMonths,
-        targetBank: selectedBank?.name || 'Banco Popular Dominicano'
+        targetBank: 'Banco Popular Dominicano'
       });
       doc.save(`Ficha_Tecnica_${machine.brand}_${machine.name.replace(/\s+/g, '_')}_TMD.pdf`);
     } catch (err) {

@@ -120,12 +120,25 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
     switch (tab) {
       case 'overview':
       case 'quotes': return 'quotes';
-      case 'orders': return 'purchases';
+      case 'orders': return 'service_history';
+      case 'service': return 'service_history';
       case 'purchases': return 'purchases';
       case 'livelink': return 'livelink_telematics';
-      case 'service': return 'service_history';
       case 'pro': return 'pro_member';
       case 'docs': return 'tech_docs';
+      case 'profile': return 'profile';
+      default: return 'quotes';
+    }
+  };
+
+  const mapClientTabToShellTab = (tab: ClientPortalTab): string => {
+    switch (tab) {
+      case 'quotes': return 'quotes';
+      case 'purchases': return 'purchases';
+      case 'livelink_telematics': return 'livelink';
+      case 'service_history': return 'orders';
+      case 'pro_member': return 'pro';
+      case 'tech_docs': return 'docs';
       case 'profile': return 'profile';
       default: return 'quotes';
     }
@@ -147,6 +160,23 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
       case 'users': return 'users';
       case 'profile': return 'profile';
       default: return 'command_center';
+    }
+  };
+
+  const mapStaffTabToShellTab = (tab: StaffPortalTab): string => {
+    switch (tab) {
+      case 'command_center': return 'command';
+      case 'office_workflow': return 'workflow';
+      case 'quotes': return 'quotes';
+      case 'orders': return 'orders';
+      case 'purchases': return 'purchases';
+      case 'livelink_telematics': return 'livelink';
+      case 'service_history': return 'orders';
+      case 'inventory_logs': return 'inventory';
+      case 'tech_docs': return 'docs';
+      case 'users': return 'users';
+      case 'profile': return 'profile';
+      default: return 'command';
     }
   };
 
@@ -214,12 +244,24 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
             createdAt: q.created_at || new Date().toISOString(),
             updatedAt: q.updated_at || new Date().toISOString()
           }));
-          if (isMounted) setQuotes(mappedQuotes);
+          const stored = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('tmd_portal_quotes') || '[]') : [];
+          const combined = [...stored.filter((sq: any) => !mappedQuotes.some(mq => mq.id === sq.id)), ...mappedQuotes];
+          if (isMounted) setQuotes(combined.length > 0 ? combined : mappedQuotes);
         } else {
-          if (isMounted) setQuotes(INITIAL_PORTAL_QUOTES);
+          const stored = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('tmd_portal_quotes') || '[]') : [];
+          if (stored.length > 0 && isMounted) {
+            setQuotes([...stored, ...INITIAL_PORTAL_QUOTES.filter(iq => !stored.some((sq: any) => sq.id === iq.id))]);
+          } else if (isMounted) {
+            setQuotes(INITIAL_PORTAL_QUOTES);
+          }
         }
       } catch (e) {
-        if (isMounted) setQuotes(INITIAL_PORTAL_QUOTES);
+        const stored = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('tmd_portal_quotes') || '[]') : [];
+        if (stored.length > 0 && isMounted) {
+          setQuotes([...stored, ...INITIAL_PORTAL_QUOTES.filter(iq => !stored.some((sq: any) => sq.id === iq.id))]);
+        } else if (isMounted) {
+          setQuotes(INITIAL_PORTAL_QUOTES);
+        }
       }
 
       // 2. Sync Work Orders from Supabase or LocalStorage
@@ -457,7 +499,7 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
             onOpenQrScanner={onOpenQrScanner}
             activeTab={mapShellTabToStaffTab(activePortalTab)}
             onTabChange={(tab) => {
-              // Internal tab sync
+              handleSelectPortalTab(mapStaffTabToShellTab(tab));
             }}
           />
         </ProtectedRoute>
@@ -481,7 +523,7 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
           onOpenQrScanner={onOpenQrScanner}
           activeTab={mapShellTabToClientTab(activePortalTab)}
           onTabChange={(tab) => {
-            // Internal tab sync
+            handleSelectPortalTab(mapClientTabToShellTab(tab));
           }}
         />
       )}

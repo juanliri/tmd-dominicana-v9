@@ -858,6 +858,7 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
               isAdmin={isAdmin}
               isStaff={isStaff}
               onNavigate={onNavigate}
+              workOrders={workOrders}
             />
           )}
 

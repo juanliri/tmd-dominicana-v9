@@ -1318,13 +1318,6 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
         unit={selectedUnit}
       />
 
-      {/* Idle Time & Fuel Waste Analytics Modal (Sprint 8 Task #50) */}
-      <IdleTimeAnalyticsModal
-        isOpen={showIdleModal}
-        onClose={() => setShowIdleModal(false)}
-        unit={selectedUnit}
-      />
-
       {/* Fuel Theft Protection & Night Sentry Modal (Sprint 9 Task #45) */}
       <FuelTheftProtectionModal
         isOpen={showFuelTheftModal}

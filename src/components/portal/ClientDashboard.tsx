@@ -808,6 +808,7 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
             isAdmin={false}
             isStaff={false}
             onNavigate={onNavigate}
+            workOrders={workOrders}
           />
         )}
 

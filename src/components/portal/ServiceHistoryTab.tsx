@@ -76,6 +76,7 @@ interface ServiceHistoryTabProps {
   isAdmin?: boolean;
   isStaff?: boolean;
   onNavigate: (route: string) => void;
+  workOrders?: ServiceWorkOrder[];
 }
 
 export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
@@ -83,7 +84,8 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
   userProfile,
   isAdmin,
   isStaff,
-  onNavigate
+  onNavigate,
+  workOrders
 }) => {
   const { checkMaintenanceReminders } = useNotifications();
   const { addToCart } = useCart();
@@ -113,6 +115,7 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
   const [showBayPlannerModal, setShowBayPlannerModal] = useState<boolean>(false);
   const [showOperatorCertModal, setShowOperatorCertModal] = useState<boolean>(false);
   const [showBatteryWarrantyModal, setShowBatteryWarrantyModal] = useState<boolean>(false);
+  const [selectedMachineForDetail, setSelectedMachineForDetail] = useState<RegisteredEquipment | null>(null);
   const [newUnitId, setNewUnitId] = useState<string>('');
   const [newBrand, setNewBrand] = useState<string>('LiuGong');
   const [newModel, setNewModel] = useState<string>('');
@@ -208,8 +211,11 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
     const local = getLocalServiceHistory().filter(
       (o) => o.clientId === currentUser.uid || o.clientId === 'guest'
     );
-    if (local.length > 0) {
-      setServiceRecords(local);
+    const initialCombined = [...(workOrders || []), ...local];
+    if (initialCombined.length > 0) {
+      const combinedMap = new Map<string, ServiceWorkOrder>();
+      initialCombined.forEach((o) => combinedMap.set(o.id || o.orderNumber, o));
+      setServiceRecords(Array.from(combinedMap.values()));
     }
 
     const workOrdersCol = collection(db, 'work_orders');
@@ -226,8 +232,9 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           fetched.push({ id: docSnap.id, ...docSnap.data() } as ServiceWorkOrder);
         });
 
-        // Merge Firestore and local cache
+        // Merge Prop WorkOrders, Firestore and local cache
         const combinedMap = new Map<string, ServiceWorkOrder>();
+        (workOrders || []).forEach((o) => combinedMap.set(o.id || o.orderNumber, o));
         local.forEach((o) => combinedMap.set(o.id || o.orderNumber, o));
         fetched.forEach((o) => combinedMap.set(o.id || o.orderNumber, o));
 
@@ -240,7 +247,10 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
       (error) => {
         clearTimeout(safetyTimeout);
         console.warn('Firestore work_orders read notice (using local cache fallback):', error);
-        setServiceRecords(local);
+        const combinedMap = new Map<string, ServiceWorkOrder>();
+        (workOrders || []).forEach((o) => combinedMap.set(o.id || o.orderNumber, o));
+        local.forEach((o) => combinedMap.set(o.id || o.orderNumber, o));
+        setServiceRecords(Array.from(combinedMap.values()));
         setLoading(false);
       }
     );

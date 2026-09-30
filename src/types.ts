@@ -38,6 +38,7 @@ export interface Machine {
   year: number;
   image: string;
   powerHp: number;
+  enginePowerHp?: number;
   operatingWeightKg: number;
   bucketCapacityM3?: number;
   engine: string;
@@ -87,6 +88,7 @@ export interface Part {
   compatibleModels: string[];
   priceUsd: number;
   stockQty: number;
+  stockKm22?: number;
   image: string;
   description: string;
   isOem: boolean;
@@ -516,11 +518,15 @@ export interface InstalledServicePart {
   id?: string;
   partNumber: string;
   name: string;
+  partName?: string;
   brand: string;
   category?: string;
   quantity: number;
   unitPriceUsd?: number;
+  unitCostUsd?: number;
   totalPriceUsd?: number;
+  totalCostUsd?: number;
+  status?: string;
   isOem?: boolean;
   warrantyPeriod?: string;
   serialBatch?: string;
@@ -746,6 +752,7 @@ export interface LiveLinkUnit {
   };
   status: 'running' | 'idle' | 'stopped' | 'offline';
   horometerHours: number;
+  operatingHours?: number;
   fuelLevelPercent: number;
   fuelConsumptionLph: number; // Liters per hour
   defLevelPercent: number;

@@ -11,7 +11,10 @@ export type HapticFeedbackType =
   | 'selection' 
   | 'success' 
   | 'warning' 
-  | 'error';
+  | 'error'
+  | 'mechanicalClick'
+  | 'successThump'
+  | 'heavyShud';
 
 export const triggerHaptic = (type: HapticFeedbackType = 'light'): void => {
   if (typeof window === 'undefined' || !('navigator' in window)) return;
@@ -19,6 +22,7 @@ export const triggerHaptic = (type: HapticFeedbackType = 'light'): void => {
   try {
     if ('vibrate' in navigator) {
       switch (type) {
+        case 'mechanicalClick':
         case 'selection':
         case 'light':
           navigator.vibrate(12);
@@ -26,9 +30,11 @@ export const triggerHaptic = (type: HapticFeedbackType = 'light'): void => {
         case 'medium':
           navigator.vibrate(28);
           break;
+        case 'heavyShud':
         case 'heavy':
           navigator.vibrate(50);
           break;
+        case 'successThump':
         case 'success':
           navigator.vibrate([15, 60, 25]);
           break;
