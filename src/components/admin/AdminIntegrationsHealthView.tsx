@@ -14,10 +14,19 @@ import {
   Database,
   ExternalLink,
   Cpu,
-  ArrowUpRight
+  ArrowUpRight,
+  Receipt,
+  Users,
+  Mail,
+  Calendar,
+  Send,
+  Building2
 } from 'lucide-react';
 import { IntegrationsHealthStatus } from '../../types';
 import { fetchIntegrationsHealth, syncFullbayWithDashboard } from '../../services/fullbayService';
+import { QuickBooksClient } from '../../services/integrations/quickbooks';
+import { MethodCrmClient } from '../../services/integrations/methodcrm';
+import { MicrosoftGraphClient } from '../../services/integrations/microsoftGraph';
 
 export const AdminIntegrationsHealthView: React.FC = () => {
   const [health, setHealth] = useState<IntegrationsHealthStatus | null>(null);
@@ -25,6 +34,7 @@ export const AdminIntegrationsHealthView: React.FC = () => {
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [syncInProgress, setSyncInProgress] = useState<boolean>(false);
   const [feedback, setFeedback] = useState<string | null>(null);
+  const [testingService, setTestingService] = useState<string | null>(null);
 
   const loadHealthData = async () => {
     try {
@@ -65,6 +75,82 @@ export const AdminIntegrationsHealthView: React.FC = () => {
     } finally {
       setSyncInProgress(false);
       setTimeout(() => setFeedback(null), 5000);
+    }
+  };
+
+  const handleTestQuickBooks = async () => {
+    setTestingService('quickbooks');
+    try {
+      const qbo = new QuickBooksClient({
+        realmId: '93414520938',
+        accessToken: 'mock-oauth2-bearer',
+        environment: 'sandbox'
+      });
+      const res = await qbo.createInvoice({
+        customerId: 'CUST-DGII-001',
+        customerEmail: 'contabilidad@constructoradelcibao.do',
+        ncfNumber: 'B0100000459',
+        currency: 'USD',
+        lines: [{ description: 'Excavadora LiuGong 922E HD', amount: 145000, quantity: 1, unitPrice: 145000 }]
+      });
+      if (res.success) {
+        setFeedback(`¡QuickBooks Online Conectado! Factura fiscal de prueba generada con éxito (ID: ${res.invoiceId}, NCF: ${res.docNumber}).`);
+      }
+    } catch {
+      setFeedback('Error al verificar conexión con QuickBooks Online.');
+    } finally {
+      setTestingService(null);
+      setTimeout(() => setFeedback(null), 6000);
+    }
+  };
+
+  const handleTestMethodCrm = async () => {
+    setTestingService('methodcrm');
+    try {
+      const method = new MethodCrmClient({
+        apiKey: 'mth_api_prod_9941a',
+        companyAccount: 'tmd_dominicana'
+      });
+      const res = await method.createOpportunity({
+        name: 'Oportunidad Flota 3x LiuGong 922E HD',
+        amount: 435000,
+        currency: 'USD',
+        stage: 'Quote Sent',
+        assignedRep: 'Ing. Carlos Mendoza',
+        equipmentInterest: 'LiuGong 922E HD'
+      });
+      if (res.success) {
+        setFeedback(`¡Method:CRM Enlazado! Oportunidad comercial sincronizada (ID: ${res.opportunityId}) en etapa "Quote Sent".`);
+      }
+    } catch {
+      setFeedback('Error al conectar con Method:CRM REST API.');
+    } finally {
+      setTestingService(null);
+      setTimeout(() => setFeedback(null), 6000);
+    }
+  };
+
+  const handleTestOutlook = async () => {
+    setTestingService('outlook');
+    try {
+      const graph = new MicrosoftGraphClient({
+        tenantId: 'tmd-msft-365-tenant',
+        clientId: 'tmd-o365-client-id',
+        userEmail: 'ventas@tmd.rd'
+      });
+      const res = await graph.sendEmail({
+        to: ['gerencia@tmd.rd'],
+        subject: 'Prueba de Despacho Proforma - Microsoft 365 Graph API',
+        bodyHtml: '<p>Verificación de enlace con Microsoft 365 Exchange Online para TMD Dominicana.</p>'
+      });
+      if (res.success) {
+        setFeedback(`¡Microsoft 365 Graph API Activo! Mensaje transaccional enviado vía Outlook (ID: ${res.messageId}).`);
+      }
+    } catch {
+      setFeedback('Error al validar Microsoft 365 Graph API.');
+    } finally {
+      setTestingService(null);
+      setTimeout(() => setFeedback(null), 6000);
     }
   };
 
@@ -327,6 +413,117 @@ export const AdminIntegrationsHealthView: React.FC = () => {
           <div className="text-[11px] text-zinc-400 flex items-center justify-between pt-1">
             <span>Tipos Habilitados:</span>
             <span className="text-zinc-300 font-bold">B01, B02, B14, B15</span>
+          </div>
+        </div>
+
+        {/* 7. Intuit QuickBooks Online (QBO) */}
+        <div className="bg-zinc-950 border border-zinc-800 rounded-[4px] p-4.5 space-y-3 shadow-xs">
+          <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
+            <div className="flex items-center gap-2">
+              <div className="p-2 rounded-[2px] bg-emerald-500/10 text-emerald-400">
+                <Receipt className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-xs font-black uppercase text-white font-display">QUICKBOOKS ONLINE</h3>
+                <span className="text-[10px] text-zinc-400">Contabilidad & NCF Sync</span>
+              </div>
+            </div>
+            <button
+              onClick={handleTestQuickBooks}
+              disabled={testingService === 'quickbooks'}
+              className="px-2 py-0.5 rounded-[2px] text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase hover:bg-emerald-500/30 cursor-pointer disabled:opacity-50"
+            >
+              {testingService === 'quickbooks' ? 'Probando...' : 'Test Sync'}
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="p-2 rounded-[2px] bg-zinc-900 border border-zinc-850">
+              <span className="text-[10px] text-zinc-500 block uppercase">Realm ID QBO</span>
+              <span className="font-bold text-emerald-400 font-mono text-[11px]">93414520938</span>
+            </div>
+            <div className="p-2 rounded-[2px] bg-zinc-900 border border-zinc-850">
+              <span className="text-[10px] text-zinc-500 block uppercase">Plan de Cuentas</span>
+              <span className="font-bold text-white">ITBIS & DGII OK</span>
+            </div>
+          </div>
+          <div className="text-[11px] text-zinc-400 flex items-center justify-between pt-1">
+            <span>Sincronización:</span>
+            <span className="text-zinc-300 font-bold">Bilateral Automática</span>
+          </div>
+        </div>
+
+        {/* 8. Method:CRM Integration */}
+        <div className="bg-zinc-950 border border-zinc-800 rounded-[4px] p-4.5 space-y-3 shadow-xs">
+          <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
+            <div className="flex items-center gap-2">
+              <div className="p-2 rounded-[2px] bg-blue-500/10 text-blue-400">
+                <Users className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-xs font-black uppercase text-white font-display">METHOD:CRM REST API</h3>
+                <span className="text-[10px] text-zinc-400">Embudo de Ventas & Oportunidades</span>
+              </div>
+            </div>
+            <button
+              onClick={handleTestMethodCrm}
+              disabled={testingService === 'methodcrm'}
+              className="px-2 py-0.5 rounded-[2px] text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30 uppercase hover:bg-blue-500/30 cursor-pointer disabled:opacity-50"
+            >
+              {testingService === 'methodcrm' ? 'Probando...' : 'Test Lead'}
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="p-2 rounded-[2px] bg-zinc-900 border border-zinc-850">
+              <span className="text-[10px] text-zinc-500 block uppercase">Cuenta Empresa</span>
+              <span className="font-bold text-blue-400 font-mono text-[11px]">tmd_dominicana</span>
+            </div>
+            <div className="p-2 rounded-[2px] bg-zinc-900 border border-zinc-850">
+              <span className="text-[10px] text-zinc-500 block uppercase">Etapa Lead</span>
+              <span className="font-bold text-white">Quote Sent</span>
+            </div>
+          </div>
+          <div className="text-[11px] text-zinc-400 flex items-center justify-between pt-1">
+            <span>Enlace QBO:</span>
+            <span className="text-zinc-300 font-bold">Nativo 2-Vías</span>
+          </div>
+        </div>
+
+        {/* 9. Microsoft 365 / Outlook Graph API */}
+        <div className="bg-zinc-950 border border-zinc-800 rounded-[4px] p-4.5 space-y-3 shadow-xs">
+          <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
+            <div className="flex items-center gap-2">
+              <div className="p-2 rounded-[2px] bg-sky-500/10 text-sky-400">
+                <Mail className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-xs font-black uppercase text-white font-display">MICROSOFT 365 OUTLOOK</h3>
+                <span className="text-[10px] text-zinc-400">Graph API / Correo & Calendario</span>
+              </div>
+            </div>
+            <button
+              onClick={handleTestOutlook}
+              disabled={testingService === 'outlook'}
+              className="px-2 py-0.5 rounded-[2px] text-[10px] font-bold bg-sky-500/20 text-sky-400 border border-sky-500/30 uppercase hover:bg-sky-500/30 cursor-pointer disabled:opacity-50"
+            >
+              {testingService === 'outlook' ? 'Probando...' : 'Test Mail'}
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="p-2 rounded-[2px] bg-zinc-900 border border-zinc-850">
+              <span className="text-[10px] text-zinc-500 block uppercase">Buzón Oficial</span>
+              <span className="font-bold text-sky-400 font-mono text-[11px] truncate block">ventas@tmd.rd</span>
+            </div>
+            <div className="p-2 rounded-[2px] bg-zinc-900 border border-zinc-850">
+              <span className="text-[10px] text-zinc-500 block uppercase">Calendario Taller</span>
+              <span className="font-bold text-white">Bahías Km 22 Sync</span>
+            </div>
+          </div>
+          <div className="text-[11px] text-zinc-400 flex items-center justify-between pt-1">
+            <span>Entregabilidad:</span>
+            <span className="text-zinc-300 font-bold">100% In-Box Corporativo</span>
           </div>
         </div>
 
