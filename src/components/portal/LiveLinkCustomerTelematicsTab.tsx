@@ -115,7 +115,7 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
   const loadData = async () => {
     try {
       const [units, sum] = await Promise.all([
-        fetchLiveLinkFleet(),
+        fetchLiveLinkFleet(currentUser?.uid, currentUser?.email || userProfile?.email || undefined),
         fetchLiveLinkSummary()
       ]);
       setFleet(units);

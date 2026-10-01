@@ -1,8 +1,12 @@
 import { LiveLinkUnit, LiveLinkTelemetrySummary } from '../types';
 
-export async function fetchLiveLinkFleet(): Promise<LiveLinkUnit[]> {
+export async function fetchLiveLinkFleet(clientId?: string, clientEmail?: string): Promise<LiveLinkUnit[]> {
   try {
-    const res = await fetch('/api/telematics/livelink/fleet');
+    const params = new URLSearchParams();
+    if (clientId) params.append('clientId', clientId);
+    if (clientEmail) params.append('clientEmail', clientEmail);
+    const qs = params.toString();
+    const res = await fetch(`/api/telematics/livelink/fleet${qs ? `?${qs}` : ''}`);
     if (!res.ok) throw new Error('Error al consultar LiveLink API');
     const data = await res.json();
     return data.units || [];

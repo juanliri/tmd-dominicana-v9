@@ -31,6 +31,48 @@ export const PIN_ACCOUNTS: Record<string, PinAccount> = {
     description: 'Acceso completo a Proformas fiscales DGII B01, Telemetría satelital LiveLink™ de flotas, historial técnico de taller y beneficios Club Pro.',
     features: ['Proformas y Cotizaciones B01', 'Telemetría LiveLink™ CAN-Bus', 'Historial Taller Km 22', 'Club Pro 1,850 PTS']
   },
+  '1112': {
+    pin: '1112',
+    role: 'client',
+    roleTitle: 'CANTERA & AGREGADOS VIP',
+    badgeColor: 'amber',
+    name: 'Ing. Roberto Henríquez',
+    email: 'operaciones@agregadoscaribe.com.do',
+    companyName: 'Agregados & Canteras del Caribe S.R.L.',
+    rnc: '1-32-44910-3',
+    phone: '+1 (809) 535-9000',
+    uid: 'client-roberto-henriquez',
+    description: 'Productor mayorista de agregados y hormigón. Flota pesada LiuGong Wheel Loaders CLG856H y excavadoras 922E.',
+    features: ['Proformas y Cotizaciones B01', 'Telemetría LiuGong iLink', 'Órdenes de Rodaje y Desgaste', 'Club Pro 4,200 PTS']
+  },
+  '1113': {
+    pin: '1113',
+    role: 'client',
+    roleTitle: 'DESARROLLO VIAL & URBANO',
+    badgeColor: 'amber',
+    name: 'Licda. Carmen Jáquez',
+    email: 'proyectos@urbanosbani.rd',
+    companyName: 'Desarrollos Urbanos Baní S.A.',
+    rnc: '1-01-99214-5',
+    phone: '+1 (829) 450-2211',
+    uid: 'client-carmen-jaquez',
+    description: 'Proyectos de asfalto y vialidad en el Sur. Compactadores Dynapac CA250D y retroexcavadoras.',
+    features: ['Proformas Asfalto y Rodillos', 'Telemetría Dynapac Dyn@Lyzer', 'Mantenimiento Preventivo 500h', 'Club Pro 950 PTS']
+  },
+  '1114': {
+    pin: '1114',
+    role: 'client',
+    roleTitle: 'MINERÍA & MOVIMIENTO DE TIERRAS',
+    badgeColor: 'amber',
+    name: 'Ing. Fernando Valerio',
+    email: 'gerencia@consorciominero.rd',
+    companyName: 'Consorcio Minero San Juan S.R.L.',
+    rnc: '1-28-76543-9',
+    phone: '+1 (809) 557-3344',
+    uid: 'client-fernando-valerio',
+    description: 'Operaciones de extracción pesada en la Cordillera Central. Flota LiuGong 936E Heavy Excavator.',
+    features: ['Proformas Equipo Pesado', 'Monitoreo de Horómetros Críticos', 'Servicio Técnico de Bahía HD', 'Club Pro 2,400 PTS']
+  },
   '2222': {
     pin: '2222',
     role: 'staff',
@@ -61,6 +103,18 @@ export const PIN_ACCOUNTS: Record<string, PinAccount> = {
   }
 };
 
+// Canonical multi-client list for switcher and simulation
+export const CANONICAL_CLIENT_ACCOUNTS: PinAccount[] = [
+  PIN_ACCOUNTS['1111'],
+  PIN_ACCOUNTS['1112'],
+  PIN_ACCOUNTS['1113'],
+  PIN_ACCOUNTS['1114']
+];
+
+export const getClientAccountById = (clientId: string): PinAccount => {
+  return CANONICAL_CLIENT_ACCOUNTS.find(c => c.uid === clientId) || PIN_ACCOUNTS['1111'];
+};
+
 // Aliases for user convenience
 export const PIN_ALIASES: Record<string, string> = {
   '1234': '1111',
@@ -69,9 +123,12 @@ export const PIN_ALIASES: Record<string, string> = {
   '0000': '3333'
 };
 
-export const getPinAccountByRole = (role: 'client' | 'staff' | 'admin'): PinAccount => {
+export const getPinAccountByRole = (role: 'client' | 'staff' | 'admin', clientId?: string): PinAccount => {
   if (role === 'admin') return PIN_ACCOUNTS['3333'];
   if (role === 'staff') return PIN_ACCOUNTS['2222'];
+  if (clientId) {
+    return getClientAccountById(clientId);
+  }
   return PIN_ACCOUNTS['1111'];
 };
 
@@ -118,6 +175,32 @@ export const createMockFirebaseUser = (account: PinAccount): User => {
 };
 
 export const createMockUserProfile = (account: PinAccount): UserProfile => {
+  let tier: 'Bronze' | 'Silver' | 'Gold' | 'Platinum' = 'Gold';
+  let points = 1850;
+  let number = 'TMD-PRO-8492';
+
+  if (account.uid === 'client-roberto-henriquez') {
+    tier = 'Platinum';
+    points = 4200;
+    number = 'TMD-PRO-7719';
+  } else if (account.uid === 'client-carmen-jaquez') {
+    tier = 'Silver';
+    points = 950;
+    number = 'TMD-PRO-3104';
+  } else if (account.uid === 'client-fernando-valerio') {
+    tier = 'Gold';
+    points = 2400;
+    number = 'TMD-PRO-9051';
+  } else if (account.role === 'staff') {
+    tier = 'Platinum';
+    points = 5000;
+    number = 'TMD-STAFF-001';
+  } else if (account.role === 'admin') {
+    tier = 'Platinum';
+    points = 9999;
+    number = 'TMD-EXEC-001';
+  }
+
   return {
     id: account.uid,
     email: account.email,
@@ -127,9 +210,9 @@ export const createMockUserProfile = (account: PinAccount): UserProfile => {
     rnc: account.rnc || '',
     phone: account.phone || '',
     isProMember: true,
-    proMemberTier: account.role === 'client' ? 'Gold' : 'Platinum',
-    proMemberPoints: account.role === 'client' ? 1850 : 5000,
-    proMemberNumber: account.role === 'client' ? 'TMD-PRO-8492' : 'TMD-STAFF-001',
+    proMemberTier: tier,
+    proMemberPoints: points,
+    proMemberNumber: number,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
   };

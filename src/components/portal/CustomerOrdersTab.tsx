@@ -33,6 +33,7 @@ import { db, handleFirestoreError, OperationType } from '../../lib/firebase';
 import { CustomerPurchaseOrder, OrderItemDetail, UserProfile } from '../../types';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
 import { getLocalOrders, generateDemoOrders, saveOrderToLocalStorage } from '../../services/orderService';
+import { INITIAL_PORTAL_PURCHASE_ORDERS } from '../../data/portalSeedData';
 import { useCart } from '../../context/CartContext';
 import { PARTS_DATA } from '../../data/parts';
 import { downloadOrderInvoicePDF } from '../../utils/pdfGenerator';
@@ -56,9 +57,7 @@ export const CustomerOrdersTab: React.FC<CustomerOrdersTabProps> = ({
   const [orders, setOrders] = useState<CustomerPurchaseOrder[]>(() => {
     const existing = getLocalOrders();
     if (existing.length > 0) return existing;
-    const initialDemo = generateDemoOrders('client-demo-km22', 'cliente@tmd.rd', 'Ing. Manuel Tavares (Constructora Tavares S.R.L.)');
-    initialDemo.forEach(o => saveOrderToLocalStorage(o));
-    return initialDemo;
+    return INITIAL_PORTAL_PURCHASE_ORDERS;
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [statusFilter, setStatusFilter] = useState<string>('all');
@@ -215,6 +214,14 @@ export const CustomerOrdersTab: React.FC<CustomerOrdersTabProps> = ({
 
   // Filtered orders
   const filteredOrders = orders.filter((order) => {
+    // Client scoping: only show matching orders if not staff/admin
+    if (!isAdmin && !isStaff && currentUser) {
+      const matchesId = order.clientId && (order.clientId === currentUser.uid);
+      const matchesEmail = order.clientEmail && currentUser.email && (order.clientEmail.toLowerCase() === currentUser.email.toLowerCase());
+      if (!matchesId && !matchesEmail) {
+        return false;
+      }
+    }
     if (statusFilter !== 'all' && order.status !== statusFilter) return false;
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();

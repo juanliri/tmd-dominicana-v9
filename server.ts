@@ -139,6 +139,7 @@ async function startServer() {
   // =========================================================================
 
   const livelinkFleet = [
+    // 1. Constructora Tavares & Asociados: JCB 3CX Eco
     {
       id: "ll-jcb-001",
       vin: "JCB3CX2026DOM001",
@@ -146,9 +147,10 @@ async function startServer() {
       brand: "JCB",
       model: "3CX-ECO-2026",
       serialNumber: "JCB3CX-882910-RD",
-      customerName: "Ing. Alejandro Santos",
-      customerCompany: "Constructora del Cibao S.A.S.",
-      customerEmail: "operaciones@constructoradelcibao.do",
+      customerId: "client-manuel-tavares",
+      customerName: "Ing. Manuel Tavares",
+      customerCompany: "Constructora Tavares & Asociados S.R.L.",
+      customerEmail: "compras@constructoratavares.rd",
       location: {
         lat: 18.5204,
         lng: -69.9801,
@@ -166,21 +168,67 @@ async function startServer() {
       lastCommunication: new Date().toISOString(),
       geofenceStatus: "inside",
       geofenceName: "Polígono Cantera Km 22",
-      serviceCountdownHours: 14.4, // Next service at 1500h (Preventive 500h)
+      serviceCountdownHours: 14.4,
       faultCodes: [],
       immobilizerActive: false,
       canBusHealth: "optimal"
     },
+    // 2. Constructora Tavares & Asociados: LiuGong 922E HD
     {
       id: "ll-liugong-002",
-      vin: "LG922E2026DOM002",
+      vin: "LG922E2024DOM089",
       name: "LiuGong 922E HD (Ficha #04)",
       brand: "LiuGong",
       model: "922E-HD-CARIBBEAN",
-      serialNumber: "LG922E-441092-RD",
-      customerName: "Lic. Manuel Henríquez",
-      customerCompany: "Agregados & Minería del Sur",
-      customerEmail: "mhenriquez@agregadosdelsur.do",
+      serialNumber: "LG922E-DO-2024-0089",
+      customerId: "client-manuel-tavares",
+      customerName: "Ing. Manuel Tavares",
+      customerCompany: "Constructora Tavares & Asociados S.R.L.",
+      customerEmail: "compras@constructoratavares.rd",
+      location: {
+        lat: 18.5100,
+        lng: -70.0200,
+        address: "Cantera Duarte Km 28 - Tramo Los Alcarrizos",
+        province: "Santo Domingo"
+      },
+      status: "in_service",
+      horometerHours: 2450.0,
+      fuelLevelPercent: 45,
+      fuelConsumptionLph: 15.2,
+      defLevelPercent: 70,
+      batteryVoltage: 26.9,
+      engineCoolantTempC: 88,
+      hydraulicOilTempC: 82,
+      lastCommunication: new Date().toISOString(),
+      geofenceStatus: "inside",
+      geofenceName: "Frente de Obra Los Alcarrizos",
+      serviceCountdownHours: 50.0,
+      faultCodes: [
+        {
+          code: "SPN 1087 FMI 3",
+          system: "Sistema Hidráulico",
+          severity: "warning",
+          description: "Variación de presión en banco de válvulas principal KMX15RA",
+          spnFmi: "1087-03",
+          timestamp: new Date().toISOString(),
+          active: true
+        }
+      ],
+      immobilizerActive: false,
+      canBusHealth: "warning"
+    },
+    // 3. Agregados del Caribe S.A.: LiuGong 856H Cargador 5T
+    {
+      id: "ll-liugong-003",
+      vin: "LG856H2025DOM019",
+      name: "LiuGong 856H Cargador 5T (Ficha #08)",
+      brand: "LiuGong",
+      model: "856H-HEAVY-DUTY",
+      serialNumber: "LG856H-441092-RD",
+      customerId: "client-roberto-henriquez",
+      customerName: "Lic. Roberto Henríquez",
+      customerCompany: "Agregados del Caribe S.A.",
+      customerEmail: "operaciones@agregadoscaribe.rd",
       location: {
         lat: 18.4167,
         lng: -70.1000,
@@ -193,41 +241,33 @@ async function startServer() {
       fuelConsumptionLph: 16.8,
       defLevelPercent: 65,
       batteryVoltage: 26.8,
-      engineCoolantTempC: 98,
+      engineCoolantTempC: 92,
       hydraulicOilTempC: 84,
       lastCommunication: new Date().toISOString(),
       geofenceStatus: "inside",
       geofenceName: "Zona de Extracción Cantera Sur",
       serviceCountdownHours: 109.8,
-      faultCodes: [
-        {
-          code: "SPN 100 FMI 1",
-          system: "Motor Diesel",
-          severity: "critical",
-          description: "Presión baja de aceite de motor diésel Cummins QSB6.7 (Por debajo de 1.2 bar en ralentí)",
-          spnFmi: "100-01",
-          timestamp: new Date().toISOString(),
-          active: true
-        }
-      ],
+      faultCodes: [],
       immobilizerActive: false,
-      canBusHealth: "warning"
+      canBusHealth: "optimal"
     },
+    // 4. Agregados del Caribe S.A.: JCB 220X Excavadora Pesada
     {
-      id: "ll-jcb-003",
+      id: "ll-jcb-004",
       vin: "JCB220X2026DOM003",
       name: "JCB 220X Heavy Excavator (Ficha #12)",
       brand: "JCB",
       model: "220X-LC-HD",
       serialNumber: "JCB220X-901442-RD",
-      customerName: "Ing. Carlos Mendoza",
-      customerCompany: "Infraestructuras Viales del Este",
-      customerEmail: "cmendoza@vialesdeleste.do",
+      customerId: "client-roberto-henriquez",
+      customerName: "Lic. Roberto Henríquez",
+      customerCompany: "Agregados del Caribe S.A.",
+      customerEmail: "operaciones@agregadoscaribe.rd",
       location: {
-        lat: 18.5601,
-        lng: -68.3725,
-        address: "Bulevar Turístico del Este, Punta Cana",
-        province: "La Altagracia"
+        lat: 18.3950,
+        lng: -70.1120,
+        address: "Mina Cantera Sur - San Cristóbal",
+        province: "San Cristóbal"
       },
       status: "idle",
       horometerHours: 940.0,
@@ -239,21 +279,57 @@ async function startServer() {
       hydraulicOilTempC: 64,
       lastCommunication: new Date().toISOString(),
       geofenceStatus: "inside",
-      geofenceName: "Proyecto Hotelero Cap Cana Fase II",
+      geofenceName: "Polígono Cantera Yaguate",
       serviceCountdownHours: 60.0,
       faultCodes: [],
       immobilizerActive: false,
       canBusHealth: "optimal"
     },
+    // 5. Desarrollos Urbanos Baní: Kubota SVL75-2S
     {
-      id: "ll-kubota-004",
+      id: "ll-kubota-005",
+      vin: "SVL75-KB-66120",
+      name: "Kubota SVL75-2S Orugas (Ficha #02)",
+      brand: "Kubota",
+      model: "SVL75-2S",
+      serialNumber: "SVL75-KB-66120",
+      customerId: "client-carmen-jaquez",
+      customerName: "Arq. Carmen Jaquez",
+      customerCompany: "Desarrollos Urbanos Baní S.R.L.",
+      customerEmail: "proyectos@urbani.rd",
+      location: {
+        lat: 18.2796,
+        lng: -70.3319,
+        address: "Urbanización Costa Sur, Baní Centro",
+        province: "Peravia"
+      },
+      status: "running",
+      horometerHours: 890.0,
+      fuelLevelPercent: 68,
+      fuelConsumptionLph: 6.8,
+      defLevelPercent: 82,
+      batteryVoltage: 27.2,
+      engineCoolantTempC: 80,
+      hydraulicOilTempC: 68,
+      lastCommunication: new Date().toISOString(),
+      geofenceStatus: "inside",
+      geofenceName: "Proyecto Urbanístico Baní",
+      serviceCountdownHours: 110.0,
+      faultCodes: [],
+      immobilizerActive: false,
+      canBusHealth: "optimal"
+    },
+    // 6. Agropecuaria del Valle San Juan: Kubota M7-172
+    {
+      id: "ll-kubota-006",
       vin: "KUBM7172DOM004",
       name: "Kubota M7-172 Premium KVT (Ficha #07)",
       brand: "Kubota",
       model: "M7172-KVT-4WD",
       serialNumber: "KUBM7-331092-RD",
+      customerId: "client-fernando-valerio",
       customerName: "Don Fernando Valerio",
-      customerCompany: "Agropecuaria del Valle San Juan",
+      customerCompany: "Agropecuaria del Valle San Juan S.A.",
       customerEmail: "fvalerio@agrivalle.do",
       location: {
         lat: 18.8059,
@@ -277,57 +353,60 @@ async function startServer() {
       immobilizerActive: false,
       canBusHealth: "optimal"
     },
+    // 7. Agropecuaria del Valle San Juan: LS Tractor MT357
     {
-      id: "ll-ammann-005",
-      vin: "AMMASC110DOM005",
-      name: "Ammann ASC 110 Compactador (Ficha #09)",
-      brand: "Ammann",
-      model: "ASC110-TIER3",
-      serialNumber: "AMMASC-771239-RD",
-      customerName: "Ing. Ramón Batista",
-      customerCompany: "Consorcio Autopistas del Cibao",
-      customerEmail: "rbatista@autopistascibao.do",
+      id: "ll-ls-007",
+      vin: "LS-MT3-2025-3312",
+      name: "LS Tractor MT357 Cabina 4WD (Ficha #03)",
+      brand: "LS Tractor",
+      model: "MT357-4WD-CAB",
+      serialNumber: "LS-MT3-2025-3312",
+      customerId: "client-fernando-valerio",
+      customerName: "Don Fernando Valerio",
+      customerCompany: "Agropecuaria del Valle San Juan S.A.",
+      customerEmail: "fvalerio@agrivalle.do",
       location: {
-        lat: 19.4517,
-        lng: -70.6970,
-        address: "Circunvalación Norte, Santiago de los Caballeros",
-        province: "Santiago"
+        lat: 18.8200,
+        lng: -71.2500,
+        address: "Finca Las Matas de Farfán, San Juan",
+        province: "San Juan"
       },
       status: "stopped",
-      horometerHours: 1980.5,
-      fuelLevelPercent: 35,
+      horometerHours: 640.0,
+      fuelLevelPercent: 55,
       fuelConsumptionLph: 0.0,
-      defLevelPercent: 50,
-      batteryVoltage: 25.8,
+      defLevelPercent: 75,
+      batteryVoltage: 26.5,
       engineCoolantTempC: 45,
       hydraulicOilTempC: 40,
       lastCommunication: new Date().toISOString(),
       geofenceStatus: "inside",
-      geofenceName: "Tramo Pavimentación Santiago",
-      serviceCountdownHours: 19.5,
-      faultCodes: [
-        {
-          code: "SPN 94 FMI 1",
-          system: "Motor Diesel",
-          severity: "warning",
-          description: "Restricción en filtro de combustible primario Fleetguard",
-          spnFmi: "94-01",
-          timestamp: new Date().toISOString(),
-          active: true
-        }
-      ],
+      geofenceName: "Sector Agrícola Las Matas",
+      serviceCountdownHours: 110.0,
+      faultCodes: [],
       immobilizerActive: false,
-      canBusHealth: "warning"
+      canBusHealth: "optimal"
     }
   ];
 
-  // LiveLink Fleet List Endpoint
-  app.get("/api/telematics/livelink/fleet", (_req, res) => {
+  // LiveLink Fleet List Endpoint (with client scoping filter)
+  app.get("/api/telematics/livelink/fleet", (req, res) => {
+    const { clientId, clientEmail } = req.query;
+    let units = livelinkFleet;
+    if (clientId || clientEmail) {
+      const cId = String(clientId || '').toLowerCase();
+      const cEmail = String(clientEmail || '').toLowerCase();
+      const matched = livelinkFleet.filter(u => 
+        (u.customerId && u.customerId.toLowerCase() === cId) ||
+        (u.customerEmail && u.customerEmail.toLowerCase() === cEmail)
+      );
+      if (matched.length > 0) units = matched;
+    }
     res.json({
       success: true,
       provider: "JCB LiveLink Telematics API v2.4 (TMD Dominicana Gateway)",
-      fleetCount: livelinkFleet.length,
-      units: livelinkFleet,
+      fleetCount: units.length,
+      units,
       timestamp: new Date().toISOString()
     });
   });

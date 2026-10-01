@@ -77,6 +77,7 @@ interface ServiceHistoryTabProps {
   isStaff?: boolean;
   onNavigate: (route: string) => void;
   workOrders?: ServiceWorkOrder[];
+  onOpenNewOrderModal?: () => void;
 }
 
 export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
@@ -85,7 +86,8 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
   isAdmin,
   isStaff,
   onNavigate,
-  workOrders
+  workOrders,
+  onOpenNewOrderModal
 }) => {
   const { checkMaintenanceReminders } = useNotifications();
   const { addToCart } = useCart();
@@ -574,7 +576,8 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           </button>
 
           <button
-            onClick={() => onNavigate('#/service')}
+            type="button"
+            onClick={onOpenNewOrderModal || (() => onNavigate('#/service'))}
             className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer shadow-md"
           >
             <Calendar className="w-4 h-4 text-black" />

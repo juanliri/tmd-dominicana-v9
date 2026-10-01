@@ -24,34 +24,34 @@ export const PortalBreadcrumbs: React.FC<PortalBreadcrumbsProps> = ({
   const roleLabel = PORTAL_ROLE_LABELS[currentRole] || 'USUARIO';
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 bg-zinc-950/80 backdrop-blur-md border border-zinc-800/80 rounded-md font-mono text-[11px] sm:text-xs shadow-sm">
+    <div className="flex items-center justify-between gap-2 px-3 py-1.5 bg-zinc-900/60 dark:bg-zinc-950/60 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800/60 rounded font-mono text-[11px] shadow-2xs">
       {/* Breadcrumb Trail */}
       <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 flex-wrap">
         <button
           type="button"
           onClick={() => onNavigate ? onNavigate('#/home') : (window.location.hash = '#/home')}
-          className="flex items-center gap-1 text-zinc-400 hover:text-amber-400 transition-colors p-1 -ml-1 rounded hover:bg-zinc-900 cursor-pointer"
+          className="flex items-center gap-1 text-zinc-400 hover:text-amber-500 dark:hover:text-amber-400 transition-colors p-0.5 -ml-0.5 rounded hover:bg-zinc-200 dark:hover:bg-zinc-900 cursor-pointer"
           title="Ir al Showroom Principal"
         >
-          <Home className="w-3.5 h-3.5" />
+          <Home className="w-3 h-3" />
           <span className="sr-only">Inicio</span>
         </button>
 
-        <ChevronRight className="w-3.5 h-3.5 text-zinc-600 shrink-0" />
+        <ChevronRight className="w-3 h-3 text-zinc-400 dark:text-zinc-600 shrink-0" />
 
         <button
           type="button"
           onClick={() => onNavigate ? onNavigate('#/portal') : (window.location.hash = '#/portal')}
-          className="text-zinc-400 hover:text-amber-400 transition-colors cursor-pointer"
+          className="text-zinc-500 dark:text-zinc-400 hover:text-amber-500 dark:hover:text-amber-400 transition-colors cursor-pointer"
         >
           Portal TMD
         </button>
 
         {items.map((item, idx) => (
           <React.Fragment key={idx}>
-            <ChevronRight className="w-3.5 h-3.5 text-zinc-600 shrink-0" />
+            <ChevronRight className="w-3 h-3 text-zinc-400 dark:text-zinc-600 shrink-0" />
             {item.active || !item.onClick && !item.path ? (
-              <span className="font-semibold text-white tracking-wide">
+              <span className="font-semibold text-zinc-900 dark:text-white tracking-wide">
                 {item.label}
               </span>
             ) : (
@@ -62,7 +62,7 @@ export const PortalBreadcrumbs: React.FC<PortalBreadcrumbsProps> = ({
                   else if (item.path && onNavigate) onNavigate(item.path);
                   else if (item.path) window.location.hash = item.path;
                 }}
-                className="text-zinc-400 hover:text-amber-400 transition-colors cursor-pointer"
+                className="text-zinc-500 dark:text-zinc-400 hover:text-amber-500 dark:hover:text-amber-400 transition-colors cursor-pointer"
               >
                 {item.label}
               </button>
@@ -70,19 +70,6 @@ export const PortalBreadcrumbs: React.FC<PortalBreadcrumbsProps> = ({
           </React.Fragment>
         ))}
       </nav>
-
-      {/* Role Capsule Badge */}
-      <div className="flex items-center gap-2">
-        <span className="text-[10px] uppercase tracking-wider text-zinc-500 hidden sm:inline">
-          Acceso:
-        </span>
-        <div
-          className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold border ${roleStyle.bg} ${roleStyle.text} ${roleStyle.border}`}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
-          <span>{roleLabel}</span>
-        </div>
-      </div>
     </div>
   );
 };

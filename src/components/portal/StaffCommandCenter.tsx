@@ -34,7 +34,8 @@ import {
   Phone,
   Fingerprint,
   QrCode,
-  BookOpen
+  BookOpen,
+  Eye
 } from 'lucide-react';
 import { PortalQuote, ServiceWorkOrder, UserProfile, UserRole, Currency, CartItem } from '../../types';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
@@ -83,6 +84,7 @@ interface StaffCommandCenterProps {
   onOpenCreateQuote: () => void;
   onOpenNewOrderModal: () => void;
   onExportQuotePdf: (quote: PortalQuote) => void;
+  onInspectQuote?: (quote: PortalQuote) => void;
   onUpdateOrderStatus: (orderId: string, status: ServiceWorkOrder['status']) => Promise<void>;
   onUpdateQuoteStatus: (quoteId: string, status: PortalQuote['status']) => Promise<void>;
   onUpdateUserRole?: (userId: string, newRole: UserRole) => Promise<void>;
@@ -110,6 +112,7 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
   onOpenCreateQuote,
   onOpenNewOrderModal,
   onExportQuotePdf,
+  onInspectQuote,
   onUpdateOrderStatus,
   onUpdateQuoteStatus,
   onUpdateUserRole,
@@ -240,42 +243,6 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
               </div>
             </div>
 
-            {/* Staff Quick Switcher & Actions */}
-            <div className="flex items-center gap-2 self-start md:self-center flex-wrap relative z-10 w-full md:w-auto justify-between md:justify-end">
-              {/* Role switcher for testing - only in dev or for real admins */}
-              {(isAdmin || import.meta.env.DEV) && (
-                <div className="flex items-center gap-0.5 p-0.5 bg-zinc-950 rounded-[3px] border border-zinc-800 shadow-inner">
-                  <span className="text-[10px] text-zinc-500 font-bold px-1 hidden sm:inline uppercase">ROL:</span>
-                  <button
-                    type="button"
-                    onClick={() => setSimulatedRole(null)}
-                    className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                      !simulatedRole ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
-                    }`}
-                  >
-                    REAL
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSimulatedRole('client')}
-                    className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                      simulatedRole === 'client' ? 'bg-blue-500 text-white shadow-xs' : 'text-zinc-400 hover:text-white'
-                    }`}
-                  >
-                    CLIENTE
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSimulatedRole('admin')}
-                    className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                      simulatedRole === 'admin' ? 'bg-purple-500 text-white shadow-xs' : 'text-zinc-400 hover:text-white'
-                    }`}
-                  >
-                    ADMIN
-                  </button>
-                </div>
-              )}
-
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <button
                   type="button"
@@ -286,26 +253,7 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
                   <Fingerprint className="w-3.5 h-3.5 text-amber-400" />
                   <span className="hidden md:inline">BIOMETRÍA</span>
                 </button>
-
-                <button
-                  type="button"
-                  onClick={onOpenCreateQuote}
-                  className="px-3.5 py-2 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-[0.98] cursor-pointer uppercase"
-                >
-                  <Plus className="w-3.5 h-3.5" />
-                  <span>+ PROFORMA</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={onSignOut}
-                  className="p-2 rounded bg-zinc-800 hover:bg-red-950/40 text-zinc-300 hover:text-red-400 border border-zinc-700 transition-colors cursor-pointer"
-                  title="Cerrar Sesión"
-                >
-                  <LogOut className="w-3.5 h-3.5" />
-                </button>
               </div>
-            </div>
           </div>
 
           {/* COMPACT DENSITY OPERATIONAL KPI BAR */}
@@ -437,163 +385,10 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
                 <span>+ Nueva Orden</span>
               </button>
             )}
-            {onOpenQrScanner && (
-              <button
-                type="button"
-                onClick={onOpenQrScanner}
-                className="p-1.5 rounded bg-zinc-800 hover:bg-zinc-700 text-cyan-400 border border-zinc-700 transition-colors cursor-pointer"
-                title="Escanear Código QR"
-              >
-                <QrCode className="w-4 h-4" />
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={() => handleTabSelect('command_center')}
-              className="px-2.5 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-semibold border border-zinc-700 transition-colors cursor-pointer uppercase flex items-center gap-1"
-              title="Volver al Command Center General"
-            >
-              <Zap className="w-3 h-3 text-amber-400" />
-              <span>Ver HQ</span>
-            </button>
           </div>
         </div>
       )}
 
-      {/* DENSE STAFF NAVIGATION BAR (PILL DOCK) */}
-      <div className="relative z-20 bg-zinc-900/95 backdrop-blur-md py-1.5 px-2 rounded-[5px] border border-zinc-800 shadow-md flex items-center gap-1.5 overflow-x-auto scrollbar-none transition-all">
-        <button
-          type="button"
-          onClick={() => handleTabSelect('command_center')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'command_center'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-          }`}
-        >
-          <Zap className="w-3.5 h-3.5" />
-          <span>HQ</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('office_workflow')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'office_workflow'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-amber-400 bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30'
-          }`}
-        >
-          <Briefcase className="w-3.5 h-3.5" />
-          <span>OFICINA</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('quotes')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'quotes'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-          }`}
-        >
-          <FileText className="w-3.5 h-3.5" />
-          <span>COTIZACIONES ({quotes.length})</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('orders')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'orders'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-          }`}
-        >
-          <Wrench className="w-3.5 h-3.5" />
-          <span>TALLER ({workOrders.length})</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('purchases')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'purchases'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-          }`}
-        >
-          <Package className="w-3.5 h-3.5" />
-          <span>PEDIDOS</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('livelink_telematics')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'livelink_telematics'
-              ? 'bg-emerald-500 text-black shadow-xs font-black'
-              : 'text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30'
-          }`}
-        >
-          <Radio className="w-3.5 h-3.5 text-emerald-400" />
-          <span>LIVELINK™</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('service_history')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'service_history'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-          }`}
-        >
-          <Activity className="w-3.5 h-3.5" />
-          <span>TÉCNICO</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('inventory_logs')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'inventory_logs'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-amber-400 bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30'
-          }`}
-        >
-          <QrCode className="w-3.5 h-3.5" />
-          <span>ESCANEOS QR</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('tech_docs')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'tech_docs'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-          }`}
-        >
-          <BookOpen className="w-3.5 h-3.5" />
-          <span>FICHAS & CATÁLOGOS PDF</span>
-        </button>
-
-        {isAdmin && (
-          <button
-            type="button"
-            onClick={() => handleTabSelect('users')}
-            className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-              activeTab === 'users'
-                ? 'bg-purple-500 text-white shadow-xs font-black'
-                : 'text-purple-400 bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30'
-            }`}
-          >
-            <Users className="w-3.5 h-3.5" />
-            <span>USUARIOS & ROLES ({allUsers.length})</span>
-          </button>
-        )}
-      </div>
 
       {/* SPLIT OPERATIONAL WORKSPACE WITH QUICK ACTION SIDEBAR */}
       <div className="flex flex-col xl:flex-row items-start gap-4">
@@ -712,6 +507,16 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
                             </select>
                           </td>
                           <td className="p-3 text-right space-x-1.5">
+                            {onInspectQuote && (
+                              <button
+                                type="button"
+                                onClick={() => onInspectQuote(q)}
+                                className="p-1.5 rounded-[3px] bg-amber-400/10 hover:bg-amber-400/20 text-amber-400 border border-amber-400/30 cursor-pointer"
+                                title="Inspección Rápida / Side-Peek (Outlook)"
+                              >
+                                <Eye className="w-3.5 h-3.5" />
+                              </button>
+                            )}
                             <button
                               type="button"
                               onClick={() => onExportQuotePdf(q)}
@@ -1040,15 +845,17 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
           )}
         </div>
 
-        {/* INTEGRATED STAFF QUICK ACTION SIDEBAR */}
-        <StaffQuickActionSidebar
-          onOpenCreateQuote={onOpenCreateQuote}
-          onSelectWorkflowTab={handleSelectWorkflowSection}
-          onNavigate={onNavigate}
-          onOpenQrScanner={onOpenQrScanner}
-          pendingQuotesCount={pendingQuotes.length}
-          activeWorkOrdersCount={activeWorkOrders.length}
-        />
+        {/* INTEGRATED STAFF QUICK ACTION SIDEBAR (HQ Command Center tab only) */}
+        {activeTab === 'command_center' && (
+          <StaffQuickActionSidebar
+            onOpenCreateQuote={onOpenCreateQuote}
+            onSelectWorkflowTab={handleSelectWorkflowSection}
+            onNavigate={onNavigate}
+            onOpenQrScanner={onOpenQrScanner}
+            pendingQuotesCount={pendingQuotes.length}
+            activeWorkOrdersCount={activeWorkOrders.length}
+          />
+        )}
       </div>
 
       {/* Staff Biometric Security & Device Key Management Modal */}

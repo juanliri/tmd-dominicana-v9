@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { 
   Shield, 
   BarChart3, 
@@ -18,7 +18,10 @@ import {
   Bell,
   Database,
   Wrench,
-  Kanban
+  Kanban,
+  ChevronDown,
+  X,
+  Sliders
 } from 'lucide-react';
 import { getUnifiedStoreMachinery, getUnifiedStoreParts } from '../services/cdnCatalogLoader';
 import { INITIAL_PORTAL_QUOTES } from '../data/portalSeedData';
@@ -50,17 +53,49 @@ import { MonthlyExecutiveReportModal } from './admin/MonthlyExecutiveReportModal
 import { S3GlacierBackupModal } from './security/S3GlacierBackupModal';
 import { LayoutGrid, Sparkles, Flame, ShieldCheck as ShieldCheckIcon, TrendingUp, Calendar as CalendarIcon, Activity as ActivityIcon, Settings, PhoneCall, HardDrive } from 'lucide-react';
 
-interface AdminDashboardViewProps {
+export type AdminTab = 
+  | 'command_grid' 
+  | 'crm_funnel' 
+  | 'patio_km22' 
+  | 'metrics' 
+  | 'quotes' 
+  | 'machines' 
+  | 'parts' 
+  | 'shop' 
+  | 'demand_heatmap' 
+  | 'audit_log' 
+  | 'integrations';
+
+export interface AdminDashboardViewProps {
   onNavigate: (route: string) => void;
+  activeTab?: AdminTab;
+  onTabChange?: (tab: AdminTab) => void;
+  isEmbedded?: boolean;
 }
 
-type AdminTab = 'command_grid' | 'crm_funnel' | 'patio_km22' | 'metrics' | 'quotes' | 'machines' | 'parts' | 'shop' | 'demand_heatmap' | 'audit_log' | 'integrations';
-
-export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNavigate }) => {
+export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ 
+  onNavigate,
+  activeTab: activeTabProp,
+  onTabChange,
+  isEmbedded = false
+}) => {
   const { currentUser, userProfile, isAdmin, role, loading: authLoading, signInWithGoogle, signOut } = useAuth();
   const { currency, setCurrency } = useCart();
 
-  const [activeTab, setActiveTab] = useState<AdminTab>('command_grid');
+  const [internalActiveTab, setInternalActiveTab] = useState<AdminTab>(activeTabProp || 'command_grid');
+
+  useEffect(() => {
+    if (activeTabProp !== undefined) {
+      setInternalActiveTab(activeTabProp);
+    }
+  }, [activeTabProp]);
+
+  const activeTab = activeTabProp !== undefined ? activeTabProp : internalActiveTab;
+  const setActiveTab = (tab: AdminTab) => {
+    setInternalActiveTab(tab);
+    if (onTabChange) onTabChange(tab);
+  };
+
   const [quotes, setQuotes] = useState<PortalQuote[]>([]);
   const [machines, setMachines] = useState<InventoryMachine[]>([]);
   const [parts, setParts] = useState<InventoryPart[]>([]);
@@ -75,7 +110,29 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
   const [isCallLogOpen, setIsCallLogOpen] = useState(false);
   const [isExecutiveReportOpen, setIsExecutiveReportOpen] = useState(false);
   const [isGlacierBackupOpen, setIsGlacierBackupOpen] = useState(false);
+  const [isExecutiveToolsOpen, setIsExecutiveToolsOpen] = useState(false);
   const [highlightItemId, setHighlightItemId] = useState<string | null>(null);
+  const toolsMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close tools dropdown on click outside or escape
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (toolsMenuRef.current && !toolsMenuRef.current.contains(e.target as Node)) {
+        setIsExecutiveToolsOpen(false);
+      }
+    };
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsExecutiveToolsOpen(false);
+    };
+    if (isExecutiveToolsOpen) {
+      document.addEventListener('mousedown', handleOutsideClick);
+      document.addEventListener('keydown', handleEsc);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('keydown', handleEsc);
+    };
+  }, [isExecutiveToolsOpen]);
 
   // Supabase Real-Time & Resilient Data Sync (Vercel + Supabase Master Architecture)
   useEffect(() => {
@@ -451,141 +508,378 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
   const machineAlertsCount = alerts.filter(a => a.itemType === 'machine').length;
   const partAlertsCount = alerts.filter(a => a.itemType === 'part').length;
 
-  return (
-    <div className="w-full min-h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 pb-20">
-      {/* Top Banner & Navigation Header */}
-      <div className="bg-white dark:bg-zinc-900 border-b border-slate-200 dark:border-zinc-800 sticky top-0 z-30 shadow-sm dark:shadow-2xl">
-        <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            {/* Left Brand & Title */}
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => onNavigate('#/portal')}
-                className="p-2 rounded-[2px] bg-slate-100 dark:bg-zinc-950 hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-700 dark:text-zinc-300 border border-slate-300 dark:border-zinc-800 transition-colors cursor-pointer"
-                title="Volver al Portal General"
-              >
-                <ArrowLeft className="w-4 h-4" />
-              </button>
+  const renderNavTabs = () => (
+    <div className="flex items-center gap-1.5 overflow-x-auto pt-2.5 border-t border-slate-200 dark:border-zinc-800 scrollbar-none font-mono text-xs">
+      <button
+        type="button"
+        onClick={() => setActiveTab('command_grid')}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
+          activeTab === 'command_grid'
+            ? 'bg-amber-400 text-black font-mono shadow-xs'
+            : 'text-slate-600 dark:text-zinc-400 hover:bg-slate-100 dark:hover:bg-zinc-800 hover:text-slate-900 dark:hover:text-zinc-200'
+        }`}
+      >
+        <LayoutGrid className="w-3.5 h-3.5" />
+        <span>Matriz de Control</span>
+        <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-black text-amber-400">
+          HQ
+        </span>
+      </button>
 
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded-[2px] text-[10px] font-mono font-bold uppercase tracking-wider bg-amber-400 text-black">
-                    ADMIN HQ
-                  </span>
-                  <h1 className="text-sm sm:text-base font-black uppercase tracking-tight text-slate-900 dark:text-white">
-                    Dashboard de Administración
-                  </h1>
-                </div>
-                <p className="text-[11px] font-mono text-slate-500 dark:text-zinc-400">
-                  TMD Dominicana • {currentUser.email}
-                </p>
+      <button
+        type="button"
+        onClick={() => setActiveTab('crm_funnel')}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
+          activeTab === 'crm_funnel'
+            ? 'bg-amber-400 text-black font-mono shadow-xs'
+            : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+        }`}
+      >
+        <TrendingUp className="w-3.5 h-3.5" />
+        <span>Embudo CRM (RFQ)</span>
+        <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-emerald-500 text-black animate-pulse">
+          Live
+        </span>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setActiveTab('patio_km22')}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
+          activeTab === 'patio_km22'
+            ? 'bg-amber-400 text-black font-mono shadow-xs'
+            : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+        }`}
+      >
+        <CalendarIcon className="w-3.5 h-3.5" />
+        <span>Patio Km 22 (Pistas)</span>
+        <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-zinc-950 border border-zinc-700 text-zinc-300">
+          Pistas
+        </span>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setActiveTab('metrics')}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
+          activeTab === 'metrics'
+            ? 'bg-amber-400 text-black font-mono shadow-xs'
+            : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+        }`}
+      >
+        <BarChart3 className="w-3.5 h-3.5 text-amber-400" />
+        <span>Métricas & Ventas</span>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setActiveTab('quotes')}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
+          activeTab === 'quotes'
+            ? 'bg-amber-400 text-black font-mono shadow-xs'
+            : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+        }`}
+      >
+        <FileText className="w-3.5 h-3.5 text-amber-400" />
+        <span>Presupuestos</span>
+        {pendingQuotesCount > 0 && (
+          <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-amber-400 text-black">
+            {pendingQuotesCount}
+          </span>
+        )}
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setActiveTab('machines')}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
+          activeTab === 'machines'
+            ? 'bg-amber-400 text-black font-mono shadow-xs'
+            : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+        }`}
+      >
+        <HardHat className="w-3.5 h-3.5 text-amber-400" />
+        <span>Maquinaria</span>
+        <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-zinc-950 border border-zinc-800 text-zinc-300">
+          {machines.length}
+        </span>
+        {machineAlertsCount > 0 && (
+          <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-amber-400 text-black" title={`${machineAlertsCount} bajo nivel crítico`}>
+            {machineAlertsCount}
+          </span>
+        )}
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setActiveTab('parts')}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
+          activeTab === 'parts'
+            ? 'bg-amber-400 text-black font-mono shadow-xs'
+            : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+        }`}
+      >
+        <Cog className="w-3.5 h-3.5 text-amber-400" />
+        <span>Repuestos OEM</span>
+        <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-zinc-950 border border-zinc-800 text-zinc-300">
+          {parts.length}
+        </span>
+        {partAlertsCount > 0 && (
+          <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-rose-500 text-white" title={`${partAlertsCount} bajo nivel crítico`}>
+            {partAlertsCount}
+          </span>
+        )}
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setActiveTab('shop')}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
+          activeTab === 'shop'
+            ? 'bg-amber-400 text-black font-mono shadow-xs'
+            : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+        }`}
+      >
+        <Wrench className="w-3.5 h-3.5 text-amber-400" />
+        <span>Taller Fullbay</span>
+        <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-amber-400/20 text-amber-400">
+          Km 22
+        </span>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setActiveTab('demand_heatmap')}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
+          activeTab === 'demand_heatmap'
+            ? 'bg-amber-400 text-black font-mono shadow-xs'
+            : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+        }`}
+      >
+        <Flame className="w-3.5 h-3.5 text-rose-500" />
+        <span>Demanda RD</span>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setActiveTab('audit_log')}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
+          activeTab === 'audit_log'
+            ? 'bg-amber-400 text-black font-mono shadow-xs'
+            : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+        }`}
+      >
+        <ShieldCheckIcon className="w-3.5 h-3.5 text-emerald-500" />
+        <span>Auditoría</span>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setActiveTab('integrations')}
+        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap cursor-pointer ${
+          activeTab === 'integrations'
+            ? 'bg-amber-400 text-black font-mono shadow-xs'
+            : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
+        }`}
+      >
+        <ActivityIcon className="w-3.5 h-3.5 text-blue-400" />
+        <span>APIs & Gateways</span>
+        <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">
+          Live
+        </span>
+      </button>
+    </div>
+  );
+
+  return (
+    <div className={`w-full ${isEmbedded ? 'space-y-4' : 'min-h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 pb-20'}`}>
+      {/* Top Banner or ERP Command Bar */}
+      {isEmbedded ? (
+        <div className="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-[5px] p-3.5 shadow-sm space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            {/* Identity & Status */}
+            <div className="flex items-center gap-2.5 flex-wrap">
+              <span className="px-2.5 py-0.5 rounded-[2px] text-[10px] font-mono font-black uppercase tracking-wider bg-amber-400 text-black shadow-xs">
+                DIRECCIÓN GENERAL HQ
+              </span>
+              <div className="flex items-center gap-1.5 text-xs font-mono text-zinc-400">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-zinc-200 font-bold">Consola ERP Unificada</span>
+                <span className="text-zinc-500 hidden md:inline">· Km 22 Autopista Duarte</span>
               </div>
             </div>
 
-            {/* Right Quick Controls: Bell Notification, Currency Toggle & Logout */}
-            <div className="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2 self-end sm:self-center">
-              {/* Monthly Business Variables Trigger Button */}
+            {/* Right Action Controls: Executive Tools Dropdown & Stock Alerts */}
+            <div className="flex items-center gap-2 self-end sm:self-center">
+              {/* Executive Tools Dropdown */}
+              <div className="relative" ref={toolsMenuRef}>
+                <button
+                  type="button"
+                  onClick={() => setIsExecutiveToolsOpen(!isExecutiveToolsOpen)}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-[3px] bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/40 text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                  title="Abrir menú de herramientas fiscales, comerciales y de infraestructura"
+                >
+                  <Sliders className="w-3.5 h-3.5" />
+                  <span>Herramientas ERP</span>
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isExecutiveToolsOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {/* Tools Menu Popover */}
+                {isExecutiveToolsOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-[340px] sm:w-[540px] bg-zinc-950 border border-zinc-800 rounded-[5px] shadow-2xl p-3.5 sm:p-4 z-50 animate-in fade-in zoom-in-95 font-sans">
+                    <div className="flex items-center justify-between pb-2.5 border-b border-zinc-800">
+                      <div className="flex items-center gap-2">
+                        <Sliders className="w-4 h-4 text-amber-400" />
+                        <h4 className="text-xs font-black uppercase text-white font-mono">
+                          Herramientas Ejecutivas ERP
+                        </h4>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setIsExecutiveToolsOpen(false)}
+                        className="text-zinc-500 hover:text-white p-1 cursor-pointer"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 text-xs">
+                      {/* Quadrant 1: Fiscal & Finanzas */}
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-wider block">
+                          Fiscal & Finanzas DGII
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => { setIsExecutiveToolsOpen(false); setIsDgiiExporterOpen(true); }}
+                          className="w-full text-left p-2 rounded bg-zinc-900 hover:bg-zinc-800/90 border border-zinc-800 flex items-center gap-2 group transition-all cursor-pointer"
+                        >
+                          <FileText className="w-4 h-4 text-emerald-400 shrink-0 group-hover:scale-110 transition-transform" />
+                          <div>
+                            <div className="font-bold text-white group-hover:text-emerald-400 transition-colors">DGII 606 & 607</div>
+                            <div className="text-[10px] text-zinc-400">Exportación Fiscal NCF</div>
+                          </div>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => { setIsExecutiveToolsOpen(false); setIsMonthlyConfigOpen(true); }}
+                          className="w-full text-left p-2 rounded bg-zinc-900 hover:bg-zinc-800/90 border border-zinc-800 flex items-center gap-2 group transition-all cursor-pointer"
+                        >
+                          <Settings className="w-4 h-4 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />
+                          <div>
+                            <div className="font-bold text-white group-hover:text-amber-400 transition-colors">Variables Mensuales</div>
+                            <div className="text-[10px] text-zinc-400">Tasas DOP/USD & Banners</div>
+                          </div>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => { setIsExecutiveToolsOpen(false); setIsExecutiveReportOpen(true); }}
+                          className="w-full text-left p-2 rounded bg-zinc-900 hover:bg-zinc-800/90 border border-zinc-800 flex items-center gap-2 group transition-all cursor-pointer"
+                        >
+                          <TrendingUp className="w-4 h-4 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />
+                          <div>
+                            <div className="font-bold text-white group-hover:text-amber-400 transition-colors">Reporte Ejecutivo CFO</div>
+                            <div className="text-[10px] text-zinc-400">Informe Dirección General</div>
+                          </div>
+                        </button>
+                      </div>
+
+                      {/* Quadrant 2: Comercial & CRM */}
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-wider block">
+                          Comercial & CRM
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => { setIsExecutiveToolsOpen(false); setIsKanbanOpen(true); }}
+                          className="w-full text-left p-2 rounded bg-zinc-900 hover:bg-zinc-800/90 border border-zinc-800 flex items-center gap-2 group transition-all cursor-pointer"
+                        >
+                          <Kanban className="w-4 h-4 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />
+                          <div>
+                            <div className="font-bold text-white group-hover:text-amber-400 transition-colors">Pipeline Kanban</div>
+                            <div className="text-[10px] text-zinc-400">Embudo de Ventas RFQ</div>
+                          </div>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => { setIsExecutiveToolsOpen(false); setIsCallLogOpen(true); }}
+                          className="w-full text-left p-2 rounded bg-zinc-900 hover:bg-zinc-800/90 border border-zinc-800 flex items-center gap-2 group transition-all cursor-pointer"
+                        >
+                          <PhoneCall className="w-4 h-4 text-sky-400 shrink-0 group-hover:scale-110 transition-transform" />
+                          <div>
+                            <div className="font-bold text-white group-hover:text-sky-400 transition-colors">Bitácora CRM</div>
+                            <div className="text-[10px] text-zinc-400">Llamadas & Visitas Obra</div>
+                          </div>
+                        </button>
+                      </div>
+
+                      {/* Quadrant 3: Operaciones Km 22 */}
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-wider block">
+                          Operaciones Sede Km 22
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => { setIsExecutiveToolsOpen(false); setIsLaborHoursOpen(true); }}
+                          className="w-full text-left p-2 rounded bg-zinc-900 hover:bg-zinc-800/90 border border-zinc-800 flex items-center gap-2 group transition-all cursor-pointer"
+                        >
+                          <Clock className="w-4 h-4 text-cyan-400 shrink-0 group-hover:scale-110 transition-transform" />
+                          <div>
+                            <div className="font-bold text-white group-hover:text-cyan-400 transition-colors">Horas Hombre Taller</div>
+                            <div className="text-[10px] text-zinc-400">Productividad & Bonos</div>
+                          </div>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => { setIsExecutiveToolsOpen(false); setIsGatePassOpen(true); }}
+                          className="w-full text-left p-2 rounded bg-zinc-900 hover:bg-zinc-800/90 border border-zinc-800 flex items-center gap-2 group transition-all cursor-pointer"
+                        >
+                          <Shield className="w-4 h-4 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />
+                          <div>
+                            <div className="font-bold text-white group-hover:text-amber-400 transition-colors">Pases de Garita QR</div>
+                            <div className="text-[10px] text-zinc-400">Control de Entrada/Salida</div>
+                          </div>
+                        </button>
+                      </div>
+
+                      {/* Quadrant 4: Gobernanza & Cloud */}
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-wider block">
+                          Gobernanza & Cloud
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => { setIsExecutiveToolsOpen(false); setIsBulkManagerOpen(true); }}
+                          className="w-full text-left p-2 rounded bg-zinc-900 hover:bg-zinc-800/90 border border-zinc-800 flex items-center gap-2 group transition-all cursor-pointer"
+                        >
+                          <Database className="w-4 h-4 text-amber-400 shrink-0 group-hover:scale-110 transition-transform" />
+                          <div>
+                            <div className="font-bold text-white group-hover:text-amber-400 transition-colors">Carga Masiva Supabase</div>
+                            <div className="text-[10px] text-zinc-400">Catálogo & Sincronización</div>
+                          </div>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => { setIsExecutiveToolsOpen(false); setIsGlacierBackupOpen(true); }}
+                          className="w-full text-left p-2 rounded bg-zinc-900 hover:bg-zinc-800/90 border border-zinc-800 flex items-center gap-2 group transition-all cursor-pointer"
+                        >
+                          <HardDrive className="w-4 h-4 text-blue-400 shrink-0 group-hover:scale-110 transition-transform" />
+                          <div>
+                            <div className="font-bold text-white group-hover:text-blue-400 transition-colors">S3 Glacier Backup</div>
+                            <div className="text-[10px] text-zinc-400">Backups AES-256 (7 Años)</div>
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Direct Stock Alerts Button */}
               <button
                 type="button"
-                onClick={() => setIsMonthlyConfigOpen(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
-                title="Gestor de Variables Mensuales, Banners y Tasas"
-              >
-                <Settings className="w-3.5 h-3.5 text-amber-400" />
-                <span className="hidden md:inline">Variables Mensuales</span>
-              </button>
-
-              {/* DGII 606 & 607 Tax Exporter Button */}
-              <button
-                type="button"
-                onClick={() => setIsDgiiExporterOpen(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-emerald-500/40 text-emerald-400 hover:text-emerald-300 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
-                title="Exportación Formal DGII Formatos 606 y 607"
-              >
-                <FileText className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="hidden lg:inline">DGII 606/607</span>
-              </button>
-
-              {/* Task #71: Sales Kanban Pipeline Trigger */}
-              <button
-                type="button"
-                onClick={() => setIsKanbanOpen(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-amber-400/40 text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
-                title="Embudo de Ventas Kanban & CRM Comercial"
-              >
-                <Kanban className="w-3.5 h-3.5" />
-                <span className="hidden lg:inline">Pipeline CRM</span>
-              </button>
-
-              {/* Task #89: Technician Labor Hours Trigger */}
-              <button
-                type="button"
-                onClick={() => setIsLaborHoursOpen(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-cyan-500/40 text-cyan-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
-                title="Control de Horas Hombre, Productividad & Bonos de Taller"
-              >
-                <Clock className="w-3.5 h-3.5" />
-                <span className="hidden lg:inline">Horas Taller</span>
-              </button>
-
-              {/* Task #84: Gate Pass Security Ticket Trigger */}
-              <button
-                type="button"
-                onClick={() => setIsGatePassOpen(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-amber-400/40 text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
-                title="Pase de Puerta Digital con QR para Garita de Salida Km 22"
-              >
-                <Shield className="w-3.5 h-3.5" />
-                <span className="hidden lg:inline">Pase Garita</span>
-              </button>
-
-              {/* Task #79: Customer Call Log CRM Trigger */}
-              <button
-                type="button"
-                onClick={() => setIsCallLogOpen(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-sky-400/40 text-sky-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
-                title="Bitácora CRM de Llamadas y Visitas al Patio Km 22"
-              >
-                <PhoneCall className="w-3.5 h-3.5" />
-                <span className="hidden lg:inline">Bitácora CRM</span>
-              </button>
-
-              {/* Task #80: Monthly Executive Report Trigger */}
-              <button
-                type="button"
-                onClick={() => setIsExecutiveReportOpen(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-amber-400/40 text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
-                title="Informe Ejecutivo Mensual Automatizado para Dirección General"
-              >
-                <TrendingUp className="w-3.5 h-3.5" />
-                <span className="hidden lg:inline">Reporte CFO</span>
-              </button>
-
-              {/* Task #56: S3 Glacier Cold Storage Backup Trigger */}
-              <button
-                type="button"
-                onClick={() => setIsGlacierBackupOpen(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-blue-500/40 text-blue-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
-                title="Backups en Frío Semanales en Amazon S3 Glacier (AES-256 / Retención 7 Años)"
-              >
-                <HardDrive className="w-3.5 h-3.5 text-blue-400" />
-                <span className="hidden lg:inline">S3 Glacier</span>
-              </button>
-
-              {/* Supabase / Master Catalog Bulk Manager Trigger Button */}
-              <button
-                onClick={() => setIsBulkManagerOpen(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/40 text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
-                title="Carga Masiva & Sincronización Supabase Cloud"
-              >
-                <Database className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">Carga Masiva</span>
-              </button>
-
-              {/* Notification Bell Button */}
-              <button
                 onClick={() => setIsNotificationCenterOpen(true)}
-                className="relative p-2 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 transition-colors flex items-center justify-center cursor-pointer"
+                className="relative p-2 rounded-[3px] bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 transition-colors flex items-center justify-center cursor-pointer shadow-xs"
                 title={`Centro de Alertas de Stock (${alerts.length} alertas)`}
               >
                 <Bell className="w-4 h-4" />
@@ -595,223 +889,193 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
                   </span>
                 )}
               </button>
-
-              {/* Currency Toggle */}
-              <div className="flex items-center bg-zinc-950 border border-zinc-800 p-0.5 rounded-[2px] text-xs font-mono font-bold">
-                <button
-                  onClick={() => setCurrency('USD')}
-                  className={`px-2 py-0.5 rounded-[2px] transition-colors ${
-                    currency === 'USD'
-                      ? 'bg-amber-400 text-black shadow-xs'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  USD $
-                </button>
-                <button
-                  onClick={() => setCurrency('DOP')}
-                  className={`px-2 py-0.5 rounded-[2px] transition-colors ${
-                    currency === 'DOP'
-                      ? 'bg-amber-400 text-black shadow-xs'
-                      : 'text-zinc-400 hover:text-white'
-                  }`}
-                >
-                  DOP RD$
-                </button>
-              </div>
-
-              <button
-                onClick={() => onNavigate('#/home')}
-                className="px-2.5 py-1.5 rounded-[2px] bg-zinc-950 border border-zinc-800 hover:bg-zinc-800 text-zinc-300 font-mono font-bold text-xs uppercase transition-colors"
-              >
-                Tienda
-              </button>
-
-              <button
-                onClick={() => signOut()}
-                className="p-2 rounded-[2px] text-zinc-400 hover:text-rose-400 hover:bg-zinc-950 transition-colors"
-                title="Cerrar Sesión"
-              >
-                <LogOut className="w-4 h-4" />
-              </button>
             </div>
           </div>
 
-          {/* Navigation Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pt-3 border-t border-slate-200 dark:border-zinc-800 mt-2.5 scrollbar-none font-mono text-xs">
-            <button
-              onClick={() => setActiveTab('command_grid')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap ${
-                activeTab === 'command_grid'
-                  ? 'bg-amber-400 text-black font-mono shadow-xs'
-                  : 'text-slate-600 dark:text-zinc-400 hover:bg-slate-100 dark:hover:bg-zinc-800 hover:text-slate-900 dark:hover:text-zinc-200'
-              }`}
-            >
-              <LayoutGrid className="w-3.5 h-3.5" />
-              <span>Matriz de Control</span>
-              <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-black text-amber-400">
-                HQ
-              </span>
-            </button>
+          {/* Navigation Tabs Bar */}
+          {renderNavTabs()}
+        </div>
+      ) : (
+        <div className="bg-white dark:bg-zinc-900 border-b border-slate-200 dark:border-zinc-800 sticky top-0 z-30 shadow-sm dark:shadow-2xl">
+          <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              {/* Left Brand & Title */}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => onNavigate('#/portal')}
+                  className="p-2 rounded-[2px] bg-slate-100 dark:bg-zinc-950 hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-700 dark:text-zinc-300 border border-slate-300 dark:border-zinc-800 transition-colors cursor-pointer"
+                  title="Volver al Portal General"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </button>
 
-            <button
-              onClick={() => setActiveTab('crm_funnel')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap ${
-                activeTab === 'crm_funnel'
-                  ? 'bg-amber-400 text-black font-mono shadow-xs'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
-              }`}
-            >
-              <TrendingUp className="w-3.5 h-3.5" />
-              <span>Embudo CRM (RFQ)</span>
-              <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-emerald-500 text-black animate-pulse">
-                Live
-              </span>
-            </button>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded-[2px] text-[10px] font-mono font-bold uppercase tracking-wider bg-amber-400 text-black">
+                      ADMIN HQ
+                    </span>
+                    <h1 className="text-sm sm:text-base font-black uppercase tracking-tight text-slate-900 dark:text-white">
+                      Dashboard de Administración
+                    </h1>
+                  </div>
+                  <p className="text-[11px] font-mono text-slate-500 dark:text-zinc-400">
+                    TMD Dominicana • {currentUser.email}
+                  </p>
+                </div>
+              </div>
 
-            <button
-              onClick={() => setActiveTab('patio_km22')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap ${
-                activeTab === 'patio_km22'
-                  ? 'bg-amber-400 text-black font-mono shadow-xs'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
-              }`}
-            >
-              <CalendarIcon className="w-3.5 h-3.5" />
-              <span>Patio Km 22 (Pistas)</span>
-              <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-zinc-950 border border-zinc-700 text-zinc-300">
-                Pistas
-              </span>
-            </button>
+              {/* Right Quick Controls: Bell Notification, Currency Toggle & Logout */}
+              <div className="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2 self-end sm:self-center">
+                <button
+                  type="button"
+                  onClick={() => setIsMonthlyConfigOpen(true)}
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                  title="Gestor de Variables Mensuales, Banners y Tasas"
+                >
+                  <Settings className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="hidden md:inline">Variables Mensuales</span>
+                </button>
 
-            <button
-              onClick={() => setActiveTab('metrics')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap ${
-                activeTab === 'metrics'
-                  ? 'bg-amber-400 text-black font-mono shadow-xs'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
-              }`}
-            >
-              <BarChart3 className="w-3.5 h-3.5 text-amber-400" />
-              <span>Métricas & Ventas</span>
-            </button>
+                <button
+                  type="button"
+                  onClick={() => setIsDgiiExporterOpen(true)}
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-emerald-500/40 text-emerald-400 hover:text-emerald-300 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                  title="Exportación Formal DGII Formatos 606 y 607"
+                >
+                  <FileText className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="hidden lg:inline">DGII 606/607</span>
+                </button>
 
-            <button
-              onClick={() => setActiveTab('quotes')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap ${
-                activeTab === 'quotes'
-                  ? 'bg-amber-400 text-black font-mono shadow-xs'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
-              }`}
-            >
-              <FileText className="w-3.5 h-3.5 text-amber-400" />
-              <span>Presupuestos</span>
-              {pendingQuotesCount > 0 && (
-                <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-amber-400 text-black">
-                  {pendingQuotesCount}
-                </span>
-              )}
-            </button>
+                <button
+                  type="button"
+                  onClick={() => setIsKanbanOpen(true)}
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-amber-400/40 text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                  title="Embudo de Ventas Kanban & CRM Comercial"
+                >
+                  <Kanban className="w-3.5 h-3.5" />
+                  <span className="hidden lg:inline">Pipeline CRM</span>
+                </button>
 
-            <button
-              onClick={() => setActiveTab('machines')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap ${
-                activeTab === 'machines'
-                  ? 'bg-amber-400 text-black font-mono shadow-xs'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
-              }`}
-            >
-              <HardHat className="w-3.5 h-3.5 text-amber-400" />
-              <span>Maquinaria</span>
-              <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-zinc-950 border border-zinc-800 text-zinc-300">
-                {machines.length}
-              </span>
-              {machineAlertsCount > 0 && (
-                <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-amber-400 text-black" title={`${machineAlertsCount} bajo nivel crítico`}>
-                  {machineAlertsCount}
-                </span>
-              )}
-            </button>
+                <button
+                  type="button"
+                  onClick={() => setIsLaborHoursOpen(true)}
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-cyan-500/40 text-cyan-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                  title="Control de Horas Hombre, Productividad & Bonos de Taller"
+                >
+                  <Clock className="w-3.5 h-3.5" />
+                  <span className="hidden lg:inline">Horas Taller</span>
+                </button>
 
-            <button
-              onClick={() => setActiveTab('parts')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap ${
-                activeTab === 'parts'
-                  ? 'bg-amber-400 text-black font-mono shadow-xs'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
-              }`}
-            >
-              <Cog className="w-3.5 h-3.5 text-amber-400" />
-              <span>Repuestos OEM</span>
-              <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-zinc-950 border border-zinc-800 text-zinc-300">
-                {parts.length}
-              </span>
-              {partAlertsCount > 0 && (
-                <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-rose-500 text-white" title={`${partAlertsCount} bajo nivel crítico`}>
-                  {partAlertsCount}
-                </span>
-              )}
-            </button>
+                <button
+                  type="button"
+                  onClick={() => setIsGatePassOpen(true)}
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-amber-400/40 text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                  title="Pase de Puerta Digital con QR para Garita de Salida Km 22"
+                >
+                  <Shield className="w-3.5 h-3.5" />
+                  <span className="hidden lg:inline">Pase Garita</span>
+                </button>
 
-            <button
-              onClick={() => setActiveTab('shop')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap ${
-                activeTab === 'shop'
-                  ? 'bg-amber-400 text-black font-mono shadow-xs'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
-              }`}
-            >
-              <Wrench className="w-3.5 h-3.5 text-amber-400" />
-              <span>Taller Fullbay</span>
-              <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-amber-400/20 text-amber-400">
-                Km 22
-              </span>
-            </button>
+                <button
+                  type="button"
+                  onClick={() => setIsCallLogOpen(true)}
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-sky-400/40 text-sky-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                  title="Bitácora CRM de Llamadas y Visitas al Patio Km 22"
+                >
+                  <PhoneCall className="w-3.5 h-3.5" />
+                  <span className="hidden lg:inline">Bitácora CRM</span>
+                </button>
 
-            <button
-              onClick={() => setActiveTab('demand_heatmap')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap ${
-                activeTab === 'demand_heatmap'
-                  ? 'bg-amber-400 text-black font-mono shadow-xs'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
-              }`}
-            >
-              <Flame className="w-3.5 h-3.5 text-rose-500" />
-              <span>Demanda RD</span>
-            </button>
+                <button
+                  type="button"
+                  onClick={() => setIsExecutiveReportOpen(true)}
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-amber-400/40 text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                  title="Informe Ejecutivo Mensual Automatizado para Dirección General"
+                >
+                  <TrendingUp className="w-3.5 h-3.5" />
+                  <span className="hidden lg:inline">Reporte CFO</span>
+                </button>
 
-            <button
-              onClick={() => setActiveTab('audit_log')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap ${
-                activeTab === 'audit_log'
-                  ? 'bg-amber-400 text-black font-mono shadow-xs'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
-              }`}
-            >
-              <ShieldCheckIcon className="w-3.5 h-3.5 text-emerald-500" />
-              <span>Auditoría</span>
-            </button>
+                <button
+                  type="button"
+                  onClick={() => setIsGlacierBackupOpen(true)}
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-blue-500/40 text-blue-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                  title="Backups en Frío Semanales en Amazon S3 Glacier (AES-256 / Retención 7 Años)"
+                >
+                  <HardDrive className="w-3.5 h-3.5 text-blue-400" />
+                  <span className="hidden lg:inline">S3 Glacier</span>
+                </button>
 
-            <button
-              onClick={() => setActiveTab('integrations')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-[2px] font-bold uppercase transition-all whitespace-nowrap ${
-                activeTab === 'integrations'
-                  ? 'bg-amber-400 text-black font-mono shadow-xs'
-                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200'
-              }`}
-            >
-              <ActivityIcon className="w-3.5 h-3.5 text-blue-400" />
-              <span>APIs & Gateways</span>
-              <span className="px-1.5 py-0.2 rounded-[2px] text-[9px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                Live
-              </span>
-            </button>
+                <button
+                  onClick={() => setIsBulkManagerOpen(true)}
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[2px] bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/40 text-amber-400 text-xs font-mono font-bold uppercase transition-all cursor-pointer shadow-xs"
+                  title="Carga Masiva & Sincronización Supabase Cloud"
+                >
+                  <Database className="w-3.5 h-3.5" />
+                  <span className="hidden md:inline">Carga Masiva</span>
+                </button>
+
+                <button
+                  onClick={() => setIsNotificationCenterOpen(true)}
+                  className="relative p-2 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 transition-colors flex items-center justify-center cursor-pointer"
+                  title={`Centro de Alertas de Stock (${alerts.length} alertas)`}
+                >
+                  <Bell className="w-4 h-4" />
+                  {alerts.length > 0 && (
+                    <span className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 rounded-[2px] bg-rose-500 text-white text-[9px] font-mono font-bold flex items-center justify-center animate-pulse">
+                      {alerts.length}
+                    </span>
+                  )}
+                </button>
+
+                <div className="flex items-center bg-zinc-950 border border-zinc-800 p-0.5 rounded-[2px] text-xs font-mono font-bold">
+                  <button
+                    onClick={() => setCurrency('USD')}
+                    className={`px-2 py-0.5 rounded-[2px] transition-colors ${
+                      currency === 'USD'
+                        ? 'bg-amber-400 text-black shadow-xs'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    USD $
+                  </button>
+                  <button
+                    onClick={() => setCurrency('DOP')}
+                    className={`px-2 py-0.5 rounded-[2px] transition-colors ${
+                      currency === 'DOP'
+                        ? 'bg-amber-400 text-black shadow-xs'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    DOP RD$
+                  </button>
+                </div>
+
+                <button
+                  onClick={() => onNavigate('#/home')}
+                  className="px-2.5 py-1.5 rounded-[2px] bg-zinc-950 border border-zinc-800 hover:bg-zinc-800 text-zinc-300 font-mono font-bold text-xs uppercase transition-colors"
+                >
+                  Tienda
+                </button>
+
+                <button
+                  onClick={() => signOut()}
+                  className="p-2 rounded-[2px] text-zinc-400 hover:text-rose-400 hover:bg-zinc-950 transition-colors"
+                  title="Cerrar Sesión"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Standalone Navigation Tabs */}
+            {renderNavTabs()}
           </div>
         </div>
-      </div>
+      )}
 
       {/* Main Content Area */}
-      <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pt-5">
+      <div className={`w-full ${isEmbedded ? '' : 'max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 pt-5'}`}>
         {/* Global Inventory Alert Banner */}
         <AdminAlertsBanner
           alerts={alerts}

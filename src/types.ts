@@ -553,6 +553,10 @@ export interface RegisteredEquipment {
   assignedOperator?: string;
   status: 'active' | 'in_service' | 'idle' | 'retired';
   image?: string;
+  clientId?: string;
+  clientEmail?: string;
+  companyName?: string;
+  vin?: string;
 }
 
 export interface ServiceWorkOrder {

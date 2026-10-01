@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { 
   User 
@@ -32,7 +32,8 @@ import {
   HardHat,
   MessageSquare,
   X,
-  BookOpen
+  BookOpen,
+  Eye
 } from 'lucide-react';
 import { PortalQuote, ServiceWorkOrder, UserProfile, UserRole, Currency } from '../../types';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
@@ -53,6 +54,11 @@ import { TechnicalDocumentationVaultTab } from './TechnicalDocumentationVaultTab
 import { getQuoteWhatsAppUrl } from '../../utils/whatsappMessaging';
 import { downloadQuotePDF } from '../../utils/pdfGenerator';
 import { getLocalFleet } from '../../services/serviceHistoryService';
+import { 
+  getScopedClientQuotes, 
+  getScopedClientWorkOrders, 
+  getScopedClientFleet 
+} from '../../data/portalSeedData';
 import { ScanFrequencyMiniChart } from './ScanFrequencyMiniChart';
 import { RecentScans } from './RecentScans';
 
@@ -83,6 +89,8 @@ interface ClientDashboardProps {
   onUpdateProfileDetails: (details: Partial<UserProfile>) => Promise<void>;
   onSignOut: () => Promise<void>;
   onOpenQrScanner?: () => void;
+  onInspectQuote?: (quote: PortalQuote) => void;
+  onInspectWorkOrder?: (workOrder: ServiceWorkOrder) => void;
   activeTab?: ClientPortalTab;
   onTabChange?: (tab: ClientPortalTab) => void;
 }
@@ -104,6 +112,8 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
   onUpdateProfileDetails,
   onSignOut,
   onOpenQrScanner,
+  onInspectQuote,
+  onInspectWorkOrder,
   activeTab: activeTabProp,
   onTabChange
 }) => {
@@ -225,12 +235,26 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
     }
   };
 
-  // Fleet and KPI calculations
-  const fleet = getLocalFleet();
-  const pendingQuotes = quotes.filter(q => q.status === 'submitted' || q.status === 'in_review' || q.status === 'draft');
-  const activeServices = workOrders.filter(w => w.status === 'requested' || w.status === 'scheduled' || w.status === 'in_progress');
+  // Scope data strictly to current client account for 100% relational coherence
+  const clientQuotes = useMemo(() => 
+    getScopedClientQuotes(quotes, currentUser?.uid, currentUser?.email || userProfile?.email),
+    [quotes, currentUser?.uid, currentUser?.email, userProfile?.email]
+  );
 
-  const filteredQuotes = quotes.filter(q => {
+  const clientWorkOrders = useMemo(() => 
+    getScopedClientWorkOrders(workOrders, currentUser?.uid, currentUser?.email || userProfile?.email),
+    [workOrders, currentUser?.uid, currentUser?.email, userProfile?.email]
+  );
+
+  const fleet = useMemo(() => 
+    getScopedClientFleet(getLocalFleet(), currentUser?.uid, currentUser?.email || userProfile?.email),
+    [currentUser?.uid, currentUser?.email, userProfile?.email]
+  );
+
+  const pendingQuotes = clientQuotes.filter(q => q.status === 'submitted' || q.status === 'in_review' || q.status === 'draft');
+  const activeServices = clientWorkOrders.filter(w => w.status === 'requested' || w.status === 'scheduled' || w.status === 'in_progress');
+
+  const filteredQuotes = clientQuotes.filter(q => {
     const matchesSearch = 
       q.quoteNumber?.toLowerCase().includes(quoteSearch.toLowerCase()) ||
       q.itemsSummary?.toLowerCase().includes(quoteSearch.toLowerCase()) ||
@@ -287,63 +311,6 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
                     )}
                   </p>
                 )}
-              </div>
-            </div>
-
-            {/* Client Top Action Controls */}
-            <div className="flex items-center gap-2 self-start md:self-center flex-wrap relative z-10 w-full md:w-auto justify-between md:justify-end">
-              {/* Role switcher for testing - only in dev or for real admins */}
-              {(role === 'admin' || import.meta.env.DEV) && (
-                <div className="flex items-center gap-0.5 p-0.5 bg-zinc-950 rounded-[3px] border border-zinc-800 shadow-inner">
-                  <span className="text-[10px] text-zinc-500 font-bold px-1 hidden sm:inline uppercase">VISTA:</span>
-                  <button
-                    type="button"
-                    onClick={() => setSimulatedRole(null)}
-                    className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                      !simulatedRole ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
-                    }`}
-                  >
-                    CLIENTE
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSimulatedRole('staff')}
-                    className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                      simulatedRole === 'staff' ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
-                    }`}
-                  >
-                    STAFF
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSimulatedRole('admin')}
-                    className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                      simulatedRole === 'admin' ? 'bg-purple-500 text-white shadow-xs' : 'text-zinc-400 hover:text-white'
-                    }`}
-                  >
-                    ADMIN
-                  </button>
-                </div>
-              )}
-
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <button
-                  type="button"
-                  onClick={onOpenCreateQuote}
-                  className="px-3.5 py-2 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-[0.98] uppercase cursor-pointer"
-                >
-                  <Plus className="w-3.5 h-3.5" />
-                  <span>+ PROFORMA</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={onSignOut}
-                  className="p-2 rounded bg-zinc-800 hover:bg-red-950/40 text-zinc-300 hover:text-red-400 border border-zinc-700 transition-colors cursor-pointer"
-                  title="Cerrar Sesión"
-                >
-                  <LogOut className="w-3.5 h-3.5" />
-                </button>
               </div>
             </div>
           </div>
@@ -471,134 +438,11 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
                 <span>+ Solicitar Taller</span>
               </button>
             )}
-            <button
-              type="button"
-              onClick={() => handleTabSelect('overview')}
-              className="px-2.5 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-semibold border border-zinc-700 transition-colors cursor-pointer uppercase flex items-center gap-1"
-              title="Volver al Panel Resumen"
-            >
-              <Zap className="w-3 h-3 text-amber-400" />
-              <span>Ver Resumen</span>
-            </button>
           </div>
         </div>
       )}
 
-      {/* INDUSTRIAL SECTION DIVIDER */}
-      <IndustrialSectionDivider badge="ESPACIO DE GESTIÓN DE CLIENTE" />
 
-      {/* CLIENT STICKY TABS NAVIGATION (COMPACT PILL DOCK) */}
-      <div className="relative z-20 bg-zinc-900/95 backdrop-blur-md py-1.5 px-2 rounded-[5px] border border-zinc-800 shadow-md flex items-center gap-1.5 overflow-x-auto scrollbar-none transition-all">
-        <button
-          type="button"
-          onClick={() => handleTabSelect('overview')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'overview'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-          }`}
-        >
-          <Zap className="w-3.5 h-3.5" />
-          <span>INICIO</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('quotes')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'quotes'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-          }`}
-        >
-          <FileText className="w-3.5 h-3.5" />
-          <span>COTIZACIONES</span>
-          {pendingQuotes.length > 0 && (
-            <span className="px-1.5 py-0.2 rounded-[2px] bg-black/20 text-[9px] font-mono">
-              {pendingQuotes.length}
-            </span>
-          )}
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('purchases')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'purchases'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-          }`}
-        >
-          <Package className="w-3.5 h-3.5" />
-          <span>PEDIDOS & ENVÍOS</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('livelink_telematics')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'livelink_telematics'
-              ? 'bg-emerald-500 text-black shadow-xs font-black'
-              : 'text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30'
-          }`}
-        >
-          <Radio className="w-3.5 h-3.5 animate-pulse text-emerald-400" />
-          <span>TELEMETRÍA LIVELINK™</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('service_history')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'service_history'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-          }`}
-        >
-          <Activity className="w-3.5 h-3.5" />
-          <span>HISTORIAL TÉCNICO</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('pro_member')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'pro_member'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-amber-400 bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30'
-          }`}
-        >
-          <Crown className="w-3.5 h-3.5" />
-          <span>CLUB PRO</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('tech_docs')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'tech_docs'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-          }`}
-        >
-          <BookOpen className="w-3.5 h-3.5" />
-          <span>FICHAS & CATÁLOGOS PDF</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => handleTabSelect('profile')}
-          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
-            activeTab === 'profile'
-              ? 'bg-amber-400 text-black shadow-xs font-black'
-              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
-          }`}
-        >
-          <Building className="w-3.5 h-3.5" />
-          <span>DATOS & ALERTAS</span>
-        </button>
-      </div>
 
       {/* CLIENT ACTIVE WORKSPACE CONTENT */}
       <div ref={portalWorkspaceRef} className="scroll-mt-32 space-y-4">
@@ -620,20 +464,28 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
                     onClick={() => handleTabSelect('quotes')}
                     className="text-[11px] text-amber-400 hover:underline uppercase font-mono font-bold cursor-pointer"
                   >
-                    Ver Todas ({quotes.length}) →
+                    Ver Todas ({clientQuotes.length}) →
                   </button>
                 </div>
-                {quotes.length === 0 ? (
+                {clientQuotes.length === 0 ? (
                   <p className="text-xs text-zinc-500 py-4 text-center">No hay cotizaciones registradas actualmente.</p>
                 ) : (
                   <div className="space-y-2">
-                    {quotes.slice(0, 3).map((q) => (
-                      <div key={q.id} className="p-2.5 rounded bg-zinc-950/80 border border-zinc-800/80 flex items-center justify-between gap-3 text-xs">
-                        <div>
-                          <span className="font-bold text-white font-mono">{q.quoteNumber}</span>
+                    {clientQuotes.slice(0, 3).map((q) => (
+                      <div
+                        key={q.id}
+                        onClick={() => onInspectQuote ? onInspectQuote(q) : handleTabSelect('quotes')}
+                        className="p-2.5 rounded bg-zinc-950/80 border border-zinc-800/80 hover:border-amber-400/50 hover:bg-zinc-900/90 transition-all flex items-center justify-between gap-3 text-xs cursor-pointer group"
+                        title="Click para ver desglose fiscal en panel lateral (Side-Peek)"
+                      >
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-bold text-white font-mono group-hover:text-amber-400 transition-colors">{q.quoteNumber}</span>
+                            <Eye className="w-3.5 h-3.5 text-zinc-500 opacity-60 group-hover:opacity-100 group-hover:text-amber-400 transition-all" />
+                          </div>
                           <p className="text-[11px] text-zinc-400 truncate max-w-xs">{q.itemsSummary || 'Equipos TMD'}</p>
                         </div>
-                        <div className="text-right">
+                        <div className="text-right shrink-0">
                           <span className="font-mono font-bold text-amber-400">{formatPrice(q.total || 0)}</span>
                           <span className="block text-[9px] uppercase font-bold text-zinc-500">{q.status}</span>
                         </div>
@@ -657,20 +509,28 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
                     onClick={() => handleTabSelect('service_history')}
                     className="text-[11px] text-blue-400 hover:underline uppercase font-mono font-bold cursor-pointer"
                   >
-                    Ver Historial ({workOrders.length}) →
+                    Ver Historial ({clientWorkOrders.length}) →
                   </button>
                 </div>
-                {workOrders.length === 0 ? (
+                {clientWorkOrders.length === 0 ? (
                   <p className="text-xs text-zinc-500 py-4 text-center">No hay órdenes de servicio activas.</p>
                 ) : (
                   <div className="space-y-2">
-                    {workOrders.slice(0, 3).map((w) => (
-                      <div key={w.id} className="p-2.5 rounded bg-zinc-950/80 border border-zinc-800/80 flex items-center justify-between gap-3 text-xs">
-                        <div>
-                          <span className="font-bold text-white font-mono">{w.orderNumber}</span>
+                    {clientWorkOrders.slice(0, 3).map((w) => (
+                      <div
+                        key={w.id}
+                        onClick={() => onInspectWorkOrder ? onInspectWorkOrder(w) : handleTabSelect('service_history')}
+                        className="p-2.5 rounded bg-zinc-950/80 border border-zinc-800/80 hover:border-blue-400/50 hover:bg-zinc-900/90 transition-all flex items-center justify-between gap-3 text-xs cursor-pointer group"
+                        title="Click para ver orden de servicio en panel lateral (Side-Peek)"
+                      >
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-bold text-white font-mono group-hover:text-blue-400 transition-colors">{w.orderNumber}</span>
+                            <Eye className="w-3.5 h-3.5 text-zinc-500 opacity-60 group-hover:opacity-100 group-hover:text-blue-400 transition-all" />
+                          </div>
                           <p className="text-[11px] text-zinc-400 truncate max-w-xs">{w.machineModel}</p>
                         </div>
-                        <div className="text-right">
+                        <div className="text-right shrink-0">
                           <span className={`inline-block px-1.5 py-0.5 rounded text-[9px] font-bold uppercase ${
                             w.status === 'in_progress' ? 'bg-amber-400/20 text-amber-400' : 'bg-emerald-500/20 text-emerald-400'
                           }`}>
@@ -828,6 +688,16 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
                             <span>APROBADA</span>
                           </span>
                         )}
+                        {onInspectQuote && (
+                          <button
+                            type="button"
+                            onClick={() => onInspectQuote(q)}
+                            className="p-1.5 rounded-[3px] bg-zinc-800 hover:bg-zinc-700 text-amber-400 hover:text-amber-300 transition-colors cursor-pointer border border-zinc-700"
+                            title="Inspeccionar Proforma Fiscal NCF B01 (Side-Peek)"
+                          >
+                            <Eye className="w-3.5 h-3.5" />
+                          </button>
+                        )}
                         <button
                           type="button"
                           onClick={() => onExportQuotePdf(q)}
@@ -977,7 +847,8 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
             isAdmin={false}
             isStaff={false}
             onNavigate={onNavigate}
-            workOrders={workOrders}
+            workOrders={clientWorkOrders}
+            onOpenNewOrderModal={onOpenNewOrderModal}
           />
         )}
 

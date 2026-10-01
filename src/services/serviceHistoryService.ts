@@ -10,6 +10,7 @@ import {
 import { db, handleFirestoreError, OperationType } from '../lib/firebase';
 import { ServiceWorkOrder, RegisteredEquipment, InstalledServicePart } from '../types';
 import { USD_TO_DOP_RATE } from '../data/catalog';
+import { INITIAL_REGISTERED_FLEET } from '../data/portalSeedData';
 
 const WORK_ORDERS_COLLECTION = 'work_orders';
 const LOCAL_SERVICE_HISTORY_KEY = 'tmd-service-history-records';
@@ -37,9 +38,9 @@ export const saveServiceOrderToLocalStorage = (order: ServiceWorkOrder) => {
 export const getLocalFleet = (): RegisteredEquipment[] => {
   try {
     const data = localStorage.getItem(LOCAL_FLEET_KEY);
-    return data ? JSON.parse(data) : [];
+    return data ? JSON.parse(data) : INITIAL_REGISTERED_FLEET;
   } catch {
-    return [];
+    return INITIAL_REGISTERED_FLEET;
   }
 };
 
@@ -52,65 +53,7 @@ export const saveFleetToLocalStorage = (fleet: RegisteredEquipment[]) => {
 };
 
 // Default registered machines for client demo
-export const generateDemoFleet = (): RegisteredEquipment[] => [
-  {
-    id: 'eq-liugong-922e',
-    unitId: 'EX-01',
-    brand: 'LiuGong',
-    model: '922E Excavadora de Orugas (22 Ton)',
-    serialNumber: 'LG922E-2023-88412',
-    year: 2023,
-    currentHorometer: 2450,
-    lastServiceDate: '15 de Agosto, 2026',
-    nextServiceHours: 2500,
-    serviceIntervalHours: 500,
-    reminderThresholdHours: 100,
-    reminderAutoEnabled: true,
-    nextServiceDate: 'Noviembre 2026',
-    jobsiteLocation: 'Cantera Autopista Duarte Km 28',
-    assignedOperator: 'Juan Carlos Martínez',
-    status: 'active',
-    image: '/assets/machinery/LiuGong_922E_Excavator_Official_Photo.jpg'
-  },
-  {
-    id: 'eq-jcb-3cx',
-    unitId: 'RT-04',
-    brand: 'JCB',
-    model: '3CX Eco Retroexcavadora 4x4 Turbo',
-    serialNumber: 'JCB-3CX-2024-9104',
-    year: 2024,
-    currentHorometer: 1120,
-    lastServiceDate: '02 de Julio, 2026',
-    nextServiceHours: 1500,
-    serviceIntervalHours: 500,
-    reminderThresholdHours: 100,
-    reminderAutoEnabled: true,
-    nextServiceDate: 'Diciembre 2026',
-    jobsiteLocation: 'Proyecto Turístico Punta Cana - Sector Cap Cana',
-    assignedOperator: 'Ramón Almonte',
-    status: 'active',
-    image: '/assets/machinery/classic_robust_yellow_jcb_3cx_backhoe.jpg'
-  },
-  {
-    id: 'eq-ls-mt357',
-    unitId: 'TR-02',
-    brand: 'LS Tractor',
-    model: 'MT357 Cabina 4WD (57 HP)',
-    serialNumber: 'LS-MT3-2025-3312',
-    year: 2025,
-    currentHorometer: 680,
-    lastServiceDate: '18 de Junio, 2026',
-    nextServiceHours: 750,
-    serviceIntervalHours: 250,
-    reminderThresholdHours: 100,
-    reminderAutoEnabled: true,
-    nextServiceDate: 'Octubre 2026',
-    jobsiteLocation: 'Finca Agropecuaria San Francisco de Macorís',
-    assignedOperator: 'Manuel Tavárez (Hijo)',
-    status: 'active',
-    image: '/assets/machinery/heavy_blue_agricultural_tractor_ls_mt7.jpg'
-  }
-];
+export const generateDemoFleet = (): RegisteredEquipment[] => INITIAL_REGISTERED_FLEET;
 
 // Helper to update machine horometer and auto-save
 export const updateEquipmentHorometer = (

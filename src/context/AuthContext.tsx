@@ -53,7 +53,7 @@ interface AuthContextType {
   loading: boolean;
   signInWithGoogle: () => Promise<void>;
   signInWithPin: (pin: string) => Promise<{ success: boolean; error?: string; role?: UserRole }>;
-  signInAsRole: (targetRole: 'client' | 'staff' | 'admin') => Promise<void>;
+  signInAsRole: (targetRole: 'client' | 'staff' | 'admin', clientId?: string) => Promise<void>;
   signInWithBiometrics: (targetEmail?: string) => Promise<BiometricAuthResult>;
   registerBiometrics: (deviceName?: string) => Promise<BiometricAuthResult>;
   isBiometricsSupported: boolean;
@@ -248,10 +248,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const signInAsRole = async (targetRole: 'client' | 'staff' | 'admin'): Promise<void> => {
+  const signInAsRole = async (targetRole: 'client' | 'staff' | 'admin', clientId?: string): Promise<void> => {
     setLoading(true);
     try {
-      const account = getPinAccountByRole(targetRole);
+      const account = getPinAccountByRole(targetRole, clientId);
       const mockUser = createMockFirebaseUser(account);
       const mockProfile = createMockUserProfile(account);
 

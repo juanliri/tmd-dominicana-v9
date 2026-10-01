@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Building2, 
   Menu, 
@@ -18,7 +18,8 @@ import {
   RefreshCw,
   LogOut,
   Sliders,
-  DollarSign
+  DollarSign,
+  FileText
 } from 'lucide-react';
 import { PortalSidebar } from './PortalSidebar';
 import { PortalBottomBar } from './PortalBottomBar';
@@ -30,12 +31,21 @@ import {
   PORTAL_ROLE_LABELS,
   PORTAL_ROLE_COLORS 
 } from '../../../config/portalPermissions';
-import { UserProfile, UserRole } from '../../../types';
+import { 
+  UserProfile, 
+  UserRole, 
+  PortalQuote, 
+  ServiceWorkOrder, 
+  RegisteredEquipment, 
+  CustomerPurchaseOrder 
+} from '../../../types';
 import { useTheme } from '../../../context/ThemeContext';
 import { useCart } from '../../../context/CartContext';
 import { useNotifications } from '../../../context/NotificationContext';
 import { useOfflineSync } from '../../../context/OfflineSyncContext';
 import { TMDLogo } from '../../common/BrandLogos';
+import { PortalSpotlightModal } from '../PortalSpotlightModal';
+import { PortalDetailDrawer, DrawerDetailItem } from '../PortalDetailDrawer';
 
 interface PortalShellProps {
   activeTab: string;
@@ -44,6 +54,7 @@ interface PortalShellProps {
   role: UserRole;
   simulatedRole?: UserRole | null;
   onSetSimulatedRole?: (role: UserRole | null) => void;
+  onSignInAsRole?: (role: 'client' | 'staff' | 'admin', clientId?: string) => Promise<void> | void;
   breadcrumbs?: BreadcrumbItem[];
   onNavigate: (route: string) => void;
   onOpenCreateQuote?: () => void;
@@ -52,6 +63,14 @@ interface PortalShellProps {
   onSignOut: () => void;
   quotesCount?: number;
   ordersCount?: number;
+  quotes?: PortalQuote[];
+  workOrders?: ServiceWorkOrder[];
+  fleet?: RegisteredEquipment[];
+  purchaseOrders?: CustomerPurchaseOrder[];
+  onApproveQuote?: (quoteId: string) => void;
+  onRejectQuote?: (quoteId: string) => void;
+  drawerItem?: DrawerDetailItem | null;
+  onSetDrawerItem?: (item: DrawerDetailItem | null) => void;
   children: React.ReactNode;
 }
 
@@ -62,6 +81,7 @@ export const PortalShell: React.FC<PortalShellProps> = ({
   role,
   simulatedRole,
   onSetSimulatedRole,
+  onSignInAsRole,
   breadcrumbs,
   onNavigate,
   onOpenCreateQuote,
@@ -70,10 +90,22 @@ export const PortalShell: React.FC<PortalShellProps> = ({
   onSignOut,
   quotesCount = 0,
   ordersCount = 0,
+  quotes,
+  workOrders,
+  fleet,
+  purchaseOrders,
+  onApproveQuote,
+  onRejectQuote,
+  drawerItem: drawerItemProp,
+  onSetDrawerItem,
   children
 }) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSpotlightOpen, setIsSpotlightOpen] = useState(false);
+  const [internalDrawerItem, setInternalDrawerItem] = useState<DrawerDetailItem | null>(null);
+  const drawerItem = drawerItemProp !== undefined ? drawerItemProp : internalDrawerItem;
+  const setDrawerItem = onSetDrawerItem || setInternalDrawerItem;
   const { theme, toggleTheme } = useTheme();
   const { currency, setCurrency } = useCart();
   const { unreadCount, openNotificationPanel } = useNotifications();
@@ -84,6 +116,30 @@ export const PortalShell: React.FC<PortalShellProps> = ({
   const currentPortalRole: PortalRole = legacyRoleToPortalRole(effectiveLegacyRole);
   const roleStyle = PORTAL_ROLE_COLORS[currentPortalRole] || PORTAL_ROLE_COLORS.client;
   const roleLabel = PORTAL_ROLE_LABELS[currentPortalRole] || 'USUARIO';
+
+  // Global Keyboard Shortcuts (Apple / Microsoft Pro Navigation)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      const isInput = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
+
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setIsSpotlightOpen(true);
+      } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'n' && !isInput) {
+        e.preventDefault();
+        onOpenCreateQuote?.();
+      } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b' && !isInput) {
+        e.preventDefault();
+        setIsSidebarCollapsed(prev => !prev);
+      } else if (e.key === 'Escape') {
+        if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onOpenQrScanner, onOpenCreateQuote, isMobileMenuOpen]);
 
   // Default breadcrumbs based on active tab
   const getTabLabel = (tabId: string): string => {
@@ -148,6 +204,7 @@ export const PortalShell: React.FC<PortalShellProps> = ({
                   currentRole={currentPortalRole}
                   simulatedRole={simulatedRole}
                   onSetSimulatedRole={onSetSimulatedRole}
+                  onSignInAsRole={onSignInAsRole}
                   onOpenCreateQuote={onOpenCreateQuote}
                   onOpenNewOrderModal={onOpenNewOrderModal}
                   onOpenQrScanner={onOpenQrScanner}
@@ -171,6 +228,7 @@ export const PortalShell: React.FC<PortalShellProps> = ({
               currentRole={currentPortalRole}
               simulatedRole={simulatedRole}
               onSetSimulatedRole={onSetSimulatedRole}
+              onSignInAsRole={onSignInAsRole}
               onOpenCreateQuote={onOpenCreateQuote}
               onOpenNewOrderModal={onOpenNewOrderModal}
               onOpenQrScanner={onOpenQrScanner}
@@ -230,11 +288,9 @@ export const PortalShell: React.FC<PortalShellProps> = ({
               {/* Center Section: Global Command Search Trigger */}
               <div className="flex-1 max-w-md mx-2 hidden md:block">
                 <div 
-                  onClick={() => {
-                    if (onOpenQrScanner) onOpenQrScanner();
-                  }}
+                  onClick={() => setIsSpotlightOpen(true)}
                   className="flex items-center gap-2 px-3 py-1.5 rounded bg-zinc-100 hover:bg-zinc-200/80 dark:bg-zinc-900/90 dark:hover:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-all cursor-pointer shadow-inner"
-                  title="Búsqueda Rápida de Cotizaciones, Órdenes, Equipos y NCF"
+                  title="Búsqueda Rápida de Cotizaciones, Órdenes, Equipos y NCF (Ctrl+K)"
                 >
                   <Search className="w-3.5 h-3.5 text-amber-500 shrink-0" />
                   <span className="truncate flex-1 text-left">Buscar cotización, equipo, orden, NCF...</span>
@@ -246,30 +302,59 @@ export const PortalShell: React.FC<PortalShellProps> = ({
 
               {/* Right Section: Quick Actions, Currency, Vault, Notifications, Theme, User */}
               <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                {/* Primary Action Button */}
-                {onOpenCreateQuote && currentPortalRole !== 'client' && (
+                {/* QuickBooks-style Smart '+ Nuevo' Dropdown */}
+                <div className="relative group">
                   <button
                     type="button"
-                    onClick={onOpenCreateQuote}
                     className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded bg-amber-400 hover:bg-amber-300 text-black text-xs font-bold transition-all shadow-xs cursor-pointer uppercase shrink-0"
-                    title="Crear Nueva Proforma / Cotización DGII"
+                    title="Crear nuevo elemento"
                   >
                     <Plus className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">Nueva Proforma</span>
+                    <span className="hidden sm:inline">Nuevo</span>
+                    <ChevronRight className="w-3 h-3 rotate-90 opacity-60" />
                   </button>
-                )}
-
-                {currentPortalRole === 'client' && onOpenNewOrderModal && (
-                  <button
-                    type="button"
-                    onClick={onOpenNewOrderModal}
-                    className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded bg-amber-400 hover:bg-amber-300 text-black text-xs font-bold transition-all shadow-xs cursor-pointer uppercase shrink-0"
-                    title="Solicitar Servicio Técnico en Taller o Campo"
-                  >
-                    <Wrench className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">Solicitar Taller</span>
-                  </button>
-                )}
+                  <div className="absolute right-0 top-full mt-1 w-52 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50 py-1">
+                    {onOpenCreateQuote && (
+                      <button
+                        type="button"
+                        onClick={onOpenCreateQuote}
+                        className="w-full flex items-center gap-2.5 px-3.5 py-2.5 text-xs font-semibold text-zinc-700 dark:text-zinc-200 hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-700 dark:hover:text-amber-400 transition-colors cursor-pointer text-left"
+                      >
+                        <FileText className="w-4 h-4 text-amber-500" />
+                        <div>
+                          <span className="block">Nueva Proforma B01</span>
+                          <span className="text-[10px] text-zinc-400 font-normal">Cotización DGII con NCF</span>
+                        </div>
+                      </button>
+                    )}
+                    {onOpenNewOrderModal && (
+                      <button
+                        type="button"
+                        onClick={onOpenNewOrderModal}
+                        className="w-full flex items-center gap-2.5 px-3.5 py-2.5 text-xs font-semibold text-zinc-700 dark:text-zinc-200 hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-700 dark:hover:text-amber-400 transition-colors cursor-pointer text-left"
+                      >
+                        <Wrench className="w-4 h-4 text-emerald-500" />
+                        <div>
+                          <span className="block">Orden de Taller</span>
+                          <span className="text-[10px] text-zinc-400 font-normal">Servicio técnico Km 22</span>
+                        </div>
+                      </button>
+                    )}
+                    {onOpenQrScanner && (
+                      <button
+                        type="button"
+                        onClick={onOpenQrScanner}
+                        className="w-full flex items-center gap-2.5 px-3.5 py-2.5 text-xs font-semibold text-zinc-700 dark:text-zinc-200 hover:bg-cyan-50 dark:hover:bg-cyan-500/10 hover:text-cyan-700 dark:hover:text-cyan-400 transition-colors cursor-pointer text-left border-t border-zinc-100 dark:border-zinc-800"
+                      >
+                        <Search className="w-4 h-4 text-cyan-500" />
+                        <div>
+                          <span className="block">Escanear QR</span>
+                          <span className="text-[10px] text-zinc-400 font-normal">Maquinaria o repuesto</span>
+                        </div>
+                      </button>
+                    )}
+                  </div>
+                </div>
 
                 {/* Currency Switcher */}
                 <div className="hidden sm:flex items-center gap-0.5 bg-zinc-100 dark:bg-zinc-900 rounded p-0.5 border border-zinc-200 dark:border-zinc-800">
@@ -317,17 +402,7 @@ export const PortalShell: React.FC<PortalShellProps> = ({
                   )}
                 </button>
 
-                {/* QR Scanner Shortcut */}
-                {onOpenQrScanner && (
-                  <button
-                    type="button"
-                    onClick={onOpenQrScanner}
-                    className="p-1.5 rounded bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-cyan-500/30 text-cyan-600 dark:text-cyan-400 transition-colors cursor-pointer"
-                    title="Escanear Código QR de Maquinaria o Repuesto"
-                  >
-                    <Search className="w-3.5 h-3.5" />
-                  </button>
-                )}
+
 
                 {/* Notification Bell */}
                 <button
@@ -342,16 +417,7 @@ export const PortalShell: React.FC<PortalShellProps> = ({
                   )}
                 </button>
 
-                {/* Showroom Public Return */}
-                <button
-                  type="button"
-                  onClick={() => onNavigate('#/home')}
-                  className="hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors cursor-pointer"
-                  title="Volver al Catálogo Público"
-                >
-                  <ExternalLink className="w-3 h-3 text-zinc-400" />
-                  <span>Showroom</span>
-                </button>
+
 
                 {/* Theme Toggle */}
                 <button
@@ -424,6 +490,32 @@ export const PortalShell: React.FC<PortalShellProps> = ({
           onSignOut={onSignOut}
           quotesCount={quotesCount}
           ordersCount={ordersCount}
+        />
+
+        {/* Global Apple/Raycast Spotlight Command Palette (Ctrl+K) */}
+        <PortalSpotlightModal
+          isOpen={isSpotlightOpen}
+          onClose={() => setIsSpotlightOpen(false)}
+          onSelectTab={onSelectTab}
+          onOpenCreateQuote={onOpenCreateQuote}
+          onOpenNewOrderModal={onOpenNewOrderModal}
+          onOpenQrScanner={onOpenQrScanner}
+          onSelectQuote={(q) => setDrawerItem({ type: 'quote', data: q })}
+          quotes={quotes}
+          workOrders={workOrders}
+          fleet={fleet}
+          purchaseOrders={purchaseOrders}
+          onSignInAsRole={onSignInAsRole}
+        />
+
+        {/* Outlook 365 / Linear Style Side-Peek Detail Drawer */}
+        <PortalDetailDrawer
+          isOpen={!!drawerItem}
+          onClose={() => setDrawerItem(null)}
+          item={drawerItem}
+          onApproveQuote={onApproveQuote}
+          onRejectQuote={onRejectQuote}
+          isStaffOrAdmin={effectiveLegacyRole === 'staff' || effectiveLegacyRole === 'admin'}
         />
       </div>
     </SessionManager>

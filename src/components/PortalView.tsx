@@ -34,13 +34,16 @@ import { StaffBiometricAuthModal } from './auth/StaffBiometricAuthModal';
 import { PasskeyBiometricAuthModal } from './auth/PasskeyBiometricAuthModal';
 import { EnterprisePortalLogin } from './portal/EnterprisePortalLogin';
 import { PortalShell } from './portal/layout/PortalShell';
-import { AdminDashboardView } from './AdminDashboardView';
+import { DrawerDetailItem } from './portal/PortalDetailDrawer';
+import { AdminDashboardView, AdminTab } from './AdminDashboardView';
 import { AdminIntegrationsHealthView } from './admin/AdminIntegrationsHealthView';
 import { ProtectedRoute } from './auth/ProtectedRoute';
 import { 
   INITIAL_PORTAL_QUOTES, 
   INITIAL_PORTAL_WORK_ORDERS, 
-  INITIAL_PORTAL_USERS 
+  INITIAL_PORTAL_USERS,
+  INITIAL_REGISTERED_FLEET,
+  INITIAL_PORTAL_PURCHASE_ORDERS
 } from '../data/portalSeedData';
 
 interface PortalViewProps {
@@ -106,9 +109,20 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
     return () => window.removeEventListener('hashchange', handleHashSync);
   }, []);
 
+  // Auto-recovery: If active account is client, avoid stranding on admin/ops tabs
+  useEffect(() => {
+    if (!loading && isClient && !isStaff && !isAdmin) {
+      const adminTabs = ['metrics', 'patio', 'audit', 'users', 'integrations', 'command', 'workflow', 'inventory'];
+      if (adminTabs.includes(activePortalTab)) {
+        setActivePortalTab('overview');
+      }
+    }
+  }, [loading, isClient, isStaff, isAdmin, activePortalTab]);
+
   const [quotes, setQuotes] = useState<PortalQuote[]>(INITIAL_PORTAL_QUOTES);
   const [workOrders, setWorkOrders] = useState<ServiceWorkOrder[]>(INITIAL_PORTAL_WORK_ORDERS);
   const [allUsers, setAllUsers] = useState<UserProfile[]>(INITIAL_PORTAL_USERS);
+  const [activeDrawerItem, setActiveDrawerItem] = useState<DrawerDetailItem | null>(null);
   
   const [isSubmittingOrder, setIsSubmittingOrder] = useState<boolean>(false);
   const [showNewOrderModal, setShowNewOrderModal] = useState<boolean>(false);
@@ -181,6 +195,42 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
       case 'users': return 'users';
       case 'profile': return 'profile';
       default: return 'command';
+    }
+  };
+
+  const mapShellTabToAdminTab = (tab: string): AdminTab => {
+    switch (tab) {
+      case 'overview':
+      case 'command': return 'command_grid';
+      case 'crm': return 'crm_funnel';
+      case 'patio': return 'patio_km22';
+      case 'metrics': return 'metrics';
+      case 'quotes': return 'quotes';
+      case 'inventory': return 'parts';
+      case 'machines': return 'machines';
+      case 'parts': return 'parts';
+      case 'shop':
+      case 'orders': return 'shop';
+      case 'audit': return 'audit_log';
+      case 'integrations': return 'integrations';
+      default: return 'command_grid';
+    }
+  };
+
+  const mapAdminTabToShellTab = (tab: AdminTab): string => {
+    switch (tab) {
+      case 'command_grid': return 'overview';
+      case 'crm_funnel': return 'crm';
+      case 'patio_km22': return 'patio';
+      case 'metrics': return 'metrics';
+      case 'quotes': return 'quotes';
+      case 'machines': return 'inventory';
+      case 'parts': return 'inventory';
+      case 'shop': return 'orders';
+      case 'demand_heatmap': return 'metrics';
+      case 'audit_log': return 'audit';
+      case 'integrations': return 'integrations';
+      default: return 'overview';
     }
   };
 
@@ -489,6 +539,7 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
       role={role}
       simulatedRole={simulatedRole}
       onSetSimulatedRole={setSimulatedRole}
+      onSignInAsRole={signInAsRole}
       onNavigate={onNavigate}
       onOpenCreateQuote={() => setShowCreateQuoteModal(true)}
       onOpenNewOrderModal={() => setShowNewOrderModal(true)}
@@ -496,19 +547,17 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
       onSignOut={signOut}
       quotesCount={quotes.length}
       ordersCount={workOrders.length}
+      quotes={quotes}
+      workOrders={workOrders}
+      fleet={INITIAL_REGISTERED_FLEET}
+      purchaseOrders={INITIAL_PORTAL_PURCHASE_ORDERS}
+      onApproveQuote={(qid) => handleUpdateQuoteStatus(qid, 'approved')}
+      onRejectQuote={(qid) => handleUpdateQuoteStatus(qid, 'rejected')}
+      drawerItem={activeDrawerItem}
+      onSetDrawerItem={setActiveDrawerItem}
     >
       {/* Dynamic Sub-route & Workspace Router with strict role gating */}
-      {activePortalTab === 'integrations' ? (
-        <ProtectedRoute requiredRole="admin" onNavigate={onNavigate} fallbackRoute="#/portal">
-          <div className="space-y-4">
-            <AdminIntegrationsHealthView />
-          </div>
-        </ProtectedRoute>
-      ) : (subRoute === 'admin' || ['patio', 'metrics', 'audit'].includes(activePortalTab)) ? (
-        <ProtectedRoute requiredRole="admin" onNavigate={onNavigate} fallbackRoute="#/portal">
-          <AdminDashboardView onNavigate={onNavigate} />
-        </ProtectedRoute>
-      ) : (subRoute === 'ops' || ['command', 'workflow', 'inventory', 'users'].includes(activePortalTab) || isStaff || isAdmin) ? (
+      {isAdmin && ['workflow', 'users', 'orders'].includes(activePortalTab) ? (
         <ProtectedRoute requiredRole="staff" onNavigate={onNavigate} fallbackRoute="#/portal">
           <StaffCommandCenter
             currentUser={currentUser}
@@ -526,6 +575,50 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
             onOpenCreateQuote={() => setShowCreateQuoteModal(true)}
             onOpenNewOrderModal={() => setShowNewOrderModal(true)}
             onExportQuotePdf={(q) => setExportingQuote(q)}
+            onInspectQuote={(q) => setActiveDrawerItem({ type: 'quote', data: q })}
+            onUpdateOrderStatus={handleUpdateOrderStatus}
+            onUpdateQuoteStatus={handleUpdateQuoteStatus}
+            onUpdateUserRole={updateUserRole}
+            onUpdateProfileDetails={updateProfileDetails}
+            onSignOut={signOut}
+            addToCart={addToCart}
+            onOpenQrScanner={onOpenQrScanner}
+            activeTab={mapShellTabToStaffTab(activePortalTab)}
+            onTabChange={(tab) => {
+              handleSelectPortalTab(mapStaffTabToShellTab(tab));
+            }}
+          />
+        </ProtectedRoute>
+      ) : (isAdmin || subRoute === 'admin' || ['patio', 'metrics', 'audit', 'integrations'].includes(activePortalTab)) ? (
+        <ProtectedRoute requiredRole="admin" onNavigate={onNavigate} fallbackRoute="#/portal">
+          <AdminDashboardView 
+            onNavigate={onNavigate} 
+            isEmbedded={true}
+            activeTab={mapShellTabToAdminTab(activePortalTab)}
+            onTabChange={(tab) => {
+              handleSelectPortalTab(mapAdminTabToShellTab(tab));
+            }}
+          />
+        </ProtectedRoute>
+      ) : (subRoute === 'ops' || ['command', 'workflow', 'inventory', 'users', 'orders'].includes(activePortalTab) || isStaff) ? (
+        <ProtectedRoute requiredRole="staff" onNavigate={onNavigate} fallbackRoute="#/portal">
+          <StaffCommandCenter
+            currentUser={currentUser}
+            userProfile={userProfile}
+            role={role}
+            isAdmin={isAdmin}
+            isStaff={isStaff}
+            simulatedRole={simulatedRole}
+            setSimulatedRole={setSimulatedRole}
+            quotes={quotes}
+            workOrders={workOrders}
+            allUsers={allUsers}
+            currency={currency}
+            onNavigate={onNavigate}
+            onOpenCreateQuote={() => setShowCreateQuoteModal(true)}
+            onOpenNewOrderModal={() => setShowNewOrderModal(true)}
+            onExportQuotePdf={(q) => setExportingQuote(q)}
+            onInspectQuote={(q) => setActiveDrawerItem({ type: 'quote', data: q })}
             onUpdateOrderStatus={handleUpdateOrderStatus}
             onUpdateQuoteStatus={handleUpdateQuoteStatus}
             onUpdateUserRole={updateUserRole}
@@ -553,6 +646,8 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
           onOpenCreateQuote={() => setShowCreateQuoteModal(true)}
           onOpenNewOrderModal={() => setShowNewOrderModal(true)}
           onExportQuotePdf={(q) => setExportingQuote(q)}
+          onInspectQuote={(q) => setActiveDrawerItem({ type: 'quote', data: q })}
+          onInspectWorkOrder={(w) => setActiveDrawerItem({ type: 'workOrder', data: w })}
           onUpdateQuoteStatus={handleUpdateQuoteStatus}
           onUpdateProfileDetails={updateProfileDetails}
           onSignOut={signOut}

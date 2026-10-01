@@ -33,6 +33,7 @@ import {
   hasPermission
 } from '../../../config/portalPermissions';
 import { UserProfile, UserRole } from '../../../types';
+import { CANONICAL_CLIENT_ACCOUNTS } from '../../../data/pinAuthAccounts';
 
 export interface PortalNavItem {
   id: string;
@@ -51,6 +52,7 @@ interface PortalSidebarProps {
   currentRole: PortalRole;
   simulatedRole?: UserRole | null;
   onSetSimulatedRole?: (role: UserRole | null) => void;
+  onSignInAsRole?: (role: 'client' | 'staff' | 'admin', clientId?: string) => Promise<void> | void;
   onOpenCreateQuote?: () => void;
   onOpenNewOrderModal?: () => void;
   onOpenQrScanner?: () => void;
@@ -68,6 +70,7 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
   currentRole,
   simulatedRole,
   onSetSimulatedRole,
+  onSignInAsRole,
   onOpenCreateQuote,
   onOpenNewOrderModal,
   onOpenQrScanner,
@@ -287,30 +290,81 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
               )}
             </div>
 
-            {/* Role Simulator Dropdown */}
-            {showRoleSelector && onSetSimulatedRole && (
-              <div className="pt-2 border-t border-zinc-200 dark:border-zinc-800 space-y-1 animate-in fade-in">
-                <span className="text-[9px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block px-1">
-                  Vista Previa por Rol:
-                </span>
-                <div className="grid grid-cols-2 gap-1 text-[10px]">
-                  {allRoles.map(r => (
-                    <button
-                      key={r}
-                      type="button"
-                      onClick={() => {
-                        onSetSimulatedRole(r === currentRole ? null : (r as any));
-                        setShowRoleSelector(false);
-                      }}
-                      className={`px-1.5 py-1 rounded text-left truncate cursor-pointer transition-colors ${
-                        currentRole === r 
-                          ? 'bg-amber-400 text-black font-bold' 
-                          : 'bg-white dark:bg-zinc-950 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800'
-                      }`}
-                    >
-                      {PORTAL_ROLE_LABELS[r].split(' ')[0]}
-                    </button>
-                  ))}
+            {/* Role Simulator & Client Account Switcher Dropdown */}
+            {showRoleSelector && (
+              <div className="pt-2 border-t border-zinc-200 dark:border-zinc-800 space-y-2 animate-in fade-in">
+                {/* Global Role Buttons */}
+                <div>
+                  <span className="text-[9px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 block px-1 mb-1 font-semibold">
+                    Simular Perfil:
+                  </span>
+                  <div className="grid grid-cols-3 gap-1 text-[10px]">
+                    {allRoles.map(r => (
+                      <button
+                        key={r}
+                        type="button"
+                        onClick={() => {
+                          if (onSignInAsRole) {
+                            onSignInAsRole(r as 'client' | 'staff' | 'admin');
+                          } else if (onSetSimulatedRole) {
+                            onSetSimulatedRole(r === currentRole ? null : (r as any));
+                          }
+                          setShowRoleSelector(false);
+                        }}
+                        className={`px-1 py-1 rounded text-center truncate cursor-pointer transition-colors ${
+                          currentRole === r 
+                            ? 'bg-amber-400 text-black font-bold' 
+                            : 'bg-white dark:bg-zinc-950 hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800'
+                        }`}
+                      >
+                        {PORTAL_ROLE_LABELS[r].split(' ')[0]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Canonical Client Accounts Selection */}
+                <div>
+                  <span className="text-[9px] uppercase tracking-wider text-amber-500 dark:text-amber-400 block px-1 mb-1 font-bold">
+                    Cuentas Clientes (Demo):
+                  </span>
+                  <div className="space-y-1">
+                    {CANONICAL_CLIENT_ACCOUNTS.map((acc) => {
+                      const isSelected = userProfile?.id === acc.uid;
+                      return (
+                        <button
+                          key={acc.uid}
+                          type="button"
+                          onClick={() => {
+                            if (onSignInAsRole) {
+                              onSignInAsRole('client', acc.uid);
+                            } else if (onSetSimulatedRole) {
+                              onSetSimulatedRole('client');
+                            }
+                            setShowRoleSelector(false);
+                          }}
+                          className={`w-full flex items-center justify-between p-1.5 rounded text-left transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-amber-500/20 border border-amber-500/50 text-amber-300'
+                              : 'bg-white/50 dark:bg-zinc-950/70 hover:bg-zinc-200 dark:hover:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300'
+                          }`}
+                        >
+                          <div className="min-w-0 pr-1">
+                            <p className="text-[11px] font-bold text-zinc-900 dark:text-white truncate flex items-center gap-1">
+                              <span>{acc.name}</span>
+                              {isSelected && <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />}
+                            </p>
+                            <p className="text-[9px] text-zinc-500 dark:text-zinc-400 truncate">
+                              {acc.companyName}
+                            </p>
+                          </div>
+                          <span className="text-[8px] font-mono px-1 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 shrink-0">
+                            PIN {acc.pin}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             )}
@@ -326,47 +380,7 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
           </div>
         )}
 
-        {/* Quick Action Buttons */}
-        {!isCollapsed && (
-          <div className="space-y-1.5 pt-1">
-            {onOpenCreateQuote && hasPermission(currentRole, 'canCreateQuotes') && (
-              <button
-                type="button"
-                onClick={onOpenCreateQuote}
-                className="w-full flex items-center justify-center gap-2 px-3.5 py-2.5 rounded bg-amber-400 hover:bg-amber-300 text-black text-xs font-bold uppercase tracking-wider transition-all shadow-sm active:scale-[0.98] cursor-pointer"
-              >
-                <PlusCircle className="w-3.5 h-3.5" />
-                <span>NUEVA COTIZACIÓN</span>
-              </button>
-            )}
 
-            <div className="grid grid-cols-2 gap-1.5">
-              {onOpenNewOrderModal && hasPermission(currentRole, 'canCreateOrders') && (
-                <button
-                  type="button"
-                  onClick={onOpenNewOrderModal}
-                  className="flex items-center justify-center gap-1.5 px-2.5 py-2 rounded bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-700/80 text-[11px] font-semibold text-zinc-700 dark:text-zinc-200 active:scale-[0.98] transition-all cursor-pointer"
-                  title="Solicitar Taller"
-                >
-                  <Wrench className="w-3 h-3 text-amber-600 dark:text-amber-400" />
-                  <span className="truncate">+ Taller</span>
-                </button>
-              )}
-
-              {onOpenQrScanner && (
-                <button
-                  type="button"
-                  onClick={onOpenQrScanner}
-                  className="flex items-center justify-center gap-1.5 px-2.5 py-2 rounded bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-zinc-300 dark:border-zinc-700/80 text-[11px] font-semibold text-zinc-700 dark:text-zinc-200 active:scale-[0.98] transition-all cursor-pointer"
-                  title="Escanear QR de Maquinaria / Repuesto"
-                >
-                  <QrCode className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
-                  <span className="truncate">Scan QR</span>
-                </button>
-              )}
-            </div>
-          </div>
-        )}
 
         {/* Navigation Categories and Items */}
         <nav className="space-y-4 pt-2">
@@ -391,7 +405,7 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
                       type="button"
                       onClick={() => onSelectTab(item.id)}
                       title={item.label}
-                      className={`w-full flex items-center gap-3 px-2.5 py-2 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                      className={`relative group w-full flex items-center gap-3 px-2.5 py-2 rounded-md text-xs font-semibold transition-all cursor-pointer ${
                         isActive
                           ? 'bg-amber-100 text-amber-800 border border-amber-300 dark:bg-amber-500/15 dark:border-amber-500/40 dark:text-amber-400 shadow-sm'
                           : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 border border-transparent'
@@ -404,6 +418,18 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
                           <span className="truncate">{item.label}</span>
                           {item.badge !== undefined && (
                             <span className="ml-auto px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 text-[10px] font-bold">
+                              {item.badge}
+                            </span>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Floating Tooltip when collapsed */}
+                      {isCollapsed && (
+                        <div className="fixed left-16 ml-2 px-2.5 py-1 rounded bg-zinc-900 border border-zinc-750 text-white text-[11px] font-medium whitespace-nowrap opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity z-50 shadow-xl pointer-events-none">
+                          {item.label}
+                          {item.badge !== undefined && (
+                            <span className="ml-1.5 px-1.5 py-0.5 rounded bg-amber-400 text-black text-[9px] font-bold">
                               {item.badge}
                             </span>
                           )}
@@ -443,18 +469,7 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
           </div>
         )}
 
-        {/* Sign Out Button */}
-        <button
-          type="button"
-          onClick={onSignOut}
-          title="Cerrar Sesión"
-          className={`w-full flex items-center gap-2.5 px-3 py-2 rounded text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 border border-transparent hover:border-rose-200 dark:hover:border-rose-500/30 transition-colors cursor-pointer ${
-            isCollapsed ? 'justify-center px-1' : ''
-          }`}
-        >
-          <LogOut className="w-4 h-4 shrink-0" />
-          {!isCollapsed && <span>Cerrar Sesión</span>}
-        </button>
+
       </div>
     </aside>
   );
