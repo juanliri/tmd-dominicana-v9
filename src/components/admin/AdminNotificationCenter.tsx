@@ -540,7 +540,7 @@ export const AdminNotificationCenter: React.FC<AdminNotificationCenterProps> = (
         <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950/50 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-zinc-500">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-            <span>Monitoreo en tiempo real sincronizado con Firestore</span>
+            <span>Monitoreo en tiempo real sincronizado con ERP Cloud</span>
           </div>
 
           <button

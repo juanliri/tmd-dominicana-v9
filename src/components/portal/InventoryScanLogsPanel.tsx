@@ -147,7 +147,7 @@ export const InventoryScanLogsPanel: React.FC<InventoryScanLogsPanelProps> = ({
                 Bitácora de Escaneos de Inventario
               </h3>
               <span className="px-1.5 py-0.5 rounded-[2px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[9px] font-black uppercase">
-                Firestore Live
+                ERP Live
               </span>
             </div>
             <p className="text-xs text-zinc-400">
@@ -173,7 +173,7 @@ export const InventoryScanLogsPanel: React.FC<InventoryScanLogsPanelProps> = ({
             onClick={fetchLogs}
             disabled={loading}
             className="px-2.5 py-1.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-bold uppercase transition-all flex items-center gap-1 cursor-pointer"
-            title="Refrescar datos de Firestore"
+            title="Refrescar datos del ERP"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-amber-400' : ''}`} />
             <span className="hidden sm:inline">Refrescar</span>
@@ -301,7 +301,7 @@ export const InventoryScanLogsPanel: React.FC<InventoryScanLogsPanelProps> = ({
             <Radio className="w-8 h-8 mx-auto text-zinc-600 mb-2 animate-pulse" />
             <p className="font-bold uppercase">No se encontraron registros de escaneo</p>
             <p className="text-[11px] mt-1 text-zinc-600">
-              Los escaneos efectuados por personal logueado se sincronizan automáticamente con Firestore en la colección <span className="text-amber-400">inventory_logs</span>.
+              Los escaneos efectuados por personal logueado se sincronizan automáticamente con la base de datos ERP (<span className="text-amber-400">inventory_logs</span>).
             </p>
           </div>
         ) : (

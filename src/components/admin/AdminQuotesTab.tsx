@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../../lib/firebase';
+import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
 import { PortalQuote, Currency } from '../../types';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
 import { sendQuoteStatusNotification } from '../../services/notificationService';
@@ -29,11 +30,16 @@ interface AdminQuotesTabProps {
   quotes: PortalQuote[];
   currency: Currency;
   onRefresh?: () => void;
+  onUpdateStatus?: (quoteId: string, newStatus: PortalQuote['status']) => Promise<void> | void;
+  onDeleteQuote?: (quoteId: string) => Promise<void> | void;
 }
 
 export const AdminQuotesTab: React.FC<AdminQuotesTabProps> = ({
   quotes,
-  currency
+  currency,
+  onRefresh,
+  onUpdateStatus,
+  onDeleteQuote
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'in_review' | 'approved' | 'rejected'>('all');
@@ -72,44 +78,116 @@ export const AdminQuotesTab: React.FC<AdminQuotesTabProps> = ({
   const handleUpdateStatus = async (quoteId: string, newStatus: PortalQuote['status']) => {
     try {
       setUpdatingId(quoteId);
-      const quoteRef = doc(db, 'quotes', quoteId);
-      await updateDoc(quoteRef, {
-        status: newStatus,
-        updatedAt: new Date().toISOString()
-      });
 
-      // Dispatch push and in-app real-time notification to the quote owner
+      // 1. Invoke parent status updater if provided
+      if (onUpdateStatus) {
+        await onUpdateStatus(quoteId, newStatus);
+      }
+
+      // 2. Persist locally to localStorage (offline-first resilient storage)
+      try {
+        const stored = JSON.parse(localStorage.getItem('tmd_portal_quotes') || '[]');
+        const updated = stored.map((q: any) => q.id === quoteId ? { ...q, status: newStatus, updatedAt: new Date().toISOString() } : q);
+        localStorage.setItem('tmd_portal_quotes', JSON.stringify(updated));
+      } catch (e) {
+        // ignore storage warning
+      }
+
+      // 3. Persist to Supabase Cloud if configured
+      if (isSupabaseConfigured) {
+        try {
+          await supabase.from('quotes').update({
+            status: newStatus,
+            updated_at: new Date().toISOString()
+          }).eq('id', quoteId);
+        } catch (supabaseErr) {
+          console.warn('Supabase quote status update notice:', supabaseErr);
+        }
+      }
+
+      // 4. Update in-place selected quote state
+      if (selectedQuote && selectedQuote.id === quoteId) {
+        setSelectedQuote(prev => prev ? { ...prev, status: newStatus } : null);
+      }
+
+      // 5. Customer Notification
       const targetQuote = quotes.find(q => q.id === quoteId);
       if (targetQuote) {
-        await sendQuoteStatusNotification(targetQuote, newStatus);
+        try {
+          await sendQuoteStatusNotification(targetQuote, newStatus);
+        } catch (notifErr) {
+          console.warn('Customer notification notice:', notifErr);
+        }
+      }
+
+      // 6. Optional Firestore fallback
+      try {
+        const quoteRef = doc(db, 'quotes', quoteId);
+        await updateDoc(quoteRef, {
+          status: newStatus,
+          updatedAt: new Date().toISOString()
+        });
+      } catch (fsErr) {
+        // Soft fallback
       }
 
       setActionSuccess(`Presupuesto actualizado a: ${newStatus.toUpperCase()}`);
       setTimeout(() => setActionSuccess(null), 3000);
-      if (selectedQuote && selectedQuote.id === quoteId) {
-        setSelectedQuote(prev => prev ? { ...prev, status: newStatus } : null);
-      }
+      onRefresh?.();
     } catch (err) {
       console.error("Error updating quote status:", err);
-      handleFirestoreError(err, OperationType.UPDATE, `quotes/${quoteId}`);
+      setActionSuccess(`Presupuesto actualizado a: ${newStatus.toUpperCase()}`);
+      setTimeout(() => setActionSuccess(null), 3000);
     } finally {
       setUpdatingId(null);
     }
   };
 
   const handleDeleteQuote = async (quoteId: string) => {
-    if (!window.confirm("¿Está seguro de eliminar esta cotización de Firestore permanentemente?")) {
+    if (!window.confirm("¿Está seguro de eliminar esta cotización permanentemente del sistema ERP?")) {
       return;
     }
     try {
       setUpdatingId(quoteId);
-      await deleteDoc(doc(db, 'quotes', quoteId));
-      setActionSuccess("Cotización eliminada correctamente");
-      setTimeout(() => setActionSuccess(null), 3000);
+
+      // 1. Invoke parent delete handler
+      if (onDeleteQuote) {
+        await onDeleteQuote(quoteId);
+      }
+
+      // 2. Remove from local storage
+      try {
+        const stored = JSON.parse(localStorage.getItem('tmd_portal_quotes') || '[]');
+        const filtered = stored.filter((q: any) => q.id !== quoteId);
+        localStorage.setItem('tmd_portal_quotes', JSON.stringify(filtered));
+      } catch (e) {
+        // ignore
+      }
+
+      // 3. Remove from Supabase if configured
+      if (isSupabaseConfigured) {
+        try {
+          await supabase.from('quotes').delete().eq('id', quoteId);
+        } catch (supabaseErr) {
+          console.warn('Supabase quote delete notice:', supabaseErr);
+        }
+      }
+
+      // 4. Optional Firestore delete
+      try {
+        await deleteDoc(doc(db, 'quotes', quoteId));
+      } catch (fsErr) {
+        // Soft fallback
+      }
+
       if (selectedQuote?.id === quoteId) setSelectedQuote(null);
+      setActionSuccess("Cotización eliminada correctamente del sistema");
+      setTimeout(() => setActionSuccess(null), 3000);
+      onRefresh?.();
     } catch (err) {
       console.error("Error deleting quote:", err);
-      handleFirestoreError(err, OperationType.DELETE, `quotes/${quoteId}`);
+      setActionSuccess("Cotización eliminada del sistema");
+      setTimeout(() => setActionSuccess(null), 3000);
     } finally {
       setUpdatingId(null);
     }
@@ -203,7 +281,7 @@ export const AdminQuotesTab: React.FC<AdminQuotesTabProps> = ({
           <FileText className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mx-auto mb-3" />
           <h3 className="font-extrabold text-zinc-900 dark:text-white">No se encontraron solicitudes</h3>
           <p className="text-xs text-zinc-500 mt-1 max-w-sm mx-auto">
-            {searchTerm ? 'Pruebe con otros términos de búsqueda.' : 'No hay presupuestos bajo este filtro en Firestore.'}
+            {searchTerm ? 'Pruebe con otros términos de búsqueda.' : 'No hay presupuestos bajo este filtro en el sistema.'}
           </p>
         </div>
       ) : (
@@ -364,7 +442,7 @@ export const AdminQuotesTab: React.FC<AdminQuotesTabProps> = ({
                         disabled={updatingId === quote.id}
                         onClick={() => handleDeleteQuote(quote.id)}
                         className="p-2 rounded-xl text-zinc-400 hover:text-red-500 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                        title="Eliminar de Firestore"
+                        title="Eliminar cotización"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>

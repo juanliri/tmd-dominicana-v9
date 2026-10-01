@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   X, 
   FileText, 
@@ -22,7 +22,8 @@ import {
   Check, 
   ChevronRight,
   Layers,
-  ArrowRight
+  ArrowRight,
+  XCircle
 } from 'lucide-react';
 import { PortalQuote, ServiceWorkOrder, CustomerPurchaseOrder } from '../../types';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
@@ -51,6 +52,13 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
   onRejectQuote,
   isStaffOrAdmin = false
 }) => {
+  const [quoteStatusOverride, setQuoteStatusOverride] = useState<PortalQuote['status'] | null>(null);
+
+  // Reset override whenever a different quote/item is selected
+  useEffect(() => {
+    setQuoteStatusOverride(null);
+  }, [item?.type === 'quote' ? item.data.id : null]);
+
   // Close on Escape
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -63,6 +71,8 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
   }, [isOpen, onClose]);
 
   if (!isOpen || !item) return null;
+
+  const currentQuoteStatus: PortalQuote['status'] | null = item.type === 'quote' ? (quoteStatusOverride || item.data.status) : null;
 
   const handleDownloadQuotePdf = (quote: PortalQuote) => {
     try {
@@ -136,18 +146,18 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
                   <div>
                     <span className="text-[10px] uppercase font-bold text-zinc-400 block">Estado Actual</span>
                     <span className={`inline-flex items-center gap-1.5 mt-1 px-2.5 py-0.5 rounded-full text-xs font-bold ${
-                      item.data.status === 'approved'
+                      currentQuoteStatus === 'approved'
                         ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                        : item.data.status === 'rejected'
+                        : currentQuoteStatus === 'rejected'
                         ? 'bg-red-500/20 text-red-400 border border-red-500/40'
                         : 'bg-amber-500/20 text-amber-400 border border-amber-500/40'
                     }`}>
-                      {item.data.status === 'approved' && <CheckCircle2 className="w-3.5 h-3.5" />}
-                      {(item.data.status === 'submitted' || item.data.status === 'in_review' || item.data.status === 'draft') && (
+                      {currentQuoteStatus === 'approved' && <CheckCircle2 className="w-3.5 h-3.5" />}
+                      {(currentQuoteStatus === 'submitted' || currentQuoteStatus === 'in_review' || currentQuoteStatus === 'draft') && (
                         <Clock className="w-3.5 h-3.5" />
                       )}
-                      {item.data.status === 'rejected' && <AlertCircle className="w-3.5 h-3.5" />}
-                      <span>{item.data.status.toUpperCase()}</span>
+                      {currentQuoteStatus === 'rejected' && <AlertCircle className="w-3.5 h-3.5" />}
+                      <span>{(currentQuoteStatus || item.data.status).toUpperCase()}</span>
                     </span>
                   </div>
 
@@ -294,11 +304,14 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
                     </button>
                   </div>
 
-                  {isStaffOrAdmin && item.data.status !== 'approved' && (
+                  {isStaffOrAdmin && currentQuoteStatus !== 'approved' && (
                     <div className="grid grid-cols-2 gap-2 pt-2">
                       <button
                         type="button"
-                        onClick={() => onApproveQuote?.(item.data.id)}
+                        onClick={() => {
+                          setQuoteStatusOverride('approved');
+                          onApproveQuote?.(item.data.id);
+                        }}
                         className="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-black text-xs font-bold transition-colors cursor-pointer shadow-sm"
                       >
                         <Check className="w-4 h-4" />
@@ -307,12 +320,29 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
 
                       <button
                         type="button"
-                        onClick={() => onRejectQuote?.(item.data.id)}
+                        onClick={() => {
+                          setQuoteStatusOverride('rejected');
+                          onRejectQuote?.(item.data.id);
+                        }}
                         className="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-red-600/20 hover:bg-red-600/30 text-red-400 text-xs font-bold transition-colors cursor-pointer border border-red-500/40"
                       >
                         <X className="w-4 h-4" />
                         <span>Rechazar</span>
                       </button>
+                    </div>
+                  )}
+
+                  {currentQuoteStatus === 'approved' && (
+                    <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 text-xs font-bold flex items-center gap-2 animate-in fade-in">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <span>Cotización Aprobada Exitosamente • NCF Fiscal DGII Asignado</span>
+                    </div>
+                  )}
+
+                  {currentQuoteStatus === 'rejected' && (
+                    <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/40 text-red-400 text-xs font-bold flex items-center gap-2 animate-in fade-in">
+                      <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                      <span>Cotización Marcada como Rechazada</span>
                     </div>
                   )}
                 </div>

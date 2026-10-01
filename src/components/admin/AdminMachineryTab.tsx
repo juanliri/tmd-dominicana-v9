@@ -111,7 +111,7 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
         };
         await setDoc(machineRef, invMachine, { merge: true });
       }
-      showToast("Flota inicial sincronizada en Firestore exitosamente");
+      showToast("Flota inicial sincronizada en la base de datos ERP exitosamente");
     } catch (err) {
       console.error("Error seeding machines:", err);
       handleFirestoreError(err, OperationType.WRITE, 'inventory_machines');
@@ -323,7 +323,7 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
 
   const handleDeleteMachine = async (id: string) => {
     const target = machines.find(m => m.id === id);
-    if (!window.confirm("¿Confirma que desea eliminar este equipo del inventario de Firestore?")) return;
+    if (!window.confirm("¿Confirma que desea eliminar este equipo del inventario ERP?")) return;
     try {
       await deleteDoc(doc(db, 'inventory_machines', id));
 

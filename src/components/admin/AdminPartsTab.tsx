@@ -112,7 +112,7 @@ export const AdminPartsTab: React.FC<AdminPartsTabProps> = ({
         };
         await setDoc(partRef, invPart, { merge: true });
       }
-      showToast(`Se sincronizaron ${PARTS_DATA.length} repuestos OEM en Firestore`);
+      showToast(`Se sincronizaron ${PARTS_DATA.length} repuestos OEM en la base de datos ERP`);
     } catch (err) {
       console.error("Error seeding parts:", err);
       handleFirestoreError(err, OperationType.WRITE, 'inventory_parts');
@@ -282,7 +282,7 @@ export const AdminPartsTab: React.FC<AdminPartsTabProps> = ({
 
   const handleDeletePart = async (id: string) => {
     const target = parts.find(p => p.id === id);
-    if (!window.confirm("¿Confirma que desea eliminar este repuesto de la base de datos Firestore?")) return;
+    if (!window.confirm("¿Confirma que desea eliminar este repuesto del inventario ERP?")) return;
     try {
       await deleteDoc(doc(db, 'inventory_parts', id));
 
@@ -403,7 +403,7 @@ export const AdminPartsTab: React.FC<AdminPartsTabProps> = ({
               onClick={handleSeedParts}
               disabled={isSeeding}
               className="px-3.5 py-2 rounded-xl bg-blue-500/15 hover:bg-blue-500/25 text-blue-700 dark:text-blue-400 border border-blue-500/30 font-bold text-xs flex items-center gap-1.5 transition-colors"
-              title="Importar catálogo inicial de repuestos a Firestore"
+              title="Importar catálogo inicial de repuestos a la base de datos ERP"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${isSeeding ? 'animate-spin' : ''}`} />
               <span>Sincronizar Repuestos</span>
@@ -426,7 +426,7 @@ export const AdminPartsTab: React.FC<AdminPartsTabProps> = ({
           <Cog className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mx-auto mb-3" />
           <h3 className="font-extrabold text-zinc-900 dark:text-white">Almacén de repuestos sin resultados</h3>
           <p className="text-xs text-zinc-500 mt-1 max-w-md mx-auto mb-4">
-            No se han registrado repuestos en Firestore o ningún artículo coincide con los filtros aplicados.
+            No se han registrado repuestos en el sistema o ningún artículo coincide con los filtros aplicados.
           </p>
           {parts.length === 0 && (
             <button

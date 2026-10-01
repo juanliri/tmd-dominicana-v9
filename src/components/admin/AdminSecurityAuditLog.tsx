@@ -225,7 +225,7 @@ export const AdminSecurityAuditLog: React.FC = () => {
               </span>
             </div>
             <p className="text-xs text-zinc-300 mt-1 max-w-2xl leading-relaxed">
-              Registro criptográfico inmutable en <strong>Google Cloud Firestore</strong> para todos los cambios de existencias de maquinaria, ajustes de precios OEM, altas masivas y elevaciones de permisos RBAC. Visible exclusivamente para administradores autenticados.
+              Registro criptográfico inmutable en <strong>Base de Datos ERP Cloud (Supabase / Postgres)</strong> para todos los cambios de existencias de maquinaria, ajustes de precios OEM, altas masivas y elevaciones de permisos RBAC. Visible exclusivamente para administradores autenticados.
             </p>
           </div>
         </div>
@@ -278,7 +278,7 @@ export const AdminSecurityAuditLog: React.FC = () => {
           <div className="text-2xl font-black text-zinc-900 dark:text-white mt-1 font-mono">
             {stats.total}
           </div>
-          <span className="text-[10px] text-zinc-500 mt-1 block">Inmutables en Firestore</span>
+          <span className="text-[10px] text-zinc-500 mt-1 block">Inmutables en ERP Cloud</span>
         </div>
 
         <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xs">
@@ -378,7 +378,7 @@ export const AdminSecurityAuditLog: React.FC = () => {
         {loading ? (
           <div className="p-12 text-center text-zinc-400 space-y-3">
             <RefreshCw className="w-8 h-8 animate-spin mx-auto text-amber-500" />
-            <p className="text-xs font-bold">Consultando registros criptográficos en Firestore...</p>
+            <p className="text-xs font-bold">Consultando registros criptográficos en el sistema ERP...</p>
           </div>
         ) : filteredLogs.length === 0 ? (
           <div className="p-12 text-center rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-400 space-y-2">
@@ -511,7 +511,7 @@ export const AdminSecurityAuditLog: React.FC = () => {
                         <span>ID Documento: <strong className="text-zinc-700 dark:text-zinc-300 font-mono">{log.targetId}</strong></span>
                         <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold">
                           <Lock className="w-3 h-3" />
-                          <span>Firestore Read-Only</span>
+                          <span>ERP Read-Only</span>
                         </span>
                       </div>
                     </div>

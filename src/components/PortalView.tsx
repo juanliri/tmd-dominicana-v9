@@ -507,6 +507,25 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
     }
   };
 
+  const handleDeleteQuote = async (quoteId: string) => {
+    setQuotes(prev => {
+      const filtered = prev.filter(q => q.id !== quoteId);
+      try {
+        localStorage.setItem('tmd_portal_quotes', JSON.stringify(filtered));
+      } catch (e) {
+        // ignore
+      }
+      return filtered;
+    });
+    if (isSupabaseConfigured) {
+      try {
+        await supabase.from('quotes').delete().eq('id', quoteId);
+      } catch (err) {
+        console.warn('Supabase quote delete notice:', err);
+      }
+    }
+  };
+
   // Non-authenticated State: Split-screen Enterprise Portal Login
   if (!currentUser) {
     return (
@@ -594,6 +613,9 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
           <AdminDashboardView 
             onNavigate={onNavigate} 
             isEmbedded={true}
+            quotes={quotes}
+            onUpdateQuoteStatus={handleUpdateQuoteStatus}
+            onDeleteQuote={handleDeleteQuote}
             activeTab={mapShellTabToAdminTab(activePortalTab)}
             onTabChange={(tab) => {
               handleSelectPortalTab(mapAdminTabToShellTab(tab));

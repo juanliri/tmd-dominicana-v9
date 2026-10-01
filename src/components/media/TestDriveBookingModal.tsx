@@ -191,7 +191,7 @@ export const TestDriveBookingModal: React.FC<TestDriveBookingModalProps> = ({
                 </span>
                 <span className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-[2px] text-[9px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 uppercase">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  FIRESTORE LIVE
+                  ERP CLOUD LIVE
                 </span>
               </div>
               <p className="text-xs text-zinc-400 font-sans mt-0.5">
@@ -632,7 +632,7 @@ export const TestDriveBookingModal: React.FC<TestDriveBookingModalProps> = ({
                 {loading ? (
                   <>
                     <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
-                    <span>REGISTRANDO EN FIRESTORE PATIO KM 22...</span>
+                    <span>REGISTRANDO EN ERP CLOUD PATIO KM 22...</span>
                   </>
                 ) : (
                   <>

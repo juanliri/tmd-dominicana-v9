@@ -28,7 +28,7 @@ import { INITIAL_PORTAL_QUOTES } from '../data/portalSeedData';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { PortalQuote, InventoryMachine, InventoryPart, InventoryAlert } from '../types';
-import { supabase } from '../lib/supabaseClient';
+import { supabase, isSupabaseConfigured } from '../lib/supabaseClient';
 import { AdminMetricsTab } from './admin/AdminMetricsTab';
 import { AdminQuotesTab } from './admin/AdminQuotesTab';
 import { AdminMachineryTab } from './admin/AdminMachineryTab';
@@ -71,13 +71,19 @@ export interface AdminDashboardViewProps {
   activeTab?: AdminTab;
   onTabChange?: (tab: AdminTab) => void;
   isEmbedded?: boolean;
+  quotes?: PortalQuote[];
+  onUpdateQuoteStatus?: (quoteId: string, status: PortalQuote['status']) => Promise<void>;
+  onDeleteQuote?: (quoteId: string) => Promise<void>;
 }
 
 export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ 
   onNavigate,
   activeTab: activeTabProp,
   onTabChange,
-  isEmbedded = false
+  isEmbedded = false,
+  quotes: quotesProp,
+  onUpdateQuoteStatus: onUpdateQuoteStatusProp,
+  onDeleteQuote: onDeleteQuoteProp
 }) => {
   const { currentUser, userProfile, isAdmin, role, loading: authLoading, signInWithGoogle, signOut } = useAuth();
   const { currency, setCurrency } = useCart();
@@ -96,7 +102,53 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({
     if (onTabChange) onTabChange(tab);
   };
 
-  const [quotes, setQuotes] = useState<PortalQuote[]>([]);
+  const [internalQuotes, setInternalQuotes] = useState<PortalQuote[]>(quotesProp || []);
+  const quotes = quotesProp !== undefined && quotesProp.length > 0 ? quotesProp : internalQuotes;
+  const setQuotes = (val: React.SetStateAction<PortalQuote[]>) => {
+    setInternalQuotes(val);
+  };
+
+  useEffect(() => {
+    if (quotesProp !== undefined && quotesProp.length > 0) {
+      setInternalQuotes(quotesProp);
+    }
+  }, [quotesProp]);
+
+  const handleUpdateQuoteStatus = async (quoteId: string, status: PortalQuote['status']) => {
+    if (onUpdateQuoteStatusProp) {
+      await onUpdateQuoteStatusProp(quoteId, status);
+    }
+    setInternalQuotes(prev => {
+      const updated = prev.map(q => q.id === quoteId ? { ...q, status, updatedAt: new Date().toISOString() } : q);
+      try { localStorage.setItem('tmd_portal_quotes', JSON.stringify(updated)); } catch (e) {}
+      return updated;
+    });
+    if (isSupabaseConfigured) {
+      try {
+        await supabase.from('quotes').update({ status, updated_at: new Date().toISOString() }).eq('id', quoteId);
+      } catch (err) {
+        console.warn('Supabase quote status update notice:', err);
+      }
+    }
+  };
+
+  const handleDeleteQuote = async (quoteId: string) => {
+    if (onDeleteQuoteProp) {
+      await onDeleteQuoteProp(quoteId);
+    }
+    setInternalQuotes(prev => {
+      const updated = prev.filter(q => q.id !== quoteId);
+      try { localStorage.setItem('tmd_portal_quotes', JSON.stringify(updated)); } catch (e) {}
+      return updated;
+    });
+    if (isSupabaseConfigured) {
+      try {
+        await supabase.from('quotes').delete().eq('id', quoteId);
+      } catch (err) {
+        console.warn('Supabase quote delete notice:', err);
+      }
+    }
+  };
   const [machines, setMachines] = useState<InventoryMachine[]>([]);
   const [parts, setParts] = useState<InventoryPart[]>([]);
   const [loadingData, setLoadingData] = useState(true);
@@ -1220,6 +1272,8 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({
               <AdminQuotesTab
                 quotes={quotes}
                 currency={currency}
+                onUpdateStatus={handleUpdateQuoteStatus}
+                onDeleteQuote={handleDeleteQuote}
               />
             )}
 

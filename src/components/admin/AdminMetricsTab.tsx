@@ -85,13 +85,13 @@ export const AdminMetricsTab: React.FC<AdminMetricsTabProps> = ({
             Resumen General de Operaciones & Finanzas
           </h2>
           <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-0.5">
-            Sincronizado en tiempo real con Firestore • Base de Datos TMD Central
+            Sincronizado en tiempo real • Base de Datos ERP TMD Central (Supabase / Postgres)
           </p>
         </div>
         <div className="flex items-center gap-3">
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            Firestore En Línea
+            ERP Cloud En Línea
           </span>
         </div>
       </div>
@@ -192,7 +192,7 @@ export const AdminMetricsTab: React.FC<AdminMetricsTabProps> = ({
                 CONSOLIDADO OPERACIONAL: VENTAS DE MAQUINARIA VS. TALLER FULLBAY
               </h3>
               <p className="text-[11px] text-zinc-400">
-                Cruce de ingresos de equipos pesados (Firestore) con facturación de servicios y margen de repuestos (Fullbay Connect)
+                Cruce de ingresos de equipos pesados con facturación de servicios y margen de repuestos (Fullbay Connect)
               </p>
             </div>
           </div>
@@ -382,7 +382,7 @@ export const AdminMetricsTab: React.FC<AdminMetricsTabProps> = ({
       <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm space-y-4">
         <h3 className="font-extrabold text-zinc-900 dark:text-white flex items-center gap-2">
           <TrendingUp className="w-5 h-5 text-amber-500" />
-          Distribución de Solicitudes de Presupuesto en Firestore
+          Distribución de Solicitudes de Presupuesto en el ERP
         </h3>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
