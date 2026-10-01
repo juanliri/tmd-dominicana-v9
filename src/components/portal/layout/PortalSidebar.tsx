@@ -199,8 +199,8 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
   return (
     <aside 
       className={`bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800/80 flex flex-col justify-between transition-all duration-300 select-none ${
-        isCollapsed ? 'w-16' : 'w-64'
-      } min-h-screen text-zinc-700 dark:text-zinc-300 font-sans`}
+        isCollapsed ? 'w-16' : 'w-full md:w-64'
+      } min-h-full text-zinc-700 dark:text-zinc-300 font-sans`}
     >
       {/* Top Header & User Profile */}
       <div className="p-3 space-y-4">

@@ -483,7 +483,7 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({ onNaviga
             </div>
 
             {/* Right Quick Controls: Bell Notification, Currency Toggle & Logout */}
-            <div className="flex items-center gap-2 self-end sm:self-center">
+            <div className="flex flex-wrap items-center justify-end gap-1.5 sm:gap-2 self-end sm:self-center">
               {/* Monthly Business Variables Trigger Button */}
               <button
                 type="button"

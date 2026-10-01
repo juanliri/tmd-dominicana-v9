@@ -24,7 +24,7 @@ export const PortalBreadcrumbs: React.FC<PortalBreadcrumbsProps> = ({
   const roleLabel = PORTAL_ROLE_LABELS[currentRole] || 'USUARIO';
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-zinc-950/80 backdrop-blur-md border border-zinc-800/80 rounded-md font-mono text-xs shadow-sm">
+    <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 bg-zinc-950/80 backdrop-blur-md border border-zinc-800/80 rounded-md font-mono text-[11px] sm:text-xs shadow-sm">
       {/* Breadcrumb Trail */}
       <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 flex-wrap">
         <button

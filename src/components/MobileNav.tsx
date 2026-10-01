@@ -22,7 +22,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ currentRoute, onNavigate }
     '#/portal',
     '#/fullbay',
     '#/livelink'
-  ].includes(currentRoute);
+  ].includes(currentRoute) || currentRoute.startsWith('#/portal') || currentRoute.startsWith('#/admin');
 
   if (isContextualWorkspaceOrAdmin) {
     return null;

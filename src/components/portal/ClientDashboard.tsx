@@ -700,7 +700,7 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
             {/* MODAL: APROBACIÓN DIGITAL DE PROFORMA */}
             {quoteToApprove && typeof document !== 'undefined' && createPortal(
               <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in font-mono">
-                <div className="bg-zinc-950 rounded-[5px] border border-zinc-800 shadow-2xl max-w-lg w-full p-5 space-y-4">
+                <div className="bg-zinc-950 rounded-[5px] border border-zinc-800 shadow-2xl max-w-lg w-full p-5 space-y-4 max-h-[90vh] overflow-y-auto">
                   <div className="flex items-start justify-between pb-3 border-b border-zinc-800">
                     <div className="space-y-0.5">
                       <span className="text-[9px] font-black uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded-[2px] border border-amber-400/20">

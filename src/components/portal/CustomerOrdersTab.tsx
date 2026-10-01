@@ -497,7 +497,7 @@ export const CustomerOrdersTab: React.FC<CustomerOrdersTabProps> = ({
         <div className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
           <div className="bg-zinc-900 w-full max-w-3xl rounded-[5px] border border-zinc-800 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
             {/* Modal Header */}
-            <div className="p-6 bg-zinc-950 text-white flex items-center justify-between relative overflow-hidden border-b border-zinc-800">
+            <div className="p-4 sm:p-6 bg-zinc-950 text-white flex items-center justify-between relative overflow-hidden border-b border-zinc-800">
               <div className="space-y-1 z-10">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-display uppercase text-amber-400 tracking-wider">
@@ -521,7 +521,7 @@ export const CustomerOrdersTab: React.FC<CustomerOrdersTabProps> = ({
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 overflow-y-auto space-y-6 text-white bg-zinc-900">
+            <div className="p-4 sm:p-6 overflow-y-auto space-y-6 text-white bg-zinc-900">
               {/* Status and Tracking timeline */}
               <div className="bg-zinc-950 p-4 rounded-[3px] border border-zinc-800 space-y-3">
                 <div className="flex flex-wrap items-center justify-between gap-2">

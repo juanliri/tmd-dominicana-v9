@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { 
   LayoutDashboard, 
   FileText, 
@@ -76,7 +77,7 @@ export const PortalBottomBar: React.FC<PortalBottomBarProps> = ({
     { id: 'audit', label: 'Auditoría & Logs', icon: ShieldCheck, requiredPermission: 'canAccessAuditLog' as const }
   ].filter(tab => !tab.requiredPermission || hasPermission(currentRole, tab.requiredPermission));
 
-  return (
+  const barContent = (
     <>
       {/* Fixed Bottom Bar on Mobile */}
       <nav 
@@ -258,4 +259,9 @@ export const PortalBottomBar: React.FC<PortalBottomBarProps> = ({
       )}
     </>
   );
+
+  if (typeof document !== 'undefined') {
+    return createPortal(barContent, document.body);
+  }
+  return barContent;
 };

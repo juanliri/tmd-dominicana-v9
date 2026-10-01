@@ -34,7 +34,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-fadeIn font-mono">
       <div className="bg-zinc-900 w-full max-w-2xl rounded-[5px] border border-zinc-800 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
         {/* Modal Header */}
-        <div className="p-6 bg-zinc-950 text-white flex items-center justify-between border-b border-zinc-800">
+        <div className="p-4 sm:p-6 bg-zinc-950 text-white flex items-center justify-between border-b border-zinc-800">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-[2px] bg-amber-500/10 text-amber-400 border border-amber-500/30">
               <Wrench className="w-5 h-5" />
@@ -68,7 +68,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 overflow-y-auto space-y-5 text-xs text-zinc-200">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-5 text-xs text-zinc-200">
           {/* Machine & Station Info */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-zinc-950 p-4 rounded-[3px] border border-zinc-800">
             <div>
@@ -130,8 +130,8 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
           {order.installedParts && order.installedParts.length > 0 && (
             <div className="space-y-2">
               <span className="text-[11px] uppercase font-bold text-zinc-400 font-display">Repuestos & Filtros Instalados:</span>
-              <div className="border border-zinc-800 rounded-[3px] overflow-hidden">
-                <table className="w-full text-left text-xs">
+              <div className="border border-zinc-800 rounded-[3px] overflow-hidden overflow-x-auto">
+                <table className="w-full text-left text-xs min-w-[320px]">
                   <thead className="bg-zinc-950 text-zinc-400 font-bold font-display uppercase text-[10px]">
                     <tr>
                       <th className="p-2.5">Código OEM</th>
