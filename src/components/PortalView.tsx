@@ -35,6 +35,7 @@ import { PasskeyBiometricAuthModal } from './auth/PasskeyBiometricAuthModal';
 import { EnterprisePortalLogin } from './portal/EnterprisePortalLogin';
 import { PortalShell } from './portal/layout/PortalShell';
 import { AdminDashboardView } from './AdminDashboardView';
+import { AdminIntegrationsHealthView } from './admin/AdminIntegrationsHealthView';
 import { ProtectedRoute } from './auth/ProtectedRoute';
 import { 
   INITIAL_PORTAL_QUOTES, 
@@ -95,9 +96,11 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
     const handleHashSync = () => {
       const sub = getSubrouteFromHash();
       setSubRoute(sub);
-      if (sub === 'admin') setActivePortalTab('metrics');
-      else if (sub === 'ops') setActivePortalTab('command');
-      else if (sub === 'dealer' || sub === 'client') setActivePortalTab('quotes');
+      if (sub === 'admin') {
+        setActivePortalTab((prev) => (['patio', 'metrics', 'audit', 'users', 'integrations'].includes(prev) ? prev : 'metrics'));
+      } else if (sub === 'ops') {
+        setActivePortalTab((prev) => (['command', 'workflow', 'inventory', 'quotes', 'orders'].includes(prev) ? prev : 'command'));
+      }
     };
     window.addEventListener('hashchange', handleHashSync);
     return () => window.removeEventListener('hashchange', handleHashSync);
@@ -118,7 +121,7 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
   // Mappers between PortalShell tabs and submodule tabs
   const mapShellTabToClientTab = (tab: string): ClientPortalTab => {
     switch (tab) {
-      case 'overview':
+      case 'overview': return 'overview';
       case 'quotes': return 'quotes';
       case 'orders': return 'service_history';
       case 'service': return 'service_history';
@@ -127,12 +130,13 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
       case 'pro': return 'pro_member';
       case 'docs': return 'tech_docs';
       case 'profile': return 'profile';
-      default: return 'quotes';
+      default: return 'overview';
     }
   };
 
   const mapClientTabToShellTab = (tab: ClientPortalTab): string => {
     switch (tab) {
+      case 'overview': return 'overview';
       case 'quotes': return 'quotes';
       case 'purchases': return 'purchases';
       case 'livelink_telematics': return 'livelink';
@@ -140,7 +144,7 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
       case 'pro_member': return 'pro';
       case 'tech_docs': return 'docs';
       case 'profile': return 'profile';
-      default: return 'quotes';
+      default: return 'overview';
     }
   };
 
@@ -182,11 +186,6 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
 
   const handleSelectPortalTab = (tabId: string) => {
     setActivePortalTab(tabId);
-    if (['patio', 'metrics', 'audit', 'users'].includes(tabId) && isAdmin) {
-      if (window.location.hash !== '#/portal/admin') {
-        window.location.hash = '#/portal/admin';
-      }
-    }
   };
 
   // New Work Order Form State
@@ -499,7 +498,13 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
       ordersCount={workOrders.length}
     >
       {/* Dynamic Sub-route & Workspace Router with strict role gating */}
-      {(subRoute === 'admin' || ['patio', 'metrics', 'audit'].includes(activePortalTab)) ? (
+      {activePortalTab === 'integrations' ? (
+        <ProtectedRoute requiredRole="admin" onNavigate={onNavigate} fallbackRoute="#/portal">
+          <div className="space-y-4">
+            <AdminIntegrationsHealthView />
+          </div>
+        </ProtectedRoute>
+      ) : (subRoute === 'admin' || ['patio', 'metrics', 'audit'].includes(activePortalTab)) ? (
         <ProtectedRoute requiredRole="admin" onNavigate={onNavigate} fallbackRoute="#/portal">
           <AdminDashboardView onNavigate={onNavigate} />
         </ProtectedRoute>

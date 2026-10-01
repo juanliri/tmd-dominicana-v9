@@ -41,7 +41,7 @@ export interface PortalNavItem {
   badge?: string | number;
   requiredPermission?: keyof import('../../../config/portalPermissions').PortalPermissions;
   targetSubpath?: string;
-  category: 'core' | 'commercial' | 'ops' | 'admin';
+  category: 'core' | 'sales' | 'ops' | 'fleet' | 'admin';
 }
 
 interface PortalSidebarProps {
@@ -81,86 +81,94 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
   const roleStyle = PORTAL_ROLE_COLORS[currentRole] || PORTAL_ROLE_COLORS.client;
   const roleLabel = PORTAL_ROLE_LABELS[currentRole] || 'USUARIO';
 
-  // Navigation Items Registry
+  // Navigation Items Registry — 4 Enterprise Departments
   const NAV_ITEMS: PortalNavItem[] = [
-    // Core
+    // 1. Core / General
     {
       id: 'overview',
       label: 'Panel Principal',
       icon: LayoutDashboard,
       category: 'core'
     },
-    // Commercial
+    // 2. Ventas & CRM
     {
       id: 'quotes',
       label: 'Cotizaciones B01',
       icon: FileText,
       badge: quotesCount > 0 ? quotesCount : undefined,
       requiredPermission: 'canViewOwnQuotes',
-      category: 'commercial'
+      category: 'sales'
     },
     {
-      id: 'orders',
-      label: 'Órdenes de Taller',
-      icon: Wrench,
-      badge: ordersCount > 0 ? ordersCount : undefined,
+      id: 'purchases',
+      label: 'Historial Pedidos',
+      icon: Package,
       requiredPermission: 'canViewOwnOrders',
-      category: 'commercial'
-    },
-    {
-      id: 'livelink',
-      label: 'Flota & LiveLink™',
-      icon: Radio,
-      requiredPermission: 'canViewOwnFleet',
-      category: 'commercial'
+      category: 'sales'
     },
     {
       id: 'pro',
       label: 'Club Pro TMD',
       icon: Crown,
       requiredPermission: 'canViewProMember',
-      category: 'commercial'
+      category: 'sales'
     },
+    // 3. Taller & Operaciones (Km 22)
     {
-      id: 'docs',
-      label: 'Bóveda Técnica',
-      icon: BookOpen,
-      requiredPermission: 'canViewTechDocs',
-      category: 'commercial'
-    },
-    // Ops & Workshop
-    {
-      id: 'command',
-      label: 'Command Center',
-      icon: Activity,
-      requiredPermission: 'canAssignOrders',
+      id: 'orders',
+      label: 'Órdenes de Servicio',
+      icon: Wrench,
+      badge: ordersCount > 0 ? ordersCount : undefined,
+      requiredPermission: 'canViewOwnOrders',
       category: 'ops'
     },
     {
       id: 'workflow',
-      label: 'Oficina & NCF DGII',
+      label: 'Oficina & Pases Garita',
       icon: Layers,
-      requiredPermission: 'canGenerateNcf',
+      requiredPermission: 'canAccessOfficeWorkflow',
       category: 'ops'
     },
     {
       id: 'inventory',
-      label: 'Inventario & Stock',
-      icon: Package,
+      label: 'Stock & Repuestos',
+      icon: Zap,
       requiredPermission: 'canViewInventory',
       category: 'ops'
     },
-    // Admin & Executive
+    {
+      id: 'docs',
+      label: 'Bóveda Técnica OEM',
+      icon: BookOpen,
+      requiredPermission: 'canViewTechDocs',
+      category: 'ops'
+    },
+    // 4. Flota & Telemetría IoT
+    {
+      id: 'livelink',
+      label: 'LiveLink™ Satelital',
+      icon: Radio,
+      requiredPermission: 'canViewOwnFleet',
+      category: 'fleet'
+    },
     {
       id: 'patio',
       label: 'Patio Km 22 GPS',
       icon: MapPin,
       requiredPermission: 'canAccessPatio',
+      category: 'fleet'
+    },
+    // 5. Finanzas & Administración ERP
+    {
+      id: 'integrations',
+      label: 'Integraciones ERP',
+      icon: Activity,
+      requiredPermission: 'canAccessIntegrations',
       category: 'admin'
     },
     {
       id: 'metrics',
-      label: 'Métricas & DGII',
+      label: 'Métricas DGII 606',
       icon: BarChart3,
       requiredPermission: 'canViewRevenueMetrics',
       category: 'admin'
@@ -189,9 +197,10 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
 
   const categories = [
     { key: 'core', label: 'General' },
-    { key: 'commercial', label: 'Comercial & Flota' },
-    { key: 'ops', label: 'Operaciones Km 22' },
-    { key: 'admin', label: 'Dirección & Control' }
+    { key: 'sales', label: 'Ventas & CRM' },
+    { key: 'ops', label: 'Taller & Operaciones' },
+    { key: 'fleet', label: 'Flota & Telemetría' },
+    { key: 'admin', label: 'Finanzas & Administración' }
   ];
 
   const allRoles: PortalRole[] = ['client', 'dealer', 'mechanic', 'sales', 'warehouse', 'finance', 'admin'];

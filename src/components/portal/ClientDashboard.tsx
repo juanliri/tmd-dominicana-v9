@@ -57,6 +57,7 @@ import { ScanFrequencyMiniChart } from './ScanFrequencyMiniChart';
 import { RecentScans } from './RecentScans';
 
 export type ClientPortalTab = 
+  | 'overview'
   | 'quotes' 
   | 'purchases' 
   | 'livelink_telematics' 
@@ -106,7 +107,7 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
   activeTab: activeTabProp,
   onTabChange
 }) => {
-  const [internalActiveTab, setInternalActiveTab] = useState<ClientPortalTab>(activeTabProp || 'quotes');
+  const [internalActiveTab, setInternalActiveTab] = useState<ClientPortalTab>(activeTabProp || 'overview');
   
   useEffect(() => {
     if (activeTabProp !== undefined) {
@@ -247,176 +248,260 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
 
   return (
     <div className="space-y-4 animate-in fade-in duration-300 font-sans">
-      {/* COMMERCIAL CONTRACTOR ACCOUNT BAR (ENTERPRISE STANDARD) */}
-      <div className="p-3.5 sm:p-4 rounded-[5px] bg-zinc-900 text-white border border-zinc-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
-        <div className="flex items-center gap-3 relative z-10">
-          <div className="h-10 px-2 rounded-[3px] bg-black/60 border border-amber-500/30 flex items-center justify-center shrink-0 shadow-xs">
-            <TMDLogo variant="icon-only" className="h-7" />
-          </div>
-          <div className="space-y-0.5">
-            <div className="flex items-center gap-2 flex-wrap">
-              <h2 className="text-base sm:text-lg font-black text-white uppercase font-display tracking-tight">
-                {userProfile?.displayName || 'Contratista Registrado'}
-              </h2>
-              <span className="px-1.5 py-0.5 rounded-[2px] text-[9px] font-bold uppercase tracking-wider bg-amber-400/15 text-amber-400 border border-amber-400/30">
-                CUENTA CORPORATIVA
-              </span>
-              <ProMemberBadge
-                points={userProfile?.proMemberPoints || 1850}
-                tier={userProfile?.proMemberTier || 'Gold'}
-                memberNumber={userProfile?.proMemberNumber || 'TMD-PRO-8492'}
-                variant="pill"
-                onClick={() => handleTabSelect('pro_member')}
-              />
-            </div>
-            <p className="text-xs text-zinc-400 font-mono">{currentUser.email}</p>
-            {userProfile?.companyName && (
-              <p className="text-xs text-amber-400 font-semibold flex items-center gap-1.5 flex-wrap uppercase">
-                <span>{userProfile.companyName}</span>
-                {userProfile.rnc && (
-                  <>
-                    <span className="text-zinc-600">•</span>
-                    <span className="px-1.5 py-0.2 rounded-[2px] bg-zinc-950 text-zinc-300 font-mono text-[10px] border border-zinc-800">
-                      RNC: {userProfile.rnc}
-                    </span>
-                  </>
+      {/* CONTRACTOR ACCOUNT BAR & METRICS (Shown on overview tab) */}
+      {activeTab === 'overview' && (
+        <>
+          {/* COMMERCIAL CONTRACTOR ACCOUNT BAR (ENTERPRISE STANDARD) */}
+          <div className="p-3.5 sm:p-4 rounded-[5px] bg-zinc-900 text-white border border-zinc-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
+            <div className="flex items-center gap-3 relative z-10">
+              <div className="h-10 px-2 rounded-[3px] bg-black/60 border border-amber-500/30 flex items-center justify-center shrink-0 shadow-xs">
+                <TMDLogo variant="icon-only" className="h-7" />
+              </div>
+              <div className="space-y-0.5">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h2 className="text-base sm:text-lg font-black text-white uppercase font-display tracking-tight">
+                    {userProfile?.displayName || 'Contratista Registrado'}
+                  </h2>
+                  <span className="px-1.5 py-0.5 rounded-[2px] text-[9px] font-bold uppercase tracking-wider bg-amber-400/15 text-amber-400 border border-amber-400/30">
+                    CUENTA CORPORATIVA
+                  </span>
+                  <ProMemberBadge
+                    points={userProfile?.proMemberPoints || 1850}
+                    tier={userProfile?.proMemberTier || 'Gold'}
+                    memberNumber={userProfile?.proMemberNumber || 'TMD-PRO-8492'}
+                    variant="pill"
+                    onClick={() => handleTabSelect('pro_member')}
+                  />
+                </div>
+                <p className="text-xs text-zinc-400 font-mono">{currentUser.email}</p>
+                {userProfile?.companyName && (
+                  <p className="text-xs text-amber-400 font-semibold flex items-center gap-1.5 flex-wrap uppercase">
+                    <span>{userProfile.companyName}</span>
+                    {userProfile.rnc && (
+                      <>
+                        <span className="text-zinc-600">•</span>
+                        <span className="px-1.5 py-0.2 rounded-[2px] bg-zinc-950 text-zinc-300 font-mono text-[10px] border border-zinc-800">
+                          RNC: {userProfile.rnc}
+                        </span>
+                      </>
+                    )}
+                  </p>
                 )}
-              </p>
-            )}
-          </div>
-        </div>
-
-        {/* Client Top Action Controls */}
-        <div className="flex items-center gap-2 self-start md:self-center flex-wrap relative z-10 w-full md:w-auto justify-between md:justify-end">
-          {/* Role switcher for testing - only in dev or for real admins */}
-          {(role === 'admin' || import.meta.env.DEV) && (
-            <div className="flex items-center gap-0.5 p-0.5 bg-zinc-950 rounded-[3px] border border-zinc-800 shadow-inner">
-              <span className="text-[10px] text-zinc-500 font-bold px-1 hidden sm:inline uppercase">VISTA:</span>
-              <button
-                type="button"
-                onClick={() => setSimulatedRole(null)}
-                className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                  !simulatedRole ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                CLIENTE
-              </button>
-              <button
-                type="button"
-                onClick={() => setSimulatedRole('staff')}
-                className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                  simulatedRole === 'staff' ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                STAFF
-              </button>
-              <button
-                type="button"
-                onClick={() => setSimulatedRole('admin')}
-                className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                  simulatedRole === 'admin' ? 'bg-purple-500 text-white shadow-xs' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                ADMIN
-              </button>
+              </div>
             </div>
-          )}
 
-          <div className="flex items-center gap-1.5 sm:gap-2">
+            {/* Client Top Action Controls */}
+            <div className="flex items-center gap-2 self-start md:self-center flex-wrap relative z-10 w-full md:w-auto justify-between md:justify-end">
+              {/* Role switcher for testing - only in dev or for real admins */}
+              {(role === 'admin' || import.meta.env.DEV) && (
+                <div className="flex items-center gap-0.5 p-0.5 bg-zinc-950 rounded-[3px] border border-zinc-800 shadow-inner">
+                  <span className="text-[10px] text-zinc-500 font-bold px-1 hidden sm:inline uppercase">VISTA:</span>
+                  <button
+                    type="button"
+                    onClick={() => setSimulatedRole(null)}
+                    className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
+                      !simulatedRole ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    CLIENTE
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSimulatedRole('staff')}
+                    className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
+                      simulatedRole === 'staff' ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    STAFF
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSimulatedRole('admin')}
+                    className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
+                      simulatedRole === 'admin' ? 'bg-purple-500 text-white shadow-xs' : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    ADMIN
+                  </button>
+                </div>
+              )}
+
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <button
+                  type="button"
+                  onClick={onOpenCreateQuote}
+                  className="px-3.5 py-2 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-[0.98] uppercase cursor-pointer"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>+ PROFORMA</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={onSignOut}
+                  className="p-2 rounded bg-zinc-800 hover:bg-red-950/40 text-zinc-300 hover:text-red-400 border border-zinc-700 transition-colors cursor-pointer"
+                  title="Cerrar Sesión"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* CLIENT OVERVIEW KPI CARDS (COMPACT COMMERCIAL STANDARD) */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+            <div 
+              onClick={() => handleTabSelect('quotes')}
+              className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-amber-400/50 transition-all cursor-pointer group shadow-xs"
+            >
+              <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
+                <span>COTIZACIONES DGII</span>
+                <FileText className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
+              </div>
+              <div className="text-xl sm:text-2xl font-black text-white font-mono mt-1">
+                {pendingQuotes.length}
+              </div>
+              <span className="text-[10px] text-amber-400 font-semibold uppercase">
+                {quotes.length} EN HISTORIAL
+              </span>
+            </div>
+
+            <div 
+              onClick={() => handleTabSelect('livelink_telematics')}
+              className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 transition-all cursor-pointer group shadow-xs"
+            >
+              <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
+                <span>TELEMETRÍA LIVELINK</span>
+                <Radio className="w-4 h-4 text-emerald-400 animate-pulse group-hover:scale-110 transition-transform" />
+              </div>
+              <div className="text-xl sm:text-2xl font-black text-white font-mono mt-1">
+                {fleet.length} <span className="text-xs font-normal text-zinc-500 uppercase">UNIDADES</span>
+              </div>
+              <span className="text-[10px] text-emerald-400 font-semibold flex items-center gap-1 uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                GPS ONLINE 24/7
+              </span>
+            </div>
+
+            <div 
+              onClick={() => handleTabSelect('service_history')}
+              className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-blue-500/50 transition-all cursor-pointer group shadow-xs"
+            >
+              <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
+                <span>TALLER KM 22 & OBRA</span>
+                <Activity className="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" />
+              </div>
+              <div className="text-xl sm:text-2xl font-black text-white font-mono mt-1">
+                {activeServices.length}
+              </div>
+              <span className="text-[10px] text-blue-400 font-semibold uppercase">
+                {workOrders.length} SERVICIOS TOTALES
+              </span>
+            </div>
+
+            <div 
+              onClick={() => handleTabSelect('pro_member')}
+              className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-amber-400/50 transition-all cursor-pointer group shadow-xs"
+            >
+              <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
+                <span>CLUB PRO TMD</span>
+                <Crown className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
+              </div>
+              <div className="text-xl sm:text-2xl font-black text-amber-400 font-mono mt-1">
+                {userProfile?.proMemberPoints || 1850} <span className="text-xs font-normal text-zinc-500">PTS</span>
+              </div>
+              <span className="text-[10px] text-zinc-400 font-semibold uppercase">
+                NIVEL {userProfile?.proMemberTier || 'Gold'} • BENEFICIOS VIP
+              </span>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* COMPACT WORKSPACE ACTION BAR (Shown on specific operational tabs) */}
+      {activeTab !== 'overview' && (
+        <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-[5px] bg-zinc-900 border border-zinc-800 shadow-md">
+          <div className="flex items-center gap-2.5">
+            <span className="p-1.5 rounded bg-amber-400/10 text-amber-400 border border-amber-400/20">
+              {activeTab === 'quotes' && <FileText className="w-4 h-4" />}
+              {activeTab === 'purchases' && <Package className="w-4 h-4" />}
+              {activeTab === 'livelink_telematics' && <Radio className="w-4 h-4 text-emerald-400" />}
+              {activeTab === 'service_history' && <Activity className="w-4 h-4 text-blue-400" />}
+              {activeTab === 'pro_member' && <Crown className="w-4 h-4" />}
+              {activeTab === 'tech_docs' && <BookOpen className="w-4 h-4" />}
+              {activeTab === 'profile' && <Building className="w-4 h-4" />}
+            </span>
+            <div>
+              <h2 className="text-sm font-black uppercase tracking-tight text-white font-display">
+                {activeTab === 'quotes' && 'MIS COTIZACIONES & PROFORMAS B01'}
+                {activeTab === 'purchases' && 'HISTORIAL DE COMPRAS & PEDIDOS'}
+                {activeTab === 'livelink_telematics' && 'TELEMETRÍA SATELITAL DE FLOTA LIVELINK™'}
+                {activeTab === 'service_history' && 'HISTORIAL DE MANTENIMIENTO EN TALLER KM 22'}
+                {activeTab === 'pro_member' && 'CLUB PRO TMD · BENEFICIOS Y PUNTOS'}
+                {activeTab === 'tech_docs' && 'BÓVEDA TÉCNICA · FICHAS Y MANUALES PDF'}
+                {activeTab === 'profile' && 'DATOS CORPORATIVOS & PREFERENCIAS'}
+              </h2>
+              <span className="text-[10px] text-zinc-400 font-mono">
+                {activeTab === 'quotes' && `${quotes.length} Cotizaciones registradas`}
+                {activeTab === 'service_history' && `${workOrders.length} Servicios en historial`}
+                {activeTab === 'livelink_telematics' && `${fleet.length} Unidades con GPS activo`}
+                {activeTab === 'pro_member' && `${userProfile?.proMemberPoints || 1850} Puntos acumulados`}
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            {activeTab === 'quotes' && (
+              <button
+                type="button"
+                onClick={onOpenCreateQuote}
+                className="px-3 py-1.5 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-[0.98] cursor-pointer uppercase"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>+ Proforma</span>
+              </button>
+            )}
+            {activeTab === 'service_history' && (
+              <button
+                type="button"
+                onClick={onOpenNewOrderModal}
+                className="px-3 py-1.5 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-[0.98] cursor-pointer uppercase"
+              >
+                <Wrench className="w-3.5 h-3.5" />
+                <span>+ Solicitar Taller</span>
+              </button>
+            )}
             <button
               type="button"
-              onClick={onOpenCreateQuote}
-              className="px-3.5 py-2 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-[0.98] uppercase cursor-pointer"
+              onClick={() => handleTabSelect('overview')}
+              className="px-2.5 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-semibold border border-zinc-700 transition-colors cursor-pointer uppercase flex items-center gap-1"
+              title="Volver al Panel Resumen"
             >
-              <Plus className="w-3.5 h-3.5" />
-              <span>+ PROFORMA</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={onSignOut}
-              className="p-2 rounded bg-zinc-800 hover:bg-red-950/40 text-zinc-300 hover:text-red-400 border border-zinc-700 transition-colors cursor-pointer"
-              title="Cerrar Sesión"
-            >
-              <LogOut className="w-3.5 h-3.5" />
+              <Zap className="w-3 h-3 text-amber-400" />
+              <span>Ver Resumen</span>
             </button>
           </div>
         </div>
-      </div>
-
-      {/* CLIENT OVERVIEW KPI CARDS (COMPACT COMMERCIAL STANDARD) */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
-        <div 
-          onClick={() => handleTabSelect('quotes')}
-          className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-amber-400/50 transition-all cursor-pointer group shadow-xs"
-        >
-          <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
-            <span>COTIZACIONES DGII</span>
-            <FileText className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="text-xl sm:text-2xl font-black text-white font-mono mt-1">
-            {pendingQuotes.length}
-          </div>
-          <span className="text-[10px] text-amber-400 font-semibold uppercase">
-            {quotes.length} EN HISTORIAL
-          </span>
-        </div>
-
-        <div 
-          onClick={() => handleTabSelect('livelink_telematics')}
-          className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 transition-all cursor-pointer group shadow-xs"
-        >
-          <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
-            <span>TELEMETRÍA LIVELINK</span>
-            <Radio className="w-4 h-4 text-emerald-400 animate-pulse group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="text-xl sm:text-2xl font-black text-white font-mono mt-1">
-            {fleet.length} <span className="text-xs font-normal text-zinc-500 uppercase">UNIDADES</span>
-          </div>
-          <span className="text-[10px] text-emerald-400 font-semibold flex items-center gap-1 uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-            GPS ONLINE 24/7
-          </span>
-        </div>
-
-        <div 
-          onClick={() => handleTabSelect('service_history')}
-          className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-blue-500/50 transition-all cursor-pointer group shadow-xs"
-        >
-          <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
-            <span>TALLER KM 22 & OBRA</span>
-            <Activity className="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="text-xl sm:text-2xl font-black text-white font-mono mt-1">
-            {activeServices.length}
-          </div>
-          <span className="text-[10px] text-blue-400 font-semibold uppercase">
-            {workOrders.length} SERVICIOS TOTALES
-          </span>
-        </div>
-
-        <div 
-          onClick={() => handleTabSelect('pro_member')}
-          className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-amber-400/50 transition-all cursor-pointer group shadow-xs"
-        >
-          <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
-            <span>CLUB PRO TMD</span>
-            <Crown className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="text-xl sm:text-2xl font-black text-amber-400 font-mono mt-1">
-            {userProfile?.proMemberPoints || 1850} <span className="text-xs font-normal text-zinc-500">PTS</span>
-          </div>
-          <span className="text-[10px] text-zinc-400 font-semibold uppercase">
-            NIVEL {userProfile?.proMemberTier || 'Gold'} • BENEFICIOS VIP
-          </span>
-        </div>
-      </div>
+      )}
 
       {/* INDUSTRIAL SECTION DIVIDER */}
       <IndustrialSectionDivider badge="ESPACIO DE GESTIÓN DE CLIENTE" />
 
       {/* CLIENT STICKY TABS NAVIGATION (COMPACT PILL DOCK) */}
       <div className="relative z-20 bg-zinc-900/95 backdrop-blur-md py-1.5 px-2 rounded-[5px] border border-zinc-800 shadow-md flex items-center gap-1.5 overflow-x-auto scrollbar-none transition-all">
+        <button
+          type="button"
+          onClick={() => handleTabSelect('overview')}
+          className={`px-3 py-1.5 rounded-[3px] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0 uppercase ${
+            activeTab === 'overview'
+              ? 'bg-amber-400 text-black shadow-xs font-black'
+              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+          }`}
+        >
+          <Zap className="w-3.5 h-3.5" />
+          <span>INICIO</span>
+        </button>
+
         <button
           type="button"
           onClick={() => handleTabSelect('quotes')}
@@ -517,6 +602,90 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
 
       {/* CLIENT ACTIVE WORKSPACE CONTENT */}
       <div ref={portalWorkspaceRef} className="scroll-mt-32 space-y-4">
+        {/* TAB 0: OVERVIEW */}
+        {activeTab === 'overview' && (
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {/* Recent Quotes Summary */}
+              <div className="p-4 rounded-[5px] bg-zinc-900 border border-zinc-800 space-y-3">
+                <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
+                  <div className="flex items-center gap-2">
+                    <FileText className="w-4 h-4 text-amber-400" />
+                    <h3 className="text-xs font-bold text-white uppercase tracking-wider font-display">
+                      Proformas Recientes B01
+                    </h3>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleTabSelect('quotes')}
+                    className="text-[11px] text-amber-400 hover:underline uppercase font-mono font-bold cursor-pointer"
+                  >
+                    Ver Todas ({quotes.length}) →
+                  </button>
+                </div>
+                {quotes.length === 0 ? (
+                  <p className="text-xs text-zinc-500 py-4 text-center">No hay cotizaciones registradas actualmente.</p>
+                ) : (
+                  <div className="space-y-2">
+                    {quotes.slice(0, 3).map((q) => (
+                      <div key={q.id} className="p-2.5 rounded bg-zinc-950/80 border border-zinc-800/80 flex items-center justify-between gap-3 text-xs">
+                        <div>
+                          <span className="font-bold text-white font-mono">{q.quoteNumber}</span>
+                          <p className="text-[11px] text-zinc-400 truncate max-w-xs">{q.itemsSummary || 'Equipos TMD'}</p>
+                        </div>
+                        <div className="text-right">
+                          <span className="font-mono font-bold text-amber-400">{formatPrice(q.total || 0)}</span>
+                          <span className="block text-[9px] uppercase font-bold text-zinc-500">{q.status}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Active Workshop Services Summary */}
+              <div className="p-4 rounded-[5px] bg-zinc-900 border border-zinc-800 space-y-3">
+                <div className="flex items-center justify-between pb-2 border-b border-zinc-800">
+                  <div className="flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-blue-400" />
+                    <h3 className="text-xs font-bold text-white uppercase tracking-wider font-display">
+                      Servicios en Taller Km 22
+                    </h3>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleTabSelect('service_history')}
+                    className="text-[11px] text-blue-400 hover:underline uppercase font-mono font-bold cursor-pointer"
+                  >
+                    Ver Historial ({workOrders.length}) →
+                  </button>
+                </div>
+                {workOrders.length === 0 ? (
+                  <p className="text-xs text-zinc-500 py-4 text-center">No hay órdenes de servicio activas.</p>
+                ) : (
+                  <div className="space-y-2">
+                    {workOrders.slice(0, 3).map((w) => (
+                      <div key={w.id} className="p-2.5 rounded bg-zinc-950/80 border border-zinc-800/80 flex items-center justify-between gap-3 text-xs">
+                        <div>
+                          <span className="font-bold text-white font-mono">{w.orderNumber}</span>
+                          <p className="text-[11px] text-zinc-400 truncate max-w-xs">{w.machineModel}</p>
+                        </div>
+                        <div className="text-right">
+                          <span className={`inline-block px-1.5 py-0.5 rounded text-[9px] font-bold uppercase ${
+                            w.status === 'in_progress' ? 'bg-amber-400/20 text-amber-400' : 'bg-emerald-500/20 text-emerald-400'
+                          }`}>
+                            {w.status}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* TAB 1: QUOTES */}
         {activeTab === 'quotes' && (
           <div className="space-y-4">

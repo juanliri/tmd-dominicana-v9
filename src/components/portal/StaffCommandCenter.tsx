@@ -211,166 +211,254 @@ export const StaffCommandCenter: React.FC<StaffCommandCenterProps> = ({
 
   return (
     <div className="space-y-4 animate-in fade-in duration-300 font-sans">
-      {/* HIGH-DENSITY COMMERCIAL STAFF BAR */}
-      <div className="p-3.5 sm:p-4 rounded-[5px] bg-zinc-900 text-white border border-zinc-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
-        <div className="flex items-center gap-3 relative z-10">
-          <div className="h-10 px-2 rounded-[3px] bg-black/60 border border-amber-500/30 flex items-center justify-center shrink-0 shadow-xs">
-            <TMDLogo variant="icon-only" className="h-7" />
+      {/* EXECUTIVE COMMAND CENTER HEADER & KPIS (Only on HQ command_center tab) */}
+      {activeTab === 'command_center' && (
+        <>
+          {/* HIGH-DENSITY COMMERCIAL STAFF BAR */}
+          <div className="p-3.5 sm:p-4 rounded-[5px] bg-zinc-900 text-white border border-zinc-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
+            <div className="flex items-center gap-3 relative z-10">
+              <div className="h-10 px-2 rounded-[3px] bg-black/60 border border-amber-500/30 flex items-center justify-center shrink-0 shadow-xs">
+                <TMDLogo variant="icon-only" className="h-7" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h2 className="text-base sm:text-lg font-black text-white uppercase font-display tracking-tight">
+                    {userProfile?.displayName || 'Personal Operativo'}
+                  </h2>
+                  <span className={`px-2 py-0.5 rounded-[2px] text-[9px] font-black uppercase tracking-wider ${
+                    isAdmin 
+                      ? 'bg-purple-500 text-white shadow-xs' 
+                      : 'bg-amber-400 text-black shadow-xs'
+                  }`}>
+                    {isAdmin ? 'ADMINISTRADOR TMD' : 'TÉCNICO & VENTAS STAFF'}
+                  </span>
+                  <span className="px-2 py-0.5 rounded-[2px] text-[9px] font-bold uppercase tracking-wider bg-zinc-950 text-amber-400 border border-zinc-800">
+                    PATIO KM 22 • OPERACIONES
+                  </span>
+                </div>
+                <p className="text-xs text-zinc-400 font-mono mt-0.5">{currentUser.email}</p>
+              </div>
+            </div>
+
+            {/* Staff Quick Switcher & Actions */}
+            <div className="flex items-center gap-2 self-start md:self-center flex-wrap relative z-10 w-full md:w-auto justify-between md:justify-end">
+              {/* Role switcher for testing - only in dev or for real admins */}
+              {(isAdmin || import.meta.env.DEV) && (
+                <div className="flex items-center gap-0.5 p-0.5 bg-zinc-950 rounded-[3px] border border-zinc-800 shadow-inner">
+                  <span className="text-[10px] text-zinc-500 font-bold px-1 hidden sm:inline uppercase">ROL:</span>
+                  <button
+                    type="button"
+                    onClick={() => setSimulatedRole(null)}
+                    className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
+                      !simulatedRole ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    REAL
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSimulatedRole('client')}
+                    className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
+                      simulatedRole === 'client' ? 'bg-blue-500 text-white shadow-xs' : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    CLIENTE
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSimulatedRole('admin')}
+                    className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
+                      simulatedRole === 'admin' ? 'bg-purple-500 text-white shadow-xs' : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    ADMIN
+                  </button>
+                </div>
+              )}
+
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowBiometricModal(true)}
+                  className="px-3 py-2 rounded bg-zinc-950 border border-zinc-700 hover:border-zinc-500 text-amber-400 hover:bg-zinc-800 font-bold text-xs transition-all flex items-center gap-1.5 active:scale-[0.98] cursor-pointer uppercase"
+                  title="Gestionar Llaves Biométricas WebAuthn / FIDO2"
+                >
+                  <Fingerprint className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="hidden md:inline">BIOMETRÍA</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={onOpenCreateQuote}
+                  className="px-3.5 py-2 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-[0.98] cursor-pointer uppercase"
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                  <span>+ PROFORMA</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={onSignOut}
+                  className="p-2 rounded bg-zinc-800 hover:bg-red-950/40 text-zinc-300 hover:text-red-400 border border-zinc-700 transition-colors cursor-pointer"
+                  title="Cerrar Sesión"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
           </div>
-          <div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <h2 className="text-base sm:text-lg font-black text-white uppercase font-display tracking-tight">
-                {userProfile?.displayName || 'Personal Operativo'}
+
+          {/* COMPACT DENSITY OPERATIONAL KPI BAR */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
+            <div 
+              onClick={() => handleTabSelect('quotes')}
+              className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-amber-400/50 transition-all cursor-pointer group shadow-xs"
+            >
+              <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
+                <span>PIPELINE PROFORMAS</span>
+                <FileText className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition-transform" />
+              </div>
+              <div className="text-lg sm:text-xl font-bold text-white font-mono mt-1">
+                {formatPrice(totalPipelineUsd)}
+              </div>
+              <span className="text-[10px] text-amber-400 font-semibold uppercase">
+                {pendingQuotes.length} PENDIENTES DE CIERRE
+              </span>
+            </div>
+
+            <div 
+              onClick={() => handleTabSelect('orders')}
+              className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 transition-all cursor-pointer group shadow-xs"
+            >
+              <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
+                <span>ÓRDENES DE SERVICIO</span>
+                <Wrench className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
+              </div>
+              <div className="text-lg sm:text-xl font-bold text-white font-mono mt-1">
+                {activeWorkOrders.length} <span className="text-xs font-normal text-zinc-500 uppercase">EN TALLER</span>
+              </div>
+              <span className="text-[10px] text-emerald-400 font-semibold uppercase">
+                {urgentWorkOrders.length > 0 ? `${urgentWorkOrders.length} PRIORIDAD ALTA` : 'FLUJO NORMAL DESPACHO'}
+              </span>
+            </div>
+
+            <div 
+              onClick={() => handleTabSelect('livelink_telematics')}
+              className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-blue-500/50 transition-all cursor-pointer group shadow-xs"
+            >
+              <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
+                <span>TELEMETRÍA DE FLOTA</span>
+                <Radio className="w-3.5 h-3.5 text-blue-400 animate-pulse group-hover:scale-110 transition-transform" />
+              </div>
+              <div className="text-lg sm:text-xl font-bold text-white font-mono mt-1">
+                {fleet.length} <span className="text-xs font-normal text-zinc-500 uppercase">UNIDADES</span>
+              </div>
+              <span className="text-[10px] text-blue-400 font-semibold uppercase">
+                GPS LIVELINK™ ACTIVO
+              </span>
+            </div>
+
+            <div 
+              onClick={() => handleTabSelect('office_workflow')}
+              className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-amber-400/50 transition-all cursor-pointer group shadow-xs"
+            >
+              <div className="flex items-center justify-between text-amber-400 text-xs font-semibold uppercase">
+                <span>OPERACIONES & DGII</span>
+                <Briefcase className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition-transform" />
+              </div>
+              <div className="text-lg sm:text-xl font-bold text-white font-mono mt-1 uppercase">
+                MÓDULO ACTIVO
+              </div>
+              <span className="text-[10px] text-amber-400 font-semibold uppercase">
+                PASES KM 22 • FACTURACIÓN NCF
+              </span>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* COMPACT WORKSPACE ACTION BAR (Shown on specific operational tabs) */}
+      {activeTab !== 'command_center' && (
+        <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-[5px] bg-zinc-900 border border-zinc-800 shadow-md">
+          <div className="flex items-center gap-2.5">
+            <span className="p-1.5 rounded bg-amber-400/10 text-amber-400 border border-amber-400/20">
+              {activeTab === 'quotes' && <FileText className="w-4 h-4" />}
+              {activeTab === 'orders' && <Wrench className="w-4 h-4" />}
+              {activeTab === 'purchases' && <Package className="w-4 h-4" />}
+              {activeTab === 'livelink_telematics' && <Radio className="w-4 h-4 text-emerald-400" />}
+              {activeTab === 'service_history' && <Activity className="w-4 h-4" />}
+              {activeTab === 'office_workflow' && <Briefcase className="w-4 h-4 text-amber-400" />}
+              {activeTab === 'inventory_logs' && <QrCode className="w-4 h-4" />}
+              {activeTab === 'tech_docs' && <BookOpen className="w-4 h-4" />}
+              {activeTab === 'users' && <Users className="w-4 h-4 text-purple-400" />}
+            </span>
+            <div>
+              <h2 className="text-sm font-black uppercase tracking-tight text-white font-display">
+                {activeTab === 'quotes' && 'COTIZACIONES B01 · PIPELINE COMERCIAL'}
+                {activeTab === 'orders' && 'ÓRDENES DE SERVICIO · FULLBAY HD TALLER'}
+                {activeTab === 'purchases' && 'HISTORIAL DE COMPRAS & PEDIDOS'}
+                {activeTab === 'livelink_telematics' && 'TELEMETRÍA SATELITAL LIVELINK™ (J1939 CAN-BUS)'}
+                {activeTab === 'service_history' && 'HISTORIAL TÉCNICO DE MANTENIMIENTO'}
+                {activeTab === 'office_workflow' && 'OFICINA ADMINISTRATIVA & PASES GARITA KM 22'}
+                {activeTab === 'inventory_logs' && 'INVENTARIO & REGISTRO DE ESCANEOS QR'}
+                {activeTab === 'tech_docs' && 'BÓVEDA TÉCNICA & MANUALES OEM'}
+                {activeTab === 'users' && 'GESTIÓN DE USUARIOS & PERMISOS RBAC'}
               </h2>
-              <span className={`px-2 py-0.5 rounded-[2px] text-[9px] font-black uppercase tracking-wider ${
-                isAdmin 
-                  ? 'bg-purple-500 text-white shadow-xs' 
-                  : 'bg-amber-400 text-black shadow-xs'
-              }`}>
-                {isAdmin ? 'ADMINISTRADOR TMD' : 'TÉCNICO & VENTAS STAFF'}
-              </span>
-              <span className="px-2 py-0.5 rounded-[2px] text-[9px] font-bold uppercase tracking-wider bg-zinc-950 text-amber-400 border border-zinc-800">
-                PATIO KM 22 • OPERACIONES
+              <span className="text-[10px] text-zinc-400 font-mono">
+                {activeTab === 'quotes' && `${quotes.length} Cotizaciones registradas`}
+                {activeTab === 'orders' && `${workOrders.length} Órdenes de servicio en curso`}
+                {activeTab === 'livelink_telematics' && `${fleet.length} Unidades monitoreadas en tiempo real`}
+                {activeTab === 'office_workflow' && 'Emisión formal NCF & Pases de despacho'}
+                {activeTab === 'inventory_logs' && 'Control de stock y trazabilidad de piezas'}
+                {activeTab === 'tech_docs' && 'Manuales de taller, diagramas hidráulicos y fichas'}
+                {activeTab === 'users' && `${allUsers.length} Usuarios corporativos`}
               </span>
             </div>
-            <p className="text-xs text-zinc-400 font-mono mt-0.5">{currentUser.email}</p>
           </div>
-        </div>
 
-        {/* Staff Quick Switcher & Actions */}
-        <div className="flex items-center gap-2 self-start md:self-center flex-wrap relative z-10 w-full md:w-auto justify-between md:justify-end">
-          {/* Role switcher for testing - only in dev or for real admins */}
-          {(isAdmin || import.meta.env.DEV) && (
-            <div className="flex items-center gap-0.5 p-0.5 bg-zinc-950 rounded-[3px] border border-zinc-800 shadow-inner">
-              <span className="text-[10px] text-zinc-500 font-bold px-1 hidden sm:inline uppercase">ROL:</span>
+          <div className="flex items-center gap-2">
+            {activeTab === 'quotes' && (
               <button
                 type="button"
-                onClick={() => setSimulatedRole(null)}
-                className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                  !simulatedRole ? 'bg-amber-400 text-black shadow-xs' : 'text-zinc-400 hover:text-white'
-                }`}
+                onClick={onOpenCreateQuote}
+                className="px-3 py-1.5 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-[0.98] cursor-pointer uppercase"
               >
-                REAL
+                <Plus className="w-3.5 h-3.5" />
+                <span>+ Nueva Proforma</span>
               </button>
+            )}
+            {activeTab === 'orders' && (
               <button
                 type="button"
-                onClick={() => setSimulatedRole('client')}
-                className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                  simulatedRole === 'client' ? 'bg-blue-500 text-white shadow-xs' : 'text-zinc-400 hover:text-white'
-                }`}
+                onClick={onOpenNewOrderModal}
+                className="px-3 py-1.5 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-[0.98] cursor-pointer uppercase"
               >
-                CLIENTE
+                <Plus className="w-3.5 h-3.5" />
+                <span>+ Nueva Orden</span>
               </button>
+            )}
+            {onOpenQrScanner && (
               <button
                 type="button"
-                onClick={() => setSimulatedRole('admin')}
-                className={`px-2 py-1 rounded-[2px] text-[10px] font-bold transition-all cursor-pointer uppercase ${
-                  simulatedRole === 'admin' ? 'bg-purple-500 text-white shadow-xs' : 'text-zinc-400 hover:text-white'
-                }`}
+                onClick={onOpenQrScanner}
+                className="p-1.5 rounded bg-zinc-800 hover:bg-zinc-700 text-cyan-400 border border-zinc-700 transition-colors cursor-pointer"
+                title="Escanear Código QR"
               >
-                ADMIN
+                <QrCode className="w-4 h-4" />
               </button>
-            </div>
-          )}
-
-          <div className="flex items-center gap-1.5 sm:gap-2">
+            )}
             <button
               type="button"
-              onClick={() => setShowBiometricModal(true)}
-              className="px-3 py-2 rounded bg-zinc-950 border border-zinc-700 hover:border-zinc-500 text-amber-400 hover:bg-zinc-800 font-bold text-xs transition-all flex items-center gap-1.5 active:scale-[0.98] cursor-pointer uppercase"
-              title="Gestionar Llaves Biométricas WebAuthn / FIDO2"
+              onClick={() => handleTabSelect('command_center')}
+              className="px-2.5 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-semibold border border-zinc-700 transition-colors cursor-pointer uppercase flex items-center gap-1"
+              title="Volver al Command Center General"
             >
-              <Fingerprint className="w-3.5 h-3.5 text-amber-400" />
-              <span className="hidden md:inline">BIOMETRÍA</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={onOpenCreateQuote}
-              className="px-3.5 py-2 rounded bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm active:scale-[0.98] cursor-pointer uppercase"
-            >
-              <Plus className="w-3.5 h-3.5" />
-              <span>+ PROFORMA</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={onSignOut}
-              className="p-2 rounded bg-zinc-800 hover:bg-red-950/40 text-zinc-300 hover:text-red-400 border border-zinc-700 transition-colors cursor-pointer"
-              title="Cerrar Sesión"
-            >
-              <LogOut className="w-3.5 h-3.5" />
+              <Zap className="w-3 h-3 text-amber-400" />
+              <span>Ver HQ</span>
             </button>
           </div>
         </div>
-      </div>
-
-      {/* COMPACT DENSITY OPERATIONAL KPI BAR */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
-        <div 
-          onClick={() => handleTabSelect('quotes')}
-          className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-amber-400/50 transition-all cursor-pointer group shadow-xs"
-        >
-          <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
-            <span>PIPELINE PROFORMAS</span>
-            <FileText className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="text-lg sm:text-xl font-bold text-white font-mono mt-1">
-            {formatPrice(totalPipelineUsd)}
-          </div>
-          <span className="text-[10px] text-amber-400 font-semibold uppercase">
-            {pendingQuotes.length} PENDIENTES DE CIERRE
-          </span>
-        </div>
-
-        <div 
-          onClick={() => handleTabSelect('orders')}
-          className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 transition-all cursor-pointer group shadow-xs"
-        >
-          <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
-            <span>ÓRDENES DE SERVICIO</span>
-            <Wrench className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="text-lg sm:text-xl font-bold text-white font-mono mt-1">
-            {activeWorkOrders.length} <span className="text-xs font-normal text-zinc-500 uppercase">EN TALLER</span>
-          </div>
-          <span className="text-[10px] text-emerald-400 font-semibold uppercase">
-            {urgentWorkOrders.length > 0 ? `${urgentWorkOrders.length} PRIORIDAD ALTA` : 'FLUJO NORMAL DESPACHO'}
-          </span>
-        </div>
-
-        <div 
-          onClick={() => handleTabSelect('livelink_telematics')}
-          className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-blue-500/50 transition-all cursor-pointer group shadow-xs"
-        >
-          <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
-            <span>TELEMETRÍA DE FLOTA</span>
-            <Radio className="w-3.5 h-3.5 text-blue-400 animate-pulse group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="text-lg sm:text-xl font-bold text-white font-mono mt-1">
-            {fleet.length} <span className="text-xs font-normal text-zinc-500 uppercase">UNIDADES</span>
-          </div>
-          <span className="text-[10px] text-blue-400 font-semibold uppercase">
-            GPS LIVELINK™ ACTIVO
-          </span>
-        </div>
-
-        <div 
-          onClick={() => handleTabSelect('office_workflow')}
-          className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-amber-400/50 transition-all cursor-pointer group shadow-xs"
-        >
-          <div className="flex items-center justify-between text-amber-400 text-xs font-semibold uppercase">
-            <span>OPERACIONES & DGII</span>
-            <Briefcase className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="text-lg sm:text-xl font-bold text-white font-mono mt-1 uppercase">
-            MÓDULO ACTIVO
-          </div>
-          <span className="text-[10px] text-amber-400 font-semibold uppercase">
-            PASES KM 22 • FACTURACIÓN NCF
-          </span>
-        </div>
-      </div>
+      )}
 
       {/* DENSE STAFF NAVIGATION BAR (PILL DOCK) */}
       <div className="relative z-20 bg-zinc-900/95 backdrop-blur-md py-1.5 px-2 rounded-[5px] border border-zinc-800 shadow-md flex items-center gap-1.5 overflow-x-auto scrollbar-none transition-all">

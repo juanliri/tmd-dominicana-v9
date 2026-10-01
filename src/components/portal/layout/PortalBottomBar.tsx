@@ -67,12 +67,12 @@ export const PortalBottomBar: React.FC<PortalBottomBarProps> = ({
   // Secondary tabs shown inside the "Más" drawer
   const SECONDARY_TABS = [
     { id: 'pro', label: 'Club Pro TMD', icon: Crown, requiredPermission: 'canViewProMember' as const },
-    { id: 'docs', label: 'Bóveda Técnica', icon: BookOpen, requiredPermission: 'canViewTechDocs' as const },
-    { id: 'command', label: 'Command Center', icon: Activity, requiredPermission: 'canAssignOrders' as const },
-    { id: 'workflow', label: 'Oficina NCF DGII', icon: Package, requiredPermission: 'canGenerateNcf' as const },
-    { id: 'inventory', label: 'Inventario & Stock', icon: Package, requiredPermission: 'canViewInventory' as const },
+    { id: 'docs', label: 'Bóveda Técnica OEM', icon: BookOpen, requiredPermission: 'canViewTechDocs' as const },
+    { id: 'workflow', label: 'Oficina & Pases Garita', icon: Package, requiredPermission: 'canAccessOfficeWorkflow' as const },
+    { id: 'inventory', label: 'Stock Repuestos', icon: Package, requiredPermission: 'canViewInventory' as const },
     { id: 'patio', label: 'Patio Km 22 GPS', icon: MapPin, requiredPermission: 'canAccessPatio' as const },
-    { id: 'metrics', label: 'Métricas DGII', icon: BarChart3, requiredPermission: 'canViewRevenueMetrics' as const },
+    { id: 'integrations', label: 'Integraciones ERP', icon: Activity, requiredPermission: 'canAccessIntegrations' as const },
+    { id: 'metrics', label: 'Métricas DGII 606', icon: BarChart3, requiredPermission: 'canViewRevenueMetrics' as const },
     { id: 'users', label: 'Usuarios & RBAC', icon: Users, requiredPermission: 'canManageUsers' as const },
     { id: 'audit', label: 'Auditoría & Logs', icon: ShieldCheck, requiredPermission: 'canAccessAuditLog' as const }
   ].filter(tab => !tab.requiredPermission || hasPermission(currentRole, tab.requiredPermission));

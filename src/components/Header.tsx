@@ -240,7 +240,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   const isCheckoutMode = currentRoute === '#/checkout';
   const isAdminMode = ['#/admin', '#/admin-dashboard'].includes(currentRoute);
-  const isPortalMode = currentRoute === '#/portal';
+  const isPortalMode = currentRoute.startsWith('#/portal');
   const isWorkspaceMode = ['#/fullbay', '#/livelink'].includes(currentRoute);
 
   // -------------------------------------------------------------
@@ -349,6 +349,11 @@ export const Header: React.FC<HeaderProps> = ({
   // 2. PORTAL CLIENTES MODULE HEADER (Clean, customer-centric)
   // -------------------------------------------------------------
   if (isPortalMode) {
+    // If user is already authenticated inside the portal shell, suppress the public header
+    // to allow PortalShell to be the single authoritative enterprise command bar.
+    if (currentUser) {
+      return null;
+    }
     return (
       <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-white/10 bg-white/95 dark:bg-zinc-950/80 backdrop-blur-md text-slate-800 dark:text-white shadow-xs dark:shadow-md">
         <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-12 max-w-[1780px] mx-auto h-15 flex items-center justify-between gap-4 bg-transparent">
