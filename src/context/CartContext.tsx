@@ -5,7 +5,8 @@ import {
   ExchangeRateData, 
   getExchangeRateData, 
   subscribeToExchangeRate, 
-  syncLiveExchangeRate 
+  syncLiveExchangeRate,
+  setManualExchangeRate
 } from '../services/currencyRateService';
 
 interface CartContextType {
@@ -17,6 +18,7 @@ interface CartContextType {
   exchangeRateData: ExchangeRateData;
   isSyncingRate: boolean;
   refreshExchangeRate: () => Promise<void>;
+  setManualRate: (rate: number, source?: string) => void;
   formatPrice: (amountUsd: number) => string;
   addToCart: (part: Part, qty?: number) => void;
   removeFromCart: (partId: string) => void;
@@ -33,6 +35,8 @@ interface CartContextType {
   totalCartCount: number;
   totalQuotesCount: number;
   subtotalUsd: number;
+  subtotalPartsUsd: number;
+  subtotalMachinesUsd: number;
   discountPercentage: number;
   discountUsd: number;
   appliedCoupon: string | null;
@@ -102,6 +106,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } finally {
       setIsSyncingRate(false);
     }
+  };
+
+  const setManualRate = (rate: number, source?: string) => {
+    const updated = setManualExchangeRate(rate, source || 'Ajuste Manual');
+    setExchangeRateData(updated);
+    showToast(`Tasa cambiaria fijada: US$ 1.00 = RD$ ${updated.rate.toFixed(2)} (${updated.source})`);
   };
 
   const [cart, setCart] = useState<CartItem[]>(() => {
@@ -350,13 +360,26 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const totalCartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
   const totalQuotesCount = machineQuotes.length;
 
-  const subtotalUsd = cart.reduce((acc, item) => acc + item.part.priceUsd * item.quantity, 0);
+  const getMachinePriceUsd = (q: MachineQuoteItem): number => {
+    if (q.estimatedPriceRange?.minUsd && q.estimatedPriceRange.minUsd > 0) {
+      return q.estimatedPriceRange.minUsd;
+    }
+    if (q.machine.basePriceUsd && q.machine.basePriceUsd > 0) {
+      return q.machine.basePriceUsd;
+    }
+    return (q.machine as any).promotionalPriceUsd || (q.machine as any).priceUsd || 0;
+  };
+
+  const subtotalPartsUsd = cart.reduce((acc, item) => acc + item.part.priceUsd * item.quantity, 0);
+  const subtotalMachinesUsd = machineQuotes.reduce((acc, item) => acc + getMachinePriceUsd(item), 0);
+  const subtotalUsd = subtotalPartsUsd + subtotalMachinesUsd;
+
   const discountUsd = (isProMemberDiscountActive || discountPercentage > 0) 
-    ? Number(((subtotalUsd * (discountPercentage / 100))).toFixed(2))
+    ? Number(((subtotalPartsUsd * (discountPercentage / 100))).toFixed(2))
     : 0;
   const taxableSubtotalUsd = Math.max(0, subtotalUsd - discountUsd);
   const itbisUsd = Number((taxableSubtotalUsd * 0.18).toFixed(2)); // 18% ITBIS Dominican Republic
-  const shippingUsd = subtotalUsd > 0 ? (subtotalUsd >= 500 ? 0 : 25) : 0; // Free shipping over $500
+  const shippingUsd = subtotalPartsUsd > 0 ? (subtotalPartsUsd >= 500 ? 0 : 25) : 0; // Free shipping over $500 on parts
   const totalUsd = taxableSubtotalUsd + itbisUsd + shippingUsd;
   const activeExchangeRate = exchangeRateData.rate || USD_TO_DOP_RATE;
   const totalDop = totalUsd * activeExchangeRate;
@@ -380,6 +403,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         exchangeRateData,
         isSyncingRate,
         refreshExchangeRate,
+        setManualRate,
         formatPrice,
         addToCart,
         removeFromCart,
@@ -391,6 +415,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         totalCartCount,
         totalQuotesCount,
         subtotalUsd,
+        subtotalPartsUsd,
+        subtotalMachinesUsd,
         discountPercentage,
         discountUsd,
         appliedCoupon,

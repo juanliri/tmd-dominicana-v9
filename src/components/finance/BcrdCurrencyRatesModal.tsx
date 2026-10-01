@@ -52,7 +52,7 @@ interface BcrdCurrencyRatesModalProps {
 }
 
 export const BcrdCurrencyRatesModal: React.FC<BcrdCurrencyRatesModalProps> = ({ isOpen, onClose }) => {
-  const { currency, setCurrency, exchangeRate, exchangeRateData, refreshExchangeRate, isSyncingRate } = useCart();
+  const { currency, setCurrency, exchangeRate, exchangeRateData, refreshExchangeRate, setManualRate, isSyncingRate } = useCart();
   const [activeTab, setActiveTab] = useState<'bcrd' | 'banks' | 'simulator'>('bcrd');
   const [simUsdAmount, setSimUsdAmount] = useState<number>(128000);
   const [selectedBank, setSelectedBank] = useState<BankRate>(COMMERCIAL_BANKS[0]);
@@ -142,6 +142,32 @@ export const BcrdCurrencyRatesModal: React.FC<BcrdCurrencyRatesModalProps> = ({ 
           </div>
 
           <div className="flex items-center gap-2">
+            {/* Active Currency Switcher */}
+            <div className="flex items-center gap-0.5 bg-zinc-900 border border-zinc-700 p-0.5 rounded-[3px]">
+              <button
+                onClick={() => setCurrency('USD')}
+                className={`px-2 py-1 text-[10px] font-black uppercase rounded-[2px] transition-colors cursor-pointer ${
+                  currency === 'USD' 
+                    ? 'bg-amber-400 text-black shadow-xs' 
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+                title="Mostrar precios en Dólares Estadounidenses"
+              >
+                USD ($)
+              </button>
+              <button
+                onClick={() => setCurrency('DOP')}
+                className={`px-2 py-1 text-[10px] font-black uppercase rounded-[2px] transition-colors cursor-pointer ${
+                  currency === 'DOP' 
+                    ? 'bg-amber-400 text-black shadow-xs' 
+                    : 'text-zinc-400 hover:text-white'
+                }`}
+                title="Mostrar precios en Pesos Dominicanos"
+              >
+                RD$ (DOP)
+              </button>
+            </div>
+
             <button
               onClick={handleRefreshFeed}
               disabled={isRefreshing}
@@ -184,10 +210,10 @@ export const BcrdCurrencyRatesModal: React.FC<BcrdCurrencyRatesModalProps> = ({ 
         </div>
 
         {/* Tabs Bar */}
-        <div className="flex items-center gap-2 border-b border-zinc-800 pb-2 shrink-0">
+        <div className="flex items-center gap-2 border-b border-zinc-800 pb-2 shrink-0 overflow-x-auto no-scrollbar">
           <button
             onClick={() => setActiveTab('bcrd')}
-            className={`px-3 py-1.5 rounded-[2px] text-xs font-bold uppercase tracking-wider transition-all font-display cursor-pointer ${
+            className={`px-3 py-1.5 rounded-[2px] text-xs font-bold uppercase tracking-wider transition-all font-display cursor-pointer shrink-0 whitespace-nowrap ${
               activeTab === 'bcrd'
                 ? 'bg-amber-400 text-black shadow-sm font-black'
                 : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800'
@@ -197,7 +223,7 @@ export const BcrdCurrencyRatesModal: React.FC<BcrdCurrencyRatesModalProps> = ({ 
           </button>
           <button
             onClick={() => setActiveTab('banks')}
-            className={`px-3 py-1.5 rounded-[2px] text-xs font-bold uppercase tracking-wider transition-all font-display cursor-pointer ${
+            className={`px-3 py-1.5 rounded-[2px] text-xs font-bold uppercase tracking-wider transition-all font-display cursor-pointer shrink-0 whitespace-nowrap ${
               activeTab === 'banks'
                 ? 'bg-amber-400 text-black shadow-sm font-black'
                 : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800'
@@ -207,7 +233,7 @@ export const BcrdCurrencyRatesModal: React.FC<BcrdCurrencyRatesModalProps> = ({ 
           </button>
           <button
             onClick={() => setActiveTab('simulator')}
-            className={`px-3 py-1.5 rounded-[2px] text-xs font-bold uppercase tracking-wider transition-all font-display cursor-pointer ${
+            className={`px-3 py-1.5 rounded-[2px] text-xs font-bold uppercase tracking-wider transition-all font-display cursor-pointer shrink-0 whitespace-nowrap ${
               activeTab === 'simulator'
                 ? 'bg-amber-400 text-black shadow-sm font-black'
                 : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800'
@@ -255,6 +281,27 @@ export const BcrdCurrencyRatesModal: React.FC<BcrdCurrencyRatesModalProps> = ({ 
                   <div className="pt-2 border-t border-zinc-800/80 flex items-center justify-between text-xs text-zinc-400">
                     <span>Tasa de Referencia Ponderada:</span>
                     <span className="text-white font-bold font-mono">RD$ {officialBcrdRef.toFixed(2)}</span>
+                  </div>
+
+                  {/* Actions for Tab 1 */}
+                  <div className="pt-2 border-t border-zinc-800 flex flex-wrap gap-2">
+                    <button
+                      onClick={() => setManualRate(officialBcrdSell, 'BCRD Oficial (Venta)')}
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black font-black text-xs uppercase tracking-wider transition-all cursor-pointer shadow-xs active:scale-[0.98]"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5" />
+                      <span>Fijar Tasa Oficial BCRD (RD$ {officialBcrdSell.toFixed(2)})</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        setManualRate(officialBcrdSell, 'BCRD Oficial (Venta)');
+                        setCurrency(currency === 'DOP' ? 'USD' : 'DOP');
+                      }}
+                      className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 text-zinc-200 border border-zinc-700 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer"
+                    >
+                      <ArrowUpDown className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Activar Precios en {currency === 'DOP' ? 'USD ($)' : 'RD$ (DOP)'}</span>
+                    </button>
                   </div>
                 </div>
 
@@ -344,7 +391,52 @@ export const BcrdCurrencyRatesModal: React.FC<BcrdCurrencyRatesModalProps> = ({ 
                 <span className="text-amber-400 font-bold">ORDENADO POR SPREAD MENOR</span>
               </div>
 
-              <div className="border border-zinc-800 rounded-[3px] overflow-hidden bg-zinc-900">
+              {/* Mobile Bank Cards View (sm:hidden) */}
+              <div className="sm:hidden space-y-2.5">
+                {COMMERCIAL_BANKS.map((b, idx) => (
+                  <div key={idx} className="bg-zinc-950 p-3 rounded-[3px] border border-zinc-800 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 font-bold text-white text-xs">
+                        {b.preferred && <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" title="Tasa Preferencial" />}
+                        <span>{b.bank}</span>
+                      </div>
+                      <span className="text-[10px] text-zinc-400 font-mono">Spread: RD$ {b.spread.toFixed(2)}</span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                      <div className="bg-zinc-900/90 px-2.5 py-1.5 rounded-[2px] border border-zinc-800">
+                        <span className="text-[9px] text-zinc-500 uppercase block">Compra</span>
+                        <span className="text-zinc-200 font-bold">RD$ {b.buy.toFixed(2)}</span>
+                      </div>
+                      <div className="bg-zinc-900/90 px-2.5 py-1.5 rounded-[2px] border border-zinc-800">
+                        <span className="text-[9px] text-zinc-500 uppercase block">Venta</span>
+                        <span className="text-amber-400 font-black">RD$ {b.sell.toFixed(2)}</span>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 pt-0.5">
+                      <button
+                        onClick={() => setManualRate(b.sell, b.bank)}
+                        className="py-1.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black text-xs font-black uppercase tracking-wider transition-colors cursor-pointer text-center"
+                      >
+                        Aplicar Tasa
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSelectedBank(b);
+                          setActiveTab('simulator');
+                        }}
+                        className="py-1.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer text-center"
+                      >
+                        Simular
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Desktop / Tablet Table View (hidden sm:block) */}
+              <div className="hidden sm:block border border-zinc-800 rounded-[3px] overflow-x-auto bg-zinc-900">
                 <table className="w-full text-left text-xs border-collapse font-mono">
                   <thead>
                     <tr className="bg-zinc-950 border-b border-zinc-800 text-[10px] text-zinc-400 uppercase">
@@ -374,15 +466,24 @@ export const BcrdCurrencyRatesModal: React.FC<BcrdCurrencyRatesModalProps> = ({ 
                           RD$ {b.spread.toFixed(2)}
                         </td>
                         <td className="p-3 text-center">
-                          <button
-                            onClick={() => {
-                              setSelectedBank(b);
-                              setActiveTab('simulator');
-                            }}
-                            className="px-2.5 py-1 rounded-[2px] bg-zinc-800 hover:bg-amber-400 hover:text-black text-zinc-300 text-[10px] font-bold uppercase transition-colors cursor-pointer"
-                          >
-                            Simular
-                          </button>
+                          <div className="flex items-center justify-center gap-1.5">
+                            <button
+                              onClick={() => setManualRate(b.sell, b.bank)}
+                              title={`Fijar tasa de venta RD$ ${b.sell.toFixed(2)} de ${b.bank}`}
+                              className="px-2 py-1 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black text-[10px] font-black uppercase transition-colors cursor-pointer whitespace-nowrap shadow-2xs"
+                            >
+                              Aplicar
+                            </button>
+                            <button
+                              onClick={() => {
+                                setSelectedBank(b);
+                                setActiveTab('simulator');
+                              }}
+                              className="px-2 py-1 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[10px] font-bold uppercase transition-colors cursor-pointer whitespace-nowrap"
+                            >
+                              Simular
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -464,6 +565,27 @@ export const BcrdCurrencyRatesModal: React.FC<BcrdCurrencyRatesModalProps> = ({ 
                     </span>
                     <span className="text-[9px] text-zinc-500">Spread total en operación</span>
                   </div>
+                </div>
+
+                {/* Tab 3 Actions */}
+                <div className="pt-3 border-t border-zinc-800 flex flex-wrap items-center gap-2">
+                  <button
+                    onClick={() => setManualRate(selectedBank.sell, selectedBank.bank)}
+                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black font-black text-xs uppercase tracking-wider transition-all cursor-pointer shadow-xs active:scale-[0.98]"
+                  >
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <span>Aplicar Tasa {selectedBank.bank.split(' ')[0]} (RD$ {selectedBank.sell.toFixed(2)}) a la Tienda</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setManualRate(selectedBank.sell, selectedBank.bank);
+                      setCurrency('DOP');
+                    }}
+                    className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 text-emerald-400 border border-emerald-500/30 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer"
+                  >
+                    <DollarSign className="w-3.5 h-3.5" />
+                    <span>Cambiar Tienda a RD$ con esta Tasa</span>
+                  </button>
                 </div>
 
               </div>

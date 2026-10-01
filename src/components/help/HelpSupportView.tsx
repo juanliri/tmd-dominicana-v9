@@ -201,7 +201,7 @@ export const HelpSupportView: React.FC<HelpSupportViewProps> = ({ onNavigate }) 
       </section>
 
       {/* 2. SUB-NAVIGATION TABS */}
-      <div className="sticky top-14 sm:top-16 z-30 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800 shadow-xs">
+      <div className="relative z-20 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800 shadow-xs">
         <div className="w-full max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
           <div className="flex items-center gap-1.5 overflow-x-auto py-2.5 scrollbar-none">
             {[

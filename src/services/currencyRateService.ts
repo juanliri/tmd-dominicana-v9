@@ -4,14 +4,14 @@
  * local fallback caching with TTL, and reactive broadcast updates.
  */
 
-export const BASELINE_USD_TO_DOP_RATE = 58.50;
+export const BASELINE_USD_TO_DOP_RATE = 60.50;
 const STORAGE_KEY = 'tmd_dop_exchange_rate_data';
 const CACHE_TTL_MS = 15 * 60 * 1000; // 15 minutes TTL for fresh rates
 
 export interface ExchangeRateData {
   rate: number;
   lastUpdated: string;
-  source: 'BCRD Live Feed' | 'Open Exchange' | 'Cached Sync' | 'Official TMD Baseline';
+  source: 'BCRD Live Feed' | 'Open Exchange' | 'Cached Sync' | 'Official TMD Baseline' | string;
   isLive: boolean;
   bcrdReference?: number;
 }
@@ -159,5 +159,27 @@ export async function syncLiveExchangeRate(forceRefresh: boolean = false): Promi
     isLive: currentRateData.isLive
   };
   notifyListeners();
+  return currentRateData;
+}
+
+/**
+ * Manually set the exchange rate (e.g. from bank selection or manual override)
+ */
+export function setManualExchangeRate(rate: number, source: string = 'Ajuste Manual'): ExchangeRateData {
+  if (typeof rate === 'number' && !isNaN(rate) && rate >= 40 && rate <= 100) {
+    currentRateData = {
+      rate: Number(rate.toFixed(2)),
+      lastUpdated: new Date().toISOString(),
+      source,
+      isLive: true,
+      bcrdReference: rate
+    };
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(currentRateData));
+    } catch {
+      // ignore
+    }
+    notifyListeners();
+  }
   return currentRateData;
 }

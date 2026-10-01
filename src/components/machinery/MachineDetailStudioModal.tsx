@@ -283,10 +283,10 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
     setIsExportingBankPdf(true);
     try {
       await new Promise(r => setTimeout(r, 120));
-      const chosenAttachments = selectedAttachmentIds.map(id => {
-        const item = AVAILABLE_OEM_ATTACHMENTS.find(a => a.id === id)!;
-        return { name: item.name, priceUsd: item.priceUsd };
-      });
+      const chosenAttachments = selectedAttachmentIds
+        .map(id => AVAILABLE_OEM_ATTACHMENTS.find(a => a.id === id))
+        .filter((item): item is NonNullable<typeof item> => Boolean(item))
+        .map(item => ({ name: item.name, priceUsd: item.priceUsd }));
 
       const pdf = generateSingleMachineSpecPdf({
         machine,
@@ -334,18 +334,28 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   };
 
   return createPortal(
-    <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="relative w-full max-w-[1680px] h-full max-h-[96vh] bg-zinc-950/95 backdrop-blur-2xl rounded-[6px] shadow-2xl border border-white/[0.08] overflow-hidden flex flex-col font-sans">
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-[1440px] h-full max-h-[96vh] bg-zinc-950/98 backdrop-blur-2xl rounded-[6px] shadow-2xl border border-white/[0.08] overflow-hidden flex flex-col font-sans">
         {/* CAD Corner Accents */}
         <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-amber-400/50 pointer-events-none z-50" />
         <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-amber-400/50 pointer-events-none z-50" />
         <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-amber-400/50 pointer-events-none z-50" />
         <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-amber-400/50 pointer-events-none z-50" />
         
+        {/* Pinned Standalone Close Button — Always visible and accessible on mobile, tablet, and desktop */}
+        <button
+          onClick={onClose}
+          className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 z-50 p-2 rounded-full bg-zinc-950/90 text-zinc-300 hover:text-white hover:bg-zinc-800 transition-all cursor-pointer shadow-xl border border-zinc-700/80 active:scale-95"
+          aria-label="Cerrar Ficha Técnica"
+          title="Cerrar Ficha"
+        >
+          <X className="w-4 h-4 sm:w-5 sm:h-5" />
+        </button>
+
         {/* ============================================================ */}
         {/* TOP HERO MEDIA BAR                                          */}
         {/* ============================================================ */}
-        <div className="relative h-64 sm:h-72 lg:h-80 bg-zinc-950 shrink-0 overflow-hidden">
+        <div className="relative h-44 sm:h-52 lg:h-60 bg-zinc-950 shrink-0 overflow-hidden">
           <img
             src={machine.image}
             alt={machine.name}
@@ -359,229 +369,228 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/50 to-transparent" />
           
-          {/* Top Control Buttons */}
-          <div className="absolute top-4 right-4 flex items-center gap-2">
-            {/* Cinematic Inspection Zoom Lens Button (Task #12) */}
-            <button
-              type="button"
-              onClick={() => setIsZoomOpen(true)}
-              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
-              title="Abrir lente cinematográfica de inspección de zapatas, cabina y motor"
-            >
-              <Crosshair className="w-3.5 h-3.5" />
-              <span>Zoom Inspección</span>
-            </button>
+          {/* Top Actions Bar (Inside Hero, right-padded so it never collides with close button) */}
+          <div className="absolute top-2.5 left-3 sm:left-4 right-14 sm:right-16 flex items-center justify-between gap-2 z-30">
+            <div className="flex items-center gap-1.5 flex-wrap">
+              <span className="px-2 py-0.5 rounded-[2px] bg-amber-400 text-black text-[10px] font-black uppercase tracking-wider shadow-xs">
+                {machine.brand}
+              </span>
+              <span className="px-2 py-0.5 rounded-[2px] bg-zinc-900/90 text-zinc-200 text-[10px] font-bold uppercase border border-zinc-800 backdrop-blur-md">
+                Mod. {machine.modelCode}
+              </span>
+            </div>
 
-            {/* Public Tenders Dossier Exporter (Task #74) */}
-            <button
-              type="button"
-              onClick={() => setIsDossierOpen(true)}
-              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
-              title="Generar Dossier Técnico consolidado para Licitaciones Públicas del Estado Dominicano"
-            >
-              <FileStack className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Dossier Licitación</span>
-            </button>
+            {/* Primary Action Buttons */}
+            <div className="flex items-center gap-1.5">
+              {machinePdfInfo?.brochurePdfUrl && (
+                <a
+                  href={machinePdfInfo.brochurePdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download={machinePdfInfo.brochureFileName}
+                  className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/50 text-[10px] sm:text-xs font-bold uppercase transition-all flex items-center gap-1 shadow-md cursor-pointer backdrop-blur-md"
+                  title="Descargar Catálogo Oficial del Fabricante en PDF de alta resolución"
+                >
+                  <BookOpen className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">Catálogo Fábrica</span>
+                </a>
+              )}
 
-            {/* Ground Bearing Pressure Simulator Button (Task #4) */}
-            <button
-              type="button"
-              onClick={() => setIsGroundPressureOpen(true)}
-              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
-              title="Calcular presión sobre el suelo (kg/cm² y PSI) y transitabilidad según ancho de zapatas"
-            >
-              <Gauge className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Presión Suelo</span>
-            </button>
-
-            {/* Social Flyer & Story Generator (Sprint 9 Task #17) */}
-            <button
-              type="button"
-              onClick={() => setIsSocialFlyerOpen(true)}
-              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
-              title="Generar Flyer publicitario descargable en HD (1080x1920) para WhatsApp y Redes Sociales"
-            >
-              <Share2 className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Flyer Social</span>
-            </button>
-
-            {/* Task #72: 5-Year Total Cost of Ownership (TCO) Calculator Trigger */}
-            <button
-              type="button"
-              onClick={() => setIsTcoModalOpen(true)}
-              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-emerald-500 hover:text-black text-emerald-400 border border-emerald-500/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
-              title="Calcular TCO a 5 Años: Ahorro de Diésel, Mantenimiento y Valor Residual vs. Competidores"
-            >
-              <TrendingDown className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">TCO 5 Años</span>
-            </button>
-
-            {/* Task #88: Official Pre-Delivery Inspection (PDI) 85-Point Audit Trigger */}
-            <button
-              type="button"
-              onClick={() => setIsPdiModalOpen(true)}
-              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
-              title="Protocolo Oficial de Inspección Pre-Entrega de 85 Puntos"
-            >
-              <ClipboardCheck className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Auditoría PDI</span>
-            </button>
-
-            {/* Task #78: Short WhatsApp Quote Link Trigger */}
-            <button
-              type="button"
-              onClick={() => setIsShortLinkOpen(true)}
-              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-emerald-500 hover:text-black text-emerald-400 border border-emerald-500/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
-              title="Generar enlace corto (tmd.com.do/q/...) para compartir cotización ejecutiva por WhatsApp"
-            >
-              <Link className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Enlace WA</span>
-            </button>
-
-            {/* Task #94: Cabin QR Digital Operator Manual Trigger */}
-            <button
-              type="button"
-              onClick={() => setIsCabinManualOpen(true)}
-              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
-              title="Manual Digital de Operación & Mantenimiento QR para Cabina"
-            >
-              <BookOpen className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Manual Cabina</span>
-            </button>
-
-            {onOpen360 && (
               <button
                 type="button"
-                onClick={() => onOpen360(machine)}
-                className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
+                onClick={handleDownloadBankProformaPdf}
+                disabled={isExportingBankPdf}
+                className="px-2.5 py-1 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black border border-amber-400 text-[10px] sm:text-xs font-black uppercase transition-all flex items-center gap-1 shadow-md cursor-pointer backdrop-blur-md disabled:opacity-50"
+                title="Descargar Ficha Técnica Homologada para Banco (Popular, BHD, Bagrícola) en PDF"
               >
-                <RotateCw className="w-3.5 h-3.5" />
-                <span>360° / Video</span>
+                <Download className={`w-3.5 h-3.5 ${isExportingBankPdf ? 'animate-bounce' : ''}`} />
+                <span>{isExportingBankPdf ? 'Generando...' : 'Ficha PDF Banco'}</span>
               </button>
-            )}
-
-            {/* Printable PDF Label Sheet Button (Mass Inventory Labeling) */}
-            <button
-              type="button"
-              onClick={() => setIsLabelPdfModalOpen(true)}
-              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
-              title="Generar pliego PDF imprimible con código interno y código QR para etiquetado masivo de almacén"
-            >
-              <Printer className="w-3.5 h-3.5" />
-              <span>Rótulos</span>
-            </button>
-
-            {/* Direct Official Factory Brochure PDF Download */}
-            {machinePdfInfo?.brochurePdfUrl && (
-              <a
-                href={machinePdfInfo.brochurePdfUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                download={machinePdfInfo.brochureFileName}
-                className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/50 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
-                title="Descargar Catálogo Oficial del Fabricante en PDF de alta resolución"
-              >
-                <BookOpen className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Catálogo Fábrica</span>
-              </a>
-            )}
-
-            {/* Direct Official Bank Spec Sheet / Proforma PDF Download */}
-            <button
-              type="button"
-              onClick={handleDownloadBankProformaPdf}
-              disabled={isExportingBankPdf}
-              className="px-2.5 py-1 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black border border-amber-400 text-xs font-black uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md disabled:opacity-50"
-              title="Descargar Ficha Técnica Homologada para Banco (Popular, BHD, Bagrícola) en PDF"
-            >
-              <Download className={`w-3.5 h-3.5 ${isExportingBankPdf ? 'animate-bounce' : ''}`} />
-              <span>{isExportingBankPdf ? 'Generando PDF...' : 'Ficha PDF Banco'}</span>
-            </button>
-
-            {/* Quick Export QR Code Button for Physical Warehouse Labeling */}
-            <button
-              type="button"
-              onClick={async () => {
-                setIsExportingQr(true);
-                try {
-                  await downloadProductQrCode(machine, 'machinery');
-                } catch (err) {
-                  console.error('Error exporting QR:', err);
-                } finally {
-                  setIsExportingQr(false);
-                }
-              }}
-              disabled={isExportingQr}
-              className="px-2.5 py-1 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-xs font-bold uppercase transition-all flex items-center gap-1.5 shadow-md cursor-pointer backdrop-blur-md"
-              title="Descargar Rótulo QR individual para etiquetado físico en patio o almacén"
-            >
-              <Download className={`w-3.5 h-3.5 ${isExportingQr ? 'animate-bounce' : ''}`} />
-              <span className="hidden sm:inline">Exportar QR</span>
-            </button>
-
-            {onOpenQr && (
-              <button
-                type="button"
-                onClick={() => onOpenQr(machine)}
-                className="p-1.5 rounded-[2px] bg-zinc-950/90 hover:bg-amber-400 hover:text-black text-zinc-300 border border-zinc-800 transition-all cursor-pointer shadow-md backdrop-blur-md"
-                title="Generar QR de Patio"
-              >
-                <QrCode className="w-4 h-4" />
-              </button>
-            )}
-
-            <button
-              onClick={onClose}
-              className="p-1.5 rounded-[2px] bg-zinc-950/90 text-zinc-400 hover:text-white hover:bg-zinc-800 transition-all cursor-pointer shadow-md backdrop-blur-md border border-zinc-800"
-              aria-label="Cerrar Ficha Técnica"
-            >
-              <X className="w-4 h-4" />
-            </button>
+            </div>
           </div>
 
           {/* Bottom Title & Badges */}
-          <div className="absolute bottom-4 left-5 right-5 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-            <div>
-              <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-                <span className="px-2 py-0.5 rounded-[2px] bg-amber-400 text-black text-[10px] font-bold uppercase tracking-wider shadow-xs">
-                  {machine.brand}
-                </span>
+          <div className="absolute bottom-2.5 sm:bottom-3 left-3 sm:left-4 right-3 sm:right-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2 z-20">
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 mb-1 flex-wrap">
                 <span className="px-2 py-0.5 rounded-[2px] bg-zinc-900/90 text-zinc-200 text-[10px] font-bold uppercase border border-zinc-800 backdrop-blur-md">
-                  {machine.category} • Mod. {machine.modelCode}
+                  {machine.category}
                 </span>
                 <AvailabilityBadge
                   status={machine.inStock ? 'immediate' : (machine.year >= 2025 ? 'transit' : 'factory_order')}
                   variant="pill"
                 />
-                {/* Recently Verified Status Indicator */}
                 <RecentlyVerifiedBadge
                   itemId={machine.id}
                   itemCode={machine.modelCode}
                   itemType="machinery"
                   variant="pill"
                 />
-                {/* Last Scanned Status Badge */}
-                <LastScannedBadge
-                  itemId={machine.id}
-                  itemCode={machine.modelCode}
-                  itemType="machinery"
-                  compact={true}
-                  showEmptyState={false}
-                />
               </div>
-              <h2 className="text-lg sm:text-xl font-bold text-white uppercase tracking-tight">
+              <h2 className="text-sm sm:text-lg font-bold text-white uppercase tracking-tight truncate">
                 {machine.name}
               </h2>
             </div>
 
             {/* Quick Price Indicator */}
-            <div className="text-left sm:text-right bg-zinc-950/90 p-2.5 px-3.5 rounded-[2px] border border-zinc-800 backdrop-blur-md">
-              <span className="text-[10px] text-zinc-400 block uppercase font-bold">Inversión Base Estimada:</span>
-              <span className="text-base sm:text-lg font-bold text-amber-400 font-mono">
+            <div className="text-left sm:text-right bg-zinc-950/90 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-[2px] border border-zinc-800 backdrop-blur-md shrink-0">
+              <span className="text-[9px] text-zinc-400 block uppercase font-bold">Inversión Base Estimada:</span>
+              <span className="text-sm sm:text-base font-bold text-amber-400 font-mono">
                 {formatMoney(machine.basePriceUsd)}
               </span>
             </div>
           </div>
+        </div>
+
+        {/* ============================================================ */}
+        {/* HORIZONTALLY SCROLLABLE SPECIALIZED ENGINEERING TOOLS RIBBON */}
+        {/* ============================================================ */}
+        <div className="bg-zinc-900/90 border-b border-zinc-800 px-3 py-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0 text-xs z-20">
+          <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500 shrink-0 mr-1 hidden sm:inline">
+            HERRAMIENTAS:
+          </span>
+
+          {/* Cinematic Inspection Zoom Lens Button */}
+          <button
+            type="button"
+            onClick={() => setIsZoomOpen(true)}
+            className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+            title="Abrir lente cinematográfica de inspección de zapatas, cabina y motor"
+          >
+            <Crosshair className="w-3 h-3" />
+            <span>Zoom Inspección</span>
+          </button>
+
+          {/* Public Tenders Dossier Exporter */}
+          <button
+            type="button"
+            onClick={() => setIsDossierOpen(true)}
+            className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+            title="Generar Dossier Técnico consolidado para Licitaciones Públicas del Estado Dominicano"
+          >
+            <FileStack className="w-3 h-3" />
+            <span>Dossier Licitación</span>
+          </button>
+
+          {/* Ground Bearing Pressure Simulator Button */}
+          <button
+            type="button"
+            onClick={() => setIsGroundPressureOpen(true)}
+            className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+            title="Calcular presión sobre el suelo (kg/cm² y PSI) y transitabilidad según ancho de zapatas"
+          >
+            <Gauge className="w-3 h-3" />
+            <span>Presión Suelo</span>
+          </button>
+
+          {/* Social Flyer & Story Generator */}
+          <button
+            type="button"
+            onClick={() => setIsSocialFlyerOpen(true)}
+            className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+            title="Generar Flyer publicitario descargable en HD (1080x1920) para WhatsApp y Redes Sociales"
+          >
+            <Share2 className="w-3 h-3" />
+            <span>Flyer Social</span>
+          </button>
+
+          {/* 5-Year Total Cost of Ownership (TCO) Calculator Trigger */}
+          <button
+            type="button"
+            onClick={() => setIsTcoModalOpen(true)}
+            className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-emerald-500 hover:text-black text-emerald-400 border border-emerald-500/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+            title="Calcular TCO a 5 Años: Ahorro de Diésel, Mantenimiento y Valor Residual"
+          >
+            <TrendingDown className="w-3 h-3" />
+            <span>TCO 5 Años</span>
+          </button>
+
+          {/* Official Pre-Delivery Inspection (PDI) 85-Point Audit Trigger */}
+          <button
+            type="button"
+            onClick={() => setIsPdiModalOpen(true)}
+            className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+            title="Protocolo Oficial de Inspección Pre-Entrega de 85 Puntos"
+          >
+            <ClipboardCheck className="w-3 h-3" />
+            <span>Auditoría PDI</span>
+          </button>
+
+          {/* Short WhatsApp Quote Link Trigger */}
+          <button
+            type="button"
+            onClick={() => setIsShortLinkOpen(true)}
+            className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-emerald-500 hover:text-black text-emerald-400 border border-emerald-500/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+            title="Generar enlace corto para compartir cotización por WhatsApp"
+          >
+            <Link className="w-3 h-3" />
+            <span>Enlace WA</span>
+          </button>
+
+          {/* Cabin QR Digital Operator Manual Trigger */}
+          <button
+            type="button"
+            onClick={() => setIsCabinManualOpen(true)}
+            className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+            title="Manual Digital de Operación & Mantenimiento QR para Cabina"
+          >
+            <BookOpen className="w-3 h-3" />
+            <span>Manual Cabina</span>
+          </button>
+
+          {onOpen360 && (
+            <button
+              type="button"
+              onClick={() => onOpen360(machine)}
+              className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+            >
+              <RotateCw className="w-3 h-3" />
+              <span>360° / Video</span>
+            </button>
+          )}
+
+          {/* Printable PDF Label Sheet Button (Mass Inventory Labeling) */}
+          <button
+            type="button"
+            onClick={() => setIsLabelPdfModalOpen(true)}
+            className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+            title="Generar pliego PDF imprimible para etiquetado masivo"
+          >
+            <Printer className="w-3 h-3" />
+            <span>Rótulos</span>
+          </button>
+
+          {/* Quick Export QR Code Button */}
+          <button
+            type="button"
+            onClick={async () => {
+              setIsExportingQr(true);
+              try {
+                await downloadProductQrCode(machine, 'machinery');
+              } catch (err) {
+                console.error('Error exporting QR:', err);
+              } finally {
+                setIsExportingQr(false);
+              }
+            }}
+            disabled={isExportingQr}
+            className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+            title="Descargar Rótulo QR individual"
+          >
+            <Download className={`w-3 h-3 ${isExportingQr ? 'animate-bounce' : ''}`} />
+            <span>Exportar QR</span>
+          </button>
+
+          {onOpenQr && (
+            <button
+              type="button"
+              onClick={() => onOpenQr(machine)}
+              className="p-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-zinc-300 border border-zinc-800 transition-all cursor-pointer shrink-0"
+              title="Generar QR de Patio"
+            >
+              <QrCode className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
 
         {/* ============================================================ */}
@@ -1400,11 +1409,11 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
             </div>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+          <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 w-full sm:w-auto">
             <button
               type="button"
               onClick={onClose}
-              className="px-3 py-1.5 rounded-[2px] border border-zinc-800 bg-zinc-900 text-zinc-300 text-xs font-bold uppercase hover:bg-zinc-800 transition-colors cursor-pointer"
+              className="px-3 py-2 sm:py-1.5 rounded-[2px] border border-zinc-800 bg-zinc-900 text-zinc-300 text-xs font-bold uppercase hover:bg-zinc-800 transition-colors cursor-pointer text-center"
             >
               Cerrar
             </button>
@@ -1412,7 +1421,7 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
               href={whatsappQuoteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3.5 py-1.5 rounded-[2px] bg-emerald-500 hover:bg-emerald-400 text-black font-black uppercase text-xs transition-all flex items-center gap-1.5 shadow-xs cursor-pointer"
+              className="px-3.5 py-2 sm:py-1.5 rounded-[2px] bg-emerald-500 hover:bg-emerald-400 text-black font-black uppercase text-xs transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer text-center"
               title="Cotizar de inmediato por WhatsApp con un asesor técnico de TMD"
             >
               <Phone className="w-3.5 h-3.5" />
@@ -1422,7 +1431,7 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
               type="button"
               onClick={handleDownloadBankProformaPdf}
               disabled={isExportingBankPdf}
-              className="px-3.5 py-1.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-amber-400 border border-amber-400/40 font-bold uppercase text-xs transition-all flex items-center gap-1.5 shadow-xs cursor-pointer disabled:opacity-50"
+              className="px-3.5 py-2 sm:py-1.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-amber-400 border border-amber-400/40 font-bold uppercase text-xs transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer disabled:opacity-50 text-center"
               title="Descargar Ficha Técnica Homologada para Banco (PDF) con corrida financiera"
             >
               <Download className={`w-3.5 h-3.5 ${isExportingBankPdf ? 'animate-bounce' : ''}`} />
@@ -1431,17 +1440,17 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
             <button
               type="button"
               onClick={() => setIsSalesInquiryModalOpen(true)}
-              className="px-3.5 py-1.5 rounded-[2px] bg-blue-600 hover:bg-blue-500 text-white font-black uppercase text-xs transition-all flex items-center gap-1.5 shadow-xs cursor-pointer"
+              className="px-3.5 py-2 sm:py-1.5 rounded-[2px] bg-blue-600 hover:bg-blue-500 text-white font-black uppercase text-xs transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer text-center"
               title="Solicitar Proforma Oficial para Banco o Compra Directa"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span>Solicitar Proforma Banco</span>
+              <span>Proforma Banco</span>
             </button>
             <button
               id="machinery-studio-request-quote-btn"
               type="button"
               onClick={handleAddToQuoteWithCustomizations}
-              className="px-4 py-1.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black font-bold uppercase text-xs transition-all flex items-center gap-1.5 shadow-xs cursor-pointer"
+              className="col-span-2 sm:col-span-1 px-4 py-2 sm:py-1.5 rounded-[2px] bg-amber-400 hover:bg-amber-300 text-black font-black uppercase text-xs transition-all flex items-center justify-center gap-1.5 shadow-xs cursor-pointer text-center"
             >
               <FileText className="w-3.5 h-3.5" />
               <span>Agregar a Presupuesto</span>

@@ -42,6 +42,7 @@ import { trackBioLinkClick } from '../utils/bioAnalytics';
 import { TMDLogo } from './common/BrandLogos';
 import { BioGoldParticleCanvas } from './effects/BioGoldParticleCanvas';
 import cinematicBgImg from '../assets/images/tmd_dealership_bg_1790439101712.jpg';
+import { generateQrDataUrl } from '../utils/qrExporter';
 
 interface BioLinkViewProps {
   onNavigate: (route: string) => void;
@@ -184,6 +185,13 @@ export const BioLinkView: React.FC<BioLinkViewProps> = ({ onNavigate, onOpenQrSc
 
   // Top Scroll Progress Bar
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [mobileQrUrl, setMobileQrUrl] = useState<string>('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      generateQrDataUrl(window.location.href, 180).then(setMobileQrUrl).catch(() => {});
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -779,12 +787,16 @@ END:VCARD`;
       {/* ========================================================================= */}
       <div className="hidden lg:flex fixed bottom-6 right-6 z-50 flex-col items-center bg-[#0c0c10] p-3 rounded-[16px] border border-amber-500/40 shadow-2xl">
         <span className="text-[10px] font-bold text-zinc-200 mb-1.5 font-mono">View on mobile</span>
-        <div className="p-1.5 bg-white rounded-[8px] shadow-md">
-          <img 
-            src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(window.location.href)}`} 
-            alt="QR Code" 
-            className="w-18 h-18"
-          />
+        <div className="p-1.5 bg-white rounded-[8px] shadow-md flex items-center justify-center min-w-[72px] min-h-[72px]">
+          {mobileQrUrl ? (
+            <img 
+              src={mobileQrUrl} 
+              alt="QR Code" 
+              className="w-18 h-18 object-contain"
+            />
+          ) : (
+            <div className="w-18 h-18 bg-zinc-200 animate-pulse rounded" />
+          )}
         </div>
       </div>
 

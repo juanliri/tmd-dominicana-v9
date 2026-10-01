@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { 
   X, 
@@ -22,6 +22,7 @@ import autoTable from 'jspdf-autotable';
 import { Machine } from '../../types';
 import { drawTmdOfficialLogoPdf } from '../../utils/pdfGenerator';
 import { triggerHaptic } from '../../utils/haptics';
+import { generateQrDataUrl } from '../../utils/qrExporter';
 
 interface GatePassModalProps {
   machine: Machine | null;
@@ -63,9 +64,18 @@ export const GatePassModal: React.FC<GatePassModalProps> = ({
   const issueTime = new Date().toLocaleTimeString('es-DO', { hour: '2-digit', minute: '2-digit' });
   const expirationTime = new Date(Date.now() + 6 * 3600 * 1000).toLocaleTimeString('es-DO', { hour: '2-digit', minute: '2-digit' });
 
-  const qrDataUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(
-    `TMD-GATE-PASS|FOLIO:${passFolio}|MACHINE:${machine.brand}-${machine.modelCode}|DRIVER:${driverCedula}|TRUCK:${truckPlate}|EXPIRES:6H|STATUS:VALIDATED`
-  )}`;
+  const [qrDataUrl, setQrDataUrl] = useState<string>('');
+
+  const qrPayload = useMemo(() => {
+    if (!machine) return '';
+    return `TMD-GATE-PASS|FOLIO:${passFolio}|MACHINE:${machine.brand}-${machine.modelCode}|DRIVER:${driverCedula}|TRUCK:${truckPlate}|EXPIRES:6H|STATUS:VALIDATED`;
+  }, [machine, passFolio, driverCedula, truckPlate]);
+
+  useEffect(() => {
+    if (qrPayload) {
+      generateQrDataUrl(qrPayload, 200).then(setQrDataUrl).catch(() => {});
+    }
+  }, [qrPayload]);
 
   const handleExportPdf = async () => {
     triggerHaptic('heavyShud');

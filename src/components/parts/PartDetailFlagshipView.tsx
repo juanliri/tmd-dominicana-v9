@@ -153,7 +153,7 @@ export const PartDetailFlagshipView: React.FC<PartDetailFlagshipViewProps> = ({
     <div className="w-full min-h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-white transition-colors duration-300 pb-20 font-sans">
       
       {/* 1. TOP EXECUTIVE BREADCRUMB & BACK NAVIGATION */}
-      <div className="border-b border-slate-200 dark:border-white/[0.08] bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl sticky top-14 sm:top-16 z-30">
+      <div className="border-b border-slate-200 dark:border-white/[0.08] bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl relative z-20">
         <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 py-3 flex flex-wrap items-center justify-between gap-3">
           
           <div className="flex items-center gap-3">

@@ -21,6 +21,8 @@ import { Machine } from '../types';
 import { USD_TO_DOP_RATE } from '../data/catalog';
 import { useCart } from '../context/CartContext';
 import { IndustrialPageFlipReaderModal } from './effects/IndustrialPageFlipReaderModal';
+import { getMachinePdfUrls } from '../data/machinePdfsData';
+import { generateSingleMachineSpecPdf } from '../services/catalogPdfExport';
 
 interface PriceEstimateModalProps {
   machine: Machine | null;
@@ -564,9 +566,22 @@ export const PriceEstimateModal: React.FC<PriceEstimateModalProps> = ({
             machine={machine}
             onClose={() => setShow3dBooklet(false)}
             onDownloadPdf={() => {
-              // Direct WhatsApp or download action
-              const msg = encodeURIComponent(`Hola TMD Dominicana, solicito la Ficha Técnica Oficial en PDF del equipo ${machine.name} (Mod. ${machine.modelCode}).`);
-              window.open(`https://wa.me/18095601234?text=${msg}`, '_blank');
+              const pdfInfo = getMachinePdfUrls(machine.id);
+              if (pdfInfo?.fichaPdfUrl) {
+                const link = document.createElement('a');
+                link.href = pdfInfo.fichaPdfUrl;
+                link.download = pdfInfo.fichaFileName || `Ficha_Tecnica_${machine.brand}_${machine.name}.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              } else {
+                try {
+                  const doc = generateSingleMachineSpecPdf({ machine });
+                  doc.save(`Ficha_Tecnica_${machine.brand}_${machine.name.replace(/\s+/g, '_')}_TMD.pdf`);
+                } catch (e) {
+                  console.error('Error generating PDF:', e);
+                }
+              }
             }}
           />
         )}

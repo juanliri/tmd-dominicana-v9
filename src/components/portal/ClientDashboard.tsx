@@ -416,7 +416,7 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
       <IndustrialSectionDivider badge="ESPACIO DE GESTIÓN DE CLIENTE" />
 
       {/* CLIENT STICKY TABS NAVIGATION (COMPACT PILL DOCK) */}
-      <div className="sticky top-16 z-30 bg-zinc-900/95 backdrop-blur-md py-1.5 px-2 rounded-[5px] border border-zinc-800 shadow-md flex items-center gap-1.5 overflow-x-auto scrollbar-none transition-all">
+      <div className="relative z-20 bg-zinc-900/95 backdrop-blur-md py-1.5 px-2 rounded-[5px] border border-zinc-800 shadow-md flex items-center gap-1.5 overflow-x-auto scrollbar-none transition-all">
         <button
           type="button"
           onClick={() => handleTabSelect('quotes')}

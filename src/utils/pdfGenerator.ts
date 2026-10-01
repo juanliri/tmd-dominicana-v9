@@ -494,7 +494,7 @@ export const downloadOrderInvoicePDF = (order: CustomerPurchaseOrder, filename?:
   // Items table
   const rows = order.items.map((item, idx) => [
     String(idx + 1).padStart(2, '0'),
-    `${item.name}\nCódigo OEM: ${item.partNumber || 'GENUINE-TMD'} | Marca: ${item.brand}`,
+    `${item.name}\n${(item as any).type === 'machine' ? 'Modelo / Código' : 'Código OEM'}: ${item.partNumber || 'GENUINE-TMD'} | Marca: ${item.brand}${(item as any).notes ? ` | ${(item as any).notes}` : ''}`,
     item.quantity,
     `US$ ${item.priceUsd.toFixed(2)}`,
     `US$ ${(item.priceUsd * item.quantity).toFixed(2)}`
@@ -502,7 +502,7 @@ export const downloadOrderInvoicePDF = (order: CustomerPurchaseOrder, filename?:
 
   autoTable(doc, {
     startY: currentY,
-    head: [['#', 'DESCRIPCIÓN DEL REPUESTO / PIEZA OEM', 'CANT', 'P. UNIT (USD)', 'TOTAL (USD)']],
+    head: [['#', 'DESCRIPCIÓN DEL ARTÍCULO / EQUIPO / REPUESTO', 'CANT', 'P. UNIT (USD)', 'TOTAL (USD)']],
     body: rows,
     theme: 'grid',
     headStyles: {

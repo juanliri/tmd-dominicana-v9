@@ -36,7 +36,8 @@ import {
   Pin,
   PinOff,
   Landmark,
-  QrCode
+  QrCode,
+  DollarSign
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useTheme } from '../context/ThemeContext';
@@ -909,6 +910,41 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="hidden xl:inline text-xs font-black uppercase tracking-wider text-slate-500 dark:text-zinc-400 group-hover:text-slate-900 dark:group-hover:text-white">QR SCAN</span>
             </button>
           )}
+
+          {/* Mobile Quick Currency Selector & BCRD Rate */}
+          <div className="flex sm:hidden items-center gap-1 font-mono">
+            <div className="flex items-center gap-0.5 bg-slate-100 dark:bg-zinc-900 rounded-[3px] p-0.5 border border-slate-200 dark:border-white/[0.08]">
+              <button
+                onClick={() => setCurrency('USD')}
+                className={`px-1.5 py-0.5 rounded-[2px] text-[10px] font-black uppercase transition-colors cursor-pointer ${
+                  currency === 'USD' 
+                    ? 'bg-amber-400 text-black shadow-2xs' 
+                    : 'text-slate-600 dark:text-zinc-400'
+                }`}
+                title="Dólares USD"
+              >
+                USD
+              </button>
+              <button
+                onClick={() => setCurrency('DOP')}
+                className={`px-1.5 py-0.5 rounded-[2px] text-[10px] font-black uppercase transition-colors cursor-pointer ${
+                  currency === 'DOP' 
+                    ? 'bg-amber-400 text-black shadow-2xs' 
+                    : 'text-slate-600 dark:text-zinc-400'
+                }`}
+                title="Pesos Dominicanos RD$"
+              >
+                RD$
+              </button>
+            </div>
+            <button
+              onClick={() => setIsBcrdModalOpen(true)}
+              title={`Tasa Banco Central: 1 USD = RD$ ${exchangeRate.toFixed(2)} (${exchangeRateData.source})`}
+              className="p-1 rounded-[3px] bg-slate-100 hover:bg-slate-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 border border-slate-200 dark:border-white/[0.08] text-amber-500 font-mono text-[10px] font-bold flex items-center justify-center cursor-pointer"
+            >
+              <DollarSign className="w-3.5 h-3.5" />
+            </button>
+          </div>
 
           {/* Cart / Cotización Button */}
           <button

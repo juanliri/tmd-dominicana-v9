@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   GraduationCap, 
   Award, 
@@ -11,11 +11,12 @@ import {
   X, 
   Clock, 
   Search, 
-  Plus,
-  ExternalLink,
-  BookOpen
+  Plus, 
+  ExternalLink, 
+  BookOpen 
 } from 'lucide-react';
 import { triggerHaptic } from '../../utils/haptics';
+import { generateQrDataUrl } from '../../utils/qrExporter';
 
 interface OperatorCertificationPortalModalProps {
   isOpen: boolean;
@@ -47,7 +48,7 @@ const INITIAL_OPERATORS: CertifiedOperator[] = [
     expiryDate: '15/01/2028',
     status: 'VIGENTE',
     score: 98,
-    qrCodeUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tmd.com.do/verify/op/TMD-OP-2026-801'
+    qrCodeUrl: ''
   },
   {
     id: 'TMD-OP-2026-802',
@@ -59,7 +60,7 @@ const INITIAL_OPERATORS: CertifiedOperator[] = [
     expiryDate: '22/02/2028',
     status: 'VIGENTE',
     score: 94,
-    qrCodeUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tmd.com.do/verify/op/TMD-OP-2026-802'
+    qrCodeUrl: ''
   },
   {
     id: 'TMD-OP-2025-742',
@@ -71,7 +72,7 @@ const INITIAL_OPERATORS: CertifiedOperator[] = [
     expiryDate: '10/11/2026',
     status: 'POR RENOVAR',
     score: 91,
-    qrCodeUrl: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tmd.com.do/verify/op/TMD-OP-2025-742'
+    qrCodeUrl: ''
   }
 ];
 
@@ -85,6 +86,15 @@ export const OperatorCertificationPortalModal: React.FC<OperatorCertificationPor
   const [searchQuery, setSearchQuery] = useState('');
   const [showAddForm, setShowAddForm] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
+  const [activeQrUrl, setActiveQrUrl] = useState<string>('');
+
+  useEffect(() => {
+    if (selectedOp) {
+      generateQrDataUrl(`https://tmd.com.do/verify/op/${selectedOp.id}`, 180)
+        .then(setActiveQrUrl)
+        .catch(() => {});
+    }
+  }, [selectedOp]);
 
   if (!isOpen) return null;
 
@@ -258,12 +268,16 @@ export const OperatorCertificationPortalModal: React.FC<OperatorCertificationPor
                 </div>
 
                 {/* QR Code */}
-                <div className="col-span-1 flex flex-col items-center justify-center p-3 bg-white rounded-[3px]">
-                  <img
-                    src={selectedOp.qrCodeUrl}
-                    alt="QR Verification"
-                    className="w-24 h-24 object-contain"
-                  />
+                <div className="col-span-1 flex flex-col items-center justify-center p-3 bg-white rounded-[3px] min-h-[120px]">
+                  {activeQrUrl ? (
+                    <img
+                      src={activeQrUrl}
+                      alt="QR Verification"
+                      className="w-24 h-24 object-contain"
+                    />
+                  ) : (
+                    <div className="w-24 h-24 bg-zinc-200 animate-pulse rounded" />
+                  )}
                   <span className="text-[9px] font-mono font-bold text-zinc-900 mt-1 text-center">
                     ESCANEAR VALIDACIÓN
                   </span>

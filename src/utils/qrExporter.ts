@@ -179,10 +179,6 @@ export async function downloadProductQrCode(
   triggerDownload(finalDataUrl, fileName);
   return finalDataUrl;
 }
-
-/**
- * Triggers a download in the user's browser
- */
 function triggerDownload(dataUrl: string, filename: string) {
   if (typeof document === 'undefined') return;
   const link = document.createElement('a');
@@ -191,4 +187,18 @@ function triggerDownload(dataUrl: string, filename: string) {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+}
+
+/**
+ * Generates an offline Data URL for any QR string without relying on external APIs
+ */
+export async function generateQrDataUrl(text: string, size: number = 240): Promise<string> {
+  return QRCode.toDataURL(text, {
+    width: size,
+    margin: 1,
+    color: {
+      dark: '#000000',
+      light: '#ffffff'
+    }
+  });
 }

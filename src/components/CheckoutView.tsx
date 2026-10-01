@@ -69,6 +69,8 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
     clearCart,
     clearMachineQuotes,
     subtotalUsd,
+    subtotalPartsUsd,
+    subtotalMachinesUsd,
     discountUsd,
     discountPercentage,
     isProMemberDiscountActive,
@@ -614,19 +616,34 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                       clientName: completedOrder.customer.fullName || 'Cliente TMD',
                       companyName: completedOrder.customer.companyName || '',
                       phone: completedOrder.customer.phone || '',
-                      items: completedOrder.items.map(i => ({
-                        id: i.part.id,
-                        name: i.part.name,
-                        partNumber: i.part.partNumber,
-                        brand: i.part.brand,
-                        category: i.part.category || 'Repuestos OEM',
-                        priceUsd: i.part.priceUsd,
-                        quantity: i.quantity,
-                        image: i.part.image || '',
-                        isOem: i.part.isOem ?? true,
-                        type: 'part' as const
-                      })),
-                      itemsCount: completedOrder.items.reduce((acc, item) => acc + item.quantity, 0),
+                      items: [
+                        ...completedOrder.items.map(i => ({
+                          id: i.part.id,
+                          name: i.part.name,
+                          partNumber: i.part.partNumber,
+                          brand: i.part.brand,
+                          category: i.part.category || 'Repuestos OEM',
+                          priceUsd: i.part.priceUsd,
+                          quantity: i.quantity,
+                          image: i.part.image || '',
+                          isOem: i.part.isOem ?? true,
+                          type: 'part' as const
+                        })),
+                        ...(completedOrder.machineQuotes || []).map(q => ({
+                          id: q.machine.id,
+                          name: q.machine.name,
+                          partNumber: q.machine.modelCode || q.machine.id,
+                          brand: q.machine.brand,
+                          category: q.machine.category || 'Maquinaria Pesada',
+                          priceUsd: q.estimatedPriceRange?.minUsd || q.machine.basePriceUsd || 0,
+                          quantity: 1,
+                          image: q.machine.image || '',
+                          isOem: true,
+                          type: 'machine' as const,
+                          notes: q.needFinancing ? 'Financiamiento solicitado' : undefined
+                        }))
+                      ],
+                      itemsCount: completedOrder.items.reduce((acc, item) => acc + item.quantity, 0) + (completedOrder.machineQuotes?.length || 0),
                       subtotalUsd: completedOrder.subtotalUsd,
                       itbisUsd: completedOrder.itbisUsd,
                       shippingUsd: completedOrder.shippingUsd,
@@ -936,12 +953,15 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                     <span className="font-bold">{formatPrice(item.part.priceUsd * item.quantity)}</span>
                   </div>
                 ))}
-                {machineQuotes.map((q) => (
-                  <div key={q.machine.id} className="flex justify-between items-center text-[11px]">
-                    <span className="text-zinc-600 dark:text-zinc-300">{q.machine.name}</span>
-                    <span className="text-amber-500 font-bold">Cotización</span>
-                  </div>
-                ))}
+                {machineQuotes.map((q) => {
+                  const mPrice = q.estimatedPriceRange?.minUsd || q.machine.basePriceUsd || (q.machine as any).promotionalPriceUsd || 0;
+                  return (
+                    <div key={q.machine.id} className="flex justify-between items-center text-[11px]">
+                      <span className="text-zinc-600 dark:text-zinc-300 truncate max-w-[200px]">{q.machine.name}</span>
+                      <span className="text-amber-400 font-bold">{formatPrice(mPrice)}</span>
+                    </div>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -1086,13 +1106,19 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                             </div>
                           </div>
 
-                          <button
-                            type="button"
-                            onClick={() => removeMachineFromQuote(q.machine.id)}
-                            className="p-2 text-zinc-500 hover:text-red-400 transition-colors"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
+                          <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t sm:border-t-0 border-zinc-800">
+                            <div className="font-mono font-black text-sm text-amber-400 min-w-[90px] text-right">
+                              {formatPrice(q.estimatedPriceRange?.minUsd || q.machine.basePriceUsd || 0)}
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => removeMachineFromQuote(q.machine.id)}
+                              className="p-2 text-zinc-500 hover:text-red-400 transition-colors"
+                              title="Eliminar de cotización"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -1124,10 +1150,24 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({ onNavigate }) => {
                   <h4 className="font-black text-sm uppercase tracking-wider text-white pb-2 border-b border-zinc-800 font-display">
                     DESGLOSE FINANCIERO
                   </h4>
-                  <div className="flex justify-between text-zinc-400 uppercase">
-                    <span>SUBTOTAL REPUESTOS:</span>
-                    <span className="font-semibold text-white">{formatPrice(subtotalUsd)}</span>
-                  </div>
+                  {subtotalMachinesUsd > 0 && (
+                    <div className="flex justify-between text-zinc-400 uppercase">
+                      <span>SUBTOTAL MAQUINARIA ({machineQuotes.length}):</span>
+                      <span className="font-semibold text-white">{formatPrice(subtotalMachinesUsd)}</span>
+                    </div>
+                  )}
+                  {subtotalPartsUsd > 0 && (
+                    <div className="flex justify-between text-zinc-400 uppercase">
+                      <span>SUBTOTAL REPUESTOS ({cart.length}):</span>
+                      <span className="font-semibold text-white">{formatPrice(subtotalPartsUsd)}</span>
+                    </div>
+                  )}
+                  {subtotalMachinesUsd === 0 && subtotalPartsUsd === 0 && (
+                    <div className="flex justify-between text-zinc-400 uppercase">
+                      <span>SUBTOTAL:</span>
+                      <span className="font-semibold text-white">{formatPrice(0)}</span>
+                    </div>
+                  )}
 
                   {discountUsd > 0 && (
                     <div className="flex justify-between items-center text-emerald-400 font-bold bg-zinc-900 p-2.5 rounded-[3px] border border-zinc-800">

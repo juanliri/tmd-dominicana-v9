@@ -727,7 +727,7 @@ export const HomeViewOriginal: React.FC<HomeViewProps> = ({ onNavigate, onSelect
       </div>
 
       {/* MINIMAL FLOATING ANCHOR CAPSULE DOCK (Minimal Icons & Smooth Scrolling Animation) */}
-      <div className="sticky top-14 sm:top-16 z-30 w-full px-3 max-w-fit mx-auto py-1 pointer-events-none">
+      <div className="relative z-20 w-full px-3 max-w-fit mx-auto py-1 pointer-events-none">
         <div className="pointer-events-auto relative flex items-center gap-1 sm:gap-1.5 px-2 py-1 rounded-full bg-white/95 dark:bg-[#0c0c10]/95 backdrop-blur-xl border border-slate-200 dark:border-white/[0.12] shadow-lg dark:shadow-[0_10px_35px_rgba(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.15)] overflow-hidden">
           {/* Animated Dynamic Scroll Progress Indicator along the base */}
           <div className="absolute bottom-0 inset-x-0 h-[2px] bg-slate-200 dark:bg-white/[0.05] pointer-events-none">

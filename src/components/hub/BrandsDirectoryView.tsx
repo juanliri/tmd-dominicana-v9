@@ -57,7 +57,7 @@ export const BrandsDirectoryView: React.FC<BrandsDirectoryProps> = ({ onNavigate
       </div>
 
       {/* 3. FILTER CHIPS */}
-      <div className="border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#0c0c10] sticky top-14 sm:top-16 z-20">
+      <div className="border-b border-slate-200/80 dark:border-white/[0.06] bg-white dark:bg-[#0c0c10] relative z-20">
         <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-3 flex items-center gap-2 overflow-x-auto no-scrollbar">
           {[
             { id: 'all', label: 'Todas las Marcas (10)' },
