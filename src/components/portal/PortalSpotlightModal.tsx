@@ -153,10 +153,10 @@ export const PortalSpotlightModal: React.FC<PortalSpotlightModalProps> = ({
       {
         id: 'act-metrics',
         category: 'action',
-        categoryLabel: 'ERP Fiscal',
-        title: 'Métricas DGII 606 & 607 / Ingresos',
-        subtitle: 'Panel ejecutivo fiscal, retenciones ITBIS y análisis de rentabilidad',
-        badge: 'DGII NCF',
+        categoryLabel: 'Facturación',
+        title: 'Métricas de Facturación & Cobros',
+        subtitle: 'Panel ejecutivo de ventas, comprobantes fiscales e ITBIS',
+        badge: 'Comprobantes',
         badgeColor: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40',
         icon: BarChart3,
         action: () => {
@@ -209,10 +209,10 @@ export const PortalSpotlightModal: React.FC<PortalSpotlightModalProps> = ({
       {
         id: 'act-audit',
         category: 'action',
-        categoryLabel: 'Ciberseguridad',
-        title: 'Auditoría & Logs Ciberseguridad',
-        subtitle: 'Trazabilidad de accesos, cambios de estado y registros inmutables',
-        badge: 'SOC2 / NIST',
+        categoryLabel: 'Seguridad',
+        title: 'Auditoría & Bitácora de Seguridad',
+        subtitle: 'Trazabilidad de accesos, cambios de estado y registros de auditoría',
+        badge: 'Seguridad',
         badgeColor: 'bg-red-500/20 text-red-400 border border-red-500/40',
         icon: ShieldCheck,
         action: () => {
@@ -224,9 +224,9 @@ export const PortalSpotlightModal: React.FC<PortalSpotlightModalProps> = ({
         id: 'act-integrations',
         category: 'action',
         categoryLabel: 'Infraestructura',
-        title: 'Integraciones ERP & APIs',
-        subtitle: 'Salud de Supabase Cloud, Fullbay REST, BCRD Tasa Cambio y Vercel Edge',
-        badge: 'Health',
+        title: 'Integraciones del Sistema & Conexiones',
+        subtitle: 'Estado de conexión con base central, catálogo de piezas y tasa cambiaria BCRD',
+        badge: 'En Línea',
         badgeColor: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40',
         icon: Activity,
         action: () => {

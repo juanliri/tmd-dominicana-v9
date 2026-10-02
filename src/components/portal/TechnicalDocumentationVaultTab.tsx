@@ -79,7 +79,7 @@ export const TechnicalDocumentationVaultTab: React.FC = () => {
             </div>
             <h2 className="text-lg sm:text-xl font-black text-white uppercase tracking-tight flex items-center gap-2">
               <FileText className="w-5 h-5 text-amber-400" />
-              <span>Bóveda de Catálogos & Fichas Técnicas Oficiales</span>
+              <span>Catálogos & Fichas Técnicas Oficiales</span>
             </h2>
             <p className="text-xs text-zinc-400 mt-1 max-w-2xl leading-relaxed">
               Descargue los folletos oficiales multi-página emitidos directamente por fabricantes internacionales (JCB, Kubota, LiuGong, Ammann, LS Tractor, Yanmar) y fichas técnicas homologadas para financiamiento bancario en Bagrícola, Banco Popular, Banreservas y BHD.

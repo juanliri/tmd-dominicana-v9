@@ -196,9 +196,9 @@ export const AdminSecurityAuditLog: React.FC = () => {
         targetName: 'Retroexcavadora JCB 3CX Eco 4x4 (Verificación Auditoría)',
         previousValue: { basePriceUsd: 85000 },
         diffSummary: 'Precio USD: $85,000 → $88,500 (+4.1%)',
-        details: 'Validación criptográfica en tiempo real registrada en el Registro Central de Seguridad ERP.'
+        details: 'Validación en tiempo real registrada en el Registro Central de Seguridad.'
       });
-      showFeedback("Entrada de auditoría registrada e inmutabilizada exitosamente en el Registro Central ERP");
+      showFeedback("Registro de seguridad guardado exitosamente en el sistema central");
     } catch (e) {
       console.error(e);
     } finally {
@@ -224,7 +224,7 @@ export const AdminSecurityAuditLog: React.FC = () => {
               </span>
             </div>
             <p className="text-xs text-zinc-300 mt-1 max-w-2xl leading-relaxed">
-              Registro criptográfico inmutable en <strong>Base de Datos ERP Cloud (Supabase / Postgres)</strong> para todos los cambios de existencias de maquinaria, ajustes de precios OEM, altas masivas y elevaciones de permisos RBAC. Visible exclusivamente para administradores autenticados.
+              Registro seguro en <strong>Base de Datos Central</strong> para todos los cambios de existencias de maquinaria, ajustes de precios OEM, altas masivas y permisos de usuarios. Visible exclusivamente para administradores autenticados.
             </p>
           </div>
         </div>
@@ -277,7 +277,7 @@ export const AdminSecurityAuditLog: React.FC = () => {
           <div className="text-2xl font-black text-zinc-900 dark:text-white mt-1 font-mono">
             {stats.total}
           </div>
-          <span className="text-[10px] text-zinc-500 mt-1 block">Inmutables en ERP Cloud</span>
+          <span className="text-[10px] text-zinc-500 mt-1 block">Historial Registrado</span>
         </div>
 
         <div className="p-4 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xs">
@@ -377,7 +377,7 @@ export const AdminSecurityAuditLog: React.FC = () => {
         {loading ? (
           <div className="p-12 text-center text-zinc-400 space-y-3">
             <RefreshCw className="w-8 h-8 animate-spin mx-auto text-amber-500" />
-            <p className="text-xs font-bold">Consultando registros criptográficos en el sistema ERP...</p>
+            <p className="text-xs font-bold">Consultando registros de auditoría en el sistema...</p>
           </div>
         ) : filteredLogs.length === 0 ? (
           <div className="p-12 text-center rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-400 space-y-2">

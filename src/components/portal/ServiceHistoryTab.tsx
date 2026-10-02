@@ -451,12 +451,21 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
           {serviceRecords.length === 0 && (
             <button
               onClick={handleSeedDemoRecords}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider rounded-[2px] text-xs transition-all shadow-sm cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all shadow-sm cursor-pointer"
             >
-              <Sparkles className="w-4 h-4" />
+              <Sparkles className="w-4 h-4 text-amber-400" />
               <span>Cargar Historial de Ejemplo</span>
             </button>
           )}
+
+          <button
+            type="button"
+            onClick={onOpenNewOrderModal || (() => onNavigate('#/service'))}
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer shadow-md"
+          >
+            <Calendar className="w-4 h-4 text-black" />
+            <span>Solicitar Servicio Técnico</span>
+          </button>
 
           <button
             onClick={() => setShowAddMachineModal(true)}
@@ -474,117 +483,112 @@ export const ServiceHistoryTab: React.FC<ServiceHistoryTabProps> = ({
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
             <span>Garantías OEM</span>
           </button>
-
-          {/* Task #95: Calibrated Workshop Tools Modal Trigger */}
-          <button
-            onClick={() => setShowCalibratedToolsModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-amber-400/30 text-amber-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
-            title="Control de Préstamo de Herramientas Calibradas e Inventario ISO 9001"
-          >
-            <Scale className="w-4 h-4 text-amber-400" />
-            <span>Herramientas Taller</span>
-          </button>
-
-          {/* Task #97: Used Oil Disposal & Eco Management Modal Trigger */}
-          <button
-            onClick={() => setShowUsedOilModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-emerald-500/30 text-emerald-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
-            title="Control de Aceites Usados y Disposición Ecológica MIMARENA"
-          >
-            <Droplets className="w-4 h-4 text-emerald-400" />
-            <span>Aceites Usados / Eco</span>
-          </button>
-
-          {/* Task #100: Automated Post-Service CSAT & NPS Survey Modal Trigger */}
-          <button
-            onClick={() => setShowCsatModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-amber-400/40 text-amber-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
-            title="Encuesta de Satisfacción Post-Servicio Técnico (CSAT & NPS)"
-          >
-            <Award className="w-4 h-4 text-amber-400" />
-            <span>Encuesta CSAT</span>
-          </button>
-
-          {/* Task #88: Pre-Delivery Inspection (PDI) 85-Point Checklist Modal Trigger */}
-          <button
-            onClick={() => setShowPdiModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-cyan-500/40 text-cyan-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
-            title="Inspección Pre-Entrega Oficial de 85 Puntos para Máquinas Nuevas"
-          >
-            <ClipboardCheck className="w-4 h-4 text-cyan-400" />
-            <span>Auditoría PDI</span>
-          </button>
-
-          {/* Task #93: Tires & Batteries OEM Warranty Management */}
-          <button
-            onClick={() => setShowTiresBatteriesModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-amber-400/40 text-amber-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
-            title="Gestión de Garantías de Baterías 24V y Neumáticos OTR"
-          >
-            <ShieldCheck className="w-4 h-4 text-amber-400" />
-            <span>Garantías Gomas/Baterías</span>
-          </button>
-
-          {/* Task #78: Operator Certification & Accredited Cards */}
-          <button
-            onClick={() => setShowOperatorCertModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-amber-500/30 text-amber-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
-            title="Carnet Oficial y Acreditación de Operadores de Maquinaria TMD Academy"
-          >
-            <Award className="w-4 h-4 text-amber-400" />
-            <span>Operadores TMD</span>
-          </button>
-
-          {/* Task #98: Battery & Inverter Batch Traceability & Warranty */}
-          <button
-            onClick={() => setShowBatteryWarrantyModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-emerald-500/30 text-emerald-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
-            title="Trazabilidad por Lote y Conductancia CCA de Baterías e Inversores"
-          >
-            <Activity className="w-4 h-4 text-emerald-400" />
-            <span>Lotes Baterías/CCA</span>
-          </button>
-
-          {/* Task #82: Equipment Intake & 4-Photo Reception Modal Trigger */}
-          <button
-            onClick={() => setShowIntakeModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-sky-400/40 text-sky-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
-            title="Módulo de Recepción e Inspección Fotográfica 4 Vistas al Entrar al Taller"
-          >
-            <Camera className="w-4 h-4 text-sky-400" />
-            <span>Recepción Taller</span>
-          </button>
-
-          {/* Task #86: S.O.S. Fluid Spectrometry Modal Trigger */}
-          <button
-            onClick={() => setShowSpectrometryModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-amber-400/40 text-amber-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
-            title="Laboratorio de Espectrometría S.O.S. y Desgaste de Metales (Cu, Fe, Si)"
-          >
-            <Droplets className="w-4 h-4 text-amber-400" />
-            <span>Lab S.O.S.</span>
-          </button>
-
-          {/* Task #87: Central Workshop Bay Planner Trigger */}
-          <button
-            onClick={() => setShowBayPlannerModal(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 border border-emerald-500/40 text-emerald-400 font-bold font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer"
-            title="Planificador de Bahías 1 a 6 de Taller Central Km 22"
-          >
-            <Layers className="w-4 h-4 text-emerald-400" />
-            <span>Bahías Km 22</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={onOpenNewOrderModal || (() => onNavigate('#/service'))}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-amber-400 hover:bg-amber-300 text-black font-black font-display uppercase tracking-wider rounded-[2px] text-xs transition-all cursor-pointer shadow-md"
-          >
-            <Calendar className="w-4 h-4 text-black" />
-            <span>Solicitar Servicio Técnico</span>
-          </button>
         </div>
       </div>
+
+      {/* Internal Workshop & Field Technician Management Bar (Staff / Admin Only) */}
+      {(isStaff || isAdmin) && (
+        <div className="p-3 bg-zinc-950/80 border border-amber-500/20 rounded-[3px] space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+              <Wrench className="w-3.5 h-3.5" />
+              <span>Herramientas Operativas de Taller (Staff Km 22)</span>
+            </span>
+            <span className="text-[10px] text-zinc-500 font-mono">Acceso Técnico Interno</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => setShowCalibratedToolsModal(true)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] text-[11px] transition-all cursor-pointer"
+              title="Control de Préstamo de Herramientas Calibradas e Inventario ISO 9001"
+            >
+              <Scale className="w-3.5 h-3.5 text-amber-400" />
+              <span>Herramientas Taller</span>
+            </button>
+
+            <button
+              onClick={() => setShowUsedOilModal(true)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] text-[11px] transition-all cursor-pointer"
+              title="Control de Aceites Usados y Disposición Ecológica MIMARENA"
+            >
+              <Droplets className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Aceites Usados / Eco</span>
+            </button>
+
+            <button
+              onClick={() => setShowCsatModal(true)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] text-[11px] transition-all cursor-pointer"
+              title="Encuesta de Satisfacción Post-Servicio Técnico (CSAT & NPS)"
+            >
+              <Award className="w-3.5 h-3.5 text-amber-400" />
+              <span>Encuesta CSAT</span>
+            </button>
+
+            <button
+              onClick={() => setShowPdiModal(true)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] text-[11px] transition-all cursor-pointer"
+              title="Inspección Pre-Entrega Oficial de 85 Puntos para Máquinas Nuevas"
+            >
+              <ClipboardCheck className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Auditoría PDI</span>
+            </button>
+
+            <button
+              onClick={() => setShowTiresBatteriesModal(true)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] text-[11px] transition-all cursor-pointer"
+              title="Gestión de Garantías de Baterías 24V y Neumáticos OTR"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+              <span>Garantías Gomas/Baterías</span>
+            </button>
+
+            <button
+              onClick={() => setShowOperatorCertModal(true)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] text-[11px] transition-all cursor-pointer"
+              title="Carnet Oficial y Acreditación de Operadores de Maquinaria TMD Academy"
+            >
+              <Award className="w-3.5 h-3.5 text-amber-400" />
+              <span>Operadores TMD</span>
+            </button>
+
+            <button
+              onClick={() => setShowBatteryWarrantyModal(true)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] text-[11px] transition-all cursor-pointer"
+              title="Trazabilidad por Lote y Conductancia CCA de Baterías e Inversores"
+            >
+              <Activity className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Lotes Baterías</span>
+            </button>
+
+            <button
+              onClick={() => setShowIntakeModal(true)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] text-[11px] transition-all cursor-pointer"
+              title="Módulo de Recepción e Inspección Fotográfica 4 Vistas al Entrar al Taller"
+            >
+              <Camera className="w-3.5 h-3.5 text-sky-400" />
+              <span>Recepción Taller</span>
+            </button>
+
+            <button
+              onClick={() => setShowSpectrometryModal(true)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] text-[11px] transition-all cursor-pointer"
+              title="Laboratorio de Espectrometría S.O.S. y Desgaste de Metales (Cu, Fe, Si)"
+            >
+              <Droplets className="w-3.5 h-3.5 text-amber-400" />
+              <span>Lab S.O.S.</span>
+            </button>
+
+            <button
+              onClick={() => setShowBayPlannerModal(true)}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 font-bold font-display uppercase tracking-wider rounded-[2px] text-[11px] transition-all cursor-pointer"
+              title="Planificador de Bahías 1 a 6 de Taller Central Km 22"
+            >
+              <Layers className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Bahías Km 22</span>
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* KPI Cards Strip */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

@@ -1205,7 +1205,7 @@ export const ProductQrScannerModal: React.FC<ProductQrScannerModalProps> = ({
                   <div className="flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                     <span>
-                      Registrado en ERP Cloud <strong className="text-white">inventory_logs</strong> ({lastLoggedScanId.slice(0, 16)}...)
+                      Inspección física registrada en <strong className="text-white">Bitácora Central</strong> ({lastLoggedScanId.slice(0, 16)}...)
                     </span>
                   </div>
                   <span className="text-[9px] text-zinc-400 hidden sm:inline">

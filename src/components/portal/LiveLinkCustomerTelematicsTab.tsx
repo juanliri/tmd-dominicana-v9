@@ -308,10 +308,10 @@ export const LiveLinkCustomerTelematicsTab: React.FC<LiveLinkCustomerTelematicsT
               type="button"
               onClick={() => setShowApiKeysModal(true)}
               className="px-4 py-2.5 rounded-[2px] bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700 font-display uppercase tracking-wider font-bold text-xs flex items-center gap-2 transition-all shadow-sm active:scale-95 cursor-pointer"
-              title="Claves de API REST y Webhooks para ERPs corporativos (Malespín, Estrella)"
+              title="Claves de API REST y Webhooks para sistemas empresariales de flotas"
             >
               <Key className="w-3.5 h-3.5 text-amber-400" />
-              <span>API Clientes ERP</span>
+              <span>API para Empresas</span>
             </button>
 
             {/* Task #56: CAN Bus J1939 Gateway Protocol Modal */}

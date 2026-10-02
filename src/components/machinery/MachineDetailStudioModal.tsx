@@ -47,6 +47,7 @@ import {
 import { triggerHaptic } from '../../utils/haptics';
 import { Machine, MachineCustomizationOption } from '../../types';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
 import { LastScannedBadge } from '../common/LastScannedBadge';
 import { RecentlyVerifiedBadge } from '../common/RecentlyVerifiedBadge';
@@ -189,6 +190,7 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
   onOpenQr
 }) => {
   const { addMachineToQuote, formatPrice, currency, exchangeRate } = useCart();
+  const { isStaff, isAdmin } = useAuth();
   const [activeTab, setActiveTab] = useState<DetailTab>('specs');
   const [selectedAttachmentIds, setSelectedAttachmentIds] = useState<string[]>([]);
   
@@ -549,47 +551,63 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
             </button>
           )}
 
-          {/* Printable PDF Label Sheet Button (Mass Inventory Labeling) */}
-          <button
-            type="button"
-            onClick={() => setIsLabelPdfModalOpen(true)}
-            className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
-            title="Generar pliego PDF imprimible para etiquetado masivo"
-          >
-            <Printer className="w-3 h-3" />
-            <span>Rótulos</span>
-          </button>
+          {/* Internal Staff Tools (Gated) */}
+          {(isStaff || isAdmin) && (
+            <>
+              {/* Official Pre-Delivery Inspection (PDI) 85-Point Audit Trigger */}
+              <button
+                type="button"
+                onClick={() => setIsPdiModalOpen(true)}
+                className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+                title="Protocolo Oficial de Inspección Pre-Entrega de 85 Puntos"
+              >
+                <ClipboardCheck className="w-3 h-3" />
+                <span>Auditoría PDI</span>
+              </button>
 
-          {/* Quick Export QR Code Button */}
-          <button
-            type="button"
-            onClick={async () => {
-              setIsExportingQr(true);
-              try {
-                await downloadProductQrCode(machine, 'machinery');
-              } catch (err) {
-                console.error('Error exporting QR:', err);
-              } finally {
-                setIsExportingQr(false);
-              }
-            }}
-            disabled={isExportingQr}
-            className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
-            title="Descargar Rótulo QR individual"
-          >
-            <Download className={`w-3 h-3 ${isExportingQr ? 'animate-bounce' : ''}`} />
-            <span>Exportar QR</span>
-          </button>
+              {/* Printable PDF Label Sheet Button (Mass Inventory Labeling) */}
+              <button
+                type="button"
+                onClick={() => setIsLabelPdfModalOpen(true)}
+                className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+                title="Generar pliego PDF imprimible para etiquetado masivo"
+              >
+                <Printer className="w-3 h-3" />
+                <span>Rótulos</span>
+              </button>
 
-          {onOpenQr && (
-            <button
-              type="button"
-              onClick={() => onOpenQr(machine)}
-              className="p-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-zinc-300 border border-zinc-800 transition-all cursor-pointer shrink-0"
-              title="Generar QR de Patio"
-            >
-              <QrCode className="w-3.5 h-3.5" />
-            </button>
+              {/* Quick Export QR Code Button */}
+              <button
+                type="button"
+                onClick={async () => {
+                  setIsExportingQr(true);
+                  try {
+                    await downloadProductQrCode(machine, 'machinery');
+                  } catch (err) {
+                    console.error('Error exporting QR:', err);
+                  } finally {
+                    setIsExportingQr(false);
+                  }
+                }}
+                disabled={isExportingQr}
+                className="px-2 py-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/40 text-[10px] font-bold uppercase transition-all flex items-center gap-1 shrink-0 cursor-pointer"
+                title="Descargar Rótulo QR individual"
+              >
+                <Download className={`w-3 h-3 ${isExportingQr ? 'animate-bounce' : ''}`} />
+                <span>Exportar QR</span>
+              </button>
+
+              {onOpenQr && (
+                <button
+                  type="button"
+                  onClick={() => onOpenQr(machine)}
+                  className="p-1 rounded-[2px] bg-zinc-950 hover:bg-amber-400 hover:text-black text-zinc-300 border border-zinc-800 transition-all cursor-pointer shrink-0"
+                  title="Generar QR de Patio"
+                >
+                  <QrCode className="w-3.5 h-3.5" />
+                </button>
+              )}
+            </>
           )}
         </div>
 
@@ -667,18 +685,20 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
             <span>Entrega & Demo</span>
           </button>
 
-          <button
-            type="button"
-            onClick={() => setActiveTab('audit')}
-            className={`px-3.5 py-2 text-xs font-bold rounded-[2px] uppercase transition-all flex items-center gap-1.5 shrink-0 cursor-pointer ${
-              activeTab === 'audit'
-                ? 'bg-amber-400 text-black shadow-xs'
-                : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
-            }`}
-          >
-            <Activity className="w-3.5 h-3.5" />
-            <span>Audit Trail (Últimos 3)</span>
-          </button>
+          {(isStaff || isAdmin) && (
+            <button
+              type="button"
+              onClick={() => setActiveTab('audit')}
+              className={`px-3.5 py-2 text-xs font-bold rounded-[2px] uppercase transition-all flex items-center gap-1.5 shrink-0 cursor-pointer ${
+                activeTab === 'audit'
+                  ? 'bg-amber-400 text-black shadow-xs'
+                  : 'text-zinc-400 hover:text-white hover:bg-zinc-900'
+              }`}
+            >
+              <Activity className="w-3.5 h-3.5" />
+              <span>Auditoría Interna</span>
+            </button>
+          )}
         </div>
 
         {/* ============================================================ */}
@@ -697,25 +717,28 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                 variant="detail-banner"
               />
 
-              {/* Last Scanned Detailed Inventory Audit Card */}
-              <LastScannedBadge
-                itemId={machine.id}
-                itemCode={machine.modelCode}
-                itemType="machinery"
-                showDetailsAccordion={true}
-                showEmptyState={true}
-              />
+              {/* Internal Staff Inventory Audit Information */}
+              {(isStaff || isAdmin) && (
+                <div className="p-3 bg-zinc-950/70 border border-zinc-800 rounded-[2px] space-y-2">
+                  <LastScannedBadge
+                    itemId={machine.id}
+                    itemCode={machine.modelCode}
+                    itemType="machinery"
+                    showDetailsAccordion={true}
+                    showEmptyState={true}
+                  />
 
-              {/* Audit Trail Section - Last 3 Scans from inventory_logs */}
-              <div className="pt-2">
-                <InventoryAuditTrail
-                  itemId={machine.id}
-                  itemCode={machine.modelCode}
-                  itemName={machine.name}
-                  itemType="machinery"
-                  maxEvents={3}
-                />
-              </div>
+                  <div className="pt-1">
+                    <InventoryAuditTrail
+                      itemId={machine.id}
+                      itemCode={machine.modelCode}
+                      itemName={machine.name}
+                      itemType="machinery"
+                      maxEvents={3}
+                    />
+                  </div>
+                </div>
+              )}
 
               <div className="p-3 bg-zinc-950 rounded-[2px] border border-zinc-800">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-amber-400 mb-1">
@@ -1150,138 +1173,7 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                   <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 transition-colors" />
                 </button>
 
-                <button
-                  type="button"
-                  onClick={() => setIsPdiOpen(true)}
-                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-emerald-500/40 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-[2px] bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
-                      <ClipboardList className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-bold uppercase text-white group-hover:text-emerald-400 block transition-colors">
-                        Checklist Pre-Entrega PDI (85 Pts)
-                      </span>
-                      <span className="text-[10px] text-zinc-400 font-sans">
-                        Inspección técnica certificada de taller Km 22
-                      </span>
-                    </div>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-emerald-400 transition-colors" />
-                </button>
-
-                {/* Task #86: Oil Spectrometry Modal Button */}
-                <button
-                  type="button"
-                  onClick={() => setIsSpectrometryOpen(true)}
-                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-400/40 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-[2px] bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
-                      <FlaskConical className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-bold uppercase text-white group-hover:text-amber-400 block transition-colors">
-                        Análisis Espectrométrico S.O.S.
-                      </span>
-                      <span className="text-[10px] text-zinc-400 font-sans">
-                        PPM metales de desgaste (Fe, Cu, Al, Si)
-                      </span>
-                    </div>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 transition-colors" />
-                </button>
-
-                {/* Task #87: Workshop Bays Scheduler Button */}
-                <button
-                  type="button"
-                  onClick={() => setIsWorkshopBaysOpen(true)}
-                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-400/40 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-[2px] bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300 shrink-0">
-                      <Wrench className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-bold uppercase text-white group-hover:text-amber-400 block transition-colors">
-                        Bahías de Taller Km 22 (6)
-                      </span>
-                      <span className="text-[10px] text-zinc-400 font-sans">
-                        Cronograma en vivo y disponibilidad
-                      </span>
-                    </div>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 transition-colors" />
-                </button>
-
-                {/* Task #76: PMA Maintenance Packages Modal Button */}
-                <button
-                  type="button"
-                  onClick={() => setIsPmaPackageOpen(true)}
-                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group bg-gradient-to-r from-amber-500/5 to-transparent"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-[2px] bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 shrink-0">
-                      <ShieldCheck className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-bold uppercase text-amber-400 block transition-colors">
-                        Pólizas PMA (1k, 2k, 3k Horas)
-                      </span>
-                      <span className="text-[10px] text-zinc-400 font-sans">
-                        Filtros OEM + Mano obra + Financiamiento banco
-                      </span>
-                    </div>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-amber-400 group-hover:translate-x-0.5 transition-transform" />
-                </button>
-
-                {/* Task #82: Workshop Expert Check-In Modal Button */}
-                <button
-                  type="button"
-                  onClick={() => setIsWorkshopCheckInOpen(true)}
-                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-400/40 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-[2px] bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300 shrink-0">
-                      <Camera className="w-4 h-4 text-amber-400" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-bold uppercase text-white group-hover:text-amber-400 block transition-colors">
-                        Recepción Pericial en Taller (4 Caras)
-                      </span>
-                      <span className="text-[10px] text-zinc-400 font-sans">
-                        Acta fotográfica, horómetro y nivel de diésel
-                      </span>
-                    </div>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 transition-colors" />
-                </button>
-
-                {/* Task #85: Warehouse Shelf Bin Label Button */}
-                <button
-                  type="button"
-                  onClick={() => setIsBinLabelOpen(true)}
-                  className="p-3 rounded-[2px] bg-zinc-950 hover:bg-zinc-900 border border-zinc-800 hover:border-amber-400/40 text-left transition-all flex items-center justify-between gap-2 cursor-pointer group"
-                >
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-[2px] bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300 shrink-0">
-                      <Tag className="w-4 h-4 text-amber-400" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-bold uppercase text-white group-hover:text-amber-400 block transition-colors">
-                        Rótulo de Almacén (100x50mm)
-                      </span>
-                      <span className="text-[10px] text-zinc-400 font-sans">
-                        Etiqueta Zebra ZPL / Avery para racks Km 22
-                      </span>
-                    </div>
-                  </div>
-                  <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-amber-400 transition-colors" />
-                </button>
-
-                {/* Task #90: Reman Component Exchange Button */}
+                {/* Componentes TMD Reman */}
                 <button
                   type="button"
                   onClick={() => setIsRemanCatalogOpen(true)}
@@ -1303,6 +1195,61 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                   <ChevronRight className="w-4 h-4 text-zinc-500 group-hover:text-emerald-400 transition-colors" />
                 </button>
               </div>
+
+              {/* Staff Workshop Operations (Gated) */}
+              {(isStaff || isAdmin) && (
+                <div className="p-3 bg-zinc-950/70 border border-amber-500/20 rounded-[2px] space-y-2 mt-2">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400 block">
+                    HERRAMIENTAS INTERNAS DE TALLER & ALMACÉN (KM 22):
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setIsPdiOpen(true)}
+                      className="p-2.5 rounded-[2px] bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-left transition-all flex items-center justify-between gap-2 cursor-pointer text-xs"
+                    >
+                      <span className="font-bold text-zinc-300">Checklist PDI (85 Pts)</span>
+                      <ClipboardList className="w-3.5 h-3.5 text-emerald-400" />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setIsSpectrometryOpen(true)}
+                      className="p-2.5 rounded-[2px] bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-left transition-all flex items-center justify-between gap-2 cursor-pointer text-xs"
+                    >
+                      <span className="font-bold text-zinc-300">Laboratorio S.O.S. (Metales)</span>
+                      <FlaskConical className="w-3.5 h-3.5 text-amber-400" />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setIsWorkshopBaysOpen(true)}
+                      className="p-2.5 rounded-[2px] bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-left transition-all flex items-center justify-between gap-2 cursor-pointer text-xs"
+                    >
+                      <span className="font-bold text-zinc-300">Bahías Taller (1 a 6)</span>
+                      <Wrench className="w-3.5 h-3.5 text-zinc-400" />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setIsWorkshopCheckInOpen(true)}
+                      className="p-2.5 rounded-[2px] bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-left transition-all flex items-center justify-between gap-2 cursor-pointer text-xs"
+                    >
+                      <span className="font-bold text-zinc-300">Recepción 4 Caras Patio</span>
+                      <Camera className="w-3.5 h-3.5 text-amber-400" />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setIsBinLabelOpen(true)}
+                      className="p-2.5 rounded-[2px] bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-left transition-all flex items-center justify-between gap-2 cursor-pointer text-xs"
+                    >
+                      <span className="font-bold text-zinc-300">Rótulo de Almacén Km 22</span>
+                      <Tag className="w-3.5 h-3.5 text-amber-400" />
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* Matriz Comparativa OEM vs Aftermarket (Task #23) */}
               <OemVsAftermarketMatrix className="mt-2" />
@@ -1340,33 +1287,35 @@ export const MachineDetailStudioModal: React.FC<MachineDetailStudioModalProps> =
                 </button>
               </div>
 
-              {/* Gate Pass Security Pass Card (Task #84) */}
-              <div className="p-3.5 rounded-[2px] bg-zinc-950 border border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <QrCode className="w-4 h-4 text-amber-400" />
-                    <h5 className="text-xs font-bold uppercase tracking-wider text-white">
-                      Pase de Puerta Digital con QR (Salida de Garita Km 22)
-                    </h5>
+              {/* Gate Pass Security Pass Card (Staff / Admin Only) */}
+              {(isStaff || isAdmin) && (
+                <div className="p-3.5 rounded-[2px] bg-zinc-950 border border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <QrCode className="w-4 h-4 text-amber-400" />
+                      <h5 className="text-xs font-bold uppercase tracking-wider text-white">
+                        Pase de Puerta Digital con QR (Salida de Garita Km 22)
+                      </h5>
+                    </div>
+                    <p className="text-xs text-zinc-400 font-sans mt-0.5">
+                      Genera el ticket de autorización de salida con código QR escaneable por el oficial de seguridad en el portón del Km 22.
+                    </p>
                   </div>
-                  <p className="text-xs text-zinc-400 font-sans mt-0.5">
-                    Genera el ticket de autorización de salida con código QR escaneable por el oficial de seguridad en el portón del Km 22.
-                  </p>
+                  <button
+                    type="button"
+                    onClick={() => setIsGatePassOpen(true)}
+                    className="py-2 px-3 rounded-[2px] bg-zinc-900 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/50 text-xs font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
+                  >
+                    <QrCode className="w-3.5 h-3.5" />
+                    <span>Emitir Pase Garita</span>
+                  </button>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setIsGatePassOpen(true)}
-                  className="py-2 px-3 rounded-[2px] bg-zinc-900 hover:bg-amber-400 hover:text-black text-amber-400 border border-amber-400/50 text-xs font-bold uppercase transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
-                >
-                  <QrCode className="w-3.5 h-3.5" />
-                  <span>Emitir Pase Garita</span>
-                </button>
-              </div>
+              )}
             </div>
           )}
 
-          {/* TAB 6: AUDIT TRAIL (LAST 3 SCAN EVENTS) */}
-          {activeTab === 'audit' && (
+          {/* TAB 6: AUDIT TRAIL (LAST 3 SCAN EVENTS - STAFF ONLY) */}
+          {(isStaff || isAdmin) && activeTab === 'audit' && (
             <div className="space-y-4 animate-in fade-in duration-150">
               <div className="p-3.5 rounded-[2px] bg-zinc-950 border border-zinc-800">
                 <div className="flex items-center gap-2 mb-1">

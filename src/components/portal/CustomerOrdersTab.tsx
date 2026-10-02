@@ -35,6 +35,7 @@ import { USD_TO_DOP_RATE } from '../../data/catalog';
 import { getLocalOrders, generateDemoOrders, saveOrderToLocalStorage } from '../../services/orderService';
 import { INITIAL_PORTAL_PURCHASE_ORDERS } from '../../data/portalSeedData';
 import { useCart } from '../../context/CartContext';
+import { useNotifications } from '../../context/NotificationContext';
 import { PARTS_DATA } from '../../data/parts';
 import { downloadOrderInvoicePDF } from '../../utils/pdfGenerator';
 
@@ -54,6 +55,7 @@ export const CustomerOrdersTab: React.FC<CustomerOrdersTabProps> = ({
   onNavigate
 }) => {
   const { addToCart } = useCart();
+  const { addNotification } = useNotifications();
   const [orders, setOrders] = useState<CustomerPurchaseOrder[]>(() => {
     const existing = getLocalOrders();
     if (existing.length > 0) return existing;
@@ -146,6 +148,11 @@ export const CustomerOrdersTab: React.FC<CustomerOrdersTabProps> = ({
     });
 
     if (addedCount > 0) {
+      addNotification({
+        type: 'order_status',
+        title: 'Repuestos Añadidos al Carrito',
+        message: `Se agregaron ${addedCount} ítem(s) de la orden ${order.orderNumber} a tu carrito de compras.`
+      });
       onNavigate('#/checkout');
     } else {
       onNavigate('#/parts');

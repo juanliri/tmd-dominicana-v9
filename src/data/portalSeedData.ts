@@ -38,10 +38,10 @@ export const CANONICAL_CLIENT_ACCOUNTS: CanonicalClientAccount[] = [
   {
     uid: 'client-roberto-henriquez',
     name: 'Lic. Roberto Henríquez',
-    email: 'operaciones@agregadoscaribe.rd',
-    companyName: 'Agregados del Caribe S.A.',
-    rnc: '1-01-55243-9',
-    phone: '+1 (829) 720-3310',
+    email: 'operaciones@agregadoscaribe.com.do',
+    companyName: 'Agregados & Canteras del Caribe S.R.L.',
+    rnc: '1-32-44910-3',
+    phone: '+1 (809) 535-9000',
     location: 'San Cristóbal / Yaguate',
     proMemberTier: 'Platinum',
     proMemberPoints: 3420,
@@ -50,10 +50,10 @@ export const CANONICAL_CLIENT_ACCOUNTS: CanonicalClientAccount[] = [
   {
     uid: 'client-carmen-jaquez',
     name: 'Arq. Carmen Jaquez',
-    email: 'proyectos@urbani.rd',
-    companyName: 'Desarrollos Urbanos Baní S.R.L.',
-    rnc: '1-30-22194-2',
-    phone: '+1 (809) 330-9944',
+    email: 'proyectos@urbanosbani.rd',
+    companyName: 'Desarrollos Urbanos Baní S.A.',
+    rnc: '1-01-99214-5',
+    phone: '+1 (829) 450-2211',
     location: 'Baní, Peravia',
     proMemberTier: 'Silver',
     proMemberPoints: 950,
@@ -62,13 +62,13 @@ export const CANONICAL_CLIENT_ACCOUNTS: CanonicalClientAccount[] = [
   {
     uid: 'client-fernando-valerio',
     name: 'Don Fernando Valerio',
-    email: 'fvalerio@agrivalle.do',
-    companyName: 'Agropecuaria del Valle San Juan S.A.',
-    rnc: '1-02-39841-5',
-    phone: '+1 (809) 557-2200',
+    email: 'gerencia@consorciominero.rd',
+    companyName: 'Consorcio Minero San Juan S.R.L.',
+    rnc: '1-28-76543-9',
+    phone: '+1 (809) 557-3344',
     location: 'San Juan de la Maguana',
     proMemberTier: 'Gold',
-    proMemberPoints: 2100,
+    proMemberPoints: 2400,
     proMemberNumber: 'TMD-PRO-3984'
   }
 ];
@@ -835,6 +835,79 @@ export const INITIAL_PORTAL_PURCHASE_ORDERS: CustomerPurchaseOrder[] = [
     ],
     createdAt: new Date(Date.now() - 35 * 24 * 3600 * 1000).toISOString(),
     updatedAt: new Date(Date.now() - 34 * 24 * 3600 * 1000).toISOString()
+  },
+  // 4. Consorcio Minero San Juan Purchase Order (Fernando Valerio)
+  {
+    id: 'ord-val-092',
+    orderNumber: 'ORD-2026-092',
+    clientId: 'client-fernando-valerio',
+    clientEmail: 'gerencia@consorciominero.rd',
+    clientName: 'Ing. Fernando Valerio',
+    companyName: 'Consorcio Minero San Juan S.R.L.',
+    rncOrCedula: '1-28-76543-9',
+    phone: '+1 (809) 557-3344',
+    items: [
+      {
+        id: 'part-filter-kit-liugong936',
+        partNumber: 'LG-936E-FIL-500H',
+        name: 'Kit de Mantenimiento 500h LiuGong 936E HD OEM Genuine',
+        brand: 'LiuGong',
+        category: 'Filtros y Mantenimiento',
+        priceUsd: 580,
+        quantity: 1,
+        image: '/assets/parts/heavy_oil_filter.jpg',
+        isOem: true,
+        type: 'part'
+      },
+      {
+        id: 'part-hydraulic-oil-tellus46',
+        partNumber: 'SHELL-TELLUS-S2-46',
+        name: 'Tambor Aceite Hidráulico Shell Tellus S2 MX 46 (55 Galones)',
+        brand: 'Shell',
+        category: 'Lubricantes y Grasas',
+        priceUsd: 890,
+        quantity: 1,
+        image: '/assets/parts/shell_grease.jpg',
+        isOem: true,
+        type: 'part'
+      }
+    ],
+    itemsCount: 2,
+    subtotalUsd: 1470,
+    itbisUsd: 264.6,
+    shippingUsd: 90,
+    totalUsd: 1824.6,
+    totalDop: 1824.6 * 60.25,
+    currency: 'USD',
+    status: 'in_transit',
+    paymentStatus: 'paid',
+    paymentMethod: 'transfer',
+    ncfType: 'B01_CREDITO_FISCAL',
+    ncfNumber: 'B0100034902',
+    deliveryMethod: 'express_jobsite',
+    deliveryAddress: 'Campamento Minero Los Frios, San Juan',
+    city: 'San Juan de la Maguana',
+    estimatedDeliveryDate: 'Mañana, 2:00 PM',
+    trackingNumber: 'TMD-LOG-092',
+    carrier: 'Camión de Carga Pesada TMD Móvil #02',
+    timeline: [
+      {
+        status: 'pending',
+        title: 'Orden Confirmada',
+        description: 'Transferencia bancaria Banco Popular validada.',
+        timestamp: new Date(Date.now() - 20 * 3600 * 1000).toISOString(),
+        location: 'TMD Pasarela'
+      },
+      {
+        status: 'in_transit',
+        title: 'En Ruta hacia San Juan',
+        description: 'Despachado en Autopista 6 de Noviembre.',
+        timestamp: new Date(Date.now() - 3 * 3600 * 1000).toISOString(),
+        location: 'Ruta Sur'
+      }
+    ],
+    createdAt: new Date(Date.now() - 20 * 3600 * 1000).toISOString(),
+    updatedAt: new Date(Date.now() - 3 * 3600 * 1000).toISOString()
   }
 ];
 
