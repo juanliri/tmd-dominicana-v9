@@ -480,7 +480,7 @@ export const AdminInventoryModule: React.FC<AdminInventoryModuleProps> = ({
 
       {/* Footer Quick Action */}
       <div className="p-3.5 bg-zinc-50 dark:bg-zinc-900/80 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs">
-        <span className="text-[11px] text-zinc-500">Auto-sincronizado con Firestore</span>
+        <span className="text-[11px] text-zinc-500">Auto-sincronizado con Registro Central Cloud</span>
         <div className="flex items-center gap-2">
           <button
             onClick={onNavigateToMachines}

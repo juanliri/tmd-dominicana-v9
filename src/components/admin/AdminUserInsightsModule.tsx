@@ -360,7 +360,7 @@ export const AdminUserInsightsModule: React.FC<AdminUserInsightsModuleProps> = (
         </div>
 
         <span className="text-[11px] font-bold text-zinc-400">
-          RBAC Security • Firestore
+          RBAC Security • Cloud Enterprise
         </span>
       </div>
 

@@ -144,20 +144,31 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
                 {/* Status & DGII Verification Banner */}
                 <div className="p-3.5 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-zinc-400 block">Estado Actual</span>
+                    <span className="text-[10px] uppercase font-bold text-zinc-400 block">Estado de Proforma</span>
                     <span className={`inline-flex items-center gap-1.5 mt-1 px-2.5 py-0.5 rounded-full text-xs font-bold ${
                       currentQuoteStatus === 'approved'
                         ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
                         : currentQuoteStatus === 'rejected'
-                        ? 'bg-red-500/20 text-red-400 border border-red-500/40'
-                        : 'bg-amber-500/20 text-amber-400 border border-amber-500/40'
+                        ? 'bg-zinc-800 text-amber-400 border border-amber-500/30'
+                        : currentQuoteStatus === 'in_review'
+                        ? 'bg-blue-500/20 text-blue-400 border border-blue-500/40'
+                        : 'bg-sky-500/20 text-sky-400 border border-sky-500/40'
                     }`}>
                       {currentQuoteStatus === 'approved' && <CheckCircle2 className="w-3.5 h-3.5" />}
-                      {(currentQuoteStatus === 'submitted' || currentQuoteStatus === 'in_review' || currentQuoteStatus === 'draft') && (
+                      {(currentQuoteStatus === 'submitted' || currentQuoteStatus === 'draft') && (
                         <Clock className="w-3.5 h-3.5" />
                       )}
+                      {currentQuoteStatus === 'in_review' && <Clock className="w-3.5 h-3.5" />}
                       {currentQuoteStatus === 'rejected' && <AlertCircle className="w-3.5 h-3.5" />}
-                      <span>{(currentQuoteStatus || item.data.status).toUpperCase()}</span>
+                      <span className="uppercase">
+                        {currentQuoteStatus === 'approved' 
+                          ? 'Aprobada' 
+                          : currentQuoteStatus === 'rejected' 
+                          ? 'Desestimada' 
+                          : currentQuoteStatus === 'in_review' 
+                          ? 'En Revisión' 
+                          : 'Enviada'}
+                      </span>
                     </span>
                   </div>
 
@@ -304,7 +315,8 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
                     </button>
                   </div>
 
-                  {isStaffOrAdmin && currentQuoteStatus !== 'approved' && (
+                  {/* Staff / Admin Actions */}
+                  {isStaffOrAdmin && currentQuoteStatus !== 'approved' && currentQuoteStatus !== 'rejected' && (
                     <div className="grid grid-cols-2 gap-2 pt-2">
                       <button
                         type="button"
@@ -312,7 +324,7 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
                           setQuoteStatusOverride('approved');
                           onApproveQuote?.(item.data.id);
                         }}
-                        className="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-black text-xs font-bold transition-colors cursor-pointer shadow-sm"
+                        className="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-black text-xs font-black uppercase transition-colors cursor-pointer shadow-sm"
                       >
                         <Check className="w-4 h-4" />
                         <span>Aprobar Proforma</span>
@@ -324,14 +336,32 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
                           setQuoteStatusOverride('rejected');
                           onRejectQuote?.(item.data.id);
                         }}
-                        className="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-red-600/20 hover:bg-red-600/30 text-red-400 text-xs font-bold transition-colors cursor-pointer border border-red-500/40"
+                        className="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-bold transition-colors cursor-pointer border border-zinc-700"
                       >
                         <X className="w-4 h-4" />
-                        <span>Rechazar</span>
+                        <span>Desestimar</span>
                       </button>
                     </div>
                   )}
 
+                  {/* Client Direct Purchase / Approval Action */}
+                  {!isStaffOrAdmin && currentQuoteStatus !== 'approved' && currentQuoteStatus !== 'rejected' && (
+                    <div className="pt-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setQuoteStatusOverride('approved');
+                          onApproveQuote?.(item.data.id);
+                        }}
+                        className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-black text-xs font-black uppercase transition-all cursor-pointer shadow-md"
+                      >
+                        <Check className="w-4 h-4 stroke-[3]" />
+                        <span>Aceptar Proforma & Confirmar Pedido</span>
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Approved Status Notice */}
                   {currentQuoteStatus === 'approved' && (
                     <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 text-xs font-bold flex items-center gap-2 animate-in fade-in">
                       <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -339,10 +369,35 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
                     </div>
                   )}
 
+                  {/* Desestimada Status with One-Click Reactivation */}
                   {currentQuoteStatus === 'rejected' && (
-                    <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/40 text-red-400 text-xs font-bold flex items-center gap-2 animate-in fade-in">
-                      <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
-                      <span>Cotización Marcada como Rechazada</span>
+                    <div className="space-y-2 pt-2 animate-in fade-in">
+                      <div className="p-3 rounded-lg bg-zinc-900 border border-zinc-700/80 text-zinc-300 text-xs font-medium flex items-center gap-2.5">
+                        <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
+                        <span>Esta proforma fue marcada como desestimada. Puede reactivarla de inmediato según los términos oficiales de TMD.</span>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setQuoteStatusOverride('approved');
+                            onApproveQuote?.(item.data.id);
+                          }}
+                          className="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-amber-400 hover:bg-amber-300 text-black text-xs font-black uppercase transition-all cursor-pointer shadow-sm"
+                        >
+                          <Check className="w-4 h-4 stroke-[3]" />
+                          <span>Reactivar & Comprar</span>
+                        </button>
+                        <a
+                          href={getQuoteWhatsAppUrl(item.data)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/40 text-xs font-bold transition-all cursor-pointer"
+                        >
+                          <Share2 className="w-4 h-4" />
+                          <span>Ajustar Términos</span>
+                        </a>
+                      </div>
                     </div>
                   )}
                 </div>

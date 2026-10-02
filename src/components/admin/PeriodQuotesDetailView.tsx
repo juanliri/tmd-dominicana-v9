@@ -432,7 +432,7 @@ export const PeriodQuotesDetailView: React.FC<PeriodQuotesDetailViewProps> = ({
                         {/* Real vs Period Benchmark Badge */}
                         {q.isRealFirestore ? (
                           <span className="text-[10px] font-bold px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
-                            Firestore Real
+                            En Vivo ERP Cloud
                           </span>
                         ) : (
                           <span className="text-[10px] font-medium px-1.5 py-0.2 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400">

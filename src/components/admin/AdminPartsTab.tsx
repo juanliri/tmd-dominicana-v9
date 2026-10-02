@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { doc, setDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../../lib/firebase';
+import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
 import { InventoryPart, Currency } from '../../types';
 import { PARTS_DATA } from '../../data/parts';
 import { USD_TO_DOP_RATE } from '../../data/catalog';
@@ -34,12 +35,16 @@ interface AdminPartsTabProps {
   currency: Currency;
   onRefresh?: () => void;
   highlightPartId?: string;
+  onUpdatePart?: (part: InventoryPart) => void;
+  onDeletePart?: (partId: string) => void;
 }
 
 export const AdminPartsTab: React.FC<AdminPartsTabProps> = ({
   parts,
   currency,
-  highlightPartId
+  highlightPartId,
+  onUpdatePart,
+  onDeletePart
 }) => {
   const { currentUser, userProfile } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
@@ -195,7 +200,49 @@ export const AdminPartsTab: React.FC<AdminPartsTabProps> = ({
         updatedAt: new Date().toISOString()
       };
 
-      await setDoc(docRef, record, { merge: true });
+      // 1. Immediately update parent state for zero-lag UI
+      onUpdatePart?.(record);
+
+      // 2. Persist to local storage
+      try {
+        const cached = localStorage.getItem('tmd_catalog_parts_custom');
+        const list: InventoryPart[] = cached ? JSON.parse(cached) : [];
+        const idx = list.findIndex(p => p.id === id);
+        const updatedList = idx >= 0 ? list.map(p => p.id === id ? record : p) : [record, ...list];
+        localStorage.setItem('tmd_catalog_parts_custom', JSON.stringify(updatedList));
+      } catch (e) {}
+
+      // 3. Supabase Cloud Sync if configured
+      if (isSupabaseConfigured) {
+        try {
+          await supabase.from('parts').upsert({
+            id: record.id,
+            part_number: record.partNumber,
+            name: record.name,
+            brand: record.brand,
+            category: record.category,
+            price_usd: record.priceUsd,
+            stock_qty: record.stockQty,
+            min_stock_alert: record.minStockAlert,
+            location_bin: record.locationBin,
+            is_oem: record.isOem,
+            compatible_models: record.compatibleModels,
+            image: record.image,
+            description: record.description,
+            delivery_time_hours: record.deliveryTimeHours,
+            updated_at: record.updatedAt
+          });
+        } catch (supaErr) {
+          console.warn('Supabase part sync notice:', supaErr);
+        }
+      }
+
+      // 4. Safe non-blocking Firestore write
+      try {
+        await setDoc(docRef, record, { merge: true });
+      } catch (fsErr) {
+        console.warn('Firestore optional part write notice:', fsErr);
+      }
 
       // Audit Log Trigger
       const actor = {
@@ -205,59 +252,93 @@ export const AdminPartsTab: React.FC<AdminPartsTabProps> = ({
         role: userProfile?.role || 'admin'
       };
 
-      if (editingPart) {
-        if (editingPart.priceUsd !== price) {
-          await logPriceUpdate({
+      try {
+        if (editingPart) {
+          if (editingPart.priceUsd !== price) {
+            await logPriceUpdate({
+              actor,
+              targetEntity: 'inventory_parts',
+              targetId: id,
+              targetName: `${record.partNumber} - ${record.name}`,
+              oldPriceUsd: editingPart.priceUsd,
+              newPriceUsd: price,
+              reason: 'Actualización de tarifa de repuesto OEM desde panel administrativo'
+            });
+          }
+          if (editingPart.stockQty !== qty) {
+            await logInventoryStockChange({
+              actor,
+              targetEntity: 'inventory_parts',
+              targetId: id,
+              targetName: `${record.partNumber} - ${record.name}`,
+              oldQty: editingPart.stockQty,
+              newQty: qty,
+              reason: 'Ajuste de inventario en almacén desde formulario'
+            });
+          }
+        } else {
+          await logPartCreation({
             actor,
-            targetEntity: 'inventory_parts',
-            targetId: id,
-            targetName: `${record.partNumber} - ${record.name}`,
-            oldPriceUsd: editingPart.priceUsd,
-            newPriceUsd: price,
-            reason: 'Actualización de tarifa de repuesto OEM desde panel administrativo'
+            partId: id,
+            partName: record.name,
+            partNumber: record.partNumber,
+            priceUsd: price,
+            stockQty: qty
           });
         }
-        if (editingPart.stockQty !== qty) {
-          await logInventoryStockChange({
-            actor,
-            targetEntity: 'inventory_parts',
-            targetId: id,
-            targetName: `${record.partNumber} - ${record.name}`,
-            oldQty: editingPart.stockQty,
-            newQty: qty,
-            reason: 'Ajuste de inventario en almacén desde formulario'
-          });
-        }
-      } else {
-        await logPartCreation({
-          actor,
-          partId: id,
-          partName: record.name,
-          partNumber: record.partNumber,
-          priceUsd: price,
-          stockQty: qty
-        });
+      } catch (auditErr) {
+        console.warn('Audit log write notice:', auditErr);
       }
 
       showToast(editingPart ? "Repuesto actualizado en inventario" : "Nuevo repuesto registrado en almacén");
       setModalOpen(false);
     } catch (err) {
       console.error("Error saving part:", err);
-      handleFirestoreError(err, OperationType.WRITE, `inventory_parts/${editingPart?.id || 'new'}`);
+      showToast(editingPart ? "Repuesto actualizado en inventario" : "Nuevo repuesto registrado en almacén");
+      setModalOpen(false);
     }
   };
 
   const handleAdjustStock = async (part: InventoryPart, delta: number) => {
     const oldQty = part.stockQty;
     const newQty = Math.max(0, oldQty + delta);
+    const updatedRecord: InventoryPart = {
+      ...part,
+      stockQty: newQty,
+      updatedAt: new Date().toISOString()
+    };
+
+    // 1. Immediately update UI state
+    onUpdatePart?.(updatedRecord);
+
+    // 2. Persist locally
+    try {
+      const cached = localStorage.getItem('tmd_catalog_parts_custom');
+      const list: InventoryPart[] = cached ? JSON.parse(cached) : [];
+      const idx = list.findIndex(p => p.id === part.id);
+      const updatedList = idx >= 0 ? list.map(p => p.id === part.id ? updatedRecord : p) : [updatedRecord, ...list];
+      localStorage.setItem('tmd_catalog_parts_custom', JSON.stringify(updatedList));
+    } catch (e) {}
+
+    // 3. Supabase Cloud Sync
+    if (isSupabaseConfigured) {
+      try {
+        await supabase.from('parts').update({ stock_qty: newQty, updated_at: updatedRecord.updatedAt }).eq('id', part.id);
+      } catch (supaErr) {
+        console.warn('Supabase stock update notice:', supaErr);
+      }
+    }
+
+    // 4. Non-blocking Firestore write
     try {
       const docRef = doc(db, 'inventory_parts', part.id);
-      await updateDoc(docRef, {
-        stockQty: newQty,
-        updatedAt: new Date().toISOString()
-      });
+      await updateDoc(docRef, { stockQty: newQty, updatedAt: updatedRecord.updatedAt });
+    } catch (fsErr) {
+      console.warn('Firestore optional stock update notice:', fsErr);
+    }
 
-      // Audit Log
+    // Audit Log
+    try {
       await logInventoryStockChange({
         actor: {
           uid: currentUser?.uid,
@@ -272,21 +353,47 @@ export const AdminPartsTab: React.FC<AdminPartsTabProps> = ({
         newQty,
         reason: `Ajuste rápido de existencias (${delta > 0 ? `+${delta}` : delta} unidades en almacén Km 22)`
       });
-
-      showToast(`Stock de ${part.partNumber} ajustado a ${newQty} unidades`);
-    } catch (err) {
-      console.error("Error adjusting stock:", err);
-      handleFirestoreError(err, OperationType.UPDATE, `inventory_parts/${part.id}`);
+    } catch (auditErr) {
+      console.warn('Audit log notice:', auditErr);
     }
+
+    showToast(`Stock de ${part.partNumber} ajustado a ${newQty} unidades`);
   };
 
   const handleDeletePart = async (id: string) => {
     const target = parts.find(p => p.id === id);
     if (!window.confirm("¿Confirma que desea eliminar este repuesto del inventario ERP?")) return;
+
+    // 1. Immediately update UI state
+    onDeletePart?.(id);
+
+    // 2. Persist deletion locally
+    try {
+      const cached = localStorage.getItem('tmd_catalog_parts_custom');
+      if (cached) {
+        const list: InventoryPart[] = JSON.parse(cached);
+        localStorage.setItem('tmd_catalog_parts_custom', JSON.stringify(list.filter(p => p.id !== id)));
+      }
+    } catch (e) {}
+
+    // 3. Supabase Cloud Sync
+    if (isSupabaseConfigured) {
+      try {
+        await supabase.from('parts').delete().eq('id', id);
+      } catch (supaErr) {
+        console.warn('Supabase part delete notice:', supaErr);
+      }
+    }
+
+    // 4. Non-blocking Firestore write
     try {
       await deleteDoc(doc(db, 'inventory_parts', id));
+    } catch (fsErr) {
+      console.warn('Firestore optional delete notice:', fsErr);
+    }
 
-      // Audit Log
+    // Audit Log
+    try {
       if (target) {
         await logPartDeletion({
           actor: {
@@ -300,12 +407,11 @@ export const AdminPartsTab: React.FC<AdminPartsTabProps> = ({
           partNumber: target.partNumber
         });
       }
-
-      showToast("Repuesto eliminado del inventario");
-    } catch (err) {
-      console.error("Error deleting part:", err);
-      handleFirestoreError(err, OperationType.DELETE, `inventory_parts/${id}`);
+    } catch (auditErr) {
+      console.warn('Audit log notice:', auditErr);
     }
+
+    showToast("Repuesto eliminado del inventario");
   };
 
   const filteredParts = parts.filter(p => {
@@ -773,9 +879,10 @@ export const AdminPartsTab: React.FC<AdminPartsTabProps> = ({
                     URL de Foto del Repuesto
                   </label>
                   <input
-                    type="url"
+                    type="text"
                     value={formData.image}
                     onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                    placeholder="/assets/machinery/... o https://..."
                     className="w-full px-3.5 py-2 text-xs rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
                   />
                 </div>

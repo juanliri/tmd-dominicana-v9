@@ -435,7 +435,7 @@ export const AdminCrmFunnelView: React.FC<AdminCrmFunnelViewProps> = ({
           <div className="flex items-center gap-2 mb-1">
             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 flex items-center gap-1">
               <Zap className="w-3 h-3" />
-              <span>Trigger RFQ & Subcolección Firestore</span>
+              <span>Trigger RFQ & Pipeline ERP Cloud</span>
             </span>
             <span className="text-[11px] text-zinc-400">
               /quotes/&#123;id&#125;/crm_inquiries
@@ -478,7 +478,7 @@ export const AdminCrmFunnelView: React.FC<AdminCrmFunnelViewProps> = ({
             onClick={handleSimulateAutomatedTrigger}
             disabled={isSimulatingTrigger}
             className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-black font-black rounded-xl text-xs shadow-md transition-all cursor-pointer disabled:opacity-50"
-            title="Genera una cotización y dispara el trigger a la subcolección CRM de Firestore"
+            title="Genera una cotización y dispara el trigger a la canalización CRM del ERP Cloud"
           >
             <Sparkles className="w-3.5 h-3.5" />
             <span>{isSimulatingTrigger ? 'Disparando...' : 'Probar Trigger RFQ'}</span>
@@ -915,7 +915,7 @@ export const AdminCrmFunnelView: React.FC<AdminCrmFunnelViewProps> = ({
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-[10px] uppercase font-black tracking-wider text-amber-400">
-                      Subcolección CRM Firestore
+                      Canal CRM ERP Cloud
                     </span>
                     <span className="text-[10px] font-mono text-zinc-400">
                       {selectedInquiry.id}

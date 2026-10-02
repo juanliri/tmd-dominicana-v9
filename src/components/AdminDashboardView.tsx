@@ -151,6 +151,40 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({
   };
   const [machines, setMachines] = useState<InventoryMachine[]>([]);
   const [parts, setParts] = useState<InventoryPart[]>([]);
+
+  const handleUpdateMachine = (updatedMachine: InventoryMachine) => {
+    setMachines(prev => {
+      const idx = prev.findIndex(m => m.id === updatedMachine.id);
+      const next = idx >= 0 ? prev.map(m => m.id === updatedMachine.id ? updatedMachine : m) : [updatedMachine, ...prev];
+      try { localStorage.setItem('tmd_catalog_machines_custom', JSON.stringify(next)); } catch (e) {}
+      return next;
+    });
+  };
+
+  const handleDeleteMachine = (machineId: string) => {
+    setMachines(prev => {
+      const next = prev.filter(m => m.id !== machineId);
+      try { localStorage.setItem('tmd_catalog_machines_custom', JSON.stringify(next)); } catch (e) {}
+      return next;
+    });
+  };
+
+  const handleUpdatePart = (updatedPart: InventoryPart) => {
+    setParts(prev => {
+      const idx = prev.findIndex(p => p.id === updatedPart.id);
+      const next = idx >= 0 ? prev.map(p => p.id === updatedPart.id ? updatedPart : p) : [updatedPart, ...prev];
+      try { localStorage.setItem('tmd_catalog_parts_custom', JSON.stringify(next)); } catch (e) {}
+      return next;
+    });
+  };
+
+  const handleDeletePart = (partId: string) => {
+    setParts(prev => {
+      const next = prev.filter(p => p.id !== partId);
+      try { localStorage.setItem('tmd_catalog_parts_custom', JSON.stringify(next)); } catch (e) {}
+      return next;
+    });
+  };
   const [loadingData, setLoadingData] = useState(true);
   const [isNotificationCenterOpen, setIsNotificationCenterOpen] = useState(false);
   const [isBulkManagerOpen, setIsBulkManagerOpen] = useState(false);
@@ -288,6 +322,17 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({
               updatedAt: new Date().toISOString()
             }));
           }
+          try {
+            const customMachines = localStorage.getItem('tmd_catalog_machines_custom');
+            if (customMachines) {
+              const parsed: InventoryMachine[] = JSON.parse(customMachines);
+              const customMap = new Map(parsed.map(m => [m.id, m]));
+              fetchedMachines = [
+                ...parsed,
+                ...fetchedMachines.filter(m => !customMap.has(m.id))
+              ];
+            }
+          } catch (e) {}
           if (isMounted) setMachines(fetchedMachines);
 
           // 3. Parts Sync (Supabase -> Unified Store Parts)
@@ -333,6 +378,17 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({
               updatedAt: new Date().toISOString()
             }));
           }
+          try {
+            const customParts = localStorage.getItem('tmd_catalog_parts_custom');
+            if (customParts) {
+              const parsed: InventoryPart[] = JSON.parse(customParts);
+              const customMap = new Map(parsed.map(p => [p.id, p]));
+              fetchedParts = [
+                ...parsed,
+                ...fetchedParts.filter(p => !customMap.has(p.id))
+              ];
+            }
+          } catch (e) {}
           if (isMounted) setParts(fetchedParts);
         })();
 
@@ -1282,6 +1338,8 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({
                 machines={machines}
                 currency={currency}
                 highlightMachineId={highlightItemId || undefined}
+                onUpdateMachine={handleUpdateMachine}
+                onDeleteMachine={handleDeleteMachine}
               />
             )}
 
@@ -1290,6 +1348,8 @@ export const AdminDashboardView: React.FC<AdminDashboardViewProps> = ({
                 parts={parts}
                 currency={currency}
                 highlightPartId={highlightItemId || undefined}
+                onUpdatePart={handleUpdatePart}
+                onDeletePart={handleDeletePart}
               />
             )}
 

@@ -145,7 +145,7 @@ export const AdminSecurityAuditLog: React.FC = () => {
         return (
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-black bg-purple-500/10 text-purple-400 border border-purple-500/20">
             <Database className="w-3.5 h-3.5" />
-            <span>Alta Masiva Firestore</span>
+            <span>Alta Masiva ERP Cloud</span>
           </span>
         );
       case 'MACHINE_CREATED':
@@ -195,11 +195,10 @@ export const AdminSecurityAuditLog: React.FC = () => {
         targetId: 'jcb-3cx-test',
         targetName: 'Retroexcavadora JCB 3CX Eco 4x4 (Verificación Auditoría)',
         previousValue: { basePriceUsd: 85000 },
-        newValue: { basePriceUsd: 88500 },
         diffSummary: 'Precio USD: $85,000 → $88,500 (+4.1%)',
-        details: 'Prueba de validación criptográfica en tiempo real para registro inmutable en Firestore (Fase 20.2).'
+        details: 'Validación criptográfica en tiempo real registrada en el Registro Central de Seguridad ERP.'
       });
-      showFeedback("Entrada de auditoría registrada e inmutabilizada exitosamente en Firestore");
+      showFeedback("Entrada de auditoría registrada e inmutabilizada exitosamente en el Registro Central ERP");
     } catch (e) {
       console.error(e);
     } finally {

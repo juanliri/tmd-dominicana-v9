@@ -645,9 +645,11 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
                           ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
                           : q.status === 'in_review'
                             ? 'bg-amber-400/20 text-amber-400 border border-amber-400/30'
-                            : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                            : q.status === 'rejected'
+                              ? 'bg-zinc-800 text-zinc-400 border border-zinc-700'
+                              : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
                       }`}>
-                        {q.status === 'approved' ? 'Aprobada' : q.status === 'in_review' ? 'En Revisión' : 'Enviada'}
+                        {q.status === 'approved' ? 'Aprobada' : q.status === 'in_review' ? 'En Revisión' : q.status === 'rejected' ? 'Desestimada' : 'Enviada'}
                       </span>
                     </div>
 
@@ -680,6 +682,17 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
                           >
                             <Check className="w-3.5 h-3.5 stroke-[3]" />
                             <span>APROBAR</span>
+                          </button>
+                        )}
+                        {q.status === 'rejected' && (
+                          <button
+                            type="button"
+                            onClick={() => setQuoteToApprove(q)}
+                            className="px-2.5 py-1.5 rounded-[3px] bg-amber-400 hover:bg-amber-300 text-black font-black text-xs flex items-center gap-1 transition-all shadow-xs cursor-pointer uppercase"
+                            title="Reactivar y autorizar esta cotización"
+                          >
+                            <RefreshCw className="w-3.5 h-3.5" />
+                            <span>REACTIVAR</span>
                           </button>
                         )}
                         {q.status === 'approved' && (
@@ -965,6 +978,94 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
           <TechnicalDocumentationVaultTab />
         )}
       </div>
+      {/* QUOTE APPROVAL & REACTIVATION CONFIRMATION MODAL */}
+      {quoteToApprove && createPortal(
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-in fade-in">
+          <div className="bg-zinc-900 border border-amber-500/40 rounded-[5px] max-w-lg w-full p-6 space-y-4 shadow-2xl relative overflow-hidden font-sans">
+            <div className="flex items-start justify-between gap-3 pb-3 border-b border-zinc-800">
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-[3px] bg-amber-400 text-black flex items-center justify-center font-black">
+                  <CheckCircle2 className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-black text-white uppercase tracking-tight font-display">
+                    {quoteToApprove.status === 'rejected' ? 'Reactivar & Confirmar Cotización' : 'Aprobar Proforma Fiscal B01'}
+                  </h3>
+                  <span className="text-[10px] font-mono text-amber-400 font-bold">
+                    {quoteToApprove.quoteNumber || 'TMD-PROFORMA'}
+                  </span>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setQuoteToApprove(null)}
+                className="text-zinc-500 hover:text-white p-1 cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="p-3.5 rounded bg-zinc-950/80 border border-zinc-800 space-y-2 text-xs">
+              <div className="flex items-center justify-between text-zinc-400">
+                <span>Equipo / Ítem Cotizado:</span>
+                <span className="font-bold text-white text-right max-w-[260px] truncate">
+                  {quoteToApprove.itemsSummary || 'Maquinaria Pesada TMD'}
+                </span>
+              </div>
+              <div className="flex items-center justify-between text-zinc-400">
+                <span>Total Proforma (ITBIS incl.):</span>
+                <span className="text-base font-black text-amber-400 font-mono">
+                  {formatPrice(quoteToApprove.total || 0)}
+                </span>
+              </div>
+            </div>
+
+            <div className="space-y-2 text-[11px] text-zinc-300">
+              <div className="flex items-start gap-2">
+                <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                <span>Bloqueo y reserva inmediata de número de chasis en Patio Km 22.</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                <span>Emisión de factura con Valor de Crédito Fiscal (Comprobante B01 DGII).</span>
+              </div>
+              <div className="flex items-start gap-2">
+                <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                <span>Acreditación automática de +500 Puntos Club Pro VIP en tu cuenta corporativa.</span>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-end gap-2 pt-3 border-t border-zinc-800">
+              <button
+                type="button"
+                onClick={() => setQuoteToApprove(null)}
+                className="px-4 py-2 rounded-[3px] border border-zinc-700 text-zinc-400 hover:text-white font-bold text-xs uppercase cursor-pointer"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmApproval}
+                disabled={isApprovingQuote}
+                className="px-5 py-2 rounded-[3px] bg-amber-400 hover:bg-amber-300 text-black font-black text-xs uppercase flex items-center gap-1.5 shadow-md cursor-pointer transition-all disabled:opacity-50"
+              >
+                {isApprovingQuote ? (
+                  <>
+                    <div className="w-3.5 h-3.5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                    <span>Confirmando...</span>
+                  </>
+                ) : (
+                  <>
+                    <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    <span>Confirmar Aprobación</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 };

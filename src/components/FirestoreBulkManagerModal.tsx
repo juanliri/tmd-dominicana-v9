@@ -277,7 +277,7 @@ export const FirestoreBulkManagerModal: React.FC<FirestoreBulkManagerModalProps>
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-xs sm:text-sm font-bold text-white uppercase tracking-tight">Gestor de Carga Masiva Firestore</h2>
+                <h2 className="text-xs sm:text-sm font-bold text-white uppercase tracking-tight">Gestor de Carga Masiva Cloud ERP</h2>
                 <span className="px-1.5 py-0.2 rounded-[2px] bg-emerald-500/20 text-emerald-400 text-[9px] font-bold border border-emerald-500/30 flex items-center gap-1 uppercase">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   Conectado

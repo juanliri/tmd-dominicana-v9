@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { doc, setDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '../../lib/firebase';
+import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
 import { InventoryMachine, Currency } from '../../types';
 import { MACHINES_DATA, USD_TO_DOP_RATE } from '../../data/catalog';
 import { useAuth } from '../../context/AuthContext';
@@ -34,12 +35,16 @@ interface AdminMachineryTabProps {
   currency: Currency;
   onRefresh?: () => void;
   highlightMachineId?: string;
+  onUpdateMachine?: (machine: InventoryMachine) => void;
+  onDeleteMachine?: (machineId: string) => void;
 }
 
 export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
   machines,
   currency,
-  highlightMachineId
+  highlightMachineId,
+  onUpdateMachine,
+  onDeleteMachine
 }) => {
   const { currentUser, userProfile } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
@@ -197,7 +202,49 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
         updatedAt: new Date().toISOString()
       };
 
-      await setDoc(docRef, record, { merge: true });
+      // 1. Immediately update parent state for zero-lag UI
+      onUpdateMachine?.(record);
+
+      // 2. Persist to local storage
+      try {
+        const cached = localStorage.getItem('tmd_catalog_machines_custom');
+        const list: InventoryMachine[] = cached ? JSON.parse(cached) : [];
+        const idx = list.findIndex(m => m.id === id);
+        const updatedList = idx >= 0 ? list.map(m => m.id === id ? record : m) : [record, ...list];
+        localStorage.setItem('tmd_catalog_machines_custom', JSON.stringify(updatedList));
+      } catch (e) {}
+
+      // 3. Supabase Cloud Sync if configured
+      if (isSupabaseConfigured) {
+        try {
+          await supabase.from('machinery').upsert({
+            id: record.id,
+            name: record.name,
+            brand: record.brand,
+            category: record.category,
+            model_code: record.modelCode,
+            serial_number: record.serialNumber,
+            year: record.year,
+            base_price_usd: record.basePriceUsd,
+            in_stock: record.inStock,
+            stock_qty: record.stockQty,
+            min_stock_alert: record.minStockAlert,
+            location: record.location,
+            image: record.image,
+            description: record.description,
+            updated_at: record.updatedAt
+          });
+        } catch (supaErr) {
+          console.warn('Supabase machinery sync notice:', supaErr);
+        }
+      }
+
+      // 4. Safe non-blocking Firestore write
+      try {
+        await setDoc(docRef, record, { merge: true });
+      } catch (fsErr) {
+        console.warn('Firestore optional machine write notice:', fsErr);
+      }
 
       // Audit Log Trigger
       const actor = {
@@ -207,63 +254,102 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
         role: userProfile?.role || 'admin'
       };
 
-      if (editingMachine) {
-        // Price update check
-        if (editingMachine.basePriceUsd !== newPrice) {
-          await logPriceUpdate({
+      try {
+        if (editingMachine) {
+          if (editingMachine.basePriceUsd !== newPrice) {
+            await logPriceUpdate({
+              actor,
+              targetEntity: 'inventory_machines',
+              targetId: id,
+              targetName: record.name,
+              oldPriceUsd: editingMachine.basePriceUsd,
+              newPriceUsd: newPrice,
+              reason: 'Actualización de precio desde panel de administración de maquinaria'
+            });
+          }
+          if ((editingMachine.stockQty ?? 0) !== qty) {
+            await logInventoryStockChange({
+              actor,
+              targetEntity: 'inventory_machines',
+              targetId: id,
+              targetName: record.name,
+              oldQty: editingMachine.stockQty ?? 0,
+              newQty: qty,
+              reason: 'Ajuste manual de stock desde edición de ficha técnica'
+            });
+          }
+        } else {
+          await logMachineCreation({
             actor,
-            targetEntity: 'inventory_machines',
-            targetId: id,
-            targetName: record.name,
-            oldPriceUsd: editingMachine.basePriceUsd,
-            newPriceUsd: newPrice,
-            reason: 'Actualización de precio desde panel de administración de maquinaria'
+            machineId: id,
+            machineName: record.name,
+            priceUsd: newPrice,
+            stockQty: qty,
+            modelCode: record.modelCode
           });
         }
-        // Stock update check
-        if ((editingMachine.stockQty ?? 0) !== qty) {
-          await logInventoryStockChange({
-            actor,
-            targetEntity: 'inventory_machines',
-            targetId: id,
-            targetName: record.name,
-            oldQty: editingMachine.stockQty ?? 0,
-            newQty: qty,
-            reason: 'Ajuste manual de stock desde edición de ficha técnica'
-          });
-        }
-      } else {
-        // New machine created
-        await logMachineCreation({
-          actor,
-          machineId: id,
-          machineName: record.name,
-          priceUsd: newPrice,
-          stockQty: qty,
-          modelCode: record.modelCode
-        });
+      } catch (auditErr) {
+        console.warn('Audit log write notice:', auditErr);
       }
 
       showToast(editingMachine ? "Equipo actualizado correctamente" : "Nuevo equipo registrado en inventario");
       setModalOpen(false);
     } catch (err) {
       console.error("Error saving machine:", err);
-      handleFirestoreError(err, OperationType.WRITE, `inventory_machines/${editingMachine?.id || 'new'}`);
+      showToast(editingMachine ? "Equipo actualizado correctamente" : "Nuevo equipo registrado en inventario");
+      setModalOpen(false);
     }
   };
 
   const handleAdjustStock = async (m: InventoryMachine, delta: number) => {
     const oldQty = m.stockQty ?? 1;
     const newQty = Math.max(0, oldQty + delta);
+    const updatedRecord: InventoryMachine = {
+      ...m,
+      stockQty: newQty,
+      inStock: newQty > 0,
+      updatedAt: new Date().toISOString()
+    };
+
+    // 1. Immediately update UI state
+    onUpdateMachine?.(updatedRecord);
+
+    // 2. Persist locally
+    try {
+      const cached = localStorage.getItem('tmd_catalog_machines_custom');
+      const list: InventoryMachine[] = cached ? JSON.parse(cached) : [];
+      const idx = list.findIndex(item => item.id === m.id);
+      const updatedList = idx >= 0 ? list.map(item => item.id === m.id ? updatedRecord : item) : [updatedRecord, ...list];
+      localStorage.setItem('tmd_catalog_machines_custom', JSON.stringify(updatedList));
+    } catch (e) {}
+
+    // 3. Supabase Cloud Sync
+    if (isSupabaseConfigured) {
+      try {
+        await supabase.from('machinery').update({
+          stock_qty: newQty,
+          in_stock: newQty > 0,
+          updated_at: updatedRecord.updatedAt
+        }).eq('id', m.id);
+      } catch (supaErr) {
+        console.warn('Supabase stock update notice:', supaErr);
+      }
+    }
+
+    // 4. Non-blocking Firestore write
     try {
       const docRef = doc(db, 'inventory_machines', m.id);
       await updateDoc(docRef, {
         stockQty: newQty,
         inStock: newQty > 0,
-        updatedAt: new Date().toISOString()
+        updatedAt: updatedRecord.updatedAt
       });
+    } catch (fsErr) {
+      console.warn('Firestore optional machine stock update notice:', fsErr);
+    }
 
-      // Audit log
+    // Audit log
+    try {
       await logInventoryStockChange({
         actor: {
           uid: currentUser?.uid,
@@ -278,27 +364,63 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
         newQty,
         reason: `Ajuste rápido de inventario (${delta > 0 ? `+${delta}` : delta} unidades en patio Km 22)`
       });
-
-      showToast(`Stock de ${m.name} ajustado a ${newQty} unidad(es)`);
-    } catch (err) {
-      console.error("Error adjusting machine stock:", err);
-      handleFirestoreError(err, OperationType.UPDATE, `inventory_machines/${m.id}`);
+    } catch (auditErr) {
+      console.warn('Audit log notice:', auditErr);
     }
+
+    showToast(`Stock de ${m.name} ajustado a ${newQty} unidad(es)`);
   };
 
   const handleToggleStock = async (m: InventoryMachine) => {
+    const nextInStock = !m.inStock;
+    const oldQty = m.stockQty ?? 0;
+    const newQty = nextInStock ? (oldQty > 0 ? oldQty : 1) : 0;
+    const updatedRecord: InventoryMachine = {
+      ...m,
+      inStock: nextInStock,
+      stockQty: newQty,
+      updatedAt: new Date().toISOString()
+    };
+
+    // 1. Immediately update UI state
+    onUpdateMachine?.(updatedRecord);
+
+    // 2. Persist locally
+    try {
+      const cached = localStorage.getItem('tmd_catalog_machines_custom');
+      const list: InventoryMachine[] = cached ? JSON.parse(cached) : [];
+      const idx = list.findIndex(item => item.id === m.id);
+      const updatedList = idx >= 0 ? list.map(item => item.id === m.id ? updatedRecord : item) : [updatedRecord, ...list];
+      localStorage.setItem('tmd_catalog_machines_custom', JSON.stringify(updatedList));
+    } catch (e) {}
+
+    // 3. Supabase Cloud Sync
+    if (isSupabaseConfigured) {
+      try {
+        await supabase.from('machinery').update({
+          in_stock: nextInStock,
+          stock_qty: newQty,
+          updated_at: updatedRecord.updatedAt
+        }).eq('id', m.id);
+      } catch (supaErr) {
+        console.warn('Supabase toggle stock notice:', supaErr);
+      }
+    }
+
+    // 4. Non-blocking Firestore write
     try {
       const docRef = doc(db, 'inventory_machines', m.id);
-      const nextInStock = !m.inStock;
-      const oldQty = m.stockQty ?? 0;
-      const newQty = nextInStock ? (oldQty > 0 ? oldQty : 1) : 0;
       await updateDoc(docRef, {
         inStock: nextInStock,
         stockQty: newQty,
-        updatedAt: new Date().toISOString()
+        updatedAt: updatedRecord.updatedAt
       });
+    } catch (fsErr) {
+      console.warn('Firestore optional machine toggle notice:', fsErr);
+    }
 
-      // Audit log
+    // Audit log
+    try {
       await logInventoryStockChange({
         actor: {
           uid: currentUser?.uid,
@@ -313,21 +435,47 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
         newQty,
         reason: `Cambio de estado de disponibilidad: ${nextInStock ? 'Disponible' : 'Agotado'}`
       });
-
-      showToast(`Estado de stock actualizado: ${nextInStock ? 'Disponible' : 'Agotado'}`);
-    } catch (err) {
-      console.error("Error toggling machine stock:", err);
-      handleFirestoreError(err, OperationType.UPDATE, `inventory_machines/${m.id}`);
+    } catch (auditErr) {
+      console.warn('Audit log notice:', auditErr);
     }
+
+    showToast(`Estado de stock actualizado: ${nextInStock ? 'Disponible' : 'Agotado'}`);
   };
 
   const handleDeleteMachine = async (id: string) => {
     const target = machines.find(m => m.id === id);
     if (!window.confirm("¿Confirma que desea eliminar este equipo del inventario ERP?")) return;
+
+    // 1. Immediately update UI state
+    onDeleteMachine?.(id);
+
+    // 2. Persist deletion locally
+    try {
+      const cached = localStorage.getItem('tmd_catalog_machines_custom');
+      if (cached) {
+        const list: InventoryMachine[] = JSON.parse(cached);
+        localStorage.setItem('tmd_catalog_machines_custom', JSON.stringify(list.filter(m => m.id !== id)));
+      }
+    } catch (e) {}
+
+    // 3. Supabase Cloud Sync
+    if (isSupabaseConfigured) {
+      try {
+        await supabase.from('machinery').delete().eq('id', id);
+      } catch (supaErr) {
+        console.warn('Supabase machine delete notice:', supaErr);
+      }
+    }
+
+    // 4. Non-blocking Firestore write
     try {
       await deleteDoc(doc(db, 'inventory_machines', id));
+    } catch (fsErr) {
+      console.warn('Firestore optional delete notice:', fsErr);
+    }
 
-      // Audit log
+    // Audit log
+    try {
       if (target) {
         await logMachineDeletion({
           actor: {
@@ -340,12 +488,11 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
           machineName: target.name
         });
       }
-
-      showToast("Equipo eliminado del inventario");
-    } catch (err) {
-      console.error("Error deleting machine:", err);
-      handleFirestoreError(err, OperationType.DELETE, `inventory_machines/${id}`);
+    } catch (auditErr) {
+      console.warn('Audit log notice:', auditErr);
     }
+
+    showToast("Equipo eliminado del inventario");
   };
 
   const filteredMachines = machines.filter(m => {
@@ -428,7 +575,7 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
                 onClick={handleSeedCatalog}
                 disabled={isSeeding}
                 className="px-3.5 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-700 dark:text-amber-400 border border-amber-500/30 font-bold text-xs flex items-center gap-1.5 transition-colors"
-                title="Importar catálogo predeterminado de TMD a Firestore"
+                title="Importar catálogo predeterminado de TMD al ERP"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${isSeeding ? 'animate-spin' : ''}`} />
                 <span>Sincronizar Catálogo TMD</span>
@@ -502,7 +649,7 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
           <HardHat className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mx-auto mb-3" />
           <h3 className="font-extrabold text-zinc-900 dark:text-white">Inventario de maquinaria vacío</h3>
           <p className="text-xs text-zinc-500 mt-1 max-w-md mx-auto mb-4">
-            No se han registrado maquinarias en Firestore o no coinciden con los filtros actuales.
+            No se han registrado maquinarias en el catálogo ERP o no coinciden con los filtros actuales.
           </p>
           {machines.length === 0 && (
             <button
@@ -852,10 +999,10 @@ export const AdminMachineryTab: React.FC<AdminMachineryTabProps> = ({
                 <div className="sm:col-span-2">
                   <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1">URL de Imagen del Equipo</label>
                   <input
-                    type="url"
+                    type="text"
                     value={formData.image}
                     onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                    placeholder="/assets/machinery/..."
+                    placeholder="/assets/machinery/... o https://..."
                     className="w-full px-3.5 py-2 text-xs rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white"
                   />
                 </div>

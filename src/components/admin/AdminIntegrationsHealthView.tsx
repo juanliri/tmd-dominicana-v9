@@ -536,7 +536,7 @@ export const AdminIntegrationsHealthView: React.FC = () => {
           ARQUITECTURA DE DATOS UNIFICADA (TMD DOMINICANA)
         </h4>
         <p className="text-zinc-400 leading-relaxed text-[11px]">
-          La plataforma en Google Cloud Run actúa como orquestador central: las solicitudes de repuestos y órdenes de taller se enrutan a <strong className="text-zinc-200">Fullbay Connect</strong>; la telemetría en tiempo real de tractores y excavadoras se extrae de los feeds <strong className="text-zinc-200">JCB LiveLink</strong> y <strong className="text-zinc-200">KubotaNOW AEMP 2.0</strong>; y el catálogo comercial de venta de maquinaria nueva junto a los controles administrativos residen en <strong className="text-zinc-200">Google Cloud Firestore</strong>.
+          La plataforma en Google Cloud Run actúa como orquestador central: las solicitudes de repuestos y órdenes de taller se enrutan a <strong className="text-zinc-200">Fullbay Connect</strong>; la telemetría en tiempo real de tractores y excavadoras se extrae de los feeds <strong className="text-zinc-200">JCB LiveLink</strong> y <strong className="text-zinc-200">KubotaNOW AEMP 2.0</strong>; y el catálogo comercial de venta de maquinaria nueva junto a los controles administrativos residen en <strong className="text-zinc-200">el Motor de Base de Datos Cloud ERP</strong>.
         </p>
       </div>
     </div>
