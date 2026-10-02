@@ -60,21 +60,21 @@ export const PortalBottomBar: React.FC<PortalBottomBarProps> = ({
   const PRIMARY_TABS = [
     { id: 'overview', label: 'Inicio', icon: LayoutDashboard },
     { id: 'quotes', label: 'Cotizaciones', icon: FileText, badge: quotesCount > 0 ? quotesCount : undefined },
-    { id: 'orders', label: 'Taller', icon: Wrench, badge: ordersCount > 0 ? ordersCount : undefined },
-    { id: 'livelink', label: 'Flota GPS', icon: Radio }
+    { id: 'orders', label: 'Servicios', icon: Wrench, badge: ordersCount > 0 ? ordersCount : undefined },
+    { id: 'livelink', label: 'Mi Flota', icon: Radio }
   ];
 
   // Secondary tabs shown inside the "Más" drawer
   const SECONDARY_TABS = [
-    { id: 'pro', label: 'Club Pro TMD', icon: Crown, requiredPermission: 'canViewProMember' as const },
-    { id: 'docs', label: 'Bóveda Técnica OEM', icon: BookOpen, requiredPermission: 'canViewTechDocs' as const },
-    { id: 'workflow', label: 'Oficina & Pases Garita', icon: Package, requiredPermission: 'canAccessOfficeWorkflow' as const },
-    { id: 'inventory', label: 'Stock Repuestos', icon: Package, requiredPermission: 'canViewInventory' as const },
-    { id: 'patio', label: 'Patio Km 22 GPS', icon: MapPin, requiredPermission: 'canAccessPatio' as const },
-    { id: 'integrations', label: 'Integraciones ERP', icon: Activity, requiredPermission: 'canAccessIntegrations' as const },
-    { id: 'metrics', label: 'Métricas DGII 606', icon: BarChart3, requiredPermission: 'canViewRevenueMetrics' as const },
-    { id: 'users', label: 'Usuarios & RBAC', icon: Users, requiredPermission: 'canManageUsers' as const },
-    { id: 'audit', label: 'Auditoría & Logs', icon: ShieldCheck, requiredPermission: 'canAccessAuditLog' as const }
+    { id: 'pro', label: 'Club Pro (Puntos)', icon: Crown, requiredPermission: 'canViewProMember' as const },
+    { id: 'docs', label: 'Manuales y Fichas', icon: BookOpen, requiredPermission: 'canViewTechDocs' as const },
+    { id: 'workflow', label: 'Despacho & Patio', icon: Package, requiredPermission: 'canAccessOfficeWorkflow' as const },
+    { id: 'inventory', label: 'Inventario & Repuestos', icon: Package, requiredPermission: 'canViewInventory' as const },
+    { id: 'patio', label: 'Control Pistas Km 22', icon: MapPin, requiredPermission: 'canAccessPatio' as const },
+    { id: 'integrations', label: 'Conexiones & APIs', icon: Activity, requiredPermission: 'canAccessIntegrations' as const },
+    { id: 'metrics', label: 'Reportes de Ventas', icon: BarChart3, requiredPermission: 'canViewRevenueMetrics' as const },
+    { id: 'users', label: 'Equipo & Roles', icon: Users, requiredPermission: 'canManageUsers' as const },
+    { id: 'audit', label: 'Seguridad & Logs', icon: ShieldCheck, requiredPermission: 'canAccessAuditLog' as const }
   ].filter(tab => !tab.requiredPermission || hasPermission(currentRole, tab.requiredPermission));
 
   const barContent = (

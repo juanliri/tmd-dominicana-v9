@@ -31,6 +31,7 @@ import { triggerRfqCrmInquiryLogging } from '../../services/crmService';
 import { getQuoteWhatsAppUrl } from '../../utils/whatsappMessaging';
 import { MarginGuardValidatorModal } from '../commercial/MarginGuardValidatorModal';
 import { supabase, isSupabaseConfigured } from '../../lib/supabaseClient';
+import { useNotifications } from '../../context/NotificationContext';
 
 interface CreateMachineQuoteModalProps {
   currentUser: { uid: string; email?: string | null; displayName?: string | null } | null;
@@ -45,6 +46,7 @@ export const CreateMachineQuoteModal: React.FC<CreateMachineQuoteModalProps> = (
   onClose,
   onQuoteCreated
 }) => {
+  const { addNotification } = useNotifications();
   const [selectedMachineId, setSelectedMachineId] = useState<string>(MACHINES_DATA[0].id);
   const [companyName, setCompanyName] = useState<string>(userProfile?.companyName || 'Constructora / Particular');
   const [clientName, setClientName] = useState<string>(userProfile?.displayName || currentUser?.displayName || 'Ing. Contratista');
@@ -274,6 +276,16 @@ export const CreateMachineQuoteModal: React.FC<CreateMachineQuoteModalProps> = (
         });
         window.open(waUrl, '_blank', 'noopener,noreferrer');
       }
+
+      // Real notification for the user
+      addNotification({
+        title: `Nueva Cotización ${createdQuote.quoteNumber}`,
+        body: `Tu solicitud para ${selectedMachine.brand} ${selectedMachine.name} fue enviada a revisión técnica.`,
+        type: 'quote_status',
+        quoteId: createdQuote.id,
+        quoteNumber: createdQuote.quoteNumber,
+        actionUrl: '#/portal'
+      });
 
       if (onQuoteCreated) {
         onQuoteCreated(createdQuote);

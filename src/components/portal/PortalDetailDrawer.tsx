@@ -173,10 +173,10 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
                   </div>
 
                   <div className="text-right">
-                    <span className="text-[10px] uppercase font-bold text-zinc-400 block">Comprobante DGII</span>
+                    <span className="text-[10px] uppercase font-bold text-zinc-400 block">Tipo de Factura</span>
                     <span className="inline-flex items-center gap-1 text-xs font-mono font-bold text-amber-400 mt-1">
                       <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>{item.data.ncfType || 'B01 CRÉDITO FISCAL'}</span>
+                      <span>{item.data.ncfType ? 'Con Crédito Fiscal' : 'Consumo / Final'}</span>
                     </span>
                   </div>
                 </div>
@@ -222,7 +222,7 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
                 <div className="space-y-2">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
                     <DollarSign className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Desglose Fiscal NCF (DGII 606/607)</span>
+                    <span>Detalle de Precios & Pago</span>
                   </h4>
                   <div className="p-4 rounded-lg bg-zinc-900/90 border border-zinc-800 space-y-2.5 text-xs">
                     <div className="flex justify-between text-zinc-400">
@@ -230,11 +230,11 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
                       <span className="font-mono text-zinc-200">US$ {item.data.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
                     </div>
                     <div className="flex justify-between text-zinc-400">
-                      <span>ITBIS (18% Ley Dominicana):</span>
+                      <span>Impuestos (18% ITBIS):</span>
                       <span className="font-mono text-zinc-200">US$ {item.data.itbis.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
                     </div>
                     <div className="pt-2 border-t border-zinc-800 flex justify-between items-baseline">
-                      <span className="text-sm font-bold text-white uppercase">Total Final Proforma:</span>
+                      <span className="text-sm font-bold text-white uppercase">Total de la Cotización:</span>
                       <div className="text-right">
                         <span className="text-base font-bold text-amber-400 font-mono">
                           US$ {item.data.total.toLocaleString('en-US', { minimumFractionDigits: 2 })}
@@ -365,7 +365,7 @@ export const PortalDetailDrawer: React.FC<PortalDetailDrawerProps> = ({
                   {currentQuoteStatus === 'approved' && (
                     <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 text-xs font-bold flex items-center gap-2 animate-in fade-in">
                       <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                      <span>Cotización Aprobada Exitosamente • NCF Fiscal DGII Asignado</span>
+                      <span>Cotización Confirmada • Lista para Despacho</span>
                     </div>
                   )}
 

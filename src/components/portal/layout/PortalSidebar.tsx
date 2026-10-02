@@ -83,20 +83,21 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
   const [showRoleSelector, setShowRoleSelector] = useState(false);
   const roleStyle = PORTAL_ROLE_COLORS[currentRole] || PORTAL_ROLE_COLORS.client;
   const roleLabel = PORTAL_ROLE_LABELS[currentRole] || 'USUARIO';
+  const isClientRole = currentRole === 'client';
 
-  // Navigation Items Registry — 4 Enterprise Departments
-  const NAV_ITEMS: PortalNavItem[] = [
-    // 1. Core / General
+  // Navigation Items Registry — Customer-Centric for Clients, Operational for Staff
+  const NAV_ITEMS: PortalNavItem[] = isClientRole ? [
+    // 1. Mi Cuenta
     {
       id: 'overview',
-      label: 'Panel Principal',
+      label: 'Resumen de Cuenta',
       icon: LayoutDashboard,
       category: 'core'
     },
-    // 2. Ventas & CRM
+    // 2. Compras & Cotizaciones
     {
       id: 'quotes',
-      label: 'Cotizaciones B01',
+      label: 'Mis Cotizaciones',
       icon: FileText,
       badge: quotesCount > 0 ? quotesCount : undefined,
       requiredPermission: 'canViewOwnQuotes',
@@ -104,7 +105,61 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
     },
     {
       id: 'purchases',
-      label: 'Historial Pedidos',
+      label: 'Mis Pedidos',
+      icon: Package,
+      requiredPermission: 'canViewOwnOrders',
+      category: 'sales'
+    },
+    {
+      id: 'pro',
+      label: 'Club Pro (Puntos)',
+      icon: Crown,
+      requiredPermission: 'canViewProMember',
+      category: 'sales'
+    },
+    // 3. Mis Equipos
+    {
+      id: 'livelink',
+      label: 'Mi Flota con GPS',
+      icon: Radio,
+      requiredPermission: 'canViewOwnFleet',
+      category: 'fleet'
+    },
+    // 4. Soporte & Taller
+    {
+      id: 'orders',
+      label: 'Servicios de Taller',
+      icon: Wrench,
+      badge: ordersCount > 0 ? ordersCount : undefined,
+      requiredPermission: 'canViewOwnOrders',
+      category: 'ops'
+    },
+    {
+      id: 'docs',
+      label: 'Manuales y Fichas',
+      icon: BookOpen,
+      requiredPermission: 'canViewTechDocs',
+      category: 'ops'
+    }
+  ] : [
+    // Personal Interno TMD / Administración
+    {
+      id: 'overview',
+      label: 'Panel Principal',
+      icon: LayoutDashboard,
+      category: 'core'
+    },
+    {
+      id: 'quotes',
+      label: 'Gestor de Cotizaciones',
+      icon: FileText,
+      badge: quotesCount > 0 ? quotesCount : undefined,
+      requiredPermission: 'canViewOwnQuotes',
+      category: 'sales'
+    },
+    {
+      id: 'purchases',
+      label: 'Órdenes de Compra',
       icon: Package,
       requiredPermission: 'canViewOwnOrders',
       category: 'sales'
@@ -116,10 +171,9 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
       requiredPermission: 'canViewProMember',
       category: 'sales'
     },
-    // 3. Taller & Operaciones (Km 22)
     {
       id: 'orders',
-      label: 'Órdenes de Servicio',
+      label: 'Órdenes de Taller',
       icon: Wrench,
       badge: ordersCount > 0 ? ordersCount : undefined,
       requiredPermission: 'canViewOwnOrders',
@@ -127,65 +181,63 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
     },
     {
       id: 'workflow',
-      label: 'Oficina & Pases Garita',
+      label: 'Despachos & Patio',
       icon: Layers,
       requiredPermission: 'canAccessOfficeWorkflow',
       category: 'ops'
     },
     {
       id: 'inventory',
-      label: 'Stock & Repuestos',
+      label: 'Inventario & Repuestos',
       icon: Zap,
       requiredPermission: 'canViewInventory',
       category: 'ops'
     },
     {
       id: 'docs',
-      label: 'Bóveda Técnica OEM',
+      label: 'Manuales Técnicos',
       icon: BookOpen,
       requiredPermission: 'canViewTechDocs',
       category: 'ops'
     },
-    // 4. Flota & Telemetría IoT
     {
       id: 'livelink',
-      label: 'LiveLink™ Satelital',
+      label: 'Telemetría Satelital',
       icon: Radio,
       requiredPermission: 'canViewOwnFleet',
       category: 'fleet'
     },
     {
       id: 'patio',
-      label: 'Patio Km 22 GPS',
+      label: 'Control de Pistas Km 22',
       icon: MapPin,
       requiredPermission: 'canAccessPatio',
       category: 'fleet'
     },
-    // 5. Finanzas & Administración ERP
     {
       id: 'integrations',
-      label: 'Integraciones ERP',
+      label: 'Conexiones & APIs',
       icon: Activity,
       requiredPermission: 'canAccessIntegrations',
       category: 'admin'
     },
     {
       id: 'metrics',
-      label: 'Métricas DGII 606',
+      label: 'Reportes de Ventas',
       icon: BarChart3,
       requiredPermission: 'canViewRevenueMetrics',
       category: 'admin'
     },
     {
       id: 'users',
-      label: 'Usuarios & RBAC',
+      label: 'Equipo & Roles',
       icon: Users,
       requiredPermission: 'canManageUsers',
       category: 'admin'
     },
     {
       id: 'audit',
-      label: 'Auditoría & Logs',
+      label: 'Seguridad & Logs',
       icon: ShieldCheck,
       requiredPermission: 'canAccessAuditLog',
       category: 'admin'
@@ -198,12 +250,17 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
     return hasPermission(currentRole, item.requiredPermission);
   });
 
-  const categories = [
+  const categories = isClientRole ? [
+    { key: 'core', label: 'Mi Cuenta' },
+    { key: 'sales', label: 'Compras y Cotizaciones' },
+    { key: 'fleet', label: 'Mis Equipos' },
+    { key: 'ops', label: 'Soporte y Taller' }
+  ] : [
     { key: 'core', label: 'General' },
-    { key: 'sales', label: 'Ventas & CRM' },
-    { key: 'ops', label: 'Taller & Operaciones' },
-    { key: 'fleet', label: 'Flota & Telemetría' },
-    { key: 'admin', label: 'Finanzas & Administración' }
+    { key: 'sales', label: 'Ventas' },
+    { key: 'ops', label: 'Operaciones' },
+    { key: 'fleet', label: 'Flota & GPS' },
+    { key: 'admin', label: 'Administración' }
   ];
 
   const allRoles: PortalRole[] = ['client', 'dealer', 'mechanic', 'sales', 'warehouse', 'finance', 'admin'];

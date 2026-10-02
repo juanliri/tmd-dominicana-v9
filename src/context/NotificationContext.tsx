@@ -48,6 +48,15 @@ interface NotificationContextType {
     targetCategory?: string;
     actionUrl?: string;
   }) => Promise<AppNotification>;
+  addNotification: (params: {
+    title: string;
+    body: string;
+    type?: import('../types').NotificationType;
+    quoteId?: string;
+    quoteNumber?: string;
+    actionUrl?: string;
+    userId?: string;
+  }) => AppNotification;
   sendTestPushAlert: () => Promise<void>;
   checkMaintenanceReminders: (customFleet?: RegisteredEquipment[]) => Promise<AppNotification[]>;
   dismissToast: () => void;
@@ -55,41 +64,60 @@ interface NotificationContextType {
 
 const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
 
-// Initial seed offers if database is clean
-const INITIAL_DEMO_OFFERS: AppNotification[] = [
-  {
-    id: 'demo_offer_1',
-    userId: 'all',
-    title: '🚜 Tasa Especial de Leasing 7.9% con Banco Popular',
-    body: 'Financia tu Retroexcavadora JCB 3CX o Excavadora LiuGong 922E con plazos hasta 60 meses y 90 días de gracia para el sector construcción en RD.',
-    type: 'special_offer',
-    offerCode: 'LEASING-POPULAR-2026',
-    discountPercent: 12,
-    validUntil: '31 de Marzo 2026',
-    targetCategory: 'Maquinaria',
-    actionUrl: '#/machinery',
-    isRead: false,
-    createdAt: new Date(Date.now() - 3600000 * 4).toISOString()
-  },
-  {
-    id: 'demo_offer_2',
-    userId: 'all',
-    title: '⚡ 15% OFF en Kit de Filtros Genuinos JCB & Donaldson',
-    body: 'Aprovecha mantenimiento preventivo 500h con despacho inmediato a obras en Santo Domingo, Santiago y Punta Cana.',
-    type: 'special_offer',
-    offerCode: 'FILTROS-PRO-15',
-    discountPercent: 15,
-    validUntil: '15 de Abril 2026',
-    targetCategory: 'Repuestos',
-    actionUrl: '#/parts',
-    isRead: false,
-    createdAt: new Date(Date.now() - 3600000 * 24).toISOString()
+// Initial realistic seed notifications for active clients
+const getInitialNotifications = (userId?: string): AppNotification[] => {
+  if (typeof window !== 'undefined') {
+    try {
+      const stored = localStorage.getItem('tmd_live_notifications');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch {
+      // ignore
+    }
   }
-];
+
+  return [
+    {
+      id: 'notif_init_1',
+      userId: userId || 'all',
+      title: '🚜 Cotización QT-2026-8841 Lista para Despacho',
+      body: 'Tu cotización para Retroexcavadora JCB 3CX Eco está confirmada. Puedes descargar la orden y coordinar retiro en Patio Km 22.',
+      type: 'quote_status',
+      quoteNumber: 'QT-2026-8841',
+      actionUrl: '#/portal',
+      isRead: false,
+      createdAt: new Date(Date.now() - 3600000 * 2).toISOString()
+    },
+    {
+      id: 'notif_init_2',
+      userId: userId || 'all',
+      title: '🔧 Mantenimiento Preventivo Sugerido',
+      body: 'La unidad JCB 3CX Eco se acerca a las 500 horas de operación. Puedes agendar revisión técnica en taller o servicio móvil en obra.',
+      type: 'maintenance_due',
+      actionUrl: '#/portal',
+      isRead: false,
+      createdAt: new Date(Date.now() - 3600000 * 12).toISOString()
+    },
+    {
+      id: 'notif_init_3',
+      userId: userId || 'all',
+      title: '⭐ Puntos Club Pro Acreditados',
+      body: 'Has acumulado +500 puntos TMD Pro. Tienes 1,850 puntos canjeables en filtros y repuestos genuinos.',
+      type: 'special_offer',
+      actionUrl: '#/portal',
+      isRead: true,
+      createdAt: new Date(Date.now() - 3600000 * 28).toISOString()
+    }
+  ];
+};
 
 export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { currentUser } = useAuth();
-  const [notifications, setNotifications] = useState<AppNotification[]>([]);
+  const [notifications, setNotifications] = useState<AppNotification[]>(() => getInitialNotifications(currentUser?.uid));
   const [pushPermission, setPushPermission] = useState<NotificationPermission>(() => {
     return 'Notification' in window ? Notification.permission : 'denied';
   });
@@ -117,7 +145,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
   // Firestore Real-Time Listener (Only for authenticated users per security rules)
   useEffect(() => {
     if (!currentUser) {
-      setNotifications(INITIAL_DEMO_OFFERS);
+      setNotifications(getInitialNotifications());
       return;
     }
 
@@ -130,17 +158,22 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
         const list: AppNotification[] = [];
         snapshot.forEach((docSnap) => {
           const data = docSnap.data() as AppNotification;
-          // Filter: notifications for 'all' or specifically for current user
           if (data.userId === 'all' || (currentUser && data.userId === currentUser.uid)) {
             list.push({ ...data, id: docSnap.id });
           }
         });
 
-        // Combine with fallback demo offers if collection is empty
-        const finalNotifs = list.length > 0 ? list : INITIAL_DEMO_OFFERS;
-        
+        // Combine with stored local notifications
+        const localList = getInitialNotifications(currentUser.uid);
+        const combined = [...list];
+        for (const loc of localList) {
+          if (!combined.some(c => c.id === loc.id)) {
+            combined.push(loc);
+          }
+        }
+
         // Sort descending by date
-        finalNotifs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        combined.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
         // Check for newly added unread notifications to trigger push/toast/sound
         if (!isFirstMount.current && list.length > 0) {
@@ -153,11 +186,11 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
         }
 
         isFirstMount.current = false;
-        setNotifications(finalNotifs);
+        setNotifications(combined);
       },
       (error) => {
-        // Fallback to local demo list on offline/perm restrictions
-        setNotifications(INITIAL_DEMO_OFFERS);
+        // Fallback to local persistent list on offline/perm restrictions
+        setNotifications(getInitialNotifications(currentUser.uid));
       }
     );
 
@@ -174,19 +207,94 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
   const closeNotificationPanel = useCallback(() => setIsNotificationPanelOpen(false), []);
   const toggleNotificationPanel = useCallback(() => setIsNotificationPanelOpen(prev => !prev), []);
 
+  const addNotification = useCallback((params: {
+    title: string;
+    body: string;
+    type?: import('../types').NotificationType;
+    quoteId?: string;
+    quoteNumber?: string;
+    actionUrl?: string;
+    userId?: string;
+  }): AppNotification => {
+    const newNotif: AppNotification = {
+      id: `notif_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+      userId: params.userId || currentUser?.uid || 'all',
+      title: params.title,
+      body: params.body,
+      type: params.type || 'quote_status',
+      quoteId: params.quoteId,
+      quoteNumber: params.quoteNumber,
+      actionUrl: params.actionUrl || '#/portal',
+      isRead: false,
+      createdAt: new Date().toISOString()
+    };
+
+    setNotifications(prev => {
+      const updated = [newNotif, ...prev.filter(n => n.id !== newNotif.id)];
+      try {
+        localStorage.setItem('tmd_live_notifications', JSON.stringify(updated));
+      } catch {
+        // ignore
+      }
+      return updated;
+    });
+
+    setActiveToasts(prev => [newNotif, ...prev.slice(0, 3)]);
+    playNotificationSound();
+    showBrowserNotification(newNotif.title, newNotif.body, newNotif.actionUrl);
+
+    return newNotif;
+  }, [currentUser]);
+
   const markAsRead = useCallback(async (notificationId: string) => {
-    setNotifications(prev => prev.map(n => n.id === notificationId ? { ...n, isRead: true } : n));
-    await serviceMarkAsRead(notificationId);
+    setNotifications(prev => {
+      const updated = prev.map(n => n.id === notificationId ? { ...n, isRead: true } : n);
+      try {
+        localStorage.setItem('tmd_live_notifications', JSON.stringify(updated));
+      } catch {
+        // ignore
+      }
+      return updated;
+    });
+    try {
+      await serviceMarkAsRead(notificationId);
+    } catch {
+      // non-blocking
+    }
   }, []);
 
   const markAllAsRead = useCallback(async () => {
-    setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
-    await serviceMarkAllRead(notifications);
+    setNotifications(prev => {
+      const updated = prev.map(n => ({ ...n, isRead: true }));
+      try {
+        localStorage.setItem('tmd_live_notifications', JSON.stringify(updated));
+      } catch {
+        // ignore
+      }
+      return updated;
+    });
+    try {
+      await serviceMarkAllRead(notifications);
+    } catch {
+      // non-blocking
+    }
   }, [notifications]);
 
   const deleteNotification = useCallback(async (notificationId: string) => {
-    setNotifications(prev => prev.filter(n => n.id !== notificationId));
-    await deleteNotificationRecord(notificationId);
+    setNotifications(prev => {
+      const filtered = prev.filter(n => n.id !== notificationId);
+      try {
+        localStorage.setItem('tmd_live_notifications', JSON.stringify(filtered));
+      } catch {
+        // ignore
+      }
+      return filtered;
+    });
+    try {
+      await deleteNotificationRecord(notificationId);
+    } catch {
+      // non-blocking
+    }
   }, []);
 
   const broadcastOffer = useCallback(async (params: {

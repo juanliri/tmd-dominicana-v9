@@ -144,30 +144,30 @@ export const PortalShell: React.FC<PortalShellProps> = ({
   // Default breadcrumbs based on active tab
   const getTabLabel = (tabId: string): string => {
     switch (tabId) {
-      case 'overview': return 'Panel Principal';
-      case 'quotes': return 'Cotizaciones B01 & Proformas';
-      case 'orders': return 'Órdenes de Servicio Fullbay';
-      case 'purchases': return 'Historial de Pedidos';
-      case 'livelink': return 'Telemetría Flota LiveLink™';
-      case 'service': return 'Historial de Taller Km 22';
-      case 'pro': return 'Club Pro TMD';
-      case 'docs': return 'Bóveda Técnica OEM';
-      case 'profile': return 'Perfil Corporativo & RNC';
-      case 'command': return 'Command Center HQ';
+      case 'overview': return 'Resumen de Cuenta';
+      case 'quotes': return 'Mis Cotizaciones';
+      case 'orders': return 'Servicios de Taller';
+      case 'purchases': return 'Mis Pedidos';
+      case 'livelink': return 'Mi Flota con GPS';
+      case 'service': return 'Historial de Mantenimiento';
+      case 'pro': return 'Club Pro';
+      case 'docs': return 'Manuales y Fichas Técnicas';
+      case 'profile': return 'Mis Datos';
+      case 'command': return 'Centro de Control';
       case 'office':
-      case 'workflow': return 'Oficina & Pases Garita Km 22';
-      case 'inventory': return 'Stock Repuestos & Escaneo QR';
-      case 'patio': return 'Patio Km 22 GPS';
-      case 'integrations': return 'Integraciones ERP & APIs';
-      case 'metrics': return 'Métricas DGII 606/607';
-      case 'users': return 'Gestión RBAC & Personal';
-      case 'audit': return 'Auditoría & Logs Ciberseguridad';
+      case 'workflow': return 'Despacho & Patio';
+      case 'inventory': return 'Inventario & Repuestos';
+      case 'patio': return 'Patio Km 22';
+      case 'integrations': return 'Conexiones & APIs';
+      case 'metrics': return 'Reportes de Ventas';
+      case 'users': return 'Equipo & Permisos';
+      case 'audit': return 'Seguridad & Logs';
       default: return tabId.toUpperCase();
     }
   };
 
   const defaultBreadcrumbs: BreadcrumbItem[] = breadcrumbs || [
-    { label: currentPortalRole === 'client' ? 'Portal Clientes' : currentPortalRole === 'admin' ? 'Admin HQ' : 'Operaciones' },
+    { label: currentPortalRole === 'client' ? 'Mi Portal' : currentPortalRole === 'admin' ? 'Administración' : 'Operaciones' },
     { label: getTabLabel(activeTab), active: true }
   ];
 

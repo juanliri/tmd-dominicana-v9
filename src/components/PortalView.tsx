@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useNotifications } from '../context/NotificationContext';
 import { supabase, isSupabaseConfigured } from '../lib/supabaseClient';
 import { PortalQuote, ServiceWorkOrder, UserProfile, UserRole } from '../types';
 import { saveServiceOrderToLocalStorage } from '../services/serviceHistoryService';
@@ -75,6 +76,7 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
   } = useAuth();
   
   const { currency, addToCart } = useCart();
+  const { addNotification } = useNotifications();
 
   // Sub-route state from window.location.hash
   const getSubrouteFromHash = (): string => {
@@ -469,6 +471,14 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
         location: 'Santo Domingo Oeste (Km 22 / Obra)',
         description: ''
       });
+
+      // Real action notification for the user
+      addNotification({
+        title: `Solicitud de Servicio ${orderNum} Registrada`,
+        body: `Hemos recibido tu solicitud para ${orderForm.machineModel}. Nuestro equipo de taller se comunicará para confirmar horario.`,
+        type: 'service_update',
+        actionUrl: '#/portal'
+      });
     } catch (err) {
       console.error('Error creating work order:', err);
     } finally {
@@ -489,6 +499,9 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
   };
 
   const handleUpdateQuoteStatus = async (quoteId: string, status: PortalQuote['status']) => {
+    const targetQuote = quotes.find(q => q.id === quoteId);
+    const qNum = targetQuote?.quoteNumber || `QT-${quoteId.substring(0, 8)}`;
+
     setQuotes(prev => {
       const updated = prev.map(q => q.id === quoteId ? { ...q, status, updatedAt: new Date().toISOString() } : q);
       try {
@@ -498,6 +511,28 @@ export const PortalView: React.FC<PortalViewProps> = ({ onNavigate, onOpenQrScan
       }
       return updated;
     });
+
+    // Real action-driven notification for the user
+    if (status === 'approved') {
+      addNotification({
+        title: `Cotización ${qNum} Confirmada`,
+        body: `Has confirmado la cotización. La unidad ha sido reservada y está lista para coordinar retiro en Patio Km 22 o despacho a obra.`,
+        type: 'quote_status',
+        quoteId,
+        quoteNumber: qNum,
+        actionUrl: '#/portal'
+      });
+    } else if (status === 'rejected') {
+      addNotification({
+        title: `Cotización ${qNum} Desestimada`,
+        body: `La cotización ha sido desestimada. Puedes reactivarla o solicitar ajuste de términos cuando lo requieras.`,
+        type: 'quote_status',
+        quoteId,
+        quoteNumber: qNum,
+        actionUrl: '#/portal'
+      });
+    }
+
     if (isSupabaseConfigured) {
       try {
         await supabase.from('quotes').update({ status, updated_at: new Date().toISOString() }).eq('id', quoteId);

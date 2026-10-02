@@ -287,7 +287,7 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
                     {userProfile?.displayName || 'Contratista Registrado'}
                   </h2>
                   <span className="px-1.5 py-0.5 rounded-[2px] text-[9px] font-bold uppercase tracking-wider bg-amber-400/15 text-amber-400 border border-amber-400/30">
-                    CUENTA CORPORATIVA
+                    CLIENTE REGISTRADO
                   </span>
                   <ProMemberBadge
                     points={userProfile?.proMemberPoints || 1850}
@@ -315,21 +315,21 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
             </div>
           </div>
 
-          {/* CLIENT OVERVIEW KPI CARDS (COMPACT COMMERCIAL STANDARD) */}
+          {/* CLIENT OVERVIEW KPI CARDS (CLEAN CUSTOMER STANDARD) */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
             <div 
               onClick={() => handleTabSelect('quotes')}
               className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-amber-400/50 transition-all cursor-pointer group shadow-xs"
             >
               <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
-                <span>COTIZACIONES DGII</span>
+                <span>MIS COTIZACIONES</span>
                 <FileText className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
               </div>
               <div className="text-xl sm:text-2xl font-black text-white font-mono mt-1">
                 {pendingQuotes.length}
               </div>
               <span className="text-[10px] text-amber-400 font-semibold uppercase">
-                {quotes.length} EN HISTORIAL
+                {quotes.length} REGISTRADAS
               </span>
             </div>
 
@@ -338,15 +338,15 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
               className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 transition-all cursor-pointer group shadow-xs"
             >
               <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
-                <span>TELEMETRÍA LIVELINK</span>
+                <span>MI FLOTA CON GPS</span>
                 <Radio className="w-4 h-4 text-emerald-400 animate-pulse group-hover:scale-110 transition-transform" />
               </div>
               <div className="text-xl sm:text-2xl font-black text-white font-mono mt-1">
-                {fleet.length} <span className="text-xs font-normal text-zinc-500 uppercase">UNIDADES</span>
+                {fleet.length} <span className="text-xs font-normal text-zinc-500 uppercase">EQUIPOS</span>
               </div>
               <span className="text-[10px] text-emerald-400 font-semibold flex items-center gap-1 uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                GPS ONLINE 24/7
+                UBICACIÓN EN VIVO
               </span>
             </div>
 
@@ -355,14 +355,14 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
               className="p-3.5 rounded-[5px] bg-zinc-900 border border-zinc-800 hover:border-blue-500/50 transition-all cursor-pointer group shadow-xs"
             >
               <div className="flex items-center justify-between text-zinc-400 text-xs font-semibold uppercase">
-                <span>TALLER KM 22 & OBRA</span>
+                <span>SERVICIOS DE TALLER</span>
                 <Activity className="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" />
               </div>
               <div className="text-xl sm:text-2xl font-black text-white font-mono mt-1">
                 {activeServices.length}
               </div>
               <span className="text-[10px] text-blue-400 font-semibold uppercase">
-                {workOrders.length} SERVICIOS TOTALES
+                {workOrders.length} SOLICITUDES TOTALES
               </span>
             </div>
 
@@ -378,7 +378,7 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
                 {userProfile?.proMemberPoints || 1850} <span className="text-xs font-normal text-zinc-500">PTS</span>
               </div>
               <span className="text-[10px] text-zinc-400 font-semibold uppercase">
-                NIVEL {userProfile?.proMemberTier || 'Gold'} • BENEFICIOS VIP
+                NIVEL {userProfile?.proMemberTier || 'Gold'} • BENEFICIOS ACTIVOS
               </span>
             </div>
           </div>
@@ -400,13 +400,13 @@ export const ClientDashboard: React.FC<ClientDashboardProps> = ({
             </span>
             <div>
               <h2 className="text-sm font-black uppercase tracking-tight text-white font-display">
-                {activeTab === 'quotes' && 'MIS COTIZACIONES & PROFORMAS B01'}
+                {activeTab === 'quotes' && 'MIS COTIZACIONES'}
                 {activeTab === 'purchases' && 'HISTORIAL DE COMPRAS & PEDIDOS'}
-                {activeTab === 'livelink_telematics' && 'TELEMETRÍA SATELITAL DE FLOTA LIVELINK™'}
-                {activeTab === 'service_history' && 'HISTORIAL DE MANTENIMIENTO EN TALLER KM 22'}
-                {activeTab === 'pro_member' && 'CLUB PRO TMD · BENEFICIOS Y PUNTOS'}
-                {activeTab === 'tech_docs' && 'BÓVEDA TÉCNICA · FICHAS Y MANUALES PDF'}
-                {activeTab === 'profile' && 'DATOS CORPORATIVOS & PREFERENCIAS'}
+                {activeTab === 'livelink_telematics' && 'UBICACIÓN Y ESTADO DE MIS EQUIPOS'}
+                {activeTab === 'service_history' && 'HISTORIAL DE MANTENIMIENTO'}
+                {activeTab === 'pro_member' && 'CLUB PRO · MIS BENEFICIOS Y PUNTOS'}
+                {activeTab === 'tech_docs' && 'MANUALES Y FICHAS TÉCNICAS'}
+                {activeTab === 'profile' && 'MIS DATOS Y PREFERENCIAS'}
               </h2>
               <span className="text-[10px] text-zinc-400 font-mono">
                 {activeTab === 'quotes' && `${quotes.length} Cotizaciones registradas`}
